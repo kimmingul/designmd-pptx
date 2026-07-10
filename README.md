@@ -1,11 +1,11 @@
 # designmd-pptx
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.1.0-brightgreen)](plugin.json)
+[![Version](https://img.shields.io/badge/version-1.2.0-brightgreen)](plugin.json)
 
-**awesome-design-md / Stitch `DESIGN.md` → [officecli](https://github.com/iOfficeAI/OfficeCLI) PPTX** — packaged for **Claude Code, OpenAI Codex, and Grok Build** (v1.1).
+**awesome-design-md / Stitch `DESIGN.md` → [officecli](https://github.com/iOfficeAI/OfficeCLI) PPTX** — packaged for **Claude Code, OpenAI Codex, and Grok Build** (v1.2).
 
-Drop a brand `DESIGN.md` in, scaffold an ordered deck, and materialize slides with staging-safe apply.
+Drop a brand `DESIGN.md` in, scaffold an ordered deck, and materialize slides with staging-safe apply. v1.2 adds the reverse path: **extract** an existing deck into an editable deck-spec draft, or **restyle** it in place with brand tokens.
 
 ## What you get
 
@@ -81,6 +81,8 @@ In Grok chat: mention DESIGN.md for slides, or run `/designmd-pptx`.
 - **Process** — glued officecli connectors with arrowheads
 - **`image_text_2col`** — image + body columns
 - **Staging-safe apply** — destination replaced only after validate + issues pass
+- **Extract** (v1.2) — existing .pptx → `content.deck.json` draft with per-slide recipe mapping, confidence report, and exported images; review, then re-scaffold with any DESIGN.md
+- **Restyle** (v1.2) — rebrand an existing .pptx in place: theme scheme + fonts remapped to brand tokens, explicit colors snapped to the nearest palette entry (`--map` to pin), staging-safe like apply
 
 ## Commands
 
@@ -89,6 +91,20 @@ python -m designmd_pptx compile DESIGN.md -o tokens.slide.json
 python -m designmd_pptx recipes tokens.slide.json -o recipes/ --content deck.json
 python -m designmd_pptx scaffold DESIGN.md -o out/brand --content deck.json
 python -m designmd_pptx apply [--force] dest.pptx recipes/deck.sequence.json
+python -m designmd_pptx extract old.pptx -o extracted/
+python -m designmd_pptx restyle old.pptx DESIGN.md -o new.pptx
+```
+
+## Modernizing an existing deck (v1.2)
+
+```powershell
+# 1. Full re-layout: extract → review draft → scaffold
+python -m designmd_pptx extract legacy.pptx -o extracted
+#    fix low-confidence slides in extracted/content.deck.json (see extract.report.json)
+python -m designmd_pptx scaffold brand.DESIGN.md -o out\rebrand --content extracted\content.deck.json
+
+# 2. Brand-only: keep layout, swap colors/fonts
+python -m designmd_pptx restyle legacy.pptx brand.DESIGN.md -o legacy-rebranded.pptx
 ```
 
 ## Development

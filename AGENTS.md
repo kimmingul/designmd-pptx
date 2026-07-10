@@ -32,6 +32,8 @@ npm test        # python -m unittest discover -s python/tests -v
 ```powershell
 $env:PYTHONPATH = "$PWD\python"
 python -m designmd_pptx scaffold python\fixtures\linear.DESIGN.md -o out\demo --content python\examples\content.deck.json
+python -m designmd_pptx extract old.pptx -o extracted    # existing deck → deck-spec draft
+python -m designmd_pptx restyle old.pptx DESIGN.md -o new.pptx   # rebrand in place
 ```
 
 See `skills/officecli-pptx-designmd/SKILL.md` for full CLI reference and hard rules.

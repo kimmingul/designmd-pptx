@@ -26,7 +26,7 @@ ok(Array.isArray(plugin.skills) && plugin.skills.length >= 1, 'skills listed');
 const skill = path.join(root, '.grok', 'skills', 'officecli-pptx-designmd', 'SKILL.md');
 ok(fs.existsSync(skill), 'skill SKILL.md');
 const skillBody = fs.readFileSync(skill, 'utf8');
-ok(/^---\n[\s\S]*?name:\s*officecli-pptx-designmd/m.test(skillBody), 'skill frontmatter name');
+ok(/^---\r?\n[\s\S]*?name:\s*officecli-pptx-designmd/m.test(skillBody), 'skill frontmatter name');
 ok(skillBody.includes('designmd_pptx'), 'skill mentions package');
 
 const cmd = path.join(root, '.grok', 'commands', 'designmd-pptx.md');
@@ -66,7 +66,7 @@ ok(sync.status === 0, `adapters in sync: ${(sync.stdout || sync.stderr || '').tr
 const pkg = path.join(root, 'python', 'designmd_pptx', '__init__.py');
 ok(fs.existsSync(pkg), 'python package present');
 const init = fs.readFileSync(pkg, 'utf8');
-ok(init.includes('1.1'), 'package version 1.1.x');
+ok(init.includes('1.2'), 'package version 1.2.x');
 
 const req = path.join(root, 'python', 'requirements.txt');
 ok(fs.existsSync(req), 'requirements.txt');
@@ -79,7 +79,7 @@ const py = spawnSync('python', ['-c', pyCode], {
   shell: false,
 });
 ok(
-  py.status === 0 && (py.stdout || '').includes('1.1'),
+  py.status === 0 && (py.stdout || '').includes('1.2'),
   `python import: ${(py.stdout || py.stderr || '').trim()}`
 );
 

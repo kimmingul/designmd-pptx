@@ -212,6 +212,69 @@ def cmd_scaffold(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_extract(args: argparse.Namespace) -> int:
+    """Existing pptx → content.deck.json draft + report + assets/."""
+    from .extract import extract_pptx
+
+    report = extract_pptx(args.pptx, args.out, export_media=not args.no_media)
+    print(f"Wrote {Path(args.out) / 'content.deck.json'}")
+    print(f"Wrote {Path(args.out) / 'extract.report.json'}")
+    for s in report["slides"]:
+        flags = f" — {'; '.join(s['warnings'])}" if s.get("warnings") else ""
+        print(f"  slide {s['index']:>2}: {s['recipe']} (confidence {s['confidence']}){flags}")
+    if report.get("assets"):
+        print(f"assets: {len(report['assets'])} exported")
+    print("Review the draft, then: python -m designmd_pptx scaffold DESIGN.md "
+          f"--content {Path(args.out) / 'content.deck.json'}")
+    return 0
+
+
+def cmd_restyle(args: argparse.Namespace) -> int:
+    """Restyle an existing pptx with brand tokens (theme + explicit values)."""
+    import os
+
+    from .restyle import restyle_pptx
+
+    design = Path(args.design)
+    if design.suffix.lower() == ".json":
+        tokens = json.loads(design.read_text(encoding="utf-8"))
+    else:
+        tokens = compile_design_md(design, brand=args.brand)
+        errs = assert_tokens_valid(tokens, strict=False)
+        for e in errs:
+            print(f"warning: {e}")
+
+    force = bool(args.force) or os.environ.get("DESIGNMD_FORCE") == "1"
+    color_map = {}
+    for pair in args.map or []:
+        old, _, new = pair.partition("=")
+        if len(old) != 6 or len(new) != 6:
+            raise ValueError(f"--map expects OLDHEX=NEWHEX, got: {pair}")
+        color_map[old] = new
+
+    report = restyle_pptx(
+        args.pptx,
+        tokens,
+        out=args.out,
+        force=force,
+        explicit_colors=not args.no_explicit_colors,
+        explicit_fonts=not args.no_explicit_fonts,
+        color_map=color_map,
+    )
+    print(f"Restyled → {report['dest']}")
+    if report["theme_scheme"]:
+        print(f"  theme scheme: {len(report['theme_scheme'])} slots remapped")
+    if report["theme_fonts"]:
+        print(f"  theme fonts: {report['theme_fonts']}")
+    if report["colors"]:
+        n = sum(v["count"] for v in report["colors"].values())
+        print(f"  explicit colors: {len(report['colors'])} distinct → {n} replacements")
+    if report["fonts"]:
+        n = sum(v["count"] for v in report["fonts"].values())
+        print(f"  explicit fonts: {len(report['fonts'])} distinct → {n} replacements")
+    return 0
+
+
 def _safe_name(s: str) -> str:
     out = []
     for ch in s:
@@ -282,10 +345,45 @@ def build_parser() -> argparse.ArgumentParser:
     )
     a.set_defaults(func=cmd_apply)
 
+    e = sub.add_parser(
+        "extract",
+        help="Existing .pptx → content.deck.json draft (+ report, assets) for re-scaffold",
+    )
+    e.add_argument("pptx", type=Path, help="Source .pptx to extract")
+    e.add_argument("-o", "--out", default="extracted", help="Output directory")
+    e.add_argument("--no-media", action="store_true", help="Do not export embedded images")
+    e.set_defaults(func=cmd_extract)
+
+    y = sub.add_parser(
+        "restyle",
+        help="Restyle an existing .pptx with DESIGN.md tokens (theme scheme/fonts "
+        "+ explicit colors/fonts; staging-safe, --force to overwrite)",
+    )
+    y.add_argument("pptx", type=Path, help="Source .pptx")
+    y.add_argument("design", type=Path, help="DESIGN.md or tokens.slide.json")
+    y.add_argument("-o", "--out", type=Path, default=None,
+                   help="Output .pptx (omit to restyle in place, requires --force)")
+    y.add_argument("--brand", default=None)
+    y.add_argument("--force", action="store_true", help="Overwrite destination")
+    y.add_argument("--no-explicit-colors", action="store_true",
+                   help="Only remap the theme scheme, not per-shape srgbClr values")
+    y.add_argument("--no-explicit-fonts", action="store_true",
+                   help="Only remap theme fonts, not per-run typefaces")
+    y.add_argument("--map", action="append", default=None, metavar="OLDHEX=NEWHEX",
+                   help="Pin an explicit color mapping (repeatable)")
+    y.set_defaults(func=cmd_restyle)
+
     return p
 
 
 def main(argv: list[str] | None = None) -> int:
+    # Legacy consoles (e.g. cp949) can't encode em-dashes etc. from deck content;
+    # degrade to replacement chars instead of crashing the summary print.
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(errors="replace")
+        except (AttributeError, OSError):
+            pass
     parser = build_parser()
     args = parser.parse_args(argv)
     try:
