@@ -1,0 +1,183 @@
+"""In-place restyle of an existing .pptx with DESIGN.md brand tokens (v1.2).
+
+Rewrites the theme color scheme + theme fonts, and optionally remaps explicit
+srgbClr values / typefaces in slides, layouts, and masters to the nearest
+brand token. Layout is never touched. Stdlib only; staging-safe like apply.py:
+the destination is never deleted until the restyled copy is fully written.
+"""
+
+from __future__ import annotations
+
+import json
+import os
+import re
+import uuid
+import zipfile
+from pathlib import Path
+from typing import Any
+
+# Theme scheme slot → tokens.colors key (first existing key wins)
+_SCHEME_MAP: list[tuple[str, list[str]]] = [
+    ("dk1", ["text"]),
+    ("lt1", ["background"]),
+    ("dk2", ["muted", "text"]),
+    ("lt2", ["surface", "background"]),
+    ("accent1", ["accent"]),
+    ("accent2", ["success", "chart_series2", "accent"]),
+    ("accent3", ["risk", "chart_series3", "accent"]),
+    ("accent4", ["chart_series2", "accent"]),
+    ("accent5", ["chart_series3", "accent"]),
+    ("accent6", ["surface_elevated", "surface", "accent"]),
+    ("hlink", ["accent"]),
+    ("folHlink", ["muted", "accent"]),
+]
+
+_MONO_HINTS = ("mono", "consolas", "courier", "menlo", "monaco", "code")
+
+
+def _hex_dist(a: str, b: str) -> int:
+    ar, ag, ab = int(a[0:2], 16), int(a[2:4], 16), int(a[4:6], 16)
+    br, bg, bb = int(b[0:2], 16), int(b[2:4], 16), int(b[4:6], 16)
+    return (ar - br) ** 2 + (ag - bg) ** 2 + (ab - bb) ** 2
+
+
+def _nearest(color: str, palette: list[str]) -> str:
+    return min(palette, key=lambda p: _hex_dist(color, p))
+
+
+def _restyle_theme(xml: str, colors: dict[str, str], typ: dict[str, Any],
+                   report: dict[str, Any]) -> str:
+    for slot, keys in _SCHEME_MAP:
+        val = next((colors[k] for k in keys if colors.get(k)), None)
+        if not val:
+            continue
+        pattern = re.compile(rf"(<a:{slot}>).*?(</a:{slot}>)", re.S)
+        new_xml, n = pattern.subn(rf'\g<1><a:srgbClr val="{val.upper()}"/>\g<2>', xml)
+        if n:
+            report["theme_scheme"][slot] = val.upper()
+            xml = new_xml
+
+    heading = typ.get("heading_font")
+    body = typ.get("body_font")
+    if heading:
+        xml, n = re.subn(
+            r'(<a:majorFont>\s*<a:latin[^>]*typeface=")[^"]*(")',
+            rf"\g<1>{heading}\g<2>", xml, flags=re.S,
+        )
+        if n:
+            report["theme_fonts"]["major"] = heading
+    if body:
+        xml, n = re.subn(
+            r'(<a:minorFont>\s*<a:latin[^>]*typeface=")[^"]*(")',
+            rf"\g<1>{body}\g<2>", xml, flags=re.S,
+        )
+        if n:
+            report["theme_fonts"]["minor"] = body
+    return xml
+
+
+def _restyle_part(xml: str, palette: list[str], typ: dict[str, Any],
+                  explicit_colors: bool, explicit_fonts: bool,
+                  color_map: dict[str, str], report: dict[str, Any]) -> str:
+    if explicit_colors and palette:
+        def _sub_color(m: re.Match) -> str:
+            old = m.group(1).upper()
+            new = color_map.get(old) or _nearest(old, palette)
+            if new != old:
+                entry = report["colors"].setdefault(old, {"new": new, "count": 0})
+                entry["count"] += 1
+            return f'srgbClr val="{new}"'
+
+        xml = re.sub(r'srgbClr val="([0-9A-Fa-f]{6})"', _sub_color, xml)
+
+    if explicit_fonts and (typ.get("body_font") or typ.get("mono_font")):
+        body = typ.get("body_font", "Calibri")
+        mono = typ.get("mono_font", "Consolas")
+
+        def _sub_font(m: re.Match) -> str:
+            old = m.group(1)
+            if old.startswith("+"):  # +mj-lt / +mn-lt follow the theme
+                return m.group(0)
+            new = mono if any(h in old.lower() for h in _MONO_HINTS) else body
+            if new != old:
+                entry = report["fonts"].setdefault(old, {"new": new, "count": 0})
+                entry["count"] += 1
+            return f'typeface="{new}"'
+
+        xml = re.sub(r'typeface="([^"]+)"', _sub_font, xml)
+    return xml
+
+
+def restyle_pptx(
+    pptx: str | Path,
+    tokens: dict[str, Any],
+    *,
+    out: str | Path | None = None,
+    force: bool = False,
+    explicit_colors: bool = True,
+    explicit_fonts: bool = True,
+    color_map: dict[str, str] | None = None,
+) -> dict[str, Any]:
+    """Restyle pptx with brand tokens. Returns a report of replacements.
+
+    out=None restyles in place (requires force). A distinct existing out
+    also requires force. Never deletes the destination until the restyled
+    staging copy is complete (os.replace).
+    """
+    pptx = Path(pptx).resolve()
+    if not pptx.exists():
+        raise FileNotFoundError(str(pptx))
+    dest = Path(out).resolve() if out else pptx
+    if dest.exists() and not force:
+        raise FileExistsError(
+            f"{dest} already exists. Pass force=True / --force to overwrite."
+        )
+
+    colors: dict[str, str] = {
+        k: str(v).upper() for k, v in (tokens.get("colors") or {}).items()
+        if isinstance(v, str) and re.fullmatch(r"[0-9A-Fa-f]{6}", str(v))
+    }
+    typ: dict[str, Any] = tokens.get("type") or {}
+    if not colors:
+        raise ValueError("tokens have no usable colors — compile DESIGN.md first")
+    palette = sorted(set(colors.values()))
+    cmap = {k.upper(): v.upper() for k, v in (color_map or {}).items()}
+
+    report: dict[str, Any] = {
+        "source": str(pptx), "dest": str(dest),
+        "theme_scheme": {}, "theme_fonts": {}, "colors": {}, "fonts": {},
+    }
+
+    staging = dest.with_name(f".{dest.stem}.restyle-{uuid.uuid4().hex[:8]}{dest.suffix}")
+    try:
+        with zipfile.ZipFile(pptx) as zin, zipfile.ZipFile(
+            staging, "w", zipfile.ZIP_DEFLATED
+        ) as zout:
+            for item in zin.infolist():
+                data = zin.read(item.filename)
+                name = item.filename
+                if re.fullmatch(r"ppt/theme/theme\d+\.xml", name):
+                    xml = _restyle_theme(data.decode("utf-8"), colors, typ, report)
+                    data = xml.encode("utf-8")
+                elif re.fullmatch(
+                    r"ppt/(slides|slideLayouts|slideMasters)/[^/]+\.xml", name
+                ):
+                    xml = _restyle_part(
+                        data.decode("utf-8"), palette, typ,
+                        explicit_colors, explicit_fonts, cmap, report,
+                    )
+                    data = xml.encode("utf-8")
+                zout.writestr(item, data)
+        os.replace(str(staging), str(dest))
+    finally:
+        if staging.exists():
+            try:
+                staging.unlink()
+            except OSError:
+                pass
+
+    report_path = dest.with_suffix(".restyle.report.json")
+    report_path.write_text(
+        json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+    return report

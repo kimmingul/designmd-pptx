@@ -1,9 +1,9 @@
 ---
 name: officecli-pptx-designmd
-description: "designmd-pptx v1.1: compile awesome-design-md / Stitch DESIGN.md into officecli PPTX tokens, ordered decks, process connectors, image_text_2col, staging-safe apply. Trigger on DESIGN.md, getdesign.md, brand design for slides, /designmd-pptx, /officecli-pptx-designmd."
+description: "designmd-pptx v1.2: compile awesome-design-md / Stitch DESIGN.md into officecli PPTX tokens, ordered decks, staging-safe apply; extract existing pptx into a deck-spec draft; restyle existing pptx with brand tokens. Trigger on DESIGN.md, getdesign.md, brand design for slides, restyle deck, modernize slides, /designmd-pptx, /officecli-pptx-designmd."
 ---
 
-# officecli-pptx-designmd (v1.1)
+# officecli-pptx-designmd (v1.2)
 
 ## Locate the toolkit
 
@@ -50,7 +50,23 @@ python -m designmd_pptx compile DESIGN.md -o tokens.slide.json --slide-md SLIDE-
 python -m designmd_pptx recipes tokens.slide.json -o recipes/ --content content.deck.json
 python -m designmd_pptx scaffold DESIGN.md -o out/brand --content content.deck.json [--apply --force]
 python -m designmd_pptx apply [--force] dest.pptx recipes/deck.sequence.json
+python -m designmd_pptx extract old.pptx -o extracted/          # v1.2: pptx → deck-spec draft
+python -m designmd_pptx restyle old.pptx DESIGN.md -o new.pptx  # v1.2: rebrand existing deck
 ```
+
+## Existing decks (v1.2)
+
+Two paths to modernize an existing .pptx — pick by how much change is wanted:
+
+- **Full re-layout**: `extract old.pptx -o extracted/` maps each slide to the
+  closest recipe (confidence + warnings in `extract.report.json`, images exported
+  to `assets/`). **Review the draft** — fix low-confidence mappings, set missing
+  `src` — then `scaffold DESIGN.md --content extracted/content.deck.json`.
+- **Brand-only restyle**: `restyle old.pptx DESIGN.md -o new.pptx` keeps layout
+  untouched; remaps theme scheme + fonts, explicit srgbClr → nearest brand color,
+  explicit typefaces → brand fonts. `--no-explicit-colors` / `--no-explicit-fonts`
+  for theme-only; `--map OLDHEX=NEWHEX` to pin mappings. In-place needs `--force`
+  (staging-safe, same guarantee as apply). Check the `.restyle.report.json`.
 
 ## Patterns
 

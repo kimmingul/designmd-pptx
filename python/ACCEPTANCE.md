@@ -1,6 +1,19 @@
-# designmd-pptx v1.1 — Definition of Done
+# designmd-pptx — Definition of Done
 
-## Acceptance criteria
+## v1.2 acceptance criteria
+
+| # | Criterion | Evidence |
+|---|---|---|
+| 1 | Package/compiler **1.2.x** | `__version__`, `COMPILER_VERSION`, tokens.compiler.version |
+| 2 | `extract` maps slides to recipes (cover, table, bullets, section_divider, quote, kpi_row, image_text_2col/full, close) with confidence + warnings, no silent truncation | `tests/test_v12.py` ExtractV12 |
+| 3 | `extract` exports embedded media to `assets/` and sets `src`/`alt` | ExtractV12.test_media_exported |
+| 4 | Extracted deck-spec feeds `generate_deck` without errors | ExtractV12.test_spec_feeds_deck_generation |
+| 5 | `restyle` remaps theme scheme (dk/lt/accent/hlink) + major/minor fonts from tokens | RestyleV12.test_theme_scheme_and_fonts |
+| 6 | `restyle` snaps explicit srgbClr to nearest palette color; `--map` pins win; explicit typefaces → brand fonts (`+mj/+mn` untouched) | RestyleV12 |
+| 7 | `restyle` staging-safe: in-place/overwrite refuse without force; destination intact on failure | RestyleV12.test_staging_safety |
+| 8 | CLI `extract` / `restyle` wired with reports written | CliV12 |
+
+## v1.1 acceptance criteria
 
 | # | Criterion | Evidence |
 |---|---|---|
