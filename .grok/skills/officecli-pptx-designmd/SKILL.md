@@ -1,9 +1,9 @@
 ---
 name: officecli-pptx-designmd
-description: "designmd-pptx v1.2: compile awesome-design-md / Stitch DESIGN.md into officecli PPTX tokens, ordered decks, staging-safe apply; extract existing pptx into a deck-spec draft; restyle existing pptx with brand tokens. Trigger on DESIGN.md, getdesign.md, brand design for slides, restyle deck, modernize slides, /designmd-pptx, /officecli-pptx-designmd."
+description: "designmd-pptx v1.3: compile awesome-design-md / Stitch DESIGN.md into officecli PPTX tokens, ordered decks, staging-safe apply; extract existing pptx into a deck-spec draft; restyle existing pptx with brand tokens; brand slide masters and export .potx templates. Trigger on DESIGN.md, getdesign.md, brand design for slides, restyle deck, modernize slides, slide master, potx template, /designmd-pptx, /officecli-pptx-designmd."
 ---
 
-# officecli-pptx-designmd (v1.2)
+# officecli-pptx-designmd (v1.3)
 
 ## Locate the toolkit
 
@@ -52,6 +52,7 @@ python -m designmd_pptx scaffold DESIGN.md -o out/brand --content content.deck.j
 python -m designmd_pptx apply [--force] dest.pptx recipes/deck.sequence.json
 python -m designmd_pptx extract old.pptx -o extracted/          # v1.2: pptx → deck-spec draft
 python -m designmd_pptx restyle old.pptx DESIGN.md -o new.pptx  # v1.2: rebrand existing deck
+python -m designmd_pptx master deck.pptx DESIGN.md --potx brand.potx [--empty-potx]  # v1.3
 ```
 
 ## Existing decks (v1.2)
@@ -67,6 +68,15 @@ Two paths to modernize an existing .pptx — pick by how much change is wanted:
   explicit typefaces → brand fonts. `--no-explicit-colors` / `--no-explicit-fonts`
   for theme-only; `--map OLDHEX=NEWHEX` to pin mappings. In-place needs `--force`
   (staging-safe, same guarantee as apply). Check the `.restyle.report.json`.
+
+## Slide master & templates (v1.3)
+
+`master deck.pptx DESIGN.md [-o branded.pptx] [--potx brand.potx] [--empty-potx]`
+brands the theme (scheme + fonts) and master type scale so slides the user adds
+later in PowerPoint inherit the brand; slide content is untouched. `--potx`
+exports a PowerPoint template (`--empty-potx` strips slides so it opens blank);
+with `--potx` alone the source pptx is never modified. Run after `apply` to
+deliver a deck whose file doubles as a brand template.
 
 ## Patterns
 

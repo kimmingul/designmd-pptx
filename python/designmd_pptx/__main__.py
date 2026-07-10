@@ -275,6 +275,47 @@ def cmd_restyle(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_master(args: argparse.Namespace) -> int:
+    """Brand theme + slide master; optionally export a .potx template."""
+    import os
+    import tempfile
+
+    from .master import brand_master, export_potx
+
+    design = Path(args.design)
+    if design.suffix.lower() == ".json":
+        tokens = json.loads(design.read_text(encoding="utf-8"))
+    else:
+        tokens = compile_design_md(design, brand=args.brand)
+        errs = assert_tokens_valid(tokens, strict=False)
+        for e in errs:
+            print(f"warning: {e}")
+
+    force = bool(args.force) or os.environ.get("DESIGNMD_FORCE") == "1"
+
+    if args.potx and not args.out and not force:
+        # potx-only mode: brand a throwaway copy, never touch the source
+        with tempfile.TemporaryDirectory() as tmp:
+            branded = Path(tmp) / "branded.pptx"
+            report = brand_master(args.pptx, tokens, out=branded)
+            export_potx(branded, args.potx, force=force, empty=args.empty_potx)
+    else:
+        report = brand_master(args.pptx, tokens, out=args.out, force=force)
+        print(f"Branded master → {report['dest']}")
+        if args.potx:
+            export_potx(report["dest"], args.potx, force=force, empty=args.empty_potx)
+
+    if report["theme_scheme"]:
+        print(f"  theme scheme: {len(report['theme_scheme'])} slots remapped")
+    if report["theme_fonts"]:
+        print(f"  theme fonts: {report['theme_fonts']}")
+    if report["master_styles"]:
+        print(f"  master type scale: {report['master_styles']}")
+    if args.potx:
+        print(f"Template → {args.potx}{' (slides stripped)' if args.empty_potx else ''}")
+    return 0
+
+
 def _safe_name(s: str) -> str:
     out = []
     for ch in s:
@@ -372,6 +413,24 @@ def build_parser() -> argparse.ArgumentParser:
     y.add_argument("--map", action="append", default=None, metavar="OLDHEX=NEWHEX",
                    help="Pin an explicit color mapping (repeatable)")
     y.set_defaults(func=cmd_restyle)
+
+    m = sub.add_parser(
+        "master",
+        help="Brand theme + slide master with DESIGN.md tokens (new PowerPoint "
+        "slides inherit the brand); optionally export a .potx template",
+    )
+    m.add_argument("pptx", type=Path, help="Source .pptx")
+    m.add_argument("design", type=Path, help="DESIGN.md or tokens.slide.json")
+    m.add_argument("-o", "--out", type=Path, default=None,
+                   help="Branded .pptx output (omit with --potx for template-only; "
+                   "omit entirely to brand in place, requires --force)")
+    m.add_argument("--potx", type=Path, default=None,
+                   help="Also export a .potx template at this path")
+    m.add_argument("--empty-potx", action="store_true",
+                   help="Strip all slides from the .potx so it opens blank")
+    m.add_argument("--brand", default=None)
+    m.add_argument("--force", action="store_true", help="Overwrite destination")
+    m.set_defaults(func=cmd_master)
 
     return p
 

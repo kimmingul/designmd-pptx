@@ -108,6 +108,50 @@ def _restyle_part(xml: str, palette: list[str], typ: dict[str, Any],
     return xml
 
 
+def rewrite_package(
+    src: str | Path,
+    dest: str | Path | None,
+    transform,
+    *,
+    force: bool = False,
+) -> Path:
+    """Copy an OPC package applying transform(name, bytes) → bytes | None.
+
+    Returning None drops the part. dest=None rewrites in place (requires
+    force). Staging-safe: the destination is never deleted until the new
+    package is fully written (os.replace).
+    """
+    src = Path(src).resolve()
+    if not src.exists():
+        raise FileNotFoundError(str(src))
+    dest_p = Path(dest).resolve() if dest else src
+    if dest_p.exists() and not force:
+        raise FileExistsError(
+            f"{dest_p} already exists. Pass force=True / --force to overwrite."
+        )
+
+    staging = dest_p.with_name(
+        f".{dest_p.stem}.staging-{uuid.uuid4().hex[:8]}{dest_p.suffix}"
+    )
+    try:
+        with zipfile.ZipFile(src) as zin, zipfile.ZipFile(
+            staging, "w", zipfile.ZIP_DEFLATED
+        ) as zout:
+            for item in zin.infolist():
+                data = transform(item.filename, zin.read(item.filename))
+                if data is None:
+                    continue
+                zout.writestr(item, data)
+        os.replace(str(staging), str(dest_p))
+    finally:
+        if staging.exists():
+            try:
+                staging.unlink()
+            except OSError:
+                pass
+    return dest_p
+
+
 def restyle_pptx(
     pptx: str | Path,
     tokens: dict[str, Any],
@@ -124,15 +168,6 @@ def restyle_pptx(
     also requires force. Never deletes the destination until the restyled
     staging copy is complete (os.replace).
     """
-    pptx = Path(pptx).resolve()
-    if not pptx.exists():
-        raise FileNotFoundError(str(pptx))
-    dest = Path(out).resolve() if out else pptx
-    if dest.exists() and not force:
-        raise FileExistsError(
-            f"{dest} already exists. Pass force=True / --force to overwrite."
-        )
-
     colors: dict[str, str] = {
         k: str(v).upper() for k, v in (tokens.get("colors") or {}).items()
         if isinstance(v, str) and re.fullmatch(r"[0-9A-Fa-f]{6}", str(v))
@@ -144,37 +179,22 @@ def restyle_pptx(
     cmap = {k.upper(): v.upper() for k, v in (color_map or {}).items()}
 
     report: dict[str, Any] = {
-        "source": str(pptx), "dest": str(dest),
+        "source": str(Path(pptx).resolve()), "dest": "",
         "theme_scheme": {}, "theme_fonts": {}, "colors": {}, "fonts": {},
     }
 
-    staging = dest.with_name(f".{dest.stem}.restyle-{uuid.uuid4().hex[:8]}{dest.suffix}")
-    try:
-        with zipfile.ZipFile(pptx) as zin, zipfile.ZipFile(
-            staging, "w", zipfile.ZIP_DEFLATED
-        ) as zout:
-            for item in zin.infolist():
-                data = zin.read(item.filename)
-                name = item.filename
-                if re.fullmatch(r"ppt/theme/theme\d+\.xml", name):
-                    xml = _restyle_theme(data.decode("utf-8"), colors, typ, report)
-                    data = xml.encode("utf-8")
-                elif re.fullmatch(
-                    r"ppt/(slides|slideLayouts|slideMasters)/[^/]+\.xml", name
-                ):
-                    xml = _restyle_part(
-                        data.decode("utf-8"), palette, typ,
-                        explicit_colors, explicit_fonts, cmap, report,
-                    )
-                    data = xml.encode("utf-8")
-                zout.writestr(item, data)
-        os.replace(str(staging), str(dest))
-    finally:
-        if staging.exists():
-            try:
-                staging.unlink()
-            except OSError:
-                pass
+    def transform(name: str, data: bytes) -> bytes:
+        if re.fullmatch(r"ppt/theme/theme\d+\.xml", name):
+            return _restyle_theme(data.decode("utf-8"), colors, typ, report).encode("utf-8")
+        if re.fullmatch(r"ppt/(slides|slideLayouts|slideMasters)/[^/]+\.xml", name):
+            return _restyle_part(
+                data.decode("utf-8"), palette, typ,
+                explicit_colors, explicit_fonts, cmap, report,
+            ).encode("utf-8")
+        return data
+
+    dest = rewrite_package(pptx, out, transform, force=force)
+    report["dest"] = str(dest)
 
     report_path = dest.with_suffix(".restyle.report.json")
     report_path.write_text(

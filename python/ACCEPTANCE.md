@@ -1,5 +1,17 @@
 # designmd-pptx — Definition of Done
 
+## v1.3 acceptance criteria
+
+| # | Criterion | Evidence |
+|---|---|---|
+| 1 | Package/compiler **1.3.x** | `__version__`, `COMPILER_VERSION`, tokens.compiler.version |
+| 2 | `master` brands theme scheme/fonts + master txStyles type scale; slide content untouched | `tests/test_v13.py` MasterV13 |
+| 3 | `master` staging-safe: in-place refuses without force, source intact on refusal | MasterV13.test_in_place_requires_force |
+| 4 | `export_potx` flips presentation → template content type; `.potx` extension enforced | PotxV13 |
+| 5 | `--empty-potx` strips slides + sldIdLst + rels + content-type overrides; master/theme survive | PotxV13.test_empty_strips_slides |
+| 6 | `master --potx` without `-o`/`--force` never modifies the source pptx | CliV13.test_master_potx_only_leaves_source |
+| 7 | rewrite_package shared by restyle/master (drop-part support) with unchanged v1.2 semantics | test_v12 RestyleV12 green |
+
 ## v1.2 acceptance criteria
 
 | # | Criterion | Evidence |
