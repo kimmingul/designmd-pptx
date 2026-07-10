@@ -1,0 +1,15 @@
+{
+  "name": "designmd-pptx",
+  "description": "DESIGN.md → officecli PPTX compiler: tokens, ordered decks, staging-safe apply.",
+  "owner": {
+    "name": "Min-Gul Kim",
+    "email": "kimmingul@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "designmd-pptx",
+      "source": "./",
+      "description": "DESIGN.md → officecli PPTX compiler: tokens, ordered decks, staging-safe apply."
+    }
+  ]
+}
