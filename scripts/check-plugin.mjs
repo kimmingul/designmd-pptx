@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** Static checks for designmd-pptx Grok plugin layout. */
+/** Static checks for designmd-pptx multi-platform plugin layout (Claude Code / Codex / Grok). */
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -31,6 +31,37 @@ ok(skillBody.includes('designmd_pptx'), 'skill mentions package');
 
 const cmd = path.join(root, '.grok', 'commands', 'designmd-pptx.md');
 ok(fs.existsSync(cmd), 'command designmd-pptx.md');
+
+// Canonical (Claude Code) layout
+const canonSkill = path.join(root, 'skills', 'officecli-pptx-designmd', 'SKILL.md');
+ok(fs.existsSync(canonSkill), 'canonical skills/ SKILL.md');
+const canonCmd = path.join(root, 'commands', 'designmd-pptx.md');
+ok(fs.existsSync(canonCmd), 'canonical commands/designmd-pptx.md');
+
+const cpj = path.join(root, '.claude-plugin', 'plugin.json');
+ok(fs.existsSync(cpj), '.claude-plugin/plugin.json exists');
+const cplugin = JSON.parse(fs.readFileSync(cpj, 'utf8'));
+ok(cplugin.name === 'designmd-pptx', 'claude plugin name designmd-pptx');
+ok(cplugin.version === plugin.version, 'claude plugin version matches grok plugin.json');
+
+const mpj = path.join(root, '.claude-plugin', 'marketplace.json');
+ok(fs.existsSync(mpj), '.claude-plugin/marketplace.json exists');
+const market = JSON.parse(fs.readFileSync(mpj, 'utf8'));
+ok(
+  Array.isArray(market.plugins) && market.plugins[0]?.source === './',
+  'marketplace self-hosts plugin at ./'
+);
+
+ok(fs.existsSync(path.join(root, 'AGENTS.md')), 'AGENTS.md (Codex) exists');
+ok(fs.existsSync(path.join(root, 'scripts', 'install-codex.ps1')), 'install-codex.ps1 exists');
+
+// Adapter drift: .grok copies must match canonical skills/ + commands/
+const sync = spawnSync(
+  process.execPath,
+  [path.join(root, 'scripts', 'sync-adapters.mjs'), '--check'],
+  { cwd: root, encoding: 'utf-8' }
+);
+ok(sync.status === 0, `adapters in sync: ${(sync.stdout || sync.stderr || '').trim().split('\n').pop()}`);
 
 const pkg = path.join(root, 'python', 'designmd_pptx', '__init__.py');
 ok(fs.existsSync(pkg), 'python package present');

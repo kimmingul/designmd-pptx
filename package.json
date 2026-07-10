@@ -1,15 +1,18 @@
 {
   "name": "designmd-pptx",
   "version": "1.1.0",
-  "description": "Grok plugin: DESIGN.md → officecli PPTX compiler (v1.1)",
+  "description": "DESIGN.md → officecli PPTX compiler, packaged for Claude Code / Codex / Grok Build (v1.1)",
   "license": "MIT",
   "private": true,
   "scripts": {
+    "sync": "node scripts/sync-adapters.mjs",
     "check": "node scripts/check-plugin.mjs",
     "test": "python -m unittest discover -s python/tests -v",
     "doctor": "python -c \"import sys; sys.path.insert(0,'python'); from designmd_pptx import __version__; print('designmd_pptx', __version__)\""
   },
   "keywords": [
+    "claude-code",
+    "codex",
     "grok",
     "design-md",
     "officecli",

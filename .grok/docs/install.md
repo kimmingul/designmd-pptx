@@ -3,9 +3,10 @@
 ## Layout
 
 ```text
-designmd-pptx-plugin/
-  plugin.json
+designmd-pptx/
+  plugin.json             # Grok manifest
   package.json
+  skills/, commands/      # canonical sources (synced to .grok/ via npm run sync)
   .grok/skills/officecli-pptx-designmd/SKILL.md
   .grok/commands/designmd-pptx.md
   python/                 # vendored designmd_pptx package + fixtures/examples
@@ -15,7 +16,7 @@ designmd-pptx-plugin/
 ## Local install (this machine)
 
 ```powershell
-$src = "C:\Users\kimmi\Downloads\ppt\designmd-pptx-plugin"
+$src = "C:\Users\kimmi\Downloads\ppt\designmd-pptx"
 $dst = "$env:USERPROFILE\.grok\installed-plugins\designmd-pptx-local"
 robocopy $src $dst /E /XD __pycache__ .git out
 pip install -r "$dst\python\requirements.txt"
