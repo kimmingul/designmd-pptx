@@ -1,11 +1,11 @@
 # designmd-pptx
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.2.0-brightgreen)](plugin.json)
+[![Version](https://img.shields.io/badge/version-1.3.0-brightgreen)](plugin.json)
 
-**awesome-design-md / Stitch `DESIGN.md` → [officecli](https://github.com/iOfficeAI/OfficeCLI) PPTX** — packaged for **Claude Code, OpenAI Codex, and Grok Build** (v1.2).
+**awesome-design-md / Stitch `DESIGN.md` → [officecli](https://github.com/iOfficeAI/OfficeCLI) PPTX** — packaged for **Claude Code, OpenAI Codex, and Grok Build** (v1.3).
 
-Drop a brand `DESIGN.md` in, scaffold an ordered deck, and materialize slides with staging-safe apply. v1.2 adds the reverse path: **extract** an existing deck into an editable deck-spec draft, or **restyle** it in place with brand tokens.
+Drop a brand `DESIGN.md` in, scaffold an ordered deck, and materialize slides with staging-safe apply. v1.2 added the reverse path (**extract** an existing deck into an editable deck-spec draft, **restyle** it in place with brand tokens); v1.3 adds **slide-master branding and .potx template export**, so slides added later in PowerPoint inherit the brand.
 
 ## What you get
 
@@ -83,6 +83,7 @@ In Grok chat: mention DESIGN.md for slides, or run `/designmd-pptx`.
 - **Staging-safe apply** — destination replaced only after validate + issues pass
 - **Extract** (v1.2) — existing .pptx → `content.deck.json` draft with per-slide recipe mapping, confidence report, and exported images; review, then re-scaffold with any DESIGN.md
 - **Restyle** (v1.2) — rebrand an existing .pptx in place: theme scheme + fonts remapped to brand tokens, explicit colors snapped to the nearest palette entry (`--map` to pin), staging-safe like apply
+- **Master & templates** (v1.3) — brand the theme + slide-master type scale (new slides inherit the brand); export a `.potx` template, optionally stripped of slides
 
 ## Commands
 
@@ -93,6 +94,7 @@ python -m designmd_pptx scaffold DESIGN.md -o out/brand --content deck.json
 python -m designmd_pptx apply [--force] dest.pptx recipes/deck.sequence.json
 python -m designmd_pptx extract old.pptx -o extracted/
 python -m designmd_pptx restyle old.pptx DESIGN.md -o new.pptx
+python -m designmd_pptx master deck.pptx DESIGN.md --potx brand.potx [--empty-potx]
 ```
 
 ## Modernizing an existing deck (v1.2)
@@ -105,6 +107,9 @@ python -m designmd_pptx scaffold brand.DESIGN.md -o out\rebrand --content extrac
 
 # 2. Brand-only: keep layout, swap colors/fonts
 python -m designmd_pptx restyle legacy.pptx brand.DESIGN.md -o legacy-rebranded.pptx
+
+# 3. Make it a reusable brand template (v1.3): theme + master + .potx
+python -m designmd_pptx master legacy-rebranded.pptx brand.DESIGN.md --potx brand.potx --empty-potx
 ```
 
 ## Development

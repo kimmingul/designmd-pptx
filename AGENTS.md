@@ -34,6 +34,7 @@ $env:PYTHONPATH = "$PWD\python"
 python -m designmd_pptx scaffold python\fixtures\linear.DESIGN.md -o out\demo --content python\examples\content.deck.json
 python -m designmd_pptx extract old.pptx -o extracted    # existing deck → deck-spec draft
 python -m designmd_pptx restyle old.pptx DESIGN.md -o new.pptx   # rebrand in place
+python -m designmd_pptx master deck.pptx DESIGN.md --potx brand.potx  # brand master + template
 ```
 
 See `skills/officecli-pptx-designmd/SKILL.md` for full CLI reference and hard rules.
