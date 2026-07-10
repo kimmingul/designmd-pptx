@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local/designmd-pptx/content.overlay.schema.json",
+  "title": "content.overlay",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "cover": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "meta": { "type": "string" }
+      }
+    },
+    "section_divider": {
+      "type": "object",
+      "properties": {
+        "number": { "type": ["string", "number"] },
+        "title": { "type": "string" },
+        "blurb": { "type": "string" }
+      }
+    },
+    "kpi_row": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "notes": { "type": "string" },
+        "kpis": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "properties": {
+              "value": { "type": ["string", "number"] },
+              "label": { "type": "string" },
+              "chip": { "type": "string" },
+              "watch": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    },
+    "kpi_3": { "$ref": "#/properties/kpi_row" },
+    "feature_cards": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "cards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": { "type": "string" },
+              "body": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "feature_cards_3": { "$ref": "#/properties/feature_cards" },
+    "bullets": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "bullets": { "type": "array", "items": { "type": "string" } },
+        "items": { "type": "array", "items": { "type": "string" } },
+        "notes": { "type": "string" }
+      }
+    },
+    "quote": {
+      "type": "object",
+      "properties": {
+        "quote": { "type": "string" },
+        "attribution": { "type": "string" }
+      }
+    },
+    "comparison_2col": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "left": {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string" },
+            "body": { "type": "string" }
+          }
+        },
+        "right": {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string" },
+            "body": { "type": "string" }
+          }
+        }
+      }
+    },
+    "chart_insight": { "type": "object" },
+    "timeline": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "notes": { "type": "string" },
+        "steps": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": { "type": "string" },
+              "detail": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "table": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "headers": { "type": "array", "items": { "type": "string" } },
+        "rows": {
+          "type": "array",
+          "items": { "type": "array", "items": { "type": "string" } }
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "image_full": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "src": { "type": "string" },
+        "alt": { "type": "string" },
+        "caption": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    },
+    "process": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "notes": { "type": "string" },
+        "steps": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 5,
+          "items": {
+            "oneOf": [
+              { "type": "string" },
+              {
+                "type": "object",
+                "properties": {
+                  "label": { "type": "string" },
+                  "detail": { "type": "string" }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "close": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "body": { "type": "string" },
+        "cta": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local/designmd-pptx/tokens.slide.schema.json",
+  "title": "tokens.slide",
+  "type": "object",
+  "required": ["version", "colors", "type", "canvas_cm", "margin_cm", "gap_cm", "patterns"],
+  "properties": {
+    "version": { "type": "string" },
+    "source": { "type": "string" },
+    "brand": { "type": "string" },
+    "description": { "type": "string" },
+    "canvas_cm": {
+      "type": "array",
+      "items": { "type": "number" },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "margin_cm": { "type": "number", "minimum": 1.0 },
+    "gap_cm": { "type": "number", "minimum": 0.5 },
+    "colors": {
+      "type": "object",
+      "required": [
+        "background",
+        "content_background",
+        "surface",
+        "accent",
+        "text",
+        "muted",
+        "on_accent"
+      ],
+      "additionalProperties": { "type": "string", "pattern": "^[0-9A-Fa-f]{6}$" }
+    },
+    "type": {
+      "type": "object",
+      "required": ["heading_font", "body_font", "title_pt", "body_pt", "cover_pt", "kpi_pt"],
+      "properties": {
+        "heading_font": { "type": "string" },
+        "body_font": { "type": "string" },
+        "mono_font": { "type": "string" },
+        "cover_pt": { "type": "integer", "minimum": 36 },
+        "title_pt": { "type": "integer", "minimum": 36 },
+        "section_pt": { "type": "integer", "minimum": 20 },
+        "body_pt": { "type": "integer", "minimum": 18 },
+        "caption_pt": { "type": "integer", "minimum": 10, "maximum": 12 },
+        "kpi_pt": { "type": "integer", "minimum": 48 }
+      }
+    },
+    "shape": { "type": "object" },
+    "motif": { "type": "string" },
+    "dark_first": { "type": "boolean" },
+    "drop": { "type": "array", "items": { "type": "string" } },
+    "patterns": { "type": "array", "items": { "type": "string" } }
+  }
+}

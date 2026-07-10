@@ -1,0 +1,21 @@
+{
+  "name": "designmd-pptx",
+  "version": "1.1.0",
+  "description": "Grok plugin: DESIGN.md → officecli PPTX compiler (v1.1)",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "check": "node scripts/check-plugin.mjs",
+    "test": "python -m unittest discover -s python/tests -v",
+    "doctor": "python -c \"import sys; sys.path.insert(0,'python'); from designmd_pptx import __version__; print('designmd_pptx', __version__)\""
+  },
+  "keywords": [
+    "grok",
+    "design-md",
+    "officecli",
+    "pptx"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
+}

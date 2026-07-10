@@ -1,0 +1,90 @@
+{
+  "cover": {
+    "title": "FY26 Product Review",
+    "subtitle": "Design system on slides",
+    "meta": "designmd-pptx · v1.0 demo"
+  },
+  "section_divider": {
+    "number": "01",
+    "title": "Traction",
+    "blurb": "Metrics, process, and the ask."
+  },
+  "kpi_row": {
+    "title": "Operating pulse",
+    "kpis": [
+      { "value": "84.2", "label": "USD millions · ARR", "chip": "+24% YoY" },
+      { "value": "118%", "label": "Net revenue retention", "chip": "Healthy" },
+      { "value": "1.4", "label": "CAC payback (yrs)", "chip": "Watch", "watch": true }
+    ],
+    "notes": "Lead with ARR; treat payback as the risk flag."
+  },
+  "feature_cards": {
+    "title": "What we optimized",
+    "cards": [
+      { "title": "Speed", "body": "Issue-to-ship cycle under two weeks for P0." },
+      { "title": "Clarity", "body": "One owner, one metric, no dashboard sprawl." },
+      { "title": "Craft", "body": "Accent only on CTAs and the watch KPI." }
+    ]
+  },
+  "bullets": {
+    "title": "Agenda",
+    "bullets": [
+      "Operating pulse",
+      "Delivery process",
+      "Revenue vs plan",
+      "Ask"
+    ]
+  },
+  "timeline": {
+    "title": "Roadmap",
+    "steps": [
+      { "label": "Q1", "detail": "Foundation" },
+      { "label": "Q2", "detail": "EMEA launch" },
+      { "label": "Q3", "detail": "Scale GTM" },
+      { "label": "Q4", "detail": "Platform" }
+    ]
+  },
+  "process": {
+    "title": "How we ship",
+    "steps": ["Brief", "Design", "Build", "Review", "Ship"]
+  },
+  "table": {
+    "title": "Segment mix",
+    "headers": ["Segment", "ARR", "NRR"],
+    "rows": [
+      ["Enterprise", "52.1", "122%"],
+      ["Mid-market", "21.4", "115%"],
+      ["SMB", "10.7", "108%"]
+    ]
+  },
+  "quote": {
+    "quote": "Ship decisions without ceremony.",
+    "attribution": "— Product principle"
+  },
+  "comparison_2col": {
+    "title": "Build vs buy",
+    "left": { "title": "Build", "body": "Control roadmap; higher upfront cost." },
+    "right": { "title": "Buy", "body": "Faster start; integration debt." }
+  },
+  "chart_insight": {
+    "title": "Revenue beat plan by 18%",
+    "insight_title": "Key insight",
+    "insight_body": "EMEA launch plus NRR at 118% drove twelve points of the eighteen-point beat.",
+    "categories": "Q1,Q2,Q3,Q4",
+    "series1_name": "Actual",
+    "series1_values": "42,45,48,55",
+    "series2_name": "Plan",
+    "series2_values": "40,42,45,48",
+    "notes": "Read the insight first; bars are evidence."
+  },
+  "image_full": {
+    "title": "Product surface",
+    "caption": "Placeholder when no src is provided",
+    "alt": "Product screenshot placeholder"
+  },
+  "close": {
+    "title": "Ask",
+    "body": "Approve Q3 hiring plan for EMEA GTM.",
+    "cta": "Approve"
+  }
+}

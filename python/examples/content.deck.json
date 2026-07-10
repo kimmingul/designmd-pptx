@@ -1,0 +1,72 @@
+{
+  "version": "1.1",
+  "slides": [
+    {
+      "id": "cover",
+      "recipe": "cover",
+      "content": {
+        "title": "FY26 Product Review",
+        "subtitle": "Design system on slides",
+        "meta": "designmd-pptx · v1.1 deck-spec"
+      }
+    },
+    {
+      "id": "agenda",
+      "recipe": "bullets",
+      "content": {
+        "title": "Agenda",
+        "bullets": ["Pulse", "Process", "Visual", "Ask"]
+      }
+    },
+    {
+      "id": "kpi-arr",
+      "recipe": "kpi_row",
+      "content": {
+        "title": "Operating pulse",
+        "kpis": [
+          { "value": "84.2", "label": "USD millions · ARR", "chip": "+24% YoY" },
+          { "value": "118%", "label": "Net revenue retention", "chip": "Healthy" },
+          { "value": "1.4", "label": "CAC payback (yrs)", "chip": "Watch", "watch": true }
+        ]
+      }
+    },
+    {
+      "id": "ship",
+      "recipe": "process",
+      "content": {
+        "title": "How we ship",
+        "steps": ["Brief", "Design", "Build", "Ship"]
+      }
+    },
+    {
+      "id": "visual",
+      "recipe": "image_text_2col",
+      "content": {
+        "title": "Product surface",
+        "body": "Explain the UI next to a visual. Provide src+alt when an asset is available.",
+        "image_side": "left"
+      }
+    },
+    {
+      "id": "chart",
+      "recipe": "chart_insight",
+      "content": {
+        "title": "Revenue beat plan by 18%",
+        "insight_title": "Key insight",
+        "insight_body": "EMEA launch plus NRR at 118% drove the beat.",
+        "categories": "Q1,Q2,Q3,Q4",
+        "series1_values": "42,45,48,55",
+        "series2_values": "40,42,45,48"
+      }
+    },
+    {
+      "id": "close",
+      "recipe": "close",
+      "content": {
+        "title": "Ask",
+        "body": "Approve Q3 hiring plan for EMEA GTM.",
+        "cta": "Approve"
+      }
+    }
+  ]
+}
