@@ -122,6 +122,12 @@ npm run check   # layout checks (Claude/Codex/Grok) + adapter drift
 npm test        # python -m unittest discover -s python/tests -v
 ```
 
+## Roadmap
+
+- **Gate 3 visual QA** — render slides to screenshots and automatically check overflow, contrast, and alignment. Needs a renderer dependency (PowerPoint COM on Windows or LibreOffice headless), which is why it is not bundled yet.
+- **Richer extract classification** — detect unit-suffixed KPI values (`42ms`, `1.2k`), and recover `process`/`timeline` patterns from step shapes + connectors instead of falling back to `bullets`.
+- **Template polish** — prune unreferenced media in `--empty-potx` output; optional branded slide layouts beyond the master defaults.
+
 ## License
 
 MIT — see [LICENSE](LICENSE). Brand DESIGN.md tokens remain under their upstream collection terms.
