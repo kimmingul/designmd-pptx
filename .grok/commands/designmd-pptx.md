@@ -21,7 +21,7 @@ Use the **designmd-pptx** toolkit (skill `officecli-pptx-designmd`).
 - `compile <DESIGN.md>` — tokens only
 - `extract <pptx> [-o extracted/]` — existing deck → deck-spec draft + report + assets (review before scaffold)
 - `restyle <pptx> <DESIGN.md|tokens.json> [-o new.pptx] [--force]` — rebrand existing deck in place (theme + explicit colors/fonts)
-- `master <pptx> <DESIGN.md|tokens.json> [--potx brand.potx] [--empty-potx]` — brand theme/slide master; export .potx template
+- `master <pptx> <DESIGN.md|tokens.json> [--potx brand.potx] [--empty-potx] [--layouts]` — brand theme/slide master (+slot-mapped layout colors); export .potx template with media GC
 - `compose <brief.md> [-o composed/] [--design X]` — markdown outline → deck-spec draft (recipe selection, auto-split, fit warnings)
 - `doctor [--strict]` — verify officecli + per-platform skill routing, print remedies
 

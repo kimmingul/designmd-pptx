@@ -1,11 +1,11 @@
 # designmd-pptx
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.5.0-brightgreen)](plugin.json)
+[![Version](https://img.shields.io/badge/version-1.6.0-brightgreen)](plugin.json)
 
-**awesome-design-md / Stitch `DESIGN.md` → [officecli](https://github.com/iOfficeAI/OfficeCLI) PPTX** — packaged for **Claude Code, OpenAI Codex, and Grok Build** (v1.5).
+**awesome-design-md / Stitch `DESIGN.md` → [officecli](https://github.com/iOfficeAI/OfficeCLI) PPTX** — packaged for **Claude Code, OpenAI Codex, and Grok Build** (v1.6).
 
-Drop a brand `DESIGN.md` in, scaffold an ordered deck, and materialize slides with staging-safe apply. v1.2 added the reverse path (extract / restyle existing decks); v1.3 added slide-master branding + .potx export; v1.4 added the default house style, doctor, and screenshot QA. **v1.5** answers the multi-model critical review: a **compose** compiler (markdown outline → deck-spec), **CJK-aware text-fit validation**, **6 new slide patterns** (20 total), a **hard Gate 3** that renders before the file is written, geometry-aware extract, and font-role-aware restyle.
+Drop a brand `DESIGN.md` in, scaffold an ordered deck, and materialize slides with staging-safe apply. v1.2 added the reverse path (extract / restyle existing decks); v1.3 slide-master branding + .potx export; v1.4 default house style, doctor, screenshot QA; v1.5 the compose compiler, CJK text-fit, 20 patterns, hard Gate 3. **v1.6** closes the roadmap: a **constraint-based layout engine** (content-driven geometry with density adaptation for text-heavy patterns — the fixed-coordinate ceiling is gone) and **template polish** (media garbage collection in `--empty-potx`, slot-mapped branded slide layouts).
 
 ## What you get
 
@@ -98,6 +98,8 @@ In agent chat (Claude Code / Codex / Grok): mention DESIGN.md for slides, or run
 - **Hard Gate 3** (v1.5) — the contact sheet renders from **staging before the destination is replaced**; `--gate3` aborts the write on render failure; generated apply wrappers pass `--screenshot` by default
 - **Structure-aware extract** (v1.5) — connectors + box rows recover `process`, even card grids recover `feature_cards`, dominant numerics recover `big_number`, unit-suffixed KPIs (42ms, 1.2k) detected
 - **Font-role-aware restyle** (v1.5) — runs at/above section size keep the heading font instead of being flattened to body
+- **Constraint-based layout engine** (v1.6) — text-heavy patterns (bullets, feature_cards, comparison_2col, image_text_2col) declare a stack tree once; the engine solves absolute geometry from content (text heights from CJK-aware line estimation, free space by weight, min/max clamps). Comfortable density first, compact fallback (spacing-first, fonts floored at 36/18pt), then a hard shorten-or-split failure — weighted boxes are overflow-checked too
+- **Template polish** (v1.6) — `--empty-potx` garbage-collects media no surviving part references (master/layout/theme refs always survive); `master --layouts` rebrands slideLayouts by mapping explicit colors that exactly match an old theme slot to the new slot color (unmatched colors untouched + reported)
 
 ## Patterns (20)
 
@@ -155,11 +157,15 @@ npm test        # python -m unittest discover -s python/tests -v
 
 ## Roadmap
 
-- ~~Gate 3 visual QA~~ — shipped in v1.4 (`--screenshot`), hardened in v1.5 (`--gate3` renders before the write).
-- ~~Richer extract classification~~ — shipped in v1.5: unit-suffixed KPIs, connector→process, card grids, big-number heroes.
-- ~~Outline → deck-spec compiler~~ — shipped in v1.5 as `compose`.
-- **Constraint-based layout engine** — density variants / adaptive composition per pattern (the long-term answer to the fixed-geometry ceiling).
-- **Template polish** — prune unreferenced media in `--empty-potx` output; optional branded slide layouts beyond the master defaults.
+All planned items have shipped:
+
+- ~~Gate 3 visual QA~~ — v1.4 (`--screenshot`), hardened in v1.5 (`--gate3` renders before the write).
+- ~~Richer extract classification~~ — v1.5: unit-suffixed KPIs, connector→process, card grids, big-number heroes.
+- ~~Outline → deck-spec compiler~~ — v1.5 (`compose`).
+- ~~Constraint-based layout engine~~ — v1.6: content-driven geometry + density adaptation for text-heavy patterns.
+- ~~Template polish~~ — v1.6: `--empty-potx` media GC + `master --layouts` slot-mapped layout branding.
+
+Ideas beyond the original roadmap (not committed): migrating the remaining grid recipes to the layout engine, per-pattern alternate compositions, and speaker-note generation from compose briefs.
 
 ## License
 
