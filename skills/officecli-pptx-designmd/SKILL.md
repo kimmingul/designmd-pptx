@@ -1,9 +1,9 @@
 ---
 name: officecli-pptx-designmd
-description: "designmd-pptx v1.4: compile awesome-design-md / Stitch DESIGN.md into officecli PPTX tokens, ordered decks, staging-safe apply; extract existing pptx into a deck-spec draft; restyle existing pptx with brand tokens; brand slide masters and export .potx templates; bundled default house style when no brand exists; doctor bootstrap; Gate 3 screenshot QA. Trigger on DESIGN.md, getdesign.md, brand design for slides, restyle deck, modernize slides, slide master, potx template, /designmd-pptx, /officecli-pptx-designmd."
+description: "designmd-pptx v1.5: compile awesome-design-md / Stitch DESIGN.md into officecli PPTX tokens, ordered decks, staging-safe apply; compose markdown briefs into deck-specs; extract existing pptx into a deck-spec draft (geometry-aware); restyle existing pptx with brand tokens (font-role aware); brand slide masters and export .potx templates; 20 slide patterns incl. big_number, matrix_2x2, team, pricing; CJK-aware text-fit validation; Gate 3 screenshot gating. Trigger on DESIGN.md, getdesign.md, brand design for slides, deck outline, restyle deck, modernize slides, slide master, potx template, /designmd-pptx, /officecli-pptx-designmd."
 ---
 
-# officecli-pptx-designmd (v1.4)
+# officecli-pptx-designmd (v1.5)
 
 ## Locate the toolkit
 
@@ -27,15 +27,19 @@ pip install -r "<resolved python root>\requirements.txt"
 ## Hard rules
 
 1. Compile DESIGN.md → tokens (provenance + css_vars + warnings).
-2. Prefer **deck-spec** (ordered, repeatable recipes).
+2. Prefer **deck-spec** (ordered, repeatable recipes). Don't hand-write it from
+   prose — run `compose` on a markdown outline first, then edit the draft.
 3. Floors: title ≥36pt, body ≥18pt, micro 12–16 for KPI chips only.
-4. No silent truncation — oversized content fails.
+4. No silent truncation — item caps AND text length are validated (CJK-aware
+   width budgets; Korean/Japanese/Chinese glyphs count wider). Over-budget
+   text fails with a shorten-or-split message; fix content, don't shrink fonts.
 5. `image_full` / `image_text_2col`: `alt` required when `src` set.
 6. Process uses **glued connectors** (`/slide[N]/shape[@name=…]`).
 7. Overwrite only with `--force` / `DESIGNMD_FORCE=1` (staging-safe via `apply_sequence`).
 8. QA: validate → view issues (incl. low_contrast) → **Gate 3**: apply with
-   `--screenshot`, then visually inspect the contact-sheet PNG for overflow,
-   overlap, and alignment; fix recipes and re-apply until clean.
+   `--screenshot` (renders from staging BEFORE the destination is replaced;
+   `--gate3` makes a failed render abort the write). Visually inspect the
+   contact sheet for overflow, overlap, alignment; fix and re-apply until clean.
 9. No brand DESIGN.md? Pass the literal `default` as the design argument —
    the bundled neutral house style keeps the design floor.
 10. officecli missing or routing unclear? Run `python -m designmd_pptx doctor`
@@ -61,7 +65,20 @@ python -m designmd_pptx restyle old.pptx DESIGN.md -o new.pptx  # v1.2: rebrand 
 python -m designmd_pptx master deck.pptx DESIGN.md --potx brand.potx [--empty-potx]  # v1.3
 python -m designmd_pptx scaffold default -o out/deck --content deck.json --apply --force --screenshot  # v1.4
 python -m designmd_pptx doctor            # v1.4: verify officecli + skill routing
+python -m designmd_pptx compose brief.md -o composed/ --design default   # v1.5: outline → deck-spec
 ```
+
+## Authoring flow (v1.5)
+
+1. Write a markdown **brief**: `# deck title`, one `## section` per slide;
+   lists, `1.` steps, tables, `> quotes`, `![alt](img)`, `CTA: …` lines.
+   Value bullets like `84.2 — ARR` become KPI cards; a single one becomes
+   a big_number hero; dated steps become a timeline; two `###` subsections
+   become comparison_2col; oversized bullet lists auto-split.
+2. `compose brief.md -o composed/ --design <brand|default>` → review
+   `compose.report.json` (confidence + fit warnings), edit the draft.
+3. `scaffold <DESIGN.md|default> --content composed/content.deck.json --apply --force --screenshot --gate3`
+4. Inspect the contact sheet (Gate 3), fix, re-apply.
 
 ## Existing decks (v1.2)
 
@@ -88,7 +105,7 @@ deliver a deck whose file doubles as a brand template.
 
 ## Patterns
 
-cover · section_divider · kpi_row · feature_cards · bullets · quote · comparison_2col · timeline · process · table · image_full · image_text_2col · chart_insight · close
+cover · section_divider · kpi_row · **big_number** · feature_cards · **pricing** · bullets · quote · comparison_2col · **matrix_2x2** · timeline · process · table · **appendix_table** · chart_insight (any officecli chartType: column/bar/line/pie/area/waterfall/funnel/…) · **team** · **logo_strip** · image_full · image_text_2col · close
 
 ## Colors
 

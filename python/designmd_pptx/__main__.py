@@ -86,6 +86,7 @@ def cmd_apply(args: argparse.Namespace) -> int:
         force=force,
         require_clean_issues=not bool(getattr(args, "no_issues_gate", False)),
         screenshot=bool(getattr(args, "screenshot", False)),
+        gate3=bool(getattr(args, "gate3", False)),
     )
     return 0
 
@@ -169,7 +170,7 @@ def cmd_scaffold(args: argparse.Namespace) -> int:
                 "# designmd-pptx package root is two levels up from out/<brand>/",
                 '$PkgRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\\..")).Path',
                 'if (Test-Path (Join-Path $PkgRoot "designmd_pptx")) { $env:PYTHONPATH = $PkgRoot }',
-                "python -m designmd_pptx apply $File $Seq @Force",
+                "python -m designmd_pptx apply $File $Seq @Force --screenshot",
                 'if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }',
                 'Write-Host "Done: $File"',
                 "",
@@ -193,7 +194,7 @@ def cmd_scaffold(args: argparse.Namespace) -> int:
                 'if [[ "${DESIGNMD_FORCE:-}" == "1" ]]; then FORCE=(--force); fi',
                 'PKG="$(cd "$ROOT/../.." && pwd)"',
                 'if [[ -d "$PKG/designmd_pptx" ]]; then export PYTHONPATH="$PKG${PYTHONPATH:+:$PYTHONPATH}"; fi',
-                'python -m designmd_pptx apply "$FILE" "$SEQ" ${FORCE[@]+"${FORCE[@]}"}',
+                'python -m designmd_pptx apply "$FILE" "$SEQ" ${FORCE[@]+"${FORCE[@]}"} --screenshot',
                 'echo "Done: $FILE"',
                 "",
             ]
@@ -212,6 +213,7 @@ def cmd_scaffold(args: argparse.Namespace) -> int:
             force=bool(getattr(args, "force", False)),
             require_clean_issues=True,
             screenshot=bool(getattr(args, "screenshot", False)),
+            gate3=bool(getattr(args, "gate3", False)),
         )
 
     print("")
@@ -327,6 +329,26 @@ def cmd_master(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_compose(args: argparse.Namespace) -> int:
+    """Markdown brief/outline → deck-spec draft (recipe selection + content)."""
+    from .compose import compose_outline
+
+    tokens = None
+    if args.design:
+        tokens = compile_design_md(_resolve_design(args.design), brand=args.brand)
+    report = compose_outline(args.brief, args.out, tokens=tokens)
+    print(f"Wrote {Path(args.out) / 'content.deck.json'}")
+    print(f"Wrote {Path(args.out) / 'compose.report.json'}")
+    for s in report["slides"]:
+        flags = f" — {'; '.join(s['warnings'])}" if s.get("warnings") else ""
+        print(f"  slide {s['index']:>2}: {s['recipe']} (confidence {s['confidence']}){flags}")
+    for w in report.get("fit_warnings") or []:
+        print(f"fit warning: {w}")
+    print("Review the draft, then: python -m designmd_pptx scaffold <DESIGN.md|default> "
+          f"--content {Path(args.out) / 'content.deck.json'}")
+    return 0
+
+
 def cmd_doctor(args: argparse.Namespace) -> int:
     from .doctor import run_doctor
 
@@ -388,6 +410,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="With --apply: emit a Gate 3 contact-sheet PNG for visual QA",
     )
+    s.add_argument(
+        "--gate3",
+        action="store_true",
+        help="With --apply: the contact sheet must render before the pptx is written",
+    )
     s.set_defaults(func=cmd_scaffold)
 
     a = sub.add_parser(
@@ -409,8 +436,14 @@ def build_parser() -> argparse.ArgumentParser:
     a.add_argument(
         "--screenshot",
         action="store_true",
-        help="After apply, emit a whole-deck contact-sheet PNG (officecli view "
-        "screenshot --grid) for Gate 3 visual QA",
+        help="Emit a whole-deck contact-sheet PNG (officecli view screenshot --grid) "
+        "for Gate 3 visual QA — rendered from staging before the destination is replaced",
+    )
+    a.add_argument(
+        "--gate3",
+        action="store_true",
+        help="Hard gate: the contact sheet must render successfully or the "
+        "destination is left untouched (implies --screenshot)",
     )
     a.set_defaults(func=cmd_apply)
 
@@ -459,6 +492,18 @@ def build_parser() -> argparse.ArgumentParser:
     m.add_argument("--brand", default=None)
     m.add_argument("--force", action="store_true", help="Overwrite destination")
     m.set_defaults(func=cmd_master)
+
+    o = sub.add_parser(
+        "compose",
+        help="Markdown brief/outline → content.deck.json draft (recipe selection, "
+        "auto-split, fit warnings)",
+    )
+    o.add_argument("brief", type=Path, help="Markdown outline: # title, ## per slide")
+    o.add_argument("-o", "--out", default="composed", help="Output directory")
+    o.add_argument("--design", default=None,
+                   help="DESIGN.md / tokens / 'default' — adds text-fit warnings to the report")
+    o.add_argument("--brand", default=None)
+    o.set_defaults(func=cmd_compose)
 
     d = sub.add_parser(
         "doctor",

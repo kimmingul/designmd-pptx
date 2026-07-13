@@ -1,11 +1,11 @@
 # designmd-pptx
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.4.0-brightgreen)](plugin.json)
+[![Version](https://img.shields.io/badge/version-1.5.0-brightgreen)](plugin.json)
 
-**awesome-design-md / Stitch `DESIGN.md` → [officecli](https://github.com/iOfficeAI/OfficeCLI) PPTX** — packaged for **Claude Code, OpenAI Codex, and Grok Build** (v1.4).
+**awesome-design-md / Stitch `DESIGN.md` → [officecli](https://github.com/iOfficeAI/OfficeCLI) PPTX** — packaged for **Claude Code, OpenAI Codex, and Grok Build** (v1.5).
 
-Drop a brand `DESIGN.md` in, scaffold an ordered deck, and materialize slides with staging-safe apply. v1.2 added the reverse path (**extract** an existing deck into an editable deck-spec draft, **restyle** it in place with brand tokens); v1.3 added **slide-master branding and .potx template export**; v1.4 adds a **bundled default house style**, a **doctor** bootstrap that verifies officecli routing on every agent platform, and **Gate 3 screenshot QA**.
+Drop a brand `DESIGN.md` in, scaffold an ordered deck, and materialize slides with staging-safe apply. v1.2 added the reverse path (extract / restyle existing decks); v1.3 added slide-master branding + .potx export; v1.4 added the default house style, doctor, and screenshot QA. **v1.5** answers the multi-model critical review: a **compose** compiler (markdown outline → deck-spec), **CJK-aware text-fit validation**, **6 new slide patterns** (20 total), a **hard Gate 3** that renders before the file is written, geometry-aware extract, and font-role-aware restyle.
 
 ## What you get
 
@@ -87,6 +87,12 @@ In Grok chat: mention DESIGN.md for slides, or run `/designmd-pptx`.
 - **Default house style** (v1.4) — pass the literal `default` as the design argument when no brand DESIGN.md exists; a neutral white/slate/blue style keeps the design floor
 - **Doctor** (v1.4) — `python -m designmd_pptx doctor` verifies officecli + the officecli-pptx / designmd skill routing across Claude Code, Codex, and Grok, with remedies for anything missing
 - **Gate 3 visual QA** (v1.4) — `apply --screenshot` emits a whole-deck contact-sheet PNG (`officecli view screenshot --grid`) for the agent to inspect for overflow, overlap, and alignment
+- **Compose** (v1.5) — `compose brief.md` turns a markdown outline into a deck-spec draft: sections become slides, value bullets become KPI cards / big-number heroes, dated steps become timelines, `###` pairs become comparisons, oversized lists auto-split; report carries confidence + fit warnings
+- **Text-fit validation, CJK-aware** (v1.5) — every budgeted field is width-checked in em units (Korean/Japanese/Chinese glyphs count wider); over-budget text fails with a shorten-or-split message. Korean web fonts (Pretendard, Noto Sans KR, Nanum…) substitute to PowerPoint-safe faces
+- **20 slide patterns** (v1.5) — adds big_number, matrix_2x2, team, logo_strip, pricing, appendix_table; chart_insight accepts any officecli chartType (pie/line/area/waterfall/funnel/… — single-series geometries drop series2 automatically)
+- **Hard Gate 3** (v1.5) — the contact sheet renders from **staging before the destination is replaced**; `--gate3` aborts the write on render failure; generated apply wrappers pass `--screenshot` by default
+- **Structure-aware extract** (v1.5) — connectors + box rows recover `process`, even card grids recover `feature_cards`, dominant numerics recover `big_number`, unit-suffixed KPIs (42ms, 1.2k) detected
+- **Font-role-aware restyle** (v1.5) — runs at/above section size keep the heading font instead of being flattened to body
 
 ## Commands
 
@@ -98,8 +104,19 @@ python -m designmd_pptx apply [--force] dest.pptx recipes/deck.sequence.json
 python -m designmd_pptx extract old.pptx -o extracted/
 python -m designmd_pptx restyle old.pptx DESIGN.md -o new.pptx
 python -m designmd_pptx master deck.pptx DESIGN.md --potx brand.potx [--empty-potx]
-python -m designmd_pptx scaffold default -o out/deck --content deck.json --apply --force --screenshot
+python -m designmd_pptx scaffold default -o out/deck --content deck.json --apply --force --screenshot [--gate3]
+python -m designmd_pptx compose brief.md -o composed/ --design default
 python -m designmd_pptx doctor [--strict]
+```
+
+## Authoring flow (v1.5)
+
+```powershell
+# 1. Write a markdown brief (# title, ## per slide, lists/tables/quotes/CTA:)
+python -m designmd_pptx compose brief.md -o composed --design brand.DESIGN.md
+# 2. Review composed/compose.report.json (confidence + fit warnings), edit the draft
+python -m designmd_pptx scaffold brand.DESIGN.md -o out\deck --content composed\content.deck.json --apply --force --screenshot --gate3
+# 3. Inspect out\deck\*.contact.png (Gate 3), fix, re-apply
 ```
 
 ## Modernizing an existing deck (v1.2)
@@ -129,8 +146,10 @@ npm test        # python -m unittest discover -s python/tests -v
 
 ## Roadmap
 
-- ~~Gate 3 visual QA~~ — shipped in v1.4 via `apply --screenshot` (officecli's built-in screenshot renderer; no extra dependency needed).
-- **Richer extract classification** — detect unit-suffixed KPI values (`42ms`, `1.2k`), and recover `process`/`timeline` patterns from step shapes + connectors instead of falling back to `bullets`.
+- ~~Gate 3 visual QA~~ — shipped in v1.4 (`--screenshot`), hardened in v1.5 (`--gate3` renders before the write).
+- ~~Richer extract classification~~ — shipped in v1.5: unit-suffixed KPIs, connector→process, card grids, big-number heroes.
+- ~~Outline → deck-spec compiler~~ — shipped in v1.5 as `compose`.
+- **Constraint-based layout engine** — density variants / adaptive composition per pattern (the long-term answer to the fixed-geometry ceiling).
 - **Template polish** — prune unreferenced media in `--empty-potx` output; optional branded slide layouts beyond the master defaults.
 
 ## License

@@ -22,7 +22,8 @@ NS = {
     "rel": "http://schemas.openxmlformats.org/package/2006/relationships",
 }
 
-_KPI_RE = re.compile(r"^\s*[~<>≈]?[$€£₩]?\d[\d,.]*\s*[%xX+]?(\s|$)")
+# Accepts unit suffixes (42ms, 1.2k, 3x, 84.2M, 12건) — v1.5
+_KPI_RE = re.compile(r"^\s*[~<>≈]?[$€£₩]?\d[\d,.]*\s*[%xX+]?[A-Za-z가-힣]{0,4}(\s|$)")
 _QUOTE_CHARS = "\"'“‘«"
 
 # Recipe capacity limits from content.overlay.schema.json — used for warnings,
@@ -84,6 +85,44 @@ def _max_font_size(tx_body: ET.Element) -> int:
     return max(sizes, default=0)
 
 
+def _geometry(sp: ET.Element) -> tuple[int, int, int, int]:
+    """(x, y, w, h) in EMU from spPr/xfrm; zeros when unpositioned."""
+    xfrm = sp.find(".//a:xfrm", NS)
+    if xfrm is None:
+        return 0, 0, 0, 0
+    off = xfrm.find("a:off", NS)
+    ext = xfrm.find("a:ext", NS)
+    x = int(off.get("x", 0)) if off is not None else 0
+    y = int(off.get("y", 0)) if off is not None else 0
+    w = int(ext.get("cx", 0)) if ext is not None else 0
+    h = int(ext.get("cy", 0)) if ext is not None else 0
+    return x, y, w, h
+
+
+def _similar_row(shapes: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Largest group of text boxes sharing a baseline y and similar width —
+    the geometry signature of process steps / card grids."""
+    boxes = [s for s in shapes if s["w"] > 0 and s["paras"]]
+    if len(boxes) < 2:
+        return []
+    y_tol = 700_000  # ~1.9cm of the 19.05cm slide height
+    groups: list[list[dict[str, Any]]] = []
+    for box in sorted(boxes, key=lambda s: s["y"]):
+        for g in groups:
+            if abs(g[0]["y"] - box["y"]) <= y_tol:
+                g.append(box)
+                break
+        else:
+            groups.append([box])
+    best = max(groups, key=len)
+    if len(best) < 2:
+        return []
+    widths = sorted(s["w"] for s in best)
+    median_w = widths[len(widths) // 2]
+    row = [s for s in best if median_w and abs(s["w"] - median_w) <= 0.35 * median_w]
+    return sorted(row, key=lambda s: s["x"]) if len(row) >= 2 else []
+
+
 def _parse_slide(zf: zipfile.ZipFile, part: str) -> dict[str, Any]:
     root = ET.fromstring(zf.read(part))
     rels = _read_rels(zf, part)
@@ -95,7 +134,10 @@ def _parse_slide(zf: zipfile.ZipFile, part: str) -> dict[str, Any]:
 
     tree = root.find(".//p:cSld/p:spTree", NS)
     if tree is None:
-        return {"title": None, "subtitle": None, "body": [], "tables": [], "pictures": []}
+        return {"title": None, "subtitle": None, "body": [], "tables": [],
+                "pictures": [], "shapes": [], "connectors": 0}
+
+    connectors = len(tree.findall("p:cxnSp", NS))
 
     plain: list[dict[str, Any]] = []  # non-placeholder text shapes, in order
     for sp in tree.findall("p:sp", NS):
@@ -112,7 +154,9 @@ def _parse_slide(zf: zipfile.ZipFile, part: str) -> dict[str, Any]:
         elif ph_type == "subTitle" and subtitle is None:
             subtitle = " ".join(paras)
         elif ph_type is None:
-            plain.append({"paras": paras, "sz": _max_font_size(tx)})
+            x, y, w, h = _geometry(sp)
+            plain.append({"paras": paras, "sz": _max_font_size(tx),
+                          "x": x, "y": y, "w": w, "h": h})
         else:
             body.extend(paras)
 
@@ -126,6 +170,7 @@ def _parse_slide(zf: zipfile.ZipFile, part: str) -> dict[str, Any]:
             plain.remove(top)
     for shape in plain:
         body.extend(shape["paras"])
+    shapes = plain
 
     for frame in tree.findall("p:graphicFrame", NS):
         for tbl in frame.findall(".//a:tbl", NS):
@@ -148,7 +193,8 @@ def _parse_slide(zf: zipfile.ZipFile, part: str) -> dict[str, Any]:
             pictures.append({"media": media, "alt": alt})
 
     return {"title": title, "subtitle": subtitle, "body": body,
-            "tables": tables, "pictures": pictures}
+            "tables": tables, "pictures": pictures,
+            "shapes": shapes, "connectors": connectors}
 
 
 def _classify(
@@ -193,6 +239,27 @@ def _classify(
         if len(body) > 1:
             warnings.append("cover keeps only the first body line as subtitle")
         return "cover", {"title": title or "Untitled", "subtitle": sub}, 0.7, warnings
+
+    # Geometry-based structure recovery (v1.5): connectors + a row of similar
+    # boxes = process; 3–4 similar boxes with multi-line text = feature cards.
+    shapes = slide.get("shapes") or []
+    row = _similar_row(shapes)
+    if slide.get("connectors", 0) >= 1 and 2 <= len(row) <= 5:
+        steps = [" ".join(s["paras"]) for s in row]
+        return "process", {"title": title, "steps": steps}, 0.75, warnings
+    if 3 <= len(row) <= 4 and all(len(s["paras"]) >= 2 for s in row):
+        cards = [{"title": s["paras"][0], "body": " ".join(s["paras"][1:])} for s in row]
+        return "feature_cards", {"title": title, "cards": cards}, 0.7, warnings
+
+    # A single dominant huge numeric = big_number hero slide.
+    huge = [s for s in shapes if s["sz"] >= 5400 and s["paras"]]
+    if len(huge) == 1 and _KPI_RE.match(huge[0]["paras"][0]):
+        value = huge[0]["paras"][0]
+        rest = [p for p in body if p != value]
+        content = {"value": value, "label": title or (rest[0] if rest else "")}
+        if rest and title:
+            content["context"] = rest[0]
+        return "big_number", content, 0.7, warnings
 
     kpi_hits = [p for p in body if _KPI_RE.match(p) and len(p) <= 40]
     if 2 <= len(kpi_hits) <= 4 and len(kpi_hits) >= max(2, len(body) - 1):

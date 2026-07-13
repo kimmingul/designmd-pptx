@@ -26,8 +26,8 @@ from designmd_pptx import apply as apply_mod  # noqa: E402
 
 class Version(unittest.TestCase):
     def test_package_and_compiler_1_1(self):
-        self.assertTrue(__version__.startswith("1.4"))
-        self.assertTrue(COMPILER_VERSION.startswith("1.4"))
+        self.assertTrue(__version__.startswith("1.5"))
+        self.assertTrue(COMPILER_VERSION.startswith("1.5"))
 
 
 class ColorV11(unittest.TestCase):
@@ -87,7 +87,7 @@ class CompileVarFixture(unittest.TestCase):
     def test_var_oklch_fixture(self):
         path = ROOT / "fixtures" / "var-oklch.DESIGN.md"
         tokens = compile_design_md(path, brand="VarOKLCH")
-        self.assertTrue(tokens["compiler"]["version"].startswith("1.4"))
+        self.assertTrue(tokens["compiler"]["version"].startswith("1.5"))
         self.assertEqual(tokens["colors"]["accent"], "0B5FFF")
         self.assertTrue(tokens["dark_first"])
         self.assertIn("image_text_2col", tokens["patterns"])

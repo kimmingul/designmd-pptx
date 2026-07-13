@@ -36,9 +36,13 @@ python -m designmd_pptx extract old.pptx -o extracted    # existing deck → dec
 python -m designmd_pptx restyle old.pptx DESIGN.md -o new.pptx   # rebrand in place
 python -m designmd_pptx master deck.pptx DESIGN.md --potx brand.potx  # brand master + template
 python -m designmd_pptx doctor   # verify officecli + skill routing (Claude/Codex/Grok)
+python -m designmd_pptx compose brief.md -o composed --design default   # outline → deck-spec
 ```
 
-No brand DESIGN.md? Use the literal `default` as the design argument. Always finish
-an `--apply` run with `--screenshot` and inspect the contact sheet (Gate 3).
+No brand DESIGN.md? Use the literal `default` as the design argument. Author content
+via `compose` (markdown brief → deck-spec draft), not by hand-writing JSON. Always
+finish an `--apply` run with `--screenshot` (add `--gate3` to abort on render failure)
+and inspect the contact sheet (Gate 3). Text budgets are CJK-aware — over-budget
+content must be shortened or split, never font-shrunk.
 
 See `skills/officecli-pptx-designmd/SKILL.md` for full CLI reference and hard rules.
