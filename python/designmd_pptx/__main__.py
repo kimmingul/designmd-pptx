@@ -11,9 +11,18 @@ from .compile import assert_content_valid, assert_tokens_valid, compile_design_m
 from .deck import generate_deck
 from .recipes import generate_all_recipes, write_deck_sequence, write_recipes, write_slide_design_md
 
+_DEFAULT_DESIGN = Path(__file__).parent / "default.DESIGN.md"
+
+
+def _resolve_design(p: str | Path) -> Path:
+    """Accept the literal `default` as the bundled neutral house style."""
+    if str(p).strip().lower() in ("default", "@default"):
+        return _DEFAULT_DESIGN
+    return Path(p)
+
 
 def cmd_compile(args: argparse.Namespace) -> int:
-    tokens = compile_design_md(args.design_md, brand=args.brand)
+    tokens = compile_design_md(_resolve_design(args.design_md), brand=args.brand)
     strict = not getattr(args, "no_strict", False)
     errs = assert_tokens_valid(tokens, strict=strict)
     if errs and not strict:
@@ -76,6 +85,7 @@ def cmd_apply(args: argparse.Namespace) -> int:
         create=True,
         force=force,
         require_clean_issues=not bool(getattr(args, "no_issues_gate", False)),
+        screenshot=bool(getattr(args, "screenshot", False)),
     )
     return 0
 
@@ -84,7 +94,7 @@ def cmd_scaffold(args: argparse.Namespace) -> int:
     out_dir = Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    tokens = compile_design_md(args.design_md, brand=args.brand)
+    tokens = compile_design_md(_resolve_design(args.design_md), brand=args.brand)
     assert_tokens_valid(tokens, strict=not args.no_strict)
     tokens_path = out_dir / "tokens.slide.json"
     write_tokens(tokens, tokens_path)
@@ -201,6 +211,7 @@ def cmd_scaffold(args: argparse.Namespace) -> int:
             create=True,
             force=bool(getattr(args, "force", False)),
             require_clean_issues=True,
+            screenshot=bool(getattr(args, "screenshot", False)),
         )
 
     print("")
@@ -235,7 +246,7 @@ def cmd_restyle(args: argparse.Namespace) -> int:
 
     from .restyle import restyle_pptx
 
-    design = Path(args.design)
+    design = _resolve_design(args.design)
     if design.suffix.lower() == ".json":
         tokens = json.loads(design.read_text(encoding="utf-8"))
     else:
@@ -282,7 +293,7 @@ def cmd_master(args: argparse.Namespace) -> int:
 
     from .master import brand_master, export_potx
 
-    design = Path(args.design)
+    design = _resolve_design(args.design)
     if design.suffix.lower() == ".json":
         tokens = json.loads(design.read_text(encoding="utf-8"))
     else:
@@ -314,6 +325,12 @@ def cmd_master(args: argparse.Namespace) -> int:
     if args.potx:
         print(f"Template → {args.potx}{' (slides stripped)' if args.empty_potx else ''}")
     return 0
+
+
+def cmd_doctor(args: argparse.Namespace) -> int:
+    from .doctor import run_doctor
+
+    return run_doctor(strict=bool(args.strict))
 
 
 def _safe_name(s: str) -> str:
@@ -366,6 +383,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="Overwrite existing pptx when using --apply",
     )
     s.add_argument("--no-strict", action="store_true", help="Relax schema/content validation")
+    s.add_argument(
+        "--screenshot",
+        action="store_true",
+        help="With --apply: emit a Gate 3 contact-sheet PNG for visual QA",
+    )
     s.set_defaults(func=cmd_scaffold)
 
     a = sub.add_parser(
@@ -383,6 +405,12 @@ def build_parser() -> argparse.ArgumentParser:
         "--no-issues-gate",
         action="store_true",
         help="Do not fail when view issues reports problems",
+    )
+    a.add_argument(
+        "--screenshot",
+        action="store_true",
+        help="After apply, emit a whole-deck contact-sheet PNG (officecli view "
+        "screenshot --grid) for Gate 3 visual QA",
     )
     a.set_defaults(func=cmd_apply)
 
@@ -431,6 +459,14 @@ def build_parser() -> argparse.ArgumentParser:
     m.add_argument("--brand", default=None)
     m.add_argument("--force", action="store_true", help="Overwrite destination")
     m.set_defaults(func=cmd_master)
+
+    d = sub.add_parser(
+        "doctor",
+        help="Verify officecli + per-platform agent skill routing (Claude/Codex/Grok)",
+    )
+    d.add_argument("--strict", action="store_true",
+                   help="Exit non-zero when officecli is missing")
+    d.set_defaults(func=cmd_doctor)
 
     return p
 

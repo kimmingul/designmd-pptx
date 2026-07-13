@@ -1,11 +1,11 @@
 # designmd-pptx
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.3.0-brightgreen)](plugin.json)
+[![Version](https://img.shields.io/badge/version-1.4.0-brightgreen)](plugin.json)
 
-**awesome-design-md / Stitch `DESIGN.md` → [officecli](https://github.com/iOfficeAI/OfficeCLI) PPTX** — packaged for **Claude Code, OpenAI Codex, and Grok Build** (v1.3).
+**awesome-design-md / Stitch `DESIGN.md` → [officecli](https://github.com/iOfficeAI/OfficeCLI) PPTX** — packaged for **Claude Code, OpenAI Codex, and Grok Build** (v1.4).
 
-Drop a brand `DESIGN.md` in, scaffold an ordered deck, and materialize slides with staging-safe apply. v1.2 added the reverse path (**extract** an existing deck into an editable deck-spec draft, **restyle** it in place with brand tokens); v1.3 adds **slide-master branding and .potx template export**, so slides added later in PowerPoint inherit the brand.
+Drop a brand `DESIGN.md` in, scaffold an ordered deck, and materialize slides with staging-safe apply. v1.2 added the reverse path (**extract** an existing deck into an editable deck-spec draft, **restyle** it in place with brand tokens); v1.3 added **slide-master branding and .potx template export**; v1.4 adds a **bundled default house style**, a **doctor** bootstrap that verifies officecli routing on every agent platform, and **Gate 3 screenshot QA**.
 
 ## What you get
 
@@ -84,6 +84,9 @@ In Grok chat: mention DESIGN.md for slides, or run `/designmd-pptx`.
 - **Extract** (v1.2) — existing .pptx → `content.deck.json` draft with per-slide recipe mapping, confidence report, and exported images; review, then re-scaffold with any DESIGN.md
 - **Restyle** (v1.2) — rebrand an existing .pptx in place: theme scheme + fonts remapped to brand tokens, explicit colors snapped to the nearest palette entry (`--map` to pin), staging-safe like apply
 - **Master & templates** (v1.3) — brand the theme + slide-master type scale (new slides inherit the brand); export a `.potx` template, optionally stripped of slides
+- **Default house style** (v1.4) — pass the literal `default` as the design argument when no brand DESIGN.md exists; a neutral white/slate/blue style keeps the design floor
+- **Doctor** (v1.4) — `python -m designmd_pptx doctor` verifies officecli + the officecli-pptx / designmd skill routing across Claude Code, Codex, and Grok, with remedies for anything missing
+- **Gate 3 visual QA** (v1.4) — `apply --screenshot` emits a whole-deck contact-sheet PNG (`officecli view screenshot --grid`) for the agent to inspect for overflow, overlap, and alignment
 
 ## Commands
 
@@ -95,6 +98,8 @@ python -m designmd_pptx apply [--force] dest.pptx recipes/deck.sequence.json
 python -m designmd_pptx extract old.pptx -o extracted/
 python -m designmd_pptx restyle old.pptx DESIGN.md -o new.pptx
 python -m designmd_pptx master deck.pptx DESIGN.md --potx brand.potx [--empty-potx]
+python -m designmd_pptx scaffold default -o out/deck --content deck.json --apply --force --screenshot
+python -m designmd_pptx doctor [--strict]
 ```
 
 ## Modernizing an existing deck (v1.2)
@@ -124,7 +129,7 @@ npm test        # python -m unittest discover -s python/tests -v
 
 ## Roadmap
 
-- **Gate 3 visual QA** — render slides to screenshots and automatically check overflow, contrast, and alignment. Needs a renderer dependency (PowerPoint COM on Windows or LibreOffice headless), which is why it is not bundled yet.
+- ~~Gate 3 visual QA~~ — shipped in v1.4 via `apply --screenshot` (officecli's built-in screenshot renderer; no extra dependency needed).
 - **Richer extract classification** — detect unit-suffixed KPI values (`42ms`, `1.2k`), and recover `process`/`timeline` patterns from step shapes + connectors instead of falling back to `bullets`.
 - **Template polish** — prune unreferenced media in `--empty-potx` output; optional branded slide layouts beyond the master defaults.
 

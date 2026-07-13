@@ -22,6 +22,9 @@ Use the **designmd-pptx** toolkit (skill `officecli-pptx-designmd`).
 - `extract <pptx> [-o extracted/]` — existing deck → deck-spec draft + report + assets (review before scaffold)
 - `restyle <pptx> <DESIGN.md|tokens.json> [-o new.pptx] [--force]` — rebrand existing deck in place (theme + explicit colors/fonts)
 - `master <pptx> <DESIGN.md|tokens.json> [--potx brand.potx] [--empty-potx]` — brand theme/slide master; export .potx template
+- `doctor [--strict]` — verify officecli + per-platform skill routing, print remedies
+
+Pass the literal `default` instead of a DESIGN.md path to use the bundled neutral house style. Add `--screenshot` to apply/scaffold for a Gate 3 contact-sheet PNG.
 
 Always load skill `officecli-pptx-designmd` and follow its hard rules + officecli-pptx QA gates.
 

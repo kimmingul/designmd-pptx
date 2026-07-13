@@ -35,6 +35,10 @@ python -m designmd_pptx scaffold python\fixtures\linear.DESIGN.md -o out\demo --
 python -m designmd_pptx extract old.pptx -o extracted    # existing deck → deck-spec draft
 python -m designmd_pptx restyle old.pptx DESIGN.md -o new.pptx   # rebrand in place
 python -m designmd_pptx master deck.pptx DESIGN.md --potx brand.potx  # brand master + template
+python -m designmd_pptx doctor   # verify officecli + skill routing (Claude/Codex/Grok)
 ```
+
+No brand DESIGN.md? Use the literal `default` as the design argument. Always finish
+an `--apply` run with `--screenshot` and inspect the contact sheet (Gate 3).
 
 See `skills/officecli-pptx-designmd/SKILL.md` for full CLI reference and hard rules.

@@ -1,6 +1,6 @@
 {
   "name": "designmd-pptx",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Compile awesome-design-md / Stitch DESIGN.md into officecli PPTX tokens, ordered decks, and staging-safe apply. Grok skill + Python CLI (designmd-pptx v1.2).",
   "author": {
     "name": "Min-Gul Kim",

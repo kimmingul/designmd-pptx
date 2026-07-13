@@ -1,9 +1,9 @@
 ---
 name: officecli-pptx-designmd
-description: "designmd-pptx v1.3: compile awesome-design-md / Stitch DESIGN.md into officecli PPTX tokens, ordered decks, staging-safe apply; extract existing pptx into a deck-spec draft; restyle existing pptx with brand tokens; brand slide masters and export .potx templates. Trigger on DESIGN.md, getdesign.md, brand design for slides, restyle deck, modernize slides, slide master, potx template, /designmd-pptx, /officecli-pptx-designmd."
+description: "designmd-pptx v1.4: compile awesome-design-md / Stitch DESIGN.md into officecli PPTX tokens, ordered decks, staging-safe apply; extract existing pptx into a deck-spec draft; restyle existing pptx with brand tokens; brand slide masters and export .potx templates; bundled default house style when no brand exists; doctor bootstrap; Gate 3 screenshot QA. Trigger on DESIGN.md, getdesign.md, brand design for slides, restyle deck, modernize slides, slide master, potx template, /designmd-pptx, /officecli-pptx-designmd."
 ---
 
-# officecli-pptx-designmd (v1.3)
+# officecli-pptx-designmd (v1.4)
 
 ## Locate the toolkit
 
@@ -33,7 +33,13 @@ pip install -r "<resolved python root>\requirements.txt"
 5. `image_full` / `image_text_2col`: `alt` required when `src` set.
 6. Process uses **glued connectors** (`/slide[N]/shape[@name=…]`).
 7. Overwrite only with `--force` / `DESIGNMD_FORCE=1` (staging-safe via `apply_sequence`).
-8. QA: validate → view issues → Gate 3 screenshots (officecli-pptx skill).
+8. QA: validate → view issues (incl. low_contrast) → **Gate 3**: apply with
+   `--screenshot`, then visually inspect the contact-sheet PNG for overflow,
+   overlap, and alignment; fix recipes and re-apply until clean.
+9. No brand DESIGN.md? Pass the literal `default` as the design argument —
+   the bundled neutral house style keeps the design floor.
+10. officecli missing or routing unclear? Run `python -m designmd_pptx doctor`
+   and follow the printed remedies before continuing.
 
 ## Commands
 
@@ -53,6 +59,8 @@ python -m designmd_pptx apply [--force] dest.pptx recipes/deck.sequence.json
 python -m designmd_pptx extract old.pptx -o extracted/          # v1.2: pptx → deck-spec draft
 python -m designmd_pptx restyle old.pptx DESIGN.md -o new.pptx  # v1.2: rebrand existing deck
 python -m designmd_pptx master deck.pptx DESIGN.md --potx brand.potx [--empty-potx]  # v1.3
+python -m designmd_pptx scaffold default -o out/deck --content deck.json --apply --force --screenshot  # v1.4
+python -m designmd_pptx doctor            # v1.4: verify officecli + skill routing
 ```
 
 ## Existing decks (v1.2)
