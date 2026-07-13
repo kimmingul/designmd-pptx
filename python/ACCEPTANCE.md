@@ -1,5 +1,16 @@
 # designmd-pptx — Definition of Done
 
+## v1.4 acceptance criteria
+
+| # | Criterion | Evidence |
+|---|---|---|
+| 1 | Package/compiler **1.4.x** | `__version__`, `COMPILER_VERSION`, tokens.compiler.version |
+| 2 | `doctor` reports officecli + per-platform skill routing (claude/codex/grok) with remedies; rc 0 | `tests/test_v14.py` DoctorV14 + manual run |
+| 3 | Literal `default` design argument resolves to bundled house style, compiles with zero color fallbacks | DefaultDesignV14 |
+| 4 | `apply`/`scaffold --screenshot` emit Gate 3 contact-sheet PNG (non-fatal on failure) | ScreenshotFlagV14 + E2E on default-demo deck |
+| 5 | `install-codex.ps1` syncs base officecli-* skills from ~/.claude/skills (warn when absent) | script + doctor after install |
+| 6 | All three platforms route pptx → officecli (base skill + designmd layer installed) | `doctor` all green on this machine |
+
 ## v1.3 acceptance criteria
 
 | # | Criterion | Evidence |
