@@ -65,16 +65,21 @@ See [.grok/docs/install.md](.grok/docs/install.md).
 
 ```powershell
 $env:PYTHONPATH = "$PWD\python"   # or the installed-plugins path
-python -m designmd_pptx scaffold python\fixtures\linear.DESIGN.md `
-  -o out\demo --content python\examples\content.deck.json --brand Linear
+python -m designmd_pptx doctor    # verify officecli + agent skill routing
 
-# needs officecli on PATH
-python -m designmd_pptx apply --force out\demo\Linear.pptx out\demo\recipes\deck.sequence.json
+# v1.5 flow: markdown brief → deck-spec draft → branded deck with Gate 3 QA
+python -m designmd_pptx compose brief.md -o composed --design default
+python -m designmd_pptx scaffold default -o out\demo `
+  --content composed\content.deck.json --apply --force --screenshot --gate3
+
+# or start from a brand fixture + prepared deck-spec
+python -m designmd_pptx scaffold python\fixtures\linear.DESIGN.md `
+  -o out\linear --content python\examples\content.deck.json --brand Linear
 ```
 
-In Grok chat: mention DESIGN.md for slides, or run `/designmd-pptx`.
+In agent chat (Claude Code / Codex / Grok): mention DESIGN.md for slides, or run `/designmd-pptx`.
 
-## Features (v1.1)
+## Features
 
 - **Deck-spec** — ordered, repeatable recipes (`kpi_row` twice, custom order)
 - **Colors** — hex, rgb/hsl, oklch (approx), color-mix, `var(--token)`, linear-gradient
@@ -93,6 +98,10 @@ In Grok chat: mention DESIGN.md for slides, or run `/designmd-pptx`.
 - **Hard Gate 3** (v1.5) — the contact sheet renders from **staging before the destination is replaced**; `--gate3` aborts the write on render failure; generated apply wrappers pass `--screenshot` by default
 - **Structure-aware extract** (v1.5) — connectors + box rows recover `process`, even card grids recover `feature_cards`, dominant numerics recover `big_number`, unit-suffixed KPIs (42ms, 1.2k) detected
 - **Font-role-aware restyle** (v1.5) — runs at/above section size keep the heading font instead of being flattened to body
+
+## Patterns (20)
+
+cover · section_divider · kpi_row · big_number · feature_cards · pricing · bullets · quote · comparison_2col · matrix_2x2 · timeline · **process** (glued connectors) · table · appendix_table · chart_insight (any officecli chartType) · team · logo_strip · image_full · **image_text_2col** · close
 
 ## Commands
 
