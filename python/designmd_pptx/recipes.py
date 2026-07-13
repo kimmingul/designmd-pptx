@@ -727,10 +727,34 @@ def recipe_chart_insight(tokens: dict, content: dict | None = None) -> list[dict
     s2 = content.get("series2_values", "9,11,12,13")
     s1_name = content.get("series1_name", "Series 1")
     s2_name = content.get("series2_name", "Series 2")
+    # v1.5: any officecli chartType (column, bar, line, area, pie, doughnut,
+    # scatter, waterfall, funnel, stacked* aliases, ...). Single-series
+    # geometries drop series2 automatically.
+    chart_type = str(content.get("chart_type", "column"))
+    single_series = chart_type.lower() in (
+        "pie", "doughnut", "funnel", "treemap", "sunburst", "pareto", "histogram",
+    )
     bg = c["content_background"]
     series2 = c["chart_series2"]
     if series2 == c["chart_series1"]:
         series2 = c["muted"]
+
+    chart_props: dict[str, Any] = {
+        "name": "MainChart",
+        "chartType": chart_type,
+        "series1.name": s1_name,
+        "series1.values": s1,
+        "series1.color": c["chart_series1"],
+        "categories": cats,
+        "x": _cm(b["margin"]),
+        "y": "3.5cm",
+        "width": "20cm",
+        "height": "14cm",
+    }
+    if not single_series and s2:
+        chart_props.update(
+            {"series2.name": s2_name, "series2.values": s2, "series2.color": series2}
+        )
 
     return [
         {
@@ -761,21 +785,7 @@ def recipe_chart_insight(tokens: dict, content: dict | None = None) -> list[dict
             "command": "add",
             "parent": "/slide[last()]",
             "type": "chart",
-            "props": {
-                "name": "MainChart",
-                "chartType": "column",
-                "series1.name": s1_name,
-                "series1.values": s1,
-                "series1.color": c["chart_series1"],
-                "series2.name": s2_name,
-                "series2.values": s2,
-                "series2.color": series2,
-                "categories": cats,
-                "x": _cm(b["margin"]),
-                "y": "3.5cm",
-                "width": "20cm",
-                "height": "14cm",
-            },
+            "props": chart_props,
         },
         {
             "command": "add",
@@ -1560,6 +1570,574 @@ def recipe_close(tokens: dict, content: dict | None = None) -> list[dict]:
     ]
 
 
+def _title_op(tokens: dict, name: str, title: str, *, y: str = "1.0cm") -> dict:
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    return {
+        "command": "add",
+        "parent": "/slide[last()]",
+        "type": "shape",
+        "props": {
+            "name": name,
+            "text": title,
+            "x": _cm(b["margin"]),
+            "y": y,
+            "width": _cm(33.87 - 2 * b["margin"]),
+            "height": "1.8cm",
+            "font": t["heading_font"],
+            "size": str(t["title_pt"]),
+            "bold": "true",
+            "color": c["text_on_content"],
+            "fill": "none",
+        },
+    }
+
+
+def _slide_op(tokens: dict) -> dict:
+    c = tokens["colors"]
+    return {
+        "command": "add",
+        "parent": "/",
+        "type": "slide",
+        "props": {"layout": "blank", "background": c["content_background"]},
+    }
+
+
+def recipe_big_number(tokens: dict, content: dict | None = None) -> list[dict]:
+    """One hero metric: huge value, label, context line."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    value = str(content.get("value", "—"))
+    label = content.get("label", "Headline metric")
+    context = content.get("context", "")
+    mega = int(t.get("mega_pt", int(t.get("kpi_pt", 60) * 1.6)))
+    color = c["risk"] if content.get("watch") else c["accent"]
+    ops = [
+        _slide_op(tokens),
+        {
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "shape",
+            "props": {
+                "name": "BigValue",
+                "text": value,
+                "x": _cm(b["margin"]),
+                "y": "4.6cm",
+                "width": _cm(33.87 - 2 * b["margin"]),
+                "height": "6cm",
+                "font": t["heading_font"],
+                "size": str(mega),
+                "bold": "true",
+                "color": color,
+                "align": "center",
+                "fill": "none",
+            },
+        },
+        {
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "shape",
+            "props": {
+                "name": "BigLabel",
+                "text": str(label),
+                "x": "3.94cm",
+                "y": "11.2cm",
+                "width": "26cm",
+                "height": "1.6cm",
+                "font": t["heading_font"],
+                "size": str(t["section_pt"]),
+                "bold": "true",
+                "color": c["text_on_content"],
+                "align": "center",
+                "fill": "none",
+            },
+        },
+    ]
+    if context:
+        ops.append(
+            {
+                "command": "add",
+                "parent": "/slide[last()]",
+                "type": "shape",
+                "props": {
+                    "name": "BigContext",
+                    "text": str(context),
+                    "x": "3.94cm",
+                    "y": "13.2cm",
+                    "width": "26cm",
+                    "height": "2cm",
+                    "font": t["body_font"],
+                    "size": str(t["body_pt"]),
+                    "color": c["muted"],
+                    "align": "center",
+                    "fill": "none",
+                },
+            }
+        )
+    ops.append(
+        {
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "notes",
+            "props": {"text": content.get("notes", "Let the number land; one sentence of context.")},
+        }
+    )
+    return ops
+
+
+def recipe_matrix_2x2(tokens: dict, content: dict | None = None) -> list[dict]:
+    """2×2 quadrant matrix with optional axis labels."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Where we play")
+    quads = content.get("quadrants") or [
+        {"title": f"Quadrant {i + 1}", "body": ""} for i in range(4)
+    ]
+    quads = (list(quads) + [{}] * 4)[:4]
+    axes = content.get("axes") or {}
+    usable = 33.87 - 2 * b["margin"]
+    col_w = (usable - b["gap"]) / 2
+    row_h, y0 = 6.4, 3.8
+    ops = [_slide_op(tokens), _title_op(tokens, "MatrixTitle", title)]
+    for i, q in enumerate(quads):
+        x = b["margin"] + (i % 2) * (col_w + b["gap"])
+        y = y0 + (i // 2) * (row_h + b["gap"])
+        name = f"Quad{i + 1}"
+        ops.extend(
+            [
+                {
+                    "command": "add",
+                    "parent": "/slide[last()]",
+                    "type": "shape",
+                    "props": {
+                        "name": f"{name}Bg", "preset": b["preset"], "fill": c["surface"],
+                        "line": "none", "x": _cm(x), "y": _cm(y),
+                        "width": _cm(col_w), "height": _cm(row_h),
+                    },
+                },
+                {
+                    "command": "add",
+                    "parent": "/slide[last()]",
+                    "type": "shape",
+                    "props": {
+                        "name": f"{name}Title", "text": str(q.get("title", "")),
+                        "x": _cm(x + 0.5), "y": _cm(y + 0.4),
+                        "width": _cm(col_w - 1), "height": "1.2cm",
+                        "font": t["heading_font"], "size": str(max(18, t["section_pt"] - 4)),
+                        "bold": "true", "color": c["text_on_surface"], "fill": "none",
+                    },
+                },
+                {
+                    "command": "add",
+                    "parent": "/slide[last()]",
+                    "type": "shape",
+                    "props": {
+                        "name": f"{name}Body", "text": str(q.get("body", "")),
+                        "x": _cm(x + 0.5), "y": _cm(y + 1.8),
+                        "width": _cm(col_w - 1), "height": _cm(row_h - 2.2),
+                        "font": t["body_font"], "size": str(t["body_pt"]),
+                        "color": c["muted"], "fill": "none",
+                    },
+                },
+            ]
+        )
+    micro = str(_micro_pt(t))
+    if axes.get("x"):
+        ops.append(
+            {
+                "command": "add",
+                "parent": "/slide[last()]",
+                "type": "shape",
+                "props": {
+                    "name": "AxisX", "text": f"→ {axes['x']}",
+                    "x": _cm(b["margin"]), "y": "17.5cm",
+                    "width": _cm(usable), "height": "0.9cm",
+                    "font": t["body_font"], "size": micro,
+                    "color": c["muted"], "align": "center", "fill": "none",
+                },
+            }
+        )
+    if axes.get("y"):
+        ops.append(
+            {
+                "command": "add",
+                "parent": "/slide[last()]",
+                "type": "shape",
+                "props": {
+                    "name": "AxisY", "text": f"↑ {axes['y']}",
+                    "x": _cm(b["margin"]), "y": "3.0cm",
+                    "width": "12cm", "height": "0.8cm",
+                    "font": t["body_font"], "size": micro,
+                    "color": c["muted"], "fill": "none",
+                },
+            }
+        )
+    ops.append(
+        {
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "notes",
+            "props": {"text": content.get("notes", "Walk quadrants clockwise from top-left.")},
+        }
+    )
+    return ops
+
+
+def _initials(name: str) -> str:
+    parts = [p for p in str(name).split() if p]
+    if not parts:
+        return "?"
+    if len(parts) == 1:
+        return parts[0][:2].upper()
+    return (parts[0][0] + parts[-1][0]).upper()
+
+
+def recipe_team(tokens: dict, content: dict | None = None) -> list[dict]:
+    """2–4 member cards: initials disc, name, role, blurb."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Team")
+    members = content.get("members") or [
+        {"name": "Member One", "role": "Role", "blurb": ""},
+        {"name": "Member Two", "role": "Role", "blurb": ""},
+    ]
+    n = max(2, min(4, len(members)))
+    members = members[:n]
+    col_w, xs = _grid_n(n, b["margin"], b["gap"])
+    micro = str(_micro_pt(t))
+    y, h = 4.0, 12.0
+    ops = [_slide_op(tokens), _title_op(tokens, "TeamTitle", title, y="1.2cm")]
+    for i, m in enumerate(members):
+        x = xs[i]
+        name = f"Member{i + 1}"
+        disc = min(3.4, col_w * 0.4)
+        ops.extend(
+            [
+                {
+                    "command": "add",
+                    "parent": "/slide[last()]",
+                    "type": "shape",
+                    "props": {
+                        "name": f"{name}Bg", "preset": b["preset"], "fill": c["surface"],
+                        "line": "none", "x": _cm(x), "y": _cm(y),
+                        "width": _cm(col_w), "height": _cm(h),
+                    },
+                },
+                {
+                    "command": "add",
+                    "parent": "/slide[last()]",
+                    "type": "shape",
+                    "props": {
+                        "name": f"{name}Avatar", "preset": "ellipse", "fill": c["accent"],
+                        "line": "none", "text": _initials(m.get("name", "")),
+                        "x": _cm(x + (col_w - disc) / 2), "y": _cm(y + 1.0),
+                        "width": _cm(disc), "height": _cm(disc),
+                        "font": t["heading_font"], "size": str(max(18, t["section_pt"] - 4)),
+                        "bold": "true", "color": c["on_accent"],
+                        "align": "center", "valign": "middle",
+                    },
+                },
+                {
+                    "command": "add",
+                    "parent": "/slide[last()]",
+                    "type": "shape",
+                    "props": {
+                        "name": f"{name}Name", "text": str(m.get("name", "")),
+                        "x": _cm(x + 0.4), "y": _cm(y + disc + 1.4),
+                        "width": _cm(col_w - 0.8), "height": "1.1cm",
+                        "font": t["heading_font"], "size": str(max(16, t["section_pt"] - 8)),
+                        "bold": "true", "color": c["text_on_surface"],
+                        "align": "center", "fill": "none",
+                    },
+                },
+                {
+                    "command": "add",
+                    "parent": "/slide[last()]",
+                    "type": "shape",
+                    "props": {
+                        "name": f"{name}Role", "text": str(m.get("role", "")),
+                        "x": _cm(x + 0.4), "y": _cm(y + disc + 2.5),
+                        "width": _cm(col_w - 0.8), "height": "0.9cm",
+                        "font": t["body_font"], "size": micro,
+                        "bold": "true", "color": c["accent"],
+                        "align": "center", "fill": "none",
+                    },
+                },
+                {
+                    "command": "add",
+                    "parent": "/slide[last()]",
+                    "type": "shape",
+                    "props": {
+                        "name": f"{name}Blurb", "text": str(m.get("blurb", "")),
+                        "x": _cm(x + 0.5), "y": _cm(y + disc + 3.5),
+                        "width": _cm(col_w - 1.0), "height": _cm(h - disc - 4.0),
+                        "font": t["body_font"], "size": str(max(12, t["body_pt"] - 4)),
+                        "color": c["muted"], "align": "center", "fill": "none",
+                    },
+                },
+            ]
+        )
+    ops.append(
+        {
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "notes",
+            "props": {"text": content.get("notes", "One line each: name, why they matter here.")},
+        }
+    )
+    return ops
+
+
+def recipe_logo_strip(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Row of up to 6 partner/customer logos (image or text placeholder)."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Trusted by")
+    logos = content.get("logos") or [{"label": f"Logo {i + 1}"} for i in range(4)]
+    n = max(2, min(6, len(logos)))
+    logos = logos[:n]
+    col_w, xs = _grid_n(n, b["margin"], b["gap"], max_n=6)
+    y, h = 7.0, 4.5
+    ops = [_slide_op(tokens), _title_op(tokens, "LogoTitle", title, y="1.2cm")]
+    for i, logo in enumerate(logos):
+        if isinstance(logo, str):
+            logo = {"label": logo}
+        x = xs[i]
+        src = logo.get("src")
+        if src:
+            ops.append(
+                {
+                    "command": "add",
+                    "parent": "/slide[last()]",
+                    "type": "picture",
+                    "props": {
+                        "name": f"Logo{i + 1}",
+                        "src": str(src),
+                        "alt": logo.get("alt") or logo.get("label") or f"Logo {i + 1}",
+                        "x": _cm(x + 0.3), "y": _cm(y + 0.3),
+                        "width": _cm(col_w - 0.6), "height": _cm(h - 0.6),
+                    },
+                }
+            )
+        else:
+            ops.append(
+                {
+                    "command": "add",
+                    "parent": "/slide[last()]",
+                    "type": "shape",
+                    "props": {
+                        "name": f"Logo{i + 1}", "preset": b["preset"],
+                        "fill": c["surface"], "line": c["hairline"],
+                        "text": str(logo.get("label", "")),
+                        "x": _cm(x), "y": _cm(y),
+                        "width": _cm(col_w), "height": _cm(h),
+                        "font": t["heading_font"], "size": str(max(14, t["body_pt"])),
+                        "bold": "true", "color": c["muted"],
+                        "align": "center", "valign": "middle",
+                    },
+                }
+            )
+    ops.append(
+        {
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "notes",
+            "props": {"text": content.get("notes", "Name-drop two, move on.")},
+        }
+    )
+    return ops
+
+
+def recipe_pricing(tokens: dict, content: dict | None = None) -> list[dict]:
+    """2–3 pricing tiers; highlight=true renders the accent tier."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Pricing")
+    tiers = content.get("tiers") or [
+        {"name": "Starter", "price": "$0", "features": ["Feature A"]},
+        {"name": "Pro", "price": "$29", "features": ["Everything in Starter"], "highlight": True},
+    ]
+    n = max(2, min(3, len(tiers)))
+    tiers = tiers[:n]
+    col_w, xs = _grid_n(n, b["margin"], b["gap"], max_n=3)
+    micro = str(_micro_pt(t))
+    y, h = 3.8, 13.2
+    ops = [_slide_op(tokens), _title_op(tokens, "PricingTitle", title)]
+    for i, tier in enumerate(tiers):
+        x = xs[i]
+        hi = bool(tier.get("highlight"))
+        fill = c["accent"] if hi else c["surface"]
+        fg = c["on_accent"] if hi else c["text_on_surface"]
+        sub = "FFFFFF" if hi else c["muted"]
+        name = f"Tier{i + 1}"
+        ops.extend(
+            [
+                {
+                    "command": "add",
+                    "parent": "/slide[last()]",
+                    "type": "shape",
+                    "props": {
+                        "name": f"{name}Bg", "preset": b["preset"], "fill": fill,
+                        "line": "none" if hi else c["hairline"],
+                        "x": _cm(x), "y": _cm(y), "width": _cm(col_w), "height": _cm(h),
+                    },
+                },
+                {
+                    "command": "add",
+                    "parent": "/slide[last()]",
+                    "type": "shape",
+                    "props": {
+                        "name": f"{name}Name", "text": str(tier.get("name", "")),
+                        "x": _cm(x + 0.5), "y": _cm(y + 0.8),
+                        "width": _cm(col_w - 1), "height": "1.2cm",
+                        "font": t["heading_font"], "size": str(max(18, t["section_pt"] - 4)),
+                        "bold": "true", "color": fg, "align": "center", "fill": "none",
+                    },
+                },
+                {
+                    "command": "add",
+                    "parent": "/slide[last()]",
+                    "type": "shape",
+                    "props": {
+                        "name": f"{name}Price", "text": str(tier.get("price", "")),
+                        "x": _cm(x + 0.5), "y": _cm(y + 2.2),
+                        "width": _cm(col_w - 1), "height": "2.6cm",
+                        "font": t["heading_font"], "size": str(t["kpi_pt"]),
+                        "bold": "true", "color": fg, "align": "center", "fill": "none",
+                    },
+                },
+                {
+                    "command": "add",
+                    "parent": "/slide[last()]",
+                    "type": "shape",
+                    "props": {
+                        "name": f"{name}Period", "text": str(tier.get("period", "")),
+                        "x": _cm(x + 0.5), "y": _cm(y + 4.9),
+                        "width": _cm(col_w - 1), "height": "0.9cm",
+                        "font": t["body_font"], "size": micro,
+                        "color": sub, "align": "center", "fill": "none",
+                    },
+                },
+                {
+                    "command": "add",
+                    "parent": "/slide[last()]",
+                    "type": "shape",
+                    "props": {
+                        "name": f"{name}Features",
+                        "text": "\n".join(f"• {f}" for f in (tier.get("features") or [])[:5]),
+                        "x": _cm(x + 0.7), "y": _cm(y + 6.2),
+                        "width": _cm(col_w - 1.4), "height": _cm(h - 6.8),
+                        "font": t["body_font"], "size": str(max(12, t["body_pt"] - 4)),
+                        "color": sub, "fill": "none",
+                    },
+                },
+            ]
+        )
+    ops.append(
+        {
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "notes",
+            "props": {"text": content.get("notes", "Anchor on the highlighted tier.")},
+        }
+    )
+    return ops
+
+
+def recipe_appendix_table(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Dense reference table for appendices: up to 8 columns × 14 rows."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Appendix")
+    headers = content.get("headers") or ["Item", "Value"]
+    rows = content.get("rows") or []
+    cols = max(1, min(8, len(headers)))
+    headers = [str(h) for h in headers[:cols]]
+    norm_rows: list[list[str]] = []
+    for r in rows[:14]:
+        cells = [str(x) for x in r] if isinstance(r, list) else [str(r)]
+        while len(cells) < cols:
+            cells.append("")
+        norm_rows.append(cells[:cols])
+    if not norm_rows:
+        norm_rows = [[""] * cols]
+
+    table_w = 33.87 - 2 * b["margin"]
+    gap = 0.06
+    col_w = (table_w - gap * (cols - 1)) / cols
+    row_h, start_y = 0.98, 2.9
+    fs = str(max(10, min(12, _micro_pt(t))))
+
+    ops: list[dict] = [
+        _slide_op(tokens),
+        {
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "shape",
+            "props": {
+                "name": "AppTitle", "text": title,
+                "x": _cm(b["margin"]), "y": "0.8cm",
+                "width": _cm(table_w), "height": "1.4cm",
+                "font": t["heading_font"], "size": str(t["section_pt"]),
+                "bold": "true", "color": c["text_on_content"], "fill": "none",
+            },
+        },
+    ]
+    for ci, hcell in enumerate(headers):
+        x = b["margin"] + ci * (col_w + gap)
+        ops.append(
+            {
+                "command": "add",
+                "parent": "/slide[last()]",
+                "type": "shape",
+                "props": {
+                    "name": f"ATh{ci + 1}", "preset": "rect", "fill": c["accent"],
+                    "line": "none", "text": hcell,
+                    "x": _cm(x), "y": _cm(start_y),
+                    "width": _cm(col_w), "height": _cm(row_h),
+                    "font": t["body_font"], "size": fs, "bold": "true",
+                    "color": c["on_accent"], "align": "center", "valign": "middle",
+                },
+            }
+        )
+    for ri, row in enumerate(norm_rows):
+        for ci, cell in enumerate(row):
+            x = b["margin"] + ci * (col_w + gap)
+            y = start_y + (ri + 1) * (row_h + gap)
+            fill = c["surface"] if ri % 2 == 0 else c.get("surface_elevated", c["surface"])
+            ops.append(
+                {
+                    "command": "add",
+                    "parent": "/slide[last()]",
+                    "type": "shape",
+                    "props": {
+                        "name": f"ATd{ri + 1}_{ci + 1}", "preset": "rect",
+                        "fill": fill, "line": c["hairline"], "text": cell,
+                        "x": _cm(x), "y": _cm(y),
+                        "width": _cm(col_w), "height": _cm(row_h),
+                        "font": t["body_font"], "size": fs,
+                        "color": c["text_on_surface"], "align": "center", "valign": "middle",
+                    },
+                }
+            )
+    if content.get("notes"):
+        ops.append(
+            {
+                "command": "add",
+                "parent": "/slide[last()]",
+                "type": "notes",
+                "props": {"text": content["notes"]},
+            }
+        )
+    return ops
+
+
 def _call_builder(builder, tokens, content, slide_index: int | None = None):
     """Call recipe builder with optional slide_index if supported."""
     try:
@@ -1584,6 +2162,12 @@ RECIPE_BUILDERS = {
     "image_text_2col": recipe_image_text_2col,
     "chart_insight": recipe_chart_insight,
     "close": recipe_close,
+    "big_number": recipe_big_number,
+    "matrix_2x2": recipe_matrix_2x2,
+    "team": recipe_team,
+    "logo_strip": recipe_logo_strip,
+    "pricing": recipe_pricing,
+    "appendix_table": recipe_appendix_table,
 }
 
 # Back-compat aliases used by older content.sample.json keys
@@ -1596,14 +2180,20 @@ DEFAULT_SEQUENCE = [
     "cover",
     "section_divider",
     "kpi_row",
+    "big_number",
     "feature_cards",
+    "pricing",
     "bullets",
     "timeline",
     "process",
     "table",
+    "appendix_table",
     "chart_insight",
     "comparison_2col",
+    "matrix_2x2",
     "quote",
+    "team",
+    "logo_strip",
     "image_full",
     "image_text_2col",
     "close",

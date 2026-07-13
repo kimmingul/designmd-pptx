@@ -93,15 +93,51 @@ def _restyle_part(xml: str, palette: list[str], typ: dict[str, Any],
     if explicit_fonts and (typ.get("body_font") or typ.get("mono_font")):
         body = typ.get("body_font", "Calibri")
         mono = typ.get("mono_font", "Consolas")
+        heading = typ.get("heading_font", body)
+        # Runs at/above the section size keep the HEADING font (v1.5) —
+        # flattening titles into the body font was a v1.2 defect.
+        heading_sz = int(typ.get("section_pt", 28)) * 100
 
-        def _sub_font(m: re.Match) -> str:
-            old = m.group(1)
-            if old.startswith("+"):  # +mj-lt / +mn-lt follow the theme
-                return m.group(0)
-            new = mono if any(h in old.lower() for h in _MONO_HINTS) else body
+        def _map_font(old: str, sz: int) -> str:
+            if any(h in old.lower() for h in _MONO_HINTS):
+                return mono
+            return heading if sz >= heading_sz else body
+
+        def _record(old: str, new: str) -> None:
             if new != old:
                 entry = report["fonts"].setdefault(old, {"new": new, "count": 0})
                 entry["count"] += 1
+
+        def _sub_block(m: re.Match) -> str:
+            block = m.group(0)
+            if "typeface" not in block:
+                return block
+            szm = re.search(r'\bsz="(\d+)"', block)
+            sz = int(szm.group(1)) if szm else 0
+
+            def _sub_face(tm: re.Match) -> str:
+                old = tm.group(2)
+                if old.startswith("+"):  # +mj-lt / +mn-lt follow the theme
+                    return tm.group(0)
+                new = _map_font(old, sz)
+                _record(old, new)
+                return f"{tm.group(1)}{new}{tm.group(3)}"
+
+            return re.sub(r'(typeface=")([^"]+)(")', _sub_face, block)
+
+        # Size-aware pass over run/paragraph property blocks…
+        xml = re.sub(
+            r"<a:(rPr|defRPr|endParaRPr)\b[^>]*?>.*?</a:\1>", _sub_block, xml, flags=re.S
+        )
+
+        # …then a catch-all for typefaces outside sized blocks (no size → body).
+        # Brand fonts already placed by the first pass must not be re-mapped.
+        def _sub_font(m: re.Match) -> str:
+            old = m.group(1)
+            if old.startswith("+") or old in (heading, body, mono):
+                return m.group(0)
+            new = _map_font(old, 0)
+            _record(old, new)
             return f'typeface="{new}"'
 
         xml = re.sub(r'typeface="([^"]+)"', _sub_font, xml)

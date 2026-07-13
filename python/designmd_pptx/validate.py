@@ -45,6 +45,12 @@ CONTENT_KEYS = {
     },
     "process": {"title", "steps", "notes"},
     "close": {"title", "body", "cta"},
+    "big_number": {"value", "label", "context", "watch", "notes"},
+    "matrix_2x2": {"title", "quadrants", "axes", "notes"},
+    "team": {"title", "members", "notes"},
+    "logo_strip": {"title", "logos", "notes"},
+    "pricing": {"title", "tiers", "notes"},
+    "appendix_table": {"title", "headers", "rows", "notes"},
 }
 
 
@@ -163,4 +169,21 @@ def validate_content_overlay(content: dict[str, Any] | None) -> list[str]:
             for side in ("left", "right"):
                 if side in node and not isinstance(node[side], dict):
                     errors.append(f"comparison_2col.{side} must be object")
+        if key == "matrix_2x2" and "quadrants" in node:
+            if not isinstance(node["quadrants"], list) or len(node["quadrants"]) > 4:
+                errors.append("matrix_2x2.quadrants must be array of ≤4 items")
+        if key == "team" and "members" in node:
+            if not isinstance(node["members"], list) or not (2 <= len(node["members"]) <= 4):
+                errors.append("team.members must be array length 2–4")
+        if key == "logo_strip" and "logos" in node:
+            if not isinstance(node["logos"], list) or not (2 <= len(node["logos"]) <= 6):
+                errors.append("logo_strip.logos must be array length 2–6")
+        if key == "pricing" and "tiers" in node:
+            if not isinstance(node["tiers"], list) or not (2 <= len(node["tiers"]) <= 3):
+                errors.append("pricing.tiers must be array length 2–3")
+        if key == "appendix_table":
+            if node.get("headers") is not None and not isinstance(node["headers"], list):
+                errors.append("appendix_table.headers must be array")
+            if node.get("rows") is not None and not isinstance(node["rows"], list):
+                errors.append("appendix_table.rows must be array")
     return errors

@@ -1,5 +1,18 @@
 # designmd-pptx — Definition of Done
 
+## v1.5 acceptance criteria
+
+| # | Criterion | Evidence |
+|---|---|---|
+| 1 | Package/compiler **1.5.x** | `__version__`, `COMPILER_VERSION`, tokens.compiler.version |
+| 2 | `compose` maps markdown briefs to recipes (cover, kpi_row, big_number, process, timeline, comparison, table, quote, close), auto-splits >5 bullets, captures CTA, co-located quotes get own slides | `tests/test_v15.py` ComposeV15 |
+| 3 | Text-fit validation is CJK-aware (east-asian width); over-budget strings fail strict generation with shorten-or-split message | FitV15 |
+| 4 | Korean/CJK web fonts substitute to PowerPoint-safe faces (Pretendard/Noto KR → Malgun Gothic; Noto Sans stays Arial) | FitV15.test_cjk_font_substitution |
+| 5 | 6 new recipes (big_number, matrix_2x2, team, logo_strip, pricing, appendix_table) generate ops; caps enforced; chart_insight passes through any chartType, single-series geometries drop series2 | NewRecipesV15 |
+| 6 | Gate 3 renders from staging BEFORE os.replace; `--gate3` aborts the write on render failure; scaffold wrappers pass `--screenshot` | Gate3V15 + apply.py |
+| 7 | Extract recovers structure: connectors→process, even card grids→feature_cards, dominant numeric→big_number, unit-suffixed KPIs (42ms) | ExtractStructureV15 |
+| 8 | Restyle preserves font roles: runs ≥ section size get heading font, others body, mono hints mono; +mj/+mn untouched | RestyleFontRolesV15 |
+
 ## v1.4 acceptance criteria
 
 | # | Criterion | Evidence |

@@ -142,6 +142,38 @@ def validate_deck_content_caps(deck: dict[str, Any]) -> list[str]:
             alt = content.get("alt")
             if src and not alt:
                 errors.append(f"{prefix}: {recipe}.alt is required when src is set")
+        if recipe == "matrix_2x2":
+            quads = content.get("quadrants") or []
+            if isinstance(quads, list) and len(quads) > 4:
+                errors.append(f"{prefix}: quadrants max 4 (got {len(quads)})")
+        if recipe == "team":
+            members = content.get("members") or []
+            if isinstance(members, list) and len(members) > 4:
+                errors.append(f"{prefix}: members max 4 (got {len(members)}); split slides")
+        if recipe == "logo_strip":
+            logos = content.get("logos") or []
+            if isinstance(logos, list) and len(logos) > 6:
+                errors.append(f"{prefix}: logos max 6 (got {len(logos)}); split slides")
+            for li, logo in enumerate(logos if isinstance(logos, list) else []):
+                if isinstance(logo, dict) and logo.get("src") and not (
+                    logo.get("alt") or logo.get("label")
+                ):
+                    errors.append(f"{prefix}: logos[{li}] needs alt or label when src is set")
+        if recipe == "pricing":
+            tiers = content.get("tiers") or []
+            if isinstance(tiers, list) and len(tiers) > 3:
+                errors.append(f"{prefix}: tiers max 3 (got {len(tiers)})")
+            for ti, tier in enumerate(tiers if isinstance(tiers, list) else []):
+                feats = tier.get("features") if isinstance(tier, dict) else None
+                if isinstance(feats, list) and len(feats) > 5:
+                    errors.append(f"{prefix}: tiers[{ti}].features max 5 (got {len(feats)})")
+        if recipe == "appendix_table":
+            headers = content.get("headers") or []
+            rows = content.get("rows") or []
+            if isinstance(headers, list) and len(headers) > 8:
+                errors.append(f"{prefix}: appendix_table headers max 8; split table")
+            if isinstance(rows, list) and len(rows) > 14:
+                errors.append(f"{prefix}: appendix_table rows max 14; split table")
     return errors
 
 
@@ -168,6 +200,14 @@ def generate_deck(
         if strict:
             raise ValueError("deck content caps exceeded:\n- " + "\n- ".join(cap_errs))
         warnings.extend(cap_errs)
+
+    from .fit import validate_deck_text_fit
+
+    fit_errs = validate_deck_text_fit(deck, tokens)
+    if fit_errs:
+        if strict:
+            raise ValueError("deck text does not fit:\n- " + "\n- ".join(fit_errs))
+        warnings.extend(fit_errs)
 
     ops: list[dict] = []
     for i, s in enumerate(deck["slides"]):

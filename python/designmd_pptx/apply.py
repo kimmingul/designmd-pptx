@@ -58,6 +58,7 @@ def apply_sequence(
     force: bool = False,
     require_clean_issues: bool = True,
     screenshot: bool = False,
+    gate3: bool = False,
 ) -> None:
     """
     Materialize deck.sequence.json into pptx.
@@ -148,28 +149,49 @@ def apply_sequence(
         # close staging if possible (ignore errors)
         _run(exe, ["close", str(staging)])
 
+        # Gate 3 runs on the STAGING copy, before the destination is replaced —
+        # a deck whose contact sheet cannot even render never ships (--gate3).
+        shot: Path | None = None
+        if screenshot or gate3:
+            shot = pptx.with_suffix(".contact.png")
+            r = _run(exe, ["view", str(staging), "screenshot", "--grid", "-o", str(shot)])
+            if r.returncode != 0 or not shot.exists():
+                msg = (
+                    "Gate 3 screenshot failed: "
+                    f"{((r.stderr or r.stdout) or '').strip()[:200]}"
+                )
+                if gate3:
+                    raise RuntimeError(f"{msg} — destination left untouched")
+                print(f"warning: {msg}")
+                shot = None
+            # the screenshot view starts its own resident on staging —
+            # release it before the atomic replace (Windows locks the file)
+            _run(exe, ["close", str(staging)])
+
         if staged:
             if dest_exists and not force:
                 # should have been caught earlier
                 raise FileExistsError(str(pptx))
-            # atomic replace onto destination
-            os.replace(str(staging), str(pptx))
+            # atomic replace onto destination; brief retry for lingering
+            # resident file locks on Windows
+            import time
+
+            for attempt in range(10):
+                try:
+                    os.replace(str(staging), str(pptx))
+                    break
+                except PermissionError:
+                    if attempt == 9:
+                        raise
+                    time.sleep(0.5)
             staged = False  # ownership transferred
 
         print(f"Applied → {pptx}")
-
-        if screenshot:
-            # Gate 3: whole-deck contact sheet for visual QA (overflow,
-            # overlap, alignment). Non-fatal — the deck is already delivered.
-            shot = pptx.with_suffix(".contact.png")
-            r = _run(exe, ["view", str(pptx), "screenshot", "--grid", "-o", str(shot)])
-            if r.returncode == 0 and shot.exists():
-                print(f"Gate 3 contact sheet → {shot}")
-            else:
-                print(
-                    "warning: Gate 3 screenshot failed: "
-                    f"{((r.stderr or r.stdout) or '').strip()[:200]}"
-                )
+        if shot:
+            print(
+                f"Gate 3 contact sheet → {shot} "
+                "(inspect for overflow/overlap/alignment before delivery)"
+            )
     finally:
         try:
             if batch_file.exists():
