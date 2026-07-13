@@ -1,5 +1,17 @@
 # designmd-pptx — Definition of Done
 
+## v1.6 acceptance criteria
+
+| # | Criterion | Evidence |
+|---|---|---|
+| 1 | Package/compiler **1.6.x** | `__version__`, `COMPILER_VERSION`, tokens.compiler.version |
+| 2 | layout.py solves stack trees to absolute cm: weighted distribution, min/max clamps, container chrome emission, text heights from CJK-aware line estimation | `tests/test_v16.py` LayoutEngineV16 |
+| 3 | Weighted text boxes are overflow-checked post-placement (no silent overflow through weight-sizing) | test_weighted_text_overflow_detected |
+| 4 | Density adaptation: comfortable → compact (spacing-first, fonts floored 36/18) → hard shorten-or-split failure | test_adaptive_falls_back_to_compact + floored_pt |
+| 5 | bullets / feature_cards / comparison_2col / image_text_2col are 100% engine-solved (no hand coordinates), names preserved, geometry within canvas | MigratedRecipesV16 + v11/v15 suites green |
+| 6 | `--empty-potx` prunes media referenced only by dropped slides; master/layout/theme-referenced media survive; stats reported | TemplatePolishV16 |
+| 7 | `master --layouts` maps explicit layout colors that exactly match an old theme slot to the new slot color; unmatched untouched + reported; off by default | TemplatePolishV16 |
+
 ## v1.5 acceptance criteria
 
 | # | Criterion | Evidence |

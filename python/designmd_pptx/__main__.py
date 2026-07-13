@@ -306,17 +306,21 @@ def cmd_master(args: argparse.Namespace) -> int:
 
     force = bool(args.force) or os.environ.get("DESIGNMD_FORCE") == "1"
 
+    potx_stats: dict = {}
     if args.potx and not args.out and not force:
         # potx-only mode: brand a throwaway copy, never touch the source
         with tempfile.TemporaryDirectory() as tmp:
             branded = Path(tmp) / "branded.pptx"
-            report = brand_master(args.pptx, tokens, out=branded)
-            export_potx(branded, args.potx, force=force, empty=args.empty_potx)
+            report = brand_master(args.pptx, tokens, out=branded, layouts=args.layouts)
+            export_potx(branded, args.potx, force=force, empty=args.empty_potx,
+                        stats=potx_stats)
     else:
-        report = brand_master(args.pptx, tokens, out=args.out, force=force)
+        report = brand_master(args.pptx, tokens, out=args.out, force=force,
+                              layouts=args.layouts)
         print(f"Branded master → {report['dest']}")
         if args.potx:
-            export_potx(report["dest"], args.potx, force=force, empty=args.empty_potx)
+            export_potx(report["dest"], args.potx, force=force, empty=args.empty_potx,
+                        stats=potx_stats)
 
     if report["theme_scheme"]:
         print(f"  theme scheme: {len(report['theme_scheme'])} slots remapped")
@@ -324,8 +328,13 @@ def cmd_master(args: argparse.Namespace) -> int:
         print(f"  theme fonts: {report['theme_fonts']}")
     if report["master_styles"]:
         print(f"  master type scale: {report['master_styles']}")
+    if report.get("layout_colors"):
+        n = sum(v["count"] for v in report["layout_colors"].values())
+        print(f"  layout colors: {len(report['layout_colors'])} distinct → {n} replacements")
     if args.potx:
         print(f"Template → {args.potx}{' (slides stripped)' if args.empty_potx else ''}")
+        if potx_stats.get("pruned_media"):
+            print(f"  pruned {len(potx_stats['pruned_media'])} unreferenced media part(s)")
     return 0
 
 
@@ -488,7 +497,10 @@ def build_parser() -> argparse.ArgumentParser:
     m.add_argument("--potx", type=Path, default=None,
                    help="Also export a .potx template at this path")
     m.add_argument("--empty-potx", action="store_true",
-                   help="Strip all slides from the .potx so it opens blank")
+                   help="Strip all slides from the .potx so it opens blank "
+                   "(also garbage-collects media no surviving part references)")
+    m.add_argument("--layouts", action="store_true",
+                   help="Also snap explicit slideLayout colors to the brand palette")
     m.add_argument("--brand", default=None)
     m.add_argument("--force", action="store_true", help="Overwrite destination")
     m.set_defaults(func=cmd_master)

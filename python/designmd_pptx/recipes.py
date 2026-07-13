@@ -6,6 +6,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from . import layout as L
+
 
 def _cm(n: float) -> str:
     s = f"{n:.2f}".rstrip("0").rstrip(".")
@@ -30,6 +32,24 @@ def _grid_n(
 
 def _micro_pt(t: dict) -> int:
     return int(t.get("micro_pt", 14))
+
+
+def _emit_shapes(placed: list[L.Placed]) -> list[dict]:
+    """Solved layout leaves → officecli add ops (geometry from the engine)."""
+    ops: list[dict] = []
+    for p in placed:
+        props = dict(p.box.props)
+        op_type = props.pop("_type", "shape")
+        props.setdefault("name", p.name)
+        if p.box.kind == "text" and "text" not in props:
+            props["text"] = p.box.text
+        props.update(
+            {"x": _cm(p.x), "y": _cm(p.y), "width": _cm(p.w), "height": _cm(p.h)}
+        )
+        ops.append(
+            {"command": "add", "parent": "/slide[last()]", "type": op_type, "props": props}
+        )
+    return ops
 
 
 def _base_props(tokens: dict) -> dict[str, Any]:
@@ -379,109 +399,77 @@ def recipe_feature_cards(tokens: dict, content: dict | None = None) -> list[dict
         cards = [{"title": "Item", "body": "Detail."}]
     n = max(2, min(4, len(cards)))
     cards = cards[:n]
-    col_w, xs = _grid_n(n, b["margin"], b["gap"])
     bg = c["content_background"]
-    card_fill = c["surface"]
 
-    ops: list[dict] = [
+    # v1.6: engine-solved geometry — equal-width card columns, card heights
+    # share the space below the title; body text height is validated.
+    def build(d: L.Density) -> L.Box:
+        body_pt = L.floored_pt(t["body_pt"], d)
+        card_boxes = []
+        for i, card in enumerate(cards):
+            card_boxes.append(
+                L.VStack(
+                    weight=1,
+                    name=f"Card{i + 1}Bg",
+                    children=[
+                        L.Fixed(0.18, name=f"Card{i + 1}Accent", props={
+                            "preset": "rect", "fill": c["accent"], "line": "none",
+                        }),
+                        L.VStack(
+                            weight=1,
+                            pad=(1.0 * d.gap, 0.6, 0.6, 0.6),
+                            gap=0.5 * d.gap,
+                            children=[
+                                L.Text(str(card.get("title", "")),
+                                       pt=max(20, t["section_pt"]),
+                                       name=f"Card{i + 1}Title",
+                                       min_cm=1.2, max_cm=3.0, props={
+                                           "font": t["heading_font"],
+                                           "size": str(max(20, t["section_pt"])),
+                                           "bold": "true",
+                                           "color": c["text_on_surface"],
+                                           "fill": "none",
+                                       }),
+                                L.Text(str(card.get("body", "")), pt=body_pt,
+                                       name=f"Card{i + 1}Body", weight=1, props={
+                                           "font": t["body_font"],
+                                           "size": str(body_pt),
+                                           "color": c["muted"], "fill": "none",
+                                       }),
+                            ],
+                        ),
+                    ],
+                    props={
+                        "preset": b["preset"], "fill": c["surface"],
+                        "line": c["hairline"],
+                    },
+                )
+            )
+        return L.VStack(
+            pad=(1.2, b["margin"], 1.0, b["margin"]),
+            gap=0.9 * d.gap,
+            name="feature_cards",
+            children=[
+                L.Text(title, pt=t["title_pt"], name="FeatTitle",
+                       min_cm=1.6, max_cm=2.8, props={
+                           "font": t["heading_font"], "size": str(t["title_pt"]),
+                           "bold": "true", "color": c["text_on_content"],
+                           "fill": "none",
+                       }),
+                L.HStack(card_boxes, gap=b["gap"] * d.gap, weight=1),
+            ],
+        )
+
+    placed, _d = L.solve_adaptive(build, 0, 0, L.CANVAS_W, L.CANVAS_H)
+    return [
         {
             "command": "add",
             "parent": "/",
             "type": "slide",
             "props": {"layout": "blank", "background": bg},
         },
-        {
-            "command": "add",
-            "parent": "/slide[last()]",
-            "type": "shape",
-            "props": {
-                "name": "FeatTitle",
-                "text": title,
-                "x": _cm(b["margin"]),
-                "y": "1.2cm",
-                "width": _cm(33.87 - 2 * b["margin"]),
-                "height": "1.8cm",
-                "font": t["heading_font"],
-                "size": str(t["title_pt"]),
-                "bold": "true",
-                "color": c["text_on_content"],
-                "fill": "none",
-            },
-        },
+        *_emit_shapes(placed),
     ]
-    y, h = 4.0, 12.5
-    for i, card in enumerate(cards):
-        x = xs[i]
-        ops.extend(
-            [
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"Card{i+1}Bg",
-                        "preset": b["preset"],
-                        "fill": card_fill,
-                        "line": c["hairline"],
-                        "x": _cm(x),
-                        "y": _cm(y),
-                        "width": _cm(col_w),
-                        "height": _cm(h),
-                    },
-                },
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"Card{i+1}Accent",
-                        "preset": "rect",
-                        "fill": c["accent"],
-                        "line": "none",
-                        "x": _cm(x),
-                        "y": _cm(y),
-                        "width": _cm(col_w),
-                        "height": "0.18cm",
-                    },
-                },
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"Card{i+1}Title",
-                        "text": str(card.get("title", "")),
-                        "x": _cm(x + 0.6),
-                        "y": _cm(y + 1.2),
-                        "width": _cm(col_w - 1.2),
-                        "height": "1.5cm",
-                        "font": t["heading_font"],
-                        "size": str(max(20, t["section_pt"])),
-                        "bold": "true",
-                        "color": c["text_on_surface"],
-                        "fill": "none",
-                    },
-                },
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"Card{i+1}Body",
-                        "text": str(card.get("body", "")),
-                        "x": _cm(x + 0.6),
-                        "y": _cm(y + 3.2),
-                        "width": _cm(col_w - 1.2),
-                        "height": "8cm",
-                        "font": t["body_font"],
-                        "size": str(t["body_pt"]),
-                        "color": c["muted"],
-                        "fill": "none",
-                    },
-                },
-            ]
-        )
-    return ops
 
 
 def recipe_bullets(tokens: dict, content: dict | None = None) -> list[dict]:
@@ -500,6 +488,29 @@ def recipe_bullets(tokens: dict, content: dict | None = None) -> list[dict]:
     items = [str(x) for x in items[:5]]
     body = "\n".join(f"• {x}" for x in items)
 
+    # v1.6: engine-solved geometry — title height from its text, body fills
+    # the rest; density backs off spacing/pt before failing loudly.
+    def build(d: L.Density) -> L.Box:
+        body_pt = L.floored_pt(t["body_pt"], d)
+        return L.VStack(
+            pad=(1.2, b["margin"], 1.0, b["margin"]),
+            gap=0.8 * d.gap,
+            name="bullets",
+            children=[
+                L.Text(title, pt=t["title_pt"], name="BulletTitle",
+                       min_cm=1.6, max_cm=2.8, props={
+                           "font": t["heading_font"], "size": str(t["title_pt"]),
+                           "bold": "true", "color": c["text_on_content"],
+                           "fill": "none",
+                       }),
+                L.Text(body, pt=body_pt, name="BulletBody", weight=1, props={
+                    "font": t["body_font"], "size": str(body_pt),
+                    "color": c["text_on_content"], "fill": "none",
+                }),
+            ],
+        )
+
+    placed, _d = L.solve_adaptive(build, 0, 0, L.CANVAS_W, L.CANVAS_H)
     return [
         {
             "command": "add",
@@ -507,41 +518,7 @@ def recipe_bullets(tokens: dict, content: dict | None = None) -> list[dict]:
             "type": "slide",
             "props": {"layout": "blank", "background": c["content_background"]},
         },
-        {
-            "command": "add",
-            "parent": "/slide[last()]",
-            "type": "shape",
-            "props": {
-                "name": "BulletTitle",
-                "text": title,
-                "x": _cm(b["margin"]),
-                "y": "1.2cm",
-                "width": _cm(33.87 - 2 * b["margin"]),
-                "height": "1.8cm",
-                "font": t["heading_font"],
-                "size": str(t["title_pt"]),
-                "bold": "true",
-                "color": c["text_on_content"],
-                "fill": "none",
-            },
-        },
-        {
-            "command": "add",
-            "parent": "/slide[last()]",
-            "type": "shape",
-            "props": {
-                "name": "BulletBody",
-                "text": body,
-                "x": _cm(b["margin"]),
-                "y": "3.8cm",
-                "width": _cm(33.87 - 2 * b["margin"]),
-                "height": "13cm",
-                "font": t["body_font"],
-                "size": str(t["body_pt"]),
-                "color": c["text_on_content"],
-                "fill": "none",
-            },
-        },
+        *_emit_shapes(placed),
         {
             "command": "add",
             "parent": "/slide[last()]",
@@ -625,91 +602,66 @@ def recipe_comparison_2col(tokens: dict, content: dict | None = None) -> list[di
     title = content.get("title", "Compare")
     left = content.get("left") or {"title": "Option A", "body": "Strengths of A."}
     right = content.get("right") or {"title": "Option B", "body": "Strengths of B."}
-    col_w, xs = _grid_n(2, b["margin"], b["gap"])
 
-    ops: list[dict] = [
+    # v1.6: engine-solved geometry — two equal panels, body heights validated.
+    def build(d: L.Density) -> L.Box:
+        body_pt = L.floored_pt(t["body_pt"], d)
+        panels = []
+        for i, side in enumerate((left, right)):
+            panels.append(
+                L.VStack(
+                    weight=1,
+                    name=f"Cmp{i + 1}Bg",
+                    pad=(0.8 * d.gap, 0.8, 0.8, 0.8),
+                    gap=0.5 * d.gap,
+                    children=[
+                        L.Text(str(side.get("title", "")),
+                               pt=max(20, t["section_pt"]),
+                               name=f"Cmp{i + 1}Title",
+                               min_cm=1.2, max_cm=3.0, props={
+                                   "font": t["heading_font"],
+                                   "size": str(max(20, t["section_pt"])),
+                                   "bold": "true",
+                                   "color": c["text_on_surface"],
+                                   "fill": "none",
+                               }),
+                        L.Text(str(side.get("body", "")), pt=body_pt,
+                               name=f"Cmp{i + 1}Body", weight=1, props={
+                                   "font": t["body_font"], "size": str(body_pt),
+                                   "color": c["muted"], "fill": "none",
+                               }),
+                    ],
+                    props={
+                        "preset": b["preset"], "fill": c["surface"],
+                        "line": c["hairline"],
+                    },
+                )
+            )
+        return L.VStack(
+            pad=(1.2, b["margin"], 1.0, b["margin"]),
+            gap=0.9 * d.gap,
+            name="comparison_2col",
+            children=[
+                L.Text(title, pt=t["title_pt"], name="CmpTitle",
+                       min_cm=1.6, max_cm=2.8, props={
+                           "font": t["heading_font"], "size": str(t["title_pt"]),
+                           "bold": "true", "color": c["text_on_content"],
+                           "fill": "none",
+                       }),
+                L.HStack(panels, gap=b["gap"] * d.gap, weight=1),
+            ],
+        )
+
+    placed, _d = L.solve_adaptive(build, 0, 0, L.CANVAS_W, L.CANVAS_H)
+    return [
         {
             "command": "add",
             "parent": "/",
             "type": "slide",
             "props": {"layout": "blank", "background": c["content_background"]},
         },
-        {
-            "command": "add",
-            "parent": "/slide[last()]",
-            "type": "shape",
-            "props": {
-                "name": "CmpTitle",
-                "text": title,
-                "x": _cm(b["margin"]),
-                "y": "1.2cm",
-                "width": _cm(33.87 - 2 * b["margin"]),
-                "height": "1.8cm",
-                "font": t["heading_font"],
-                "size": str(t["title_pt"]),
-                "bold": "true",
-                "color": c["text_on_content"],
-                "fill": "none",
-            },
-        },
+        *_emit_shapes(placed),
     ]
-    for i, side in enumerate((left, right)):
-        x = xs[i]
-        ops.extend(
-            [
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"Cmp{i+1}Bg",
-                        "preset": b["preset"],
-                        "fill": c["surface"],
-                        "line": c["hairline"],
-                        "x": _cm(x),
-                        "y": "4cm",
-                        "width": _cm(col_w),
-                        "height": "12.5cm",
-                    },
-                },
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"Cmp{i+1}Title",
-                        "text": str(side.get("title", "")),
-                        "x": _cm(x + 0.8),
-                        "y": "4.8cm",
-                        "width": _cm(col_w - 1.6),
-                        "height": "1.5cm",
-                        "font": t["heading_font"],
-                        "size": str(max(20, t["section_pt"])),
-                        "bold": "true",
-                        "color": c["text_on_surface"],
-                        "fill": "none",
-                    },
-                },
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"Cmp{i+1}Body",
-                        "text": str(side.get("body", "")),
-                        "x": _cm(x + 0.8),
-                        "y": "6.8cm",
-                        "width": _cm(col_w - 1.6),
-                        "height": "9cm",
-                        "font": t["body_font"],
-                        "size": str(t["body_pt"]),
-                        "color": c["muted"],
-                        "fill": "none",
-                    },
-                },
-            ]
-        )
-    return ops
 
 
 def recipe_chart_insight(tokens: dict, content: dict | None = None) -> list[dict]:
@@ -1390,13 +1342,44 @@ def recipe_image_text_2col(
     if side not in ("left", "right"):
         side = "left"
 
-    margin = b["margin"]
-    gap = b["gap"]
-    usable = 33.87 - 2 * margin - gap
-    col_w = usable / 2
-    img_x = margin if side == "left" else margin + col_w + gap
-    text_x = margin + col_w + gap if side == "left" else margin
+    # v1.6: engine-solved geometry — image column fills its half, text column
+    # gets a content-sized title and a validated, space-filling body.
+    if src:
+        visual = L.Box(kind="fixed", weight=1, name="It2Image", props={
+            "_type": "picture", "src": str(src), "alt": alt or "Illustration",
+        })
+    else:
+        visual = L.Box(kind="fixed", weight=1, name="It2Placeholder", props={
+            "preset": b["preset"], "fill": c["surface"], "line": c["hairline"],
+            "text": "Image — set content.src", "font": t["body_font"],
+            "size": str(t["body_pt"]), "color": c["muted"],
+            "align": "center", "valign": "middle",
+        })
 
+    def build(d: L.Density) -> L.Box:
+        body_pt = L.floored_pt(t["body_pt"], d)
+        text_col = L.VStack(
+            weight=1,
+            gap=0.7 * d.gap,
+            children=[
+                L.Text(title, pt=t["title_pt"], name="It2Title",
+                       min_cm=1.6, max_cm=4.0, props={
+                           "font": t["heading_font"], "size": str(t["title_pt"]),
+                           "bold": "true", "color": c["text_on_content"],
+                           "fill": "none",
+                       }),
+                L.Text(body, pt=body_pt, name="It2Body", weight=1, props={
+                    "font": t["body_font"], "size": str(body_pt),
+                    "color": c["muted"], "fill": "none",
+                }),
+            ],
+        )
+        cols = [visual, text_col] if side == "left" else [text_col, visual]
+        return L.HStack(cols, gap=b["gap"] * d.gap,
+                        pad=(2.5 * d.gap, b["margin"], 2.0 * d.gap, b["margin"]),
+                        name="image_text_2col")
+
+    placed, _d = L.solve_adaptive(build, 0, 0, L.CANVAS_W, L.CANVAS_H)
     ops: list[dict] = [
         {
             "command": "add",
@@ -1404,83 +1387,8 @@ def recipe_image_text_2col(
             "type": "slide",
             "props": {"layout": "blank", "background": c["content_background"]},
         },
-        {
-            "command": "add",
-            "parent": "/slide[last()]",
-            "type": "shape",
-            "props": {
-                "name": "It2Title",
-                "text": title,
-                "x": _cm(text_x),
-                "y": "2.5cm",
-                "width": _cm(col_w),
-                "height": "2cm",
-                "font": t["heading_font"],
-                "size": str(t["title_pt"]),
-                "bold": "true",
-                "color": c["text_on_content"],
-                "fill": "none",
-            },
-        },
-        {
-            "command": "add",
-            "parent": "/slide[last()]",
-            "type": "shape",
-            "props": {
-                "name": "It2Body",
-                "text": body,
-                "x": _cm(text_x),
-                "y": "5cm",
-                "width": _cm(col_w),
-                "height": "11cm",
-                "font": t["body_font"],
-                "size": str(t["body_pt"]),
-                "color": c["muted"],
-                "fill": "none",
-            },
-        },
+        *_emit_shapes(placed),
     ]
-    if src:
-        ops.append(
-            {
-                "command": "add",
-                "parent": "/slide[last()]",
-                "type": "picture",
-                "props": {
-                    "name": "It2Image",
-                    "src": str(src),
-                    "alt": alt or "Illustration",
-                    "x": _cm(img_x),
-                    "y": "2.5cm",
-                    "width": _cm(col_w),
-                    "height": "14cm",
-                },
-            }
-        )
-    else:
-        ops.append(
-            {
-                "command": "add",
-                "parent": "/slide[last()]",
-                "type": "shape",
-                "props": {
-                    "name": "It2Placeholder",
-                    "preset": b["preset"],
-                    "fill": c["surface"],
-                    "line": c["hairline"],
-                    "text": "Image — set content.src",
-                    "x": _cm(img_x),
-                    "y": "2.5cm",
-                    "width": _cm(col_w),
-                    "height": "14cm",
-                    "font": t["body_font"],
-                    "size": str(t["body_pt"]),
-                    "color": c["muted"],
-                    "align": "center",
-                    "valign": "middle",
-                },
-            }
-        )
     if content.get("notes"):
         ops.append(
             {

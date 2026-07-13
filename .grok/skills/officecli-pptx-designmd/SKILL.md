@@ -1,9 +1,9 @@
 ---
 name: officecli-pptx-designmd
-description: "designmd-pptx v1.5: compile awesome-design-md / Stitch DESIGN.md into officecli PPTX tokens, ordered decks, staging-safe apply; compose markdown briefs into deck-specs; extract existing pptx into a deck-spec draft (geometry-aware); restyle existing pptx with brand tokens (font-role aware); brand slide masters and export .potx templates; 20 slide patterns incl. big_number, matrix_2x2, team, pricing; CJK-aware text-fit validation; Gate 3 screenshot gating. Trigger on DESIGN.md, getdesign.md, brand design for slides, deck outline, restyle deck, modernize slides, slide master, potx template, /designmd-pptx, /officecli-pptx-designmd."
+description: "designmd-pptx v1.6: compile awesome-design-md / Stitch DESIGN.md into officecli PPTX tokens, ordered decks, staging-safe apply; compose markdown briefs into deck-specs; constraint-based layout engine with density adaptation for text-heavy patterns; extract existing pptx into a deck-spec draft (geometry-aware); restyle existing pptx with brand tokens (font-role aware); brand slide masters/layouts and export pruned .potx templates; 20 slide patterns; CJK-aware text-fit validation; Gate 3 screenshot gating. Trigger on DESIGN.md, getdesign.md, brand design for slides, deck outline, restyle deck, modernize slides, slide master, potx template, /designmd-pptx, /officecli-pptx-designmd."
 ---
 
-# officecli-pptx-designmd (v1.5)
+# officecli-pptx-designmd (v1.6)
 
 ## Locate the toolkit
 
@@ -31,8 +31,11 @@ pip install -r "<resolved python root>\requirements.txt"
    prose — run `compose` on a markdown outline first, then edit the draft.
 3. Floors: title ≥36pt, body ≥18pt, micro 12–16 for KPI chips only.
 4. No silent truncation — item caps AND text length are validated (CJK-aware
-   width budgets; Korean/Japanese/Chinese glyphs count wider). Over-budget
-   text fails with a shorten-or-split message; fix content, don't shrink fonts.
+   width budgets; Korean/Japanese/Chinese glyphs count wider). Text-heavy
+   patterns (bullets, feature_cards, comparison_2col, image_text_2col) solve
+   their geometry with the layout engine: comfortable density first, compact
+   (tighter spacing, fonts floored at title 36 / body 18) as fallback, then a
+   hard shorten-or-split failure. Fix content, don't shrink fonts.
 5. `image_full` / `image_text_2col`: `alt` required when `src` set.
 6. Process uses **glued connectors** (`/slide[N]/shape[@name=…]`).
 7. Overwrite only with `--force` / `DESIGNMD_FORCE=1` (staging-safe via `apply_sequence`).
@@ -96,12 +99,15 @@ Two paths to modernize an existing .pptx — pick by how much change is wanted:
 
 ## Slide master & templates (v1.3)
 
-`master deck.pptx DESIGN.md [-o branded.pptx] [--potx brand.potx] [--empty-potx]`
+`master deck.pptx DESIGN.md [-o branded.pptx] [--potx brand.potx] [--empty-potx] [--layouts]`
 brands the theme (scheme + fonts) and master type scale so slides the user adds
-later in PowerPoint inherit the brand; slide content is untouched. `--potx`
-exports a PowerPoint template (`--empty-potx` strips slides so it opens blank);
-with `--potx` alone the source pptx is never modified. Run after `apply` to
-deliver a deck whose file doubles as a brand template.
+later in PowerPoint inherit the brand; slide content is untouched. `--layouts`
+also rebrands slideLayouts: explicit colors that exactly match an old theme
+slot get that slot's new brand color (unmatched colors are left alone and
+reported — safer than nearest-color snapping). `--potx` exports a PowerPoint
+template; `--empty-potx` strips slides AND garbage-collects media that no
+surviving part references. With `--potx` alone the source pptx is never
+modified. Run after `apply` to deliver a deck whose file doubles as a template.
 
 ## Patterns
 

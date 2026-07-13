@@ -25,6 +25,9 @@ npm test        # python -m unittest discover -s python/tests -v
 - Edit skills only under `skills/` and `commands/`, then run `npm run sync`. The `.grok/` copies are generated.
 - Keep versions aligned across `plugin.json`, `.claude-plugin/plugin.json`, `package.json`, and `python/designmd_pptx/__init__.py`.
 - Python changes require `npm test` to pass; skill/manifest changes require `npm run check`.
+- Geometry: bullets/feature_cards/comparison_2col/image_text_2col are 100%
+  layout-engine solved (`layout.py`) — never reintroduce hand coordinates into
+  them; a recipe uses exactly one geometry system (engine tree OR fixed cm).
 - Overwrite of generated .pptx is staging-safe and requires `--force` / `DESIGNMD_FORCE=1`.
 
 ## Using the toolkit
