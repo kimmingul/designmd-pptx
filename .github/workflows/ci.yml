@@ -86,3 +86,41 @@ jobs:
         # The full pipeline needs the legacy iOfficeAI shape-level binary; where
         # it isn't provisioned, EndToEndV20 self-skips and this is a no-op.
         run: python -m unittest tests.test_v20 -v
+
+  package:
+    name: package · wheel installs clean · ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    needs: unit
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build wheel
+        run: python -m pip wheel . --no-deps -w dist
+      - name: Install into a clean venv and smoke-test (no PYTHONPATH)
+        shell: bash
+        # Issue #33: the installed wheel must be self-contained (bundled
+        # schemas / manifest / default DESIGN.md) and usable with no PYTHONPATH.
+        run: |
+          set -e
+          python -m venv env
+          if [ -f env/Scripts/python.exe ]; then BIN="env/Scripts"; EXE=".exe"; else BIN="env/bin"; EXE=""; fi
+          "$BIN/python$EXE" -m pip install --quiet --disable-pip-version-check dist/*.whl
+          "$BIN/python$EXE" - <<'PY'
+          import pathlib, designmd_pptx
+          from designmd_pptx import compat
+          from designmd_pptx.validate import SCHEMA_PATH
+          assert SCHEMA_PATH.is_file(), "schema not shipped in the wheel"
+          assert compat.spec_for("official")["min"], "compatibility.json not shipped"
+          assert (pathlib.Path(designmd_pptx.__file__).parent / "default.DESIGN.md").is_file()
+          print("installed", designmd_pptx.__version__, "— self-contained OK")
+          PY
+          # console entry point drives a real scaffold from an unrelated cwd
+          cd "$RUNNER_TEMP"
+          "$OLDPWD/$BIN/designmd-pptx$EXE" scaffold default -o deck --title "pip smoke"
+          test -f deck/tokens.slide.json

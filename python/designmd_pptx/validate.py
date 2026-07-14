@@ -7,7 +7,9 @@ import re
 from pathlib import Path
 from typing import Any
 
-SCHEMA_PATH = Path(__file__).resolve().parents[1] / "schema" / "tokens.slide.schema.json"
+# Ships inside the package (designmd_pptx/schema/) so an installed wheel is
+# self-contained — the schemas moved here from python/schema/ in #33.
+SCHEMA_PATH = Path(__file__).resolve().parent / "schema" / "tokens.slide.schema.json"
 
 HEX6 = re.compile(r"^[0-9A-Fa-f]{6}$")
 

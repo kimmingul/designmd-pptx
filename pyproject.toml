@@ -1,0 +1,60 @@
+# Packaging for `pip install designmd-pptx` (issue #33). The Python package
+# lives under python/designmd_pptx; the version is read from its __init__ so it
+# stays the single source of truth (also mirrored in plugin.json / package.json).
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "designmd-pptx"
+dynamic = ["version"]
+description = "Compile a brand DESIGN.md into OfficeCLI PowerPoint (.pptx) decks"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "kimmingul" }]
+keywords = [
+    "pptx", "powerpoint", "officecli", "design-tokens",
+    "presentation", "design-md", "slides",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business",
+]
+dependencies = [
+    "PyYAML>=6.0",
+    "lxml>=5.0",
+    "defusedxml>=0.7",
+]
+
+[project.optional-dependencies]
+# jsonschema upgrades token validation from structural checks to full schema
+# validation; the package ships the schemas either way.
+schema = ["jsonschema>=4.0"]
+
+[project.urls]
+Homepage = "https://github.com/kimmingul/designmd-pptx"
+Issues = "https://github.com/kimmingul/designmd-pptx/issues"
+
+[project.scripts]
+designmd-pptx = "designmd_pptx.__main__:main"
+
+[tool.setuptools]
+package-dir = { "" = "python" }
+
+[tool.setuptools.dynamic]
+version = { attr = "designmd_pptx.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["python"]
+include = ["designmd_pptx*"]
+
+[tool.setuptools.package-data]
+designmd_pptx = ["compatibility.json", "default.DESIGN.md", "schema/*.json"]
