@@ -592,6 +592,105 @@ def cmd_corpus(args: argparse.Namespace) -> int:
     return 1 if errors else 0
 
 
+def cmd_a11y(args: argparse.Namespace) -> int:
+    """WCAG contrast, reading order, alt/notes audit (#39)."""
+    from . import a11y as a11y_mod
+
+    tokens = None
+    deck = None
+    if args.tokens:
+        tokens = a11y_mod.load_json(args.tokens)
+    if args.deck:
+        deck = a11y_mod.load_json(args.deck)
+    if tokens is None and deck is None:
+        # Convenience: compile design + load content when provided
+        if args.design:
+            from .compile import compile_design_md
+            tokens = compile_design_md(_resolve_design(args.design))
+        if args.content:
+            deck = a11y_mod.load_json(args.content)
+    if tokens is None and deck is None:
+        print("error: provide --tokens and/or --deck (or --design / --content)",
+              file=sys.stderr)
+        return 2
+
+    report = a11y_mod.audit(
+        tokens=tokens,
+        deck=deck,
+        level=args.level,
+        require_notes=bool(args.require_notes),
+        auto_correct=bool(args.fix_contrast),
+        generate_missing=bool(args.generate_missing),
+    )
+    out = Path(args.out) if args.out else None
+    if out:
+        a11y_mod.write_report(report, out)
+        print(f"Wrote {out}")
+        if report.corrected and args.write_corrected:
+            corr_dir = out.parent
+            if report.corrected.get("tokens"):
+                tp = corr_dir / "tokens.a11y.json"
+                tp.write_text(
+                    json.dumps(report.corrected["tokens"], indent=2, ensure_ascii=False) + "\n",
+                    encoding="utf-8")
+                print(f"Wrote {tp}")
+            if report.corrected.get("deck"):
+                dp = corr_dir / "content.a11y.deck.json"
+                dp.write_text(
+                    json.dumps(report.corrected["deck"], indent=2, ensure_ascii=False) + "\n",
+                    encoding="utf-8")
+                print(f"Wrote {dp}")
+
+    mark = "PASS" if report.ok else "FAIL"
+    print(f"a11y {mark}: {report.errors} error(s), {report.warnings} warning(s)")
+    for f in report.findings:
+        print(f"  [{f.severity}] {f.code}: {f.message}"
+              + (f" ({f.path})" if f.path else ""))
+    if report.reading_order and args.show_order:
+        print(f"reading order ({len(report.reading_order)} nodes):")
+        for n in report.reading_order[:40]:
+            print(f"  [{n.get('reading_index')}] {n.get('slide_id')}/"
+                  f"{n.get('role')}: {n.get('text', '')[:60]}")
+    return 0 if report.ok else 1
+
+
+def cmd_benchmark(args: argparse.Namespace) -> int:
+    """Before/after regression harness (#37)."""
+    from . import benchmark as bench
+
+    th = bench.load_thresholds(args.thresholds) if args.thresholds else bench.load_thresholds()
+    if args.manifest:
+        report = bench.run_corpus_suite(
+            args.manifest,
+            root=args.root,
+            thresholds=th,
+            held_out_only=not bool(args.all_entries),
+        )
+    else:
+        report = bench.run_default_fixture_benchmark(
+            content_path=args.content,
+            design_path=args.design,
+            thresholds=th,
+        )
+    out = Path(args.out) if args.out else Path("benchmark-out")
+    path = bench.write_report(report, out)
+    print(f"Wrote {path}")
+    mark = "PASS" if report.ok else "FAIL"
+    print(f"benchmark {mark}: pass={report.decks_pass} fail={report.decks_fail} "
+          f"skip={report.decks_skip} total={report.decks_total}")
+    for n in report.notes:
+        print(f"  note: {n}")
+    for r in report.results:
+        if r.status == "skip":
+            print(f"  skip  {r.deck_id}: {r.skip_reason}")
+        elif r.status == "fail":
+            print(f"  FAIL  {r.deck_id}: {', '.join(r.threshold_breaches)}")
+            print(f"        deltas={r.deltas}")
+        else:
+            print(f"  pass  {r.deck_id}: deltas={r.deltas}")
+    return 0 if report.ok else 1
+
+
 def _safe_name(s: str) -> str:
     out = []
     for ch in s:
@@ -913,6 +1012,53 @@ def build_parser() -> argparse.ArgumentParser:
     )
     cp.add_argument("manifest", type=Path, help="corpus.manifest.json")
     cp.set_defaults(func=cmd_corpus)
+
+    ay = sub.add_parser(
+        "a11y",
+        help="WCAG contrast + reading order + alt/notes audit (issue #39); "
+             "fails before output is treated as clean when errors remain",
+    )
+    ay.add_argument("--tokens", type=Path, default=None, help="tokens.slide.json")
+    ay.add_argument("--deck", type=Path, default=None, help="content.deck.json / deck-spec")
+    ay.add_argument("--design", type=Path, default=None,
+                    help="DESIGN.md or 'default' (compiled when --tokens omitted)")
+    ay.add_argument("--content", type=Path, default=None,
+                    help="content.deck.json (used when --deck omitted)")
+    ay.add_argument("--level", default="AA", choices=["AA", "AAA"],
+                    help="WCAG contrast level (default AA)")
+    ay.add_argument("--require-notes", action="store_true",
+                    help="Treat missing speaker notes on narrative recipes as errors")
+    ay.add_argument("--fix-contrast", action="store_true",
+                    help="Opt-in: snap failing foreground token colors to readable ones")
+    ay.add_argument("--generate-missing", action="store_true",
+                    help="Opt-in: fill missing alt/notes with deterministic placeholders")
+    ay.add_argument("--show-order", action="store_true",
+                    help="Print deterministic reading-order nodes")
+    ay.add_argument("-o", "--out", type=Path, default=None,
+                    help="Write structured a11y.report.json")
+    ay.add_argument("--write-corrected", action="store_true",
+                    help="With --out, also write tokens.a11y.json / content.a11y.deck.json")
+    ay.set_defaults(func=cmd_a11y)
+
+    bm = sub.add_parser(
+        "benchmark",
+        help="Before/after regression harness with explicit thresholds (issue #37)",
+    )
+    bm.add_argument("--manifest", type=Path, default=None,
+                    help="corpus.manifest.json (held-out by default); omit for fixture suite")
+    bm.add_argument("--root", type=Path, default=None,
+                    help="Root for relative corpus file paths")
+    bm.add_argument("--all-entries", action="store_true",
+                    help="With --manifest, score train+held-out (default: held-out only)")
+    bm.add_argument("--design", type=Path, default=None,
+                    help="Fixture mode: DESIGN.md (default: bundled default)")
+    bm.add_argument("--content", type=Path, default=None,
+                    help="Fixture mode: content.deck.json")
+    bm.add_argument("--thresholds", type=Path, default=None,
+                    help="Override benchmark_thresholds.json")
+    bm.add_argument("-o", "--out", type=Path, default=Path("benchmark-out"),
+                    help="Output directory for reports (default: benchmark-out)")
+    bm.set_defaults(func=cmd_benchmark)
 
     return p
 

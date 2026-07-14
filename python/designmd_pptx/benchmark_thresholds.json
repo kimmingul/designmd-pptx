@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "description": "Regression thresholds for the before/after benchmark harness (issue #37). A deck fails the suite when any metric exceeds its max.",
+  "metrics": {
+    "corruption": {
+      "max": 0,
+      "description": "File unreadable / not a zip-pptx / structural OPC failure (0 = none allowed)"
+    },
+    "extraction_loss": {
+      "max": 5,
+      "description": "Count of extract loss_ledger entries of severity error/high (held-out tolerance)"
+    },
+    "layout_failure": {
+      "max": 0,
+      "description": "Hard layout/fit/validate errors that would block scaffold"
+    },
+    "visual_gate_failure": {
+      "max": 0,
+      "description": "Gate 3 / vision_gate hard failures (when gate ran); 0 allowed in CI fixture mode"
+    },
+    "a11y_error": {
+      "max": 0,
+      "description": "Accessibility error-severity findings on after tokens/deck"
+    }
+  },
+  "suite": {
+    "max_failed_decks": 0,
+    "min_decks": 1
+  }
+}

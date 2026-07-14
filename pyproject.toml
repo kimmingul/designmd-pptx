@@ -57,4 +57,9 @@ where = ["python"]
 include = ["designmd_pptx*"]
 
 [tool.setuptools.package-data]
-designmd_pptx = ["compatibility.json", "default.DESIGN.md", "schema/*.json"]
+designmd_pptx = [
+    "compatibility.json",
+    "benchmark_thresholds.json",
+    "default.DESIGN.md",
+    "schema/*.json",
+]

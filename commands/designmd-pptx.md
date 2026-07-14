@@ -25,6 +25,8 @@ Use the **designmd-pptx** toolkit (skill `officecli-pptx-designmd`).
 - `compose <brief.md> [-o composed/] [--design X]` — markdown outline → deck-spec draft (recipe selection, auto-split, fit warnings)
 - `render <brief.md|deck.json> -o out.pptx [--design X] [--images]` — quick draft via official agent-bridge (office.render)
 - `doctor [--strict] [--install [--dry-run]]` — verify officecli + skill routing; `--install` pins official OfficeCLI from compatibility.json (prints downloads; legacy stays manual)
+- `a11y [--tokens] [--deck] [--design] [--content] [--fix-contrast] [--generate-missing]` — WCAG contrast + reading order + alt/notes; fails before output is treated as clean
+- `benchmark [-o out/] [--manifest]` — before/after regression harness (fixture suite default; corpus held-out optional)
 
 Pass the literal `default` instead of a DESIGN.md path to use the bundled neutral house style. Add `--screenshot` to apply/scaffold for a Gate 3 contact-sheet PNG (`--gate3` aborts the write if it cannot render). Preferred flow: `compose → review draft → scaffold --apply --screenshot`.
 

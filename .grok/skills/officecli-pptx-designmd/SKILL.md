@@ -78,6 +78,9 @@ python -m designmd_pptx scaffold default -o out/deck --content deck.json --apply
 python -m designmd_pptx doctor            # v1.4: verify officecli + skill routing
 python -m designmd_pptx doctor --install --dry-run  # #34: version-locked install plan
 python -m designmd_pptx doctor --install            # #34: pin official officecli + PyYAML
+python -m designmd_pptx a11y --design default --content content.deck.json --show-order  # #39
+python -m designmd_pptx a11y --tokens tokens.json --deck deck.json --fix-contrast --generate-missing
+python -m designmd_pptx benchmark -o benchmark-out  # #37 fixture thresholds
 python -m designmd_pptx compose brief.md -o composed/ --design default   # v1.5: outline → deck-spec
 python -m designmd_pptx compose brief.md -o composed/ --llm --style "Keynote storytelling"  # Phase 3 / #18 opt-in planner
 python -m designmd_pptx render brief.md -o out/draft.pptx --design default  # v1.7: quick draft via official agent-bridge

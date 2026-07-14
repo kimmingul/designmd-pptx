@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Documentation
+    url: https://github.com/kimmingul/designmd-pptx/tree/main/docs
+    about: Install, concepts, gallery, migration, production checklist
+  - name: Production checklist
+    url: https://github.com/kimmingul/designmd-pptx/blob/main/docs/production-readiness.md
+    about: Explicit thresholds before shipping a deck or release
