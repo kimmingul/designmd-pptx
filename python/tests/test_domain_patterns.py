@@ -8,7 +8,15 @@ from pathlib import Path
 
 from designmd_pptx.compile import compile_design_md
 from designmd_pptx.deck import generate_deck, validate_deck_content_caps
-from designmd_pptx.recipes import RECIPE_BUILDERS
+from designmd_pptx.deck import normalize_deck_spec
+from designmd_pptx.recipes import (
+    CATALOG_SEQUENCE,
+    CORE_SEQUENCE,
+    DOMAIN_SEQUENCE,
+    PREMIUM_SEQUENCE,
+    RECIPE_BUILDERS,
+    sequence_for,
+)
 
 FIXTURES = Path(__file__).resolve().parent.parent / "fixtures"
 EXAMPLES = Path(__file__).resolve().parent.parent / "examples"
@@ -84,6 +92,26 @@ class DomainPatterns10(unittest.TestCase):
         self.assertTrue(any(op.get("type") == "chart" for op in ops))
         names = [op.get("props", {}).get("name") for op in ops]
         self.assertTrue(any(n and n.startswith("KmRisk") for n in names))
+
+    def test_sequence_partitions(self) -> None:
+        self.assertEqual(sequence_for("core"), list(CORE_SEQUENCE))
+        # empty scaffold defaults to core — no medical tax
+        deck, warns = normalize_deck_spec(None)
+        recipes = [s["recipe"] for s in deck["slides"]]
+        self.assertEqual(recipes, list(CORE_SEQUENCE))
+        self.assertTrue(any("core" in w for w in warns))
+        self.assertNotIn("consort_flow", recipes)
+        self.assertNotIn("kpi_dashboard_grid", recipes)
+        # full catalog on request
+        full, _ = normalize_deck_spec(None, catalog="all")
+        full_r = [s["recipe"] for s in full["slides"]]
+        self.assertEqual(len(full_r), len(CATALOG_SEQUENCE))
+        for name in DOMAIN_SEQUENCE + PREMIUM_SEQUENCE:
+            self.assertIn(name, full_r)
+        # every builder is reachable via catalog partitions
+        covered = set(CORE_SEQUENCE) | set(PREMIUM_SEQUENCE) | set(DOMAIN_SEQUENCE)
+        self.assertEqual(set(RECIPE_BUILDERS), covered)
+        self.assertEqual(set(CATALOG_SEQUENCE), covered)
 
     def test_caps(self) -> None:
         bad = {

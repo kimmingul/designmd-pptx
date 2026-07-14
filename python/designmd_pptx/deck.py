@@ -54,15 +54,28 @@ def is_deck_spec(obj: Any) -> bool:
     return isinstance(obj, dict) and isinstance(obj.get("slides"), list)
 
 
-def normalize_deck_spec(obj: dict[str, Any] | None) -> tuple[dict[str, Any], list[str]]:
-    """Accept deck-spec or flat overlay; return (deck, warnings)."""
+def normalize_deck_spec(
+    obj: dict[str, Any] | None,
+    *,
+    catalog: str = "core",
+) -> tuple[dict[str, Any], list[str]]:
+    """Accept deck-spec or flat overlay; return (deck, warnings).
+
+    When ``obj`` is None, emit one empty slide per recipe in the requested
+    catalog partition (``core`` default — not the full 36-pattern kitchen sink).
+    Pass ``catalog="all"`` for a full-pattern demo deck.
+    """
     if obj is None:
-        # catalog / demo: one of every pattern with empty content
+        seq = R.sequence_for(catalog)
         slides = [
             {"id": name, "recipe": name, "content": {}}
-            for name in R.DEFAULT_SEQUENCE
+            for name in seq
         ]
-        return {"version": "1.0", "slides": slides}, ["deck: using full pattern catalog defaults"]
+        label = catalog if catalog not in ("core", "default", "") else "core"
+        return (
+            {"version": "1.0", "slides": slides},
+            [f"deck: using {label} pattern catalog defaults ({len(seq)} slides)"],
+        )
     if is_deck_spec(obj):
         warnings: list[str] = []
         slides_in = obj["slides"]

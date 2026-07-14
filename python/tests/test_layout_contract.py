@@ -120,7 +120,10 @@ class GeometryContract(unittest.TestCase):
         self.assertEqual(len(flat), len(set(flat)), "a pattern is in two buckets")
         self.assertEqual(set(flat), set(RECIPE_BUILDERS),
                          "PATTERN_LAYOUT and RECIPE_BUILDERS disagree")
-        self.assertGreaterEqual(len(PATTERN_LAYOUT["engine"]), 9)
+        # Phase 2: hybrid is first-class (timeline dots, forest bars, …).
+        self.assertIn("hybrid", PATTERN_LAYOUT)
+        self.assertGreaterEqual(len(PATTERN_LAYOUT["engine"]), 8)
+        self.assertGreaterEqual(len(PATTERN_LAYOUT["hybrid"]), 4)
 
     def test_default_content_is_on_canvas_and_readable(self) -> None:
         for name in RECIPE_BUILDERS:

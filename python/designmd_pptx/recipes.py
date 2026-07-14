@@ -3869,15 +3869,26 @@ RECIPE_BUILDERS = {
 #   "fixed"      — intentional hero/divider compositions whose design depends on
 #                  overlap / opacity / precise centering that a top-down flex
 #                  engine cannot express (e.g. the 0.25-opacity section number).
-# All registered patterns are covered by the geometry-contract harness
-# (test_layout_contract.py). test_pattern_layout_covers_registry keeps this in
-# sync with RECIPE_BUILDERS.
+# Geometry strategy per pattern. Every registered recipe is in exactly one
+# bucket (test_pattern_layout_covers_registry). Buckets:
+#   "engine"     — content grid solved by layout.py for adaptive text-fit;
+#                  chrome may still be fixed.
+#   "hybrid"     — fixed frame + engine-solved region and/or post-solve markers
+#                  (timeline dots, forest CI bars, consort spine, matrix axes).
+#   "structured" — chart/table/connector/picture-cell composition or pure
+#                  hand-cm band stacks (funnel/pyramid/roadmap).
+#   "fixed"      — intentional hero/divider compositions (overlap / opacity).
+# Geometry-contract harness asserts on-canvas + readability for all; it does
+# not enforce single-system purity inside hybrid/structured recipes.
 PATTERN_LAYOUT: dict[str, tuple[str, ...]] = {
     "engine": (
         "bullets", "feature_cards", "comparison_2col", "image_text_2col",
-        "matrix_2x2", "quadrant_matrix_rich", "kpi_row", "kpi_dashboard_grid",
-        "pricing", "team", "timeline", "story_timeline", "agenda_toc",
-        "vs_scorecard", "consort_flow", "forest_plot", "study_design",
+        "kpi_row", "kpi_dashboard_grid", "pricing", "team", "agenda_toc",
+        "vs_scorecard", "study_design",
+    ),
+    "hybrid": (
+        "timeline", "story_timeline", "matrix_2x2", "quadrant_matrix_rich",
+        "consort_flow", "forest_plot",
     ),
     "structured": (
         "process", "funnel_stages", "roadmap_swimlane", "pyramid_levels",
@@ -3897,37 +3908,22 @@ RECIPE_ALIASES = {
     "feature_cards_3": "feature_cards",
 }
 
-DEFAULT_SEQUENCE = [
+# Catalog partitions (Phase 2 review: avoid kitchen-sink empty scaffolds).
+CORE_SEQUENCE = [
     "cover",
-    "agenda_toc",
     "section_divider",
-    "section_opener_numbered",
     "kpi_row",
-    "kpi_dashboard_grid",
     "big_number",
     "feature_cards",
     "pricing",
     "bullets",
     "timeline",
-    "story_timeline",
     "process",
-    "consort_flow",
-    "study_design",
-    "kaplan_meier",
-    "forest_plot",
-    "results_table_insight",
-    "multi_panel_figure",
-    "funnel_stages",
-    "roadmap_swimlane",
-    "pyramid_levels",
     "table",
     "appendix_table",
     "chart_insight",
-    "chart_callout_panel",
     "comparison_2col",
-    "vs_scorecard",
     "matrix_2x2",
-    "quadrant_matrix_rich",
     "quote",
     "team",
     "logo_strip",
@@ -3935,6 +3931,50 @@ DEFAULT_SEQUENCE = [
     "image_text_2col",
     "close",
 ]
+
+PREMIUM_SEQUENCE = [
+    "agenda_toc",
+    "section_opener_numbered",
+    "kpi_dashboard_grid",
+    "story_timeline",
+    "funnel_stages",
+    "roadmap_swimlane",
+    "pyramid_levels",
+    "chart_callout_panel",
+    "vs_scorecard",
+    "quadrant_matrix_rich",
+]
+
+DOMAIN_SEQUENCE = [
+    "consort_flow",
+    "study_design",
+    "kaplan_meier",
+    "forest_plot",
+    "results_table_insight",
+    "multi_panel_figure",
+]
+
+# Empty-deck / flat-overlay default: consulting core only (no medical tax).
+DEFAULT_SEQUENCE = list(CORE_SEQUENCE)
+
+# Full catalog for inspection / generate_all_recipes ordering helpers.
+CATALOG_SEQUENCE = list(CORE_SEQUENCE) + [
+    n for n in PREMIUM_SEQUENCE + DOMAIN_SEQUENCE if n not in CORE_SEQUENCE
+]
+
+
+def sequence_for(catalog: str = "core") -> list[str]:
+    """Return an ordered recipe list: core | premium | domain | all."""
+    key = (catalog or "core").strip().lower()
+    if key in ("core", "default", ""):
+        return list(CORE_SEQUENCE)
+    if key in ("premium", "consulting-premium"):
+        return list(CORE_SEQUENCE) + [n for n in PREMIUM_SEQUENCE if n not in CORE_SEQUENCE]
+    if key in ("domain", "medical", "academic"):
+        return list(CORE_SEQUENCE) + [n for n in DOMAIN_SEQUENCE if n not in CORE_SEQUENCE]
+    if key in ("all", "catalog", "full"):
+        return list(CATALOG_SEQUENCE)
+    raise ValueError(f"unknown catalog sequence: {catalog!r}")
 
 
 def generate_all_recipes(
