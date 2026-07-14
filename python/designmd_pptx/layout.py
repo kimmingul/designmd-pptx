@@ -29,8 +29,29 @@ CANVAS_W = 33.87
 CANVAS_H = 19.05
 
 
+class Overflow:
+    """Typed overflow outcomes (issue #9) — the vocabulary recipes use to decide
+    what to do when content does not fit, instead of silently shrinking or
+    dropping it. `solve_adaptive` fits (FIT/USE_COMPACT) or raises
+    `LayoutOverflow`; a recipe that can split its content (e.g. tables, #17)
+    catches that and PAGINATEs rather than failing."""
+
+    FIT = "fit"                 # fits at comfortable density
+    USE_COMPACT = "use_compact"  # fits only at the compact density
+    PAGINATE = "paginate"       # caller should split across slides
+    SHORTEN = "shorten"         # content must be shortened to fit
+    FAIL = "fail"               # unrecoverable
+
+
 class LayoutOverflow(ValueError):
-    """Content cannot fit even at the compact density — shorten or split."""
+    """Content cannot fit even at the compact density — shorten or split.
+
+    Carries `.policy` (default `Overflow.SHORTEN`) so callers can branch: a
+    paginating recipe treats it as `Overflow.PAGINATE`, others surface it."""
+
+    def __init__(self, *args, policy: str = Overflow.SHORTEN):
+        super().__init__(*args)
+        self.policy = policy
 
 
 @dataclass
