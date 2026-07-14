@@ -69,7 +69,31 @@ Commands (palette `designmd-pptx:`): Doctor, Compose, Scaffold, A11y, Refine,
 Benchmark, open contact sheet / Gate 3 JSON. Activity bar lists DESIGN.md and  
 `*.deck.json`. See [editor/vscode/README.md](../editor/vscode/README.md).
 
+## Windows standalone installer (#35)
+
+For non-developer machines (one file, per-user):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File packaging\windows\Install-DesignmdPptx.ps1
+# uninstall:
+powershell -ExecutionPolicy Bypass -File packaging\windows\Install-DesignmdPptx.ps1 -Uninstall
+```
+
+Fetches the **pinned** official OfficeCLI from officecli-dist, creates a venv,
+and adds `designmd-pptx` to the user PATH. Full docs:
+[windows-installer.md](windows-installer.md) ·
+[packaging/windows/README.md](../packaging/windows/README.md).
+
+```bash
+# any OS — print the install plan
+python -m designmd_pptx windows-install --plan
+python -m designmd_pptx windows-install --check-script
+```
+
 ## Version pin
 
 Do not hardcode OfficeCLI versions in scripts. Read
 `compatibility.json` (or `python -m designmd_pptx.compat`).
+The Windows installer embeds a default pin that must stay aligned with
+`compatibility.json` (see `win_install.officecli_pin()` / script
+`$DefaultOfficeCliPin`).

@@ -1,0 +1,30 @@
+designmd-pptx — Windows standalone installer (#35)
+==================================================
+
+This setup installs a per-user copy of designmd-pptx under:
+
+  %LOCALAPPDATA%\designmd-pptx
+
+What gets installed
+-------------------
+* Python virtual environment (uses your Python 3.10+ or winget Python 3.12)
+* designmd-pptx package (pip)
+* Pinned official OfficeCLI from officecli-dist (see compatibility.json)
+* CLI shim: designmd-pptx.cmd (added to your user PATH)
+
+What is NOT installed automatically
+-----------------------------------
+* Legacy shape-level OfficeCLI (still manual — required for scaffold/apply
+  precision). Doctor will print the download URL if missing.
+
+Uninstall
+---------
+* Apps & Features → designmd-pptx → Uninstall
+* Or: Start Menu → designmd-pptx → Uninstall designmd-pptx
+* Or: powershell -ExecutionPolicy Bypass -File Install-DesignmdPptx.ps1 -Uninstall
+
+One-file installer without this Setup.exe
+-----------------------------------------
+  powershell -ExecutionPolicy Bypass -File Install-DesignmdPptx.ps1
+
+License: MIT (designmd-pptx). OfficeCLI binaries are covered by their own terms.

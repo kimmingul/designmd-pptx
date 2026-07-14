@@ -2,7 +2,7 @@
 
 All notable changes to designmd-pptx are documented here.
 
-## [Unreleased] — Phase 5 (#21 / #40 / #42)
+## [Unreleased] — Phase 5 (#21 / #40 / #42 / #35)
 
 ### Added
 - **`generate`** CLI (#21) — hybrid generative layout: NL style directives
@@ -17,10 +17,15 @@ All notable changes to designmd-pptx are documented here.
   synthetic CC0 fixtures across the recipe catalog; methodology + results in
   [docs/public-benchmark.md](docs/public-benchmark.md). Rights: synthetic only;
   private corpus remains separate (`docs/corpus.md`).
+- **Windows standalone installer** (#35) — one-file
+  `packaging/windows/Install-DesignmdPptx.ps1` (venv + pip + pinned
+  officecli-dist + user PATH + uninstall); optional Inno Setup
+  `DesignmdPptx-Setup.exe`; `windows-install` CLI for plan/manifest checks.
+  Docs: [docs/windows-installer.md](docs/windows-installer.md).
 
 ### Changed
 - Recipe registry **61** builders (`freeform` + GENERATIVE_SEQUENCE).
-- Maturity roadmap: #21 / #40 / #42 marked shipped on the Phase 5 train.
+- Maturity roadmap: Phase 5 items #21 / #40 / #42 / #35 marked shipped.
 
 ## [2.0.0] — 2026-07-15
 
@@ -55,8 +60,8 @@ Production release: Phase 0–4 complete.
   (`a11y_error` delta −4) + `render` → 7-slide draft.pptx.
 - Full unit suite green; plugin `npm run check` green.
 
-### Deferred to v2.1
-- Windows MSI (#35), animation (#40), generative layout (#21), chart
+### Deferred to v2.1 (at 2.0.0 cut; now largely shipped — see Unreleased)
+- Windows installer (#35), animation (#40), generative layout (#21), chart
   reconstruction (#22), iterative vision loop (#19), editor integration
   (#44/#45), 100+ public benchmark corpus (#42).
 
