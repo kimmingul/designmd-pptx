@@ -55,6 +55,24 @@ _ROLE_TITLE_HINTS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"\b(finance|p&l|budget|forecast)\b", re.I), "finance_statement"),
     (re.compile(r"\b(at\s+a\s+glance|stat\s+row|icon\s+stats?)\b", re.I), "icon_stat_row"),
     (re.compile(r"\b(hub\s+and\s+spoke|bullseye|radial)\b", re.I), "hub_spoke"),
+    # Wave 4 Infograpify long-tail
+    (re.compile(r"\b(mind\s*map|mindmap)\b", re.I), "mindmap_branches"),
+    (re.compile(r"\b(customer\s+journey|user\s+journey|journey\s+map)\b", re.I),
+     "journey_stages"),
+    (re.compile(r"\b(pestle|pestel|pest\b)\b", re.I), "pestle_grid"),
+    (re.compile(r"\b(raci|responsibility\s+matrix)\b", re.I), "raci_matrix"),
+    (re.compile(r"\b(balanced\s+scorecard|bsc)\b", re.I), "scorecard_balanced"),
+    (re.compile(r"\b(hexagon|honeycomb|hex\s+cluster)\b", re.I), "hex_cluster"),
+    (re.compile(r"\b(puzzle|jigsaw)\b", re.I), "puzzle_pieces"),
+    (re.compile(r"\b(pillar|pillars)\b", re.I), "pillar_columns"),
+    (re.compile(r"\b(stair|stairs|maturity\s+model|ascent)\b", re.I), "stairs_ascent"),
+    (re.compile(r"\b(checklist|launch\s+readiness)\b", re.I), "checklist_board"),
+    (re.compile(r"\b(empathy\s+map)\b", re.I), "empathy_map_quad"),
+    (re.compile(r"\b(risk\s+matrix|risk\s+heat|heat\s*map\s+risk)\b", re.I),
+     "risk_heat_matrix"),
+    (re.compile(r"\b(circle\s+segment|donut\s+legend|ring\s+chart)\b", re.I),
+     "circle_segments"),
+    (re.compile(r"\b(mission|vision|purpose)\b", re.I), "mission_vision_split"),
 ]
 
 

@@ -1,0 +1,129 @@
+{
+  "version": "1.1",
+  "meta": {
+    "title": "Infograpify structural roles (Wave 4)",
+    "note": "Synthetic deck-spec only — original geometry, no vendor content"
+  },
+  "slides": [
+    {
+      "id": "cover",
+      "recipe": "cover",
+      "content": {
+        "title": "Strategy toolkit",
+        "subtitle": "Wave 4 roles from Infograpify analysis",
+        "meta": "designmd-pptx · original recipes"
+      }
+    },
+    {
+      "id": "mind",
+      "recipe": "mindmap_branches",
+      "content": {
+        "title": "Problem space",
+        "hub": "Growth",
+        "branches": [
+          {"label": "Product"},
+          {"label": "GTM"},
+          {"label": "Ops"},
+          {"label": "People"},
+          {"label": "Risk"},
+          {"label": "Capital"}
+        ]
+      }
+    },
+    {
+      "id": "journey",
+      "recipe": "journey_stages",
+      "content": {
+        "title": "Customer journey",
+        "stages": [
+          {"label": "Aware", "detail": "Paid + organic", "emotion": "curious"},
+          {"label": "Consider", "detail": "Trials", "emotion": "hopeful"},
+          {"label": "Buy", "detail": "Checkout", "emotion": "anxious"},
+          {"label": "Use", "detail": "Onboarding", "emotion": "focused"},
+          {"label": "Advocate", "detail": "Referral", "emotion": "proud"}
+        ]
+      }
+    },
+    {
+      "id": "pestle",
+      "recipe": "pestle_grid",
+      "content": {
+        "title": "External scan",
+        "political": ["Policy shift Q3"],
+        "economic": ["FX volatility"],
+        "social": ["Remote norms"],
+        "technological": ["Model cost drop"],
+        "legal": ["Data residency"],
+        "environmental": ["Scope 3 reporting"]
+      }
+    },
+    {
+      "id": "raci",
+      "recipe": "raci_matrix",
+      "content": {
+        "title": "Launch RACI",
+        "roles": ["Exec", "PM", "Eng", "Design", "CS"],
+        "activities": [
+          {"name": "Scope", "raci": ["A", "R", "C", "C", "I"]},
+          {"name": "Build", "raci": ["I", "A", "R", "C", "C"]},
+          {"name": "Launch", "raci": ["A", "R", "C", "C", "R"]}
+        ]
+      }
+    },
+    {
+      "id": "bsc",
+      "recipe": "scorecard_balanced",
+      "content": {
+        "title": "Balanced scorecard",
+        "perspectives": [
+          {"label": "Financial", "body": "ARR · NRR · Gross margin"},
+          {"label": "Customer", "body": "NPS · Logo churn · Expansion"},
+          {"label": "Internal", "body": "Cycle time · Escapes"},
+          {"label": "Learning", "body": "Experiments / quarter"}
+        ]
+      }
+    },
+    {
+      "id": "risk",
+      "recipe": "risk_heat_matrix",
+      "content": {
+        "title": "Risk heat map",
+        "risks": [
+          {"label": "Vendor delay", "likelihood": 2, "impact": 3},
+          {"label": "Scope creep", "likelihood": 3, "impact": 2},
+          {"label": "Key person", "likelihood": 1, "impact": 3}
+        ]
+      }
+    },
+    {
+      "id": "empathy",
+      "recipe": "empathy_map_quad",
+      "content": {
+        "title": "Buyer empathy",
+        "user": "Ops lead",
+        "says": "• Need audit trail",
+        "thinks": "• Will this break SOP?",
+        "does": "• Shadow IT spreadsheets",
+        "feels": "• Risk-averse, time-poor"
+      }
+    },
+    {
+      "id": "mv",
+      "recipe": "mission_vision_split",
+      "content": {
+        "title": "North star",
+        "mission": "Make every brand deck as sharp as the product it sells.",
+        "vision": "By 2028 every team ships DESIGN.md-native slides without designers in the loop."
+      }
+    },
+    {
+      "id": "close",
+      "recipe": "close",
+      "content": {
+        "title": "Next",
+        "body": "Scaffold with --content python/examples/content.infograpify-roles.deck.json",
+        "cta": "python -m designmd_pptx scaffold default -o out/roles --content …"
+      }
+    }
+  ]
+}

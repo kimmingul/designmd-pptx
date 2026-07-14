@@ -48,18 +48,29 @@ _SLIDE_H_EMU_DEFAULT = 6_858_000   # 7.5"
 _FAMILY_HINTS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"kpi|dashboard", re.I), "kpi_dashboard"),
     (re.compile(r"timeline|roadmap|gantt", re.I), "timeline_roadmap"),
+    # Mind maps before geo_map (otherwise "mindmap" matches "map")
+    (re.compile(r"mind\s*map|mindmap", re.I), "other"),
+    (re.compile(r"journey", re.I), "process_flow"),
+    (re.compile(r"pestle|pestel|\bpest\b", re.I), "strategy_canvas"),
+    (re.compile(r"raci|scorecard|pillar|checklist|empathy", re.I), "other"),
     (re.compile(
-        r"process|flow|funnel|pipeline|value\s*chain|adkar|aida|fishbone|ishikawa",
+        r"process|flow|funnel|pipeline|value\s*chain|adkar|aida|fishbone|ishikawa|stair",
         re.I,
     ), "process_flow"),
-    (re.compile(r"pyramid|triangle|hierarchy|iceberg", re.I), "hierarchy"),
+    (re.compile(r"pyramid|triangle|hierarchy|iceberg|pillar", re.I), "hierarchy"),
     (re.compile(r"org(?:anizational)?|team|persona", re.I), "org_team"),
     (re.compile(r"pricing|table", re.I), "pricing_table"),
-    (re.compile(r"compar|vs\.?|versus|swot|matrix|2\s*x\s*2", re.I), "comparison_matrix"),
+    (re.compile(r"compar|vs\.?|versus|swot|matrix|2\s*x\s*2|risk\s*heat", re.I),
+     "comparison_matrix"),
     (re.compile(r"agenda|cover|intro|profile|mission|vision", re.I), "narrative_chrome"),
-    (re.compile(r"chart|pie|waterfall|venn|cycle|circle", re.I), "chart_story"),
+    (re.compile(r"chart|pie|waterfall|venn|cycle|circle|hexagon|honeycomb|puzzle", re.I),
+     "chart_story"),
     (re.compile(r"business\s*model|canvas|bmc", re.I), "strategy_canvas"),
-    (re.compile(r"map|geo|world|asia|europe|united\s*states|mind\s*map|mindmap", re.I), "geo_map"),
+    # Cartography — mindmap/empathy already matched above
+    (re.compile(
+        r"\b(geo|world|asia|europe|united\s*states|continent)\b|(?<!mind)(?<!empathy\s)maps?\b",
+        re.I,
+    ), "geo_map"),
     (re.compile(r"mockup|device", re.I), "device_mockup"),
 ]
 
@@ -498,34 +509,44 @@ def _suggest_recipes(hints: Counter[str], family: str) -> list[str]:
         ],
         "process_flow": [
             "process", "funnel_stages", "chevron_process", "cycle_loop",
-            "fishbone_causes", "framework_row", "pipeline_stages", "feature_cards",
+            "fishbone_causes", "framework_row", "pipeline_stages",
+            "journey_stages", "stairs_ascent", "feature_cards",
         ],
-        "hierarchy": ["pyramid_levels", "iceberg_levels", "feature_cards"],
+        "hierarchy": [
+            "pyramid_levels", "iceberg_levels", "pillar_columns", "feature_cards",
+        ],
         "org_team": ["team", "org_tree", "persona_card", "feature_cards"],
         "pricing_table": ["pricing", "table", "comparison_2col"],
         "comparison_matrix": [
             "comparison_2col", "matrix_2x2", "quadrant_matrix_rich",
-            "vs_scorecard", "swot_2x2",
+            "vs_scorecard", "swot_2x2", "risk_heat_matrix", "raci_matrix",
         ],
         "narrative_chrome": [
             "cover", "section_divider", "agenda_toc", "section_opener_numbered",
+            "mission_vision_split",
         ],
         "chart_story": [
             "chart_insight", "chart_callout_panel", "waterfall_insight",
-            "venn_overlap", "big_number",
+            "venn_overlap", "circle_segments", "big_number",
         ],
-        "strategy_canvas": ["business_canvas", "feature_cards", "table"],
-        "geo_map": ["geo_callout", "image_full", "image_text_2col"],
+        "strategy_canvas": [
+            "business_canvas", "pestle_grid", "scorecard_balanced",
+            "feature_cards", "table",
+        ],
+        "geo_map": ["geo_callout", "empathy_map_quad", "image_full", "image_text_2col"],
         "device_mockup": ["device_frame", "image_text_2col", "image_full"],
         "other": [
             "feature_cards", "bullets", "icon_stat_row", "scale_rating",
             "hub_spoke", "before_after_slider", "calendar_heatmap",
             "case_study_band", "okrs_tree", "project_status_rag",
             "finance_statement", "pipeline_stages",
+            # Wave 4
+            "mindmap_branches", "hex_cluster", "puzzle_pieces",
+            "checklist_board", "raci_matrix", "risk_heat_matrix",
+            "empathy_map_quad", "journey_stages", "pestle_grid",
         ],
     }
-    # Full-family coverage roadmap (Wave 1 / Wave 2) — keep names stable.
-    # Wave 1–2 IDs are shipped — remaining planned are Wave 3 optional / future.
+    # Full-family coverage roadmap — Wave 1–4 shipped; residual planned IDs rare.
     planned = {
         "kpi_dashboard": ["metric_sparkline_row"],
         "timeline_roadmap": [],
@@ -533,12 +554,12 @@ def _suggest_recipes(hints: Counter[str], family: str) -> list[str]:
         "hierarchy": [],
         "org_team": [],
         "comparison_matrix": [],
-        "narrative_chrome": ["mission_vision_split"],
+        "narrative_chrome": [],
         "chart_story": ["cycle_stats"],
         "strategy_canvas": [],
-        "geo_map": [],  # geo_callout shipped (user basemap only)
-        "device_mockup": [],  # device_frame shipped (user screenshot only)
-        "other": [],  # Wave 2 long-tail roles shipped
+        "geo_map": [],
+        "device_mockup": [],
+        "other": [],
     }
     sug = list(existing.get(family, existing["other"]))
     for p in planned.get(family, []):

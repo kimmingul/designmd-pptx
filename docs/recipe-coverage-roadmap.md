@@ -7,7 +7,7 @@ Infograpify library (local only) — **not** a 1:1 clone of 400 files.
 |---|---:|
 | Source decks (filename inventory) | 400 |
 | Coarse families (`reference` catalog) | 12 |
-| Shipped recipes today | 36 |
+| Shipped recipes today | 75 (Wave 0–4 + freeform) |
 | Phase 2 premium shortlist (#58) | 10 / 10 |
 | Intentional non-goals (asset-heavy) | maps, device mockups, icon packs |
 
@@ -171,6 +171,32 @@ Compose routes `##` titles containing role keywords (OKR, SWOT, pipeline, …) t
 | **1c** (people/strategy) | `org_tree`, `persona_card`, `business_canvas`, `fishbone_causes`, `iceberg_levels`, `framework_row` | 1a | ✅ shipped (`WAVE1_SEQUENCE`, tests) |
 | **2** (long-tail roles) | icon_stat_row … device_frame (12 recipes, incl. `pipeline_stages`, `geo_callout`, `device_frame`) | 1 complete | ✅ shipped (`WAVE2_SEQUENCE`, tests) |
 | **3** (verticals) | 0 recipes | wave 1–2 | ✅ shipped: 5 vertical deck-specs + finance DESIGN skin + compose title keywords |
+| **4** (Infograpify long-tail) | 14 recipes | wave 1–3 | ✅ shipped: mindmap, journey, PESTLE, RACI, BSC, hex, puzzle, pillars, stairs, checklist, empathy, risk heat, circle segments, mission/vision |
+
+### Wave 4 — additional structural roles (2026-07-15 catalog re-analysis)
+
+Filename + redacted structural scans of the local 400-deck library surfaced
+roles still only approximated by `feature_cards` / `bullets`. **Original**
+recipes (no vendor geometry):
+
+| Recipe | Infograpify signals (examples) |
+|---|---|
+| `mindmap_branches` | Mind Map 01–03, Mindmap-Infographic-* |
+| `journey_stages` | Customer Journey V2 |
+| `pestle_grid` | PESTEL |
+| `raci_matrix` | RACI |
+| `scorecard_balanced` | Balanced scorecard packs / matrix analysis |
+| `hex_cluster` | Hexagon / honeycomb packs |
+| `puzzle_pieces` | Puzzle 1–3 |
+| `pillar_columns` | Pillars |
+| `stairs_ascent` | Stairs / maturity language |
+| `checklist_board` | Checklist |
+| `empathy_map_quad` | Empathy Map |
+| `risk_heat_matrix` | Risk Management |
+| `circle_segments` | Circle Infographics, Analytics Circle |
+| `mission_vision_split` | narrative chrome gap from Wave 0 |
+
+Example deck-spec: `python/examples/content.infograpify-roles.deck.json`.
 
 ### Per-recipe checklist (same as premium bar)
 
