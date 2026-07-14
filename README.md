@@ -1,7 +1,8 @@
 # designmd-pptx
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.7.0-brightgreen)](plugin.json)
+[![Version](https://img.shields.io/badge/version-1.7.1-brightgreen)](plugin.json)
+[![v2.0 roadmap](https://img.shields.io/badge/v2.0-Phase%200%20%26%201%20done-blue)](https://github.com/kimmingul/designmd-pptx/milestones)
 
 **awesome-design-md / Stitch `DESIGN.md` → [OfficeCLI](https://github.com/officecli/officecli) PPTX** — packaged for **Claude Code, OpenAI Codex, and Grok Build** (v1.7).
 
@@ -212,15 +213,25 @@ npm test        # python -m unittest discover -s python/tests -v
 
 ## Roadmap
 
-All planned items have shipped:
+### Shipped (v1.x)
 
 - ~~Gate 3 visual QA~~ — v1.4 (`--screenshot`), hardened in v1.5 (`--gate3` renders before the write).
 - ~~Richer extract classification~~ — v1.5: unit-suffixed KPIs, connector→process, card grids, big-number heroes.
 - ~~Outline → deck-spec compiler~~ — v1.5 (`compose`).
 - ~~Constraint-based layout engine~~ — v1.6: content-driven geometry + density adaptation for text-heavy patterns.
 - ~~Template polish~~ — v1.6: `--empty-potx` media GC + `master --layouts` slot-mapped layout branding.
+- ~~Dual OfficeCLI backends + `render`~~ — v1.7: legacy shape-level + official agent-bridge, capability-first.
 
-Ideas beyond the original roadmap (not committed): migrating the remaining grid recipes to the layout engine, per-pattern alternate compositions, and speaker-note generation from compose briefs.
+### v2.0 — in progress ([milestones](https://github.com/kimmingul/designmd-pptx/milestones))
+
+Sequenced into six phases (see [issues](https://github.com/kimmingul/designmd-pptx/issues)). Each item is branch → build → verify (unit + real-deck OfficeCLI `validate`/`view issues` + adversarial review) → CI → merge.
+
+- ✅ **Phase 0 — Foundation** — ~~#8~~ OfficeCLI version contract + 3-OS CI, ~~#16~~ lxml/OPC namespace-aware editing (replaces regex-on-XML), ~~#33~~ `pip install designmd-pptx` (self-contained wheel), ~~#36~~ PII-anonymization + validation-corpus pipeline.
+- ✅ **Phase 1 — Deterministic core** — ~~#11~~ DESIGN.md schema v2 (composition/charts/tables/images/master tokens), ~~#17~~ table auto-split to continuation slides, ~~#13~~ semantic-preserving restyle colors, ~~#9~~ layout-engine expansion (9/20 patterns engine-solved + geometry-contract harness + typed overflow policy).
+- ⏳ **Phase 2 — Fidelity** — #12 extract fidelity (faithful loss-ledger), #10 domain patterns (academic/medical).
+- ⏳ **Phase 3 — Intelligence adapters** — #18 LLM narrative planner, #14 vision quality gate (both opt-in, replayable).
+- ⏳ **Phase 4 — v2.0 release** — packaging/install (#34), a11y (#39), 50-deck benchmark (#37/#38), docs/gallery (#41/#43).
+- 🔮 **Phase 5 — v2.1** — iterative visual refinement (#19), chart/table reconstruction (#22), generative layout (#21), animation (#40), editor integration (#44/#45).
 
 ## License
 
