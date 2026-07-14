@@ -20,8 +20,19 @@ class DocsPhase4(unittest.TestCase):
             "docs/maturity-roadmap.md": ["v2.0", "v2.1", "v3.0"],
             "docs/production-readiness.md": ["Threshold", "a11y", "Fixture benchmark"],
             "docs/governance.md": ["Label", "PR merge", "Triage"],
+            "docs/recipe-coverage-roadmap.md": [
+                "Wave 1", "chevron_process", "COVERED", "DEFER", "400",
+            ],
             "CONTRIBUTING.md": ["Dev setup", "Pattern", "PR checks", "Governance"],
         }
+        # Machine-readable cluster snapshot (filenames only — no media)
+        snap = ROOT / "docs/reference-catalog-clusters.json"
+        self.assertTrue(snap.is_file(), "missing docs/reference-catalog-clusters.json")
+        import json
+        data = json.loads(snap.read_text(encoding="utf-8"))
+        self.assertEqual(data.get("schema"), 1)
+        self.assertGreaterEqual(int(data.get("total") or 0), 1)
+        self.assertIn("subclusters", data)
         for rel, needles in required.items():
             path = ROOT / rel
             self.assertTrue(path.is_file(), f"missing {rel}")

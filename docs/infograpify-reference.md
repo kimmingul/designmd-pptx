@@ -203,6 +203,17 @@ The `.potx` is **our** branded shell (tokens + master), not a redistributed
 vendor template. Gate 3 on any demo deck built from these tokens before claiming
 visual quality.
 
+## Full-library coverage (beyond the shortlist)
+
+400 files are **not** 400 recipes. Structural coverage of the whole library
+(families, subclusters, Wave 1–3 recipe plan, explicit DEFER for maps/mockups)
+lives in:
+
+- **[recipe-coverage-roadmap.md](recipe-coverage-roadmap.md)** — plan + waves  
+- **[reference-catalog-clusters.json](reference-catalog-clusters.json)** — filename-only cluster counts  
+
+Refresh: `PYTHONPATH=python python scripts/cluster_reference_catalog.py --dir infograpify_ppt_templates -o docs/reference-catalog-clusters.json`
+
 ## Linkage to other Phase 2 issues
 
 | Issue | Role |
@@ -211,6 +222,7 @@ visual quality.
 | **#58** | Implement the shortlist above |
 | **#12** | Extract fidelity / loss ledger (groups, charts, SmartArt). **Do not** `extract` commercial packs into a git tree — media is fenced off under `infograpify_ppt_templates/`; use `reference` for structural study |
 | **#10** | Academic / medical patterns (parallel track) |
+| **Full-family roadmap** | [recipe-coverage-roadmap.md](recipe-coverage-roadmap.md) (post-v2.0 waves) |
 
 ## What “done” means for #59
 

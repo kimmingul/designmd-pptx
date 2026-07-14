@@ -44,17 +44,22 @@ _SLIDE_W_EMU_DEFAULT = 12_192_000  # 13.333" widescreen
 _SLIDE_H_EMU_DEFAULT = 6_858_000   # 7.5"
 
 # Map loose filename tokens → designmd recipe / premium pattern families.
+# Keep in sync with docs/recipe-coverage-roadmap.md coarse families.
 _FAMILY_HINTS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"kpi|dashboard", re.I), "kpi_dashboard"),
     (re.compile(r"timeline|roadmap|gantt", re.I), "timeline_roadmap"),
-    (re.compile(r"process|flow|funnel|pipeline|value\s*chain|adkar|aida", re.I), "process_flow"),
-    (re.compile(r"pyramid|triangle|hierarchy", re.I), "hierarchy"),
+    (re.compile(
+        r"process|flow|funnel|pipeline|value\s*chain|adkar|aida|fishbone|ishikawa",
+        re.I,
+    ), "process_flow"),
+    (re.compile(r"pyramid|triangle|hierarchy|iceberg", re.I), "hierarchy"),
     (re.compile(r"org(?:anizational)?|team|persona", re.I), "org_team"),
     (re.compile(r"pricing|table", re.I), "pricing_table"),
     (re.compile(r"compar|vs\.?|versus|swot|matrix|2\s*x\s*2", re.I), "comparison_matrix"),
     (re.compile(r"agenda|cover|intro|profile|mission|vision", re.I), "narrative_chrome"),
     (re.compile(r"chart|pie|waterfall|venn|cycle|circle", re.I), "chart_story"),
-    (re.compile(r"map|geo|world|asia|europe|united\s*states", re.I), "geo_map"),
+    (re.compile(r"business\s*model|canvas|bmc", re.I), "strategy_canvas"),
+    (re.compile(r"map|geo|world|asia|europe|united\s*states|mind\s*map|mindmap", re.I), "geo_map"),
     (re.compile(r"mockup|device", re.I), "device_mockup"),
 ]
 
@@ -481,34 +486,61 @@ def analyze_pptx(
 
 
 def _suggest_recipes(hints: Counter[str], family: str) -> list[str]:
-    """Map structural signals → existing or planned designmd patterns."""
+    """Map structural signals → existing or planned designmd patterns.
+
+    Planned IDs match docs/recipe-coverage-roadmap.md Wave 1–2 (not yet all
+    shipped). ``planned:`` prefix marks unimplemented suggestions.
+    """
     existing = {
-        "kpi_dashboard": ["kpi_row", "big_number", "chart_insight"],
-        "timeline_roadmap": ["timeline", "process"],
-        "process_flow": ["process", "timeline", "feature_cards"],
-        "hierarchy": ["feature_cards", "process"],
+        "kpi_dashboard": ["kpi_dashboard_grid", "kpi_row", "big_number", "chart_insight"],
+        "timeline_roadmap": ["timeline", "story_timeline", "roadmap_swimlane"],
+        "process_flow": ["process", "funnel_stages", "feature_cards"],
+        "hierarchy": ["pyramid_levels", "feature_cards"],
         "org_team": ["team", "feature_cards"],
         "pricing_table": ["pricing", "table", "comparison_2col"],
-        "comparison_matrix": ["comparison_2col", "matrix_2x2"],
-        "narrative_chrome": ["cover", "section_divider", "agenda_like"],
-        "chart_story": ["chart_insight", "big_number"],
+        "comparison_matrix": [
+            "comparison_2col", "matrix_2x2", "quadrant_matrix_rich", "vs_scorecard",
+        ],
+        "narrative_chrome": [
+            "cover", "section_divider", "agenda_toc", "section_opener_numbered",
+        ],
+        "chart_story": ["chart_insight", "chart_callout_panel", "big_number"],
+        "strategy_canvas": ["feature_cards", "table"],
         "geo_map": ["image_full", "image_text_2col"],
         "device_mockup": ["image_text_2col", "image_full"],
         "other": ["feature_cards", "bullets"],
     }
+    # Full-family coverage roadmap (Wave 1 / Wave 2) — keep names stable.
     planned = {
-        "kpi_dashboard": ["kpi_dashboard_grid", "metric_sparkline_row"],
-        "timeline_roadmap": ["story_timeline", "roadmap_swimlane"],
-        "process_flow": ["funnel_stages", "chevron_process"],
-        "hierarchy": ["pyramid_levels", "org_tree"],
-        "comparison_matrix": ["quadrant_matrix_rich", "vs_scorecard"],
-        "narrative_chrome": ["agenda_toc", "section_opener_numbered"],
-        "chart_story": ["chart_callout_panel", "waterfall_insight"],
+        "kpi_dashboard": ["metric_sparkline_row"],
+        "timeline_roadmap": ["gantt_bars"],
+        "process_flow": [
+            "chevron_process", "cycle_loop", "pipeline_stages",
+            "fishbone_causes", "framework_row",
+        ],
+        "hierarchy": ["iceberg_levels"],
+        "org_team": ["org_tree", "persona_card"],
+        "comparison_matrix": ["swot_2x2"],
+        "narrative_chrome": ["mission_vision_split"],
+        "chart_story": ["waterfall_insight", "venn_overlap", "cycle_stats"],
+        "strategy_canvas": ["business_canvas"],
+        "geo_map": ["geo_callout"],  # optional; basemap deferred
+        "device_mockup": ["device_frame"],  # user-supplied PNG only
+        "other": [
+            "icon_stat_row", "hub_spoke", "scale_rating", "okrs_tree",
+            "project_status_rag", "finance_statement",
+        ],
     }
     sug = list(existing.get(family, existing["other"]))
     for p in planned.get(family, []):
-        if p not in sug:
-            sug.append(f"planned:{p}")
+        if p not in sug and f"planned:{p}" not in sug:
+            # Only mark as planned if not already a shipped builder.
+            from .recipes import RECIPE_BUILDERS
+            if p in RECIPE_BUILDERS:
+                if p not in sug:
+                    sug.append(p)
+            else:
+                sug.append(f"planned:{p}")
     if hints.get("card_row") or any(k.startswith("card_row_") for k in hints):
         if "feature_cards" not in sug:
             sug.insert(0, "feature_cards")
