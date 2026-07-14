@@ -1,12 +1,17 @@
 #Requires -Version 5.1
 <#
-Install designmd-pptx as an OpenAI Codex CLI skill.
-Copies the skill + vendored Python toolkit into ~/.codex/skills/ (self-contained)
-and the slash command into ~/.codex/prompts/.
+Install designmd-pptx for OpenAI Codex — OFFICIAL-FIRST (v1.7, issue #29).
 
-Also syncs the base officecli-* skill family from ~/.claude/skills (if present)
-so that generic "make me a deck" requests in Codex route through officecli,
-not just DESIGN.md-triggered ones. Pass -SkipBaseSkills to opt out.
+Order of operations:
+1. Official officecli binary: keep an existing one; else `npm install -g
+   officecli`; else download the platform asset from officecli/officecli-dist
+   into %LOCALAPPDATA%\officecli (npm's postinstall downloader is known to
+   fail on some Windows setups).
+2. Official base skill: run the official installer
+   (scripts/install-skill.sh via Git Bash), then sync the resulting
+   ~/.claude/skills/officecli into ~/.codex/skills. Legacy officecli-* skill
+   copying is only a fallback and warns.
+3. designmd-pptx extension skill: vendored copy (this repo's own skill).
 #>
 param(
     [string]$CodexHome = (Join-Path $env:USERPROFILE ".codex"),
@@ -15,44 +20,98 @@ param(
 
 $ErrorActionPreference = "Stop"
 $repo = Split-Path -Parent $PSScriptRoot
-$skillDst = Join-Path $CodexHome "skills\officecli-pptx-designmd"
 
+function Test-OfficialBinary([string]$exe) {
+    try { return ((& $exe --version) 2>$null | Select-Object -First 1) -like "officecli version*" }
+    catch { return $false }
+}
+
+# --- 1. official binary -------------------------------------------------------
+$officialExe = $null
+# NOTE: "officecli-official", never "officecli" — Windows paths are
+# case-insensitive and "officecli\" would clobber the legacy "OfficeCLI\" dir.
+foreach ($cand in @((Get-Command officecli -ErrorAction SilentlyContinue)?.Source,
+                    (Join-Path $env:LOCALAPPDATA "officecli-official\officecli.exe"))) {
+    if ($cand -and (Test-Path $cand) -and (Test-OfficialBinary $cand)) { $officialExe = $cand; break }
+}
+if (-not $officialExe) {
+    Write-Host "official officecli not found — trying npm install -g officecli"
+    try {
+        npm install -g officecli 2>$null | Out-Null
+        $npmShim = Join-Path $env:APPDATA "npm\officecli.cmd"
+        if ((Test-Path $npmShim) -and (Test-OfficialBinary $npmShim)) { $officialExe = $npmShim }
+    } catch {}
+}
+if (-not $officialExe) {
+    Write-Host "npm route unavailable — downloading from officecli/officecli-dist releases"
+    $dst = Join-Path $env:LOCALAPPDATA "officecli-official"
+    New-Item -ItemType Directory -Force $dst | Out-Null
+    try {
+        gh release download -R officecli/officecli-dist --pattern "*windows_amd64.tar.gz" `
+            --dir $dst --clobber 2>$null
+        $tarball = Get-ChildItem $dst -Filter "officecli_*_windows_amd64.tar.gz" |
+            Sort-Object LastWriteTime -Descending | Select-Object -First 1
+        tar -xzf $tarball.FullName -C $dst
+        if (Test-OfficialBinary (Join-Path $dst "officecli.exe")) {
+            $officialExe = Join-Path $dst "officecli.exe"
+        }
+    } catch {
+        Write-Warning ("could not fetch officecli-dist automatically — download " +
+            "https://github.com/officecli/officecli-dist/releases manually into $dst")
+    }
+}
+if ($officialExe) {
+    Write-Host "official officecli: $officialExe"
+} else {
+    Write-Warning "official officecli unavailable — the render command will be disabled"
+}
+
+# --- 2. official base skill ---------------------------------------------------
+if (-not $SkipBaseSkills) {
+    $claudeBase = Join-Path $env:USERPROFILE ".claude\skills\officecli"
+    $bash = (Get-Command bash -ErrorAction SilentlyContinue)?.Source
+    if ($bash -and -not (Test-Path (Join-Path $claudeBase "SKILL.md"))) {
+        Write-Host "running official install-skill.sh (officecli base skill)"
+        try {
+            & $bash -c "curl -fsSL https://raw.githubusercontent.com/officecli/officecli/main/scripts/install-skill.sh | bash -s -- officecli" | Out-Null
+        } catch { Write-Warning "official install-skill.sh failed: $_" }
+    }
+    if (Test-Path (Join-Path $claudeBase "SKILL.md")) {
+        $dst = Join-Path $CodexHome "skills\officecli"
+        robocopy $claudeBase $dst /E /NFL /NDL /NJH /NJS | Out-Null
+        if ($LASTEXITCODE -ge 8) { throw "robocopy failed for base skill ($LASTEXITCODE)" }
+        Write-Host "synced official base skill -> $dst"
+    } else {
+        # legacy fallback only (#25): old officecli-* skill family
+        $legacy = Get-ChildItem (Join-Path $env:USERPROFILE ".claude\skills") `
+            -Directory -Filter "officecli*" -ErrorAction SilentlyContinue |
+            Where-Object { $_.Name -ne "officecli-pptx-designmd" }
+        if ($legacy) {
+            Write-Warning ("official base skill unavailable — falling back to copying " +
+                "$($legacy.Count) LEGACY officecli-* skill(s); re-run once the official " +
+                "installer works")
+            foreach ($dir in $legacy) {
+                robocopy $dir.FullName (Join-Path $CodexHome "skills\$($dir.Name)") /E /NFL /NDL /NJH /NJS | Out-Null
+                if ($LASTEXITCODE -ge 8) { throw "robocopy failed for $($dir.Name)" }
+            }
+        } else {
+            Write-Warning "no officecli base skill found (official or legacy)"
+        }
+    }
+}
+
+# --- 3. designmd-pptx extension skill (vendored) ------------------------------
+$skillDst = Join-Path $CodexHome "skills\officecli-pptx-designmd"
 New-Item -ItemType Directory -Force $skillDst | Out-Null
 Copy-Item (Join-Path $repo "skills\officecli-pptx-designmd\SKILL.md") $skillDst -Force
-
-# Vendor the Python toolkit inside the skill so it is self-contained
 robocopy (Join-Path $repo "python") (Join-Path $skillDst "python") /E /XD __pycache__ out /NFL /NDL /NJH /NJS | Out-Null
 if ($LASTEXITCODE -ge 8) { throw "robocopy failed ($LASTEXITCODE)" }
 
-# Optional explicit prompt (invoke with /designmd-pptx or $officecli-pptx-designmd)
 $promptDir = Join-Path $CodexHome "prompts"
 New-Item -ItemType Directory -Force $promptDir | Out-Null
 Copy-Item (Join-Path $repo "commands\designmd-pptx.md") (Join-Path $promptDir "designmd-pptx.md") -Force
 
-# Base officecli skill family: same SKILL.md standard works in Codex.
-if (-not $SkipBaseSkills) {
-    $claudeSkills = Join-Path $env:USERPROFILE ".claude\skills"
-    $baseDirs = @()
-    if (Test-Path $claudeSkills) {
-        $baseDirs = Get-ChildItem $claudeSkills -Directory -Filter "officecli*" |
-            Where-Object { $_.Name -ne "officecli-pptx-designmd" }
-    }
-    if ($baseDirs.Count -gt 0) {
-        foreach ($dir in $baseDirs) {
-            $dst = Join-Path $CodexHome "skills\$($dir.Name)"
-            robocopy $dir.FullName $dst /E /NFL /NDL /NJH /NJS | Out-Null
-            if ($LASTEXITCODE -ge 8) { throw "robocopy failed for $($dir.Name) ($LASTEXITCODE)" }
-        }
-        Write-Host "Synced $($baseDirs.Count) base officecli skill(s) from ~/.claude/skills"
-    } else {
-        Write-Warning ("Base officecli-pptx skill not found in ~/.claude/skills — generic deck " +
-            "requests in Codex will not route through officecli. Install the officecli skill " +
-            "family (https://github.com/iOfficeAI/OfficeCLI) or re-run after installing it in Claude Code.")
-    }
-}
-
 pip install -r (Join-Path $skillDst "python\requirements.txt")
 
 Write-Host "Installed skill: $skillDst"
-Write-Host 'In Codex: type $officecli-pptx-designmd, run /designmd-pptx, or mention DESIGN.md -> PPTX.'
-Write-Host 'Verify routing everywhere: python -m designmd_pptx doctor'
+Write-Host 'Verify everything: python -m designmd_pptx doctor'

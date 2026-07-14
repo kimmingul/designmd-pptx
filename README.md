@@ -1,11 +1,11 @@
 # designmd-pptx
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.6.0-brightgreen)](plugin.json)
+[![Version](https://img.shields.io/badge/version-1.7.0-brightgreen)](plugin.json)
 
-**awesome-design-md / Stitch `DESIGN.md` → [officecli](https://github.com/iOfficeAI/OfficeCLI) PPTX** — packaged for **Claude Code, OpenAI Codex, and Grok Build** (v1.6).
+**awesome-design-md / Stitch `DESIGN.md` → [OfficeCLI](https://github.com/officecli/officecli) PPTX** — packaged for **Claude Code, OpenAI Codex, and Grok Build** (v1.7).
 
-Drop a brand `DESIGN.md` in, scaffold an ordered deck, and materialize slides with staging-safe apply. v1.2 added the reverse path (extract / restyle existing decks); v1.3 slide-master branding + .potx export; v1.4 default house style, doctor, screenshot QA; v1.5 the compose compiler, CJK text-fit, 20 patterns, hard Gate 3. **v1.6** closes the roadmap: a **constraint-based layout engine** (content-driven geometry with density adaptation for text-heavy patterns — the fixed-coordinate ceiling is gone) and **template polish** (media garbage collection in `--empty-potx`, slot-mapped branded slide layouts).
+Drop a brand `DESIGN.md` in, scaffold an ordered deck, and materialize slides with staging-safe apply. v1.2 added the reverse path (extract / restyle existing decks); v1.3 slide-master branding + .potx export; v1.4 default house style, doctor, screenshot QA; v1.5 the compose compiler, CJK text-fit, 20 patterns, hard Gate 3; v1.6 the constraint-based layout engine + template polish. **v1.7** adopts the new official OfficeCLI ecosystem: an abstracted **backend layer** (legacy shape-level batch + official **agent-bridge** JSON-RPC), capability-first detection, a **`render`** command for quick outline→deck drafts through `office.render`, and official-installer-first setup.
 
 ## What you get
 
@@ -24,7 +24,9 @@ Drop a brand `DESIGN.md` in, scaffold an ordered deck, and materialize slides wi
 
 - Python 3.10+
 - `pip install -r python/requirements.txt` (PyYAML)
-- Optional: [officecli](https://github.com/iOfficeAI/OfficeCLI) to write real `.pptx` files
+- Optional, for materializing real `.pptx` files (see [Architecture](#architecture-officecli-backends)):
+  - legacy shape-level binary ([iOfficeAI/OfficeCLI releases](https://github.com/iOfficeAI/OfficeCLI/releases)) — powers scaffold/apply/restyle/master
+  - official [officecli](https://github.com/officecli/officecli) ≥ 0.2.117 (`npm install -g officecli`) — powers the `render` command via agent-bridge
 - Node 18+ only for `npm run sync` / `npm run check`
 
 ## Install
@@ -117,8 +119,27 @@ python -m designmd_pptx restyle old.pptx DESIGN.md -o new.pptx
 python -m designmd_pptx master deck.pptx DESIGN.md --potx brand.potx [--empty-potx]
 python -m designmd_pptx scaffold default -o out/deck --content deck.json --apply --force --screenshot [--gate3]
 python -m designmd_pptx compose brief.md -o composed/ --design default
+python -m designmd_pptx render brief.md -o out/draft.pptx --design default [--images]
 python -m designmd_pptx doctor [--strict]
 ```
+
+## Architecture: OfficeCLI backends
+
+Two OfficeCLI generations power different commands (full write-up:
+[docs/officecli-backends.md](docs/officecli-backends.md)):
+
+| Backend | Binary | Used by | Fidelity |
+|---|---|---|---|
+| `LegacyBatchBackend` | legacy shape-level binary ([iOfficeAI/OfficeCLI](https://github.com/iOfficeAI/OfficeCLI/releases)) | scaffold · apply · restyle · master · extract | DESIGN.md-exact: engine-solved cm geometry, glued connectors, Gate 3 |
+| `AgentBridgeBackend` | official [officecli](https://github.com/officecli/officecli) ≥ 0.2.117 | `render` | outline-level (`office.render` payload); brand colors/fonts carry via the theme object (incl. `eaFontFamily` for CJK) |
+
+Both are **capability-first** (the bridge via `initialize`/`capabilities/get`
+per the official skill's guidance, the legacy binary via schema-reference
+probing) and identified by version probing — never by binary name, since both
+generations install as `officecli`. The official payload schema is outline-only
+today (no absolute geometry / connectors / per-shape typography), which is why
+the precision pipeline stays on the legacy backend; an upstream feature request
+for shape-level payloads is filed with the officecli team.
 
 ## Authoring flow (v1.5)
 

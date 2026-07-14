@@ -358,6 +358,56 @@ def cmd_compose(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_render(args: argparse.Namespace) -> int:
+    """Outline → deck via the official agent-bridge (office.render).
+
+    Quick-draft path: outline-level fidelity only. For DESIGN.md-precise
+    decks use compose → scaffold (legacy shape-level backend)."""
+    import os
+    import tempfile
+
+    from .backend import (AgentBridgeBackend, deck_to_render_payload,
+                          tokens_to_bridge_theme)
+    from .deck import normalize_deck_spec
+
+    src = Path(args.source)
+    if src.suffix.lower() == ".json":
+        deck_obj = json.loads(src.read_text(encoding="utf-8"))
+    else:
+        from .compose import compose_outline
+
+        with tempfile.TemporaryDirectory() as tmp:
+            compose_outline(src, tmp)
+            deck_obj = json.loads(
+                (Path(tmp) / "content.deck.json").read_text(encoding="utf-8")
+            )
+    deck, _ = normalize_deck_spec(deck_obj)
+    theme = None
+    if args.design:
+        tokens = compile_design_md(_resolve_design(args.design), brand=None)
+        theme = tokens_to_bridge_theme(tokens)
+    payload = deck_to_render_payload(
+        deck, title=args.title, style_preset=args.style, theme=theme
+    )
+
+    out = Path(args.out)
+    force = bool(args.force) or os.environ.get("DESIGNMD_FORCE") == "1"
+    if out.exists() and not force:
+        raise FileExistsError(f"{out} already exists. Pass --force to overwrite.")
+
+    bridge = AgentBridgeBackend()
+    try:
+        result = bridge.render_pptx(payload, out, enable_images=bool(args.images))
+    finally:
+        bridge.close()
+    print(f"Rendered → {out}")
+    status = result.get("status") or result.get("state") or "done"
+    print(f"  bridge result: {status} ({len(payload['slides'])} slides, "
+          f"images={'on' if args.images else 'off'})")
+    print("  note: outline-level fidelity — use scaffold for DESIGN.md-precise decks")
+    return 0
+
+
 def cmd_doctor(args: argparse.Namespace) -> int:
     from .doctor import run_doctor
 
@@ -516,6 +566,23 @@ def build_parser() -> argparse.ArgumentParser:
                    help="DESIGN.md / tokens / 'default' — adds text-fit warnings to the report")
     o.add_argument("--brand", default=None)
     o.set_defaults(func=cmd_compose)
+
+    n = sub.add_parser(
+        "render",
+        help="Outline → deck via the official officecli agent-bridge "
+        "(office.render; quick drafts — use scaffold for precision)",
+    )
+    n.add_argument("source", type=Path, help="brief.md or content.deck.json")
+    n.add_argument("-o", "--out", type=Path, required=True, help="Output .pptx")
+    n.add_argument("--title", default=None)
+    n.add_argument("--style", default="business", help="stylePreset (default: business)")
+    n.add_argument("--design", default=None,
+                   help="DESIGN.md / tokens / 'default' — brand colors+fonts "
+                   "carry into the bridge theme (incl. CJK font slot)")
+    n.add_argument("--images", action="store_true",
+                   help="Enable hosted image generation (account credits)")
+    n.add_argument("--force", action="store_true", help="Overwrite existing output")
+    n.set_defaults(func=cmd_render)
 
     d = sub.add_parser(
         "doctor",

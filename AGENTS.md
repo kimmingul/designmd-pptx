@@ -1,6 +1,6 @@
 # designmd-pptx — agent guide
 
-Compile [awesome-design-md](https://github.com/VoltAgent/awesome-design-md) / Stitch `DESIGN.md` into [officecli](https://github.com/iOfficeAI/OfficeCLI) PPTX tokens, ordered decks, and staging-safe apply.
+Compile [awesome-design-md](https://github.com/VoltAgent/awesome-design-md) / Stitch `DESIGN.md` into [OfficeCLI](https://github.com/officecli/officecli) PPTX tokens, ordered decks, and staging-safe apply. Two backends (docs/officecli-backends.md): the legacy shape-level binary drives the precision pipeline; the official agent-bridge (JSON-RPC, capability-first) drives `render`.
 
 ## Layout
 
