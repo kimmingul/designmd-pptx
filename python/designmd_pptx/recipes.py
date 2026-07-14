@@ -745,7 +745,9 @@ def recipe_chart_insight(tokens: dict, content: dict | None = None) -> list[dict
 
 
 def recipe_timeline(tokens: dict, content: dict | None = None) -> list[dict]:
-    """Horizontal timeline: 2–6 steps with labels."""
+    """Horizontal timeline: 2–6 steps. The label/detail columns are engine-solved
+    (#9) for adaptive text-fit; the axis line and step dots are overlaid on the
+    fixed track from the solved column geometry."""
     b = _base_props(tokens)
     c, t = b["c"], b["t"]
     content = content or {}
@@ -760,126 +762,76 @@ def recipe_timeline(tokens: dict, content: dict | None = None) -> list[dict]:
         steps = [{"label": str(steps)}]
     n = max(2, min(6, len(steps)))
     steps = steps[:n]
-    col_w, xs = _grid_n(n, b["margin"], b["gap"], max_n=6)
-    micro = str(_micro_pt(t))
+    mpt = _micro_pt(t)
+    label_pt = max(16, min(20, t["section_pt"]))
     y_line = 9.0
+
+    def _step_col(i: int, detail_pt: int) -> L.Box:
+        step = steps[i] if isinstance(steps[i], dict) else {"label": str(steps[i])}
+        # `or` (not a default arg) so an explicit null renders the fallback, not "None".
+        label = str(step.get("label") or f"Step {i + 1}")
+        detail = str(step.get("detail") or "")
+        return L.VStack(
+            weight=1, name=f"TlCol{i + 1}", gap=0.35,
+            children=[
+                L.Text(label, pt=label_pt, name=f"TlLabel{i + 1}",
+                       min_cm=1.0, max_cm=2.4, props={
+                           "font": t["heading_font"], "size": str(label_pt),
+                           "bold": "true", "color": c["text_on_content"],
+                           "align": "center", "fill": "none"}),
+                L.Text(detail, pt=detail_pt, name=f"TlDetail{i + 1}", weight=1, props={
+                    "font": t["body_font"], "size": str(detail_pt),
+                    "color": c["muted"], "align": "center", "fill": "none"}),
+            ])
+
+    def build(d: L.Density) -> L.Box:
+        dpt = L.floored_pt(max(12, mpt), d, floor=12)
+        return L.HStack([_step_col(i, dpt) for i in range(len(steps))],
+                        gap=b["gap"] * d.gap, weight=1)
+
+    placed = L.solve_adaptive(
+        build, b["margin"], y_line + 1.3, 33.87 - 2 * b["margin"],
+        17.8 - (y_line + 1.3))[0]
+
+    axis_w = 33.87 - 2 * b["margin"]
     ops: list[dict] = [
-        {
-            "command": "add",
-            "parent": "/",
-            "type": "slide",
-            "props": {"layout": "blank", "background": c["content_background"]},
-        },
-        {
-            "command": "add",
-            "parent": "/slide[last()]",
-            "type": "shape",
-            "props": {
-                "name": "TlTitle",
-                "text": title,
-                "x": _cm(b["margin"]),
-                "y": "1.2cm",
-                "width": _cm(33.87 - 2 * b["margin"]),
-                "height": "1.8cm",
-                "font": t["heading_font"],
-                "size": str(t["title_pt"]),
-                "bold": "true",
-                "color": c["text_on_content"],
-                "fill": "none",
-            },
-        },
-        {
-            "command": "add",
-            "parent": "/slide[last()]",
-            "type": "shape",
-            "props": {
-                "name": "TlAxis",
-                "preset": "rect",
-                "fill": c["hairline"],
-                "line": "none",
-                "x": _cm(b["margin"]),
-                "y": _cm(y_line),
-                "width": _cm(33.87 - 2 * b["margin"]),
-                "height": "0.12cm",
-            },
-        },
+        {"command": "add", "parent": "/", "type": "slide",
+         "props": {"layout": "blank", "background": c["content_background"]}},
+        {"command": "add", "parent": "/slide[last()]", "type": "shape",
+         "props": {
+             "name": "TlTitle", "text": title, "x": _cm(b["margin"]), "y": "1.2cm",
+             "width": _cm(axis_w), "height": "1.8cm", "font": t["heading_font"],
+             "size": str(t["title_pt"]), "bold": "true",
+             "color": c["text_on_content"], "fill": "none"}},
+        {"command": "add", "parent": "/slide[last()]", "type": "shape",
+         "props": {
+             "name": "TlAxis", "preset": "rect", "fill": c["hairline"], "line": "none",
+             "x": _cm(b["margin"]), "y": _cm(y_line), "width": _cm(axis_w),
+             "height": "0.12cm"}},
+        *_emit_shapes(placed),
     ]
-    for i, step in enumerate(steps):
-        if isinstance(step, str):
-            label, detail = step, ""
-        else:
-            label = str(step.get("label", f"Step {i+1}"))
-            detail = str(step.get("detail", ""))
-        x = xs[i]
-        cx = x + col_w / 2 - 0.45
-        ops.extend(
-            [
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"TlDot{i+1}",
-                        "preset": "ellipse",
-                        "fill": c["accent"],
-                        "line": "none",
-                        "x": _cm(cx),
-                        "y": _cm(y_line - 0.35),
-                        "width": "0.9cm",
-                        "height": "0.9cm",
-                    },
-                },
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"TlLabel{i+1}",
-                        "text": label,
-                        "x": _cm(x),
-                        "y": _cm(y_line + 1.2),
-                        "width": _cm(col_w),
-                        "height": "1.4cm",
-                        "font": t["heading_font"],
-                        "size": str(max(16, min(20, t["section_pt"]))),
-                        "bold": "true",
-                        "color": c["text_on_content"],
-                        "align": "center",
-                        "fill": "none",
-                    },
-                },
-            ]
-        )
-        if detail:
-            ops.append(
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"TlDetail{i+1}",
-                        "text": detail,
-                        "x": _cm(x),
-                        "y": _cm(y_line + 2.7),
-                        "width": _cm(col_w),
-                        "height": "3cm",
-                        "font": t["body_font"],
-                        "size": micro if int(micro) >= 12 else "14",
-                        "color": c["muted"],
-                        "align": "center",
-                        "fill": "none",
-                    },
-                }
-            )
+
+    # Overlay a dot on the axis, centered under each solved label column.
+    labels = {p.name: p for p in placed if p.name.startswith("TlLabel")}
+    dot = 0.9
+    for i in range(len(steps)):
+        p = labels.get(f"TlLabel{i + 1}")
+        if p is None:
+            continue
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"TlDot{i + 1}", "preset": "ellipse", "fill": c["accent"],
+                "line": "none",
+                "x": _cm(p.x + p.w / 2 - dot / 2), "y": _cm(y_line - dot / 2 + 0.06),
+                "width": _cm(dot), "height": _cm(dot)},
+        })
+
     if content.get("notes"):
-        ops.append(
-            {
-                "command": "add",
-                "parent": "/slide[last()]",
-                "type": "notes",
-                "props": {"text": content["notes"]},
-            }
-        )
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "notes",
+            "props": {"text": content["notes"]},
+        })
     return ops
 
 
