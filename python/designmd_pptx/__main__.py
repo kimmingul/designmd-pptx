@@ -246,7 +246,7 @@ def cmd_restyle(args: argparse.Namespace) -> int:
     """Restyle an existing pptx with brand tokens (theme + explicit values)."""
     import os
 
-    from .restyle import restyle_pptx
+    from .restyle import restyle_pptx, restyle_preview
 
     design = _resolve_design(args.design)
     if design.suffix.lower() == ".json":
@@ -265,16 +265,15 @@ def cmd_restyle(args: argparse.Namespace) -> int:
             raise ValueError(f"--map expects OLDHEX=NEWHEX, got: {pair}")
         color_map[old] = new
 
-    report = restyle_pptx(
-        args.pptx,
-        tokens,
-        out=args.out,
-        force=force,
-        explicit_colors=not args.no_explicit_colors,
-        explicit_fonts=not args.no_explicit_fonts,
-        color_map=color_map,
-    )
-    print(f"Restyled → {report['dest']}")
+    kwargs = dict(explicit_colors=bool(args.map_colors),
+                  explicit_fonts=not args.no_explicit_fonts, color_map=color_map)
+
+    if args.preview:
+        report = restyle_preview(args.pptx, tokens, **kwargs)
+        print(f"Restyle preview (no changes written) → {report['source']}")
+    else:
+        report = restyle_pptx(args.pptx, tokens, out=args.out, force=force, **kwargs)
+        print(f"Restyled → {report['dest']}")
     if report["theme_scheme"]:
         print(f"  theme scheme: {len(report['theme_scheme'])} slots remapped")
     if report["theme_fonts"]:
@@ -282,9 +281,15 @@ def cmd_restyle(args: argparse.Namespace) -> int:
     if report["colors"]:
         n = sum(v["count"] for v in report["colors"].values())
         print(f"  explicit colors: {len(report['colors'])} distinct → {n} replacements")
+    if report.get("colors_preserved"):
+        n = sum(v["count"] for v in report["colors_preserved"].values())
+        print(f"  semantic colors preserved: {len(report['colors_preserved'])} "
+              f"distinct → {n} occurrences (use --map to remap)")
     if report["fonts"]:
         n = sum(v["count"] for v in report["fonts"].values())
         print(f"  explicit fonts: {len(report['fonts'])} distinct → {n} replacements")
+    if not args.map_colors and not args.preview:
+        print("  (theme-only by default; pass --map-colors to snap explicit colors)")
     return 0
 
 
@@ -566,12 +571,16 @@ def build_parser() -> argparse.ArgumentParser:
                    help="Output .pptx (omit to restyle in place, requires --force)")
     y.add_argument("--brand", default=None)
     y.add_argument("--force", action="store_true", help="Overwrite destination")
-    y.add_argument("--no-explicit-colors", action="store_true",
-                   help="Only remap the theme scheme, not per-shape srgbClr values")
+    y.add_argument("--map-colors", action="store_true",
+                   help="Opt in to remapping per-shape srgbClr values to the nearest "
+                   "brand color (hue-aware — off-hue semantic colors are preserved). "
+                   "Default is theme-only, which never collapses series/semantic colors")
     y.add_argument("--no-explicit-fonts", action="store_true",
                    help="Only remap theme fonts, not per-run typefaces")
     y.add_argument("--map", action="append", default=None, metavar="OLDHEX=NEWHEX",
-                   help="Pin an explicit color mapping (repeatable)")
+                   help="Pin an explicit color mapping — always applied (repeatable)")
+    y.add_argument("--preview", action="store_true",
+                   help="Print the mapping report without writing anything")
     y.set_defaults(func=cmd_restyle)
 
     m = sub.add_parser(

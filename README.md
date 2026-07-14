@@ -115,7 +115,7 @@ In agent chat (Claude Code / Codex / Grok): mention DESIGN.md for slides, or run
 - **`image_text_2col`** — image + body columns
 - **Staging-safe apply** — destination replaced only after validate + issues pass
 - **Extract** (v1.2) — existing .pptx → `content.deck.json` draft with per-slide recipe mapping, confidence report, and exported images; review, then re-scaffold with any DESIGN.md
-- **Restyle** (v1.2) — rebrand an existing .pptx in place: theme scheme + fonts remapped to brand tokens, explicit colors snapped to the nearest palette entry (`--map` to pin), staging-safe like apply
+- **Restyle** (v1.2, safer default in v2.0 #13) — rebrand an existing .pptx: theme scheme + fonts remapped to brand tokens; **by default per-shape colors are left alone** so distinct series/semantic colors (risk red, success green) aren't collapsed onto the brand. `--map-colors` opts into hue-aware nearest-palette snapping (off-hue colors still preserved), `--map OLD=NEW` pins specific colors (always applied), `--preview` prints the mapping report without writing. Staging-safe like apply
 - **Master & templates** (v1.3) — brand the theme + slide-master type scale (new slides inherit the brand); export a `.potx` template, optionally stripped of slides
 - **Default house style** (v1.4) — pass the literal `default` as the design argument when no brand DESIGN.md exists; a neutral white/slate/blue style keeps the design floor
 - **Doctor** (v1.4) — `python -m designmd_pptx doctor` verifies officecli + the officecli-pptx / designmd skill routing across Claude Code, Codex, and Grok, with remedies for anything missing
