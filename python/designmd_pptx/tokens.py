@@ -522,6 +522,139 @@ def extract_type_sizes(typography: dict) -> tuple[dict[str, int], list[str]]:
     }, warnings
 
 
+# ---- v2 design tokens (issue #11) --------------------------------------
+
+_WHITESPACE_DENSITY = ("comfortable", "compact", "spacious")
+_TITLE_PLACEMENT = ("top", "left", "center")
+_CHART_STYLE = ("modern", "classic", "minimal")
+_TABLE_HEADER_STYLE = ("filled", "underline", "plain")
+_IMAGE_CROP_MODE = ("fill", "fit", "none")
+_IMAGE_PLACEMENT = ("auto", "left", "right", "full")
+
+
+def _enum(value: Any, allowed: tuple, default: str,
+          warnings: list[str], path: str) -> str:
+    if value is None:
+        return default
+    v = str(value).strip().lower()
+    if v in allowed:
+        return v
+    warnings.append(f"{path}: {value!r} not one of {allowed} — using {default!r}")
+    return default
+
+
+def _coerce_bool(value: Any, default: bool) -> bool:
+    if isinstance(value, bool):
+        return value
+    if value is None:
+        return default
+    if isinstance(value, str):
+        return value.strip().lower() in ("true", "yes", "on", "1")
+    return bool(value)
+
+
+def _coerce_float(value: Any, default: float, warnings: list[str], path: str,
+                  *, lo: float, hi: float) -> float:
+    if value is None:
+        return default
+    try:
+        f = float(value)
+    except (TypeError, ValueError):
+        warnings.append(f"{path}: {value!r} is not a number — using {default}")
+        return default
+    if not (lo <= f <= hi):
+        warnings.append(f"{path}: {f} out of [{lo}, {hi}] — clamped")
+        f = max(lo, min(hi, f))
+    return f
+
+
+def _hex6_or_none(value: Any) -> str | None:
+    if not isinstance(value, str):
+        return None
+    s = value.strip().lstrip("#")
+    return s.upper() if re.fullmatch(r"[0-9A-Fa-f]{6}", s) else None
+
+
+def _series_from_palette(palette: dict[str, str]) -> list[str]:
+    out: list[str] = []
+    for k in ("accent", "chart_series2", "chart_series3",
+              "success", "risk", "surface_elevated"):
+        h = _hex6_or_none(palette.get(k))
+        if h and h not in out:
+            out.append(h)
+    return out[:6]
+
+
+def extract_design_v2(fm: dict, palette: dict[str, str]
+                      ) -> tuple[dict[str, Any], list[str]]:
+    """v2 design-token sections (issue #11): composition / charts / tables /
+    images / master. Every section is OPTIONAL in DESIGN.md and every field
+    defaults, so v1 briefs still compile; invalid values fall back with a
+    warning rather than failing the compile."""
+    warnings: list[str] = []
+
+    def _sect(key: str) -> dict:
+        v = fm.get(key)
+        return v if isinstance(v, dict) else {}
+
+    comp, ch, tb, im, ma = (_sect(k) for k in
+                            ("composition", "charts", "tables", "images", "master"))
+
+    series: list[str] = []
+    raw = ch.get("series_colors")
+    if isinstance(raw, list):
+        for i, c in enumerate(raw):
+            h = _hex6_or_none(c)
+            if h:
+                series.append(h)
+            else:
+                warnings.append(
+                    f"charts.series_colors[{i}]: {c!r} is not a 6-digit hex — skipped")
+    if not series:
+        series = _series_from_palette(palette)
+
+    footer = ma.get("footer")
+    sections = {
+        "composition": {
+            "whitespace_density": _enum(
+                comp.get("whitespace_density"), _WHITESPACE_DENSITY,
+                "comfortable", warnings, "composition.whitespace_density"),
+            "title_placement": _enum(
+                comp.get("title_placement"), _TITLE_PLACEMENT,
+                "top", warnings, "composition.title_placement"),
+        },
+        "charts": {
+            "default_style": _enum(
+                ch.get("default_style"), _CHART_STYLE,
+                "modern", warnings, "charts.default_style"),
+            "series_colors": series,
+        },
+        "tables": {
+            "header_style": _enum(
+                tb.get("header_style"), _TABLE_HEADER_STYLE,
+                "filled", warnings, "tables.header_style"),
+            "cell_padding_cm": _coerce_float(
+                tb.get("cell_padding_cm", tb.get("cell_padding")), 0.15,
+                warnings, "tables.cell_padding_cm", lo=0.0, hi=1.0),
+            "stripe": _coerce_bool(tb.get("stripe"), True),
+        },
+        "images": {
+            "crop_mode": _enum(
+                im.get("crop_mode"), _IMAGE_CROP_MODE,
+                "fill", warnings, "images.crop_mode"),
+            "placement": _enum(
+                im.get("placement", im.get("placement_rules")), _IMAGE_PLACEMENT,
+                "auto", warnings, "images.placement"),
+        },
+        "master": {
+            "footer": str(footer).strip() if isinstance(footer, str) and footer.strip() else None,
+            "page_number": _coerce_bool(ma.get("page_number"), False),
+            "navigation": _coerce_bool(ma.get("navigation"), False),
+        },
+    }
+    return sections, warnings
+
+
 def motif_from_atmosphere(colors: dict[str, str], description: str = "") -> str:
     bg = colors["background"]
     if is_dark(bg):

@@ -133,6 +133,9 @@ def compile_design_md(
 
     motif = T.motif_from_atmosphere(palette, description)
 
+    design_v2, v2_warnings = T.extract_design_v2(fm, palette)
+    warnings.extend(v2_warnings)
+
     card_radius_px = None
     for k in ("lg", "md", "xl"):
         if k in rounded_raw:
@@ -163,6 +166,11 @@ def compile_design_md(
             "card_radius_px_source": card_radius_px,
         },
         "motif": motif,
+        "composition": design_v2["composition"],
+        "charts": design_v2["charts"],
+        "tables": design_v2["tables"],
+        "images": design_v2["images"],
+        "master": design_v2["master"],
         "dark_first": T.is_dark(palette["background"]),
         "content_bg_policy": "match_canvas",
         "background_gradient": extras.get("background_gradient"),
