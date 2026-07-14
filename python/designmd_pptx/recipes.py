@@ -253,7 +253,7 @@ def recipe_kpi_row(tokens: dict, content: dict | None = None) -> list[dict]:
     micro = str(mpt)
 
     def _kpi_card(i: int) -> L.Box:
-        kpi = kpis[i]
+        kpi = kpis[i] if isinstance(kpis[i], dict) else {}
         watch = bool(kpi.get("watch"))
         fill = c["risk"] if watch else c["surface"]
         tc = c["on_accent"] if watch else c["text_on_surface"]
@@ -1555,7 +1555,7 @@ def recipe_matrix_2x2(tokens: dict, content: dict | None = None) -> list[dict]:
     qt_pt = max(18, t["section_pt"] - 4)
 
     def _quad(i: int, body_pt: int) -> L.Box:
-        q = quads[i]
+        q = quads[i] if isinstance(quads[i], dict) else {}
         return L.VStack(
             weight=1, name=f"Quad{i + 1}Bg", pad=(0.5, 0.6, 0.6, 0.6), gap=0.4,
             props={"preset": b["preset"], "fill": c["surface"], "line": "none"},
@@ -1641,7 +1641,9 @@ def _initials(name: str) -> str:
 
 
 def recipe_team(tokens: dict, content: dict | None = None) -> list[dict]:
-    """2–4 member cards: initials disc, name, role, blurb."""
+    """2–4 member cards: initials disc, name, role, blurb. Card text is
+    engine-solved (#9); the avatar disc is overlaid centered in each solved
+    card's reserved top band (a fixed square disc isn't a flex child)."""
     b = _base_props(tokens)
     c, t = b["c"], b["t"]
     content = content or {}
@@ -1652,88 +1654,69 @@ def recipe_team(tokens: dict, content: dict | None = None) -> list[dict]:
     ]
     n = max(2, min(4, len(members)))
     members = members[:n]
-    col_w, xs = _grid_n(n, b["margin"], b["gap"])
-    micro = str(_micro_pt(t))
-    y, h = 4.0, 12.0
-    ops = [_slide_op(tokens), _title_op(tokens, "TeamTitle", title, y="1.2cm")]
-    for i, m in enumerate(members):
-        x = xs[i]
-        name = f"Member{i + 1}"
-        disc = min(3.4, col_w * 0.4)
-        ops.extend(
-            [
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"{name}Bg", "preset": b["preset"], "fill": c["surface"],
-                        "line": "none", "x": _cm(x), "y": _cm(y),
-                        "width": _cm(col_w), "height": _cm(h),
-                    },
-                },
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"{name}Avatar", "preset": "ellipse", "fill": c["accent"],
-                        "line": "none", "text": _initials(m.get("name", "")),
-                        "x": _cm(x + (col_w - disc) / 2), "y": _cm(y + 1.0),
-                        "width": _cm(disc), "height": _cm(disc),
-                        "font": t["heading_font"], "size": str(max(18, t["section_pt"] - 4)),
-                        "bold": "true", "color": c["on_accent"],
-                        "align": "center", "valign": "middle",
-                    },
-                },
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"{name}Name", "text": str(m.get("name", "")),
-                        "x": _cm(x + 0.4), "y": _cm(y + disc + 1.4),
-                        "width": _cm(col_w - 0.8), "height": "1.1cm",
-                        "font": t["heading_font"], "size": str(max(16, t["section_pt"] - 8)),
-                        "bold": "true", "color": c["text_on_surface"],
-                        "align": "center", "fill": "none",
-                    },
-                },
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"{name}Role", "text": str(m.get("role", "")),
-                        "x": _cm(x + 0.4), "y": _cm(y + disc + 2.5),
-                        "width": _cm(col_w - 0.8), "height": "0.9cm",
-                        "font": t["body_font"], "size": micro,
-                        "bold": "true", "color": c["accent"],
-                        "align": "center", "fill": "none",
-                    },
-                },
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"{name}Blurb", "text": str(m.get("blurb", "")),
-                        "x": _cm(x + 0.5), "y": _cm(y + disc + 3.5),
-                        "width": _cm(col_w - 1.0), "height": _cm(h - disc - 4.0),
-                        "font": t["body_font"], "size": str(max(12, t["body_pt"] - 4)),
-                        "color": c["muted"], "align": "center", "fill": "none",
-                    },
-                },
-            ]
-        )
-    ops.append(
-        {
-            "command": "add",
-            "parent": "/slide[last()]",
-            "type": "notes",
-            "props": {"text": content.get("notes", "One line each: name, why they matter here.")},
-        }
-    )
+    mpt = _micro_pt(t)
+    micro = str(mpt)
+    name_pt = max(16, t["section_pt"] - 8)
+    avatar_pt = max(18, t["section_pt"] - 4)
+    AVATAR_BAND = 4.4  # top padding reserved for the overlaid disc
+
+    def _card(i: int, blurb_pt: int) -> L.Box:
+        m = members[i] if isinstance(members[i], dict) else {}
+        return L.VStack(
+            weight=1, name=f"Member{i + 1}Bg", pad=(AVATAR_BAND, 0.4, 0.6, 0.4), gap=0.3,
+            props={"preset": b["preset"], "fill": c["surface"], "line": "none"},
+            children=[
+                # names can wrap to 2 lines; reserve the height officecli needs
+                # after text-frame insets (a 1-line box overflows a long name).
+                L.Text(str(m.get("name", "")), pt=name_pt, name=f"Member{i + 1}Name",
+                       min_cm=1.75, max_cm=2.4, props={
+                           "font": t["heading_font"], "size": str(name_pt), "bold": "true",
+                           "color": c["text_on_surface"], "align": "center", "fill": "none"}),
+                L.Text(str(m.get("role", "")), pt=mpt, name=f"Member{i + 1}Role",
+                       min_cm=0.6, props={
+                           "font": t["body_font"], "size": micro, "bold": "true",
+                           "color": c["accent"], "align": "center", "fill": "none"}),
+                L.Text(str(m.get("blurb", "")), pt=blurb_pt, name=f"Member{i + 1}Blurb",
+                       weight=1, props={
+                           "font": t["body_font"], "size": str(blurb_pt),
+                           "color": c["muted"], "align": "center", "fill": "none"}),
+            ])
+
+    def build(d: L.Density) -> L.Box:
+        bpt = L.floored_pt(max(12, t["body_pt"] - 4), d, floor=12)
+        return L.HStack([_card(i, bpt) for i in range(len(members))],
+                        gap=b["gap"] * d.gap, weight=1)
+
+    placed = L.solve_adaptive(
+        build, b["margin"], 3.4, 33.87 - 2 * b["margin"], 14.4)[0]
+    ops = [_slide_op(tokens), _title_op(tokens, "TeamTitle", title, y="1.2cm"),
+           *_emit_shapes(placed)]
+
+    # Overlay the avatar disc, centered in each solved card's reserved top band.
+    bg = {p.name: p for p in placed if p.name.endswith("Bg")}
+    for i in range(len(members)):
+        m = members[i] if isinstance(members[i], dict) else {}
+        p = bg.get(f"Member{i + 1}Bg")
+        if p is None:
+            continue
+        disc = min(3.4, p.w * 0.42)
+        # font scaled to the disc so initials never overflow it (narrow cards /
+        # large brand type scale) — the disc is outside solve_adaptive.
+        av_pt = min(avatar_pt, max(14, int(disc * 12)))
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"Member{i + 1}Avatar", "preset": "ellipse", "fill": c["accent"],
+                "line": "none", "text": _initials(m.get("name", "")),
+                "x": _cm(p.x + (p.w - disc) / 2), "y": _cm(p.y + 0.6),
+                "width": _cm(disc), "height": _cm(disc),
+                "font": t["heading_font"], "size": str(av_pt), "bold": "true",
+                "color": c["on_accent"], "align": "center", "valign": "middle"},
+        })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get("notes", "One line each: name, why they matter here.")},
+    })
     return ops
 
 
@@ -1799,7 +1782,8 @@ def recipe_logo_strip(tokens: dict, content: dict | None = None) -> list[dict]:
 
 
 def recipe_pricing(tokens: dict, content: dict | None = None) -> list[dict]:
-    """2–3 pricing tiers; highlight=true renders the accent tier."""
+    """2–3 pricing tiers; highlight=true renders the accent tier — engine-solved
+    card row (#9): tier heights and feature-list fit adapt to content."""
     b = _base_props(tokens)
     c, t = b["c"], b["t"]
     content = content or {}
@@ -1810,88 +1794,54 @@ def recipe_pricing(tokens: dict, content: dict | None = None) -> list[dict]:
     ]
     n = max(2, min(3, len(tiers)))
     tiers = tiers[:n]
-    col_w, xs = _grid_n(n, b["margin"], b["gap"], max_n=3)
-    micro = str(_micro_pt(t))
-    y, h = 3.8, 13.2
-    ops = [_slide_op(tokens), _title_op(tokens, "PricingTitle", title)]
-    for i, tier in enumerate(tiers):
-        x = xs[i]
+    mpt = _micro_pt(t)
+    micro = str(mpt)
+    name_pt = max(18, t["section_pt"] - 4)
+
+    def _tier(i: int, feat_pt: int) -> L.Box:
+        tier = tiers[i] if isinstance(tiers[i], dict) else {}
         hi = bool(tier.get("highlight"))
         fill = c["accent"] if hi else c["surface"]
         fg = c["on_accent"] if hi else c["text_on_surface"]
         sub = "FFFFFF" if hi else c["muted"]
-        name = f"Tier{i + 1}"
-        ops.extend(
-            [
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"{name}Bg", "preset": b["preset"], "fill": fill,
-                        "line": "none" if hi else c["hairline"],
-                        "x": _cm(x), "y": _cm(y), "width": _cm(col_w), "height": _cm(h),
-                    },
-                },
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"{name}Name", "text": str(tier.get("name", "")),
-                        "x": _cm(x + 0.5), "y": _cm(y + 0.8),
-                        "width": _cm(col_w - 1), "height": "1.2cm",
-                        "font": t["heading_font"], "size": str(max(18, t["section_pt"] - 4)),
-                        "bold": "true", "color": fg, "align": "center", "fill": "none",
-                    },
-                },
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"{name}Price", "text": str(tier.get("price", "")),
-                        "x": _cm(x + 0.5), "y": _cm(y + 2.2),
-                        "width": _cm(col_w - 1), "height": "2.6cm",
-                        "font": t["heading_font"], "size": str(t["kpi_pt"]),
-                        "bold": "true", "color": fg, "align": "center", "fill": "none",
-                    },
-                },
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"{name}Period", "text": str(tier.get("period", "")),
-                        "x": _cm(x + 0.5), "y": _cm(y + 4.9),
-                        "width": _cm(col_w - 1), "height": "0.9cm",
-                        "font": t["body_font"], "size": micro,
-                        "color": sub, "align": "center", "fill": "none",
-                    },
-                },
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"{name}Features",
-                        "text": "\n".join(f"• {f}" for f in (tier.get("features") or [])[:5]),
-                        "x": _cm(x + 0.7), "y": _cm(y + 6.2),
-                        "width": _cm(col_w - 1.4), "height": _cm(h - 6.8),
-                        "font": t["body_font"], "size": str(max(12, t["body_pt"] - 4)),
-                        "color": sub, "fill": "none",
-                    },
-                },
-            ]
-        )
-    ops.append(
-        {
-            "command": "add",
-            "parent": "/slide[last()]",
-            "type": "notes",
-            "props": {"text": content.get("notes", "Anchor on the highlighted tier.")},
-        }
-    )
+        feats = "\n".join(f"• {f}" for f in (tier.get("features") or [])[:5])
+        # Narrow side padding: the big price needs near-full column width to
+        # stay on one line (see kpi_row).
+        return L.VStack(
+            weight=1, name=f"Tier{i + 1}Bg", pad=(0.8, 0.35, 0.8, 0.35), gap=0.35,
+            props={"preset": b["preset"], "fill": fill,
+                   "line": "none" if hi else c["hairline"]},
+            children=[
+                L.Text(str(tier.get("name", "")), pt=name_pt, name=f"Tier{i + 1}Name",
+                       min_cm=0.9, max_cm=1.8, props={
+                           "font": t["heading_font"], "size": str(name_pt),
+                           "bold": "true", "color": fg, "align": "center", "fill": "none"}),
+                L.Text(str(tier.get("price", "")), pt=t["kpi_pt"], name=f"Tier{i + 1}Price",
+                       min_cm=1.8, max_cm=3.4, props={
+                           "font": t["heading_font"], "size": str(t["kpi_pt"]),
+                           "bold": "true", "color": fg, "align": "center", "fill": "none"}),
+                L.Text(str(tier.get("period", "")), pt=mpt, name=f"Tier{i + 1}Period",
+                       min_cm=0.6, props={
+                           "font": t["body_font"], "size": micro,
+                           "color": sub, "align": "center", "fill": "none"}),
+                L.Text(feats, pt=feat_pt, name=f"Tier{i + 1}Features", weight=1, props={
+                    "font": t["body_font"], "size": str(feat_pt),
+                    "color": sub, "fill": "none"}),
+            ])
+
+    def build(d: L.Density) -> L.Box:
+        feat_pt = L.floored_pt(max(12, t["body_pt"] - 2), d, floor=12)
+        return L.HStack([_tier(i, feat_pt) for i in range(len(tiers))],
+                        gap=b["gap"] * d.gap, weight=1)
+
+    placed, _d = L.solve_adaptive(
+        build, b["margin"], 3.6, 33.87 - 2 * b["margin"], 14.6)
+    ops = [_slide_op(tokens), _title_op(tokens, "PricingTitle", title),
+           *_emit_shapes(placed)]
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get("notes", "Anchor on the highlighted tier.")},
+    })
     return ops
 
 
