@@ -52,6 +52,23 @@ missing. The legacy shape-level binary remains **manual** (release URL printed).
 | Codex | `pwsh scripts/install-codex.ps1` |
 | Grok | copy/link into `~/.grok/installed-plugins/designmd-pptx-local` (see AGENTS.md) |
 
+## VS Code / Cursor extension (#45)
+
+Primary **editor surface** (decision: [editor-integration-decision.md](editor-integration-decision.md)).
+
+```bash
+cd editor/vscode
+npx @vscode/vsce package --no-dependencies   # → designmd-pptx-0.1.0.vsix
+code --install-extension designmd-pptx-0.1.0.vsix
+# Cursor: Extensions → Install from VSIX…
+```
+
+Or **Developer: Install Extension from Location…** → select `editor/vscode`.
+
+Commands (palette `designmd-pptx:`): Doctor, Compose, Scaffold, A11y, Refine,  
+Benchmark, open contact sheet / Gate 3 JSON. Activity bar lists DESIGN.md and  
+`*.deck.json`. See [editor/vscode/README.md](../editor/vscode/README.md).
+
 ## Version pin
 
 Do not hardcode OfficeCLI versions in scripts. Read

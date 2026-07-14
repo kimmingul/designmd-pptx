@@ -1,0 +1,177 @@
+{
+  "name": "designmd-pptx",
+  "displayName": "designmd-pptx",
+  "description": "Compose DESIGN.md / markdown briefs into OfficeCLI PPTX decks via the designmd-pptx CLI",
+  "version": "0.1.0",
+  "publisher": "kimmingul",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Formatters"
+  ],
+  "keywords": [
+    "pptx",
+    "powerpoint",
+    "design-md",
+    "officecli",
+    "slides"
+  ],
+  "activationEvents": [
+    "onView:designmdPptx.explorer",
+    "onCommand:designmdPptx.doctor",
+    "onCommand:designmdPptx.compose",
+    "onCommand:designmdPptx.scaffold",
+    "onCommand:designmdPptx.a11y",
+    "onCommand:designmdPptx.refine",
+    "onCommand:designmdPptx.benchmark",
+    "onCommand:designmdPptx.openContactSheet",
+    "onCommand:designmdPptx.openGate3Report",
+    "workspaceContains:**/DESIGN.md",
+    "workspaceContains:**/*.deck.json"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "designmd-pptx",
+      "properties": {
+        "designmdPptx.pythonPath": {
+          "type": "string",
+          "default": "",
+          "description": "Python executable (empty = python3/python on PATH)."
+        },
+        "designmdPptx.cliPath": {
+          "type": "string",
+          "default": "",
+          "description": "Optional path to designmd-pptx console script. Empty uses python -m designmd_pptx."
+        },
+        "designmdPptx.pythonPathExtra": {
+          "type": "string",
+          "default": "",
+          "description": "Extra PYTHONPATH entry (defaults to workspace python/ when present)."
+        },
+        "designmdPptx.defaultDesign": {
+          "type": "string",
+          "default": "default",
+          "description": "DESIGN.md path or the literal 'default' for scaffold/a11y."
+        },
+        "designmdPptx.outputDir": {
+          "type": "string",
+          "default": "out/designmd",
+          "description": "Default output directory under the workspace folder."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "designmdPptx.doctor",
+        "title": "designmd-pptx: Doctor",
+        "category": "designmd-pptx"
+      },
+      {
+        "command": "designmdPptx.doctorInstall",
+        "title": "designmd-pptx: Doctor Install (dry-run)",
+        "category": "designmd-pptx"
+      },
+      {
+        "command": "designmdPptx.compose",
+        "title": "designmd-pptx: Compose brief → deck-spec",
+        "category": "designmd-pptx"
+      },
+      {
+        "command": "designmdPptx.scaffold",
+        "title": "designmd-pptx: Scaffold deck",
+        "category": "designmd-pptx"
+      },
+      {
+        "command": "designmdPptx.a11y",
+        "title": "designmd-pptx: Accessibility audit",
+        "category": "designmd-pptx"
+      },
+      {
+        "command": "designmdPptx.refine",
+        "title": "designmd-pptx: Refine deck-spec",
+        "category": "designmd-pptx"
+      },
+      {
+        "command": "designmdPptx.benchmark",
+        "title": "designmd-pptx: Run fixture benchmark",
+        "category": "designmd-pptx"
+      },
+      {
+        "command": "designmdPptx.openContactSheet",
+        "title": "designmd-pptx: Open contact sheet PNG",
+        "category": "designmd-pptx"
+      },
+      {
+        "command": "designmdPptx.openGate3Report",
+        "title": "designmd-pptx: Open Gate 3 / refine report JSON",
+        "category": "designmd-pptx"
+      },
+      {
+        "command": "designmdPptx.refreshExplorer",
+        "title": "designmd-pptx: Refresh explorer",
+        "category": "designmd-pptx",
+        "icon": "$(refresh)"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "designmdPptx.compose",
+          "when": "resourceExtname == .md",
+          "group": "designmdPptx@1"
+        },
+        {
+          "command": "designmdPptx.scaffold",
+          "when": "resourceFilename =~ /deck\\.json$/ || resourceFilename =~ /DESIGN\\.md$/i",
+          "group": "designmdPptx@1"
+        },
+        {
+          "command": "designmdPptx.a11y",
+          "when": "resourceFilename =~ /deck\\.json$/",
+          "group": "designmdPptx@2"
+        },
+        {
+          "command": "designmdPptx.refine",
+          "when": "resourceFilename =~ /deck\\.json$/",
+          "group": "designmdPptx@2"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "designmdPptx.refreshExplorer",
+          "when": "view == designmdPptx.explorer",
+          "group": "navigation"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "designmdPptx",
+          "title": "designmd-pptx",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "designmdPptx": [
+        {
+          "id": "designmdPptx.explorer",
+          "name": "Workspace decks"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "package": "echo 'Install @vscode/vsce then: npx @vscode/vsce package' && exit 0",
+    "lint": "node -e \"require('./extension.js'); console.log('extension.js load ok')\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kimmingul/designmd-pptx"
+  }
+}

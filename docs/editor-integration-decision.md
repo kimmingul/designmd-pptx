@@ -109,3 +109,8 @@ They do not primarily open PowerPoint to *compose* structure; they open it to *r
 ## 5. Next (#45)
 
 Implement the VS Code extension MVP as listed in §3.4; track under #45. Do not open a PPT Add-in workstream in the same release train.
+
+### Implementation status
+
+- [x] MVP shipped under [`editor/vscode/`](../editor/vscode/) (commands, explorer, diagnostics, VSIX packaging docs)
+- [ ] Marketplace listing (optional; VSIX sideload is the MVP distribution path)

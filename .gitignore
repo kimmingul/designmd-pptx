@@ -34,3 +34,4 @@ infograpify_ppt_templates/
 # Extract drafts (may hold media ripped from licensed packs)
 extracted/
 **/extract-assets/
+editor/vscode/*.vsix
