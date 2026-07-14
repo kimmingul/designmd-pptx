@@ -257,13 +257,26 @@ class RestyleV12(unittest.TestCase):
         self.assertIn(f'typeface="{self.tokens["type"]["heading_font"]}"', theme)
         self.assertGreaterEqual(len(report["theme_scheme"]), 10)
 
-    def test_explicit_colors_and_fonts(self) -> None:
+    def test_default_preserves_colors_remaps_fonts(self) -> None:
+        # #13: the safe default is theme-only for colors (a semantic red is NOT
+        # collapsed onto the brand palette) while fonts are still remapped.
         out = self.root / "restyled.pptx"
         restyle_pptx(self.pptx, self.tokens, out=out)
         slide2 = self._read(out, "ppt/slides/slide2.xml")
-        self.assertNotIn("FF0000", slide2)
+        self.assertIn("FF0000", slide2)                 # preserved (no --map-colors)
         self.assertNotIn("Comic Sans MS", slide2)
         self.assertIn(f'typeface="{self.tokens["type"]["body_font"]}"', slide2)
+
+    def test_map_colors_opt_in_remaps_explicit(self) -> None:
+        out = self.root / "restyled2.pptx"
+        restyle_pptx(self.pptx, self.tokens, out=out, explicit_colors=True)
+        slide2 = self._read(out, "ppt/slides/slide2.xml")
+        # with the opt-in on, FF0000 is either remapped (hue match) or reported
+        # as preserved — never silently left AND unreported
+        report = restyle_pptx(self.pptx, self.tokens, out=out, force=True,
+                              explicit_colors=True)
+        touched = "FF0000" in report["colors"] or "FF0000" in report["colors_preserved"]
+        self.assertTrue(touched)
 
     def test_color_map_pin(self) -> None:
         out = self.root / "pinned.pptx"

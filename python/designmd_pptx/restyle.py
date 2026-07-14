@@ -8,6 +8,7 @@ the destination is never deleted until the restyled copy is fully written.
 
 from __future__ import annotations
 
+import colorsys
 import json
 import os
 import re
@@ -49,6 +50,42 @@ def _nearest(color: str, palette: list[str]) -> str:
     return min(palette, key=lambda p: _hex_dist(color, p))
 
 
+# Semantic-preservation thresholds (#13). A source color is only snapped to the
+# nearest brand color when it is near-neutral (safe to rebrand) or shares the
+# nearest brand color's hue family; a saturated color with no hue match in the
+# palette (a risk red, a success green, a distinct chart series) is PRESERVED
+# rather than collapsed onto the brand accent.
+_NEUTRAL_SAT = 0.18   # below this saturation → treated as a neutral
+_HUE_TOL = 0.055      # ~20° hue window counts as the same family
+
+
+def _hsv(hex6: str) -> tuple[float, float, float]:
+    r, g, b = (int(hex6[i:i + 2], 16) / 255 for i in (0, 2, 4))
+    return colorsys.rgb_to_hsv(r, g, b)
+
+
+def _hue_dist(a: float, b: float) -> float:
+    d = abs(a - b)
+    return min(d, 1.0 - d)
+
+
+def _map_or_preserve(old: str, palette: list[str]) -> tuple[str, bool]:
+    """(new_hex, preserved). Snap `old` to the nearest brand color only when it
+    is neutral or hue-compatible; otherwise preserve it as a semantic color."""
+    near = _nearest(old, palette)
+    if near == old:
+        return old, False
+    _oh, os_, _ov = _hsv(old)
+    if os_ < _NEUTRAL_SAT:            # near-grey → safe to rebrand
+        return near, False
+    nh, ns, _nv = _hsv(near)
+    if ns < _NEUTRAL_SAT:            # colored source, neutral target → preserve
+        return old, True
+    if _hue_dist(_oh, nh) <= _HUE_TOL:  # same hue family → rebrand
+        return near, False
+    return old, True                # colored + off-hue → semantic, preserve
+
+
 def _restyle_theme_tree(theme, colors: dict[str, str], typ: dict[str, Any],
                         report: dict[str, Any]) -> None:
     """Namespace-aware theme rebrand: point each clrScheme slot at an explicit
@@ -69,9 +106,20 @@ def _restyle_theme_tree(theme, colors: dict[str, str], typ: dict[str, Any],
 def _restyle_part_tree(root, palette: list[str], typ: dict[str, Any],
                        explicit_colors: bool, explicit_fonts: bool,
                        color_map: dict[str, str], report: dict[str, Any]) -> None:
-    if explicit_colors and palette:
+    # #13: explicit-color remapping is opt-in (explicit_colors). Pinned colors
+    # (--map) are always honored. When remapping is on, semantic colors are
+    # hue-preserved instead of collapsed onto the brand palette.
+    if (explicit_colors or color_map) and palette:
         def _color(old: str) -> str:
-            new = color_map.get(old) or _nearest(old, palette)
+            if old in color_map:
+                new = color_map[old]                  # pin: always applied
+            elif not explicit_colors:
+                return old                            # pins-only mode: leave the rest
+            else:
+                new, preserved = _map_or_preserve(old, palette)
+                if preserved:
+                    report["colors_preserved"].setdefault(old, {"count": 0})["count"] += 1
+                    return old
             if new != old:
                 report["colors"].setdefault(old, {"new": new, "count": 0})["count"] += 1
             return new
@@ -146,37 +194,27 @@ def rewrite_package(
     return dest_p
 
 
-def restyle_pptx(
-    pptx: str | Path,
-    tokens: dict[str, Any],
-    *,
-    out: str | Path | None = None,
-    force: bool = False,
-    explicit_colors: bool = True,
-    explicit_fonts: bool = True,
-    color_map: dict[str, str] | None = None,
-) -> dict[str, Any]:
-    """Restyle pptx with brand tokens. Returns a report of replacements.
-
-    out=None restyles in place (requires force). A distinct existing out
-    also requires force. Never deletes the destination until the restyled
-    staging copy is complete (os.replace).
-    """
+def _restyle_setup(pptx: str | Path, tokens: dict[str, Any],
+                   color_map: dict[str, str] | None):
     colors: dict[str, str] = {
         k: str(v).upper() for k, v in (tokens.get("colors") or {}).items()
         if isinstance(v, str) and re.fullmatch(r"[0-9A-Fa-f]{6}", str(v))
     }
-    typ: dict[str, Any] = tokens.get("type") or {}
     if not colors:
         raise ValueError("tokens have no usable colors — compile DESIGN.md first")
+    typ: dict[str, Any] = tokens.get("type") or {}
     palette = sorted(set(colors.values()))
     cmap = {k.upper(): v.upper() for k, v in (color_map or {}).items()}
-
     report: dict[str, Any] = {
         "source": str(Path(pptx).resolve()), "dest": "",
-        "theme_scheme": {}, "theme_fonts": {}, "colors": {}, "fonts": {},
+        "theme_scheme": {}, "theme_fonts": {}, "colors": {},
+        "colors_preserved": {}, "fonts": {},
     }
+    return colors, typ, palette, cmap, report
 
+
+def _make_transform(colors, typ, palette, cmap, report, *,
+                    explicit_colors: bool, explicit_fonts: bool):
     def transform(name: str, data: bytes) -> bytes:
         is_theme = re.fullmatch(r"ppt/theme/theme\d+\.xml", name)
         is_part = re.fullmatch(
@@ -198,11 +236,60 @@ def restyle_pptx(
                 root, palette, typ, explicit_colors, explicit_fonts, cmap, report)
         return opc.serialize(root, declaration=decl)
 
+    return transform
+
+
+def restyle_pptx(
+    pptx: str | Path,
+    tokens: dict[str, Any],
+    *,
+    out: str | Path | None = None,
+    force: bool = False,
+    explicit_colors: bool = False,
+    explicit_fonts: bool = True,
+    color_map: dict[str, str] | None = None,
+) -> dict[str, Any]:
+    """Restyle pptx with brand tokens. Returns a report of replacements.
+
+    By default only the theme scheme/fonts and any pinned (`color_map`) colors
+    are changed; per-shape explicit colors are left alone (#13) so distinct
+    series / semantic colors are not collapsed onto the brand palette. Set
+    `explicit_colors=True` to opt into hue-aware nearest-palette remapping (which
+    still preserves off-hue semantic colors).
+
+    out=None restyles in place (requires force). A distinct existing out also
+    requires force. Never deletes the destination until the restyled staging
+    copy is complete (os.replace).
+    """
+    colors, typ, palette, cmap, report = _restyle_setup(pptx, tokens, color_map)
+    transform = _make_transform(colors, typ, palette, cmap, report,
+                                explicit_colors=explicit_colors,
+                                explicit_fonts=explicit_fonts)
     dest = rewrite_package(pptx, out, transform, force=force)
     report["dest"] = str(dest)
+    dest.with_suffix(".restyle.report.json").write_text(
+        json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return report
 
-    report_path = dest.with_suffix(".restyle.report.json")
-    report_path.write_text(
-        json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
-    )
+
+def restyle_preview(
+    pptx: str | Path,
+    tokens: dict[str, Any],
+    *,
+    explicit_colors: bool = False,
+    explicit_fonts: bool = True,
+    color_map: dict[str, str] | None = None,
+) -> dict[str, Any]:
+    """Compute the restyle mapping report WITHOUT writing anything (#13): the
+    same transform runs over the source parts and populates the report as a
+    side effect, so you can review theme/color/font/preserved changes before
+    committing to an apply."""
+    colors, typ, palette, cmap, report = _restyle_setup(pptx, tokens, color_map)
+    transform = _make_transform(colors, typ, palette, cmap, report,
+                                explicit_colors=explicit_colors,
+                                explicit_fonts=explicit_fonts)
+    with zipfile.ZipFile(Path(pptx)) as z:
+        for name in z.namelist():
+            transform(name, z.read(name))  # side effect: fills report
+    report["preview"] = True
     return report
