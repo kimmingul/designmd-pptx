@@ -54,15 +54,28 @@ def is_deck_spec(obj: Any) -> bool:
     return isinstance(obj, dict) and isinstance(obj.get("slides"), list)
 
 
-def normalize_deck_spec(obj: dict[str, Any] | None) -> tuple[dict[str, Any], list[str]]:
-    """Accept deck-spec or flat overlay; return (deck, warnings)."""
+def normalize_deck_spec(
+    obj: dict[str, Any] | None,
+    *,
+    catalog: str = "core",
+) -> tuple[dict[str, Any], list[str]]:
+    """Accept deck-spec or flat overlay; return (deck, warnings).
+
+    When ``obj`` is None, emit one empty slide per recipe in the requested
+    catalog partition (``core`` default — not the full 36-pattern kitchen sink).
+    Pass ``catalog="all"`` for a full-pattern demo deck.
+    """
     if obj is None:
-        # catalog / demo: one of every pattern with empty content
+        seq = R.sequence_for(catalog)
         slides = [
             {"id": name, "recipe": name, "content": {}}
-            for name in R.DEFAULT_SEQUENCE
+            for name in seq
         ]
-        return {"version": "1.0", "slides": slides}, ["deck: using full pattern catalog defaults"]
+        label = catalog if catalog not in ("core", "default", "") else "core"
+        return (
+            {"version": "1.0", "slides": slides},
+            [f"deck: using {label} pattern catalog defaults ({len(seq)} slides)"],
+        )
     if is_deck_spec(obj):
         warnings: list[str] = []
         slides_in = obj["slides"]
@@ -103,9 +116,61 @@ def validate_deck_content_caps(deck: dict[str, Any]) -> list[str]:
         if recipe in ("kpi_row", "kpi_3"):
             kpis = content.get("kpis") or []
             if isinstance(kpis, list) and len(kpis) > 4:
-                errors.append(f"{prefix}: kpis max 4 (got {len(kpis)}); split into another kpi_row slide")
+                errors.append(
+                    f"{prefix}: kpis max 4 (got {len(kpis)}); use kpi_dashboard_grid "
+                    "for 4–8 metrics or split into another kpi_row slide"
+                )
             if isinstance(kpis, list) and len(kpis) == 1:
                 errors.append(f"{prefix}: kpis need 2–4 items (got 1)")
+        if recipe == "kpi_dashboard_grid":
+            kpis = content.get("kpis") or []
+            if isinstance(kpis, list) and len(kpis) > 8:
+                errors.append(
+                    f"{prefix}: kpis max 8 (got {len(kpis)}); split across dashboard slides"
+                )
+            if isinstance(kpis, list) and 0 < len(kpis) < 4:
+                errors.append(f"{prefix}: kpi_dashboard_grid needs 4–8 kpis (got {len(kpis)})")
+        if recipe == "agenda_toc":
+            items = content.get("items") or content.get("entries") or []
+            if isinstance(items, list) and len(items) > 12:
+                errors.append(f"{prefix}: agenda items max 12 (got {len(items)}); split slides")
+            if isinstance(items, list) and 0 < len(items) < 5:
+                errors.append(f"{prefix}: agenda_toc needs 5–12 items (got {len(items)})")
+        if recipe == "story_timeline":
+            steps = content.get("steps") or []
+            if isinstance(steps, list) and len(steps) > 6:
+                errors.append(f"{prefix}: story_timeline steps max 6 (got {len(steps)})")
+            if isinstance(steps, list) and 0 < len(steps) < 2:
+                errors.append(f"{prefix}: story_timeline needs ≥2 steps")
+        if recipe == "funnel_stages":
+            stages = content.get("stages") or content.get("steps") or []
+            if isinstance(stages, list) and len(stages) > 6:
+                errors.append(f"{prefix}: funnel_stages max 6 (got {len(stages)})")
+            if isinstance(stages, list) and 0 < len(stages) < 3:
+                errors.append(f"{prefix}: funnel_stages needs 3–6 stages (got {len(stages)})")
+        if recipe == "roadmap_swimlane":
+            lanes = content.get("lanes") or content.get("rows") or []
+            phases = content.get("phases") or content.get("columns") or []
+            if isinstance(lanes, list) and len(lanes) > 5:
+                errors.append(f"{prefix}: roadmap lanes max 5 (got {len(lanes)})")
+            if isinstance(phases, list) and len(phases) > 5:
+                errors.append(f"{prefix}: roadmap phases max 5 (got {len(phases)})")
+        if recipe == "pyramid_levels":
+            levels = content.get("levels") or content.get("steps") or []
+            if isinstance(levels, list) and len(levels) > 5:
+                errors.append(f"{prefix}: pyramid_levels max 5 (got {len(levels)})")
+            if isinstance(levels, list) and 0 < len(levels) < 3:
+                errors.append(f"{prefix}: pyramid_levels needs 3–5 levels (got {len(levels)})")
+        if recipe == "vs_scorecard":
+            criteria = content.get("criteria") or content.get("rows") or []
+            if isinstance(criteria, list) and len(criteria) > 8:
+                errors.append(f"{prefix}: vs_scorecard criteria max 8 (got {len(criteria)})")
+        if recipe == "chart_callout_panel":
+            callouts = content.get("callouts") or content.get("bullets") or []
+            if isinstance(callouts, list) and len(callouts) > 3:
+                errors.append(
+                    f"{prefix}: chart_callout_panel callouts max 3 (got {len(callouts)})"
+                )
         if recipe in ("feature_cards", "feature_cards_3"):
             cards = content.get("cards") or []
             if isinstance(cards, list) and len(cards) > 4:
@@ -135,6 +200,24 @@ def validate_deck_content_caps(deck: dict[str, Any]) -> list[str]:
                         errors.append(
                             f"{prefix}: row {ri} length {len(row)} != headers {len(headers)}"
                         )
+        if recipe == "consort_flow":
+            stages = content.get("stages") or content.get("steps") or []
+            if isinstance(stages, list) and len(stages) > 7:
+                errors.append(f"{prefix}: consort_flow stages max 7 (got {len(stages)})")
+            if isinstance(stages, list) and 0 < len(stages) < 3:
+                errors.append(f"{prefix}: consort_flow needs 3–7 stages (got {len(stages)})")
+        if recipe == "forest_plot":
+            rows = content.get("rows") or content.get("studies") or []
+            if isinstance(rows, list) and len(rows) > 8:
+                errors.append(f"{prefix}: forest_plot rows max 8 (got {len(rows)})")
+        if recipe == "study_design":
+            phases = content.get("phases") or []
+            if isinstance(phases, list) and len(phases) > 5:
+                errors.append(f"{prefix}: study_design phases max 5 (got {len(phases)})")
+        if recipe == "multi_panel_figure":
+            panels = content.get("panels") or content.get("figures") or []
+            if isinstance(panels, list) and len(panels) > 4:
+                errors.append(f"{prefix}: multi_panel_figure panels max 4 (got {len(panels)})")
         if recipe == "bullets":
             items = content.get("bullets") or content.get("items") or []
             if isinstance(items, list) and len(items) > 5:

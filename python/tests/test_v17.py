@@ -274,6 +274,42 @@ class PayloadMappingV17(unittest.TestCase):
         for s in slides:  # schema: every slide field is required
             self.assertEqual(set(s), required)
 
+    def test_phase2_recipes_not_empty_points(self) -> None:
+        """New premium/domain recipes must not fall into the empty generic else."""
+        deck = {"version": "1.1", "slides": [
+            {"recipe": "kpi_dashboard_grid", "content": {
+                "title": "Dash", "subtitle": "QoQ",
+                "kpis": [{"value": "1", "label": "A", "chip": "+1"}],
+            }},
+            {"recipe": "agenda_toc", "content": {
+                "items": [{"number": "01", "label": "Intro", "time": "5m"}],
+            }},
+            {"recipe": "consort_flow", "content": {
+                "stages": [{"label": "Screened", "n": "N=10"}],
+            }},
+            {"recipe": "forest_plot", "content": {
+                "studies": [{"label": "S1", "text": "0.8 (0.6–1.0)"}],
+            }},
+            {"recipe": "chart_callout_panel", "content": {
+                "title": "C", "categories": "A,B", "series1_values": "1,2",
+                "callouts": ["One", "Two"],
+            }},
+            {"recipe": "kaplan_meier", "content": {
+                "categories": "0,12", "series1_values": "100,80",
+                "insight": "HR 0.8",
+            }},
+        ]}
+        slides = deck_to_render_payload(deck)["slides"]
+        self.assertEqual(slides[0]["metrics"][0]["value"], "1")
+        self.assertEqual(slides[0]["content"], "QoQ")
+        self.assertTrue(slides[1]["points"] and "Intro" in slides[1]["points"][0])
+        self.assertTrue(slides[2]["points"] and "Screened" in slides[2]["points"][0])
+        self.assertTrue(slides[3]["points"] and "S1" in slides[3]["points"][0])
+        self.assertEqual(slides[4]["points"], ["One", "Two"])
+        self.assertEqual(slides[4]["chart"]["values"], [1.0, 2.0])
+        self.assertEqual(slides[5]["chart"]["type"], "line")
+        self.assertIn("HR", slides[5]["content"])
+
     def test_tokens_to_bridge_theme(self) -> None:
         from designmd_pptx.compile import compile_design_md
 

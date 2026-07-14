@@ -26,3 +26,11 @@ Thumbs.db
 # Env
 .env
 .env.*
+
+# Licensed third-party templates — NEVER commit originals
+infograpify_ppt_templates/
+# Local structural analysis of licensed decks (may hold absolute paths)
+.ref-analysis/
+# Extract drafts (may hold media ripped from licensed packs)
+extracted/
+**/extract-assets/

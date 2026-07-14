@@ -586,12 +586,14 @@ def deck_to_render_payload(deck: dict[str, Any], *, title: str | None = None,
             if recipe == "close":
                 pts = [p for p in (c.get("body"), c.get("cta")) if p]
             out["points"] = [str(p) for p in pts]
-        elif recipe in ("kpi_row", "kpi_3"):
+        elif recipe in ("kpi_row", "kpi_3", "kpi_dashboard_grid"):
             out["metrics"] = [
                 {"label": str(k.get("label", "")), "value": str(k.get("value", "")),
                  "note": str(k.get("chip", "") or "")}
                 for k in c.get("kpis") or []
             ]
+            if recipe == "kpi_dashboard_grid" and c.get("subtitle"):
+                out["content"] = str(c.get("subtitle") or "")
         elif recipe == "big_number":
             out["metrics"] = [{
                 "label": str(c.get("label", "")), "value": str(c.get("value", "")),
@@ -608,35 +610,187 @@ def deck_to_render_payload(deck: dict[str, Any], *, title: str | None = None,
                  "detail": str((c.get(side) or {}).get("body", ""))}
                 for side in ("left", "right")
             ]
-        elif recipe == "chart_insight":
+        elif recipe in ("chart_insight", "chart_callout_panel", "kaplan_meier"):
             out["chart"] = {
                 "title": str(c.get("title", "Chart")),
-                "type": str(c.get("chart_type", "column")),
-                "categories": [x.strip() for x in str(c.get("categories", "")).split(",") if x.strip()],
+                "type": str(c.get("chart_type", "line" if recipe == "kaplan_meier" else "column")),
+                "categories": [
+                    x.strip()
+                    for x in str(c.get("categories", "")).split(",")
+                    if x.strip()
+                ],
                 "values": _floats(c.get("series1_values", "")),
             }
-            out["content"] = str(c.get("insight_body", "") or "")
+            if recipe == "chart_callout_panel":
+                callouts = c.get("callouts") or c.get("bullets") or []
+                out["points"] = [str(p) for p in callouts]
+            else:
+                out["content"] = str(
+                    c.get("insight_body") or c.get("insight") or ""
+                )
         elif recipe == "quote":
             att = c.get("attribution")
             out["content"] = f"“{c.get('quote', '')}”" + (f" — {att}" if att else "")
-        elif recipe in ("table", "appendix_table"):
+        elif recipe in ("table", "appendix_table", "results_table_insight"):
             headers = [str(h) for h in c.get("headers") or []]
             rows = c.get("rows") or []
             lines = [" | ".join(headers)] if headers else []
             lines += [" | ".join(str(x) for x in r) for r in rows]
             out["content"] = "\n".join(lines)
-        elif recipe in ("image_full", "image_text_2col"):
-            out["content"] = str(c.get("body", "") or c.get("caption", "") or "")
-            alt = str(c.get("alt", "") or "")
-            if alt:
-                out["visuals"] = [{"label": alt, "prompt": alt, "caption": alt}]
-        else:  # process / timeline / team / pricing / matrix / logo_strip …
-            items = c.get("steps") or c.get("members") or c.get("tiers") or c.get("logos") or []
+            if recipe == "results_table_insight":
+                insight = c.get("insight_body") or c.get("insight") or ""
+                if insight:
+                    out["content"] = (out["content"] + "\n\n" + str(insight)).strip()
+        elif recipe in ("image_full", "image_text_2col", "multi_panel_figure"):
+            if recipe == "multi_panel_figure":
+                panels = c.get("panels") or c.get("figures") or []
+                pts = []
+                for p in panels:
+                    if isinstance(p, dict):
+                        pts.append(
+                            f"{p.get('label', '')}: {p.get('caption') or p.get('alt') or ''}".strip(": ")
+                        )
+                    else:
+                        pts.append(str(p))
+                out["points"] = pts
+            else:
+                out["content"] = str(c.get("body", "") or c.get("caption", "") or "")
+                alt = str(c.get("alt", "") or "")
+                if alt:
+                    out["visuals"] = [{"label": alt, "prompt": alt, "caption": alt}]
+        elif recipe == "agenda_toc":
+            items = c.get("items") or c.get("entries") or []
             pts = []
             for it in items:
                 if isinstance(it, dict):
-                    label = it.get("label") or it.get("name") or it.get("title") or ""
-                    detail = it.get("detail") or it.get("role") or it.get("price") or ""
+                    num = it.get("number") or ""
+                    label = it.get("label") or it.get("title") or ""
+                    time = it.get("time") or it.get("duration") or ""
+                    pts.append(
+                        f"{num} {label}".strip()
+                        + (f" ({time})" if time else "")
+                    )
+                else:
+                    pts.append(str(it))
+            out["points"] = pts
+        elif recipe in ("section_opener_numbered",):
+            out.update(
+                layout="section",
+                content=str(c.get("blurb") or ""),
+                title=str(c.get("title") or ""),
+            )
+            if c.get("number") is not None:
+                out["content"] = (
+                    f"{c.get('number')}. {out['content']}".strip(". ")
+                )
+        elif recipe == "vs_scorecard":
+            left = c.get("left") or c.get("option_a") or {}
+            right = c.get("right") or c.get("option_b") or {}
+            if not isinstance(left, dict):
+                left = {"title": str(left)}
+            if not isinstance(right, dict):
+                right = {"title": str(right)}
+            out["sections"] = [
+                {"heading": str(left.get("title", "A")), "detail": ""},
+                {"heading": str(right.get("title", "B")), "detail": ""},
+            ]
+            crit = c.get("criteria") or c.get("rows") or []
+            pts = []
+            for row in crit:
+                if isinstance(row, dict):
+                    pts.append(
+                        f"{row.get('name') or row.get('label')}: "
+                        f"{row.get('left') or row.get('a')} vs "
+                        f"{row.get('right') or row.get('b')}"
+                    )
+                else:
+                    pts.append(str(row))
+            out["points"] = pts
+        elif recipe == "forest_plot":
+            studies = c.get("studies") or c.get("rows") or []
+            pts = []
+            for row in studies:
+                if isinstance(row, dict):
+                    pts.append(
+                        f"{row.get('label') or row.get('study')}: "
+                        f"{row.get('text') or row.get('ci') or row.get('effect', '')}"
+                    )
+                else:
+                    pts.append(str(row))
+            out["points"] = pts
+        elif recipe in ("consort_flow", "funnel_stages", "pyramid_levels"):
+            items = c.get("stages") or c.get("levels") or c.get("steps") or []
+            pts = []
+            for it in items:
+                if isinstance(it, dict):
+                    label = it.get("label") or it.get("title") or ""
+                    extra = it.get("n") or it.get("value") or it.get("detail") or ""
+                    pts.append(f"{label} — {extra}".strip(" —"))
+                else:
+                    pts.append(str(it))
+            out["points"] = pts
+        elif recipe == "study_design":
+            phases = c.get("phases") or []
+            arms = c.get("arms") or c.get("groups") or []
+            pts = []
+            for it in phases:
+                if isinstance(it, dict):
+                    pts.append(
+                        f"{it.get('label') or it.get('title')}: "
+                        f"{it.get('detail') or it.get('body') or ''}".strip(": ")
+                    )
+                else:
+                    pts.append(str(it))
+            for it in arms:
+                if isinstance(it, dict):
+                    pts.append(
+                        f"Arm {it.get('label') or it.get('name')}: "
+                        f"{it.get('detail') or ''}".strip(": ")
+                    )
+                else:
+                    pts.append(str(it))
+            out["points"] = pts
+        elif recipe == "roadmap_swimlane":
+            phases = c.get("phases") or c.get("columns") or []
+            lanes = c.get("lanes") or c.get("rows") or []
+            pts = [f"Phases: {', '.join(str(p) for p in phases)}"] if phases else []
+            for lane in lanes:
+                if isinstance(lane, dict):
+                    cells = lane.get("cells") or lane.get("items") or []
+                    pts.append(
+                        f"{lane.get('name') or lane.get('label')}: "
+                        f"{', '.join(str(x) for x in cells)}"
+                    )
+                else:
+                    pts.append(str(lane))
+            out["points"] = pts
+        else:  # process / timeline / story_timeline / team / pricing / matrix …
+            items = (
+                c.get("steps")
+                or c.get("members")
+                or c.get("tiers")
+                or c.get("logos")
+                or c.get("quadrants")
+                or []
+            )
+            pts = []
+            for it in items:
+                if isinstance(it, dict):
+                    label = (
+                        it.get("label")
+                        or it.get("name")
+                        or it.get("title")
+                        or it.get("date")
+                        or ""
+                    )
+                    detail = (
+                        it.get("detail")
+                        or it.get("body")
+                        or it.get("role")
+                        or it.get("price")
+                        or it.get("text")
+                        or ""
+                    )
                     pts.append(f"{label} — {detail}".strip(" —"))
                 else:
                     pts.append(str(it))

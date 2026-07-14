@@ -30,7 +30,11 @@ HEAVY = {
     "cards": [{"title": "Card", "body": "Card body text " * 8}] * 8,
     "steps": [{"title": "Step", "body": "Step detail " * 6}] * 10,
     "kpis": [{"value": "42.1", "label": "Label " * 4, "chip": "+9%"}] * 8,
-    "items": [{"title": "Item", "body": "Item body " * 6}] * 8,
+    # agenda_toc + any list that reads content["items"]
+    "items": [
+        {"number": f"{i:02d}", "label": "Agenda topic " * 4, "time": "10m"}
+        for i in range(1, 14)
+    ],
     "headers": ["Metric", "Q1", "Q2", "Q3"],
     "rows": [["Row label " * 2, "1", "2", "3"]] * 30,
     "columns": [{"title": "Column", "points": ["point " * 6] * 6}] * 2,
@@ -40,6 +44,33 @@ HEAVY = {
     "quote": "A rather long pull quote that keeps going and going " * 6,
     "attribution": "Someone Notable, Title",
     "chart_type": "bar", "categories": "A,B,C,D", "series1_values": "4,8,15,16",
+    # Shared blob: each builder reads only the keys it understands. Prefer
+    # distinct keys (studies vs rows) so forest_plot is not starved by table rows.
+    "stages": [
+        {"label": "Stage " * 4, "value": "10%", "n": "N=99", "note": "note " * 6}
+    ] * 10,
+    "levels": [{"label": "Level", "detail": "Detail " * 4}] * 8,
+    "phases": ["Now", "Next", "Later", "Future", "Horizon", "Extra"],
+    "lanes": [{"name": "Lane", "cells": ["A", "B", "C", "D"]}] * 8,
+    "criteria": [{"name": "Crit", "left": "High", "right": "Low"}] * 12,
+    "callouts": ["Callout line " * 8] * 6,
+    "era": "2024–2026",
+    "left": {"title": "Option A"}, "right": {"title": "Option B"},
+    "arms": [{"label": "Arm", "detail": "Detail " * 4}] * 6,
+    "panels": [{"label": "X", "caption": "Caption " * 6, "src": "", "alt": "a"}] * 6,
+    "studies": [
+        {
+            "label": "Study",
+            "effect": 0.1,
+            "low": -0.5,
+            "high": 0.6,
+            "text": "1.1 (0.6–1.6)",
+        }
+    ] * 12,
+    "risk_table": [["0", "100", "100"]] * 10,
+    "insight": "Insight text " * 20,
+    "insight_body": "Insight body " * 20,
+    "domain": [-2.0, 2.0],
 }
 
 
@@ -69,7 +100,17 @@ class GeometryContract(unittest.TestCase):
         return _call_builder(RECIPE_BUILDERS[name], self.tokens, content, idx)
 
     def test_every_pattern_registered(self) -> None:
-        self.assertEqual(len(RECIPE_BUILDERS), 20)
+        # Phase 2: premium (#58) + domain (#10) catalogs.
+        self.assertGreaterEqual(len(RECIPE_BUILDERS), 36)
+        for name in (
+            "kpi_dashboard_grid", "agenda_toc", "section_opener_numbered",
+            "story_timeline", "funnel_stages", "roadmap_swimlane",
+            "quadrant_matrix_rich", "pyramid_levels", "vs_scorecard",
+            "chart_callout_panel",
+            "consort_flow", "kaplan_meier", "forest_plot",
+            "study_design", "results_table_insight", "multi_panel_figure",
+        ):
+            self.assertIn(name, RECIPE_BUILDERS)
 
     def test_pattern_layout_covers_registry(self) -> None:
         # every pattern is categorized exactly once (engine/structured/fixed),
@@ -79,7 +120,10 @@ class GeometryContract(unittest.TestCase):
         self.assertEqual(len(flat), len(set(flat)), "a pattern is in two buckets")
         self.assertEqual(set(flat), set(RECIPE_BUILDERS),
                          "PATTERN_LAYOUT and RECIPE_BUILDERS disagree")
-        self.assertEqual(len(PATTERN_LAYOUT["engine"]), 9)
+        # Phase 2: hybrid is first-class (timeline dots, forest bars, …).
+        self.assertIn("hybrid", PATTERN_LAYOUT)
+        self.assertGreaterEqual(len(PATTERN_LAYOUT["engine"]), 8)
+        self.assertGreaterEqual(len(PATTERN_LAYOUT["hybrid"]), 4)
 
     def test_default_content_is_on_canvas_and_readable(self) -> None:
         for name in RECIPE_BUILDERS:

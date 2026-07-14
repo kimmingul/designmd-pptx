@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -227,9 +228,27 @@ def cmd_scaffold(args: argparse.Namespace) -> int:
 
 def cmd_extract(args: argparse.Namespace) -> int:
     """Existing pptx → content.deck.json draft + report + assets/."""
-    from .extract import extract_pptx
+    from .extract import extract_pptx, is_licensed_reference_path
 
-    report = extract_pptx(args.pptx, args.out, export_media=not args.no_media)
+    # --no-media always wins; otherwise None lets extract apply the license fence
+    # (media off under infograpify_ppt_templates/). --force-media opts back in.
+    export_media: bool | None
+    if getattr(args, "no_media", False):
+        export_media = False
+    elif getattr(args, "force_media", False):
+        export_media = True
+    else:
+        export_media = None
+
+    if is_licensed_reference_path(args.pptx) and export_media is not False:
+        print(
+            "warning: source looks like a licensed commercial pack — "
+            "prefer `reference` for structural study; media export is "
+            + ("ON (--force-media)" if export_media else "OFF (license fence)"),
+            file=sys.stderr,
+        )
+
+    report = extract_pptx(args.pptx, args.out, export_media=export_media)
     print(f"Wrote {Path(args.out) / 'content.deck.json'}")
     print(f"Wrote {Path(args.out) / 'extract.report.json'}")
     for s in report["slides"]:
@@ -237,8 +256,89 @@ def cmd_extract(args: argparse.Namespace) -> int:
         print(f"  slide {s['index']:>2}: {s['recipe']} (confidence {s['confidence']}){flags}")
     if report.get("assets"):
         print(f"assets: {len(report['assets'])} exported")
+    if report.get("licensed_source"):
+        print(
+            "note: licensed source detected — do not commit extracted assets; "
+            "use `python -m designmd_pptx reference` for license-safe analysis"
+        )
     print("Review the draft, then: python -m designmd_pptx scaffold DESIGN.md "
           f"--content {Path(args.out) / 'content.deck.json'}")
+    return 0
+
+
+def cmd_reference(args: argparse.Namespace) -> int:
+    """License-safe structural analysis of premium reference decks (Phase 2 / #59).
+
+    Default output redacts slide text and never exports media. Original .pptx
+    files must remain gitignored (infograpify_ppt_templates/).
+    """
+    from .reference import (
+        analyze_pptx,
+        analyze_tree,
+        catalog_filenames,
+        write_report,
+    )
+
+    src = Path(args.path)
+    out = Path(args.out) if args.out else Path(".ref-analysis")
+    include_text = bool(args.include_text)
+    if include_text:
+        print(
+            "warning: --include-text embeds slide wording; do NOT commit the report",
+            file=sys.stderr,
+        )
+
+    if args.catalog:
+        if not src.is_dir():
+            print(f"error: --catalog needs a directory, got {src}", file=sys.stderr)
+            return 2
+        report = catalog_filenames(src)
+        path = write_report(report, out / "catalog.json")
+        print(f"Wrote {path} ({report['total']} decks, {len(report['families'])} families)")
+        for fam, n in list(report["families"].items())[:16]:
+            print(f"  {fam}: {n}")
+        return 0
+
+    if src.is_dir():
+        report = analyze_tree(
+            src,
+            include_text=include_text,
+            max_slides=args.max_slides,
+        )
+        path = write_report(report, out / "index.json")
+        print(
+            f"Wrote {path} — {report['deck_count']} decks, "
+            f"{len(report.get('errors') or [])} errors"
+        )
+        for fam, n in list(report.get("families", {}).items())[:12]:
+            print(f"  {fam}: {n}")
+        if report.get("errors"):
+            for e in report["errors"][:8]:
+                print(f"  error: {e['filename']}: {e['error']}")
+        print(
+            "License: originals stay local/gitignored; only structural JSON is written."
+        )
+        return 0 if not report.get("errors") else 0  # soft-fail on per-deck errors
+
+    report = analyze_pptx(
+        src,
+        include_text=include_text,
+        max_slides=args.max_slides,
+    )
+    stem = re.sub(r"[^\w.\-]+", "_", src.stem)[:80]
+    path = write_report(report, out / f"{stem}.json")
+    print(f"Wrote {path}")
+    print(
+        f"  family={report['source']['family_hint']}  "
+        f"slides={report['package']['slide_count']}  "
+        f"analyzed={report['aggregate']['slides_analyzed']}"
+    )
+    print(f"  theme fonts: {report['theme'].get('fonts')}")
+    print(f"  suggestions: {', '.join(report['recipe_suggestions'][:8])}")
+    hints = report["aggregate"].get("layout_hints") or {}
+    if hints:
+        top = ", ".join(f"{k}×{v}" for k, v in list(hints.items())[:8])
+        print(f"  hints: {top}")
     return 0
 
 
@@ -558,7 +658,49 @@ def build_parser() -> argparse.ArgumentParser:
     e.add_argument("pptx", type=Path, help="Source .pptx to extract")
     e.add_argument("-o", "--out", default="extracted", help="Output directory")
     e.add_argument("--no-media", action="store_true", help="Do not export embedded images")
+    e.add_argument(
+        "--force-media",
+        action="store_true",
+        help="Export embedded images even when the source path looks like a "
+        "licensed commercial pack (infograpify_ppt_templates/). Default is to "
+        "skip media for those paths — prefer `reference` for structural study.",
+    )
     e.set_defaults(func=cmd_extract)
+
+    ref = sub.add_parser(
+        "reference",
+        help="License-safe structural analysis of premium reference .pptx "
+        "(theme/geometry/hints only; default redacts text; never commits originals)",
+    )
+    ref.add_argument(
+        "path",
+        type=Path,
+        help="A .pptx file or a directory of reference decks "
+        "(e.g. infograpify_ppt_templates/)",
+    )
+    ref.add_argument(
+        "-o",
+        "--out",
+        default=".ref-analysis",
+        help="Output directory for JSON reports (default: .ref-analysis/, gitignored)",
+    )
+    ref.add_argument(
+        "--catalog",
+        action="store_true",
+        help="Filename-only family catalog (no package open; safest inventory)",
+    )
+    ref.add_argument(
+        "--include-text",
+        action="store_true",
+        help="Include short text samples (local study only — do not commit)",
+    )
+    ref.add_argument(
+        "--max-slides",
+        type=int,
+        default=12,
+        help="Per-deck slide cap for deep analysis (default 12; catalog ignores this)",
+    )
+    ref.set_defaults(func=cmd_reference)
 
     y = sub.add_parser(
         "restyle",

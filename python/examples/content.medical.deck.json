@@ -1,0 +1,116 @@
+{
+  "version": "1.1",
+  "slides": [
+    {
+      "id": "cover",
+      "recipe": "cover",
+      "content": {
+        "title": "Phase 3 oncology readout",
+        "subtitle": "Primary analysis · intent-to-treat",
+        "meta": "designmd-pptx · academic / medical patterns (#10)"
+      }
+    },
+    {
+      "id": "consort",
+      "recipe": "consort_flow",
+      "content": {
+        "title": "CONSORT flow",
+        "stages": [
+          { "label": "Assessed for eligibility", "n": "N=842" },
+          { "label": "Randomized", "n": "N=612", "note": "230 excluded" },
+          { "label": "Allocated to intervention", "n": "N=306" },
+          { "label": "Allocated to control", "n": "N=306" },
+          { "label": "Analyzed (ITT)", "n": "N=600", "note": "12 withdrew consent" }
+        ]
+      }
+    },
+    {
+      "id": "design",
+      "recipe": "study_design",
+      "content": {
+        "title": "Study design",
+        "phases": [
+          { "label": "Screen", "detail": "D−28 to D0" },
+          { "label": "Randomize", "detail": "1:1 stratified" },
+          { "label": "Treat", "detail": "12 cycles" },
+          { "label": "Follow-up", "detail": "24 months" }
+        ],
+        "arms": [
+          { "label": "Intervention", "detail": "Drug X + SOC" },
+          { "label": "Control", "detail": "Placebo + SOC" }
+        ]
+      }
+    },
+    {
+      "id": "km",
+      "recipe": "kaplan_meier",
+      "content": {
+        "title": "Overall survival",
+        "categories": "0,6,12,18,24",
+        "series1_name": "Drug X",
+        "series1_values": "100,94,88,81,74",
+        "series2_name": "Control",
+        "series2_values": "100,91,82,73,64",
+        "risk_headers": ["Month", "Drug X", "Control"],
+        "risk_table": [
+          ["0", "306", "306"],
+          ["12", "248", "231"],
+          ["24", "172", "149"]
+        ],
+        "insight_title": "Clinical takeaway",
+        "insight_body": "HR 0.78 (95% CI 0.64–0.95); median OS not reached in the intervention arm."
+      }
+    },
+    {
+      "id": "forest",
+      "recipe": "forest_plot",
+      "content": {
+        "title": "Subgroup hazard ratios",
+        "domain": [-1.0, 1.0],
+        "rows": [
+          { "label": "Overall", "effect": -0.25, "low": -0.45, "high": -0.05, "text": "0.78 (0.64–0.95)" },
+          { "label": "PD-L1 high", "effect": -0.4, "low": -0.7, "high": -0.15, "text": "0.67 (0.50–0.86)" },
+          { "label": "PD-L1 low", "effect": -0.05, "low": -0.35, "high": 0.25, "text": "0.95 (0.70–1.28)" },
+          { "label": "Prior IO", "effect": 0.1, "low": -0.2, "high": 0.4, "text": "1.11 (0.82–1.49)" }
+        ]
+      }
+    },
+    {
+      "id": "results",
+      "recipe": "results_table_insight",
+      "content": {
+        "title": "Primary and key secondary endpoints",
+        "headers": ["Endpoint", "Drug X", "Control", "p"],
+        "rows": [
+          ["ORR", "44%", "29%", "0.002"],
+          ["PFS median", "11.4 mo", "7.1 mo", "<0.001"],
+          ["Grade ≥3 TEAE", "21%", "17%", "0.18"]
+        ],
+        "insight_title": "Interpretation",
+        "insight_body": "Benefit is driven by response depth and PFS; safety is comparable to SOC."
+      }
+    },
+    {
+      "id": "figures",
+      "recipe": "multi_panel_figure",
+      "content": {
+        "title": "Exploratory imaging panels",
+        "panels": [
+          { "label": "A", "caption": "Baseline", "alt": "Baseline scan" },
+          { "label": "B", "caption": "Week 12", "alt": "Week 12 scan" },
+          { "label": "C", "caption": "Waterfall", "alt": "Waterfall plot" },
+          { "label": "D", "caption": "Swimmer", "alt": "Swimmer plot" }
+        ]
+      }
+    },
+    {
+      "id": "close",
+      "recipe": "close",
+      "content": {
+        "title": "Next steps",
+        "body": "File sBLA package and initiate HEOR dossier.",
+        "cta": "Approve"
+      }
+    }
+  ]
+}

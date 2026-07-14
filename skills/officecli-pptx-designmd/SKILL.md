@@ -47,6 +47,10 @@ pip install -r "<resolved python root>\requirements.txt"
    the bundled neutral house style keeps the design floor.
 10. officecli missing or routing unclear? Run `python -m designmd_pptx doctor`
    and follow the printed remedies before continuing.
+11. Licensed premium templates (Infograpify, etc.) are **local reference only** —
+    keep under `infograpify_ppt_templates/` (gitignored). Never commit originals
+    or force-add ignored `.pptx`. Analyze with `reference` (text redacted by
+    default); ship only original tokens/recipes. See `docs/infograpify-reference.md`.
 
 ## Commands
 
@@ -70,6 +74,8 @@ python -m designmd_pptx scaffold default -o out/deck --content deck.json --apply
 python -m designmd_pptx doctor            # v1.4: verify officecli + skill routing
 python -m designmd_pptx compose brief.md -o composed/ --design default   # v1.5: outline → deck-spec
 python -m designmd_pptx render brief.md -o out/draft.pptx --design default  # v1.7: quick draft via official agent-bridge
+python -m designmd_pptx reference infograpify_ppt_templates --catalog -o .ref-analysis  # Phase 2: license-safe structure inventory
+python -m designmd_pptx reference path\to\licensed.pptx -o .ref-analysis               # Phase 2: redacted geometry/theme report
 ```
 
 ## Backends (v1.7)
@@ -103,9 +109,11 @@ to → render. `doctor` shows which backends this machine has.
 Two paths to modernize an existing .pptx — pick by how much change is wanted:
 
 - **Full re-layout**: `extract old.pptx -o extracted/` maps each slide to the
-  closest recipe (confidence + warnings in `extract.report.json`, images exported
-  to `assets/`). **Review the draft** — fix low-confidence mappings, set missing
-  `src` — then `scaffold DESIGN.md --content extracted/content.deck.json`.
+  closest recipe (confidence + warnings + **loss_ledger** in `extract.report.json`,
+  images exported to `assets/`). Charts recover type/series/categories; SmartArt
+  falls back to text; groups are expanded; animations/embeddings are listed as
+  losses (never silent). **Review the draft** — fix low-confidence mappings, set
+  missing `src` — then `scaffold DESIGN.md --content extracted/content.deck.json`.
 - **Brand-only restyle**: `restyle old.pptx DESIGN.md -o new.pptx` keeps layout
   untouched; remaps theme scheme + fonts, explicit srgbClr → nearest brand color,
   explicit typefaces → brand fonts. `--no-explicit-colors` / `--no-explicit-fonts`
@@ -126,7 +134,9 @@ modified. Run after `apply` to deliver a deck whose file doubles as a template.
 
 ## Patterns
 
-cover · section_divider · kpi_row · **big_number** · feature_cards · **pricing** · bullets · quote · comparison_2col · **matrix_2x2** · timeline · process · table · **appendix_table** · chart_insight (any officecli chartType: column/bar/line/pie/area/waterfall/funnel/…) · **team** · **logo_strip** · image_full · image_text_2col · close
+cover · section_divider · **section_opener_numbered** · **agenda_toc** · kpi_row · **kpi_dashboard_grid** · **big_number** · feature_cards · **pricing** · bullets · quote · comparison_2col · **matrix_2x2** · **quadrant_matrix_rich** · **vs_scorecard** · timeline · **story_timeline** · process · **funnel_stages** · **roadmap_swimlane** · **pyramid_levels** · table · **appendix_table** · chart_insight · **chart_callout_panel** (any officecli chartType: column/bar/line/pie/area/waterfall/funnel/…) · **team** · **logo_strip** · image_full · image_text_2col · close
+
+**Academic / medical (#10):** **consort_flow** · **kaplan_meier** · **forest_plot** · **study_design** · **results_table_insight** · **multi_panel_figure** — example deck-spec: `python/examples/content.medical.deck.json`
 
 ## Colors
 

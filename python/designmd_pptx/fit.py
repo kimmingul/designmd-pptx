@@ -52,6 +52,50 @@ _BUDGETS: dict[str, dict[str, tuple[Any, Any, int]]] = {
         "kpis.label": ("per_item", "micro_pt", 2),
         "kpis.chip": ("per_item", "micro_pt", 1),
     },
+    "kpi_dashboard_grid": {
+        "title": ("full", "title_pt", 1),
+        "subtitle": ("full", "body_pt", 1),
+        # Render uses ~0.55×kpi_pt (≥28); budget must match or fit false-rejects.
+        "kpis.value": ("per_item_dash", "dashboard_kpi_pt", 1),
+        "kpis.label": ("per_item_dash", "micro_pt", 2),
+        "kpis.chip": ("per_item_dash", "micro_pt", 1),
+    },
+    "agenda_toc": {
+        "title": ("full", "title_pt", 1),
+        "items.label": ("full", "body_pt", 1),
+    },
+    "section_opener_numbered": {
+        "title": ("full", "title_pt", 2),
+        "blurb": (22.0, "body_pt", 2),
+    },
+    "story_timeline": {
+        "title": ("full", "title_pt", 1),
+        "era": ("full", "body_pt", 1),
+        "steps.title": ("per_item", "section_pt", 2),
+        "steps.detail": ("per_item", "micro_pt", 4),
+    },
+    "funnel_stages": {
+        "title": ("full", "title_pt", 1),
+        "stages.label": ("full", "section_pt", 1),
+    },
+    "roadmap_swimlane": {"title": ("full", "title_pt", 1)},
+    "quadrant_matrix_rich": {
+        "title": ("full", "title_pt", 1),
+        "quadrants.title": (13.0, "section_pt", 1),
+        "quadrants.body": (13.0, "body_pt", 4),
+    },
+    "pyramid_levels": {
+        "title": ("full", "title_pt", 1),
+        "levels.label": ("full", "section_pt", 1),
+    },
+    "vs_scorecard": {
+        "title": ("full", "title_pt", 1),
+        "criteria.name": ("full", "body_pt", 1),
+    },
+    "chart_callout_panel": {
+        "title": ("full", "title_pt", 1),
+        "callouts": (9.0, "body_pt", 3),
+    },
     "feature_cards": {
         "title": ("full", "title_pt", 1),
         "cards.title": ("per_item", "section_pt", 2),
@@ -103,11 +147,38 @@ _BUDGETS: dict[str, dict[str, tuple[Any, Any, int]]] = {
         "tiers.features": ("per_item", "micro_pt", 2),
     },
     "appendix_table": {"title": ("full", "title_pt", 1)},
+    "consort_flow": {
+        "title": ("full", "title_pt", 1),
+        "stages.label": ("full", "body_pt", 2),
+    },
+    "kaplan_meier": {
+        "title": ("full", "title_pt", 1),
+        "insight": (7.0, "body_pt", 12),
+        "insight_body": (7.0, "body_pt", 12),
+    },
+    "forest_plot": {
+        "title": ("full", "title_pt", 1),
+        "rows.label": ("full", "body_pt", 1),
+    },
+    "study_design": {
+        "title": ("full", "title_pt", 1),
+        "phases.label": ("per_item", "body_pt", 2),
+    },
+    "results_table_insight": {
+        "title": ("full", "title_pt", 1),
+        "insight_body": (7.0, "body_pt", 12),
+    },
+    "multi_panel_figure": {
+        "title": ("full", "title_pt", 1),
+        "panels.caption": ("per_item", "micro_pt", 2),
+    },
 }
 
 _PT_DEFAULTS = {
     "cover_pt": 52, "title_pt": 36, "section_pt": 28, "body_pt": 18,
     "micro_pt": 12, "kpi_pt": 60, "mega_pt": 96,
+    # Matches recipe_kpi_dashboard_grid value_pt = max(28, int(kpi_pt * 0.55)).
+    "dashboard_kpi_pt": 33,
 }
 
 
@@ -118,6 +189,16 @@ def _field_width(spec: Any, margin: float, items: int) -> float:
         n = max(1, min(4, items))
         usable = _CANVAS_W - 2 * margin - (n - 1) * 0.76
         return usable / n - 0.8  # inner padding
+    if spec == "per_item_dash":
+        # Mirror recipe_kpi_dashboard_grid column choice: ≤4 → n; ≤6 → 3; else 4.
+        if items <= 4:
+            n = max(1, items)
+        elif items <= 6:
+            n = 3
+        else:
+            n = 4
+        usable = _CANVAS_W - 2 * margin - (n - 1) * 0.76
+        return usable / n - 0.5
     return float(spec)
 
 
@@ -130,7 +211,12 @@ def check_text(
         return None
     width_spec, pt_key, max_lines = budget
     typ = tokens.get("type") or {}
-    pt = float(typ.get(pt_key, _PT_DEFAULTS.get(pt_key, 18)))
+    if isinstance(pt_key, (int, float)):
+        pt = float(pt_key)
+    else:
+        pt = float(typ.get(pt_key, _PT_DEFAULTS.get(pt_key, 18)))
+        if pt_key == "dashboard_kpi_pt" and "kpi_pt" in typ:
+            pt = max(28.0, float(typ["kpi_pt"]) * 0.55)
     margin = float(tokens.get("margin_cm", _DEFAULT_MARGIN))
     width_cm = _field_width(width_spec, margin, items)
     units_per_line = max(1.0, width_cm / (pt * _PT_TO_CM))

@@ -40,6 +40,10 @@ def _emit_shapes(placed: list[L.Placed]) -> list[dict]:
     for p in placed:
         props = dict(p.box.props)
         op_type = props.pop("_type", "shape")
+        # Drop private engine metadata (e.g. forest-plot CI geometry).
+        for k in list(props):
+            if k.startswith("_"):
+                props.pop(k, None)
         props.setdefault("name", p.name)
         if p.box.kind == "text" and "text" not in props:
             props["text"] = p.box.text
@@ -322,6 +326,429 @@ def recipe_kpi_row(tokens: dict, content: dict | None = None) -> list[dict]:
         "props": {"text": content.get(
             "notes", "Walk KPIs left to right; pause on any watch metric.")},
     })
+    return ops
+
+
+def recipe_kpi_dashboard_grid(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Premium multi-row KPI dashboard (Phase 2 / #58) — 4–8 metric tiles.
+
+    Engine-solved 1–2 row grid inspired by consulting dashboard structure
+    (card bands + large values), original geometry — not a vendor clone.
+    """
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Performance dashboard")
+    subtitle = content.get("subtitle", "")
+    defaults = [
+        {"value": "—", "label": f"Metric {i + 1}", "chip": ""}
+        for i in range(6)
+    ]
+    kpis = content.get("kpis", defaults)
+    if not isinstance(kpis, list) or not kpis:
+        kpis = defaults
+    n = max(4, min(8, len(kpis)))
+    kpis = list(kpis[:n])
+    # Pad short lists up to 4 so the grid never collapses to a single cell.
+    while len(kpis) < 4:
+        kpis.append({"value": "—", "label": "—", "chip": ""})
+    n = len(kpis)
+    bg = c["content_background"]
+    mpt = _micro_pt(t)
+    # Slightly smaller KPI type than kpi_row so 2×N grids stay readable.
+    value_pt = max(28, int(t.get("kpi_pt", 60) * 0.55))
+
+    def _tile(i: int, d: L.Density) -> L.Box:
+        kpi = kpis[i] if isinstance(kpis[i], dict) else {}
+        watch = bool(kpi.get("watch"))
+        fill = c["risk"] if watch else c["surface"]
+        tc = c["on_accent"] if watch else c["text_on_surface"]
+        mc = "FFFFFF" if watch else c["muted"]
+        chip_c = mc if watch else c["accent"]
+        return L.VStack(
+            weight=1,
+            name=f"DashKpi{i + 1}Bg",
+            pad=(0.55 * d.gap, 0.25, 0.45 * d.gap, 0.25),
+            gap=0.2 * d.gap,
+            props={"preset": b["preset"], "fill": fill, "line": c.get("hairline", "none")},
+            children=[
+                L.Spacer(weight=0.6),
+                L.Text(
+                    str(kpi.get("value", "—")),
+                    pt=value_pt,
+                    name=f"DashKpi{i + 1}Value",
+                    min_cm=1.4,
+                    max_cm=3.6,
+                    props={
+                        "font": t["heading_font"],
+                        "size": str(value_pt),
+                        "bold": "true",
+                        "color": tc,
+                        "align": "center",
+                        "fill": "none",
+                    },
+                ),
+                L.Text(
+                    str(kpi.get("label", "")),
+                    pt=mpt,
+                    name=f"DashKpi{i + 1}Label",
+                    min_cm=0.6,
+                    props={
+                        "font": t["body_font"],
+                        "size": str(mpt),
+                        "color": mc,
+                        "align": "center",
+                        "fill": "none",
+                    },
+                ),
+                L.Text(
+                    str(kpi.get("chip", "")),
+                    pt=mpt,
+                    name=f"DashKpi{i + 1}Chip",
+                    min_cm=0.5,
+                    props={
+                        "font": t["body_font"],
+                        "size": str(mpt),
+                        "bold": "true",
+                        "color": chip_c,
+                        "align": "center",
+                        "fill": "none",
+                    },
+                ),
+                L.Spacer(weight=0.4),
+            ],
+        )
+
+    def _row_slices(count: int) -> list[list[int]]:
+        if count <= 4:
+            return [list(range(count))]
+        cols = 3 if count <= 6 else 4
+        return [
+            list(range(i, min(i + cols, count)))
+            for i in range(0, count, cols)
+        ]
+
+    def build(d: L.Density) -> L.Box:
+        header: list[L.Box] = [
+            L.Text(
+                title,
+                pt=t["title_pt"],
+                name="DashTitle",
+                min_cm=1.4,
+                max_cm=2.4,
+                props={
+                    "font": t["heading_font"],
+                    "size": str(t["title_pt"]),
+                    "bold": "true",
+                    "color": c["text_on_content"],
+                    "fill": "none",
+                },
+            ),
+        ]
+        if subtitle:
+            header.append(
+                L.Text(
+                    str(subtitle),
+                    pt=L.floored_pt(t["body_pt"], d),
+                    name="DashSubtitle",
+                    min_cm=0.7,
+                    max_cm=1.6,
+                    props={
+                        "font": t["body_font"],
+                        "size": str(L.floored_pt(t["body_pt"], d)),
+                        "color": c["muted"],
+                        "fill": "none",
+                    },
+                )
+            )
+        rows = []
+        for ri, idxs in enumerate(_row_slices(n)):
+            rows.append(
+                L.HStack(
+                    [_tile(i, d) for i in idxs],
+                    gap=b["gap"] * d.gap,
+                    weight=1,
+                    name=f"DashRow{ri + 1}",
+                )
+            )
+        return L.VStack(
+            pad=(1.1, b["margin"], 0.9, b["margin"]),
+            gap=0.55 * d.gap,
+            name="kpi_dashboard_grid",
+            children=header + rows,
+        )
+
+    placed, _d = L.solve_adaptive(build, 0, 0, L.CANVAS_W, L.CANVAS_H)
+    ops: list[dict] = [
+        {
+            "command": "add",
+            "parent": "/",
+            "type": "slide",
+            "props": {"layout": "blank", "background": bg},
+        },
+    ]
+    ops.extend(_emit_shapes(placed))
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Read the dashboard left→right, top→bottom; call out watches.")},
+    })
+    return ops
+
+
+def recipe_agenda_toc(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Numbered agenda / table-of-contents (Phase 2 / #58) — 5–12 items."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Agenda")
+    raw = content.get("items") or content.get("entries")
+    if not isinstance(raw, list) or not raw:
+        raw = [
+            {"label": "Context & goals"},
+            {"label": "What changed"},
+            {"label": "Options"},
+            {"label": "Recommendation"},
+            {"label": "Next steps"},
+        ]
+    items: list[dict] = []
+    for i, it in enumerate(raw[:12]):
+        if isinstance(it, str):
+            items.append({"number": f"{i + 1:02d}", "label": it, "time": ""})
+        elif isinstance(it, dict):
+            items.append({
+                "number": str(it.get("number") or f"{i + 1:02d}"),
+                "label": str(it.get("label") or it.get("title") or f"Item {i + 1}"),
+                "time": str(it.get("time") or it.get("duration") or ""),
+            })
+    if len(items) < 5:
+        # Pad to the design floor so geometry stays stable in catalog mode.
+        while len(items) < 5:
+            items.append({"number": f"{len(items) + 1:02d}", "label": "—", "time": ""})
+    bg = c["content_background"]
+    body_base = t["body_pt"]
+
+    def build(d: L.Density) -> L.Box:
+        body_pt = L.floored_pt(body_base, d)
+        num_pt = max(body_pt, min(28, t.get("section_pt", 28)))
+        micro = max(12, _micro_pt(t))
+        rows: list[L.Box] = []
+        for i, it in enumerate(items):
+            weighted: list[L.Box] = [
+                L.VStack(
+                    weight=0.18,
+                    name=f"AgendaNumWrap{i + 1}",
+                    children=[
+                        L.Text(
+                            str(it["number"]),
+                            pt=num_pt,
+                            name=f"AgendaNum{i + 1}",
+                            min_cm=0.9,
+                            max_cm=1.4,
+                            props={
+                                "font": t["heading_font"],
+                                "size": str(num_pt),
+                                "bold": "true",
+                                "color": c["accent"],
+                                "fill": "none",
+                            },
+                        ),
+                    ],
+                ),
+                L.VStack(
+                    weight=1,
+                    name=f"AgendaLabelWrap{i + 1}",
+                    children=[
+                        L.Text(
+                            str(it["label"]),
+                            pt=body_pt,
+                            name=f"AgendaLabel{i + 1}",
+                            weight=1,
+                            min_cm=0.9,
+                            props={
+                                "font": t["body_font"],
+                                "size": str(body_pt),
+                                "color": c["text_on_content"],
+                                "fill": "none",
+                            },
+                        ),
+                    ],
+                ),
+            ]
+            if it.get("time"):
+                weighted.append(
+                    L.VStack(
+                        weight=0.28,
+                        name=f"AgendaTimeWrap{i + 1}",
+                        children=[
+                            L.Text(
+                                str(it["time"]),
+                                pt=micro,
+                                name=f"AgendaTime{i + 1}",
+                                min_cm=0.8,
+                                max_cm=1.2,
+                                props={
+                                    "font": t["body_font"],
+                                    "size": str(micro),
+                                    "color": c["muted"],
+                                    "align": "right",
+                                    "fill": "none",
+                                },
+                            ),
+                        ],
+                    )
+                )
+            rows.append(
+                L.HStack(
+                    weighted,
+                    gap=0.4 * d.gap,
+                    weight=1,
+                    name=f"AgendaRow{i + 1}",
+                )
+            )
+            if i < len(items) - 1:
+                rows.append(
+                    L.Fixed(
+                        0.04,
+                        name=f"AgendaRule{i + 1}",
+                        props={
+                            "preset": "rect",
+                            "fill": c.get("hairline", c["muted"]),
+                            "line": "none",
+                        },
+                    )
+                )
+        return L.VStack(
+            pad=(1.1, b["margin"], 1.0, b["margin"]),
+            gap=0.35 * d.gap,
+            name="agenda_toc",
+            children=[
+                L.Text(
+                    title,
+                    pt=t["title_pt"],
+                    name="AgendaTitle",
+                    min_cm=1.5,
+                    max_cm=2.5,
+                    props={
+                        "font": t["heading_font"],
+                        "size": str(t["title_pt"]),
+                        "bold": "true",
+                        "color": c["text_on_content"],
+                        "fill": "none",
+                    },
+                ),
+                L.VStack(rows, gap=0.28 * d.gap, weight=1, name="AgendaList"),
+            ],
+        )
+
+    placed, _d = L.solve_adaptive(build, 0, 0, L.CANVAS_W, L.CANVAS_H)
+    ops: list[dict] = [
+        {
+            "command": "add",
+            "parent": "/",
+            "type": "slide",
+            "props": {"layout": "blank", "background": bg},
+        },
+    ]
+    ops.extend(_emit_shapes(placed))
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get("notes", "Walk the agenda; mark time boxes.")},
+    })
+    return ops
+
+
+def recipe_section_opener_numbered(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Premium section opener — solid large index + title (Phase 2 / #58).
+
+    Fixed geometry (overlap / opacity centering is intentional chrome, not flex).
+    Distinct from ``section_divider`` which uses a washed-out watermark number.
+    """
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    number = str(content.get("number", "01"))
+    title = content.get("title", "Section")
+    blurb = content.get("blurb", "")
+    bg = c["background"]
+
+    ops: list[dict] = [
+        {
+            "command": "add",
+            "parent": "/",
+            "type": "slide",
+            "props": {"layout": "blank", "background": bg},
+        },
+        {
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "shape",
+            "props": {
+                "name": "OpenerAccentBar",
+                "preset": "rect",
+                "fill": c["accent"],
+                "line": "none",
+                "x": _cm(b["margin"]),
+                "y": "6.4cm",
+                "width": "1.1cm",
+                "height": "6.2cm",
+            },
+        },
+        {
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "shape",
+            "props": {
+                "name": "OpenerNumber",
+                "text": number,
+                "x": _cm(b["margin"] + 1.6),
+                "y": "5.8cm",
+                "width": "8cm",
+                "height": "2.4cm",
+                "font": t["heading_font"],
+                "size": "54",
+                "bold": "true",
+                "color": c["accent"],
+                "fill": "none",
+            },
+        },
+        {
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "shape",
+            "props": {
+                "name": "OpenerTitle",
+                "text": title,
+                "x": _cm(b["margin"] + 1.6),
+                "y": "8.4cm",
+                "width": _cm(33.87 - 2 * b["margin"] - 1.6),
+                "height": "2.6cm",
+                "font": t["heading_font"],
+                "size": str(t["title_pt"]),
+                "bold": "true",
+                "color": c["text"],
+                "fill": "none",
+            },
+        },
+    ]
+    if blurb:
+        ops.append({
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "shape",
+            "props": {
+                "name": "OpenerBlurb",
+                "text": blurb,
+                "x": _cm(b["margin"] + 1.6),
+                "y": "11.3cm",
+                "width": "22cm",
+                "height": "2.2cm",
+                "font": t["body_font"],
+                "size": str(t["body_pt"]),
+                "color": c["muted"],
+                "fill": "none",
+            },
+        })
     return ops
 
 
@@ -1903,6 +2330,1484 @@ def recipe_appendix_table(tokens: dict, content: dict | None = None) -> list[dic
     return ops
 
 
+def recipe_story_timeline(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Premium story timeline (Phase 2 / #58) — era band + 2–6 milestone cards.
+
+    Richer than ``timeline``: each step has date/era, title, and detail body.
+    Engine-solved columns; axis + dots overlaid like timeline.
+    """
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "The story so far")
+    era = content.get("era", content.get("subtitle", ""))
+    steps = content.get("steps") or [
+        {"date": "Q1", "title": "Discover", "detail": "Frame the problem."},
+        {"date": "Q2", "title": "Build", "detail": "Ship the thin slice."},
+        {"date": "Q3", "title": "Scale", "detail": "Instrument and expand."},
+        {"date": "Q4", "title": "Prove", "detail": "Measure outcomes."},
+    ]
+    if not isinstance(steps, list):
+        steps = [{"title": str(steps)}]
+    n = max(2, min(6, len(steps)))
+    steps = steps[:n]
+    mpt = _micro_pt(t)
+    y_line = 8.6
+
+    def _col(i: int, body_pt: int) -> L.Box:
+        s = steps[i] if isinstance(steps[i], dict) else {"title": str(steps[i])}
+        date = str(s.get("date") or s.get("era") or s.get("label") or f"{i + 1:02d}")
+        head = str(s.get("title") or s.get("label") or f"Milestone {i + 1}")
+        detail = str(s.get("detail") or s.get("body") or "")
+        return L.VStack(
+            weight=1,
+            name=f"StoryCol{i + 1}",
+            gap=0.3,
+            pad=(0.45, 0.35, 0.45, 0.35),
+            props={
+                "preset": b["preset"],
+                "fill": c["surface"],
+                "line": c.get("hairline", "none"),
+            },
+            children=[
+                L.Text(
+                    date, pt=mpt, name=f"StoryDate{i + 1}", min_cm=0.55, max_cm=1.0,
+                    props={
+                        "font": t["body_font"], "size": str(mpt), "bold": "true",
+                        "color": c["accent"], "align": "center", "fill": "none",
+                    },
+                ),
+                L.Text(
+                    head, pt=max(16, min(22, t["section_pt"] - 4)),
+                    name=f"StoryTitle{i + 1}", min_cm=0.9, max_cm=2.2,
+                    props={
+                        "font": t["heading_font"],
+                        "size": str(max(16, min(22, t["section_pt"] - 4))),
+                        "bold": "true", "color": c["text_on_surface"],
+                        "align": "center", "fill": "none",
+                    },
+                ),
+                L.Text(
+                    detail, pt=body_pt, name=f"StoryDetail{i + 1}", weight=1,
+                    props={
+                        "font": t["body_font"], "size": str(body_pt),
+                        "color": c["muted"], "align": "center", "fill": "none",
+                    },
+                ),
+            ],
+        )
+
+    def build(d: L.Density) -> L.Box:
+        bpt = L.floored_pt(max(12, mpt + 2), d, floor=12)
+        return L.HStack(
+            [_col(i, bpt) for i in range(len(steps))],
+            gap=b["gap"] * d.gap,
+            weight=1,
+        )
+
+    placed, _d = L.solve_adaptive(
+        build, b["margin"], y_line + 1.1, 33.87 - 2 * b["margin"],
+        17.9 - (y_line + 1.1),
+    )
+    axis_w = 33.87 - 2 * b["margin"]
+    ops: list[dict] = [
+        _slide_op(tokens),
+        _title_op(tokens, "StoryTlTitle", title),
+    ]
+    if era:
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": "StoryEra", "text": str(era),
+                "x": _cm(b["margin"]), "y": "2.7cm",
+                "width": _cm(axis_w), "height": "0.9cm",
+                "font": t["body_font"], "size": str(t["body_pt"]),
+                "color": c["muted"], "fill": "none",
+            },
+        })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "StoryAxis", "preset": "rect",
+            "fill": c.get("hairline", c["muted"]), "line": "none",
+            "x": _cm(b["margin"]), "y": _cm(y_line),
+            "width": _cm(axis_w), "height": "0.12cm",
+        },
+    })
+    ops.extend(_emit_shapes(placed))
+    cards = {p.name: p for p in placed if p.name.startswith("StoryCol")}
+    # Prefer centering dots under date labels when present.
+    dates = {p.name: p for p in placed if p.name.startswith("StoryDate")}
+    dot = 0.75
+    for i in range(len(steps)):
+        p = dates.get(f"StoryDate{i + 1}") or cards.get(f"StoryCol{i + 1}")
+        if p is None:
+            continue
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"StoryDot{i + 1}", "preset": "ellipse",
+                "fill": c["accent"], "line": "none",
+                "x": _cm(p.x + p.w / 2 - dot / 2),
+                "y": _cm(y_line - dot / 2 + 0.06),
+                "width": _cm(dot), "height": _cm(dot),
+            },
+        })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Tell the arc left→right; pause on the turning point.")},
+    })
+    return ops
+
+
+def recipe_funnel_stages(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Funnel / stage cascade (Phase 2 / #58) — 3–6 decreasing-width bands."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Conversion funnel")
+    stages = content.get("stages") or content.get("steps") or [
+        {"label": "Awareness", "value": "100%"},
+        {"label": "Interest", "value": "48%"},
+        {"label": "Decision", "value": "22%"},
+        {"label": "Action", "value": "9%"},
+    ]
+    if not isinstance(stages, list):
+        stages = [{"label": str(stages)}]
+    n = max(3, min(6, len(stages)))
+    stages = stages[:n]
+    while len(stages) < 3:
+        stages.append({"label": "—", "value": ""})
+    n = len(stages)
+    m = b["margin"]
+    usable = 33.87 - 2 * m
+    # Band heights share vertical space under the title.
+    top = 3.4
+    bottom = 18.0
+    gap = 0.28
+    band_h = (bottom - top - gap * (n - 1)) / n
+    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "FunnelTitle", title)]
+    # Width fraction from top (widest) to bottom (narrowest): 1.0 → ~0.42
+    for i, st in enumerate(stages):
+        if isinstance(st, str):
+            label, value = st, ""
+        else:
+            label = str(st.get("label") or st.get("title") or f"Stage {i + 1}")
+            value = str(st.get("value") or st.get("metric") or "")
+        frac = 1.0 - (i / max(1, n - 1)) * 0.55
+        w = usable * frac
+        x = m + (usable - w) / 2
+        y = top + i * (band_h + gap)
+        # Alternate surface / accent-tinted fill for depth without vendor art.
+        fill = c["accent"] if i == n - 1 else c["surface"]
+        tc = c["on_accent"] if i == n - 1 else c["text_on_surface"]
+        mc = c["on_accent"] if i == n - 1 else c["muted"]
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"FunnelBand{i + 1}", "preset": b["preset"],
+                "fill": fill, "line": "none",
+                "x": _cm(x), "y": _cm(y), "width": _cm(w), "height": _cm(band_h),
+            },
+        })
+        text = f"{label}  ·  {value}" if value else label
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"FunnelLabel{i + 1}", "text": text,
+                "x": _cm(x + 0.4), "y": _cm(y + band_h * 0.28),
+                "width": _cm(max(2.0, w - 0.8)), "height": _cm(band_h * 0.5),
+                "font": t["heading_font"],
+                "size": str(max(16, min(24, t["section_pt"] - 4))),
+                "bold": "true", "color": tc, "align": "center", "fill": "none",
+            },
+        })
+        # silence unused mc if value empty — use for secondary when value present
+        if value and i != n - 1:
+            ops[-1]["props"]["color"] = tc
+        _ = mc
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Name the drop-off between the two biggest deltas.")},
+    })
+    return ops
+
+
+def recipe_roadmap_swimlane(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Roadmap swimlanes (Phase 2 / #58) — rows × phase columns (structured grid)."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Roadmap")
+    phases = content.get("phases") or content.get("columns") or ["Now", "Next", "Later"]
+    if not isinstance(phases, list):
+        phases = [str(phases)]
+    phases = [str(p) for p in phases[:5]]
+    if len(phases) < 2:
+        phases = ["Now", "Next", "Later"]
+    lanes = content.get("lanes") or content.get("rows") or [
+        {"name": "Product", "cells": ["MVP", "Beta", "GA"]},
+        {"name": "GTM", "cells": ["Design partners", "Launch", "Expand"]},
+        {"name": "Platform", "cells": ["Core APIs", "Scale", "Self-serve"]},
+    ]
+    if not isinstance(lanes, list):
+        lanes = [{"name": "Lane", "cells": []}]
+    lanes = lanes[:5]
+    m = b["margin"]
+    usable = 33.87 - 2 * m
+    label_w = 4.2
+    grid_w = usable - label_w - 0.4
+    n_ph = len(phases)
+    col_w = (grid_w - 0.25 * (n_ph - 1)) / n_ph
+    top = 3.5
+    header_h = 1.1
+    n_lanes = max(1, len(lanes))
+    lane_h = min(3.2, (18.2 - top - header_h - 0.3 * n_lanes) / n_lanes)
+    micro = str(_micro_pt(t))
+    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "RoadmapTitle", title)]
+    # Phase headers
+    for j, ph in enumerate(phases):
+        x = m + label_w + 0.4 + j * (col_w + 0.25)
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"RoadPhase{j + 1}", "text": ph,
+                "x": _cm(x), "y": _cm(top),
+                "width": _cm(col_w), "height": _cm(header_h),
+                "font": t["heading_font"], "size": str(max(14, t["body_pt"])),
+                "bold": "true", "color": c["accent"], "align": "center", "fill": "none",
+            },
+        })
+    for i, lane in enumerate(lanes):
+        if isinstance(lane, str):
+            name, cells = lane, []
+        else:
+            name = str(lane.get("name") or lane.get("label") or f"Lane {i + 1}")
+            cells = lane.get("cells") or lane.get("items") or []
+        if not isinstance(cells, list):
+            cells = [str(cells)]
+        cells = list(cells) + [""] * n_ph
+        cells = cells[:n_ph]
+        y = top + header_h + 0.25 + i * (lane_h + 0.3)
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"RoadLane{i + 1}", "text": name,
+                "x": _cm(m), "y": _cm(y),
+                "width": _cm(label_w), "height": _cm(lane_h),
+                "font": t["heading_font"], "size": str(max(14, t["body_pt"])),
+                "bold": "true", "color": c["text_on_content"], "fill": "none",
+            },
+        })
+        for j, cell in enumerate(cells):
+            x = m + label_w + 0.4 + j * (col_w + 0.25)
+            ops.append({
+                "command": "add", "parent": "/slide[last()]", "type": "shape",
+                "props": {
+                    "name": f"RoadCell{i + 1}_{j + 1}Bg", "preset": b["preset"],
+                    "fill": c["surface"], "line": c.get("hairline", "none"),
+                    "x": _cm(x), "y": _cm(y),
+                    "width": _cm(col_w), "height": _cm(lane_h),
+                },
+            })
+            if str(cell).strip():
+                ops.append({
+                    "command": "add", "parent": "/slide[last()]", "type": "shape",
+                    "props": {
+                        "name": f"RoadCell{i + 1}_{j + 1}", "text": str(cell),
+                        "x": _cm(x + 0.2), "y": _cm(y + 0.25),
+                        "width": _cm(col_w - 0.4), "height": _cm(lane_h - 0.5),
+                        "font": t["body_font"], "size": micro,
+                        "color": c["text_on_surface"], "fill": "none",
+                    },
+                })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Walk one lane at a time; call out dependencies across phases.")},
+    })
+    return ops
+
+
+def recipe_quadrant_matrix_rich(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Labeled-axis 2×2 with denser cells (Phase 2 / #58) — engine grid + chrome."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Priority matrix")
+    quads = content.get("quadrants") or [
+        {"title": "Bet", "body": "High impact · invest", "tag": "Do"},
+        {"title": "Shape", "body": "Promising · refine", "tag": "Design"},
+        {"title": "Delegate", "body": "Low strategy · staff", "tag": "Own"},
+        {"title": "Drop", "body": "Low leverage · cut", "tag": "Kill"},
+    ]
+    quads = (list(quads) + [{}] * 4)[:4]
+    axes = content.get("axes") or {"x": "Effort →", "y": "Impact →"}
+    qt_pt = max(16, t["section_pt"] - 6)
+    micro = _micro_pt(t)
+
+    def _quad(i: int, body_pt: int) -> L.Box:
+        q = quads[i] if isinstance(quads[i], dict) else {}
+        kids = [
+            L.Text(
+                str(q.get("tag") or q.get("chip") or ""),
+                pt=micro, name=f"RichQuad{i + 1}Tag", min_cm=0.45, max_cm=0.9,
+                props={
+                    "font": t["body_font"], "size": str(micro), "bold": "true",
+                    "color": c["accent"], "fill": "none",
+                },
+            ),
+            L.Text(
+                str(q.get("title", "")), pt=qt_pt, name=f"RichQuad{i + 1}Title",
+                min_cm=0.8, max_cm=2.0,
+                props={
+                    "font": t["heading_font"], "size": str(qt_pt), "bold": "true",
+                    "color": c["text_on_surface"], "fill": "none",
+                },
+            ),
+            L.Text(
+                str(q.get("body", "")), pt=body_pt, name=f"RichQuad{i + 1}Body",
+                weight=1,
+                props={
+                    "font": t["body_font"], "size": str(body_pt),
+                    "color": c["muted"], "fill": "none",
+                },
+            ),
+        ]
+        return L.VStack(
+            weight=1, name=f"RichQuad{i + 1}Bg",
+            pad=(0.45, 0.55, 0.5, 0.55), gap=0.28,
+            props={"preset": b["preset"], "fill": c["surface"],
+                   "line": c.get("hairline", "none")},
+            children=kids,
+        )
+
+    def build(d: L.Density) -> L.Box:
+        bpt = L.floored_pt(t["body_pt"], d)
+        return L.VStack(gap=b["gap"] * d.gap, name="rich_matrix_grid", children=[
+            L.HStack([_quad(0, bpt), _quad(1, bpt)], gap=b["gap"] * d.gap, weight=1),
+            L.HStack([_quad(2, bpt), _quad(3, bpt)], gap=b["gap"] * d.gap, weight=1),
+        ])
+
+    grid_top = 3.9 if axes.get("y") else 3.4
+    grid_bottom = 17.0 if axes.get("x") else 18.2
+    placed, _d = L.solve_adaptive(
+        build, b["margin"], grid_top, 33.87 - 2 * b["margin"], grid_bottom - grid_top)
+    ops = [_slide_op(tokens), _title_op(tokens, "RichMatrixTitle", title),
+           *_emit_shapes(placed)]
+    usable = 33.87 - 2 * b["margin"]
+    micro_s = str(micro)
+    if axes.get("x"):
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": "RichAxisX", "text": str(axes["x"]),
+                "x": _cm(b["margin"]), "y": "17.5cm",
+                "width": _cm(usable), "height": "0.9cm",
+                "font": t["body_font"], "size": micro_s,
+                "color": c["muted"], "align": "center", "fill": "none",
+            },
+        })
+    if axes.get("y"):
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": "RichAxisY", "text": str(axes["y"]),
+                "x": _cm(b["margin"]), "y": "3.0cm",
+                "width": "14cm", "height": "0.8cm",
+                "font": t["body_font"], "size": micro_s,
+                "color": c["muted"], "fill": "none",
+            },
+        })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Start top-left; contrast invest vs kill with one example each.")},
+    })
+    return ops
+
+
+def recipe_pyramid_levels(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Hierarchy pyramid (Phase 2 / #58) — 3–5 centered levels, widest at base."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Capability stack")
+    levels = content.get("levels") or content.get("steps") or [
+        {"label": "Vision"},
+        {"label": "Strategy"},
+        {"label": "Programs"},
+        {"label": "Execution"},
+    ]
+    if not isinstance(levels, list):
+        levels = [{"label": str(levels)}]
+    n = max(3, min(5, len(levels)))
+    levels = levels[:n]
+    while len(levels) < 3:
+        levels.append({"label": "—"})
+    n = len(levels)
+    m = b["margin"]
+    usable = 33.87 - 2 * m
+    top = 3.5
+    bottom = 18.0
+    gap = 0.3
+    band_h = (bottom - top - gap * (n - 1)) / n
+    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "PyramidTitle", title)]
+    for i, lv in enumerate(levels):
+        # Top of pyramid is narrowest (index 0); base is widest.
+        if isinstance(lv, str):
+            label, detail = lv, ""
+        else:
+            label = str(lv.get("label") or lv.get("title") or f"Level {i + 1}")
+            detail = str(lv.get("detail") or lv.get("body") or "")
+        frac = 0.42 + (i / max(1, n - 1)) * 0.58
+        w = usable * frac
+        x = m + (usable - w) / 2
+        y = top + i * (band_h + gap)
+        fill = c["accent"] if i == 0 else c["surface"]
+        tc = c["on_accent"] if i == 0 else c["text_on_surface"]
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"PyramidBand{i + 1}", "preset": b["preset"],
+                "fill": fill, "line": "none",
+                "x": _cm(x), "y": _cm(y), "width": _cm(w), "height": _cm(band_h),
+            },
+        })
+        text = f"{label} — {detail}" if detail else label
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"PyramidLabel{i + 1}", "text": text,
+                "x": _cm(x + 0.35), "y": _cm(y + band_h * 0.28),
+                "width": _cm(max(2.0, w - 0.7)), "height": _cm(band_h * 0.5),
+                "font": t["heading_font"],
+                "size": str(max(14, min(22, t["section_pt"] - 6))),
+                "bold": "true", "color": tc, "align": "center", "fill": "none",
+            },
+        })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Read top→bottom; the apex is the single organizing idea.")},
+    })
+    return ops
+
+
+def recipe_vs_scorecard(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Two-option scorecard (Phase 2 / #58) — criteria rows with A/B scores."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Option scorecard")
+    left = content.get("left") or content.get("option_a") or {"title": "Option A"}
+    right = content.get("right") or content.get("option_b") or {"title": "Option B"}
+    if not isinstance(left, dict):
+        left = {"title": str(left)}
+    if not isinstance(right, dict):
+        right = {"title": str(right)}
+    criteria = content.get("criteria") or content.get("rows") or [
+        {"name": "Impact", "left": "High", "right": "Med"},
+        {"name": "Effort", "left": "Med", "right": "Low"},
+        {"name": "Risk", "left": "Low", "right": "Med"},
+        {"name": "Fit", "left": "Strong", "right": "Partial"},
+    ]
+    if not isinstance(criteria, list):
+        criteria = []
+    criteria = criteria[:8]
+    if len(criteria) < 2:
+        criteria = [
+            {"name": "Impact", "left": "—", "right": "—"},
+            {"name": "Effort", "left": "—", "right": "—"},
+        ]
+    mpt = _micro_pt(t)
+    body_base = t["body_pt"]
+
+    def build(d: L.Density) -> L.Box:
+        bpt = L.floored_pt(body_base, d)
+        header = L.HStack(
+            [
+                L.VStack(weight=1.1, name="VsCritHead", children=[
+                    L.Text("Criteria", pt=mpt, name="VsCritHeadT", min_cm=0.7,
+                           props={"font": t["body_font"], "size": str(mpt),
+                                  "bold": "true", "color": c["muted"], "fill": "none"}),
+                ]),
+                L.VStack(weight=1, name="VsLeftHead", children=[
+                    L.Text(str(left.get("title", "A")), pt=max(16, t["section_pt"] - 6),
+                           name="VsLeftHeadT", min_cm=0.9,
+                           props={"font": t["heading_font"],
+                                  "size": str(max(16, t["section_pt"] - 6)),
+                                  "bold": "true", "color": c["accent"],
+                                  "align": "center", "fill": "none"}),
+                ]),
+                L.VStack(weight=1, name="VsRightHead", children=[
+                    L.Text(str(right.get("title", "B")), pt=max(16, t["section_pt"] - 6),
+                           name="VsRightHeadT", min_cm=0.9,
+                           props={"font": t["heading_font"],
+                                  "size": str(max(16, t["section_pt"] - 6)),
+                                  "bold": "true", "color": c["accent"],
+                                  "align": "center", "fill": "none"}),
+                ]),
+            ],
+            gap=0.4 * d.gap,
+            name="VsHeader",
+        )
+        rows: list[L.Box] = [header]
+        for i, row in enumerate(criteria):
+            if isinstance(row, str):
+                name, lv, rv = row, "—", "—"
+            else:
+                name = str(row.get("name") or row.get("label") or f"C{i + 1}")
+                lv = str(row.get("left") or row.get("a") or "—")
+                rv = str(row.get("right") or row.get("b") or "—")
+            rows.append(
+                L.HStack(
+                    [
+                        L.VStack(
+                            weight=1.1, name=f"VsCrit{i + 1}Bg",
+                            pad=(0.35, 0.4, 0.35, 0.4),
+                            props={"preset": b["preset"], "fill": c["surface"],
+                                   "line": "none"},
+                            children=[
+                                L.Text(name, pt=bpt, name=f"VsCrit{i + 1}",
+                                       min_cm=0.7, weight=1,
+                                       props={"font": t["heading_font"],
+                                              "size": str(bpt), "bold": "true",
+                                              "color": c["text_on_surface"],
+                                              "fill": "none"}),
+                            ],
+                        ),
+                        L.VStack(
+                            weight=1, name=f"VsLeft{i + 1}Bg",
+                            pad=(0.35, 0.4, 0.35, 0.4),
+                            props={"preset": b["preset"], "fill": c["surface"],
+                                   "line": "none"},
+                            children=[
+                                L.Text(lv, pt=bpt, name=f"VsLeft{i + 1}",
+                                       min_cm=0.7, weight=1,
+                                       props={"font": t["body_font"], "size": str(bpt),
+                                              "color": c["text_on_surface"],
+                                              "align": "center", "fill": "none"}),
+                            ],
+                        ),
+                        L.VStack(
+                            weight=1, name=f"VsRight{i + 1}Bg",
+                            pad=(0.35, 0.4, 0.35, 0.4),
+                            props={"preset": b["preset"], "fill": c["surface"],
+                                   "line": "none"},
+                            children=[
+                                L.Text(rv, pt=bpt, name=f"VsRight{i + 1}",
+                                       min_cm=0.7, weight=1,
+                                       props={"font": t["body_font"], "size": str(bpt),
+                                              "color": c["text_on_surface"],
+                                              "align": "center", "fill": "none"}),
+                            ],
+                        ),
+                    ],
+                    gap=0.35 * d.gap,
+                    weight=1,
+                    name=f"VsRow{i + 1}",
+                )
+            )
+        return L.VStack(
+            pad=(1.1, b["margin"], 0.9, b["margin"]),
+            gap=0.4 * d.gap,
+            name="vs_scorecard",
+            children=[
+                L.Text(
+                    title, pt=t["title_pt"], name="VsTitle",
+                    min_cm=1.4, max_cm=2.4,
+                    props={
+                        "font": t["heading_font"], "size": str(t["title_pt"]),
+                        "bold": "true", "color": c["text_on_content"], "fill": "none",
+                    },
+                ),
+                L.VStack(rows, gap=0.35 * d.gap, weight=1, name="VsGrid"),
+            ],
+        )
+
+    placed, _d = L.solve_adaptive(build, 0, 0, L.CANVAS_W, L.CANVAS_H)
+    ops: list[dict] = [_slide_op(tokens), *_emit_shapes(placed)]
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Score transparently; pick the option that wins where it matters.")},
+    })
+    return ops
+
+
+def recipe_chart_callout_panel(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Chart + three numbered callouts (Phase 2 / #58) — structured storytelling."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "What the data says")
+    cats = content.get("categories", "A,B,C,D")
+    s1 = content.get("series1_values", "10,14,12,18")
+    s2 = content.get("series2_values", "")
+    s1_name = content.get("series1_name", "Series 1")
+    s2_name = content.get("series2_name", "Series 2")
+    chart_type = str(content.get("chart_type", "column"))
+    callouts = content.get("callouts") or content.get("bullets") or [
+        "Lead with the single most surprising bar.",
+        "Name the driver behind the inflection.",
+        "Close with the decision this enables.",
+    ]
+    if not isinstance(callouts, list):
+        callouts = [str(callouts)]
+    callouts = [str(x) for x in callouts[:3]]
+    while len(callouts) < 3:
+        callouts.append("—")
+    single_series = chart_type.lower() in (
+        "pie", "doughnut", "funnel", "treemap", "sunburst", "pareto", "histogram",
+    )
+    series2 = c.get("chart_series2", c["muted"])
+    chart_props: dict[str, Any] = {
+        "name": "CalloutChart",
+        "chartType": chart_type,
+        "series1.name": s1_name,
+        "series1.values": s1,
+        "series1.color": c.get("chart_series1", c["accent"]),
+        "categories": cats,
+        "x": _cm(b["margin"]),
+        "y": "3.4cm",
+        "width": "19.5cm",
+        "height": "14cm",
+    }
+    if not single_series and s2:
+        chart_props.update({
+            "series2.name": s2_name,
+            "series2.values": s2,
+            "series2.color": series2,
+        })
+    ops: list[dict] = [
+        _slide_op(tokens),
+        _title_op(tokens, "CalloutTitle", title),
+        {"command": "add", "parent": "/slide[last()]", "type": "chart",
+         "props": chart_props},
+        {
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": "CalloutPanelBg", "preset": b["preset"],
+                "fill": c["surface"], "line": "none",
+                "x": "22.2cm", "y": "3.4cm", "width": "10.2cm", "height": "14cm",
+            },
+        },
+    ]
+    y0 = 4.0
+    slot_h = 4.0
+    for i, text in enumerate(callouts):
+        y = y0 + i * slot_h
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"CalloutNum{i + 1}", "text": f"{i + 1:02d}",
+                "x": "22.7cm", "y": _cm(y),
+                "width": "2.2cm", "height": "1.0cm",
+                "font": t["heading_font"], "size": "22", "bold": "true",
+                "color": c["accent"], "fill": "none",
+            },
+        })
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"CalloutBody{i + 1}", "text": text,
+                "x": "22.7cm", "y": _cm(y + 1.1),
+                "width": "9.0cm", "height": "2.4cm",
+                "font": t["body_font"], "size": str(t["body_pt"]),
+                "color": c["text_on_surface"], "fill": "none",
+            },
+        })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Point to the chart only after the three callouts land.")},
+    })
+    return ops
+
+
+def recipe_consort_flow(tokens: dict, content: dict | None = None) -> list[dict]:
+    """CONSORT-style enrollment flow (Phase 2 / #10) — vertical boxes 3–7 stages.
+
+    Engine-solved stack of stage cards (label + n= count + optional reason).
+    Original geometry for research decks; not a medical-template clone.
+    """
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "CONSORT flow")
+    stages = content.get("stages") or content.get("steps") or [
+        {"label": "Assessed for eligibility", "n": "N=420"},
+        {"label": "Randomized", "n": "N=300"},
+        {"label": "Allocated to intervention", "n": "N=150"},
+        {"label": "Analyzed", "n": "N=148", "note": "2 lost to follow-up"},
+    ]
+    if not isinstance(stages, list):
+        stages = [{"label": str(stages)}]
+    stages = stages[:7]
+    while len(stages) < 3:
+        stages.append({"label": "—", "n": ""})
+    mpt = _micro_pt(t)
+
+    def build(d: L.Density) -> L.Box:
+        # Tighter type as stage count grows so 5–7 CONSORT boxes still fit.
+        n_stages = len(stages)
+        body_pt = L.floored_pt(max(12, t["body_pt"] - (0 if n_stages <= 4 else 4)), d, floor=12)
+        label_min = 0.45 if n_stages >= 5 else 0.65
+        rows: list[L.Box] = []
+        for i, st in enumerate(stages):
+            if isinstance(st, str):
+                label, n, note = st, "", ""
+            else:
+                label = str(st.get("label") or st.get("title") or f"Stage {i + 1}")
+                n = str(st.get("n") or st.get("count") or "")
+                note = str(st.get("note") or st.get("reason") or "")
+            kids: list[L.Box] = [
+                L.Text(
+                    label, pt=body_pt, name=f"ConsortLabel{i + 1}",
+                    min_cm=label_min, max_cm=1.4, weight=1,
+                    props={
+                        "font": t["heading_font"], "size": str(body_pt),
+                        "bold": "true", "color": c["text_on_surface"], "fill": "none",
+                    },
+                ),
+            ]
+            if n:
+                kids.append(
+                    L.Text(
+                        n, pt=mpt, name=f"ConsortN{i + 1}",
+                        min_cm=0.35, max_cm=0.7,
+                        props={
+                            "font": t["body_font"], "size": str(mpt), "bold": "true",
+                            "color": c["accent"], "fill": "none",
+                        },
+                    )
+                )
+            if note:
+                kids.append(
+                    L.Text(
+                        note, pt=mpt, name=f"ConsortNote{i + 1}",
+                        min_cm=0.3, max_cm=0.7,
+                        props={
+                            "font": t["body_font"], "size": str(mpt),
+                            "color": c["muted"], "fill": "none",
+                        },
+                    )
+                )
+            rows.append(
+                L.VStack(
+                    weight=1, name=f"ConsortBox{i + 1}",
+                    pad=(0.2 * d.gap, 0.45, 0.2 * d.gap, 0.45),
+                    gap=0.08 * d.gap,
+                    props={
+                        "preset": b["preset"], "fill": c["surface"],
+                        "line": c.get("hairline", "none"),
+                    },
+                    children=kids,
+                )
+            )
+        side = b["margin"] + (3.0 if n_stages <= 4 else 5.0)
+        return L.VStack(
+            pad=(1.0, side, 0.7, side),
+            gap=0.25 * d.gap,
+            name="consort_flow",
+            children=[
+                L.Text(
+                    title, pt=t["title_pt"], name="ConsortTitle",
+                    min_cm=1.2, max_cm=2.0,
+                    props={
+                        "font": t["heading_font"], "size": str(t["title_pt"]),
+                        "bold": "true", "color": c["text_on_content"], "fill": "none",
+                    },
+                ),
+                L.VStack(rows, gap=0.18 * d.gap, weight=1, name="ConsortStack"),
+            ],
+        )
+
+    placed, _d = L.solve_adaptive(build, 0, 0, L.CANVAS_W, L.CANVAS_H)
+    ops: list[dict] = [_slide_op(tokens), *_emit_shapes(placed)]
+    # Connectors between consecutive boxes (visual CONSORT spine).
+    boxes = {p.name: p for p in placed if p.name.startswith("ConsortBox")}
+    for i in range(1, len(stages)):
+        a, b_ = boxes.get(f"ConsortBox{i}"), boxes.get(f"ConsortBox{i + 1}")
+        if not a or not b_:
+            continue
+        x = a.x + a.w / 2 - 0.06
+        y = a.y + a.h
+        h = max(0.15, b_.y - y)
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"ConsortLink{i}", "preset": "rect",
+                "fill": c["accent"], "line": "none",
+                "x": _cm(x), "y": _cm(y), "width": "0.12cm", "height": _cm(h),
+            },
+        })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Walk top→bottom; call out each attrition reason.")},
+    })
+    return ops
+
+
+def recipe_kaplan_meier(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Kaplan–Meier curve + risk table (Phase 2 / #10) — structured.
+
+    Uses a line chart for survival estimates and a compact risk table under it.
+    Provide categories as time points and series as arm survival percentages.
+    """
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Kaplan–Meier survival")
+    cats = content.get("categories", "0,6,12,18,24")
+    s1 = content.get("series1_values", "100,92,85,78,72")
+    s2 = content.get("series2_values", "100,88,79,70,61")
+    s1_name = content.get("series1_name", "Intervention")
+    s2_name = content.get("series2_name", "Control")
+    insight = content.get("insight", content.get("insight_body", ""))
+    # Risk table: list of {time, arm_a, arm_b} or rows [[time, a, b], ...]
+    risk = content.get("risk_table") or content.get("rows") or [
+        ["0", "150", "150"],
+        ["12", "128", "119"],
+        ["24", "96", "84"],
+    ]
+    if risk and isinstance(risk[0], dict):
+        risk = [
+            [str(r.get("time", "")), str(r.get("arm_a", r.get("n1", ""))),
+             str(r.get("arm_b", r.get("n2", "")))]
+            for r in risk
+        ]
+    risk = risk[:6]
+    headers = content.get("risk_headers") or ["Month", s1_name, s2_name]
+    m = b["margin"]
+    micro = str(_micro_pt(t))
+    series2 = c.get("chart_series2", c["muted"])
+    ops: list[dict] = [
+        _slide_op(tokens),
+        _title_op(tokens, "KmTitle", title),
+        {
+            "command": "add", "parent": "/slide[last()]", "type": "chart",
+            "props": {
+                "name": "KmChart",
+                "chartType": "line",
+                "series1.name": s1_name,
+                "series1.values": s1,
+                "series1.color": c.get("chart_series1", c["accent"]),
+                "series2.name": s2_name,
+                "series2.values": s2,
+                "series2.color": series2,
+                "categories": cats,
+                "x": _cm(m), "y": "3.2cm",
+                "width": "22.5cm", "height": "10.5cm",
+            },
+        },
+    ]
+    # Risk table under chart
+    table_y = 14.0
+    col_w = (22.5 - 0.3 * (len(headers) - 1)) / max(1, len(headers))
+    for j, h in enumerate(headers[:4]):
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"KmRiskH{j + 1}", "text": str(h),
+                "x": _cm(m + j * (col_w + 0.3)), "y": _cm(table_y),
+                "width": _cm(col_w), "height": "0.7cm",
+                "font": t["body_font"], "size": micro, "bold": "true",
+                "color": c["muted"], "fill": "none",
+            },
+        })
+    for i, row in enumerate(risk):
+        if not isinstance(row, (list, tuple)):
+            continue
+        for j, cell in enumerate(list(row)[:4]):
+            ops.append({
+                "command": "add", "parent": "/slide[last()]", "type": "shape",
+                "props": {
+                    "name": f"KmRisk{i + 1}_{j + 1}", "text": str(cell),
+                    "x": _cm(m + j * (col_w + 0.3)),
+                    "y": _cm(table_y + 0.75 + i * 0.65),
+                    "width": _cm(col_w), "height": "0.6cm",
+                    "font": t["body_font"], "size": micro,
+                    "color": c["text_on_content"], "fill": "none",
+                },
+            })
+    # Insight panel
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "KmInsightBg", "preset": b["preset"],
+            "fill": c["surface"], "line": "none",
+            "x": "24.5cm", "y": "3.2cm", "width": "7.8cm", "height": "14.5cm",
+        },
+    })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "KmInsightTitle", "text": content.get("insight_title", "Takeaway"),
+            "x": "25cm", "y": "3.7cm", "width": "6.8cm", "height": "1.1cm",
+            "font": t["heading_font"], "size": str(max(16, t["section_pt"] - 8)),
+            "bold": "true", "color": c["text_on_surface"], "fill": "none",
+        },
+    })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "KmInsightBody",
+            "text": insight or "State HR, median survival, and clinical relevance.",
+            "x": "25cm", "y": "5.1cm", "width": "6.8cm", "height": "11.5cm",
+            "font": t["body_font"], "size": str(t["body_pt"]),
+            "color": c["muted"], "fill": "none",
+        },
+    })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Point to separation of curves, then the numbers at risk.")},
+    })
+    return ops
+
+
+def recipe_forest_plot(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Forest plot rows (Phase 2 / #10) — study / effect / CI as engine rows.
+
+    Each row: label | effect text | visual CI bar (normalized 0–1 domain).
+    ``effect`` is the point estimate (float); ``low``/``high`` are CI bounds
+    on the same scale (default domain -1..1 mapped to a bar track).
+    """
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Forest plot")
+    # Prefer studies[] when present so table-shaped HEAVY["rows"] cannot steal
+    # the forest path in the geometry-contract suite.
+    rows = content.get("studies") or content.get("rows") or [
+        {"label": "Study A", "effect": -0.2, "low": -0.5, "high": 0.1, "text": "0.82 (0.60–1.10)"},
+        {"label": "Study B", "effect": -0.35, "low": -0.6, "high": -0.1, "text": "0.70 (0.55–0.90)"},
+        {"label": "Study C", "effect": 0.05, "low": -0.2, "high": 0.3, "text": "1.05 (0.82–1.35)"},
+        {"label": "Pooled", "effect": -0.22, "low": -0.4, "high": -0.05, "text": "0.80 (0.67–0.95)"},
+    ]
+    if not isinstance(rows, list):
+        rows = []
+    rows = rows[:8]
+    while len(rows) < 2:
+        rows.append({"label": "—", "effect": 0, "low": -0.2, "high": 0.2, "text": "—"})
+    domain = content.get("domain") or [-1.0, 1.0]
+    d0, d1 = float(domain[0]), float(domain[1])
+    if d0 > d1:
+        d0, d1 = d1, d0
+    span = max(1e-6, d1 - d0)
+    mpt = _micro_pt(t)
+    forest_warnings: set[str] = set()
+
+    def _norm(v: float) -> float:
+        return max(0.0, min(1.0, (float(v) - d0) / span))
+
+    def build(d: L.Density) -> L.Box:
+        body_pt = L.floored_pt(max(14, t["body_pt"] - 2), d, floor=12)
+        line_boxes: list[L.Box] = []
+        for i, row in enumerate(rows):
+            if isinstance(row, str):
+                label, text = row, ""
+                effect = low = high = 0.0
+            elif isinstance(row, (list, tuple)):
+                label = str(row[0]) if row else f"Row {i + 1}"
+                text = str(row[1]) if len(row) > 1 else ""
+                effect = low = high = 0.0
+            elif isinstance(row, dict):
+                label = str(row.get("label") or row.get("study") or f"Row {i + 1}")
+                text = str(row.get("text") or row.get("ci") or "")
+                effect = float(row.get("effect", row.get("or", row.get("hr", 0)) or 0))
+                low = float(row.get("low", row.get("ci_low", effect - 0.2)) or 0)
+                high = float(row.get("high", row.get("ci_high", effect + 0.2)) or 0)
+            else:
+                label, text, effect, low, high = f"Row {i + 1}", "", 0.0, -0.2, 0.2
+            if low > high:
+                low, high = high, low
+                forest_warnings.add(f"row {i + 1}: swapped inverted CI bounds")
+            if effect < d0 or effect > d1 or low < d0 or high > d1:
+                forest_warnings.add(
+                    f"row {i + 1}: effect/CI clamped to domain [{d0}, {d1}]"
+                )
+            # Store normalized geometry in props for post-solve bar overlay.
+            line_boxes.append(
+                L.HStack(
+                    [
+                        L.VStack(
+                            weight=1.1, name=f"ForestLabelWrap{i + 1}",
+                            children=[
+                                L.Text(
+                                    label, pt=body_pt, name=f"ForestLabel{i + 1}",
+                                    min_cm=0.7, weight=1,
+                                    props={
+                                        "font": t["heading_font"], "size": str(body_pt),
+                                        "bold": "true", "color": c["text_on_content"],
+                                        "fill": "none",
+                                    },
+                                ),
+                            ],
+                        ),
+                        L.VStack(
+                            weight=1.6, name=f"ForestTrack{i + 1}",
+                            pad=(0.35, 0.2, 0.35, 0.2),
+                            props={
+                                "preset": "rect",
+                                "fill": c["surface"],
+                                "line": "none",
+                                "_forest": {
+                                    "low": _norm(low),
+                                    "high": _norm(high),
+                                    "effect": _norm(effect),
+                                },
+                            },
+                            children=[L.Spacer(weight=1)],
+                        ),
+                        L.VStack(
+                            weight=1.0, name=f"ForestTextWrap{i + 1}",
+                            children=[
+                                L.Text(
+                                    text or f"{effect:.2f}",
+                                    pt=mpt, name=f"ForestText{i + 1}",
+                                    min_cm=0.6, weight=1,
+                                    props={
+                                        "font": t["body_font"], "size": str(mpt),
+                                        "color": c["muted"], "align": "right",
+                                        "fill": "none",
+                                    },
+                                ),
+                            ],
+                        ),
+                    ],
+                    gap=0.35 * d.gap,
+                    weight=1,
+                    name=f"ForestRow{i + 1}",
+                )
+            )
+        return L.VStack(
+            pad=(1.1, b["margin"], 0.9, b["margin"]),
+            gap=0.35 * d.gap,
+            name="forest_plot",
+            children=[
+                L.Text(
+                    title, pt=t["title_pt"], name="ForestTitle",
+                    min_cm=1.4, max_cm=2.4,
+                    props={
+                        "font": t["heading_font"], "size": str(t["title_pt"]),
+                        "bold": "true", "color": c["text_on_content"], "fill": "none",
+                    },
+                ),
+                L.VStack(line_boxes, gap=0.28 * d.gap, weight=1, name="ForestRows"),
+            ],
+        )
+
+    placed, _d = L.solve_adaptive(build, 0, 0, L.CANVAS_W, L.CANVAS_H)
+    ops: list[dict] = [_slide_op(tokens), *_emit_shapes(placed)]
+    # Overlay CI bars + effect markers on solved track boxes.
+    tracks = {p.name: p for p in placed if p.name.startswith("ForestTrack")}
+    for i in range(len(rows)):
+        tr = tracks.get(f"ForestTrack{i + 1}")
+        if tr is None:
+            continue
+        meta = (tr.box.props or {}).get("_forest") or {}
+        lo = float(meta.get("low", 0.3))
+        hi = float(meta.get("high", 0.7))
+        ef = float(meta.get("effect", 0.5))
+        pad = 0.25
+        track_w = max(0.5, tr.w - 2 * pad)
+        bar_x = tr.x + pad + lo * track_w
+        bar_w = max(0.12, (hi - lo) * track_w)
+        mid_y = tr.y + tr.h / 2
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"ForestBar{i + 1}", "preset": "rect",
+                "fill": c["accent"], "line": "none",
+                "x": _cm(bar_x), "y": _cm(mid_y - 0.08),
+                "width": _cm(bar_w), "height": "0.16cm",
+            },
+        })
+        dot = 0.35
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"ForestDot{i + 1}", "preset": "ellipse",
+                "fill": c["accent"], "line": "none",
+                "x": _cm(tr.x + pad + ef * track_w - dot / 2),
+                "y": _cm(mid_y - dot / 2),
+                "width": _cm(dot), "height": _cm(dot),
+            },
+        })
+        # Null line at effect=0 if in domain
+        if d0 < 0 < d1:
+            zx = tr.x + pad + _norm(0.0) * track_w
+            ops.append({
+                "command": "add", "parent": "/slide[last()]", "type": "shape",
+                "props": {
+                    "name": f"ForestNull{i + 1}", "preset": "rect",
+                    "fill": c.get("hairline", c["muted"]), "line": "none",
+                    "x": _cm(zx - 0.03), "y": _cm(tr.y + 0.15),
+                    "width": "0.06cm", "height": _cm(max(0.3, tr.h - 0.3)),
+                },
+            })
+    notes = content.get("notes", "Read left labels, then CI bars vs the null line.")
+    if forest_warnings:
+        notes = notes + " | " + "; ".join(sorted(forest_warnings)[:6])
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": notes},
+    })
+    return ops
+
+
+def recipe_study_design(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Study design schematic (Phase 2 / #10) — phases × optional arms.
+
+    Engine-solved phase columns with arm cards underneath.
+    """
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Study design")
+    phases = content.get("phases") or [
+        {"label": "Screen", "detail": "D-28 to D0"},
+        {"label": "Randomize", "detail": "1:1"},
+        {"label": "Treat", "detail": "12 weeks"},
+        {"label": "Follow-up", "detail": "Week 24"},
+    ]
+    if not isinstance(phases, list):
+        phases = [{"label": str(phases)}]
+    phases = phases[:5]
+    while len(phases) < 2:
+        phases.append({"label": "—", "detail": ""})
+    arms = content.get("arms") or content.get("groups") or [
+        {"label": "Intervention", "detail": "Drug X + SOC"},
+        {"label": "Control", "detail": "Placebo + SOC"},
+    ]
+    if not isinstance(arms, list):
+        arms = []
+    arms = arms[:4]
+    mpt = _micro_pt(t)
+
+    def build(d: L.Density) -> L.Box:
+        body_pt = L.floored_pt(t["body_pt"], d)
+        phase_boxes = []
+        for i, ph in enumerate(phases):
+            if isinstance(ph, str):
+                label, detail = ph, ""
+            else:
+                label = str(ph.get("label") or ph.get("title") or f"Phase {i + 1}")
+                detail = str(ph.get("detail") or ph.get("body") or "")
+            phase_boxes.append(
+                L.VStack(
+                    weight=1, name=f"StudyPhase{i + 1}",
+                    pad=(0.45, 0.4, 0.45, 0.4), gap=0.2 * d.gap,
+                    props={
+                        "preset": b["preset"], "fill": c["surface"],
+                        "line": c.get("hairline", "none"),
+                    },
+                    children=[
+                        L.Text(
+                            f"{i + 1:02d}", pt=mpt, name=f"StudyPhaseNum{i + 1}",
+                            min_cm=0.45,
+                            props={
+                                "font": t["body_font"], "size": str(mpt), "bold": "true",
+                                "color": c["accent"], "fill": "none",
+                            },
+                        ),
+                        L.Text(
+                            label, pt=body_pt, name=f"StudyPhaseLabel{i + 1}",
+                            min_cm=0.7, weight=1,
+                            props={
+                                "font": t["heading_font"], "size": str(body_pt),
+                                "bold": "true", "color": c["text_on_surface"],
+                                "fill": "none",
+                            },
+                        ),
+                        L.Text(
+                            detail, pt=mpt, name=f"StudyPhaseDetail{i + 1}",
+                            min_cm=0.5,
+                            props={
+                                "font": t["body_font"], "size": str(mpt),
+                                "color": c["muted"], "fill": "none",
+                            },
+                        ),
+                    ],
+                )
+            )
+        kids: list[L.Box] = [
+            L.Text(
+                title, pt=t["title_pt"], name="StudyTitle",
+                min_cm=1.4, max_cm=2.4,
+                props={
+                    "font": t["heading_font"], "size": str(t["title_pt"]),
+                    "bold": "true", "color": c["text_on_content"], "fill": "none",
+                },
+            ),
+            L.HStack(phase_boxes, gap=b["gap"] * d.gap, weight=1.2, name="StudyPhases"),
+        ]
+        if arms:
+            arm_boxes = []
+            for i, arm in enumerate(arms):
+                if isinstance(arm, str):
+                    label, detail = arm, ""
+                else:
+                    label = str(arm.get("label") or arm.get("name") or f"Arm {i + 1}")
+                    detail = str(arm.get("detail") or arm.get("body") or "")
+                arm_boxes.append(
+                    L.VStack(
+                        weight=1, name=f"StudyArm{i + 1}",
+                        pad=(0.4, 0.45, 0.4, 0.45), gap=0.15 * d.gap,
+                        props={
+                            "preset": b["preset"],
+                            "fill": c["accent"] if i == 0 else c["surface"],
+                            "line": "none",
+                        },
+                        children=[
+                            L.Text(
+                                label, pt=body_pt, name=f"StudyArmLabel{i + 1}",
+                                min_cm=0.7, weight=1,
+                                props={
+                                    "font": t["heading_font"], "size": str(body_pt),
+                                    "bold": "true",
+                                    "color": c["on_accent"] if i == 0 else c["text_on_surface"],
+                                    "fill": "none",
+                                },
+                            ),
+                            L.Text(
+                                detail, pt=mpt, name=f"StudyArmDetail{i + 1}",
+                                min_cm=0.5,
+                                props={
+                                    "font": t["body_font"], "size": str(mpt),
+                                    "color": c["on_accent"] if i == 0 else c["muted"],
+                                    "fill": "none",
+                                },
+                            ),
+                        ],
+                    )
+                )
+            kids.append(
+                L.HStack(arm_boxes, gap=b["gap"] * d.gap, weight=0.9, name="StudyArms")
+            )
+        return L.VStack(
+            pad=(1.1, b["margin"], 0.9, b["margin"]),
+            gap=0.55 * d.gap,
+            name="study_design",
+            children=kids,
+        )
+
+    placed, _d = L.solve_adaptive(build, 0, 0, L.CANVAS_W, L.CANVAS_H)
+    ops: list[dict] = [_slide_op(tokens), *_emit_shapes(placed)]
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Narrate phases left→right, then contrast the arms.")},
+    })
+    return ops
+
+
+def recipe_results_table_insight(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Results table + interpretation panel (Phase 2 / #10) — structured."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Primary results")
+    headers = content.get("headers") or ["Endpoint", "Intervention", "Control", "p"]
+    rows = content.get("rows") or [
+        ["ORR", "42%", "28%", "0.03"],
+        ["PFS median", "11.2 mo", "7.8 mo", "0.01"],
+        ["Grade ≥3 AE", "18%", "14%", "0.22"],
+    ]
+    if not isinstance(headers, list):
+        headers = ["Col"]
+    if not isinstance(rows, list):
+        rows = []
+    headers = [str(h) for h in headers[:6]]
+    rows = rows[:8]
+    insight_h = content.get("insight_title", "Interpretation")
+    insight_b = content.get(
+        "insight_body",
+        content.get("insight", "State clinical meaning, not just statistical significance."),
+    )
+    m = b["margin"]
+    micro = str(_micro_pt(t))
+    n_cols = max(1, len(headers))
+    table_w = 21.0
+    col_w = (table_w - 0.2 * (n_cols - 1)) / n_cols
+    row_h = 0.95
+    start_y = 3.5
+    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "ResTitle", title)]
+    for j, h in enumerate(headers):
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"ResH{j + 1}", "text": h,
+                "x": _cm(m + j * (col_w + 0.2)), "y": _cm(start_y),
+                "width": _cm(col_w), "height": _cm(row_h),
+                "font": t["heading_font"], "size": str(max(12, t["body_pt"] - 4)),
+                "bold": "true", "color": c["on_accent"],
+                "fill": c["accent"], "align": "center",
+            },
+        })
+    for i, row in enumerate(rows):
+        if not isinstance(row, (list, tuple)):
+            row = [str(row)]
+        cells = list(row) + [""] * n_cols
+        for j in range(n_cols):
+            ops.append({
+                "command": "add", "parent": "/slide[last()]", "type": "shape",
+                "props": {
+                    "name": f"ResR{i + 1}C{j + 1}", "text": str(cells[j]),
+                    "x": _cm(m + j * (col_w + 0.2)),
+                    "y": _cm(start_y + (i + 1) * row_h),
+                    "width": _cm(col_w), "height": _cm(row_h),
+                    "font": t["body_font"], "size": micro,
+                    "color": c["text_on_surface"],
+                    "fill": c["surface"] if i % 2 == 0 else c["content_background"],
+                    "align": "center",
+                },
+            })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "ResInsightBg", "preset": b["preset"],
+            "fill": c["surface"], "line": "none",
+            "x": "24.0cm", "y": "3.5cm", "width": "8.3cm", "height": "13.8cm",
+        },
+    })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "ResInsightTitle", "text": insight_h,
+            "x": "24.5cm", "y": "4.0cm", "width": "7.3cm", "height": "1.2cm",
+            "font": t["heading_font"], "size": str(max(16, t["section_pt"] - 8)),
+            "bold": "true", "color": c["text_on_surface"], "fill": "none",
+        },
+    })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "ResInsightBody", "text": insight_b,
+            "x": "24.5cm", "y": "5.5cm", "width": "7.3cm", "height": "11.0cm",
+            "font": t["body_font"], "size": str(t["body_pt"]),
+            "color": c["muted"], "fill": "none",
+        },
+    })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Lead with the interpretation, then walk the table.")},
+    })
+    return ops
+
+
+def recipe_multi_panel_figure(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Multi-panel figure grid (Phase 2 / #10) — 2–4 panels with captions.
+
+    Structured picture cells; missing src leaves a labeled placeholder surface.
+    """
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Multi-panel figure")
+    panels = content.get("panels") or content.get("figures") or [
+        {"label": "A", "caption": "Primary endpoint", "src": "", "alt": "Panel A"},
+        {"label": "B", "caption": "Subgroup", "src": "", "alt": "Panel B"},
+        {"label": "C", "caption": "Safety", "src": "", "alt": "Panel C"},
+        {"label": "D", "caption": "Exploratory", "src": "", "alt": "Panel D"},
+    ]
+    if not isinstance(panels, list):
+        panels = []
+    n = max(2, min(4, len(panels) or 2))
+    panels = (list(panels) + [
+        {"label": chr(65 + i), "caption": "", "src": "", "alt": f"Panel {chr(65 + i)}"}
+        for i in range(4)
+    ])[:n]
+    # Layout: 2 cols if 2–4 panels
+    cols = 2 if n > 1 else 1
+    rows = (n + cols - 1) // cols
+    m = b["margin"]
+    usable_w = 33.87 - 2 * m
+    gap = 0.5
+    cell_w = (usable_w - gap * (cols - 1)) / cols
+    top = 3.3
+    usable_h = 18.3 - top
+    cell_h = (usable_h - gap * (rows - 1)) / rows
+    micro = str(_micro_pt(t))
+    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "FigTitle", title)]
+    for i, panel in enumerate(panels):
+        if isinstance(panel, str):
+            label, caption, src, alt = chr(65 + i), panel, "", f"Panel {chr(65 + i)}"
+        else:
+            label = str(panel.get("label") or chr(65 + i))
+            caption = str(panel.get("caption") or panel.get("title") or "")
+            src = str(panel.get("src") or "")
+            alt = str(panel.get("alt") or caption or f"Panel {label}")
+        r, col = divmod(i, cols)
+        x = m + col * (cell_w + gap)
+        y = top + r * (cell_h + gap)
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"FigPanel{i + 1}Bg", "preset": b["preset"],
+                "fill": c["surface"], "line": c.get("hairline", "none"),
+                "x": _cm(x), "y": _cm(y),
+                "width": _cm(cell_w), "height": _cm(cell_h),
+            },
+        })
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"FigPanel{i + 1}Label", "text": label,
+                "x": _cm(x + 0.25), "y": _cm(y + 0.2),
+                "width": "1.5cm", "height": "0.8cm",
+                "font": t["heading_font"], "size": "18", "bold": "true",
+                "color": c["accent"], "fill": "none",
+            },
+        })
+        if src:
+            ops.append({
+                "command": "add", "parent": "/slide[last()]", "type": "picture",
+                "props": {
+                    "name": f"FigPanel{i + 1}Img",
+                    "src": src, "alt": alt,
+                    "x": _cm(x + 0.4), "y": _cm(y + 1.1),
+                    "width": _cm(cell_w - 0.8), "height": _cm(cell_h - 2.4),
+                },
+            })
+        else:
+            ops.append({
+                "command": "add", "parent": "/slide[last()]", "type": "shape",
+                "props": {
+                    "name": f"FigPanel{i + 1}Placeholder",
+                    "text": alt or f"[{label}]",
+                    "x": _cm(x + 0.4), "y": _cm(y + 1.3),
+                    "width": _cm(cell_w - 0.8), "height": _cm(cell_h - 2.6),
+                    "font": t["body_font"], "size": micro,
+                    "color": c["muted"], "align": "center", "fill": "none",
+                },
+            })
+        if caption:
+            ops.append({
+                "command": "add", "parent": "/slide[last()]", "type": "shape",
+                "props": {
+                    "name": f"FigPanel{i + 1}Cap", "text": caption,
+                    "x": _cm(x + 0.3), "y": _cm(y + cell_h - 0.95),
+                    "width": _cm(cell_w - 0.6), "height": "0.8cm",
+                    "font": t["body_font"], "size": micro,
+                    "color": c["muted"], "fill": "none",
+                },
+            })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Walk panels A→D; set src/alt for each figure asset.")},
+    })
+    return ops
+
+
 def _call_builder(builder, tokens, content, slide_index: int | None = None):
     """Call recipe builder with optional slide_index if supported."""
     try:
@@ -1915,24 +3820,41 @@ def _call_builder(builder, tokens, content, slide_index: int | None = None):
 RECIPE_BUILDERS = {
     "cover": recipe_cover,
     "section_divider": recipe_section_divider,
+    "section_opener_numbered": recipe_section_opener_numbered,
     "kpi_row": recipe_kpi_row,
+    "kpi_dashboard_grid": recipe_kpi_dashboard_grid,
     "feature_cards": recipe_feature_cards,
     "bullets": recipe_bullets,
     "quote": recipe_quote,
     "comparison_2col": recipe_comparison_2col,
     "timeline": recipe_timeline,
+    "story_timeline": recipe_story_timeline,
     "process": recipe_process,
+    "funnel_stages": recipe_funnel_stages,
+    "roadmap_swimlane": recipe_roadmap_swimlane,
     "table": recipe_table,
     "image_full": recipe_image_full,
     "image_text_2col": recipe_image_text_2col,
     "chart_insight": recipe_chart_insight,
+    "chart_callout_panel": recipe_chart_callout_panel,
     "close": recipe_close,
     "big_number": recipe_big_number,
     "matrix_2x2": recipe_matrix_2x2,
+    "quadrant_matrix_rich": recipe_quadrant_matrix_rich,
+    "pyramid_levels": recipe_pyramid_levels,
+    "vs_scorecard": recipe_vs_scorecard,
     "team": recipe_team,
     "logo_strip": recipe_logo_strip,
     "pricing": recipe_pricing,
     "appendix_table": recipe_appendix_table,
+    "agenda_toc": recipe_agenda_toc,
+    # Phase 2 / #10 academic · medical · research
+    "consort_flow": recipe_consort_flow,
+    "kaplan_meier": recipe_kaplan_meier,
+    "forest_plot": recipe_forest_plot,
+    "study_design": recipe_study_design,
+    "results_table_insight": recipe_results_table_insight,
+    "multi_panel_figure": recipe_multi_panel_figure,
 }
 
 # Layout strategy per pattern (#9). Every pattern is one of:
@@ -1947,18 +3869,36 @@ RECIPE_BUILDERS = {
 #   "fixed"      — intentional hero/divider compositions whose design depends on
 #                  overlap / opacity / precise centering that a top-down flex
 #                  engine cannot express (e.g. the 0.25-opacity section number).
-# All 20 are covered by the geometry-contract harness (test_layout_contract.py).
-# test_pattern_layout_covers_registry keeps this in sync with RECIPE_BUILDERS.
+# Geometry strategy per pattern. Every registered recipe is in exactly one
+# bucket (test_pattern_layout_covers_registry). Buckets:
+#   "engine"     — content grid solved by layout.py for adaptive text-fit;
+#                  chrome may still be fixed.
+#   "hybrid"     — fixed frame + engine-solved region and/or post-solve markers
+#                  (timeline dots, forest CI bars, consort spine, matrix axes).
+#   "structured" — chart/table/connector/picture-cell composition or pure
+#                  hand-cm band stacks (funnel/pyramid/roadmap).
+#   "fixed"      — intentional hero/divider compositions (overlap / opacity).
+# Geometry-contract harness asserts on-canvas + readability for all; it does
+# not enforce single-system purity inside hybrid/structured recipes.
 PATTERN_LAYOUT: dict[str, tuple[str, ...]] = {
     "engine": (
         "bullets", "feature_cards", "comparison_2col", "image_text_2col",
-        "matrix_2x2", "kpi_row", "pricing", "team", "timeline",
+        "kpi_row", "kpi_dashboard_grid", "pricing", "team", "agenda_toc",
+        "vs_scorecard", "study_design",
+    ),
+    "hybrid": (
+        "timeline", "story_timeline", "matrix_2x2", "quadrant_matrix_rich",
+        "consort_flow", "forest_plot",
     ),
     "structured": (
-        "process", "chart_insight", "table", "appendix_table", "logo_strip",
+        "process", "funnel_stages", "roadmap_swimlane", "pyramid_levels",
+        "chart_insight", "chart_callout_panel", "table", "appendix_table",
+        "logo_strip", "kaplan_meier", "results_table_insight",
+        "multi_panel_figure",
     ),
     "fixed": (
-        "cover", "section_divider", "big_number", "quote", "close", "image_full",
+        "cover", "section_divider", "section_opener_numbered",
+        "big_number", "quote", "close", "image_full",
     ),
 }
 
@@ -1968,7 +3908,8 @@ RECIPE_ALIASES = {
     "feature_cards_3": "feature_cards",
 }
 
-DEFAULT_SEQUENCE = [
+# Catalog partitions (Phase 2 review: avoid kitchen-sink empty scaffolds).
+CORE_SEQUENCE = [
     "cover",
     "section_divider",
     "kpi_row",
@@ -1990,6 +3931,50 @@ DEFAULT_SEQUENCE = [
     "image_text_2col",
     "close",
 ]
+
+PREMIUM_SEQUENCE = [
+    "agenda_toc",
+    "section_opener_numbered",
+    "kpi_dashboard_grid",
+    "story_timeline",
+    "funnel_stages",
+    "roadmap_swimlane",
+    "pyramid_levels",
+    "chart_callout_panel",
+    "vs_scorecard",
+    "quadrant_matrix_rich",
+]
+
+DOMAIN_SEQUENCE = [
+    "consort_flow",
+    "study_design",
+    "kaplan_meier",
+    "forest_plot",
+    "results_table_insight",
+    "multi_panel_figure",
+]
+
+# Empty-deck / flat-overlay default: consulting core only (no medical tax).
+DEFAULT_SEQUENCE = list(CORE_SEQUENCE)
+
+# Full catalog for inspection / generate_all_recipes ordering helpers.
+CATALOG_SEQUENCE = list(CORE_SEQUENCE) + [
+    n for n in PREMIUM_SEQUENCE + DOMAIN_SEQUENCE if n not in CORE_SEQUENCE
+]
+
+
+def sequence_for(catalog: str = "core") -> list[str]:
+    """Return an ordered recipe list: core | premium | domain | all."""
+    key = (catalog or "core").strip().lower()
+    if key in ("core", "default", ""):
+        return list(CORE_SEQUENCE)
+    if key in ("premium", "consulting-premium"):
+        return list(CORE_SEQUENCE) + [n for n in PREMIUM_SEQUENCE if n not in CORE_SEQUENCE]
+    if key in ("domain", "medical", "academic"):
+        return list(CORE_SEQUENCE) + [n for n in DOMAIN_SEQUENCE if n not in CORE_SEQUENCE]
+    if key in ("all", "catalog", "full"):
+        return list(CATALOG_SEQUENCE)
+    raise ValueError(f"unknown catalog sequence: {catalog!r}")
 
 
 def generate_all_recipes(
