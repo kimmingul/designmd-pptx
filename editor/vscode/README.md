@@ -20,8 +20,8 @@ Thin **command palette + explorer + Problems** shell around the existing
 cd editor/vscode
 npm install -g @vscode/vsce   # once
 npx @vscode/vsce package --no-dependencies
-# → designmd-pptx-0.1.0.vsix
-code --install-extension designmd-pptx-0.1.0.vsix
+# → designmd-pptx-0.2.0.vsix
+code --install-extension designmd-pptx-0.2.0.vsix
 ```
 
 Cursor: **Extensions → … → Install from VSIX…**

@@ -66,7 +66,7 @@ ok(sync.status === 0, `adapters in sync: ${(sync.stdout || sync.stderr || '').tr
 const pkg = path.join(root, 'python', 'designmd_pptx', '__init__.py');
 ok(fs.existsSync(pkg), 'python package present');
 const init = fs.readFileSync(pkg, 'utf8');
-ok(init.includes('2.0'), 'package version 2.0.x');
+ok(init.includes('2.1'), 'package version 2.1.x');
 
 const req = path.join(root, 'python', 'requirements.txt');
 ok(fs.existsSync(req), 'requirements.txt');
@@ -79,7 +79,7 @@ const py = spawnSync('python', ['-c', pyCode], {
   shell: false,
 });
 ok(
-  py.status === 0 && (py.stdout || '').includes('2.0'),
+  py.status === 0 && (py.stdout || '').includes('2.1'),
   `python import: ${(py.stdout || py.stderr || '').trim()}`
 );
 

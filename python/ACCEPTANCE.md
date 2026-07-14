@@ -1,5 +1,19 @@
 # designmd-pptx — Definition of Done
 
+## v2.1.0 acceptance criteria (Phase 5)
+
+| # | Criterion | Evidence |
+|---|---|---|
+| 1 | Package/compiler/plugin **2.1.0** aligned | `__version__`, `COMPILER_VERSION`, `plugin.json`, `package.json`, `.claude-plugin/plugin.json` |
+| 2 | (#19) `refine` CLI | `refine.py` + `tests/test_refine.py` |
+| 3 | (#21) Hybrid generative layout + `freeform` | `generative.py` + `tests/test_phase5_21_40_42.py` |
+| 4 | (#22) Chart/table reconstruct | `reconstruct.py` + `tests/test_reconstruct.py` |
+| 5 | (#40) Animation OOXML | `animation.py` + phase5 tests |
+| 6 | (#42) Public ≥100-deck benchmark | `public_benchmark.py` + `docs/public-benchmark.md` |
+| 7 | (#35) Windows one-file installer + uninstall | `packaging/windows/Install-DesignmdPptx.ps1` + `win_install.py` + `tests/test_windows_installer.py` |
+| 8 | (#44/#45) Editor decision + VS Code MVP | `docs/editor-integration-decision.md` + `editor/vscode/` |
+| 9 | CI green + `npm run check` | unit matrix, package, benchmark fixture |
+
 ## v1.7 acceptance criteria (issues #25–#30)
 
 | # | Criterion | Evidence |

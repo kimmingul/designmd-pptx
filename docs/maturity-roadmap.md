@@ -32,7 +32,9 @@ CI. A private/licensed 50-deck held-out set may still be incomplete; that is
 documented rather than blocking the release. Methodology and thresholds live in
 `python/designmd_pptx/benchmark_thresholds.json`.
 
-## v2.1 — intelligence (Phase 5)
+## v2.1 — intelligence (**shipped** as v2.1.0)
+
+Phase 5 complete. See [CHANGELOG.md](../CHANGELOG.md) for the release notes.
 
 - ✅ Iterative visual refinement loop (#19) — `refine` CLI
 - ✅ Chart/table reconstruction from extract (#22) — modern classify + `reconstruct`
