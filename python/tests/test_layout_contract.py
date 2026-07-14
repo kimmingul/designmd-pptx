@@ -44,6 +44,14 @@ HEAVY = {
     "quote": "A rather long pull quote that keeps going and going " * 6,
     "attribution": "Someone Notable, Title",
     "chart_type": "bar", "categories": "A,B,C,D", "series1_values": "4,8,15,16",
+    "stages": [{"label": "Stage", "value": "10%"}] * 8,
+    "levels": [{"label": "Level", "detail": "Detail " * 4}] * 8,
+    "phases": ["Now", "Next", "Later", "Future", "Horizon", "Extra"],
+    "lanes": [{"name": "Lane", "cells": ["A", "B", "C", "D"]}] * 8,
+    "criteria": [{"name": "Crit", "left": "High", "right": "Low"}] * 12,
+    "callouts": ["Callout line " * 8] * 6,
+    "era": "2024–2026",
+    "left": {"title": "Option A"}, "right": {"title": "Option B"},
 }
 
 
@@ -73,11 +81,15 @@ class GeometryContract(unittest.TestCase):
         return _call_builder(RECIPE_BUILDERS[name], self.tokens, content, idx)
 
     def test_every_pattern_registered(self) -> None:
-        # Phase 2 (#58) grows the catalog beyond the original 20.
-        self.assertGreaterEqual(len(RECIPE_BUILDERS), 20)
-        self.assertIn("kpi_dashboard_grid", RECIPE_BUILDERS)
-        self.assertIn("agenda_toc", RECIPE_BUILDERS)
-        self.assertIn("section_opener_numbered", RECIPE_BUILDERS)
+        # Phase 2 (#58) premium catalog (20 base + 10 premium patterns).
+        self.assertGreaterEqual(len(RECIPE_BUILDERS), 30)
+        for name in (
+            "kpi_dashboard_grid", "agenda_toc", "section_opener_numbered",
+            "story_timeline", "funnel_stages", "roadmap_swimlane",
+            "quadrant_matrix_rich", "pyramid_levels", "vs_scorecard",
+            "chart_callout_panel",
+        ):
+            self.assertIn(name, RECIPE_BUILDERS)
 
     def test_pattern_layout_covers_registry(self) -> None:
         # every pattern is categorized exactly once (engine/structured/fixed),

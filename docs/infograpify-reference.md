@@ -214,7 +214,7 @@ visual quality.
 - [x] This document (principles, token mapping, shortlist, contributor rules)
 - [x] Original premium DESIGN.md fixture for master / scaffold
 - [x] Contributor note mirrored in `CONTRIBUTING.md` / skill hard rules
-- [ ] First wave recipes (#58) — **in progress** (see below)
+- [x] First wave recipes (#58) — ten premium patterns shipped (Gate 3 optional)
 
 ## #58 implementation status
 
@@ -223,13 +223,17 @@ visual quality.
 | `kpi_dashboard_grid` | ✅ shipped | engine |
 | `agenda_toc` | ✅ shipped | engine |
 | `section_opener_numbered` | ✅ shipped | fixed |
-| `story_timeline` | pending | engine |
-| `funnel_stages` | pending | structured |
-| `roadmap_swimlane` | pending | structured |
-| `quadrant_matrix_rich` | pending | engine |
-| `pyramid_levels` | pending | structured |
-| `vs_scorecard` | pending | engine |
-| `chart_callout_panel` | pending | structured |
+| `story_timeline` | ✅ shipped | engine |
+| `funnel_stages` | ✅ shipped | structured |
+| `roadmap_swimlane` | ✅ shipped | structured |
+| `quadrant_matrix_rich` | ✅ shipped | engine |
+| `pyramid_levels` | ✅ shipped | structured |
+| `vs_scorecard` | ✅ shipped | engine |
+| `chart_callout_panel` | ✅ shipped | structured |
+
+All ten shortlist patterns are registered in `RECIPE_BUILDERS` with schema,
+content caps, text-fit budgets, and geometry-contract coverage. Gate 3 visual
+QA still needs an OfficeCLI machine on real rendered decks.
 
 ---
 

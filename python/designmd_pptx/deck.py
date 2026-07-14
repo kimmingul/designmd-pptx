@@ -123,6 +123,41 @@ def validate_deck_content_caps(deck: dict[str, Any]) -> list[str]:
                 errors.append(f"{prefix}: agenda items max 12 (got {len(items)}); split slides")
             if isinstance(items, list) and 0 < len(items) < 5:
                 errors.append(f"{prefix}: agenda_toc needs 5–12 items (got {len(items)})")
+        if recipe == "story_timeline":
+            steps = content.get("steps") or []
+            if isinstance(steps, list) and len(steps) > 6:
+                errors.append(f"{prefix}: story_timeline steps max 6 (got {len(steps)})")
+            if isinstance(steps, list) and 0 < len(steps) < 2:
+                errors.append(f"{prefix}: story_timeline needs ≥2 steps")
+        if recipe == "funnel_stages":
+            stages = content.get("stages") or content.get("steps") or []
+            if isinstance(stages, list) and len(stages) > 6:
+                errors.append(f"{prefix}: funnel_stages max 6 (got {len(stages)})")
+            if isinstance(stages, list) and 0 < len(stages) < 3:
+                errors.append(f"{prefix}: funnel_stages needs 3–6 stages (got {len(stages)})")
+        if recipe == "roadmap_swimlane":
+            lanes = content.get("lanes") or content.get("rows") or []
+            phases = content.get("phases") or content.get("columns") or []
+            if isinstance(lanes, list) and len(lanes) > 5:
+                errors.append(f"{prefix}: roadmap lanes max 5 (got {len(lanes)})")
+            if isinstance(phases, list) and len(phases) > 5:
+                errors.append(f"{prefix}: roadmap phases max 5 (got {len(phases)})")
+        if recipe == "pyramid_levels":
+            levels = content.get("levels") or content.get("steps") or []
+            if isinstance(levels, list) and len(levels) > 5:
+                errors.append(f"{prefix}: pyramid_levels max 5 (got {len(levels)})")
+            if isinstance(levels, list) and 0 < len(levels) < 3:
+                errors.append(f"{prefix}: pyramid_levels needs 3–5 levels (got {len(levels)})")
+        if recipe == "vs_scorecard":
+            criteria = content.get("criteria") or content.get("rows") or []
+            if isinstance(criteria, list) and len(criteria) > 8:
+                errors.append(f"{prefix}: vs_scorecard criteria max 8 (got {len(criteria)})")
+        if recipe == "chart_callout_panel":
+            callouts = content.get("callouts") or content.get("bullets") or []
+            if isinstance(callouts, list) and len(callouts) > 3:
+                errors.append(
+                    f"{prefix}: chart_callout_panel callouts max 3 (got {len(callouts)})"
+                )
         if recipe in ("feature_cards", "feature_cards_3"):
             cards = content.get("cards") or []
             if isinstance(cards, list) and len(cards) > 4:

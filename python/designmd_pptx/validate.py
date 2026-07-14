@@ -21,6 +21,18 @@ CONTENT_KEYS = {
     "kpi_dashboard_grid": {"title", "subtitle", "kpis", "notes"},
     "agenda_toc": {"title", "items", "entries", "notes"},
     "section_opener_numbered": {"number", "title", "blurb"},
+    "story_timeline": {"title", "era", "subtitle", "steps", "notes"},
+    "funnel_stages": {"title", "stages", "steps", "notes"},
+    "roadmap_swimlane": {"title", "phases", "columns", "lanes", "rows", "notes"},
+    "quadrant_matrix_rich": {"title", "quadrants", "axes", "notes"},
+    "pyramid_levels": {"title", "levels", "steps", "notes"},
+    "vs_scorecard": {
+        "title", "left", "right", "option_a", "option_b", "criteria", "rows", "notes",
+    },
+    "chart_callout_panel": {
+        "title", "callouts", "bullets", "categories", "series1_values",
+        "series2_values", "series1_name", "series2_name", "chart_type", "notes",
+    },
     "feature_cards": {"title", "cards"},
     "feature_cards_3": {"title", "cards"},
     "bullets": {"title", "bullets", "items", "notes"},

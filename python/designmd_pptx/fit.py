@@ -67,6 +67,34 @@ _BUDGETS: dict[str, dict[str, tuple[Any, Any, int]]] = {
         "title": ("full", "title_pt", 2),
         "blurb": (22.0, "body_pt", 2),
     },
+    "story_timeline": {
+        "title": ("full", "title_pt", 1),
+        "era": ("full", "body_pt", 1),
+        "steps.title": ("per_item", "section_pt", 2),
+        "steps.detail": ("per_item", "micro_pt", 4),
+    },
+    "funnel_stages": {
+        "title": ("full", "title_pt", 1),
+        "stages.label": ("full", "section_pt", 1),
+    },
+    "roadmap_swimlane": {"title": ("full", "title_pt", 1)},
+    "quadrant_matrix_rich": {
+        "title": ("full", "title_pt", 1),
+        "quadrants.title": (13.0, "section_pt", 1),
+        "quadrants.body": (13.0, "body_pt", 4),
+    },
+    "pyramid_levels": {
+        "title": ("full", "title_pt", 1),
+        "levels.label": ("full", "section_pt", 1),
+    },
+    "vs_scorecard": {
+        "title": ("full", "title_pt", 1),
+        "criteria.name": ("full", "body_pt", 1),
+    },
+    "chart_callout_panel": {
+        "title": ("full", "title_pt", 1),
+        "callouts": (9.0, "body_pt", 3),
+    },
     "feature_cards": {
         "title": ("full", "title_pt", 1),
         "cards.title": ("per_item", "section_pt", 2),

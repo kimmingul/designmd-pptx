@@ -133,7 +133,7 @@ In agent chat (Claude Code / Codex / Grok): mention DESIGN.md for slides, or run
 - **Geometry-contract tests + typed overflow policy** (v2.0, #9) — a contract suite asserts on the *solved geometry* of **all 20 patterns** (on-canvas bounds, ≥10pt readability, determinism, graceful degradation under heavy content) rather than screenshots; the layout engine exposes a typed `Overflow` outcome (`FIT` / `USE_COMPACT` / `PAGINATE` / `SHORTEN` / `FAIL`) so recipes decide explicitly instead of silently shrinking or dropping content
 - **Template polish** (v1.6) — `--empty-potx` garbage-collects media no surviving part references (master/layout/theme refs always survive); `master --layouts` rebrands slideLayouts by mapping explicit colors that exactly match an old theme slot to the new slot color (unmatched colors untouched + reported)
 
-## Patterns (23+)
+## Patterns (30)
 
 cover · section_divider · kpi_row · big_number · feature_cards · pricing · bullets · quote · comparison_2col · matrix_2x2 · timeline · **process** (glued connectors) · table · appendix_table · chart_insight (any officecli chartType) · team · logo_strip · image_full · **image_text_2col** · close
 
