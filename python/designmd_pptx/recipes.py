@@ -5439,6 +5439,12 @@ def _call_builder(builder, tokens, content, slide_index: int | None = None):
         return builder(tokens, content)
 
 
+def recipe_freeform(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Hybrid generative free-form slide (#21) — constraint-validated placements."""
+    from .generative import recipe_freeform as _gen_freeform
+    return _gen_freeform(tokens, content)
+
+
 # Primary builders
 RECIPE_BUILDERS = {
     "cover": recipe_cover,
@@ -5504,6 +5510,7 @@ RECIPE_BUILDERS = {
     "pipeline_stages": recipe_pipeline_stages,
     "geo_callout": recipe_geo_callout,
     "device_frame": recipe_device_frame,
+    "freeform": recipe_freeform,
 }
 
 # Layout strategy per pattern (#9). Every pattern is one of:
@@ -5534,6 +5541,8 @@ PATTERN_LAYOUT: dict[str, tuple[str, ...]] = {
         "bullets", "feature_cards", "comparison_2col", "image_text_2col",
         "kpi_row", "kpi_dashboard_grid", "pricing", "team", "agenda_toc",
         "vs_scorecard", "study_design",
+        # Phase 5 / #21 generative freeform (constraint-validated Box tree)
+        "freeform",
         # Wave 2
         "icon_stat_row", "scale_rating", "before_after_slider",
         "okrs_tree", "project_status_rag", "pipeline_stages",
@@ -5649,17 +5658,23 @@ WAVE2_SEQUENCE = [
 # Empty-deck / flat-overlay default: consulting core only (no medical tax).
 DEFAULT_SEQUENCE = list(CORE_SEQUENCE)
 
+# Phase 5 / #21 — hybrid generative free-form (not in empty-scaffold defaults)
+GENERATIVE_SEQUENCE = [
+    "freeform",
+]
+
 # Full catalog for inspection / generate_all_recipes ordering helpers.
 CATALOG_SEQUENCE = list(CORE_SEQUENCE) + [
     n for n in (
         PREMIUM_SEQUENCE + DOMAIN_SEQUENCE + WAVE1_SEQUENCE + WAVE2_SEQUENCE
+        + GENERATIVE_SEQUENCE
     )
     if n not in CORE_SEQUENCE
 ]
 
 
 def sequence_for(catalog: str = "core") -> list[str]:
-    """Return ordered recipe list: core | premium | domain | wave1 | wave2 | all."""
+    """Return ordered recipe list: core | premium | domain | wave1 | wave2 | generative | all."""
     key = (catalog or "core").strip().lower()
     if key in ("core", "default", ""):
         return list(CORE_SEQUENCE)
@@ -5671,6 +5686,8 @@ def sequence_for(catalog: str = "core") -> list[str]:
         return list(CORE_SEQUENCE) + [n for n in WAVE1_SEQUENCE if n not in CORE_SEQUENCE]
     if key in ("wave2", "long-tail"):
         return list(CORE_SEQUENCE) + [n for n in WAVE2_SEQUENCE if n not in CORE_SEQUENCE]
+    if key in ("generative", "freeform", "hybrid"):
+        return list(CORE_SEQUENCE) + [n for n in GENERATIVE_SEQUENCE if n not in CORE_SEQUENCE]
     if key in ("all", "catalog", "full"):
         return list(CATALOG_SEQUENCE)
     raise ValueError(f"unknown catalog sequence: {catalog!r}")

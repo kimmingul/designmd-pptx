@@ -136,6 +136,10 @@ def compile_design_md(
     design_v2, v2_warnings = T.extract_design_v2(fm, palette)
     warnings.extend(v2_warnings)
 
+    from . import animation as anim_mod
+    animation_cfg, anim_warnings = anim_mod.extract_animation(fm)
+    warnings.extend(anim_warnings)
+
     card_radius_px = None
     for k in ("lg", "md", "xl"):
         if k in rounded_raw:
@@ -171,6 +175,7 @@ def compile_design_md(
         "tables": design_v2["tables"],
         "images": design_v2["images"],
         "master": design_v2["master"],
+        "animation": animation_cfg,
         "dark_first": T.is_dark(palette["background"]),
         "content_bg_policy": "match_canvas",
         "background_gradient": extras.get("background_gradient"),

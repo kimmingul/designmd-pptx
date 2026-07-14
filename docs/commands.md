@@ -22,8 +22,10 @@ designmd-pptx <command> …
 | `anonymize <pptx> [-o out.pptx] [--redact-text]` | PII strip for corpus admission |
 | `corpus <manifest.json>` | Validate corpus + train/held-out split |
 | `a11y [--tokens] [--deck] [--design] [--content] [--fix-contrast] …` | WCAG + order + alt/notes |
-| `benchmark [-o out/] [--manifest] [--design] [--content]` | Before/after regression harness |
+| `benchmark [-o out/] [--manifest] [--public] [--design] [--content]` | Before/after harness; `--public` = ≥100-deck suite (#42) |
 | `refine <deck.json> [-o refined/] [--feedback] [--findings] [--rounds]` | Iterative visual refinement (#19) |
+| `generate <deck.json> [-o out/] [--directive] [--profile] [--contact]` | Hybrid generative layout (#21) |
+| `animate <pptx> [-o out.pptx] [--entrance] [--transition] [--tokens]` | OOXML animation/transitions (#40) |
 | `doctor [--strict] [--install [--dry-run]]` | Env + skill routing; pinned install |
 
 Pass the literal `default` instead of a DESIGN.md path for the bundled neutral
@@ -52,9 +54,57 @@ python -m designmd_pptx benchmark -o benchmark-out
 
 # Corpus held-out (skips missing assets with reason)
 python -m designmd_pptx benchmark --manifest corpus/corpus.manifest.json -o benchmark-out
+
+# Public ≥100-deck synthetic suite (#42) + methodology snapshot
+python -m designmd_pptx benchmark --public --publish-docs -o public-benchmark-out
 ```
 
 Thresholds: `python/designmd_pptx/benchmark_thresholds.json`.
+Public methodology: [public-benchmark.md](public-benchmark.md).
+
+## generate (#21)
+
+```bash
+# Natural-language style restyle (pattern map + freeform when needed)
+python -m designmd_pptx generate content.deck.json -o generated \
+  --directive "이 슬라이드를 Apple Keynote 스타일로 재구성해줘"
+
+python -m designmd_pptx generate content.deck.json -o generated --profile minimal
+python -m designmd_pptx generate --list-styles
+
+# Then re-scaffold the generated deck-spec
+python -m designmd_pptx scaffold default -o out/v2 \
+  --content generated/content.generated.deck.json
+```
+
+Freeform placements are validated by `layout.solve_adaptive` before emission
+so title/body floors still hold. Optional external layout generator:
+`DESIGNMD_LAYOUT_CMD` / vision contact sheet via `--contact`.
+
+## animate (#40)
+
+DESIGN.md frontmatter:
+
+```yaml
+animation:
+  enabled: true
+  entrance: fade        # none | appear | fade | wipe | fly_in
+  transition: fade      # none | fade | push | wipe | cut | cover
+  transition_speed: med
+  stagger_ms: 150
+  emphasis: none        # none | pulse
+```
+
+```bash
+# After scaffold/apply produced a .pptx
+python -m designmd_pptx animate out/deck.pptx -o out/deck.animated.pptx \
+  --entrance fade --transition fade --force
+
+# Or compile animation from DESIGN.md
+python -m designmd_pptx animate out/deck.pptx --design brand/DESIGN.md --force
+```
+
+Injection is namespace-safe OOXML (`opc` + lxml), not regex.
 
 ## refine (#19)
 

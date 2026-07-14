@@ -46,6 +46,9 @@ python -m designmd_pptx master deck.pptx DESIGN.md --potx brand.potx  # brand ma
 python -m designmd_pptx doctor   # verify officecli + skill routing (Claude/Codex/Grok)
 python -m designmd_pptx a11y --design default --content python/examples/content.deck.json
 python -m designmd_pptx benchmark -o benchmark-out
+python -m designmd_pptx benchmark --public -o public-benchmark-out   # #42 ≥100 decks
+python -m designmd_pptx generate content.deck.json -o gen --directive "Keynote style"  # #21
+python -m designmd_pptx animate deck.pptx --entrance fade --force   # #40
 python -m designmd_pptx compose brief.md -o composed --design default   # outline → deck-spec
 ```
 

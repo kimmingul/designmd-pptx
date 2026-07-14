@@ -40,6 +40,15 @@ master:
   footer: "Confidential"            # string, or omit for none
   page_number: false
   navigation: false
+
+# --- Phase 5 / #40 (optional; disabled unless present) ---
+animation:
+  enabled: true
+  entrance: fade                    # none | appear | fade | wipe | fly_in
+  transition: fade                  # none | fade | push | wipe | cut | cover
+  transition_speed: med             # slow | med | fast
+  stagger_ms: 150
+  emphasis: none                    # none | pulse
 ---
 ```
 
@@ -59,6 +68,9 @@ master:
 | `master` | `footer` | `null` |
 | | `page_number` | `false` |
 | | `navigation` | `false` |
+| `animation` | `enabled` | `false` (omit block = off) |
+| | `entrance` | `fade` |
+| | `transition` | `fade` |
 
 ## In the compiled tokens
 

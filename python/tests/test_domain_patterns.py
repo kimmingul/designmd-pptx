@@ -110,8 +110,10 @@ class DomainPatterns10(unittest.TestCase):
         for name in DOMAIN_SEQUENCE + PREMIUM_SEQUENCE + WAVE1_SEQUENCE + WAVE2_SEQUENCE:
             self.assertIn(name, full_r)
         # every builder is reachable via catalog partitions
+        from designmd_pptx.recipes import GENERATIVE_SEQUENCE
         covered = (set(CORE_SEQUENCE) | set(PREMIUM_SEQUENCE)
-                   | set(DOMAIN_SEQUENCE) | set(WAVE1_SEQUENCE) | set(WAVE2_SEQUENCE))
+                   | set(DOMAIN_SEQUENCE) | set(WAVE1_SEQUENCE) | set(WAVE2_SEQUENCE)
+                   | set(GENERATIVE_SEQUENCE))
         self.assertEqual(set(RECIPE_BUILDERS), covered)
         self.assertEqual(set(CATALOG_SEQUENCE), covered)
 
