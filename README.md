@@ -228,7 +228,7 @@ Sequenced into six phases (see [issues](https://github.com/kimmingul/designmd-pp
 
 - ✅ **Phase 0 — Foundation** — ~~#8~~ OfficeCLI version contract + 3-OS CI, ~~#16~~ lxml/OPC namespace-aware editing (replaces regex-on-XML), ~~#33~~ `pip install designmd-pptx` (self-contained wheel), ~~#36~~ PII-anonymization + validation-corpus pipeline.
 - ✅ **Phase 1 — Deterministic core** — ~~#11~~ DESIGN.md schema v2 (composition/charts/tables/images/master tokens), ~~#17~~ table auto-split to continuation slides, ~~#13~~ semantic-preserving restyle colors, ~~#9~~ layout-engine expansion (9/20 patterns engine-solved + geometry-contract harness + typed overflow policy).
-- ⏳ **Phase 2 — Fidelity** — #12 extract fidelity (faithful loss-ledger), #10 domain patterns (academic/medical).
+- ⏳ **Phase 2 — Fidelity** — #12 extract fidelity (loss ledger), #10 domain patterns (`consort_flow`, `kaplan_meier`, `forest_plot`, `study_design`, `results_table_insight`, `multi_panel_figure`; see `python/examples/content.medical.deck.json`).
 - ⏳ **Phase 3 — Intelligence adapters** — #18 LLM narrative planner, #14 vision quality gate (both opt-in, replayable).
 - ⏳ **Phase 4 — v2.0 release** — packaging/install (#34), a11y (#39), 50-deck benchmark (#37/#38), docs/gallery (#41/#43).
 - 🔮 **Phase 5 — v2.1** — iterative visual refinement (#19), chart/table reconstruction (#22), generative layout (#21), animation (#40), editor integration (#44/#45).

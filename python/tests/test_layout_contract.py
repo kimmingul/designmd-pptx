@@ -40,6 +40,17 @@ HEAVY = {
     "quote": "A rather long pull quote that keeps going and going " * 6,
     "attribution": "Someone Notable, Title",
     "chart_type": "bar", "categories": "A,B,C,D", "series1_values": "4,8,15,16",
+    "stages": [{"label": "Stage " * 4, "n": "N=99", "note": "note " * 6}] * 10,
+    "phases": [{"label": "Phase", "detail": "Detail " * 4}] * 8,
+    "arms": [{"label": "Arm", "detail": "Detail " * 4}] * 6,
+    "panels": [{"label": "X", "caption": "Caption " * 6, "src": "", "alt": "a"}] * 6,
+    "studies": [
+        {"label": "Study", "effect": 0.1, "low": -0.5, "high": 0.6, "text": "1.1 (0.6–1.6)"}
+    ] * 12,
+    "risk_table": [["0", "100", "100"]] * 10,
+    "insight": "Insight text " * 20,
+    "insight_body": "Insight body " * 20,
+    "domain": [-2.0, 2.0],
 }
 
 
@@ -69,7 +80,13 @@ class GeometryContract(unittest.TestCase):
         return _call_builder(RECIPE_BUILDERS[name], self.tokens, content, idx)
 
     def test_every_pattern_registered(self) -> None:
-        self.assertEqual(len(RECIPE_BUILDERS), 20)
+        # Base 20 + Phase 2 domain patterns (#10).
+        self.assertGreaterEqual(len(RECIPE_BUILDERS), 26)
+        for name in (
+            "consort_flow", "kaplan_meier", "forest_plot",
+            "study_design", "results_table_insight", "multi_panel_figure",
+        ):
+            self.assertIn(name, RECIPE_BUILDERS)
 
     def test_pattern_layout_covers_registry(self) -> None:
         # every pattern is categorized exactly once (engine/structured/fixed),
@@ -79,7 +96,7 @@ class GeometryContract(unittest.TestCase):
         self.assertEqual(len(flat), len(set(flat)), "a pattern is in two buckets")
         self.assertEqual(set(flat), set(RECIPE_BUILDERS),
                          "PATTERN_LAYOUT and RECIPE_BUILDERS disagree")
-        self.assertEqual(len(PATTERN_LAYOUT["engine"]), 9)
+        self.assertGreaterEqual(len(PATTERN_LAYOUT["engine"]), 9)
 
     def test_default_content_is_on_canvas_and_readable(self) -> None:
         for name in RECIPE_BUILDERS:

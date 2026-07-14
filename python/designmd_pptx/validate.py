@@ -53,6 +53,19 @@ CONTENT_KEYS = {
     "logo_strip": {"title", "logos", "notes"},
     "pricing": {"title", "tiers", "notes"},
     "appendix_table": {"title", "headers", "rows", "notes"},
+    # Phase 2 / #10 academic · medical · research
+    "consort_flow": {"title", "stages", "steps", "notes"},
+    "kaplan_meier": {
+        "title", "categories", "series1_values", "series2_values",
+        "series1_name", "series2_name", "risk_table", "rows", "risk_headers",
+        "insight", "insight_title", "insight_body", "notes",
+    },
+    "forest_plot": {"title", "rows", "studies", "domain", "notes"},
+    "study_design": {"title", "phases", "arms", "groups", "notes"},
+    "results_table_insight": {
+        "title", "headers", "rows", "insight", "insight_title", "insight_body", "notes",
+    },
+    "multi_panel_figure": {"title", "panels", "figures", "notes"},
 }
 
 

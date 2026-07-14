@@ -103,6 +103,31 @@ _BUDGETS: dict[str, dict[str, tuple[Any, Any, int]]] = {
         "tiers.features": ("per_item", "micro_pt", 2),
     },
     "appendix_table": {"title": ("full", "title_pt", 1)},
+    "consort_flow": {
+        "title": ("full", "title_pt", 1),
+        "stages.label": ("full", "body_pt", 2),
+    },
+    "kaplan_meier": {
+        "title": ("full", "title_pt", 1),
+        "insight": (7.0, "body_pt", 12),
+        "insight_body": (7.0, "body_pt", 12),
+    },
+    "forest_plot": {
+        "title": ("full", "title_pt", 1),
+        "rows.label": ("full", "body_pt", 1),
+    },
+    "study_design": {
+        "title": ("full", "title_pt", 1),
+        "phases.label": ("per_item", "body_pt", 2),
+    },
+    "results_table_insight": {
+        "title": ("full", "title_pt", 1),
+        "insight_body": (7.0, "body_pt", 12),
+    },
+    "multi_panel_figure": {
+        "title": ("full", "title_pt", 1),
+        "panels.caption": ("per_item", "micro_pt", 2),
+    },
 }
 
 _PT_DEFAULTS = {

@@ -135,6 +135,24 @@ def validate_deck_content_caps(deck: dict[str, Any]) -> list[str]:
                         errors.append(
                             f"{prefix}: row {ri} length {len(row)} != headers {len(headers)}"
                         )
+        if recipe == "consort_flow":
+            stages = content.get("stages") or content.get("steps") or []
+            if isinstance(stages, list) and len(stages) > 7:
+                errors.append(f"{prefix}: consort_flow stages max 7 (got {len(stages)})")
+            if isinstance(stages, list) and 0 < len(stages) < 3:
+                errors.append(f"{prefix}: consort_flow needs 3–7 stages (got {len(stages)})")
+        if recipe == "forest_plot":
+            rows = content.get("rows") or content.get("studies") or []
+            if isinstance(rows, list) and len(rows) > 8:
+                errors.append(f"{prefix}: forest_plot rows max 8 (got {len(rows)})")
+        if recipe == "study_design":
+            phases = content.get("phases") or []
+            if isinstance(phases, list) and len(phases) > 5:
+                errors.append(f"{prefix}: study_design phases max 5 (got {len(phases)})")
+        if recipe == "multi_panel_figure":
+            panels = content.get("panels") or content.get("figures") or []
+            if isinstance(panels, list) and len(panels) > 4:
+                errors.append(f"{prefix}: multi_panel_figure panels max 4 (got {len(panels)})")
         if recipe == "bullets":
             items = content.get("bullets") or content.get("items") or []
             if isinstance(items, list) and len(items) > 5:
