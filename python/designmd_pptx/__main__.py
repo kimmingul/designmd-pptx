@@ -88,6 +88,10 @@ def cmd_apply(args: argparse.Namespace) -> int:
         require_clean_issues=not bool(getattr(args, "no_issues_gate", False)),
         screenshot=bool(getattr(args, "screenshot", False)),
         gate3=bool(getattr(args, "gate3", False)),
+        vision=bool(getattr(args, "vision", False)),
+        vision_fail=bool(getattr(args, "gate3_vision", False)),
+        vision_plan=getattr(args, "vision_plan", None),
+        vision_cmd=getattr(args, "vision_cmd", None),
     )
     return 0
 
@@ -215,6 +219,10 @@ def cmd_scaffold(args: argparse.Namespace) -> int:
             require_clean_issues=True,
             screenshot=bool(getattr(args, "screenshot", False)),
             gate3=bool(getattr(args, "gate3", False)),
+            vision=bool(getattr(args, "vision", False)),
+            vision_fail=bool(getattr(args, "gate3_vision", False)),
+            vision_plan=getattr(args, "vision_plan", None),
+            vision_cmd=getattr(args, "vision_cmd", None),
         )
 
     print("")
@@ -642,6 +650,27 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="With --apply: the contact sheet must render before the pptx is written",
     )
+    s.add_argument(
+        "--vision",
+        action="store_true",
+        help="With --apply: evaluate contact sheet (offline + optional DESIGNMD_VISION_CMD)",
+    )
+    s.add_argument(
+        "--gate3-vision",
+        action="store_true",
+        help="Hard vision QA gate: fail apply if evaluation pass=false (implies screenshot)",
+    )
+    s.add_argument(
+        "--vision-plan",
+        type=Path,
+        default=None,
+        help="JSON evaluation plan/result for replay (tests)",
+    )
+    s.add_argument(
+        "--vision-cmd",
+        default=None,
+        help="Shell vision evaluator (stdin JSON → stdout eval). Overrides DESIGNMD_VISION_CMD",
+    )
     s.set_defaults(func=cmd_scaffold)
 
     a = sub.add_parser(
@@ -671,6 +700,29 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Hard gate: the contact sheet must render successfully or the "
         "destination is left untouched (implies --screenshot)",
+    )
+    a.add_argument(
+        "--vision",
+        action="store_true",
+        help="Evaluate contact sheet quality (offline heuristic + optional vision cmd)",
+    )
+    a.add_argument(
+        "--gate3-vision",
+        action="store_true",
+        dest="gate3_vision",
+        help="Hard vision QA: abort apply when evaluation pass=false "
+        "(implies screenshot; writes .gate3.json)",
+    )
+    a.add_argument(
+        "--vision-plan",
+        type=Path,
+        default=None,
+        help="JSON evaluation to merge/replay (tests + offline CI)",
+    )
+    a.add_argument(
+        "--vision-cmd",
+        default=None,
+        help="Shell vision evaluator (stdin JSON → stdout eval JSON)",
     )
     a.set_defaults(func=cmd_apply)
 
