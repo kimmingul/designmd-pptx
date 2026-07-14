@@ -19,6 +19,7 @@ tokens, ordered decks, and staging-safe apply.
 | [DESIGN.md schema v2](design-md-v2.md) | Token schema |
 | [Corpus](corpus.md) | Anonymize + validation corpus |
 | [Public benchmark](public-benchmark.md) | #42 — ≥100-deck methodology + results (CC0 synthetic) |
+| [Windows installer](windows-installer.md) | #35 — one-file PS1 + optional Setup.exe (Inno) |
 | [Infograpify reference](infograpify-reference.md) | License-safe premium analysis |
 | [Recipe coverage roadmap](recipe-coverage-roadmap.md) | Full-family recipe plan vs 400-deck library |
 | [Editor integration decision](editor-integration-decision.md) | #44 — VS Code/Cursor extension (not PPT Add-in) |

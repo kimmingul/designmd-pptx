@@ -88,6 +88,11 @@ python -m designmd_pptx generate content.deck.json -o generated --directive "App
 python -m designmd_pptx generate content.deck.json -o generated --profile minimal
 # after generate: scaffold from generated/content.generated.deck.json
 python -m designmd_pptx animate out/deck.pptx -o out/deck.animated.pptx --entrance fade --force  # #40
+python -m designmd_pptx windows-install --plan          # #35 Windows installer plan
+python -m designmd_pptx windows-install --check-script  # #35 validate one-file PS1
+# Windows one-file install (on Windows):
+#   powershell -ExecutionPolicy Bypass -File packaging\windows\Install-DesignmdPptx.ps1
+#   powershell -ExecutionPolicy Bypass -File packaging\windows\Install-DesignmdPptx.ps1 -Uninstall
 python -m designmd_pptx extract old.pptx -o extracted   # #22 modern chart/table mapping on extract
 python -m designmd_pptx reconstruct extracted/content.deck.json -o modern.json  # #22 restyle types/recipes
 python -m designmd_pptx compose brief.md -o composed/ --design default   # v1.5: outline → deck-spec

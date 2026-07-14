@@ -49,8 +49,12 @@ python -m designmd_pptx benchmark -o benchmark-out
 python -m designmd_pptx benchmark --public -o public-benchmark-out   # #42 ≥100 decks
 python -m designmd_pptx generate content.deck.json -o gen --directive "Keynote style"  # #21
 python -m designmd_pptx animate deck.pptx --entrance fade --force   # #40
+python -m designmd_pptx windows-install --plan --check-script       # #35
 python -m designmd_pptx compose brief.md -o composed --design default   # outline → deck-spec
 ```
+
+Windows non-dev install: `packaging/windows/Install-DesignmdPptx.ps1`
+(see `docs/windows-installer.md`).
 
 No brand DESIGN.md? Use the literal `default` as the design argument. Author content
 via `compose` (markdown brief → deck-spec draft), not by hand-writing JSON. Always

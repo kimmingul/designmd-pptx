@@ -26,6 +26,7 @@ designmd-pptx <command> …
 | `refine <deck.json> [-o refined/] [--feedback] [--findings] [--rounds]` | Iterative visual refinement (#19) |
 | `generate <deck.json> [-o out/] [--directive] [--profile] [--contact]` | Hybrid generative layout (#21) |
 | `animate <pptx> [-o out.pptx] [--entrance] [--transition] [--tokens]` | OOXML animation/transitions (#40) |
+| `windows-install [--plan] [--check-script] [--json]` | Windows installer plan / script checks (#35) |
 | `doctor [--strict] [--install [--dry-run]]` | Env + skill routing; pinned install |
 
 Pass the literal `default` instead of a DESIGN.md path for the bundled neutral

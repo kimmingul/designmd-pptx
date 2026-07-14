@@ -824,6 +824,68 @@ def cmd_generate(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_windows_install(args: argparse.Namespace) -> int:
+    """Print / validate the Windows standalone installer plan (#35)."""
+    from . import win_install as wi
+
+    if args.check_script:
+        try:
+            path = wi.assert_installer_present(args.repo_root)
+        except FileNotFoundError as e:
+            print(f"error: {e}", file=sys.stderr)
+            return 1
+        text = path.read_text(encoding="utf-8", errors="replace")
+        required = (
+            "-Uninstall", "officecli-dist", "install.manifest.json",
+            "LOCALAPPDATA", "designmd-pptx", "DryRun",
+        )
+        missing = [n for n in required if n not in text]
+        if missing:
+            print(f"error: installer missing markers: {missing}", file=sys.stderr)
+            return 1
+        print(f"OK windows installer: {path} ({path.stat().st_size} bytes)")
+        return 0
+
+    if args.validate_manifest:
+        try:
+            data = wi.load_manifest(args.validate_manifest)
+        except (OSError, ValueError, json.JSONDecodeError) as e:
+            print(f"error: {e}", file=sys.stderr)
+            return 1
+        print(f"OK manifest: product={data.get('product')} version={data.get('version')}")
+        print(f"  uninstall: {(data.get('uninstall') or {}).get('command')}")
+        return 0
+
+    plan = wi.build_install_plan(
+        root=args.root,
+        package_source=args.package_source or "pip",
+        skip_officecli=bool(args.skip_officecli),
+        skip_path=bool(args.skip_path),
+    )
+    if args.json or (args.out and str(args.out).endswith(".json")):
+        payload = plan.to_dict()
+        text = json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
+        if args.out:
+            out = Path(args.out)
+            out.parent.mkdir(parents=True, exist_ok=True)
+            out.write_text(text, encoding="utf-8")
+            print(f"Wrote {out}")
+        else:
+            print(text, end="")
+    else:
+        text = wi.render_plan_text(plan)
+        if args.out:
+            out = Path(args.out)
+            out.parent.mkdir(parents=True, exist_ok=True)
+            out.write_text(text, encoding="utf-8")
+            print(f"Wrote {out}")
+        else:
+            print(text, end="")
+    print(f"one-file installer: packaging/windows/Install-DesignmdPptx.ps1")
+    print(f"uninstall: {plan.uninstall_command}")
+    return 0
+
+
 def cmd_animate(args: argparse.Namespace) -> int:
     """Inject namespace-safe OOXML animation/transitions (#40)."""
     from . import animation as anim
@@ -1330,6 +1392,31 @@ def build_parser() -> argparse.ArgumentParser:
     an.add_argument("--report", type=Path, default=None,
                     help="Write animation.report.json")
     an.set_defaults(func=cmd_animate)
+
+    wi = sub.add_parser(
+        "windows-install",
+        help="Windows standalone installer plan / checks (#35); "
+             "one-file script: packaging/windows/Install-DesignmdPptx.ps1",
+    )
+    wi.add_argument("--plan", action="store_true", default=True,
+                    help="Print install plan (default)")
+    wi.add_argument("--json", action="store_true",
+                    help="Emit plan as JSON")
+    wi.add_argument("-o", "--out", type=Path, default=None,
+                    help="Write plan to file (.json → JSON)")
+    wi.add_argument("--root", type=Path, default=None,
+                    help="Override install root in the plan")
+    wi.add_argument("--package-source", default="pip",
+                    help="pip (default) or a local path for the plan's pip step")
+    wi.add_argument("--skip-officecli", action="store_true")
+    wi.add_argument("--skip-path", action="store_true")
+    wi.add_argument("--check-script", action="store_true",
+                    help="Validate packaging/windows/Install-DesignmdPptx.ps1 is present")
+    wi.add_argument("--repo-root", type=Path, default=None,
+                    help="Repo root for --check-script (default: auto)")
+    wi.add_argument("--validate-manifest", type=Path, default=None,
+                    help="Validate an install.manifest.json")
+    wi.set_defaults(func=cmd_windows_install)
 
     return p
 

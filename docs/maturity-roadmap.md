@@ -41,7 +41,7 @@ documented rather than blocking the release. Methodology and thresholds live in
 - ✅ Hybrid generative layout (#21) — `generate` CLI + `freeform` recipe
 - ✅ Animation / transitions (#40) — DESIGN.md `animation:` + `animate` CLI
 - ✅ Public 100+ deck benchmark (#42) — `benchmark --public` + [public-benchmark.md](public-benchmark.md)
-- Standalone Windows installer (#35)
+- ✅ Standalone Windows installer (#35) — `packaging/windows/Install-DesignmdPptx.ps1` + `windows-install` CLI
 
 ## v3.0 — platform
 

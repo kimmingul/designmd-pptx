@@ -249,7 +249,7 @@ Phases 0–4 complete. See [CHANGELOG](CHANGELOG.md) and [docs/maturity-roadmap.
 - ✅ **#22 Chart/table reconstruction** — lossless extract of type/series/categories; modern recipe mapping (`waterfall_insight`, `chart_callout_panel`, `appendix_table`); `reconstruct` CLI.
 - ✅ **#44 Editor decision** — primary surface is **VS Code / Cursor extension** (not PowerPoint Add-in); see [docs/editor-integration-decision.md](docs/editor-integration-decision.md).
 - ✅ **#45 Editor implementation** — MVP extension in [`editor/vscode/`](editor/vscode/) (compose/scaffold/a11y/refine/doctor, explorer, Problems from reports; VSIX sideload).
-- ⏳ Generative layout (#21), animation (#40), Windows installer (#35), larger public benchmark (#42).
+- ✅ Generative layout (#21), animation (#40), public 100+ benchmark (#42), Windows installer (#35).
 
 ## License
 
