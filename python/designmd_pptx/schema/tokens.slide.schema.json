@@ -47,6 +47,46 @@
     },
     "shape": { "type": "object" },
     "motif": { "type": "string" },
+    "composition": {
+      "type": "object",
+      "properties": {
+        "whitespace_density": { "enum": ["comfortable", "compact", "spacious"] },
+        "title_placement": { "enum": ["top", "left", "center"] }
+      }
+    },
+    "charts": {
+      "type": "object",
+      "properties": {
+        "default_style": { "enum": ["modern", "classic", "minimal"] },
+        "series_colors": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[0-9A-Fa-f]{6}$" }
+        }
+      }
+    },
+    "tables": {
+      "type": "object",
+      "properties": {
+        "header_style": { "enum": ["filled", "underline", "plain"] },
+        "cell_padding_cm": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "stripe": { "type": "boolean" }
+      }
+    },
+    "images": {
+      "type": "object",
+      "properties": {
+        "crop_mode": { "enum": ["fill", "fit", "none"] },
+        "placement": { "enum": ["auto", "left", "right", "full"] }
+      }
+    },
+    "master": {
+      "type": "object",
+      "properties": {
+        "footer": { "type": ["string", "null"] },
+        "page_number": { "type": "boolean" },
+        "navigation": { "type": "boolean" }
+      }
+    },
     "dark_first": { "type": "boolean" },
     "drop": { "type": "array", "items": { "type": "string" } },
     "patterns": { "type": "array", "items": { "type": "string" } }
