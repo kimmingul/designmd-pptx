@@ -21,6 +21,7 @@ tokens, ordered decks, and staging-safe apply.
 | [Infograpify reference](infograpify-reference.md) | License-safe premium analysis |
 | [Recipe coverage roadmap](recipe-coverage-roadmap.md) | Full-family recipe plan vs 400-deck library |
 | [Editor integration decision](editor-integration-decision.md) | #44 — VS Code/Cursor extension (not PPT Add-in) |
+| [VS Code extension README](../editor/vscode/README.md) | #45 MVP install + commands |
 
 ## Quick start
 

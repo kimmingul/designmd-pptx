@@ -37,9 +37,9 @@ documented rather than blocking the release. Methodology and thresholds live in
 - ✅ Iterative visual refinement loop (#19) — `refine` CLI
 - ✅ Chart/table reconstruction from extract (#22) — modern classify + `reconstruct`
 - ✅ Editor integration **decision** (#44) — VS Code/Cursor extension (not PPT Add-in)
+- ✅ Editor integration **implementation** (#45) — `editor/vscode` MVP
 - Generative / constraint layout expansion (#21)
 - Animation / transitions (#40)
-- Editor integration **implementation** (#45)
 - Standalone Windows installer (#35)
 - Larger public benchmark (#42)
 
