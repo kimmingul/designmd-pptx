@@ -23,6 +23,9 @@ class DocsPhase4(unittest.TestCase):
             "docs/recipe-coverage-roadmap.md": [
                 "Wave 1", "chevron_process", "COVERED", "DEFER", "400",
             ],
+            "docs/editor-integration-decision.md": [
+                "VS Code", "PowerPoint Add-in", "Usage-signal", "Feasibility", "#45",
+            ],
             "CONTRIBUTING.md": ["Dev setup", "Pattern", "PR checks", "Governance"],
         }
         # Machine-readable cluster snapshot (filenames only — no media)

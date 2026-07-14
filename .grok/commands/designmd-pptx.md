@@ -28,6 +28,7 @@ Use the **designmd-pptx** toolkit (skill `officecli-pptx-designmd`).
 - `a11y [--tokens] [--deck] [--design] [--content] [--fix-contrast] [--generate-missing]` — WCAG contrast + reading order + alt/notes; fails before output is treated as clean
 - `benchmark [-o out/] [--manifest]` — before/after regression harness (fixture suite default; corpus held-out optional)
 - `refine <deck.json> [-o refined/] [--feedback "…"] [--findings gate3.json] [--rounds 3]` — iterative visual refinement (#19): NL/vision findings → deck-spec patches
+- `reconstruct <deck.json> [-o out.json]` — modernize chart/table types & recipes (#22)
 
 Pass the literal `default` instead of a DESIGN.md path to use the bundled neutral house style. Add `--screenshot` to apply/scaffold for a Gate 3 contact-sheet PNG (`--gate3` aborts the write if it cannot render). Preferred flow: `compose → review draft → scaffold --apply --screenshot`.
 
