@@ -231,7 +231,7 @@ def recipe_section_divider(tokens: dict, content: dict | None = None) -> list[di
 
 
 def recipe_kpi_row(tokens: dict, content: dict | None = None) -> list[dict]:
-    """Adaptive 2–4 KPI cards (default 3)."""
+    """Adaptive 2–4 KPI cards (default 3) — engine-solved card row (#9)."""
     b = _base_props(tokens)
     c, t = b["c"], b["t"]
     content = content or {}
@@ -248,12 +248,38 @@ def recipe_kpi_row(tokens: dict, content: dict | None = None) -> list[dict]:
         kpis = [{"value": "—", "label": "Metric", "chip": ""}]
     n = max(2, min(4, len(kpis)))
     kpis = kpis[:n]
-    col_w, xs = _grid_n(n, b["margin"], b["gap"])
     bg = c["content_background"]
-    card_fill = c["surface"]
-    text_card = c["text_on_surface"]
-    muted_card = c["muted"]
-    micro = str(_micro_pt(t))
+    mpt = _micro_pt(t)
+    micro = str(mpt)
+
+    def _kpi_card(i: int) -> L.Box:
+        kpi = kpis[i]
+        watch = bool(kpi.get("watch"))
+        fill = c["risk"] if watch else c["surface"]
+        tc = c["on_accent"] if watch else c["text_on_surface"]
+        mc = "FFFFFF" if watch else c["muted"]
+        chip_c = mc if watch else c["accent"]
+        # Narrow side padding: the big KPI value needs near-full column width so
+        # it stays on one line (officecli wraps a wide value in a padded box).
+        return L.VStack(
+            weight=1, name=f"Kpi{i + 1}Bg", pad=(0.9, 0.2, 0.7, 0.2), gap=0.3,
+            props={"preset": b["preset"], "fill": fill, "line": "none"},
+            children=[
+                L.Spacer(weight=1),
+                L.Text(str(kpi.get("value", "—")), pt=t["kpi_pt"],
+                       name=f"Kpi{i + 1}Value", min_cm=2.0, max_cm=5.0, props={
+                           "font": t["heading_font"], "size": str(t["kpi_pt"]),
+                           "bold": "true", "color": tc, "align": "center", "fill": "none"}),
+                L.Text(str(kpi.get("label", "")), pt=mpt, name=f"Kpi{i + 1}Label",
+                       min_cm=0.8, props={
+                           "font": t["body_font"], "size": micro, "color": mc,
+                           "align": "center", "fill": "none"}),
+                L.Text(str(kpi.get("chip", "")), pt=mpt, name=f"Kpi{i + 1}Chip",
+                       min_cm=0.7, props={
+                           "font": t["body_font"], "size": micro, "bold": "true",
+                           "color": chip_c, "align": "center", "fill": "none"}),
+                L.Spacer(weight=1),
+            ])
 
     ops: list[dict] = [
         {
@@ -282,102 +308,20 @@ def recipe_kpi_row(tokens: dict, content: dict | None = None) -> list[dict]:
         },
     ]
 
-    y, h = 4.2, 10.5
-    for i, kpi in enumerate(kpis):
-        x = xs[i]
-        watch = bool(kpi.get("watch"))
-        fill = c["risk"] if watch else card_fill
-        tc = c["on_accent"] if watch else text_card
-        mc = "FFFFFF" if watch else muted_card
-        name = f"Kpi{i+1}"
-        ops.extend(
-            [
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"{name}Bg",
-                        "preset": b["preset"],
-                        "fill": fill,
-                        "line": "none",
-                        "x": _cm(x),
-                        "y": _cm(y),
-                        "width": _cm(col_w),
-                        "height": _cm(h),
-                    },
-                },
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"{name}Value",
-                        "text": str(kpi.get("value", "—")),
-                        "x": _cm(x),
-                        "y": _cm(y + 1.5),
-                        "width": _cm(col_w),
-                        "height": "3cm",
-                        "font": t["heading_font"],
-                        "size": str(t["kpi_pt"]),
-                        "bold": "true",
-                        "color": tc,
-                        "align": "center",
-                        "fill": "none",
-                    },
-                },
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"{name}Label",
-                        "text": str(kpi.get("label", "")),
-                        "x": _cm(x + 0.4),
-                        "y": _cm(y + 5.2),
-                        "width": _cm(col_w - 0.8),
-                        "height": "1.2cm",
-                        "font": t["body_font"],
-                        "size": micro,
-                        "color": mc,
-                        "align": "center",
-                        "fill": "none",
-                    },
-                },
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"{name}Chip",
-                        "text": str(kpi.get("chip", "")),
-                        "x": _cm(x + 0.4),
-                        "y": _cm(y + 6.8),
-                        "width": _cm(col_w - 0.8),
-                        "height": "1cm",
-                        "font": t["body_font"],
-                        "size": micro,
-                        "bold": "true",
-                        "color": c["accent"] if not watch else mc,
-                        "align": "center",
-                        "fill": "none",
-                    },
-                },
-            ]
-        )
-    ops.append(
-        {
-            "command": "add",
-            "parent": "/slide[last()]",
-            "type": "notes",
-            "props": {
-                "text": content.get(
-                    "notes",
-                    "Walk KPIs left to right; pause on any watch metric.",
-                )
-            },
-        }
-    )
+    def build(d: L.Density) -> L.Box:
+        # iterate the ACTUAL kpis (n is only the display clamp) — range(n) would
+        # index past a 1-item list and crash.
+        return L.HStack([_kpi_card(i) for i in range(len(kpis))],
+                        gap=b["gap"] * d.gap, weight=1)
+
+    placed, _d = L.solve_adaptive(
+        build, b["margin"], 4.2, 33.87 - 2 * b["margin"], 11.0)
+    ops.extend(_emit_shapes(placed))
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Walk KPIs left to right; pause on any watch metric.")},
+    })
     return ops
 
 
@@ -1595,7 +1539,9 @@ def recipe_big_number(tokens: dict, content: dict | None = None) -> list[dict]:
 
 
 def recipe_matrix_2x2(tokens: dict, content: dict | None = None) -> list[dict]:
-    """2×2 quadrant matrix with optional axis labels."""
+    """2×2 quadrant matrix with optional axis labels. The quadrant grid is
+    engine-solved (#9) — card heights and text-fit adapt to content; the title
+    and axis annotations stay fixed as chrome."""
     b = _base_props(tokens)
     c, t = b["c"], b["t"]
     content = content or {}
@@ -1605,52 +1551,44 @@ def recipe_matrix_2x2(tokens: dict, content: dict | None = None) -> list[dict]:
     ]
     quads = (list(quads) + [{}] * 4)[:4]
     axes = content.get("axes") or {}
+
+    qt_pt = max(18, t["section_pt"] - 4)
+
+    def _quad(i: int, body_pt: int) -> L.Box:
+        q = quads[i]
+        return L.VStack(
+            weight=1, name=f"Quad{i + 1}Bg", pad=(0.5, 0.6, 0.6, 0.6), gap=0.4,
+            props={"preset": b["preset"], "fill": c["surface"], "line": "none"},
+            children=[
+                L.Text(str(q.get("title", "")), pt=qt_pt, name=f"Quad{i + 1}Title",
+                       min_cm=0.9, max_cm=2.4, props={
+                           "font": t["heading_font"], "size": str(qt_pt),
+                           "bold": "true", "color": c["text_on_surface"], "fill": "none"}),
+                L.Text(str(q.get("body", "")), pt=body_pt, name=f"Quad{i + 1}Body",
+                       weight=1, props={
+                           "font": t["body_font"], "size": str(body_pt),
+                           "color": c["muted"], "fill": "none"}),
+            ])
+
+    def build(d: L.Density) -> L.Box:
+        # body font shrinks with density (compact) so dense quadrants compact
+        # instead of overflowing.
+        bpt = L.floored_pt(t["body_pt"], d)
+        return L.VStack(gap=b["gap"] * d.gap, name="matrix_grid", children=[
+            L.HStack([_quad(0, bpt), _quad(1, bpt)], gap=b["gap"] * d.gap, weight=1),
+            L.HStack([_quad(2, bpt), _quad(3, bpt)], gap=b["gap"] * d.gap, weight=1),
+        ])
+
+    # grid clears the fixed AxisY band (3.0–3.8cm) when present, and the AxisX
+    # band at the bottom — the overlap codex flagged (#9 review).
+    grid_top = 3.9 if axes.get("y") else 3.4
+    grid_bottom = 17.0 if axes.get("x") else 18.2
+    placed, _d = L.solve_adaptive(
+        build, b["margin"], grid_top, 33.87 - 2 * b["margin"], grid_bottom - grid_top)
+    ops = [_slide_op(tokens), _title_op(tokens, "MatrixTitle", title),
+           *_emit_shapes(placed)]
+
     usable = 33.87 - 2 * b["margin"]
-    col_w = (usable - b["gap"]) / 2
-    row_h, y0 = 6.4, 3.8
-    ops = [_slide_op(tokens), _title_op(tokens, "MatrixTitle", title)]
-    for i, q in enumerate(quads):
-        x = b["margin"] + (i % 2) * (col_w + b["gap"])
-        y = y0 + (i // 2) * (row_h + b["gap"])
-        name = f"Quad{i + 1}"
-        ops.extend(
-            [
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"{name}Bg", "preset": b["preset"], "fill": c["surface"],
-                        "line": "none", "x": _cm(x), "y": _cm(y),
-                        "width": _cm(col_w), "height": _cm(row_h),
-                    },
-                },
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"{name}Title", "text": str(q.get("title", "")),
-                        "x": _cm(x + 0.5), "y": _cm(y + 0.4),
-                        "width": _cm(col_w - 1), "height": "1.2cm",
-                        "font": t["heading_font"], "size": str(max(18, t["section_pt"] - 4)),
-                        "bold": "true", "color": c["text_on_surface"], "fill": "none",
-                    },
-                },
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"{name}Body", "text": str(q.get("body", "")),
-                        "x": _cm(x + 0.5), "y": _cm(y + 1.8),
-                        "width": _cm(col_w - 1), "height": _cm(row_h - 2.2),
-                        "font": t["body_font"], "size": str(t["body_pt"]),
-                        "color": c["muted"], "fill": "none",
-                    },
-                },
-            ]
-        )
     micro = str(_micro_pt(t))
     if axes.get("x"):
         ops.append(
