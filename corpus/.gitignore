@@ -1,0 +1,4 @@
+# Anonymized decks may still be confidential. Commit the manifest, not the
+# decks, unless you hold redistribution rights. Remove these lines to opt in.
+*.pptx
+*.potx

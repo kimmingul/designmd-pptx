@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "corpus.manifest",
+  "type": "object",
+  "required": ["schema", "entries"],
+  "properties": {
+    "schema": { "const": 1 },
+    "description": { "type": "string" },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "file", "source", "license", "provenance"],
+        "properties": {
+          "id": { "type": "string", "description": "Stable unique deck id" },
+          "file": { "type": "string", "description": "Path to the anonymized .pptx" },
+          "source": { "type": "string", "description": "Where the deck came from" },
+          "license": { "type": "string", "description": "Redistribution terms / 'private'" },
+          "provenance": { "type": "string", "description": "How it was obtained + anonymized" },
+          "sha256": { "type": "string", "description": "Digest of the anonymized file (drives the stable held-out split)" },
+          "held_out": { "type": "boolean", "description": "Pin in/out of the eval set; omit to use the hash rule" },
+          "admitted_at": { "type": "string", "description": "ISO date of admission" },
+          "notes": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}
