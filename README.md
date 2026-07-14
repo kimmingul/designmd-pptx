@@ -26,8 +26,24 @@ Drop a brand `DESIGN.md` in, scaffold an ordered deck, and materialize slides wi
 - `pip install -r python/requirements.txt` (PyYAML)
 - Optional, for materializing real `.pptx` files (see [Architecture](#architecture-officecli-backends)):
   - legacy shape-level binary ([iOfficeAI/OfficeCLI releases](https://github.com/iOfficeAI/OfficeCLI/releases)) — powers scaffold/apply/restyle/master
-  - official [officecli](https://github.com/officecli/officecli) ≥ 0.2.117 (`npm install -g officecli`) — powers the `render` command via agent-bridge
+  - official [officecli](https://github.com/officecli/officecli) — powers the `render` command via agent-bridge
 - Node 18+ only for `npm run sync` / `npm run check`
+
+### Supported OfficeCLI versions
+
+The supported/tested version range is pinned in one machine-readable place —
+[`python/designmd_pptx/compatibility.json`](python/designmd_pptx/compatibility.json) —
+and consumed by `doctor`, CI, and packaging (issue #8). Do not hardcode a
+version elsewhere; edit the manifest.
+
+| Backend | Min supported | Pinned / max tested | Install |
+|---|---|---|---|
+| official (agent-bridge) | `0.2.117` | `0.2.117` | `npm install -g officecli@0.2.117` |
+| legacy (shape-level) | any (verb-gated) | rolling | [iOfficeAI/OfficeCLI releases](https://github.com/iOfficeAI/OfficeCLI/releases) |
+
+`python -m designmd_pptx doctor` reports the exact detected version and whether
+it is **supported**, **too old** (fails), or **newer than tested** (usable,
+unverified). `python -m designmd_pptx.compat` self-checks the manifest.
 
 ## Install
 

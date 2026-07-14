@@ -12,8 +12,9 @@ import subprocess
 import sys
 from pathlib import Path
 
+from . import compat
 from .backend import (AgentBridgeBackend, BackendUnavailable,
-                      LegacyBatchBackend, OFFICIAL_MIN_VERSION, find_binaries)
+                      LegacyBatchBackend, find_binaries)
 
 _LEGACY_REMEDY = (
     "install the legacy shape-level binary from "
@@ -50,14 +51,31 @@ def _legacy() -> tuple[bool, str]:
     return True, f"v{ver} ({be.exe}) — shape-level pipeline ready"
 
 
+_SUPPORT_TAG = {
+    compat.OK: "supported",
+    compat.TOO_OLD: "TOO OLD",
+    compat.UNTESTED_NEWER: "untested (newer)",
+    compat.UNKNOWN: "version unreadable",
+}
+
+
 def _official() -> tuple[bool, str]:
     exe = find_binaries().get("official")
     if not exe:
         return False, _OFFICIAL_REMEDY
     _, ver = _run(exe, "--version")
+    level, why = compat.classify_support("official", ver)
+    spec = compat.spec_for("official")
     rc, status = _run(exe, "config", "status")
     note = status.splitlines()[0][:80] if rc == 0 and status else "config status n/a"
-    return True, f"{ver} ({exe}) — min {OFFICIAL_MIN_VERSION}; {note}"
+    # Too-old is the only version state that fails the check — a newer,
+    # untested build is reported but still usable.
+    ok = level != compat.TOO_OLD
+    detail = (f"{ver} ({exe}) — {_SUPPORT_TAG[level]} "
+              f"[{why}; pinned {spec['recommended']}]; {note}")
+    if level == compat.TOO_OLD:
+        detail += f" — upgrade: {spec['install']}"
+    return ok, detail
 
 
 def _bridge() -> tuple[bool, str]:
