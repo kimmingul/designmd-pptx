@@ -768,8 +768,9 @@ def recipe_timeline(tokens: dict, content: dict | None = None) -> list[dict]:
 
     def _step_col(i: int, detail_pt: int) -> L.Box:
         step = steps[i] if isinstance(steps[i], dict) else {"label": str(steps[i])}
-        label = str(step.get("label", f"Step {i + 1}"))
-        detail = str(step.get("detail", ""))
+        # `or` (not a default arg) so an explicit null renders the fallback, not "None".
+        label = str(step.get("label") or f"Step {i + 1}")
+        detail = str(step.get("detail") or "")
         return L.VStack(
             weight=1, name=f"TlCol{i + 1}", gap=0.35,
             children=[
