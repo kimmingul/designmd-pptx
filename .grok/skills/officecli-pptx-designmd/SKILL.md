@@ -109,9 +109,11 @@ to → render. `doctor` shows which backends this machine has.
 Two paths to modernize an existing .pptx — pick by how much change is wanted:
 
 - **Full re-layout**: `extract old.pptx -o extracted/` maps each slide to the
-  closest recipe (confidence + warnings in `extract.report.json`, images exported
-  to `assets/`). **Review the draft** — fix low-confidence mappings, set missing
-  `src` — then `scaffold DESIGN.md --content extracted/content.deck.json`.
+  closest recipe (confidence + warnings + **loss_ledger** in `extract.report.json`,
+  images exported to `assets/`). Charts recover type/series/categories; SmartArt
+  falls back to text; groups are expanded; animations/embeddings are listed as
+  losses (never silent). **Review the draft** — fix low-confidence mappings, set
+  missing `src` — then `scaffold DESIGN.md --content extracted/content.deck.json`.
 - **Brand-only restyle**: `restyle old.pptx DESIGN.md -o new.pptx` keeps layout
   untouched; remaps theme scheme + fonts, explicit srgbClr → nearest brand color,
   explicit typefaces → brand fonts. `--no-explicit-colors` / `--no-explicit-fonts`
