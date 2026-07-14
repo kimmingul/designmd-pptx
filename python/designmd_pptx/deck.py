@@ -126,7 +126,9 @@ def validate_deck_content_caps(deck: dict[str, Any]) -> list[str]:
             if isinstance(headers, list) and len(headers) > 6:
                 errors.append(f"{prefix}: table headers max 6; split table")
             if isinstance(rows, list) and len(rows) > 8:
-                errors.append(f"{prefix}: table rows max 8; split table")
+                errors.append(
+                    f"{prefix}: table rows max 8; use the appendix_table recipe "
+                    "for larger data (auto-splits across continuation slides)")
             if isinstance(headers, list) and isinstance(rows, list):
                 for ri, row in enumerate(rows):
                     if isinstance(row, list) and len(row) != len(headers):
@@ -169,11 +171,10 @@ def validate_deck_content_caps(deck: dict[str, Any]) -> list[str]:
                     errors.append(f"{prefix}: tiers[{ti}].features max 5 (got {len(feats)})")
         if recipe == "appendix_table":
             headers = content.get("headers") or []
-            rows = content.get("rows") or []
+            # rows are NOT capped: appendix_table auto-splits into continuation
+            # slides (#17), so large tables paginate instead of being rejected.
             if isinstance(headers, list) and len(headers) > 8:
-                errors.append(f"{prefix}: appendix_table headers max 8; split table")
-            if isinstance(rows, list) and len(rows) > 14:
-                errors.append(f"{prefix}: appendix_table rows max 14; split table")
+                errors.append(f"{prefix}: appendix_table headers max 8; split columns")
     return errors
 
 
