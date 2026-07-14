@@ -8,7 +8,7 @@
 ; with -Uninstall.
 
 #define MyAppName "designmd-pptx"
-#define MyAppVersion "2.1.0"
+#define MyAppVersion "2.1.1"
 #define MyAppPublisher "designmd-pptx contributors"
 #define MyAppURL "https://github.com/kimmingul/designmd-pptx"
 

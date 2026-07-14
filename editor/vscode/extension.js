@@ -7,6 +7,7 @@
 const vscode = require("vscode");
 const path = require("path");
 const fs = require("fs");
+const { spawn } = require("child_process");
 const { resolveCli: resolveCliPure, diagnosticsFromReport } = require("./cli");
 
 const DIAG_COLLECTION = "designmd-pptx";
@@ -83,7 +84,7 @@ function workspaceOutput(rel) {
 
 /**
  * @param {string[]} args
- * @returns {{ shellCmd: string, cwd: string, env: NodeJS.ProcessEnv }}
+ * @returns {{ argv: string[], cwd: string, env: NodeJS.ProcessEnv, display: string }}
  */
 function resolveCli(args) {
   const root = workspaceRoot() || process.cwd();
@@ -98,35 +99,48 @@ function resolveCli(args) {
   });
 }
 
-function quote(s) {
-  if (/[\s"]/g.test(String(s))) {
-    return `"${String(s).replace(/"/g, '\\"')}"`;
-  }
-  return String(s);
-}
-
 /**
+ * Run designmd-pptx with argv (shell:false) — never interpolates user input
+ * into a shell string (adversarial #45 P1).
  * @param {string[]} args
  * @param {{ reveal?: boolean, title?: string }} [opts]
+ * @returns {Thenable<void>}
  */
 function runCli(args, opts = {}) {
-  const { shellCmd, cwd, env } = resolveCli(args);
+  const { argv, cwd, env, display } = resolveCli(args);
   const name = opts.title || `designmd-pptx ${args[0] || ""}`.trim();
-  const terminal =
-    vscode.window.terminals.find((t) => t.name === "designmd-pptx") ||
-    vscode.window.createTerminal({ name: "designmd-pptx", cwd, env });
+  const out = vscode.window.createOutputChannel("designmd-pptx", { log: true });
   if (opts.reveal !== false) {
-    terminal.show(true);
+    out.show(true);
   }
-  if (env.PYTHONPATH) {
-    const exp =
-      process.platform === "win32"
-        ? `$env:PYTHONPATH = '${env.PYTHONPATH.replace(/'/g, "''")}'`
-        : `export PYTHONPATH=${quote(env.PYTHONPATH)}`;
-    terminal.sendText(exp, true);
-  }
-  terminal.sendText(shellCmd, true);
-  return vscode.window.setStatusBarMessage(`$(sync~spin) ${name}`, 4000);
+  out.appendLine(`$ ${display}`);
+  const status = vscode.window.setStatusBarMessage(`$(sync~spin) ${name}`, 60000);
+
+  return new Promise((resolve) => {
+    const [cmd, ...cmdArgs] = argv;
+    const child = spawn(cmd, cmdArgs, {
+      cwd,
+      env,
+      shell: false,
+      windowsHide: true,
+    });
+    child.stdout?.on("data", (buf) => out.append(buf.toString()));
+    child.stderr?.on("data", (buf) => out.append(buf.toString()));
+    child.on("error", (err) => {
+      out.appendLine(`error: ${err.message}`);
+      status.dispose();
+      vscode.window.showErrorMessage(`designmd-pptx failed to start: ${err.message}`);
+      resolve();
+    });
+    child.on("close", (code) => {
+      out.appendLine(`\n[exit ${code}]`);
+      status.dispose();
+      if (code !== 0) {
+        vscode.window.showWarningMessage(`${name} exited ${code} — see Output → designmd-pptx`);
+      }
+      resolve();
+    });
+  });
 }
 
 // ── Commands ────────────────────────────────────────────────────────────────

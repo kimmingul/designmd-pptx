@@ -66,7 +66,9 @@ ok(sync.status === 0, `adapters in sync: ${(sync.stdout || sync.stderr || '').tr
 const pkg = path.join(root, 'python', 'designmd_pptx', '__init__.py');
 ok(fs.existsSync(pkg), 'python package present');
 const init = fs.readFileSync(pkg, 'utf8');
-ok(init.includes('2.1'), 'package version 2.1.x');
+const verMatch = init.match(/__version__\s*=\s*["']([\d.]+)["']/);
+const pyVer = verMatch ? verMatch[1] : '';
+ok(pyVer === plugin.version, `package version ${pyVer} == plugin ${plugin.version}`);
 
 const req = path.join(root, 'python', 'requirements.txt');
 ok(fs.existsSync(req), 'requirements.txt');
@@ -78,10 +80,15 @@ const py = spawnSync('python', ['-c', pyCode], {
   encoding: 'utf-8',
   shell: false,
 });
+const imported = (py.stdout || '').trim();
 ok(
-  py.status === 0 && (py.stdout || '').includes('2.1'),
-  `python import: ${(py.stdout || py.stderr || '').trim()}`
+  py.status === 0 && imported === plugin.version,
+  `python import: ${imported} (plugin ${plugin.version})`
 );
+
+// Exact equality across package.json as well
+const npj = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
+ok(npj.version === plugin.version, `npm package.json ${npj.version} == plugin`);
 
 if (failed) {
   console.error(`\n${failed} check(s) failed`);

@@ -62,11 +62,27 @@ class Generative21(unittest.TestCase):
         # keynote maps bullets → feature_cards OR freeform when force
         new_recipe = report["deck"]["slides"][0]["recipe"]
         self.assertIn(new_recipe, ("feature_cards", "freeform"))
-        # list trimmed to max_list_items
         content = report["deck"]["slides"][0]["content"]
         key = "cards" if "cards" in content else "bullets"
-        if key in content:
+        if key in content and key == "bullets":
             self.assertLessEqual(len(content[key]), 4)
+            # Overflow preserved (not silent drop)
+            if len([f"P{i}" for i in range(8)]) > 4:
+                self.assertIn("overflow", content)
+
+    def test_overflow_preserved_not_dropped(self) -> None:
+        deck = {
+            "slides": [{
+                "id": "s1",
+                "recipe": "bullets",
+                "content": {"title": "T", "bullets": [f"P{i}" for i in range(10)]},
+            }],
+        }
+        report = gen.generate_deck_layout(deck, profile_id="minimal")
+        content = report["deck"]["slides"][0]["content"]
+        ov = content.get("overflow") or {}
+        self.assertTrue(ov.get("bullets") or content.get("notes", "").find("overflow") >= 0
+                        or report["deck"]["slides"][0]["recipe"] == "freeform")
 
     def test_vision_density_forces_freeform(self) -> None:
         deck = {
@@ -180,11 +196,36 @@ class Animation40(unittest.TestCase):
         self.assertIn(b"timing", new)
         self.assertIn(b"transition", new)
         self.assertIn(b"animEffect", new)
-        # namespace-safe re-parse
+        # namespace-safe re-parse + CT_Slide order: transition/timing before extLst
         from designmd_pptx import opc
         root = opc.parse(new)
         self.assertIsNotNone(root.find(opc.qn("p:timing")))
         self.assertIsNotNone(root.find(opc.qn("p:transition")))
+        tags = [opc.qn(t).split("}")[-1] if False else (
+            c.tag.split("}")[-1] if "}" in c.tag else c.tag
+        ) for c in list(root)]
+        # simplified local names
+        locals_ = [c.tag.split("}")[-1] for c in list(root)]
+        if "clrMapOvr" in locals_:
+            self.assertLess(locals_.index("clrMapOvr"), locals_.index("transition"))
+        self.assertLess(locals_.index("transition"), locals_.index("timing"))
+        if "extLst" in locals_:
+            self.assertLess(locals_.index("timing"), locals_.index("extLst"))
+
+    def test_inplace_requires_force(self) -> None:
+        slide = self._minimal_slide_xml("CoverTitle")
+        with tempfile.TemporaryDirectory() as td:
+            src = Path(td) / "deck.pptx"
+            with zipfile.ZipFile(src, "w") as zf:
+                zf.writestr("[Content_Types].xml", "<Types/>")
+                zf.writestr("ppt/slides/slide1.xml", slide)
+            report = anim.animate_pptx(
+                src, out=src,
+                animation={"enabled": True, "entrance": "fade", "transition": "fade"},
+                force=False,
+            )
+            self.assertFalse(report.ok)
+            self.assertTrue(any("force" in n.lower() for n in report.notes))
 
     def test_animate_pptx_roundtrip(self) -> None:
         slide = self._minimal_slide_xml("CoverTitle")

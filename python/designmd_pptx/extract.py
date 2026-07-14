@@ -186,11 +186,23 @@ def _similar_row(shapes: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def _chart_type(chart_root: ET.Element) -> str:
+    """Map OOXML chart plot type → officecli chart_type string.
+
+    Note: vertical *column* charts and horizontal *bar* charts both use
+    ``c:barChart`` in ECMA-376; direction is ``c:barDir`` (``col`` | ``bar``).
+    """
     plot = chart_root.find(".//c:plotArea", NS)
     if plot is None:
         return "column"
     for child in list(plot):
         local = _local(child.tag)
+        if local in ("barChart", "bar3DChart"):
+            # ECMA-376: barDir val="col" → column, val="bar" → bar (default bar)
+            bar_dir = child.find("c:barDir", NS)
+            direction = (bar_dir.get("val") if bar_dir is not None else None) or "bar"
+            if str(direction).lower() in ("col", "column"):
+                return "column"
+            return "bar"
         if local in _CHART_TYPE_MAP:
             return _CHART_TYPE_MAP[local]
         if local.endswith("Chart") and local not in ("ofPieChart",):

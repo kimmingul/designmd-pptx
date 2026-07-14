@@ -65,9 +65,14 @@ class PublicSuiteMeta:
     decks_generated: int = 0
     recipes_covered: list[str] = field(default_factory=list)
     themes: list[str] = field(default_factory=list)
+    recipe_build_ok: int = 0
+    recipe_build_fail: int = 0
     methodology: str = (
-        "Synthetic deck-specs × design themes; before side degrades contrast/"
-        "alt; after runs a11y auto-correct; scored with benchmark_thresholds.json"
+        "Synthetic deck-spec a11y + recipe-builder smoke suite (CC0). "
+        "Does NOT download private decks, render PPTX, or run live Gate 3. "
+        "Each fixture: degraded before tokens/deck → a11y auto-correct after; "
+        "primary recipe is materialised via RECIPE_BUILDERS (ops emitted). "
+        "OfficeCLI apply/screenshot is out of band for this public harness."
     )
 
     def to_dict(self) -> dict[str, Any]:
@@ -252,12 +257,52 @@ def _degrade_for_before(deck: dict[str, Any], tokens: dict[str, Any]) -> tuple[d
     return before_deck, before_tokens
 
 
+def _materialize_primary(
+    tokens: dict[str, Any],
+    deck: dict[str, Any],
+) -> tuple[int, list[str]]:
+    """Invoke RECIPE_BUILDERS for each slide. Returns (layout_failures, notes)."""
+    from . import recipes as recipes_mod
+
+    failures = 0
+    notes: list[str] = []
+    builders = recipes_mod.RECIPE_BUILDERS
+    for s in deck.get("slides") or []:
+        if not isinstance(s, dict):
+            failures += 1
+            continue
+        recipe = str(s.get("recipe") or "")
+        content = s.get("content") if isinstance(s.get("content"), dict) else {}
+        builder = builders.get(recipe)
+        if builder is None:
+            failures += 1
+            notes.append(f"unknown recipe {recipe!r}")
+            continue
+        try:
+            ops = builder(tokens, content)
+            if not isinstance(ops, list) or not ops:
+                failures += 1
+                notes.append(f"{recipe}: empty ops")
+            elif not any(o.get("type") == "slide" for o in ops if isinstance(o, dict)):
+                failures += 1
+                notes.append(f"{recipe}: no slide op")
+        except Exception as e:  # noqa: BLE001 — record builder failure as layout metric
+            failures += 1
+            notes.append(f"{recipe}: {type(e).__name__}: {e}")
+    return failures, notes
+
+
 def build_public_fixtures(
     n: int = MIN_PUBLIC_DECKS,
     *,
     design_path: str | Path | None = None,
 ) -> tuple[list[dict[str, Any]], PublicSuiteMeta]:
-    """Compile tokens once and build fixture dicts for run_fixture_suite."""
+    """Compile tokens once and build fixture dicts for run_fixture_suite.
+
+    Honesty note (adversarial #42): this is a **synthetic deck-spec + recipe
+    builder smoke** suite, not a rendered-PPTX corpus. Gate 3 is offline
+    structural (no contact sheet unless provided).
+    """
     pkg = Path(__file__).parent
     design = Path(design_path) if design_path else pkg / "default.DESIGN.md"
     tokens = compile_design_md(design)
@@ -265,6 +310,8 @@ def build_public_fixtures(
     fixtures: list[dict[str, Any]] = []
     recipes_seen: set[str] = set()
     themes_seen: set[str] = set()
+    build_ok = 0
+    build_fail = 0
 
     for deck in decks:
         did = str(deck["id"])
@@ -274,22 +321,49 @@ def build_public_fixtures(
         before_deck, before_tokens = _degrade_for_before(deck, tokens)
         after_tokens, _ = a11y_mod.auto_correct_contrast(before_tokens)
         after_deck, _ = a11y_mod.ensure_notes_and_alt(before_deck)
+
+        # Recipe materialisation smoke on the *after* deck
+        layout_fail, build_notes = _materialize_primary(after_tokens, after_deck)
+        if layout_fail:
+            build_fail += 1
+        else:
+            build_ok += 1
+
+        # Offline gate: pass only when recipe smoke succeeded (not hard-coded)
+        after_gate = {
+            "pass": layout_fail == 0,
+            "provider": "recipe_smoke",
+            "issues": [
+                {"severity": "error", "code": "recipe_build", "message": n}
+                for n in build_notes
+            ],
+        }
         fixtures.append({
             "id": did,
             "before_deck": before_deck,
             "after_deck": after_deck,
             "before_tokens": before_tokens,
             "after_tokens": after_tokens,
-            "before_extract": {"loss_ledger": []},
-            "after_extract": {"loss_ledger": []},
-            "after_gate": {"pass": True, "issues": []},
+            # No real extract — ledger empty is honest for synthetic fixtures
+            "before_extract": {"loss_ledger": [], "note": "synthetic: no pptx extract"},
+            "after_extract": {"loss_ledger": [], "note": "synthetic: no pptx extract"},
+            "after_gate": after_gate,
+            # Inject layout_failure via a synthetic after metric path:
+            # score_deck uses layout_failures(tokens, deck) — we also stash
+            # builder failures into after_deck meta for audit.
+            "_layout_builder_failures": layout_fail,
         })
+        if layout_fail and isinstance(after_deck.get("meta"), dict):
+            after_deck["meta"]["layout_builder_failures"] = layout_fail
+            after_deck["meta"]["layout_builder_notes"] = build_notes[:8]
 
     meta_out = PublicSuiteMeta(
         decks_requested=n,
         decks_generated=len(fixtures),
         recipes_covered=sorted(r for r in recipes_seen if r),
         themes=sorted(themes_seen),
+        recipe_build_ok=build_ok,
+        recipe_build_fail=build_fail,
     )
     return fixtures, meta_out
 
@@ -300,27 +374,40 @@ def run_public_suite(
     design_path: str | Path | None = None,
     thresholds: dict[str, Any] | None = None,
 ) -> tuple[bench.SuiteReport, PublicSuiteMeta]:
-    """Run the ≥100 deck public benchmark. Returns (suite_report, meta)."""
-    if n < MIN_PUBLIC_DECKS:
-        # allow smaller smoke runs but annotate
-        pass
+    """Run the ≥100 deck public synthetic suite. Returns (suite_report, meta)."""
     fixtures, meta = build_public_fixtures(n, design_path=design_path)
     th = thresholds or bench.load_thresholds()
-    # Public suite may evaluate many decks; keep max_failed at 0
     report = bench.run_fixture_suite(fixtures=fixtures, thresholds=th)
+    # Fold recipe-builder failures into suite status (layout_failure may be 0
+    # if deck-spec is well-formed but builder raised).
+    extra_fail = 0
+    for fx, result in zip(fixtures, report.results):
+        bf = int(fx.get("_layout_builder_failures") or 0)
+        if bf and result.status == "pass":
+            result.status = "fail"
+            result.threshold_breaches = list(result.threshold_breaches) + [
+                f"recipe_builder_failures={bf}"
+            ]
+            extra_fail += 1
+    if extra_fail:
+        report.decks_fail += extra_fail
+        report.decks_pass = max(0, report.decks_pass - extra_fail)
+        report.ok = False
     report.notes.append(
-        f"public benchmark v{meta.version} license={meta.license} "
-        f"decks={meta.decks_generated} recipes={len(meta.recipes_covered)}"
+        f"public synthetic suite v{meta.version} license={meta.license} "
+        f"decks={meta.decks_generated} recipes={len(meta.recipes_covered)} "
+        f"recipe_build_ok={meta.recipe_build_ok} fail={meta.recipe_build_fail}"
     )
     report.notes.append(meta.methodology)
-    if meta.decks_generated < MIN_PUBLIC_DECKS:
+    report.notes.append(
+        "NOT a rendered-PPTX corpus: no OfficeCLI apply/screenshot in this harness"
+    )
+    if meta.decks_generated < MIN_PUBLIC_DECKS and n >= MIN_PUBLIC_DECKS:
         report.notes.append(
             f"WARNING: generated {meta.decks_generated} < {MIN_PUBLIC_DECKS} "
             "public-deck target"
         )
-        # fail suite if below publication bar when n requested ≥ bar
-        if n >= MIN_PUBLIC_DECKS:
-            report.ok = False
+        report.ok = False
     return report, meta
 
 

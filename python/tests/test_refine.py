@@ -54,6 +54,38 @@ class ApplyPatches19(unittest.TestCase):
         self.assertEqual(len(out["slides"][1]["content"]["bullets"]), 6)
         self.assertIn("cont", out["slides"][1]["content"]["title"].lower())
 
+    def test_split_does_not_corrupt_later_slides(self) -> None:
+        """Adversarial #19: insert must not shift indices mid-pass."""
+        deck = {
+            "slides": [
+                {
+                    "id": "s1",
+                    "recipe": "bullets",
+                    "content": {"title": "A", "bullets": [f"a{i}" for i in range(8)]},
+                },
+                {
+                    "id": "s2",
+                    "recipe": "bullets",
+                    "content": {"title": "B", "bullets": [f"b{i}" for i in range(8)]},
+                },
+            ],
+        }
+        findings = [{
+            "code": "density",
+            "severity": "error",
+            "message": "crowded",
+            "slide": None,  # all slides
+        }]
+        out, log = refine.apply_patches(deck, findings, max_list_items=4)
+        ids = [s["id"] for s in out["slides"]]
+        self.assertIn("s1", ids)
+        self.assertIn("s2", ids)
+        # Both originals split → 4 slides (s1, s1-cont, s2, s2-cont) order may vary
+        self.assertEqual(len(out["slides"]), 4)
+        s2 = next(s for s in out["slides"] if s["id"] == "s2")
+        self.assertEqual(len(s2["content"]["bullets"]), 4)
+        self.assertTrue(any(p["action"] == "split_list" for p in log))
+
     def test_shorten_body(self) -> None:
         long_body = "word " * 80
         deck = {

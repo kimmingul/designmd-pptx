@@ -1,5 +1,10 @@
 # Public benchmark methodology (v1.0.0)
 
+> **Honesty (v2.1.1):** This is a **synthetic deck-spec + recipe-builder smoke
+> suite**, not a rendered-PPTX corpus. It does **not** run OfficeCLI apply,
+> screenshots, or live Gate 3 vision. “PASS” means a11y auto-correct + recipe
+> ops emission succeeded for each fixture.
+
 ## Rights
 
 - **License:** CC0-1.0

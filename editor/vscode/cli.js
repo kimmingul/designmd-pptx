@@ -1,14 +1,20 @@
-/* Pure CLI resolution helpers — no vscode import (unit-testable). */
+/* Pure CLI resolution helpers — no vscode import (unit-testable).
+ *
+ * Security (#45 adversarial fix): never build shell command strings from
+ * user input. Callers must spawn with argv + shell:false / Task API.
+ */
 "use strict";
 
 const path = require("path");
 const fs = require("fs");
 
+/**
+ * @deprecated Prefer resolveCli().argv — kept only for display/debug labels.
+ * Does NOT make shell-safe strings for user-controlled input.
+ */
 function quote(s) {
-  if (/[\s"]/g.test(String(s))) {
-    return `"${String(s).replace(/"/g, '\\"')}"`;
-  }
-  return String(s);
+  // Escape for display only; never use for shell execution of untrusted input.
+  return JSON.stringify(String(s));
 }
 
 /**
@@ -19,6 +25,7 @@ function quote(s) {
  * @param {string} [opts.pythonPathExtra]
  * @param {string[]} opts.args
  * @param {NodeJS.ProcessEnv} [opts.env]
+ * @returns {{ argv: string[], cwd: string, env: NodeJS.ProcessEnv, display: string }}
  */
 function resolveCli(opts) {
   const root = opts.workspaceRoot || process.cwd();
@@ -37,15 +44,16 @@ function resolveCli(opts) {
       .filter(Boolean)
       .join(path.delimiter);
   }
-  let shellCmd;
+  /** @type {string[]} */
+  let argv;
   if (cliPath) {
-    shellCmd = [quote(cliPath), ...opts.args.map(quote)].join(" ");
+    argv = [cliPath, ...opts.args];
   } else {
-    shellCmd = [quote(python), "-m", "designmd_pptx", ...opts.args.map(quote)].join(
-      " ",
-    );
+    argv = [python, "-m", "designmd_pptx", ...opts.args];
   }
-  return { shellCmd, cwd: root, env };
+  // Display form is JSON-quoted for human terminals only — never pass to a shell.
+  const display = argv.map((a) => JSON.stringify(String(a))).join(" ");
+  return { argv, cwd: root, env, display, shellCmd: display };
 }
 
 /**
@@ -89,4 +97,13 @@ function diagnosticsFromReport(data) {
   return diags;
 }
 
-module.exports = { quote, resolveCli, diagnosticsFromReport };
+/**
+ * Detect shell metacharacters that would be dangerous if argv were joined into a shell.
+ * Used by unit tests; runtime never shells user args.
+ * @param {string} s
+ */
+function hasShellMeta(s) {
+  return /[$`;&|<>(){}!]/.test(String(s));
+}
+
+module.exports = { quote, resolveCli, diagnosticsFromReport, hasShellMeta };

@@ -1,8 +1,8 @@
 # designmd-pptx
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.1.0-brightgreen)](plugin.json)
-[![Release](https://img.shields.io/badge/release-v2.1.0-blue)](https://github.com/kimmingul/designmd-pptx/releases/tag/v2.1.0)
+[![Version](https://img.shields.io/badge/version-2.1.1-brightgreen)](plugin.json)
+[![Release](https://img.shields.io/badge/release-v2.1.1-blue)](https://github.com/kimmingul/designmd-pptx/releases/tag/v2.1.1)
 
 **awesome-design-md / Stitch `DESIGN.md` → [OfficeCLI](https://github.com/officecli/officecli) PPTX** — packaged for **Claude Code, OpenAI Codex, and Grok Build** (**v2.1**).
 

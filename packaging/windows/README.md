@@ -4,7 +4,7 @@
 
 | Artifact | Role |
 |---|---|
-| **`Install-DesignmdPptx.ps1`** | **One-file installer** (primary). Run on any Windows 10+ with PowerShell 5.1+. |
+| **`Install-DesignmdPptx.ps1`** | **One-file network bootstrap** (primary). Not offline MSI. |
 | `Uninstall` via same script (`-Uninstall`) or copied `Uninstall-DesignmdPptx.ps1` | **Uninstall path** |
 | `designmd-pptx.iss` + `build-installer.ps1` | Optional **Setup.exe** (Inno Setup 6) GUI wrapper |
 | `python/designmd_pptx/win_install.py` | Cross-platform plan/manifest helpers + CLI |

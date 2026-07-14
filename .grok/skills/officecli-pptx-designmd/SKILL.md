@@ -1,9 +1,9 @@
 ---
 name: officecli-pptx-designmd
-description: "designmd-pptx v2.1: compile awesome-design-md / Stitch DESIGN.md into officecli PPTX tokens, ordered decks, staging-safe apply; compose briefs; constraint layout + generative freeform; refine/animate; extract/restyle/reconstruct; a11y + public benchmark; doctor --install; Windows one-file installer; VS Code extension; 60+ patterns; CJK text-fit; Gate 3 vision; render via agent-bridge. Trigger on DESIGN.md, getdesign.md, brand design for slides, deck outline, restyle deck, modernize slides, slide master, potx template, /designmd-pptx, /officecli-pptx-designmd."
+description: "designmd-pptx v2.1.1: compile awesome-design-md / Stitch DESIGN.md into officecli PPTX tokens, ordered decks, staging-safe apply; compose briefs; constraint layout + generative freeform; refine/animate; extract/restyle/reconstruct; a11y + public benchmark; doctor --install; Windows one-file installer; VS Code extension; 60+ patterns; CJK text-fit; Gate 3 vision; render via agent-bridge. Trigger on DESIGN.md, getdesign.md, brand design for slides, deck outline, restyle deck, modernize slides, slide master, potx template, /designmd-pptx, /officecli-pptx-designmd."
 ---
 
-# officecli-pptx-designmd (v2.1)
+# officecli-pptx-designmd (v2.1.1)
 
 ## Locate the toolkit
 

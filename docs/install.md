@@ -58,8 +58,8 @@ Primary **editor surface** (decision: [editor-integration-decision.md](editor-in
 
 ```bash
 cd editor/vscode
-npx @vscode/vsce package --no-dependencies   # → designmd-pptx-0.1.0.vsix
-code --install-extension designmd-pptx-0.1.0.vsix
+npx @vscode/vsce package --no-dependencies   # → designmd-pptx-0.2.0.vsix
+code --install-extension designmd-pptx-0.2.0.vsix
 # Cursor: Extensions → Install from VSIX…
 ```
 

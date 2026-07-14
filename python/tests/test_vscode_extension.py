@@ -35,27 +35,37 @@ class VscodeExtension45(unittest.TestCase):
         self.assertTrue((EXT / "media" / "icon.svg").is_file())
 
     def test_cli_helper_resolves_python_module(self) -> None:
-        # Node unit test for pure helper
+        # Node unit test for pure helper — argv, never shell-joined user input
         script = r"""
 const path = require('path');
-const { resolveCli, diagnosticsFromReport } = require('./cli.js');
+const { resolveCli, diagnosticsFromReport, hasShellMeta } = require('./cli.js');
 const root = path.resolve('../..');
 const r = resolveCli({
   workspaceRoot: root,
   pythonPath: 'python3',
   args: ['doctor', '--install', '--dry-run'],
 });
-if (!r.shellCmd.includes('designmd_pptx')) throw new Error('cmd: ' + r.shellCmd);
+if (!Array.isArray(r.argv)) throw new Error('argv missing');
+if (!r.argv.includes('designmd_pptx')) throw new Error('argv: ' + JSON.stringify(r.argv));
 if (!r.env.PYTHONPATH || !r.env.PYTHONPATH.includes('python')) {
   throw new Error('PYTHONPATH: ' + r.env.PYTHONPATH);
 }
+// Injection-sensitive feedback stays a single argv element (no shell eval)
+const evil = resolveCli({
+  workspaceRoot: root,
+  pythonPath: 'python3',
+  args: ['refine', 'deck.json', '--feedback', '$(id); rm -rf /'],
+});
+const fb = evil.argv[evil.argv.indexOf('--feedback') + 1];
+if (fb !== '$(id); rm -rf /') throw new Error('feedback argv corrupted: ' + fb);
+if (!hasShellMeta(fb)) throw new Error('meta detect');
 const d = diagnosticsFromReport({
   pass: false,
   findings: [{ code: 'density', severity: 'error', message: 'crowded', slide: 2 }],
 });
 if (d.length < 2) throw new Error('diags ' + JSON.stringify(d));
 if (d[0].line !== 1) throw new Error('line ' + d[0].line);
-console.log('ok', r.shellCmd);
+console.log('ok', r.argv.join(' '));
 """
         proc = subprocess.run(
             ["node", "-e", script],
@@ -66,6 +76,13 @@ console.log('ok', r.shellCmd);
         )
         self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
         self.assertIn("ok", proc.stdout)
+
+    def test_extension_uses_spawn_not_sendtext_for_cli(self) -> None:
+        ext = (EXT / "extension.js").read_text(encoding="utf-8")
+        self.assertIn("spawn", ext)
+        self.assertIn("shell: false", ext)
+        # Must not send user feedback through a shell string
+        self.assertNotIn("terminal.sendText(shellCmd", ext)
 
     def test_decision_doc_points_at_extension(self) -> None:
         doc = (ROOT / "docs" / "editor-integration-decision.md").read_text(encoding="utf-8")

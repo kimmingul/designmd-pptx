@@ -386,6 +386,26 @@ def validate_builder(
         return LayoutValidation(ok=False, overflow=str(e), placed_count=0)
 
 
+def validate_placements(placements: list[dict[str, Any]]) -> tuple[bool, str]:
+    """Geometry sanity for freeform placements (cm, on-canvas, non-empty)."""
+    if not placements:
+        return False, "empty placements"
+    for i, p in enumerate(placements):
+        if not isinstance(p, dict):
+            return False, f"placements[{i}] not an object"
+        try:
+            x, y, w, h = float(p["x"]), float(p["y"]), float(p["w"]), float(p["h"])
+        except (KeyError, TypeError, ValueError):
+            return False, f"placements[{i}] missing numeric x/y/w/h"
+        if w <= 0 or h <= 0:
+            return False, f"placements[{i}] non-positive size"
+        if x < -0.5 or y < -0.5 or x + w > L.CANVAS_W + 0.5 or y + h > L.CANVAS_H + 0.5:
+            return False, f"placements[{i}] outside canvas"
+        if not p.get("name"):
+            return False, f"placements[{i}] missing name"
+    return True, "ok"
+
+
 def freeform_to_ops(
     placements: list[dict[str, Any]],
     tokens: dict[str, Any],
@@ -438,10 +458,25 @@ def recipe_freeform(tokens: dict, content: dict | None = None) -> list[dict]:
     )
     if isinstance(profile, str):
         profile = parse_style_directive(profile)
-    # Prefer pre-validated placements when present
+    # External placements must pass geometry sanity before emission (adversarial #21)
     placements = content.get("placements")
     if isinstance(placements, list) and placements:
+        ok_pl, why = validate_placements(placements)
+        if not ok_pl:
+            raise L.LayoutOverflow(
+                f"freeform placements invalid: {why} — regenerate or fix content.placements"
+            )
         return freeform_to_ops(placements, tokens)
+    # Optional external layout generator (DESIGNMD_LAYOUT_CMD)
+    ext = external_layout_tree(content)
+    if isinstance(ext, dict):
+        if isinstance(ext.get("placements"), list):
+            ok_pl, why = validate_placements(ext["placements"])
+            if ok_pl:
+                return freeform_to_ops(ext["placements"], tokens)
+        if ext.get("preset"):
+            profile = dict(profile)
+            profile["freeform_preset"] = ext["preset"]
     tree = build_freeform_tree(content, profile, tokens=tokens)
     val = validate_tree(tree, density_hint=str(profile.get("density") or "comfortable"))
     if not val.ok:
@@ -483,24 +518,32 @@ def _apply_style_to_slide(
     prefer_ff = profile.get("prefer_freeform_for") or frozenset()
     use_ff = force_freeform or recipe in prefer_ff or profile.get("force_relayout")
 
-    # Cap list density per style
+    # Cap list density per style — preserve overflow in structured fields
+    # (never silent drop; adversarial #21).
     max_items = int(profile.get("max_list_items") or 5)
+    overflow: dict[str, Any] = {}
     for key in ("bullets", "items", "steps", "stages", "cards", "entries"):
         raw = content.get(key)
         if isinstance(raw, list) and len(raw) > max_items:
+            overflow[key] = raw[max_items:]
             content[key] = raw[:max_items]
             content["notes"] = (
                 (content.get("notes") or "")
-                + f" [generative: trimmed {key} to {max_items} for {profile.get('id')} style]"
+                + f" [generative: overflow {len(overflow[key])} {key} → content.overflow]"
             ).strip()
             patch["trimmed"] = key
+            patch["overflow_count"] = len(overflow[key])
 
     max_body = int(profile.get("max_body_chars") or 220)
     for bk in ("body", "blurb", "subtitle", "quote", "insight_body"):
         if isinstance(content.get(bk), str) and len(content[bk]) > max_body:
-            cut = content[bk][: max_body - 1].rsplit(" ", 1)[0]
-            content[bk] = (cut or content[bk][: max_body - 1]) + "…"
+            full = content[bk]
+            cut = full[: max_body - 1].rsplit(" ", 1)[0]
+            content[bk] = (cut or full[: max_body - 1]) + "…"
+            overflow[bk] = full
             patch["shortened"] = bk
+    if overflow:
+        content["overflow"] = overflow
 
     if use_ff:
         tree = build_freeform_tree(content, profile, tokens=tokens)

@@ -912,7 +912,7 @@ def cmd_animate(args: argparse.Namespace) -> int:
         out=out,
         animation=overrides,
         tokens=tokens,
-        force=bool(args.force) or (out.resolve() == Path(args.pptx).resolve()),
+        force=bool(args.force),
     )
     mark = "ok" if report.ok else "FAIL"
     print(f"animate {mark}: slides={report.slides_touched} effects={report.effects_added} "
@@ -1384,8 +1384,8 @@ def build_parser() -> argparse.ArgumentParser:
                     choices=list(sorted({"none", "fade", "push", "wipe", "cut", "cover"})),
                     help="Slide transition override")
     an.add_argument("--emphasis", default=None,
-                    choices=["none", "pulse"],
-                    help="Emphasis preset (default none)")
+                    choices=["none"],
+                    help="Emphasis preset (only 'none' is implemented)")
     an.add_argument("--stagger-ms", type=int, default=None,
                     help="Stagger between shapes in ms")
     an.add_argument("--force", action="store_true", help="Overwrite destination")
