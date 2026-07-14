@@ -286,7 +286,10 @@ class RestyleV12(unittest.TestCase):
 
     def test_in_place_with_force(self) -> None:
         report = restyle_pptx(self.pptx, self.tokens, force=True)
-        self.assertEqual(report["dest"], str(self.pptx))
+        # dest echoes the resolved path (restyle resolve()s src); compare
+        # resolved-to-resolved so CI temp dirs with symlinks (/var ->
+        # /private/var) or 8.3 short names (RUNNER~1) don't spuriously differ.
+        self.assertEqual(report["dest"], str(self.pptx.resolve()))
         theme = self._read(self.pptx, "ppt/theme/theme1.xml")
         self.assertIn(self.tokens["colors"]["accent"], theme)
 
