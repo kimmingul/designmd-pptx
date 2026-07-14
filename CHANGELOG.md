@@ -2,6 +2,26 @@
 
 All notable changes to designmd-pptx are documented here.
 
+## [Unreleased] — Phase 5 (#21 / #40 / #42)
+
+### Added
+- **`generate`** CLI (#21) — hybrid generative layout: NL style directives
+  (`Apple Keynote`, Swiss, consulting, minimal, editorial) → pattern recipe
+  maps and/or **freeform** Box trees validated by the constraint layout engine
+  (text-fit floors preserved). Vision density findings force re-layout.
+  Recipe `freeform` materializes editable native shapes via officecli ops.
+- **`animate`** CLI + DESIGN.md `animation:` frontmatter (#40) — entrance
+  presets (`fade` / `appear` / `wipe` / `fly_in`), slide transitions, default
+  targets on key patterns; **namespace-safe OOXML** injection via `opc` (lxml).
+- **Public 100+ deck benchmark** (#42) — `benchmark --public` runs ≥100
+  synthetic CC0 fixtures across the recipe catalog; methodology + results in
+  [docs/public-benchmark.md](docs/public-benchmark.md). Rights: synthetic only;
+  private corpus remains separate (`docs/corpus.md`).
+
+### Changed
+- Recipe registry **61** builders (`freeform` + GENERATIVE_SEQUENCE).
+- Maturity roadmap: #21 / #40 / #42 marked shipped on the Phase 5 train.
+
 ## [2.0.0] — 2026-07-15
 
 Production release: Phase 0–4 complete.

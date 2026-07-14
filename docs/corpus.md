@@ -75,4 +75,8 @@ decks; they exist to measure, not to fit.
 |---|---|---|
 | Phase 0 | ≥ 10 decks admitted | pipeline + format proven on real structure |
 | Phase 4 (v2.0) | ≥ 50 decks, held-out benchmark | before/after regression gate (#37) |
-| v2.1 | 100+ published benchmark | public methodology + results (#42) |
+| v2.1 | 100+ published benchmark | **shipped** as synthetic public suite — see [public-benchmark.md](public-benchmark.md) (#42) |
+
+The **public** 100+ suite does not require admitting private decks into this
+repo. Run `python -m designmd_pptx benchmark --public --publish-docs` to
+regenerate methodology + summarized results.

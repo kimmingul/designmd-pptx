@@ -706,10 +706,40 @@ def cmd_a11y(args: argparse.Namespace) -> int:
 
 
 def cmd_benchmark(args: argparse.Namespace) -> int:
-    """Before/after regression harness (#37)."""
+    """Before/after regression harness (#37) + public 100+ suite (#42)."""
     from . import benchmark as bench
 
     th = bench.load_thresholds(args.thresholds) if args.thresholds else bench.load_thresholds()
+    out = Path(args.out) if args.out else Path("benchmark-out")
+
+    if getattr(args, "public", False):
+        from . import public_benchmark as pub
+        n = int(getattr(args, "public_n", None) or pub.MIN_PUBLIC_DECKS)
+        report, meta = pub.run_public_suite(
+            n=n,
+            design_path=args.design,
+            thresholds=th,
+        )
+        paths = pub.write_public_report(report, meta, out)
+        if getattr(args, "publish_docs", False):
+            docs_dir = Path(getattr(args, "publish_docs_dir", None) or "docs")
+            dpath = pub.publish_docs_snapshot(report, meta, docs_dir)
+            print(f"Wrote {dpath}")
+        print(f"Wrote {paths['summary']}")
+        print(f"Wrote {paths['benchmark']}")
+        mark = "PASS" if report.ok else "FAIL"
+        print(f"public-benchmark {mark}: pass={report.decks_pass} fail={report.decks_fail} "
+              f"skip={report.decks_skip} total={report.decks_total} "
+              f"(license={meta.license} recipes={len(meta.recipes_covered)})")
+        for nnote in report.notes:
+            print(f"  note: {nnote}")
+        fails = [r for r in report.results if r.status == "fail"]
+        for r in fails[:20]:
+            print(f"  FAIL  {r.deck_id}: {', '.join(r.threshold_breaches)}")
+        if len(fails) > 20:
+            print(f"  … +{len(fails) - 20} more failures")
+        return 0 if report.ok else 1
+
     if args.manifest:
         report = bench.run_corpus_suite(
             args.manifest,
@@ -723,14 +753,13 @@ def cmd_benchmark(args: argparse.Namespace) -> int:
             design_path=args.design,
             thresholds=th,
         )
-    out = Path(args.out) if args.out else Path("benchmark-out")
     path = bench.write_report(report, out)
     print(f"Wrote {path}")
     mark = "PASS" if report.ok else "FAIL"
     print(f"benchmark {mark}: pass={report.decks_pass} fail={report.decks_fail} "
           f"skip={report.decks_skip} total={report.decks_total}")
-    for n in report.notes:
-        print(f"  note: {n}")
+    for nnote in report.notes:
+        print(f"  note: {nnote}")
     for r in report.results:
         if r.status == "skip":
             print(f"  skip  {r.deck_id}: {r.skip_reason}")
@@ -739,6 +768,100 @@ def cmd_benchmark(args: argparse.Namespace) -> int:
             print(f"        deltas={r.deltas}")
         else:
             print(f"  pass  {r.deck_id}: deltas={r.deltas}")
+    return 0 if report.ok else 1
+
+
+def cmd_generate(args: argparse.Namespace) -> int:
+    """Hybrid generative layout (#21): NL style directive → deck-spec patches."""
+    from . import generative as gen
+
+    if args.list_styles:
+        for s in gen.list_style_profiles():
+            print(f"  {s['id']:12}  {s['label']}")
+        return 0
+
+    if not args.deck:
+        print("error: deck path required (or pass --list-styles)", file=sys.stderr)
+        return 2
+
+    deck = json.loads(Path(args.deck).read_text(encoding="utf-8"))
+    tokens = None
+    if args.tokens:
+        tokens = json.loads(Path(args.tokens).read_text(encoding="utf-8"))
+    elif args.design:
+        tokens = compile_design_md(_resolve_design(args.design))
+
+    directive = args.directive or args.style
+    if args.profile:
+        report = gen.generate_deck_layout(
+            deck,
+            directive=directive,
+            profile_id=args.profile,
+            tokens=tokens,
+        )
+    else:
+        report = gen.generate_with_vision(
+            deck,
+            directive=directive,
+            contact_png=args.contact,
+            vision_plan=args.vision_plan,
+            vision_cmd=args.vision_cmd,
+            tokens=tokens,
+            rounds=int(args.rounds),
+        )
+    out = Path(args.out)
+    path = gen.write_report(report, out)
+    print(f"Wrote {path}")
+    print(f"Wrote {out / 'content.generated.deck.json'}")
+    prof = report.get("profile") or {}
+    print(f"generate: style={prof.get('id')} patches={len(report.get('patches') or [])} "
+          f"changed={report.get('changed')} rounds={report.get('rounds', 1)}")
+    for p in (report.get("patches") or [])[:12]:
+        print(f"  - slide={p.get('slide')} {p.get('action')} "
+              f"{p.get('from_recipe')}→{p.get('to_recipe')}")
+    if not report.get("changed"):
+        print("tip: try --directive 'Apple Keynote style' or --profile keynote")
+    return 0
+
+
+def cmd_animate(args: argparse.Namespace) -> int:
+    """Inject namespace-safe OOXML animation/transitions (#40)."""
+    from . import animation as anim
+
+    tokens = None
+    if args.tokens:
+        tokens = json.loads(Path(args.tokens).read_text(encoding="utf-8"))
+    elif args.design:
+        tokens = compile_design_md(_resolve_design(args.design))
+
+    overrides: dict = {"enabled": True}
+    if args.entrance:
+        overrides["entrance"] = args.entrance
+    if args.transition:
+        overrides["transition"] = args.transition
+    if args.stagger_ms is not None:
+        overrides["stagger_ms"] = int(args.stagger_ms)
+    if args.emphasis:
+        overrides["emphasis"] = args.emphasis
+
+    out = Path(args.out) if args.out else Path(args.pptx)
+    report = anim.animate_pptx(
+        args.pptx,
+        out=out,
+        animation=overrides,
+        tokens=tokens,
+        force=bool(args.force) or (out.resolve() == Path(args.pptx).resolve()),
+    )
+    mark = "ok" if report.ok else "FAIL"
+    print(f"animate {mark}: slides={report.slides_touched} effects={report.effects_added} "
+          f"transitions={report.transitions_added} → {out}")
+    for n in report.notes:
+        print(f"  note: {n}")
+    if args.report:
+        Path(args.report).write_text(
+            json.dumps(report.to_dict(), indent=2) + "\n", encoding="utf-8"
+        )
+        print(f"Wrote {args.report}")
     return 0 if report.ok else 1
 
 
@@ -1125,7 +1248,8 @@ def build_parser() -> argparse.ArgumentParser:
 
     bm = sub.add_parser(
         "benchmark",
-        help="Before/after regression harness with explicit thresholds (issue #37)",
+        help="Before/after regression harness with explicit thresholds (issue #37); "
+             "use --public for the ≥100-deck public suite (#42)",
     )
     bm.add_argument("--manifest", type=Path, default=None,
                     help="corpus.manifest.json (held-out by default); omit for fixture suite")
@@ -1139,9 +1263,73 @@ def build_parser() -> argparse.ArgumentParser:
                     help="Fixture mode: content.deck.json")
     bm.add_argument("--thresholds", type=Path, default=None,
                     help="Override benchmark_thresholds.json")
+    bm.add_argument("--public", action="store_true",
+                    help="Run the public ≥100-deck synthetic suite (#42)")
+    bm.add_argument("--public-n", type=int, default=None,
+                    help="Public suite size (default 100)")
+    bm.add_argument("--publish-docs", action="store_true",
+                    help="With --public: also write docs/public-benchmark.md")
+    bm.add_argument("--publish-docs-dir", type=Path, default=Path("docs"),
+                    help="Directory for --publish-docs (default: docs)")
     bm.add_argument("-o", "--out", type=Path, default=Path("benchmark-out"),
                     help="Output directory for reports (default: benchmark-out)")
     bm.set_defaults(func=cmd_benchmark)
+
+    gn = sub.add_parser(
+        "generate",
+        help="Hybrid generative layout (#21): NL style directive / freeform "
+             "constraint-validated re-layout → deck-spec patches",
+    )
+    gn.add_argument("deck", type=Path, nargs="?", default=None,
+                    help="content.deck.json / deck-spec (optional with --list-styles)")
+    gn.add_argument("-o", "--out", type=Path, default=Path("generated"),
+                    help="Output directory (default: generated/)")
+    gn.add_argument("--directive", default=None,
+                    help="Natural-language style, e.g. 'Apple Keynote style로 재구성'")
+    gn.add_argument("--style", default=None,
+                    help="Alias for --directive")
+    gn.add_argument("--profile", default=None,
+                    choices=["keynote", "swiss", "consulting", "minimal", "editorial", "default"],
+                    help="Force a named style profile")
+    gn.add_argument("--list-styles", action="store_true",
+                    help="List built-in style profiles and exit")
+    gn.add_argument("--tokens", type=Path, default=None, help="tokens.slide.json")
+    gn.add_argument("--design", type=Path, default=None,
+                    help="DESIGN.md or 'default' (compiled when --tokens omitted)")
+    gn.add_argument("--contact", type=Path, default=None,
+                    help="Contact-sheet PNG for vision-driven re-layout")
+    gn.add_argument("--vision-plan", type=Path, default=None)
+    gn.add_argument("--vision-cmd", default=None)
+    gn.add_argument("--rounds", type=int, default=2,
+                    help="Max generate+refine rounds (default 2)")
+    gn.set_defaults(func=cmd_generate)
+
+    an = sub.add_parser(
+        "animate",
+        help="Inject namespace-safe OOXML entrance animations + slide transitions (#40)",
+    )
+    an.add_argument("pptx", type=Path, help="Source .pptx")
+    an.add_argument("-o", "--out", type=Path, default=None,
+                    help="Output .pptx (default: overwrite source with --force semantics)")
+    an.add_argument("--tokens", type=Path, default=None,
+                    help="tokens.slide.json carrying animation: block")
+    an.add_argument("--design", type=Path, default=None,
+                    help="DESIGN.md with animation: frontmatter (compiled when no --tokens)")
+    an.add_argument("--entrance", default=None,
+                    choices=list(sorted({"none", "appear", "fade", "wipe", "fly_in"})),
+                    help="Entrance preset override")
+    an.add_argument("--transition", default=None,
+                    choices=list(sorted({"none", "fade", "push", "wipe", "cut", "cover"})),
+                    help="Slide transition override")
+    an.add_argument("--emphasis", default=None,
+                    choices=["none", "pulse"],
+                    help="Emphasis preset (default none)")
+    an.add_argument("--stagger-ms", type=int, default=None,
+                    help="Stagger between shapes in ms")
+    an.add_argument("--force", action="store_true", help="Overwrite destination")
+    an.add_argument("--report", type=Path, default=None,
+                    help="Write animation.report.json")
+    an.set_defaults(func=cmd_animate)
 
     return p
 

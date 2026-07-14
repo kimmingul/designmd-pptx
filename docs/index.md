@@ -18,6 +18,7 @@ tokens, ordered decks, and staging-safe apply.
 | [OfficeCLI backends](officecli-backends.md) | Legacy vs agent-bridge |
 | [DESIGN.md schema v2](design-md-v2.md) | Token schema |
 | [Corpus](corpus.md) | Anonymize + validation corpus |
+| [Public benchmark](public-benchmark.md) | #42 — ≥100-deck methodology + results (CC0 synthetic) |
 | [Infograpify reference](infograpify-reference.md) | License-safe premium analysis |
 | [Recipe coverage roadmap](recipe-coverage-roadmap.md) | Full-family recipe plan vs 400-deck library |
 | [Editor integration decision](editor-integration-decision.md) | #44 — VS Code/Cursor extension (not PPT Add-in) |
@@ -34,6 +35,9 @@ python -m designmd_pptx scaffold default -o out/demo \
 python -m designmd_pptx a11y --design default \
   --content python/examples/content.deck.json --show-order
 python -m designmd_pptx benchmark -o benchmark-out
+python -m designmd_pptx generate content.deck.json -o gen \
+  --directive "Apple Keynote style"   # #21
+python -m designmd_pptx benchmark --public -o public-benchmark-out  # #42
 ```
 
 Materializing real `.pptx` still needs an OfficeCLI backend (legacy for

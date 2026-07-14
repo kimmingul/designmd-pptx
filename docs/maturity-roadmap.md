@@ -38,10 +38,10 @@ documented rather than blocking the release. Methodology and thresholds live in
 - ✅ Chart/table reconstruction from extract (#22) — modern classify + `reconstruct`
 - ✅ Editor integration **decision** (#44) — VS Code/Cursor extension (not PPT Add-in)
 - ✅ Editor integration **implementation** (#45) — `editor/vscode` MVP
-- Generative / constraint layout expansion (#21)
-- Animation / transitions (#40)
+- ✅ Hybrid generative layout (#21) — `generate` CLI + `freeform` recipe
+- ✅ Animation / transitions (#40) — DESIGN.md `animation:` + `animate` CLI
+- ✅ Public 100+ deck benchmark (#42) — `benchmark --public` + [public-benchmark.md](public-benchmark.md)
 - Standalone Windows installer (#35)
-- Larger public benchmark (#42)
 
 ## v3.0 — platform
 

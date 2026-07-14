@@ -81,8 +81,13 @@ python -m designmd_pptx doctor --install            # #34: pin official officecl
 python -m designmd_pptx a11y --design default --content content.deck.json --show-order  # #39
 python -m designmd_pptx a11y --tokens tokens.json --deck deck.json --fix-contrast --generate-missing
 python -m designmd_pptx benchmark -o benchmark-out  # #37 fixture thresholds
+python -m designmd_pptx benchmark --public --publish-docs -o public-benchmark-out  # #42 ≥100 decks
 python -m designmd_pptx refine content.deck.json -o refined --feedback "too dense" --rounds 3  # #19
 # after refine: scaffold again from refined/content.deck.json
+python -m designmd_pptx generate content.deck.json -o generated --directive "Apple Keynote style"  # #21
+python -m designmd_pptx generate content.deck.json -o generated --profile minimal
+# after generate: scaffold from generated/content.generated.deck.json
+python -m designmd_pptx animate out/deck.pptx -o out/deck.animated.pptx --entrance fade --force  # #40
 python -m designmd_pptx extract old.pptx -o extracted   # #22 modern chart/table mapping on extract
 python -m designmd_pptx reconstruct extracted/content.deck.json -o modern.json  # #22 restyle types/recipes
 python -m designmd_pptx compose brief.md -o composed/ --design default   # v1.5: outline → deck-spec
@@ -156,7 +161,17 @@ cover · section_divider · **section_opener_numbered** · **agenda_toc** · kpi
 
 **Wave 2 long-tail:** **icon_stat_row** · **scale_rating** · **hub_spoke** · **before_after_slider** · **calendar_heatmap** · **case_study_band** · **okrs_tree** · **project_status_rag** · **finance_statement** · **pipeline_stages** · **geo_callout** · **device_frame** (user media only for map/device)
 
+**Generative (#21):** **freeform** — constraint-validated free-form layout from
+`generate --directive` / `--profile` (keynote · swiss · consulting · minimal ·
+editorial). Prefer patterns first; freeform when NL or vision asks for re-layout.
+
 **Wave 3 verticals:** `python/examples/content.{business,marketing,health,education,finance}.deck.json` — see `docs/recipe-coverage-roadmap.md`
+
+### Animation (#40)
+
+Optional DESIGN.md frontmatter `animation: { enabled, entrance, transition, … }`.
+After materializing a `.pptx`, run `animate` to inject namespace-safe OOXML
+timing + transitions. Defaults target cover/bullets/feature_cards/kpi/process.
 
 ## Colors
 
