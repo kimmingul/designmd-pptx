@@ -1,12 +1,12 @@
 # designmd-pptx
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.0.0-brightgreen)](plugin.json)
-[![Release](https://img.shields.io/badge/release-v2.0.0-blue)](https://github.com/kimmingul/designmd-pptx/releases/tag/v2.0.0)
+[![Version](https://img.shields.io/badge/version-2.1.0-brightgreen)](plugin.json)
+[![Release](https://img.shields.io/badge/release-v2.1.0-blue)](https://github.com/kimmingul/designmd-pptx/releases/tag/v2.1.0)
 
-**awesome-design-md / Stitch `DESIGN.md` → [OfficeCLI](https://github.com/officecli/officecli) PPTX** — packaged for **Claude Code, OpenAI Codex, and Grok Build** (**v2.0**).
+**awesome-design-md / Stitch `DESIGN.md` → [OfficeCLI](https://github.com/officecli/officecli) PPTX** — packaged for **Claude Code, OpenAI Codex, and Grok Build** (**v2.1**).
 
-Drop a brand `DESIGN.md` in, scaffold an ordered deck, and materialize slides with staging-safe apply. v1.x delivered reverse extract/restyle, masters/.potx, compose, layout engine, dual OfficeCLI backends, and `render`. **v2.0** is the production release: version-locked `doctor --install` (officecli-dist pin), WCAG a11y gate, before/after benchmark harness, maturity docs/gallery, and a green CI fixture suite.
+Drop a brand `DESIGN.md` in, scaffold an ordered deck, and materialize slides with staging-safe apply. v1.x delivered reverse extract/restyle, masters/.potx, compose, layout engine, dual OfficeCLI backends, and `render`. **v2.0** shipped the production core (doctor pin, a11y, benchmark, docs). **v2.1** adds Phase 5 intelligence: `refine` / `generate` / `animate`, chart reconstruction, public 100+ benchmark, Windows one-file installer, and a VS Code/Cursor extension MVP.
 
 ## What you get
 
@@ -243,13 +243,21 @@ Phases 0–4 complete. See [CHANGELOG](CHANGELOG.md) and [docs/maturity-roadmap.
 - ✅ **Phase 3 — Intelligence adapters** — `compose --llm`, vision Gate 3.
 - ✅ **Phase 4 — v2.0 release** — `doctor --install` (officecli-dist pin), a11y, benchmark, docs/gallery/governance.
 
-### v2.1 (Phase 5) — in progress
+### v2.1 — shipped (Phase 5)
+
+Intelligence + packaging train. Full notes: [CHANGELOG](CHANGELOG.md) · tag `v2.1.0`.
 
 - ✅ **#19 Iterative visual refinement** — `refine` CLI: NL / Gate 3 findings → deck-spec patches.
-- ✅ **#22 Chart/table reconstruction** — lossless extract of type/series/categories; modern recipe mapping (`waterfall_insight`, `chart_callout_panel`, `appendix_table`); `reconstruct` CLI.
-- ✅ **#44 Editor decision** — primary surface is **VS Code / Cursor extension** (not PowerPoint Add-in); see [docs/editor-integration-decision.md](docs/editor-integration-decision.md).
-- ✅ **#45 Editor implementation** — MVP extension in [`editor/vscode/`](editor/vscode/) (compose/scaffold/a11y/refine/doctor, explorer, Problems from reports; VSIX sideload).
-- ✅ Generative layout (#21), animation (#40), public 100+ benchmark (#42), Windows installer (#35).
+- ✅ **#22 Chart/table reconstruction** — modern chart/table recipes + `reconstruct` CLI.
+- ✅ **#44 / #45 Editor** — VS Code/Cursor extension MVP ([`editor/vscode/`](editor/vscode/)); decision doc (not PPT Add-in).
+- ✅ **#21 Hybrid generative layout** — `generate` + `freeform` recipe (constraint-validated).
+- ✅ **#40 Animation** — DESIGN.md `animation:` + `animate` (namespace-safe OOXML).
+- ✅ **#42 Public 100+ benchmark** — `benchmark --public` + [docs/public-benchmark.md](docs/public-benchmark.md).
+- ✅ **#35 Windows installer** — one-file `Install-DesignmdPptx.ps1` + optional Setup.exe.
+
+### v3.0 — planned
+
+Hosted gallery, multi-format export evaluation, community pattern registry, signed releases / SBOM.
 
 ## License
 

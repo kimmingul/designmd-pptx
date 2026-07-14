@@ -13,7 +13,7 @@ from . import fonts, tokens as T
 from .colors_parse import collect_css_vars
 from .validate import validate_content_overlay, validate_tokens_against_schema_file
 
-COMPILER_VERSION = "2.0.0"
+COMPILER_VERSION = "2.1.0"
 
 DEFAULT_PATTERNS = [
     "cover",

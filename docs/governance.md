@@ -28,14 +28,15 @@
 | `effort:S` / `effort:M` / `effort:L` | Rough sizing |
 | `v2.0` / `v2.1` | Target release train |
 
-Milestones map to roadmap phases (Phase 4 = v2.0 release, Phase 5 = intelligence).
+Milestones map to roadmap phases (Phase 4 = v2.0 release, Phase 5 = v2.1
+intelligence — **shipped**). Next train is v3.0 platform work.
 
 ## Triage SLA (best-effort)
 
 1. New issues: label + milestone within a few days when active.
 2. Security / data exposure: treat as highest priority; do not paste secrets in issues.
 3. Duplicate: close with pointer to canonical issue.
-4. Out of scope (Phase 5 while shipping v2.0): label `v2.1` and leave open.
+4. Out of scope for the active train: label the next milestone (`v3.0`) and leave open.
 
 ## PR merge bar
 
