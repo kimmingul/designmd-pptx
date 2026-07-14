@@ -34,11 +34,12 @@ documented rather than blocking the release. Methodology and thresholds live in
 
 ## v2.1 — intelligence (Phase 5)
 
-- Iterative visual refinement loop (#19)
+- ✅ Iterative visual refinement loop (#19) — `refine` CLI
+- ✅ Chart/table reconstruction from extract (#22) — modern classify + `reconstruct`
+- ✅ Editor integration **decision** (#44) — VS Code/Cursor extension (not PPT Add-in)
 - Generative / constraint layout expansion (#21)
-- Chart/table reconstruction from extract (#22)
 - Animation / transitions (#40)
-- Editor integration (Claude/Grok bridges) (#44, #45)
+- Editor integration **implementation** (#45)
 - Standalone Windows installer (#35)
 - Larger public benchmark (#42)
 

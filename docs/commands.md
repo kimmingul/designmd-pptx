@@ -12,7 +12,8 @@ designmd-pptx <command> …
 | `recipes <tokens.json> -o recipes/ [--content deck.json]` | Generate recipe ops |
 | `scaffold <DESIGN.md\|default> -o out/ [--content] [--apply --force]` | Full pipeline to out dir |
 | `apply <pptx> <deck.sequence.json> [--force] [--screenshot] [--gate3] [--vision]` | Staging-safe materialize |
-| `extract <pptx> [-o extracted/]` | pptx → deck-spec draft + loss ledger |
+| `extract <pptx> [-o extracted/]` | pptx → deck-spec draft + loss ledger (charts/tables modernized, #22) |
+| `reconstruct <deck.json> [-o out.json]` | Modernize chart/table recipes in a deck-spec (#22) |
 | `restyle <pptx> <DESIGN.md> [-o new.pptx]` | Rebrand colors/fonts in place |
 | `master <pptx> <DESIGN.md> [--potx] [--empty-potx] [--layouts]` | Brand masters / template |
 | `compose <brief.md> [-o composed/] [--design] [--llm]` | Markdown outline → deck-spec |

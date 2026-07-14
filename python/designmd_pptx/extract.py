@@ -41,6 +41,8 @@ _QUOTE_CHARS = "\"'“‘«"
 _LIMITS = {"process": 5, "timeline": 6, "kpi_row": 4}
 
 # Chart type local-names → officecli / content chart_type strings.
+# 3D / legacy types keep a lossless data path; modern styling is applied in
+# reconstruct.modernize_chart_type / extract classification (#22).
 _CHART_TYPE_MAP = {
     "barChart": "bar",
     "bar3DChart": "bar",
@@ -58,6 +60,13 @@ _CHART_TYPE_MAP = {
     "surfaceChart": "surface",
     "stockChart": "stock",
     "ofPieChart": "pie",
+    "waterfallChart": "waterfall",
+    "funnelChart": "funnel",
+    "treemapChart": "treemap",
+    "sunburstChart": "sunburst",
+    "histogramChart": "histogram",
+    "boxWhiskerChart": "boxWhisker",
+    "paretoChart": "pareto",
 }
 
 
@@ -233,6 +242,10 @@ def _parse_chart_part(zf: zipfile.ZipFile, chart_part: str) -> dict[str, Any] | 
     chart_type = _chart_type(root)
     cats: list[str] = []
     series: list[dict[str, Any]] = []
+    title = ""
+    t_el = root.find(".//c:title//c:v", NS)
+    if t_el is not None and (t_el.text or "").strip():
+        title = (t_el.text or "").strip()
     for ser in root.findall(".//c:ser", NS):
         name = _series_name(ser) or f"Series {len(series) + 1}"
         # Categories often live on the first series' cat node.
@@ -242,19 +255,26 @@ def _parse_chart_part(zf: zipfile.ZipFile, chart_part: str) -> dict[str, Any] | 
         vals = _num_ref_values(ser.find("c:val", NS))
         if not vals:
             vals = _num_ref_values(ser.find("c:yVal", NS))
+        # xVal for scatter
+        if not vals:
+            vals = _num_ref_values(ser.find("c:xVal", NS))
         series.append({"name": name, "values": vals})
+    # Some charts put cats only under plotArea/catAx — already covered via ser/cat.
+    partial = not series or any(not (s.get("values") or []) for s in series)
     if not series:
         return {
             "chart_type": chart_type,
             "categories": [],
             "series": [],
+            "title": title,
             "partial": True,
         }
     return {
         "chart_type": chart_type,
         "categories": cats,
         "series": series,
-        "partial": False,
+        "title": title,
+        "partial": partial and not (cats and series and series[0].get("values")),
     }
 
 
@@ -537,44 +557,12 @@ def _classify(
     title = slide["title"] or ""
     body: list[str] = list(slide["body"])
 
-    # Charts → chart_insight (prefer over tables/pictures when chart data exists)
-    charts = slide.get("charts") or []
-    if charts:
-        ch = charts[0]
-        if len(charts) > 1:
-            warnings.append(f"{len(charts)} charts on slide; only the first was mapped")
-        series = ch.get("series") or []
-        cats = ch.get("categories") or []
-        content: dict[str, Any] = {
-            "title": title or "Chart",
-            "chart_type": ch.get("chart_type") or "column",
-            "categories": ",".join(str(c) for c in cats),
-        }
-        if series:
-            content["series1_name"] = series[0].get("name") or "Series 1"
-            content["series1_values"] = ",".join(str(v) for v in series[0].get("values") or [])
-        if len(series) > 1:
-            content["series2_name"] = series[1].get("name") or "Series 2"
-            content["series2_values"] = ",".join(str(v) for v in series[1].get("values") or [])
-        if body:
-            content["insight_title"] = "Key insight"
-            content["insight_body"] = body[0]
-            if len(body) > 1:
-                warnings.append("extra body text folded into insight notes")
-                content["notes"] = " ".join(body[1:])
-        if ch.get("partial"):
-            warnings.append("chart data partial — verify series/categories")
-        conf = 0.85 if series and cats else 0.65
-        return "chart_insight", content, conf, warnings
+    # Charts / tables → modern reconstruction path (#22)
+    from .reconstruct import classify_chart_table_slide
 
-    if slide["tables"]:
-        rows = slide["tables"][0]
-        if len(slide["tables"]) > 1:
-            warnings.append("multiple tables on slide; only the first was mapped")
-        content = {"title": title, "headers": rows[0], "rows": rows[1:]}
-        if body:
-            content["notes"] = " ".join(body)
-        return "table", content, 0.9, warnings
+    ct = classify_chart_table_slide(slide)
+    if ct is not None:
+        return ct
 
     if slide["pictures"]:
         pic = slide["pictures"][0]
@@ -801,6 +789,17 @@ def extract_pptx(
             )
 
     deck = {"version": "1.1", "slides": slides_spec}
+    # Always apply modern chart/table styling pass (#22) — data already
+    # lossless from classification; this normalizes types/recipes further.
+    from .reconstruct import modernize_deck
+
+    deck, modern_notes = modernize_deck(deck)
+    for rec in modern_notes:
+        idx = int(rec.get("slide") or 1) - 1
+        if 0 <= idx < len(report_slides):
+            report_slides[idx].setdefault("warnings", []).extend(rec.get("warnings") or [])
+            report_slides[idx]["recipe"] = rec.get("recipe") or report_slides[idx].get("recipe")
+
     deck_path = out_dir / "content.deck.json"
     deck_path.write_text(
         json.dumps(deck, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"

@@ -245,8 +245,10 @@ Phases 0–4 complete. See [CHANGELOG](CHANGELOG.md) and [docs/maturity-roadmap.
 
 ### v2.1 (Phase 5) — in progress
 
-- ✅ **#19 Iterative visual refinement** — `refine` CLI: NL / Gate 3 findings → deck-spec patches (split dense lists, shorten prose, re-scaffold path), 1–3 rounds.
-- ⏳ Chart/table reconstruction (#22), generative layout (#21), animation (#40), editor integration (#44/#45), Windows installer (#35), larger public benchmark (#42).
+- ✅ **#19 Iterative visual refinement** — `refine` CLI: NL / Gate 3 findings → deck-spec patches.
+- ✅ **#22 Chart/table reconstruction** — lossless extract of type/series/categories; modern recipe mapping (`waterfall_insight`, `chart_callout_panel`, `appendix_table`); `reconstruct` CLI.
+- ✅ **#44 Editor decision** — primary surface is **VS Code / Cursor extension** (not PowerPoint Add-in); see [docs/editor-integration-decision.md](docs/editor-integration-decision.md).
+- ⏳ Generative layout (#21), animation (#40), editor implementation (#45), Windows installer (#35), larger public benchmark (#42).
 
 ## License
 

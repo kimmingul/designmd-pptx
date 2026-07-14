@@ -83,6 +83,8 @@ python -m designmd_pptx a11y --tokens tokens.json --deck deck.json --fix-contras
 python -m designmd_pptx benchmark -o benchmark-out  # #37 fixture thresholds
 python -m designmd_pptx refine content.deck.json -o refined --feedback "too dense" --rounds 3  # #19
 # after refine: scaffold again from refined/content.deck.json
+python -m designmd_pptx extract old.pptx -o extracted   # #22 modern chart/table mapping on extract
+python -m designmd_pptx reconstruct extracted/content.deck.json -o modern.json  # #22 restyle types/recipes
 python -m designmd_pptx compose brief.md -o composed/ --design default   # v1.5: outline → deck-spec
 python -m designmd_pptx compose brief.md -o composed/ --llm --style "Keynote storytelling"  # Phase 3 / #18 opt-in planner
 python -m designmd_pptx render brief.md -o out/draft.pptx --design default  # v1.7: quick draft via official agent-bridge

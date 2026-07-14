@@ -274,6 +274,27 @@ def cmd_extract(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_reconstruct(args: argparse.Namespace) -> int:
+    """Modernize chart/table deck-spec content (#22) without re-reading pptx."""
+    from .reconstruct import modernize_deck
+
+    src = Path(args.deck)
+    deck = json.loads(src.read_text(encoding="utf-8"))
+    modern, notes = modernize_deck(deck)
+    out = Path(args.out) if args.out else src.with_name(
+        src.stem + ".modern" + src.suffix)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(modern, indent=2, ensure_ascii=False) + "\n",
+                   encoding="utf-8")
+    print(f"Wrote {out}")
+    for rec in notes:
+        print(f"  slide {rec.get('slide')}: {rec.get('recipe')} — "
+              f"{'; '.join(rec.get('warnings') or [])}")
+    if not notes:
+        print("  (no modernizations needed — already clean)")
+    return 0
+
+
 def cmd_reference(args: argparse.Namespace) -> int:
     """License-safe structural analysis of premium reference decks (Phase 2 / #59).
 
@@ -872,6 +893,16 @@ def build_parser() -> argparse.ArgumentParser:
         "skip media for those paths — prefer `reference` for structural study.",
     )
     e.set_defaults(func=cmd_extract)
+
+    rc = sub.add_parser(
+        "reconstruct",
+        help="Modernize chart/table recipes in a deck-spec (#22) — "
+             "type normalize, callouts, appendix pagination hints",
+    )
+    rc.add_argument("deck", type=Path, help="content.deck.json to modernize")
+    rc.add_argument("-o", "--out", type=Path, default=None,
+                    help="Output path (default: <stem>.modern.json)")
+    rc.set_defaults(func=cmd_reconstruct)
 
     ref = sub.add_parser(
         "reference",
