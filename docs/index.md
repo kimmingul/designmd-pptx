@@ -19,6 +19,7 @@ tokens, ordered decks, and staging-safe apply.
 | [DESIGN.md schema v2](design-md-v2.md) | Token schema |
 | [Corpus](corpus.md) | Anonymize + validation corpus |
 | [Infograpify reference](infograpify-reference.md) | License-safe premium analysis |
+| [Recipe coverage roadmap](recipe-coverage-roadmap.md) | Full-family recipe plan vs 400-deck library |
 
 ## Quick start
 

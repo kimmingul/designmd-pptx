@@ -110,6 +110,9 @@ class FamilyHints(unittest.TestCase):
         self.assertEqual(family_from_name("KPI Dashboard.pptx"), "kpi_dashboard")
         self.assertEqual(family_from_name("Product Roadmap.pptx"), "timeline_roadmap")
         self.assertEqual(family_from_name("Funnel-Infographic-01.pptx"), "process_flow")
+        self.assertEqual(family_from_name("Fishbone Analysis.pptx"), "process_flow")
+        self.assertEqual(family_from_name("Iceberg Model.pptx"), "hierarchy")
+        self.assertEqual(family_from_name("Business Model Canvas 1.pptx"), "strategy_canvas")
         self.assertEqual(family_from_name("Random Deck.pptx"), "other")
 
 

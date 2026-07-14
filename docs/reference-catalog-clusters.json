@@ -1,0 +1,472 @@
+{
+  "schema": 1,
+  "source_dir": "infograpify_ppt_templates",
+  "total": 400,
+  "license_note": "Filenames only. Decks are licensed third-party assets and must not be committed.",
+  "coarse_families": {
+    "other": 273,
+    "chart_story": 23,
+    "process_flow": 21,
+    "timeline_roadmap": 20,
+    "geo_map": 17,
+    "org_team": 11,
+    "kpi_dashboard": 8,
+    "narrative_chrome": 7,
+    "comparison_matrix": 7,
+    "pricing_table": 6,
+    "hierarchy": 6,
+    "device_mockup": 1
+  },
+  "subclusters": {
+    "generic_infographic": {
+      "count": 154,
+      "status": "PARTIAL",
+      "shipped_recipes": [
+        "feature_cards",
+        "bullets",
+        "process"
+      ],
+      "examples": [
+        "5G Infographics.pptx",
+        "6 Scale Smile Rating Scale Infographics.pptx",
+        "AIDS Day Infographics.pptx",
+        "Alphabet-Infographic.pptx",
+        "Architecture Infographics.pptx",
+        "Arrow-Infographic-01.pptx",
+        "Arrow-Infographic-02.pptx",
+        "Arrow-Infographic-03.pptx"
+      ]
+    },
+    "unclassified_other": {
+      "count": 104,
+      "status": "PARTIAL",
+      "shipped_recipes": [
+        "bullets",
+        "feature_cards"
+      ],
+      "examples": [
+        "50 Minimal Slides.pptx",
+        "Agile Diagrams.pptx",
+        "Analytics Circle.pptx",
+        "Anatomy and Phisiology.pptx",
+        "Balance.pptx",
+        "BullΓÇÖs Eye 01.pptx",
+        "BullΓÇÖs Eye 02.pptx",
+        "BullΓÇÖs Eye 03.pptx"
+      ]
+    },
+    "map_or_mindmap": {
+      "count": 17,
+      "status": "GAP_OR_WEAK",
+      "shipped_recipes": [
+        "image_full",
+        "image_text_2col"
+      ],
+      "examples": [
+        "Asia Maps Infographics.pptx",
+        "Empathy Map.pptx",
+        "Europe Maps Infographics.pptx",
+        "Geometric-Infographic-01.pptx",
+        "Geometric-Infographic-02.pptx",
+        "Geometric-Infographic-03.pptx",
+        "Geometric-Infographic-04.pptx",
+        "Geometric-Infographic-05.pptx"
+      ]
+    },
+    "finance": {
+      "count": 10,
+      "status": "PARTIAL",
+      "shipped_recipes": [
+        "table",
+        "chart_insight",
+        "kpi_row"
+      ],
+      "examples": [
+        "20 Budget Forecasting Slides.pptx",
+        "Finance-Infographic-01.pptx",
+        "Finance-Infographic-02.pptx",
+        "Finance-Infographic-03.pptx",
+        "Finance-Infographic-04.pptx",
+        "Finance-Infographic-05.pptx",
+        "Finance-Infographic-06.pptx",
+        "Finances 01.pptx"
+      ]
+    },
+    "fishbone": {
+      "count": 9,
+      "status": "GAP",
+      "shipped_recipes": [],
+      "examples": [
+        "Fishbone 01.pptx",
+        "Fishbone 02.pptx",
+        "Fishbone 03.pptx",
+        "Fishbone-Infographic-01.pptx",
+        "Fishbone-Infographic-02.pptx",
+        "Fishbone-Infographic-03.pptx",
+        "Fishbone-Infographic-04.pptx",
+        "Fishbone-Infographic-05.pptx"
+      ]
+    },
+    "org_chart": {
+      "count": 9,
+      "status": "GAP_OR_WEAK",
+      "shipped_recipes": [
+        "team"
+      ],
+      "examples": [
+        "Organizational Charts 01.pptx",
+        "Organizational Charts 02.pptx",
+        "Organizational Charts 03.pptx",
+        "Organizational Charts 04.pptx",
+        "Organizational Charts 05.pptx",
+        "Organizational Charts 06.pptx",
+        "Organizational-Chart-Infographic-01.pptx",
+        "Organizational-Chart-Infographic-02.pptx"
+      ]
+    },
+    "kpi_dashboard": {
+      "count": 8,
+      "status": "COVERED",
+      "shipped_recipes": [
+        "kpi_dashboard_grid",
+        "kpi_row",
+        "big_number"
+      ],
+      "examples": [
+        "Dashboards 01.pptx",
+        "Dashboards 02.pptx",
+        "Dashboards 03.pptx",
+        "KPI 01.pptx",
+        "KPI 02.pptx",
+        "KPI 03.pptx",
+        "KPI Dashboard.pptx",
+        "KPI Dashboards PowerPoint Templates by Infograpify.pptx"
+      ]
+    },
+    "roadmap": {
+      "count": 7,
+      "status": "COVERED",
+      "shipped_recipes": [
+        "roadmap_swimlane",
+        "story_timeline"
+      ],
+      "examples": [
+        "Product Roadmap.pptx",
+        "Roadmap-Infographic-01.pptx",
+        "Roadmap-Infographic-02.pptx",
+        "Roadmap-Infographic-03.pptx",
+        "Roadmap-Infographic-04.pptx",
+        "Roadmap-Infographic-05.pptx",
+        "Roadmap-Infographic-06.pptx"
+      ]
+    },
+    "timeline": {
+      "count": 7,
+      "status": "COVERED",
+      "shipped_recipes": [
+        "timeline",
+        "story_timeline"
+      ],
+      "examples": [
+        "Timeline-Infographic-01.pptx",
+        "Timeline-Infographic-02.pptx",
+        "Timeline-Infographic-03.pptx",
+        "Timeline-Infographic-04.pptx",
+        "Timeline-Infographic-05.pptx",
+        "Timeline-Infographic-06.pptx",
+        "Timeline.pptx"
+      ]
+    },
+    "marketing_framework": {
+      "count": 6,
+      "status": "PARTIAL",
+      "shipped_recipes": [
+        "process",
+        "feature_cards"
+      ],
+      "examples": [
+        "ADKAR 01.pptx",
+        "ADKAR 02.pptx",
+        "ADKAR 03.pptx",
+        "AIDA 01.pptx",
+        "AIDA 02.pptx",
+        "AIDA 03.pptx"
+      ]
+    },
+    "cycle_diagram": {
+      "count": 6,
+      "status": "GAP_OR_WEAK",
+      "shipped_recipes": [
+        "process"
+      ],
+      "examples": [
+        "Cycle-Infographic-01.pptx",
+        "Cycle-Infographic-02.pptx",
+        "Cycle-Infographic-03.pptx",
+        "Cycle-Infographic-04.pptx",
+        "Cycle-Infographic-05.pptx",
+        "Cycle-Infographic-06.pptx"
+      ]
+    },
+    "process": {
+      "count": 6,
+      "status": "COVERED",
+      "shipped_recipes": [
+        "process"
+      ],
+      "examples": [
+        "Flow Charts 01.pptx",
+        "Flow Charts 02.pptx",
+        "Flow Charts 03.pptx",
+        "Process 01.pptx",
+        "Process 02.pptx",
+        "Process 03.pptx"
+      ]
+    },
+    "funnel": {
+      "count": 6,
+      "status": "COVERED",
+      "shipped_recipes": [
+        "funnel_stages"
+      ],
+      "examples": [
+        "Funnel-Infographic-01.pptx",
+        "Funnel-Infographic-02.pptx",
+        "Funnel-Infographic-03.pptx",
+        "Funnel-Infographic-04.pptx",
+        "Funnel-Infographic-05.pptx",
+        "Funnel-Infographic-06.pptx"
+      ]
+    },
+    "gantt": {
+      "count": 6,
+      "status": "GAP_OR_WEAK",
+      "shipped_recipes": [
+        "roadmap_swimlane",
+        "timeline"
+      ],
+      "examples": [
+        "Gantt Charts 01.pptx",
+        "Gantt Charts 02.pptx",
+        "Gantt Charts 03.pptx",
+        "Gantt-Chart-Infographic-1.pptx",
+        "Gantt-Chart-Infographic-2.pptx",
+        "Gantt-Chart-Infographic-3.pptx"
+      ]
+    },
+    "iceberg": {
+      "count": 6,
+      "status": "GAP_OR_WEAK",
+      "shipped_recipes": [
+        "pyramid_levels"
+      ],
+      "examples": [
+        "Iceberg-Infographic-01.pptx",
+        "Iceberg-Infographic-02.pptx",
+        "Iceberg-Infographic-03.pptx",
+        "Iceberg-Infographic-04.pptx",
+        "Iceberg-Infographic-05.pptx",
+        "Iceberg-Infographic-06.pptx"
+      ]
+    },
+    "pyramid": {
+      "count": 6,
+      "status": "COVERED",
+      "shipped_recipes": [
+        "pyramid_levels"
+      ],
+      "examples": [
+        "Pyramid-Diagram-Infographic-01.pptx",
+        "Pyramid-Diagram-Infographic-02.pptx",
+        "Pyramid-Diagram-Infographic-03.pptx",
+        "Pyramid-Infographic-01.pptx",
+        "Pyramid-Infographic-02.pptx",
+        "Triangle.pptx"
+      ]
+    },
+    "venn": {
+      "count": 6,
+      "status": "GAP",
+      "shipped_recipes": [],
+      "examples": [
+        "Venn Diagram 01.pptx",
+        "Venn Diagram 02.pptx",
+        "Venn Diagram 03.pptx",
+        "Venn-Diagram-Infographic-01.pptx",
+        "Venn-Diagram-Infographic-02.pptx",
+        "Venn-Diagram-Infographic-03.pptx"
+      ]
+    },
+    "value_chain": {
+      "count": 4,
+      "status": "PARTIAL",
+      "shipped_recipes": [
+        "process",
+        "feature_cards"
+      ],
+      "examples": [
+        "Porters 5 Forces Infographics.pptx",
+        "Value Chain 01.pptx",
+        "Value Chain 02.pptx",
+        "Value Chain 03.pptx"
+      ]
+    },
+    "agenda": {
+      "count": 3,
+      "status": "COVERED",
+      "shipped_recipes": [
+        "agenda_toc"
+      ],
+      "examples": [
+        "Agenda 1.pptx",
+        "Agenda 2.pptx",
+        "Agenda 3.pptx"
+      ]
+    },
+    "business_canvas": {
+      "count": 3,
+      "status": "GAP",
+      "shipped_recipes": [],
+      "examples": [
+        "Business Model Canvas 1.pptx",
+        "Business Model Canvas 2.pptx",
+        "Business Model Canvas B&W.pptx"
+      ]
+    },
+    "comparison": {
+      "count": 3,
+      "status": "COVERED",
+      "shipped_recipes": [
+        "comparison_2col",
+        "vs_scorecard"
+      ],
+      "examples": [
+        "Comparison Charts Infographics 01.pptx",
+        "Comparison Charts Infographics 02.pptx",
+        "Comparison Charts Infographics 03.pptx"
+      ]
+    },
+    "pricing": {
+      "count": 3,
+      "status": "COVERED",
+      "shipped_recipes": [
+        "pricing"
+      ],
+      "examples": [
+        "Pricing Tables 01.pptx",
+        "Pricing Tables 02.pptx",
+        "Pricing Tables 03.pptx"
+      ]
+    },
+    "swot": {
+      "count": 3,
+      "status": "GAP_OR_WEAK",
+      "shipped_recipes": [
+        "matrix_2x2",
+        "quadrant_matrix_rich",
+        "vs_scorecard"
+      ],
+      "examples": [
+        "SWOT 01.pptx",
+        "SWOT 02.pptx",
+        "SWOT 03.pptx"
+      ]
+    },
+    "waterfall_chart": {
+      "count": 3,
+      "status": "GAP_OR_WEAK",
+      "shipped_recipes": [
+        "chart_insight",
+        "chart_callout_panel"
+      ],
+      "examples": [
+        "Waterfall Charts 1.pptx",
+        "Waterfall Charts 2.pptx",
+        "Waterfall Charts 3.pptx"
+      ]
+    },
+    "persona": {
+      "count": 2,
+      "status": "PARTIAL",
+      "shipped_recipes": [
+        "team",
+        "feature_cards"
+      ],
+      "examples": [
+        "Buyer Persona Infographics.pptx",
+        "Buyer Persona.pptx"
+      ]
+    },
+    "device_mockup": {
+      "count": 1,
+      "status": "GAP_OR_WEAK",
+      "shipped_recipes": [
+        "image_text_2col"
+      ],
+      "examples": [
+        "50 Mockup Devices.pptx"
+      ]
+    },
+    "matrix": {
+      "count": 1,
+      "status": "COVERED",
+      "shipped_recipes": [
+        "matrix_2x2",
+        "quadrant_matrix_rich"
+      ],
+      "examples": [
+        "Matrix Analysis Infographics.pptx"
+      ]
+    },
+    "okr": {
+      "count": 1,
+      "status": "PARTIAL",
+      "shipped_recipes": [
+        "kpi_row",
+        "bullets"
+      ],
+      "examples": [
+        "OKR.pptx"
+      ]
+    }
+  },
+  "shipped_recipe_count": 36,
+  "shipped_recipes": [
+    "agenda_toc",
+    "appendix_table",
+    "big_number",
+    "bullets",
+    "chart_callout_panel",
+    "chart_insight",
+    "close",
+    "comparison_2col",
+    "consort_flow",
+    "cover",
+    "feature_cards",
+    "forest_plot",
+    "funnel_stages",
+    "image_full",
+    "image_text_2col",
+    "kaplan_meier",
+    "kpi_dashboard_grid",
+    "kpi_row",
+    "logo_strip",
+    "matrix_2x2",
+    "multi_panel_figure",
+    "pricing",
+    "process",
+    "pyramid_levels",
+    "quadrant_matrix_rich",
+    "quote",
+    "results_table_insight",
+    "roadmap_swimlane",
+    "section_divider",
+    "section_opener_numbered",
+    "story_timeline",
+    "study_design",
+    "table",
+    "team",
+    "timeline",
+    "vs_scorecard"
+  ]
+}
