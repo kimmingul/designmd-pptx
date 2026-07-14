@@ -41,8 +41,10 @@ pip install -r "<resolved python root>\requirements.txt"
 7. Overwrite only with `--force` / `DESIGNMD_FORCE=1` (staging-safe via `apply_sequence`).
 8. QA: validate → view issues (incl. low_contrast) → **Gate 3**: apply with
    `--screenshot` (renders from staging BEFORE the destination is replaced;
-   `--gate3` makes a failed render abort the write). Visually inspect the
-   contact sheet for overflow, overlap, alignment; fix and re-apply until clean.
+   `--gate3` makes a failed render abort the write). Optional **vision QA**
+   (`--vision` / hard `--gate3-vision`, writes `.gate3.json`; offline heuristic
+   always, `DESIGNMD_VISION_CMD` for a real vision model). Visually inspect the
+   contact sheet; fix and re-apply until clean.
 9. No brand DESIGN.md? Pass the literal `default` as the design argument —
    the bundled neutral house style keeps the design floor.
 10. officecli missing or routing unclear? Run `python -m designmd_pptx doctor`

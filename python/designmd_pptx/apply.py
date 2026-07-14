@@ -34,6 +34,10 @@ def apply_sequence(
     require_clean_issues: bool = True,
     screenshot: bool = False,
     gate3: bool = False,
+    vision: bool = False,
+    vision_fail: bool = False,
+    vision_plan: str | Path | None = None,
+    vision_cmd: str | None = None,
     backend: LegacyBatchBackend | None = None,
 ) -> None:
     """
@@ -128,8 +132,10 @@ def apply_sequence(
 
         # Gate 3 runs on the STAGING copy, before the destination is replaced —
         # a deck whose contact sheet cannot even render never ships (--gate3).
+        # Optional vision QA (#14) evaluates the sheet and may hard-fail.
         shot: Path | None = None
-        if screenshot or gate3:
+        want_shot = screenshot or gate3 or vision or vision_fail
+        if want_shot:
             shot = pptx.with_suffix(".contact.png")
             r = be.screenshot(staging, shot)
             if r.returncode != 0 or not shot.exists():
@@ -137,13 +143,42 @@ def apply_sequence(
                     "Gate 3 screenshot failed: "
                     f"{((r.stderr or r.stdout) or '').strip()[:200]}"
                 )
-                if gate3:
+                if gate3 or vision_fail:
                     raise RuntimeError(f"{msg} — destination left untouched")
                 print(f"warning: {msg}")
                 shot = None
             # the screenshot view starts its own resident on staging —
             # release it before the atomic replace (Windows locks the file)
             be.close(staging)
+
+            if shot is not None and (vision or vision_fail or vision_plan):
+                from .vision_gate import evaluate_contact_sheet, write_report
+
+                eval_path = pptx.with_suffix(".gate3.json")
+                result = evaluate_contact_sheet(
+                    shot,
+                    vision_plan=vision_plan,
+                    use_subprocess=(
+                        True if vision_cmd or os.environ.get("DESIGNMD_VISION_CMD")
+                        else None
+                    ),
+                    vision_cmd=vision_cmd,
+                    context={"pptx": pptx.name, "sequence": sequence_json.name},
+                )
+                write_report(result, eval_path)
+                print(
+                    f"Gate 3 vision → {eval_path} "
+                    f"(pass={result.get('pass')} score={result.get('score')} "
+                    f"provider={result.get('provider')})"
+                )
+                for f in result.get("findings") or []:
+                    sev = f.get("severity") or "info"
+                    print(f"  [{sev}] {f.get('code')}: {f.get('message')}")
+                if vision_fail and not result.get("pass", False):
+                    raise RuntimeError(
+                        "Gate 3 vision QA failed — destination left untouched "
+                        f"(see {eval_path.name})"
+                    )
 
         if staged:
             if dest_exists and not force:
