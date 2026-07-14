@@ -1957,8 +1957,66 @@ def recipe_pricing(tokens: dict, content: dict | None = None) -> list[dict]:
     return ops
 
 
+# One appendix slide fits ~14 rows below the title/header band.
+APPENDIX_ROWS_PER_SLIDE = 14
+
+
+def _appendix_page_ops(tokens: dict, b: dict, c: dict, t: dict, page_title: str,
+                       headers: list[str], chunk: list[list[str]], cols: int,
+                       col_w: float, gap: float, row_h: float, start_y: float,
+                       fs: str, page: int) -> list[dict]:
+    """Ops for a single appendix-table slide (title + header band + rows)."""
+    table_w = 33.87 - 2 * b["margin"]
+    ops: list[dict] = [
+        _slide_op(tokens),
+        {
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": "AppTitle", "text": page_title,
+                "x": _cm(b["margin"]), "y": "0.8cm",
+                "width": _cm(table_w), "height": "1.4cm",
+                "font": t["heading_font"], "size": str(t["section_pt"]),
+                "bold": "true", "color": c["text_on_content"], "fill": "none",
+            },
+        },
+    ]
+    for ci, hcell in enumerate(headers):
+        x = b["margin"] + ci * (col_w + gap)
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"ATh{page}_{ci + 1}", "preset": "rect", "fill": c["accent"],
+                "line": "none", "text": hcell,
+                "x": _cm(x), "y": _cm(start_y),
+                "width": _cm(col_w), "height": _cm(row_h),
+                "font": t["body_font"], "size": fs, "bold": "true",
+                "color": c["on_accent"], "align": "center", "valign": "middle",
+            },
+        })
+    for ri, row in enumerate(chunk):
+        for ci, cell in enumerate(row):
+            x = b["margin"] + ci * (col_w + gap)
+            y = start_y + (ri + 1) * (row_h + gap)
+            fill = c["surface"] if ri % 2 == 0 else c.get("surface_elevated", c["surface"])
+            ops.append({
+                "command": "add", "parent": "/slide[last()]", "type": "shape",
+                "props": {
+                    "name": f"ATd{page}_{ri + 1}_{ci + 1}", "preset": "rect",
+                    "fill": fill, "line": c["hairline"], "text": cell,
+                    "x": _cm(x), "y": _cm(y),
+                    "width": _cm(col_w), "height": _cm(row_h),
+                    "font": t["body_font"], "size": fs,
+                    "color": c["text_on_surface"], "align": "center", "valign": "middle",
+                },
+            })
+    return ops
+
+
 def recipe_appendix_table(tokens: dict, content: dict | None = None) -> list[dict]:
-    """Dense reference table for appendices: up to 8 columns × 14 rows."""
+    """Dense reference table for appendices: up to 8 columns. Rows beyond one
+    slide's capacity (14) auto-split into continuation slides (#17) — the table
+    is never silently truncated. Continuation slides repeat the header band and
+    tag the title `(cont. k/n)`."""
     b = _base_props(tokens)
     c, t = b["c"], b["t"]
     content = content or {}
@@ -1968,7 +2026,7 @@ def recipe_appendix_table(tokens: dict, content: dict | None = None) -> list[dic
     cols = max(1, min(8, len(headers)))
     headers = [str(h) for h in headers[:cols]]
     norm_rows: list[list[str]] = []
-    for r in rows[:14]:
+    for r in rows:
         cells = [str(x) for x in r] if isinstance(r, list) else [str(r)]
         while len(cells) < cols:
             cells.append("")
@@ -1982,67 +2040,26 @@ def recipe_appendix_table(tokens: dict, content: dict | None = None) -> list[dic
     row_h, start_y = 0.98, 2.9
     fs = str(max(10, min(12, _micro_pt(t))))
 
-    ops: list[dict] = [
-        _slide_op(tokens),
-        {
-            "command": "add",
-            "parent": "/slide[last()]",
-            "type": "shape",
-            "props": {
-                "name": "AppTitle", "text": title,
-                "x": _cm(b["margin"]), "y": "0.8cm",
-                "width": _cm(table_w), "height": "1.4cm",
-                "font": t["heading_font"], "size": str(t["section_pt"]),
-                "bold": "true", "color": c["text_on_content"], "fill": "none",
-            },
-        },
-    ]
-    for ci, hcell in enumerate(headers):
-        x = b["margin"] + ci * (col_w + gap)
-        ops.append(
-            {
-                "command": "add",
-                "parent": "/slide[last()]",
-                "type": "shape",
-                "props": {
-                    "name": f"ATh{ci + 1}", "preset": "rect", "fill": c["accent"],
-                    "line": "none", "text": hcell,
-                    "x": _cm(x), "y": _cm(start_y),
-                    "width": _cm(col_w), "height": _cm(row_h),
-                    "font": t["body_font"], "size": fs, "bold": "true",
-                    "color": c["on_accent"], "align": "center", "valign": "middle",
-                },
-            }
-        )
-    for ri, row in enumerate(norm_rows):
-        for ci, cell in enumerate(row):
-            x = b["margin"] + ci * (col_w + gap)
-            y = start_y + (ri + 1) * (row_h + gap)
-            fill = c["surface"] if ri % 2 == 0 else c.get("surface_elevated", c["surface"])
-            ops.append(
-                {
-                    "command": "add",
-                    "parent": "/slide[last()]",
-                    "type": "shape",
-                    "props": {
-                        "name": f"ATd{ri + 1}_{ci + 1}", "preset": "rect",
-                        "fill": fill, "line": c["hairline"], "text": cell,
-                        "x": _cm(x), "y": _cm(y),
-                        "width": _cm(col_w), "height": _cm(row_h),
-                        "font": t["body_font"], "size": fs,
-                        "color": c["text_on_surface"], "align": "center", "valign": "middle",
-                    },
-                }
-            )
+    per = APPENDIX_ROWS_PER_SLIDE
+    pages = max(1, (len(norm_rows) + per - 1) // per)
+    ops: list[dict] = []
+    for page in range(pages):
+        chunk = norm_rows[page * per:(page + 1) * per]
+        if pages == 1:
+            page_title = title
+        elif page == 0:
+            page_title = f"{title} (1/{pages})"
+        else:
+            page_title = f"{title} (cont. {page + 1}/{pages})"
+        ops.extend(_appendix_page_ops(
+            tokens, b, c, t, page_title, headers, chunk, cols,
+            col_w, gap, row_h, start_y, fs, page + 1))
+
     if content.get("notes"):
-        ops.append(
-            {
-                "command": "add",
-                "parent": "/slide[last()]",
-                "type": "notes",
-                "props": {"text": content["notes"]},
-            }
-        )
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "notes",
+            "props": {"text": content["notes"]},
+        })
     return ops
 
 
