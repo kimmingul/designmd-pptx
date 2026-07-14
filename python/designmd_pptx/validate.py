@@ -33,6 +33,19 @@ CONTENT_KEYS = {
         "title", "callouts", "bullets", "categories", "series1_values",
         "series2_values", "series1_name", "series2_name", "chart_type", "notes",
     },
+# Phase 2 / #10 academic · medical · research
+    "consort_flow": {"title", "stages", "steps", "notes"},
+    "kaplan_meier": {
+        "title", "categories", "series1_values", "series2_values",
+        "series1_name", "series2_name", "risk_table", "rows", "risk_headers",
+        "insight", "insight_title", "insight_body", "notes",
+    },
+    "forest_plot": {"title", "rows", "studies", "domain", "notes"},
+    "study_design": {"title", "phases", "arms", "groups", "notes"},
+    "results_table_insight": {
+        "title", "headers", "rows", "insight", "insight_title", "insight_body", "notes",
+    },
+    "multi_panel_figure": {"title", "panels", "figures", "notes"},
     "feature_cards": {"title", "cards"},
     "feature_cards_3": {"title", "cards"},
     "bullets": {"title", "bullets", "items", "notes"},

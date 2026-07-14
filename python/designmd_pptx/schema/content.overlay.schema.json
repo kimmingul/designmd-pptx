@@ -537,6 +537,179 @@
         },
         "notes": { "type": "string" }
       }
+    },
+    "consort_flow": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "notes": { "type": "string" },
+        "stages": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 7,
+          "items": {
+            "oneOf": [
+              { "type": "string" },
+              {
+                "type": "object",
+                "properties": {
+                  "label": { "type": "string" },
+                  "title": { "type": "string" },
+                  "n": { "type": ["string", "number"] },
+                  "count": { "type": ["string", "number"] },
+                  "note": { "type": "string" },
+                  "reason": { "type": "string" }
+                }
+              }
+            ]
+          }
+        },
+        "steps": { "$ref": "#/properties/consort_flow/properties/stages" }
+      }
+    },
+    "kaplan_meier": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "notes": { "type": "string" },
+        "categories": { "type": "string" },
+        "series1_values": { "type": "string" },
+        "series2_values": { "type": "string" },
+        "series1_name": { "type": "string" },
+        "series2_name": { "type": "string" },
+        "insight": { "type": "string" },
+        "insight_title": { "type": "string" },
+        "insight_body": { "type": "string" },
+        "risk_headers": { "type": "array", "items": { "type": "string" } },
+        "risk_table": { "type": "array" },
+        "rows": { "type": "array" }
+      }
+    },
+    "forest_plot": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "notes": { "type": "string" },
+        "domain": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "type": "number" }
+        },
+        "rows": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "oneOf": [
+              { "type": "string" },
+              {
+                "type": "object",
+                "properties": {
+                  "label": { "type": "string" },
+                  "study": { "type": "string" },
+                  "effect": { "type": "number" },
+                  "or": { "type": "number" },
+                  "hr": { "type": "number" },
+                  "low": { "type": "number" },
+                  "high": { "type": "number" },
+                  "ci_low": { "type": "number" },
+                  "ci_high": { "type": "number" },
+                  "text": { "type": "string" },
+                  "ci": { "type": "string" }
+                }
+              }
+            ]
+          }
+        },
+        "studies": { "$ref": "#/properties/forest_plot/properties/rows" }
+      }
+    },
+    "study_design": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "notes": { "type": "string" },
+        "phases": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "oneOf": [
+              { "type": "string" },
+              {
+                "type": "object",
+                "properties": {
+                  "label": { "type": "string" },
+                  "title": { "type": "string" },
+                  "detail": { "type": "string" },
+                  "body": { "type": "string" }
+                }
+              }
+            ]
+          }
+        },
+        "arms": {
+          "type": "array",
+          "maxItems": 4,
+          "items": {
+            "oneOf": [
+              { "type": "string" },
+              {
+                "type": "object",
+                "properties": {
+                  "label": { "type": "string" },
+                  "name": { "type": "string" },
+                  "detail": { "type": "string" },
+                  "body": { "type": "string" }
+                }
+              }
+            ]
+          }
+        },
+        "groups": { "$ref": "#/properties/study_design/properties/arms" }
+      }
+    },
+    "results_table_insight": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "notes": { "type": "string" },
+        "headers": { "type": "array", "maxItems": 6, "items": { "type": "string" } },
+        "rows": {
+          "type": "array",
+          "maxItems": 8,
+          "items": { "type": "array", "items": { "type": "string" } }
+        },
+        "insight": { "type": "string" },
+        "insight_title": { "type": "string" },
+        "insight_body": { "type": "string" }
+      }
+    },
+    "multi_panel_figure": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "notes": { "type": "string" },
+        "panels": {
+          "type": "array",
+          "maxItems": 4,
+          "items": {
+            "oneOf": [
+              { "type": "string" },
+              {
+                "type": "object",
+                "properties": {
+                  "label": { "type": "string" },
+                  "caption": { "type": "string" },
+                  "title": { "type": "string" },
+                  "src": { "type": "string" },
+                  "alt": { "type": "string" }
+                }
+              }
+            ]
+          }
+        },
+        "figures": { "$ref": "#/properties/multi_panel_figure/properties/panels" }
+      }
     }
   }
 }

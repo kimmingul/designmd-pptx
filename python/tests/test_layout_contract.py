@@ -52,6 +52,17 @@ HEAVY = {
     "callouts": ["Callout line " * 8] * 6,
     "era": "2024–2026",
     "left": {"title": "Option A"}, "right": {"title": "Option B"},
+    "stages": [{"label": "Stage " * 4, "n": "N=99", "note": "note " * 6}] * 10,
+    "phases": [{"label": "Phase", "detail": "Detail " * 4}] * 8,
+    "arms": [{"label": "Arm", "detail": "Detail " * 4}] * 6,
+    "panels": [{"label": "X", "caption": "Caption " * 6, "src": "", "alt": "a"}] * 6,
+    "studies": [
+        {"label": "Study", "effect": 0.1, "low": -0.5, "high": 0.6, "text": "1.1 (0.6–1.6)"}
+    ] * 12,
+    "risk_table": [["0", "100", "100"]] * 10,
+    "insight": "Insight text " * 20,
+    "insight_body": "Insight body " * 20,
+    "domain": [-2.0, 2.0],
 }
 
 
@@ -81,13 +92,15 @@ class GeometryContract(unittest.TestCase):
         return _call_builder(RECIPE_BUILDERS[name], self.tokens, content, idx)
 
     def test_every_pattern_registered(self) -> None:
-        # Phase 2 (#58) premium catalog (20 base + 10 premium patterns).
-        self.assertGreaterEqual(len(RECIPE_BUILDERS), 30)
+        # Phase 2: premium (#58) + domain (#10) catalogs.
+        self.assertGreaterEqual(len(RECIPE_BUILDERS), 36)
         for name in (
             "kpi_dashboard_grid", "agenda_toc", "section_opener_numbered",
             "story_timeline", "funnel_stages", "roadmap_swimlane",
             "quadrant_matrix_rich", "pyramid_levels", "vs_scorecard",
             "chart_callout_panel",
+            "consort_flow", "kaplan_meier", "forest_plot",
+            "study_design", "results_table_insight", "multi_panel_figure",
         ):
             self.assertIn(name, RECIPE_BUILDERS)
 

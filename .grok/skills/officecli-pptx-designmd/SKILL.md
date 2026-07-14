@@ -136,6 +136,8 @@ modified. Run after `apply` to deliver a deck whose file doubles as a template.
 
 cover · section_divider · **section_opener_numbered** · **agenda_toc** · kpi_row · **kpi_dashboard_grid** · **big_number** · feature_cards · **pricing** · bullets · quote · comparison_2col · **matrix_2x2** · **quadrant_matrix_rich** · **vs_scorecard** · timeline · **story_timeline** · process · **funnel_stages** · **roadmap_swimlane** · **pyramid_levels** · table · **appendix_table** · chart_insight · **chart_callout_panel** (any officecli chartType: column/bar/line/pie/area/waterfall/funnel/…) · **team** · **logo_strip** · image_full · image_text_2col · close
 
+**Academic / medical (#10):** **consort_flow** · **kaplan_meier** · **forest_plot** · **study_design** · **results_table_insight** · **multi_panel_figure** — example deck-spec: `python/examples/content.medical.deck.json`
+
 ## Colors
 
 hex, rgb/hsl, oklch (approx), color-mix, var(--token), linear-gradient (2-stop officecli form).
