@@ -450,12 +450,35 @@ def cmd_compose(args: argparse.Namespace) -> int:
     tokens = None
     if args.design:
         tokens = compile_design_md(_resolve_design(args.design), brand=args.brand)
-    report = compose_outline(args.brief, args.out, tokens=tokens)
+    report = compose_outline(
+        args.brief,
+        args.out,
+        tokens=tokens,
+        llm=bool(getattr(args, "llm", False)),
+        style=getattr(args, "style", None),
+        plan=getattr(args, "plan", None),
+        llm_cmd=getattr(args, "llm_cmd", None),
+    )
     print(f"Wrote {Path(args.out) / 'content.deck.json'}")
     print(f"Wrote {Path(args.out) / 'compose.report.json'}")
     for s in report["slides"]:
+        role = f" [{s['role']}]" if s.get("role") else ""
         flags = f" — {'; '.join(s['warnings'])}" if s.get("warnings") else ""
-        print(f"  slide {s['index']:>2}: {s['recipe']} (confidence {s['confidence']}){flags}")
+        print(
+            f"  slide {s['index']:>2}: {s['recipe']}{role} "
+            f"(confidence {s['confidence']}){flags}"
+        )
+    planner = report.get("planner") or {}
+    if planner:
+        print(
+            f"planner: provider={planner.get('provider')} "
+            f"accepted={planner.get('accepted')} "
+            f"pacing={((planner.get('pacing') or {}).get('score'))}"
+        )
+        for e in planner.get("errors") or []:
+            print(f"planner error: {e}")
+        for w in planner.get("warnings") or []:
+            print(f"planner warning: {w}")
     for w in report.get("fit_warnings") or []:
         print(f"fit warning: {w}")
     print("Review the draft, then: python -m designmd_pptx scaffold <DESIGN.md|default> "
@@ -756,6 +779,32 @@ def build_parser() -> argparse.ArgumentParser:
     o.add_argument("--design", default=None,
                    help="DESIGN.md / tokens / 'default' — adds text-fit warnings to the report")
     o.add_argument("--brand", default=None)
+    o.add_argument(
+        "--llm",
+        action="store_true",
+        help="Opt-in intelligent planner (Phase 3 / #18). Default offline path is "
+        "unchanged. Without DESIGNMD_LLM_CMD uses a narrative heuristic; set the "
+        "env (or --llm-cmd) for a real LLM subprocess. Also: DESIGNMD_COMPOSE_LLM=1",
+    )
+    o.add_argument(
+        "--style",
+        default=None,
+        help="Style / storytelling directive for the planner "
+        '(e.g. "Apple Keynote storytelling", "medical conference")',
+    )
+    o.add_argument(
+        "--plan",
+        type=Path,
+        default=None,
+        help="Apply a JSON plan file (replay/tests). Validated through the same "
+        "deck caps as hand-written specs",
+    )
+    o.add_argument(
+        "--llm-cmd",
+        default=None,
+        help="Shell command for subprocess planner (stdin JSON request → stdout plan). "
+        "Overrides DESIGNMD_LLM_CMD",
+    )
     o.set_defaults(func=cmd_compose)
 
     n = sub.add_parser(

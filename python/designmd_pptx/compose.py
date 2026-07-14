@@ -237,12 +237,31 @@ def compose_outline(
     out_dir: str | Path,
     *,
     tokens: dict[str, Any] | None = None,
+    llm: bool = False,
+    style: str | None = None,
+    plan: str | Path | None = None,
+    llm_cmd: str | None = None,
 ) -> dict[str, Any]:
-    """Compile a markdown brief into content.deck.json + compose.report.json."""
+    """Compile a markdown brief into content.deck.json + compose.report.json.
+
+    Parameters
+    ----------
+    llm:
+        Opt-in intelligent planner (Phase 3 / #18). Default False keeps the
+        fully offline deterministic path. When True, applies
+        ``compose_llm.plan_compose`` (plan file / subprocess / offline heuristic).
+    style:
+        Free-text style directive (e.g. ``"Apple Keynote storytelling"``).
+    plan:
+        Path to a JSON plan (replay / tests). Implies intelligent path.
+    llm_cmd:
+        Override ``DESIGNMD_LLM_CMD`` for subprocess planners.
+    """
     brief_md = Path(brief_md)
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
-    head, sections = _parse_sections(brief_md.read_text(encoding="utf-8"))
+    brief_text = brief_md.read_text(encoding="utf-8")
+    head, sections = _parse_sections(brief_text)
     if not head["title"] and not sections:
         raise ValueError(f"{brief_md}: no # title or ## sections found")
 
@@ -272,6 +291,47 @@ def compose_outline(
                               "warnings": ["auto-added close slide — edit its content"]})
 
     deck = {"version": "1.1", "slides": slides}
+    planner_report: dict[str, Any] | None = None
+    use_llm = bool(llm or plan or (
+        __import__("os").environ.get("DESIGNMD_COMPOSE_LLM", "").strip() in ("1", "true", "yes")
+    ))
+    if use_llm:
+        from .compose_llm import plan_compose
+
+        deck, planner_report = plan_compose(
+            deck,
+            brief_text=brief_text,
+            style=style,
+            plan_path=plan,
+            tokens=tokens,
+            llm_cmd=llm_cmd,
+        )
+        # Rebuild report_slides from the (possibly revised) deck so agents see
+        # the final recipes. Confidence: LLM path bumps base scores slightly.
+        report_slides = []
+        conf_model = (planner_report or {}).get("confidence_model") or "rules"
+        for i, s in enumerate(deck.get("slides") or []):
+            base = 0.55
+            role = None
+            if planner_report and planner_report.get("narrative"):
+                for n in planner_report["narrative"]:
+                    if n.get("index") == i + 1:
+                        role = n.get("role")
+                        break
+            if conf_model == "llm":
+                base = 0.8
+            elif planner_report and planner_report.get("accepted"):
+                base = 0.65
+            report_slides.append({
+                "index": i + 1,
+                "recipe": s.get("recipe"),
+                "confidence": base,
+                "title": (s.get("content") or {}).get("title"),
+                "role": role,
+                "warnings": [],
+                "confidence_model": conf_model,
+            })
+
     fit_warnings: list[str] = []
     if tokens is not None:
         from .deck import generate_deck
@@ -284,12 +344,18 @@ def compose_outline(
     (out_dir / "content.deck.json").write_text(
         json.dumps(deck, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
-    report = {
-        "source": str(brief_md),
+    report: dict[str, Any] = {
+        "source": str(brief_md.name),  # basename — avoid leaking home paths
         "slides": report_slides,
         "fit_warnings": fit_warnings,
         "note": "Draft — review recipes/content, then scaffold with a DESIGN.md",
     }
+    if planner_report is not None:
+        report["planner"] = planner_report
+        if planner_report.get("accepted"):
+            report["note"] += " | planner applied (see report.planner)"
+        elif planner_report.get("errors"):
+            report["note"] += " | planner rejected plan; deterministic deck kept"
     (out_dir / "compose.report.json").write_text(
         json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
