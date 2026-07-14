@@ -13,9 +13,14 @@ const { resolveCli: resolveCliPure, diagnosticsFromReport } = require("./cli");
 const DIAG_COLLECTION = "designmd-pptx";
 
 /** @param {vscode.ExtensionContext} context */
+/** @type {vscode.OutputChannel | undefined} */
+let sharedOutput;
+
 function activate(context) {
   const diagnostics = vscode.languages.createDiagnosticCollection(DIAG_COLLECTION);
   context.subscriptions.push(diagnostics);
+  sharedOutput = vscode.window.createOutputChannel("designmd-pptx");
+  context.subscriptions.push(sharedOutput);
 
   const explorer = new DesignmdExplorer();
   context.subscriptions.push(
@@ -109,7 +114,7 @@ function resolveCli(args) {
 function runCli(args, opts = {}) {
   const { argv, cwd, env, display } = resolveCli(args);
   const name = opts.title || `designmd-pptx ${args[0] || ""}`.trim();
-  const out = vscode.window.createOutputChannel("designmd-pptx", { log: true });
+  const out = sharedOutput || vscode.window.createOutputChannel("designmd-pptx");
   if (opts.reveal !== false) {
     out.show(true);
   }

@@ -78,9 +78,10 @@ python -m designmd_pptx scaffold default -o out/v2 \
   --content generated/content.generated.deck.json
 ```
 
-Freeform placements are validated by `layout.solve_adaptive` before emission
-so title/body floors still hold. Optional external layout generator:
-`DESIGNMD_LAYOUT_CMD` / vision contact sheet via `--contact`.
+Freeform placements are validated (finite cm, on-canvas, non-empty text) before
+emission. Optional external layout generator: env `DESIGNMD_LAYOUT_CMD` or
+`--layout-cmd` (JSON placements/preset on stdout). Vision contact sheet via
+`--contact`.
 
 ## animate (#40)
 
@@ -93,7 +94,7 @@ animation:
   transition: fade      # none | fade | push | wipe | cut | cover
   transition_speed: med
   stagger_ms: 150
-  emphasis: none        # none | pulse
+  emphasis: none        # only 'none' is implemented
 ```
 
 ```bash

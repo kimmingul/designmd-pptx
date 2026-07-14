@@ -48,7 +48,7 @@ animation:
   transition: fade                  # none | fade | push | wipe | cut | cover
   transition_speed: med             # slow | med | fast
   stagger_ms: 150
-  emphasis: none                    # none | pulse
+  emphasis: none                    # only 'none' implemented (v2.1.x)
 ---
 ```
 

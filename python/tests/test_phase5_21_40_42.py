@@ -84,6 +84,36 @@ class Generative21(unittest.TestCase):
         self.assertTrue(ov.get("bullets") or content.get("notes", "").find("overflow") >= 0
                         or report["deck"]["slides"][0]["recipe"] == "freeform")
 
+    def test_feature_cards_to_bullets_keeps_body(self) -> None:
+        deck = {
+            "slides": [{
+                "id": "s1",
+                "recipe": "feature_cards",
+                "content": {
+                    "title": "T",
+                    "cards": [
+                        {"title": "A", "body": "BODY_A"},
+                        {"title": "B", "body": "BODY_B"},
+                    ],
+                },
+            }],
+        }
+        report = gen.generate_deck_layout(deck, profile_id="swiss")
+        slide = report["deck"]["slides"][0]
+        blob = json.dumps(slide)
+        self.assertIn("BODY_A", blob)
+        self.assertIn("BODY_B", blob)
+
+    def test_placements_reject_nan_and_empty_text(self) -> None:
+        ok, _ = gen.validate_placements([
+            {"name": "X", "x": float("nan"), "y": 0, "w": 1, "h": 1, "text": "hi", "kind": "text"},
+        ])
+        self.assertFalse(ok)
+        ok, _ = gen.validate_placements([
+            {"name": "X", "x": 1, "y": 1, "w": 2, "h": 2, "text": "", "kind": "text"},
+        ])
+        self.assertFalse(ok)
+
     def test_vision_density_forces_freeform(self) -> None:
         deck = {
             "slides": [{

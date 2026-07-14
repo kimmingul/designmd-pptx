@@ -1,6 +1,6 @@
 {
   "name": "designmd-pptx",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "DESIGN.md → officecli PPTX compiler, packaged for Claude Code / Codex / Grok Build (v2.1)",
   "license": "MIT",
   "private": true,

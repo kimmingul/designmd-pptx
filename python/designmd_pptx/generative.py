@@ -387,9 +387,12 @@ def validate_builder(
 
 
 def validate_placements(placements: list[dict[str, Any]]) -> tuple[bool, str]:
-    """Geometry sanity for freeform placements (cm, on-canvas, non-empty)."""
+    """Geometry sanity for freeform placements (cm, on-canvas, finite, non-empty)."""
+    import math
+
     if not placements:
         return False, "empty placements"
+    boxes: list[tuple[float, float, float, float]] = []
     for i, p in enumerate(placements):
         if not isinstance(p, dict):
             return False, f"placements[{i}] not an object"
@@ -397,12 +400,25 @@ def validate_placements(placements: list[dict[str, Any]]) -> tuple[bool, str]:
             x, y, w, h = float(p["x"]), float(p["y"]), float(p["w"]), float(p["h"])
         except (KeyError, TypeError, ValueError):
             return False, f"placements[{i}] missing numeric x/y/w/h"
+        if not all(math.isfinite(v) for v in (x, y, w, h)):
+            return False, f"placements[{i}] non-finite coordinate"
         if w <= 0 or h <= 0:
             return False, f"placements[{i}] non-positive size"
+        if w < 0.3 or h < 0.3:
+            return False, f"placements[{i}] undersized (<0.3cm)"
         if x < -0.5 or y < -0.5 or x + w > L.CANVAS_W + 0.5 or y + h > L.CANVAS_H + 0.5:
             return False, f"placements[{i}] outside canvas"
         if not p.get("name"):
             return False, f"placements[{i}] missing name"
+        # Text leaves need non-empty text for readability contract
+        kind = str(p.get("kind") or "text")
+        if kind == "text" and not str(p.get("text") or "").strip():
+            return False, f"placements[{i}] text empty"
+        # Crude overlap: reject identical origin+size pairs
+        for j, (ox, oy, ow, oh) in enumerate(boxes):
+            if abs(x - ox) < 0.01 and abs(y - oy) < 0.01 and abs(w - ow) < 0.01 and abs(h - oh) < 0.01:
+                return False, f"placements[{i}] identical geometry to placements[{j}]"
+        boxes.append((x, y, w, h))
     return True, "ok"
 
 
@@ -562,23 +578,48 @@ def _apply_style_to_slide(
             return out, patch
         patch["freeform_overflow"] = val.overflow
 
-    # Pattern path with style-driven recipe map
+    # Pattern path with style-driven recipe map — never silent field drop (#21 re-verify)
     new_recipe = rmap.get(recipe, recipe)
     if new_recipe != recipe:
-        # light content reshape when swapping bullets ↔ feature_cards
         if recipe == "bullets" and new_recipe == "feature_cards":
             bullets = content.get("bullets") or []
             content["cards"] = [
-                {"title": str(b)[:48], "body": ""} for b in bullets[:4]
+                {"title": str(b)[:48], "body": str(b)} for b in bullets[:max_items]
             ]
             content.pop("bullets", None)
         elif recipe == "feature_cards" and new_recipe == "bullets":
             cards = content.get("cards") or []
-            content["bullets"] = [
-                str(c.get("title") or c.get("body") or c) if isinstance(c, dict) else str(c)
-                for c in cards
-            ][:max_items]
+            bullets_out: list[str] = []
+            for c in cards[:max_items]:
+                if isinstance(c, dict):
+                    title = str(c.get("title") or "").strip()
+                    body = str(c.get("body") or "").strip()
+                    if title and body:
+                        bullets_out.append(f"{title} — {body}")
+                    else:
+                        bullets_out.append(title or body or str(c))
+                else:
+                    bullets_out.append(str(c))
+            content["bullets"] = bullets_out
+            # Preserve full cards under overflow for recoverability
+            if cards:
+                content.setdefault("overflow", {})["cards"] = cards
             content.pop("cards", None)
+        elif recipe == "quote" and new_recipe == "bullets":
+            q = str(content.get("quote") or content.get("body") or "")
+            content["bullets"] = [q] if q else content.get("bullets") or ["—"]
+            content.setdefault("overflow", {})["quote"] = content.get("quote")
+        elif recipe == "table" and new_recipe in ("kpi_row", "feature_cards"):
+            # Keep table payload; do not invent KPIs from thin air
+            content.setdefault("overflow", {})["table"] = {
+                "headers": content.get("headers"),
+                "rows": content.get("rows"),
+            }
+            content.setdefault("notes", "")
+            content["notes"] = (
+                (content.get("notes") or "")
+                + " [generative: table retained in overflow; review KPI mapping]"
+            ).strip()
         out["recipe"] = new_recipe
         patch["to_recipe"] = new_recipe
         patch["action"] = "recipe_map"

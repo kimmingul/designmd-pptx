@@ -2,6 +2,23 @@
 
 All notable changes to designmd-pptx are documented here.
 
+## [2.1.2] — 2026-07-15
+
+Residual fixes after Codex **re-verify** of v2.1.1 (still flagged generative body loss,
+placement NaN, Windows uninstall fail-open, methodology honesty).
+
+### Fixed
+- Generative recipe maps preserve card bodies (`title — body`) + `overflow.cards`
+- Placement validation: finite coords, min size, non-empty text, identical-box reject
+- Windows uninstall fail-closed on missing/invalid/mismatched manifest; SHA warn + `DESIGNMD_REQUIRE_OFFICECLI_SHA=1`
+- Generated public benchmark METHODOLOGY honesty banner
+- VS Code shared OutputChannel (no per-command leak)
+- `generate --layout-cmd`; docs: pulse removed; smoke checklist
+
+### Smoke
+- `scripts/smoke-v2.1.1.sh` (version gate 2.1.2) track A PASS on Darwin
+- Windows install + real PPT open: manual (docs/smoke-v2.1.1.md B/C)
+
 ## [2.1.1] — 2026-07-15
 
 Adversarial review follow-up (Codex gpt-5.6-sol@high **BLOCK** findings).

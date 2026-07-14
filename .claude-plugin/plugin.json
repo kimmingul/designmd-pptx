@@ -1,6 +1,6 @@
 {
   "name": "designmd-pptx",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Compile awesome-design-md / Stitch DESIGN.md into officecli PPTX tokens, ordered decks, and staging-safe apply.",
   "author": {
     "name": "Min-Gul Kim",
