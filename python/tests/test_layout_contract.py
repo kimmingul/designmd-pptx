@@ -71,6 +71,23 @@ HEAVY = {
     "insight": "Insight text " * 20,
     "insight_body": "Insight body " * 20,
     "domain": [-2.0, 2.0],
+    # Wave 1 keys (builders ignore unknowns)
+    "hub": "Loop", "center": "Core",
+    "sets": [{"label": "A"}, {"label": "B"}, {"label": "C"}],
+    "intersection": "Shared " * 4,
+    "strengths": ["S1", "S2"], "weaknesses": ["W1"],
+    "opportunities": ["O1"], "threats": ["T1"],
+    "tasks": [{"name": "Task " * 3, "start": 0, "end": 2}] * 10,
+    "root": {"name": "Lead", "role": "CEO"},
+    "reports": [{"name": "R", "role": "Role"}] * 6,
+    "name": "Persona Name", "role": "Buyer role",
+    "attrs": ["Attr " * 4] * 8,
+    "effect": "Outcome",
+    "causes": [{"label": "Bone", "items": ["item"]}] * 8,
+    "above": [{"label": "Events", "detail": "seen"}],
+    "below": [{"label": "Structure", "detail": "hidden"}] * 4,
+    "framework": "ADKAR",
+    "blocks": [{"label": f"B{i}", "body": "x"} for i in range(9)],
 }
 
 
@@ -101,7 +118,7 @@ class GeometryContract(unittest.TestCase):
 
     def test_every_pattern_registered(self) -> None:
         # Phase 2: premium (#58) + domain (#10) catalogs.
-        self.assertGreaterEqual(len(RECIPE_BUILDERS), 36)
+        self.assertGreaterEqual(len(RECIPE_BUILDERS), 48)
         for name in (
             "kpi_dashboard_grid", "agenda_toc", "section_opener_numbered",
             "story_timeline", "funnel_stages", "roadmap_swimlane",

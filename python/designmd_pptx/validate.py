@@ -81,6 +81,45 @@ CONTENT_KEYS = {
     "logo_strip": {"title", "logos", "notes"},
     "pricing": {"title", "tiers", "notes"},
     "appendix_table": {"title", "headers", "rows", "notes"},
+    # Wave 1 full-family coverage
+    "chevron_process": {"title", "steps", "stages", "notes"},
+    "cycle_loop": {"title", "steps", "stages", "hub", "center", "notes"},
+    "waterfall_insight": {
+        "title", "insight_title", "insight_body", "categories",
+        "series1_values", "series2_values", "series1_name", "series2_name",
+        "chart_type", "notes",
+    },
+    "venn_overlap": {
+        "title", "sets", "circles", "intersection", "overlap", "notes",
+    },
+    "swot_2x2": {
+        "title", "quadrants", "axes", "strengths", "weaknesses",
+        "opportunities", "threats", "s", "w", "o", "t", "notes",
+    },
+    "gantt_bars": {
+        "title", "phases", "columns", "tasks", "rows", "items", "notes",
+    },
+    "org_tree": {
+        "title", "root", "lead", "reports", "children", "members", "notes",
+    },
+    "persona_card": {
+        "title", "name", "persona", "role", "title_line", "quote", "goal",
+        "attrs", "traits", "bullets", "notes",
+    },
+    "business_canvas": {
+        "title", "blocks", "key_partners", "key_activities", "key_resources",
+        "value_propositions", "customer_relationships", "channels",
+        "customer_segments", "cost_structure", "revenue_streams", "notes",
+    },
+    "fishbone_causes": {
+        "title", "effect", "head", "causes", "bones", "branches", "notes",
+    },
+    "iceberg_levels": {
+        "title", "above", "below", "events", "levels", "notes",
+    },
+    "framework_row": {
+        "title", "framework", "name", "steps", "stages", "items", "notes",
+    },
 }
 
 

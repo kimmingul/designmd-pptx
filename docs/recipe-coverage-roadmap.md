@@ -152,9 +152,9 @@ These are **content/theme packs** on top of Wave 0–2 geometry.
 
 | Wave | Recipes (new) | Depends on | Exit criteria |
 |---|---:|---|---|
-| **1a** (process/chart) | `chevron_process`, `cycle_loop`, `waterfall_insight`, `venn_overlap` | layout contract tests | 4 recipes in `RECIPE_BUILDERS` + PATTERN_LAYOUT + unit tests + compose hints |
-| **1b** (matrix/plan) | `swot_2x2`, `gantt_bars` | 1a patterns | Gate 3 optional on synthetic fixtures |
-| **1c** (people/strategy) | `org_tree`, `persona_card`, `business_canvas`, `fishbone_causes`, `iceberg_levels`, `framework_row` | 1a | SKILL Patterns list updated + `npm run sync` |
+| **1a** (process/chart) | `chevron_process`, `cycle_loop`, `waterfall_insight`, `venn_overlap` | layout contract tests | ✅ shipped |
+| **1b** (matrix/plan) | `swot_2x2`, `gantt_bars` | 1a patterns | ✅ shipped |
+| **1c** (people/strategy) | `org_tree`, `persona_card`, `business_canvas`, `fishbone_causes`, `iceberg_levels`, `framework_row` | 1a | ✅ shipped (`WAVE1_SEQUENCE`, tests) |
 | **2** (long-tail roles) | icon_stat_row … finance_statement | 1 complete | Subcluster “PARTIAL” count drops; catalog suggestions updated |
 | **3** (verticals) | 0 recipes | wave 1–2 | Example decks + DESIGN skins for top 5 verticals |
 
