@@ -313,6 +313,20 @@ class ExtractFidelity12(unittest.TestCase):
         self.assertEqual(report["source"], "named-deck.pptx")
         self.assertNotIn(str(self.root), report["source"])
 
+    def test_licensed_path_disables_media_by_default(self):
+        from designmd_pptx.extract import is_licensed_reference_path
+
+        pack = self.root / "infograpify_ppt_templates"
+        pack.mkdir(exist_ok=True)
+        slide = _slide(_sp(["Hi"], ph="title"))
+        pptx = _make_pptx(pack / "vendor.pptx", [(slide, None)])
+        self.assertTrue(is_licensed_reference_path(pptx))
+        report = extract_pptx(pptx, self.root / "out-licensed")
+        self.assertTrue(report["licensed_source"])
+        self.assertFalse(report["export_media"])
+        warns = " ".join(report["slides"][0]["warnings"])
+        self.assertIn("licensed", warns.lower())
+
 
 if __name__ == "__main__":
     unittest.main()

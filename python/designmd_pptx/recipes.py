@@ -3282,7 +3282,9 @@ def recipe_forest_plot(tokens: dict, content: dict | None = None) -> list[dict]:
     c, t = b["c"], b["t"]
     content = content or {}
     title = content.get("title", "Forest plot")
-    rows = content.get("rows") or content.get("studies") or [
+    # Prefer studies[] when present so table-shaped HEAVY["rows"] cannot steal
+    # the forest path in the geometry-contract suite.
+    rows = content.get("studies") or content.get("rows") or [
         {"label": "Study A", "effect": -0.2, "low": -0.5, "high": 0.1, "text": "0.82 (0.60–1.10)"},
         {"label": "Study B", "effect": -0.35, "low": -0.6, "high": -0.1, "text": "0.70 (0.55–0.90)"},
         {"label": "Study C", "effect": 0.05, "low": -0.2, "high": 0.3, "text": "1.05 (0.82–1.35)"},
@@ -3295,8 +3297,11 @@ def recipe_forest_plot(tokens: dict, content: dict | None = None) -> list[dict]:
         rows.append({"label": "—", "effect": 0, "low": -0.2, "high": 0.2, "text": "—"})
     domain = content.get("domain") or [-1.0, 1.0]
     d0, d1 = float(domain[0]), float(domain[1])
+    if d0 > d1:
+        d0, d1 = d1, d0
     span = max(1e-6, d1 - d0)
     mpt = _micro_pt(t)
+    forest_warnings: set[str] = set()
 
     def _norm(v: float) -> float:
         return max(0.0, min(1.0, (float(v) - d0) / span))
@@ -3320,6 +3325,13 @@ def recipe_forest_plot(tokens: dict, content: dict | None = None) -> list[dict]:
                 high = float(row.get("high", row.get("ci_high", effect + 0.2)) or 0)
             else:
                 label, text, effect, low, high = f"Row {i + 1}", "", 0.0, -0.2, 0.2
+            if low > high:
+                low, high = high, low
+                forest_warnings.add(f"row {i + 1}: swapped inverted CI bounds")
+            if effect < d0 or effect > d1 or low < d0 or high > d1:
+                forest_warnings.add(
+                    f"row {i + 1}: effect/CI clamped to domain [{d0}, {d1}]"
+                )
             # Store normalized geometry in props for post-solve bar overlay.
             line_boxes.append(
                 L.HStack(
@@ -3440,10 +3452,12 @@ def recipe_forest_plot(tokens: dict, content: dict | None = None) -> list[dict]:
                     "width": "0.06cm", "height": _cm(max(0.3, tr.h - 0.3)),
                 },
             })
+    notes = content.get("notes", "Read left labels, then CI bars vs the null line.")
+    if forest_warnings:
+        notes = notes + " | " + "; ".join(sorted(forest_warnings)[:6])
     ops.append({
         "command": "add", "parent": "/slide[last()]", "type": "notes",
-        "props": {"text": content.get(
-            "notes", "Read left labels, then CI bars vs the null line.")},
+        "props": {"text": notes},
     })
     return ops
 

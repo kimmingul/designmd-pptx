@@ -44,7 +44,11 @@ HEAVY = {
     "quote": "A rather long pull quote that keeps going and going " * 6,
     "attribution": "Someone Notable, Title",
     "chart_type": "bar", "categories": "A,B,C,D", "series1_values": "4,8,15,16",
-    "stages": [{"label": "Stage", "value": "10%"}] * 8,
+    # Shared blob: each builder reads only the keys it understands. Prefer
+    # distinct keys (studies vs rows) so forest_plot is not starved by table rows.
+    "stages": [
+        {"label": "Stage " * 4, "value": "10%", "n": "N=99", "note": "note " * 6}
+    ] * 10,
     "levels": [{"label": "Level", "detail": "Detail " * 4}] * 8,
     "phases": ["Now", "Next", "Later", "Future", "Horizon", "Extra"],
     "lanes": [{"name": "Lane", "cells": ["A", "B", "C", "D"]}] * 8,
@@ -52,12 +56,16 @@ HEAVY = {
     "callouts": ["Callout line " * 8] * 6,
     "era": "2024–2026",
     "left": {"title": "Option A"}, "right": {"title": "Option B"},
-    "stages": [{"label": "Stage " * 4, "n": "N=99", "note": "note " * 6}] * 10,
-    "phases": [{"label": "Phase", "detail": "Detail " * 4}] * 8,
     "arms": [{"label": "Arm", "detail": "Detail " * 4}] * 6,
     "panels": [{"label": "X", "caption": "Caption " * 6, "src": "", "alt": "a"}] * 6,
     "studies": [
-        {"label": "Study", "effect": 0.1, "low": -0.5, "high": 0.6, "text": "1.1 (0.6–1.6)"}
+        {
+            "label": "Study",
+            "effect": 0.1,
+            "low": -0.5,
+            "high": 0.6,
+            "text": "1.1 (0.6–1.6)",
+        }
     ] * 12,
     "risk_table": [["0", "100", "100"]] * 10,
     "insight": "Insight text " * 20,

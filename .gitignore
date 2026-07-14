@@ -31,3 +31,6 @@ Thumbs.db
 infograpify_ppt_templates/
 # Local structural analysis of licensed decks (may hold absolute paths)
 .ref-analysis/
+# Extract drafts (may hold media ripped from licensed packs)
+extracted/
+**/extract-assets/

@@ -677,18 +677,49 @@ def _classify(
     return "bullets", {"title": title, "bullets": cleaned}, 0.4, warnings
 
 
+# Directory name markers for licensed commercial packs that must never be
+# auto-copied into redistributable extract assets (Phase 2 license fence).
+_LICENSED_PATH_MARKERS = (
+    "infograpify_ppt_templates",
+    "infograpify",
+)
+
+
+def is_licensed_reference_path(path: str | Path) -> bool:
+    """True when the path sits under a known licensed-template directory."""
+    parts = {p.lower() for p in Path(path).resolve().parts}
+    return any(m in parts or m in str(path).lower() for m in _LICENSED_PATH_MARKERS)
+
+
 def extract_pptx(
     pptx: str | Path,
     out_dir: str | Path,
     *,
-    export_media: bool = True,
+    export_media: bool | None = None,
 ) -> dict[str, Any]:
     """Extract pptx → deck-spec draft. Writes content.deck.json,
-    extract.report.json, and assets/ under out_dir. Returns the report."""
+    extract.report.json, and assets/ under out_dir. Returns the report.
+
+    Media export defaults to **on** for ordinary decks and **off** when the
+    source path is under a licensed pack (e.g. ``infograpify_ppt_templates/``),
+    so agent autopilot cannot silently dump commercial bitmaps into ``assets/``.
+    Pass ``export_media=True`` only when you have redistribution rights.
+    """
     pptx = Path(pptx)
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     assets = out_dir / "assets"
+    licensed = is_licensed_reference_path(pptx)
+    if export_media is None:
+        export_media = not licensed
+    license_warnings: list[str] = []
+    if licensed:
+        license_warnings.append(
+            "source path looks like a licensed commercial pack "
+            f"({pptx.name}); media export "
+            + ("forced on by caller — do not commit assets"
+               if export_media else "disabled (license fence)")
+        )
 
     slides_spec: list[dict[str, Any]] = []
     report_slides: list[dict[str, Any]] = []
@@ -780,9 +811,18 @@ def extract_pptx(
     for loss in all_losses:
         by_kind[loss["kind"]] = by_kind.get(loss["kind"], 0) + 1
 
+    # Surface license fence on slide 1 so agents always see it.
+    if license_warnings and report_slides:
+        report_slides[0].setdefault("warnings", [])
+        report_slides[0]["warnings"] = list(license_warnings) + list(
+            report_slides[0].get("warnings") or []
+        )
+
     report = {
         "source": str(pptx.name),  # basename only — avoid leaking absolute paths
         "source_path_hint": pptx.name,
+        "licensed_source": licensed,
+        "export_media": bool(export_media),
         "slides": report_slides,
         "assets": sorted(exported.values()),
         "loss_ledger": {
@@ -794,7 +834,9 @@ def extract_pptx(
             "Draft mapping — review recipes/content before scaffold; "
             "asset src paths are relative to this directory. "
             "loss_ledger lists elements that were not fully reconstructed "
-            "(charts without data, SmartArt geometry, animations, embeddings)."
+            "(charts without data, SmartArt geometry, animations, embeddings). "
+            "Never extract licensed packs (Infograpify etc.) into a git tree; "
+            "use `reference` for structural study instead."
         ),
     }
     (out_dir / "extract.report.json").write_text(

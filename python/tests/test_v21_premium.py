@@ -29,6 +29,52 @@ class PremiumPatterns58(unittest.TestCase):
         cls.tokens = compile_design_md(FIXTURES / "premium-consulting.DESIGN.md")
         cls.linear = compile_design_md(FIXTURES / "linear.DESIGN.md")
 
+    def test_dashboard_fit_matches_render_scale(self) -> None:
+        from designmd_pptx.fit import check_text
+
+        # Realistic multi-digit KPI must not false-fail at dashboard scale.
+        err = check_text(
+            "kpi_dashboard_grid",
+            "kpis.value",
+            "1,234,567",
+            self.linear,
+            items=6,
+        )
+        self.assertIsNone(err, err)
+
+    def test_forest_swaps_inverted_ci(self) -> None:
+        from designmd_pptx.recipes import recipe_forest_plot
+
+        ops = recipe_forest_plot(
+            self.linear,
+            {
+                "studies": [
+                    {
+                        "label": "X",
+                        "effect": 0.0,
+                        "low": 0.5,
+                        "high": -0.5,
+                        "text": "bad",
+                    }
+                ]
+            },
+        )
+        notes = [
+            op["props"]["text"]
+            for op in ops
+            if op.get("type") == "notes"
+        ]
+        self.assertTrue(any("swapped inverted CI" in n for n in notes))
+        bars = [
+            op
+            for op in ops
+            if str(op.get("props", {}).get("name", "")).startswith("ForestBar")
+        ]
+        # After swap, bar should span a real interval (not a 0.12 stub only by accident).
+        self.assertTrue(bars)
+        w = float(bars[0]["props"]["width"].replace("cm", ""))
+        self.assertGreater(w, 0.2)
+
     def test_dashboard_emits_grid(self) -> None:
         kpis = [
             {"value": f"{10 + i}%", "label": f"Metric {i}", "chip": "+1%"}

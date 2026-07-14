@@ -14,6 +14,11 @@ patterns** derived from structural analysis — not copies of vendor slides.
 3. Ship only **original** code: DESIGN.md tokens, recipes, layout rules, and
    synthetic fixtures. Do not paste vendor shapes, icons, or stock photography.
 4. Local analysis artifacts go to `.ref-analysis/` (gitignored).
+5. **Never `extract` Infograpify (or other commercial) packs** into a project
+   you will commit. `extract` is a re-layout path for *your* decks; for premium
+   packs use `reference` only. Media export is auto-disabled under
+   `infograpify_ppt_templates/` (override with `--force-media` only if you
+   accept the redistribution risk).
 
 ```bash
 # Filename inventory only (safest)
@@ -204,7 +209,7 @@ visual quality.
 |---|---|
 | **#59** (this doc + `reference` CLI) | Workflow + principles |
 | **#58** | Implement the shortlist above |
-| **#12** | Extract fidelity / loss ledger (groups, charts, SmartArt) — needed so reference decks can be studied via extract as well as `reference` |
+| **#12** | Extract fidelity / loss ledger (groups, charts, SmartArt). **Do not** `extract` commercial packs into a git tree — media is fenced off under `infograpify_ppt_templates/`; use `reference` for structural study |
 | **#10** | Academic / medical patterns (parallel track) |
 
 ## What “done” means for #59

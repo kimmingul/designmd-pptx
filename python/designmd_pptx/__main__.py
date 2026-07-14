@@ -228,9 +228,27 @@ def cmd_scaffold(args: argparse.Namespace) -> int:
 
 def cmd_extract(args: argparse.Namespace) -> int:
     """Existing pptx → content.deck.json draft + report + assets/."""
-    from .extract import extract_pptx
+    from .extract import extract_pptx, is_licensed_reference_path
 
-    report = extract_pptx(args.pptx, args.out, export_media=not args.no_media)
+    # --no-media always wins; otherwise None lets extract apply the license fence
+    # (media off under infograpify_ppt_templates/). --force-media opts back in.
+    export_media: bool | None
+    if getattr(args, "no_media", False):
+        export_media = False
+    elif getattr(args, "force_media", False):
+        export_media = True
+    else:
+        export_media = None
+
+    if is_licensed_reference_path(args.pptx) and export_media is not False:
+        print(
+            "warning: source looks like a licensed commercial pack — "
+            "prefer `reference` for structural study; media export is "
+            + ("ON (--force-media)" if export_media else "OFF (license fence)"),
+            file=sys.stderr,
+        )
+
+    report = extract_pptx(args.pptx, args.out, export_media=export_media)
     print(f"Wrote {Path(args.out) / 'content.deck.json'}")
     print(f"Wrote {Path(args.out) / 'extract.report.json'}")
     for s in report["slides"]:
@@ -238,6 +256,11 @@ def cmd_extract(args: argparse.Namespace) -> int:
         print(f"  slide {s['index']:>2}: {s['recipe']} (confidence {s['confidence']}){flags}")
     if report.get("assets"):
         print(f"assets: {len(report['assets'])} exported")
+    if report.get("licensed_source"):
+        print(
+            "note: licensed source detected — do not commit extracted assets; "
+            "use `python -m designmd_pptx reference` for license-safe analysis"
+        )
     print("Review the draft, then: python -m designmd_pptx scaffold DESIGN.md "
           f"--content {Path(args.out) / 'content.deck.json'}")
     return 0
@@ -635,6 +658,13 @@ def build_parser() -> argparse.ArgumentParser:
     e.add_argument("pptx", type=Path, help="Source .pptx to extract")
     e.add_argument("-o", "--out", default="extracted", help="Output directory")
     e.add_argument("--no-media", action="store_true", help="Do not export embedded images")
+    e.add_argument(
+        "--force-media",
+        action="store_true",
+        help="Export embedded images even when the source path looks like a "
+        "licensed commercial pack (infograpify_ppt_templates/). Default is to "
+        "skip media for those paths — prefer `reference` for structural study.",
+    )
     e.set_defaults(func=cmd_extract)
 
     ref = sub.add_parser(
