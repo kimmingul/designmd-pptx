@@ -11,7 +11,7 @@ from pathlib import Path
 
 from designmd_pptx.compile import compile_design_md
 from designmd_pptx.recipes import (recipe_kpi_row, recipe_matrix_2x2,
-                                   recipe_pricing, recipe_team)
+                                   recipe_pricing, recipe_team, recipe_timeline)
 
 FIXTURES = Path(__file__).resolve().parent.parent / "fixtures"
 
@@ -103,6 +103,20 @@ class MigrationRegressionV9(unittest.TestCase):
         recipe_pricing(self.t, {"tiers": ["Free", {"name": "Pro", "price": "$9"}]})
         recipe_kpi_row(self.t, {"kpis": ["42", {"value": "9"}]})
         recipe_matrix_2x2(self.t, {"quadrants": ["A", "B", "C", "D"]})
+        recipe_timeline(self.t, {"steps": ["Alpha", None, {"label": "GA"}]})
+
+    def test_timeline_dot_per_step_on_axis(self) -> None:
+        for k in (2, 4, 6):
+            ops = recipe_timeline(self.t, {"steps": [
+                {"label": f"S{i}", "detail": "d"} for i in range(k)]})
+            dots = list(_rects(ops, lambda n: n.startswith("TlDot")))
+            labels = {p[0]: p for p in _rects(ops, lambda n: n.startswith("TlLabel"))}
+            self.assertEqual(len(dots), k)
+            # each dot is horizontally centered over its label column
+            for j in range(k):
+                _, dx, dy, dw, dh = next(d for d in dots if d[0] == f"TlDot{j + 1}")
+                _, lx, ly, lw, lh = labels[f"TlLabel{j + 1}"]
+                self.assertAlmostEqual(dx + dw / 2, lx + lw / 2, delta=0.15)
 
 
 if __name__ == "__main__":
