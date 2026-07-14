@@ -1,16 +1,21 @@
-"""Environment doctor (v1.7 — issues #25/#26): capability-first verification
+"""Environment doctor (v1.7+ — issues #25/#26/#34): capability-first verification
 of BOTH OfficeCLI generations plus per-platform agent skill routing
 (Claude Code / Codex / Grok).
 
+``doctor --install`` (issue #34) is an explicit, transparent installer that
+pins the official OfficeCLI to the version in ``compatibility.json`` (#8).
 Both generations install a binary named `officecli`, so everything here is
 identified by probing, never by name — see docs/officecli-backends.md."""
 
 from __future__ import annotations
 
+import os
 import shutil
 import subprocess
 import sys
+from dataclasses import dataclass
 from pathlib import Path
+from typing import Callable
 
 from . import compat
 from .backend import (AgentBridgeBackend, BackendUnavailable,
@@ -19,13 +24,17 @@ from .backend import (AgentBridgeBackend, BackendUnavailable,
 _LEGACY_REMEDY = (
     "install the legacy shape-level binary from "
     "https://github.com/iOfficeAI/OfficeCLI/releases (or set "
-    "OFFICECLI_LEGACY_BIN) — required by scaffold/apply/restyle/master"
+    "OFFICECLI_LEGACY_BIN) — required by scaffold/apply/restyle/master; "
+    "not auto-installable via doctor --install"
 )
 _OFFICIAL_REMEDY = (
-    "install the official officecli: `npm install -g officecli` "
-    "(fallback: download from https://github.com/officecli/officecli-dist/"
-    "releases, or set OFFICECLI_BRIDGE_BIN) — enables the render command"
+    "run `python -m designmd_pptx doctor --install` (pins the official "
+    "officecli from compatibility.json) — or set OFFICECLI_BRIDGE_BIN; "
+    "fallback download: https://github.com/officecli/officecli-dist/releases"
 )
+
+# Injected by tests; production uses subprocess.run.
+_RUN_INSTALL: Callable[..., subprocess.CompletedProcess] | None = None
 
 
 def _run(exe: str, *args: str, timeout: int = 30) -> tuple[int, str]:
@@ -74,7 +83,7 @@ def _official() -> tuple[bool, str]:
     detail = (f"{ver} ({exe}) — {_SUPPORT_TAG[level]} "
               f"[{why}; pinned {spec['recommended']}]; {note}")
     if level == compat.TOO_OLD:
-        detail += f" — upgrade: {spec['install']}"
+        detail += f" — upgrade: doctor --install  (or {spec['install']})"
     return ok, detail
 
 
@@ -110,7 +119,7 @@ def _pyyaml() -> tuple[bool, str]:
 
         return True, "importable"
     except ImportError:
-        return False, "pip install PyYAML"
+        return False, "pip install PyYAML  (or: doctor --install)"
 
 
 def _skill(home: Path, *names: str) -> tuple[bool, str]:
@@ -134,6 +143,232 @@ def _claude_designmd(claude: Path) -> tuple[bool, str]:
         "in Claude Code run: /plugin marketplace add kimmingul/designmd-pptx "
         "then /plugin install designmd-pptx@designmd-pptx"
     )
+
+
+# ---------------------------------------------------------------------------
+# doctor --install (issue #34)
+# ---------------------------------------------------------------------------
+
+@dataclass(frozen=True)
+class InstallStep:
+    """One transparent install / guidance action."""
+
+    id: str
+    title: str
+    kind: str  # "run" | "manual" | "skip"
+    argv: tuple[str, ...]  # empty for manual/skip
+    display: str  # shell-ish form printed to the user
+    reason: str
+    downloads: str  # what package / URL this pulls
+
+
+def _official_install_argv(spec: dict) -> tuple[str, ...]:
+    """Prefer parsing the manifest install string; fall back to recommended pin."""
+    install = (spec.get("install") or "").strip()
+    if install:
+        # e.g. "npm install -g officecli@0.2.117"
+        parts = install.split()
+        if parts:
+            return tuple(parts)
+    pinned = spec.get("recommended") or spec.get("min") or "0.2.117"
+    return ("npm", "install", "-g", f"officecli@{pinned}")
+
+
+def _official_needs_install() -> tuple[bool, str]:
+    """(needed, reason) for the official pin from compatibility.json."""
+    exe = find_binaries().get("official")
+    spec = compat.spec_for("official")
+    pinned = spec.get("recommended") or spec.get("min") or "?"
+    if not exe:
+        return True, f"official officecli not found — will install pinned {pinned}"
+    _, ver = _run(exe, "--version")
+    level, why = compat.classify_support("official", ver)
+    if level == compat.TOO_OLD:
+        return True, f"installed {ver or '?'} is {why} — upgrade to pinned {pinned}"
+    if level == compat.UNKNOWN:
+        return True, f"could not parse version from {ver!r} — reinstall pinned {pinned}"
+    # OK or UNTESTED_NEWER: leave alone (don't downgrade a newer build)
+    return False, f"already present ({ver}) — {_SUPPORT_TAG[level]} [{why}]"
+
+
+def _pyyaml_needs_install() -> tuple[bool, str]:
+    ok, msg = _pyyaml()
+    if ok:
+        return False, "already importable"
+    return True, "PyYAML not importable"
+
+
+def plan_install() -> list[InstallStep]:
+    """Build the explicit install plan from current probes + compatibility.json.
+
+    Never silent: every step is listed even when skipped. Legacy is always
+    manual (rolling/unversioned upstream; no safe npm pin).
+    """
+    steps: list[InstallStep] = []
+    spec = compat.spec_for("official")
+    pinned = spec.get("recommended") or spec.get("min") or "?"
+    argv = _official_install_argv(spec)
+    need, reason = _official_needs_install()
+    npm = shutil.which("npm")
+    if need and not npm:
+        steps.append(InstallStep(
+            id="official",
+            title="official officecli (agent-bridge)",
+            kind="manual",
+            argv=(),
+            display=spec.get("install") or " ".join(argv),
+            reason=(
+                f"{reason}; npm not on PATH — install Node/npm, then re-run, "
+                f"or download from https://github.com/officecli/officecli-dist/releases "
+                f"(or set OFFICECLI_BRIDGE_BIN)"
+            ),
+            downloads=f"officecli@{pinned} (npm registry) or officecli-dist release asset",
+        ))
+    elif need:
+        steps.append(InstallStep(
+            id="official",
+            title="official officecli (agent-bridge)",
+            kind="run",
+            argv=argv,
+            display=" ".join(argv),
+            reason=reason,
+            downloads=f"officecli@{pinned} from the npm registry (global)",
+        ))
+    else:
+        steps.append(InstallStep(
+            id="official",
+            title="official officecli (agent-bridge)",
+            kind="skip",
+            argv=(),
+            display=" ".join(argv),
+            reason=reason,
+            downloads=f"officecli@{pinned} (not downloaded — already ok)",
+        ))
+
+    need_y, reason_y = _pyyaml_needs_install()
+    pip_argv = (sys.executable, "-m", "pip", "install", "PyYAML")
+    if need_y:
+        steps.append(InstallStep(
+            id="pyyaml",
+            title="PyYAML",
+            kind="run",
+            argv=pip_argv,
+            display=" ".join(pip_argv),
+            reason=reason_y,
+            downloads="PyYAML from PyPI",
+        ))
+    else:
+        steps.append(InstallStep(
+            id="pyyaml",
+            title="PyYAML",
+            kind="skip",
+            argv=(),
+            display=" ".join(pip_argv),
+            reason=reason_y,
+            downloads="PyYAML (not downloaded — already importable)",
+        ))
+
+    leg_ok, leg_msg = _legacy()
+    steps.append(InstallStep(
+        id="legacy",
+        title="legacy officecli (shape-level)",
+        kind="manual" if not leg_ok else "skip",
+        argv=(),
+        display=(
+            "download from https://github.com/iOfficeAI/OfficeCLI/releases "
+            "and set OFFICECLI_LEGACY_BIN if not on PATH"
+        ),
+        reason=leg_msg if not leg_ok else f"present — {leg_msg}",
+        downloads=(
+            "iOfficeAI/OfficeCLI release asset (manual; not version-pinned)"
+            if not leg_ok
+            else "none (legacy binary already available)"
+        ),
+    ))
+    return steps
+
+
+def _execute_step(step: InstallStep, *, dry_run: bool) -> tuple[bool, str]:
+    """Run one install step. Returns (ok, detail)."""
+    if step.kind == "skip":
+        return True, f"skip — {step.reason}"
+    if step.kind == "manual":
+        return False, f"manual — {step.reason}"
+    assert step.kind == "run" and step.argv
+    if dry_run:
+        return True, f"dry-run — would run: {step.display}"
+    runner = _RUN_INSTALL or subprocess.run
+    try:
+        r = runner(
+            list(step.argv),
+            capture_output=True,
+            text=True,
+            timeout=int(os.environ.get("DESIGNMD_INSTALL_TIMEOUT", "300")),
+            encoding="utf-8",
+            errors="replace",
+        )
+    except OSError as e:
+        return False, f"failed to spawn: {e}"
+    except subprocess.TimeoutExpired:
+        return False, "timed out"
+    out = ((r.stdout or "") + (r.stderr or "")).strip()
+    tail = "\n".join(out.splitlines()[-8:]) if out else "(no output)"
+    if r.returncode != 0:
+        return False, f"exit {r.returncode}\n{tail}"
+    return True, f"ok\n{tail}" if tail != "(no output)" else "ok"
+
+
+def run_install(*, dry_run: bool = False) -> int:
+    """Execute (or dry-run) the install plan. Returns 0 when every *run*
+    step succeeded and no *manual* steps remain required; non-zero otherwise.
+    Skips never fail the exit code.
+    """
+    steps = plan_install()
+    print("doctor --install plan (compatibility.json pin)")
+    print(f"  dry-run: {'yes' if dry_run else 'no'}")
+    off = compat.spec_for("official")
+    print(f"  official pin: min={off.get('min')} recommended={off.get('recommended')} "
+          f"max_tested={off.get('max_tested')}")
+    print()
+
+    failures = 0
+    manuals = 0
+    ran = 0
+    for i, step in enumerate(steps, 1):
+        print(f"[{i}/{len(steps)}] {step.title}  ({step.kind})")
+        print(f"  reason:    {step.reason}")
+        print(f"  downloads: {step.downloads}")
+        print(f"  command:   {step.display}")
+        ok, detail = _execute_step(step, dry_run=dry_run)
+        for line in detail.splitlines() or [detail]:
+            print(f"  → {line}")
+        print()
+        if step.kind == "run":
+            ran += 1
+            if not ok:
+                failures += 1
+        elif step.kind == "manual":
+            manuals += 1
+
+    if dry_run:
+        print("dry-run complete — re-run without --dry-run to apply")
+        # dry-run never fails for unexecuted run steps; manuals still noted
+        return 0 if failures == 0 else 1
+
+    if failures:
+        print(f"{failures} install step(s) failed — see output above")
+        print("repair: fix network/npm/pip, then re-run doctor --install")
+        return 1
+    if manuals:
+        print(f"{manuals} step(s) need manual action (legacy binary / missing npm)")
+        print("repair: follow the printed URLs, then re-run doctor")
+        return 1
+    if ran:
+        print(f"{ran} step(s) applied — re-probing environment…")
+    else:
+        print("nothing to install — environment already satisfies auto-installable deps")
+    print()
+    return run_doctor(strict=False)
 
 
 def run_doctor(*, strict: bool = False) -> int:
@@ -189,6 +424,8 @@ def run_doctor(*, strict: bool = False) -> int:
 
     if failures:
         print(f"\n{failures} item(s) missing — remedies above")
+        print("tip: `python -m designmd_pptx doctor --install --dry-run` "
+              "shows the version-locked OfficeCLI install plan")
     else:
         print("\nall checks passed — pptx requests route through officecli on every platform")
     if strict and not officecli_ok:
@@ -197,4 +434,7 @@ def run_doctor(*, strict: bool = False) -> int:
 
 
 if __name__ == "__main__":  # pragma: no cover
+    argv = sys.argv[1:]
+    if "--install" in argv:
+        raise SystemExit(run_install(dry_run="--dry-run" in argv))
     raise SystemExit(run_doctor(strict="--strict" in sys.argv))
