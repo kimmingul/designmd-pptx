@@ -95,6 +95,50 @@ class SuiteV37(unittest.TestCase):
         self.assertTrue(report.ok, msg=report.to_dict())
         self.assertGreaterEqual(report.decks_pass, 1)
         self.assertEqual(report.decks_fail, 0)
+        # Before side must score real a11y errors on the intentionally degraded
+        # tokens/deck (not stay stuck at 0); after is clean → negative delta.
+        r0 = report.results[0]
+        self.assertGreater(
+            r0.before["a11y_error"], 0,
+            msg=f"before a11y_error should reflect degraded fixture: {r0.before}",
+        )
+        self.assertEqual(r0.after["a11y_error"], 0)
+        self.assertLess(r0.deltas["a11y_error"], 0)
+
+    def test_score_deck_audits_before_tokens_and_deck(self) -> None:
+        """Direct path: degraded before inputs must raise before.a11y_error."""
+        from designmd_pptx.compile import compile_design_md
+
+        tokens = compile_design_md(PKG / "default.DESIGN.md")
+        bad_tokens = json.loads(json.dumps(tokens))
+        bad_tokens["colors"]["text"] = "CCCCCC"
+        bad_tokens["colors"]["background"] = "FFFFFF"
+        bad_deck = {
+            "slides": [{
+                "id": "img",
+                "recipe": "image_full",
+                "content": {"title": "T", "src": "x.png", "alt": ""},
+            }]
+        }
+        from designmd_pptx import a11y as a11y_mod
+
+        good_tokens, _ = a11y_mod.auto_correct_contrast(bad_tokens)
+        good_deck, _ = a11y_mod.ensure_notes_and_alt(bad_deck)
+
+        # Prove the audit itself sees errors on the before inputs
+        direct = a11y_mod.audit(tokens=bad_tokens, deck=bad_deck)
+        self.assertGreaterEqual(direct.errors, 4)
+
+        b, a = bench.score_deck(
+            "probe",
+            before_tokens=bad_tokens,
+            before_deck=bad_deck,
+            after_tokens=good_tokens,
+            after_deck=good_deck,
+        )
+        self.assertEqual(b.a11y_error, direct.errors)
+        self.assertGreater(b.a11y_error, 0)
+        self.assertEqual(a.a11y_error, 0)
 
     def test_corpus_missing_assets_skip_not_fail(self) -> None:
         with tempfile.TemporaryDirectory() as td:
