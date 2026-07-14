@@ -152,8 +152,13 @@ python -m designmd_pptx compose brief.md -o composed/ --design default
 python -m designmd_pptx render brief.md -o out/draft.pptx --design default [--images]
 python -m designmd_pptx anonymize deck.pptx -o corpus/deck.pptx [--redact-text]
 python -m designmd_pptx corpus corpus/corpus.manifest.json
-python -m designmd_pptx doctor [--strict]
+python -m designmd_pptx doctor [--strict] [--install [--dry-run]]
 ```
+
+`doctor --install` is explicit and version-locked: it prints every download/command,
+installs the official `officecli@` pin from [`compatibility.json`](python/designmd_pptx/compatibility.json)
+(and PyYAML if missing), then re-probes. The legacy shape-level binary stays a
+manual install (release URL printed). Use `--dry-run` to preview.
 
 `anonymize` strips author/organization/custom metadata + comment authorship (optionally text) so a real deck can join the [validation corpus](docs/corpus.md); `corpus` validates the manifest and reports the stable train / held-out split.
 

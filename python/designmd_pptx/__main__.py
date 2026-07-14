@@ -545,8 +545,10 @@ def cmd_render(args: argparse.Namespace) -> int:
 
 
 def cmd_doctor(args: argparse.Namespace) -> int:
-    from .doctor import run_doctor
+    from .doctor import run_doctor, run_install
 
+    if getattr(args, "install", False):
+        return run_install(dry_run=bool(getattr(args, "dry_run", False)))
     return run_doctor(strict=bool(args.strict))
 
 
@@ -878,10 +880,17 @@ def build_parser() -> argparse.ArgumentParser:
 
     d = sub.add_parser(
         "doctor",
-        help="Verify officecli + per-platform agent skill routing (Claude/Codex/Grok)",
+        help="Verify officecli + per-platform agent skill routing (Claude/Codex/Grok); "
+             "optional --install pins official OfficeCLI from compatibility.json",
     )
     d.add_argument("--strict", action="store_true",
                    help="Exit non-zero when officecli is missing")
+    d.add_argument("--install", action="store_true",
+                   help="Explicitly install/repair auto-installable deps "
+                        "(official officecli@pin from compatibility.json, PyYAML); "
+                        "prints every download/command; legacy remains manual")
+    d.add_argument("--dry-run", action="store_true",
+                   help="With --install: print the version-locked plan without running it")
     d.set_defaults(func=cmd_doctor)
 
     z = sub.add_parser(

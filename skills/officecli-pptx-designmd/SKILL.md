@@ -48,7 +48,9 @@ pip install -r "<resolved python root>\requirements.txt"
 9. No brand DESIGN.md? Pass the literal `default` as the design argument —
    the bundled neutral house style keeps the design floor.
 10. officecli missing or routing unclear? Run `python -m designmd_pptx doctor`
-   and follow the printed remedies before continuing.
+   and follow the printed remedies before continuing. For a version-locked
+   official OfficeCLI pin: `doctor --install --dry-run` then `doctor --install`
+   (reads `compatibility.json`; legacy binary remains a manual download).
 11. Licensed premium templates (Infograpify, etc.) are **local reference only** —
     keep under `infograpify_ppt_templates/` (gitignored). Never commit originals
     or force-add ignored `.pptx`. Analyze with `reference` (text redacted by
@@ -74,6 +76,8 @@ python -m designmd_pptx restyle old.pptx DESIGN.md -o new.pptx  # v1.2: rebrand 
 python -m designmd_pptx master deck.pptx DESIGN.md --potx brand.potx [--empty-potx]  # v1.3
 python -m designmd_pptx scaffold default -o out/deck --content deck.json --apply --force --screenshot  # v1.4
 python -m designmd_pptx doctor            # v1.4: verify officecli + skill routing
+python -m designmd_pptx doctor --install --dry-run  # #34: version-locked install plan
+python -m designmd_pptx doctor --install            # #34: pin official officecli + PyYAML
 python -m designmd_pptx compose brief.md -o composed/ --design default   # v1.5: outline → deck-spec
 python -m designmd_pptx compose brief.md -o composed/ --llm --style "Keynote storytelling"  # Phase 3 / #18 opt-in planner
 python -m designmd_pptx render brief.md -o out/draft.pptx --design default  # v1.7: quick draft via official agent-bridge
