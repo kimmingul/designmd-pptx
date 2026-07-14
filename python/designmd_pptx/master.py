@@ -14,7 +14,11 @@ import re
 from pathlib import Path
 from typing import Any
 
-from .restyle import _SCHEME_MAP, _restyle_theme, rewrite_package
+from lxml.etree import XMLSyntaxError
+
+from . import opc
+from .opc import qn
+from .restyle import _SCHEME_MAP, _restyle_theme_tree, rewrite_package
 
 _PRESENTATION_CT = (
     "application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml"
@@ -24,27 +28,24 @@ _TEMPLATE_CT = (
 )
 
 
-def _style_master(xml: str, typ: dict[str, Any], report: dict[str, Any]) -> str:
-    """Set title/body default sizes in slideMaster txStyles from the token
-    type scale. Font faces are left as +mj-lt / +mn-lt so they follow the
-    theme set by _restyle_theme."""
-    title_pt = typ.get("title_pt")
-    body_pt = typ.get("body_pt")
-    if title_pt:
-        xml, n = re.subn(
-            r'(<p:titleStyle>.*?<a:defRPr[^>]*?sz=")\d+(")',
-            rf"\g<1>{int(title_pt) * 100}\g<2>", xml, count=1, flags=re.S,
-        )
-        if n:
-            report["master_styles"]["title_pt"] = title_pt
-    if body_pt:
-        xml, n = re.subn(
-            r'(<p:bodyStyle>.*?<a:defRPr[^>]*?sz=")\d+(")',
-            rf"\g<1>{int(body_pt) * 100}\g<2>", xml, count=1, flags=re.S,
-        )
-        if n:
-            report["master_styles"]["body_pt"] = body_pt
-    return xml
+def _style_master_tree(root, typ: dict[str, Any], report: dict[str, Any]) -> None:
+    """Set title/body default sizes in slideMaster txStyles from the token type
+    scale (the first defRPr under titleStyle / bodyStyle). Font faces are left
+    as +mj-lt / +mn-lt so they follow the theme set by _restyle_theme_tree."""
+    def _set(style_tag: str, pt: Any, key: str) -> None:
+        if not pt:
+            return
+        style = root.find(f".//{qn('p:' + style_tag)}")
+        if style is None:
+            return
+        defrpr = style.find(f".//{qn('a:defRPr')}")
+        if defrpr is None:
+            return
+        defrpr.set("sz", str(int(pt) * 100))
+        report["master_styles"][key] = pt
+
+    _set("titleStyle", typ.get("title_pt"), "title_pt")
+    _set("bodyStyle", typ.get("body_pt"), "body_pt")
 
 
 def brand_master(
@@ -89,34 +90,42 @@ def brand_master(
             if old and new and old != new.upper():
                 slot_remap[old] = new.upper()
 
-    def _brand_layout(xml: str) -> str:
+    def _brand_layout_tree(root) -> None:
         skipped: set[str] = set()
 
-        def sub(m: re.Match) -> str:
-            old = m.group(1).upper()
+        def _fn(old: str) -> str:
             new = slot_remap.get(old)
             if new is None:
                 if old not in slot_remap.values():
                     skipped.add(old)
-                return m.group(0)
-            entry = report["layout_colors"].setdefault(old, {"new": new, "count": 0})
-            entry["count"] += 1
-            return f'srgbClr val="{new}"'
+                return old
+            report["layout_colors"].setdefault(old, {"new": new, "count": 0})["count"] += 1
+            return new
 
-        xml = re.sub(r'srgbClr val="([0-9A-Fa-f]{6})"', sub, xml)
+        opc.remap_srgb_colors(root, _fn)
         for s in sorted(skipped):
             if s not in report["layout_colors_skipped"]:
                 report["layout_colors_skipped"].append(s)
-        return xml
 
     def transform(name: str, data: bytes) -> bytes:
-        if re.fullmatch(r"ppt/theme/theme\d+\.xml", name):
-            return _restyle_theme(data.decode("utf-8"), colors, typ, report).encode("utf-8")
-        if re.fullmatch(r"ppt/slideMasters/[^/]+\.xml", name):
-            return _style_master(data.decode("utf-8"), typ, report).encode("utf-8")
-        if layouts and re.fullmatch(r"ppt/slideLayouts/[^/]+\.xml", name):
-            return _brand_layout(data.decode("utf-8")).encode("utf-8")
-        return data
+        is_theme = re.fullmatch(r"ppt/theme/theme\d+\.xml", name)
+        is_master = re.fullmatch(r"ppt/slideMasters/[^/]+\.xml", name)
+        is_layout = layouts and re.fullmatch(r"ppt/slideLayouts/[^/]+\.xml", name)
+        if not (is_theme or is_master or is_layout):
+            return data
+        decl = opc.xml_declaration(data)
+        try:
+            root = opc.parse(data)
+        except XMLSyntaxError:
+            report.setdefault("unparsed", []).append(name)
+            return data
+        if is_theme:
+            _restyle_theme_tree(root, colors, typ, report)
+        elif is_master:
+            _style_master_tree(root, typ, report)
+        else:
+            _brand_layout_tree(root)
+        return opc.serialize(root, declaration=decl)
 
     dest = rewrite_package(pptx, out, transform, force=force)
     report["dest"] = str(dest)
@@ -157,37 +166,64 @@ def export_potx(
         if empty and name in dropped_media:
             return None
         if name == "[Content_Types].xml":
-            xml = data.decode("utf-8")
-            if _PRESENTATION_CT not in xml:
-                raise ValueError("source is not a .pptx presentation package")
-            xml = xml.replace(_PRESENTATION_CT, _TEMPLATE_CT, 1)
-            if empty:
-                xml = re.sub(
-                    r'<Override PartName="/ppt/(slides|notesSlides)/[^"]*"[^>]*/>', "", xml
-                )
-                for media in dropped_media:
-                    # media is usually covered by extension Defaults (kept);
-                    # only a part-specific Override must go with the part
-                    xml = re.sub(
-                        rf'<Override PartName="/{re.escape(media)}"[^>]*/>', "", xml
-                    )
-            return xml.encode("utf-8")
+            return _potx_content_types(data, empty, dropped_media)
         if empty and name == "ppt/presentation.xml":
-            xml = data.decode("utf-8")
-            xml = re.sub(r"<p:sldId [^>]*/>", "", xml)
-            return xml.encode("utf-8")
+            return _strip_slide_ids(data)
         if empty and name == "ppt/_rels/presentation.xml.rels":
-            xml = data.decode("utf-8")
-            xml = re.sub(r'<Relationship [^>]*Target="slides/[^"]*"[^>]*/>', "", xml)
-            return xml.encode("utf-8")
+            return _strip_slide_rels(data)
         return data
 
     return rewrite_package(pptx, out, transform, force=force)
 
 
+def _potx_content_types(data: bytes, empty: bool, dropped_media: set[str]) -> bytes:
+    """Flip the presentation content-type Override to the template type and,
+    when emptying, drop Overrides for the removed slide/media parts."""
+    decl = opc.xml_declaration(data)
+    root = opc.parse(data)
+    swapped = False
+    # The presentation content type may be carried by an Override (specific
+    # part) OR a Default (extension) depending on the writer — swap it wherever
+    # it lives, matching the old substring-replace behavior namespace-aware.
+    for el in (*root.iter(qn("ct:Override")), *root.iter(qn("ct:Default"))):
+        if el.get("ContentType") == _PRESENTATION_CT:
+            el.set("ContentType", _TEMPLATE_CT)
+            swapped = True
+    if not swapped:
+        raise ValueError("source is not a .pptx presentation package")
+    if empty:
+        drop_parts = {"/" + m for m in dropped_media}
+        for ov in list(root.iter(qn("ct:Override"))):
+            part = ov.get("PartName", "")
+            # media is usually covered by extension Defaults (kept); only a
+            # part-specific Override must go with its part.
+            if re.match(r"/ppt/(slides|notesSlides)/", part) or part in drop_parts:
+                ov.getparent().remove(ov)
+    return opc.serialize(root, declaration=decl)
+
+
+def _strip_slide_ids(data: bytes) -> bytes:
+    """Remove every ``p:sldId`` so an emptied template opens with no slides."""
+    decl = opc.xml_declaration(data)
+    root = opc.parse(data)
+    for sld in list(root.iter(qn("p:sldId"))):
+        sld.getparent().remove(sld)
+    return opc.serialize(root, declaration=decl)
+
+
+def _strip_slide_rels(data: bytes) -> bytes:
+    """Drop presentation relationships that target the removed slide parts."""
+    decl = opc.xml_declaration(data)
+    root = opc.parse(data)
+    for rel in list(root.iter(qn("rel:Relationship"))):
+        if (rel.get("Target") or "").startswith("slides/"):
+            rel.getparent().remove(rel)
+    return opc.serialize(root, declaration=decl)
+
+
 def _scheme_slot_colors(pptx: Path) -> dict[str, str]:
     """Old theme scheme slot → hex, read before any rewrite (srgbClr val or
-    sysClr lastClr)."""
+    sysClr lastClr), namespace-aware via opc."""
     import zipfile
 
     slots: dict[str, str] = {}
@@ -195,14 +231,14 @@ def _scheme_slot_colors(pptx: Path) -> dict[str, str]:
         for name in zf.namelist():
             if not re.fullmatch(r"ppt/theme/theme\d+\.xml", name):
                 continue
-            xml = zf.read(name).decode("utf-8", errors="replace")
+            try:
+                theme = opc.parse(zf.read(name))
+            except XMLSyntaxError:
+                break
             for slot, _keys in _SCHEME_MAP:
-                m = re.search(
-                    rf"<a:{slot}>.*?(?:srgbClr val|lastClr)=\"([0-9A-Fa-f]{{6}})\"",
-                    xml, re.S,
-                )
-                if m and slot not in slots:
-                    slots[slot] = m.group(1).upper()
+                hexv = opc.get_scheme_color(theme, slot)
+                if hexv and slot not in slots:
+                    slots[slot] = hexv
             break  # theme1 wins
     return slots
 
@@ -214,6 +250,7 @@ def _unreferenced_media(pptx: Path) -> set[str]:
     whatever the survivors reference is kept, the rest is garbage-collected.
     """
     import zipfile
+    from urllib.parse import unquote
 
     referenced: set[str] = set()
     all_media: set[str] = set()
@@ -227,12 +264,14 @@ def _unreferenced_media(pptx: Path) -> set[str]:
             if re.match(r"ppt/(slides|notesSlides)/_rels/", name):
                 continue  # these parts are dropped; their refs don't count
             base = name.split("/_rels/")[0]
-            xml = zf.read(name).decode("utf-8", errors="replace")
-            for target in re.findall(r'Target="([^"]+)"', xml):
-                if "://" in target:  # TargetMode="External" URLs
+            try:
+                rels = opc.parse(zf.read(name))
+            except XMLSyntaxError:
+                continue
+            for rel in rels.iter(qn("rel:Relationship")):
+                target = rel.get("Target")
+                if not target or "://" in target:  # TargetMode="External" URLs
                     continue
-                from urllib.parse import unquote
-
                 t = unquote(target).lstrip("/")
                 b = base
                 while t.startswith("../"):
