@@ -243,9 +243,10 @@ Phases 0–4 complete. See [CHANGELOG](CHANGELOG.md) and [docs/maturity-roadmap.
 - ✅ **Phase 3 — Intelligence adapters** — `compose --llm`, vision Gate 3.
 - ✅ **Phase 4 — v2.0 release** — `doctor --install` (officecli-dist pin), a11y, benchmark, docs/gallery/governance.
 
-### Next: v2.1 (Phase 5)
+### v2.1 (Phase 5) — in progress
 
-Iterative visual refinement (#19), chart/table reconstruction (#22), generative layout (#21), animation (#40), editor integration (#44/#45), Windows installer (#35), larger public benchmark (#42).
+- ✅ **#19 Iterative visual refinement** — `refine` CLI: NL / Gate 3 findings → deck-spec patches (split dense lists, shorten prose, re-scaffold path), 1–3 rounds.
+- ⏳ Chart/table reconstruction (#22), generative layout (#21), animation (#40), editor integration (#44/#45), Windows installer (#35), larger public benchmark (#42).
 
 ## License
 
