@@ -73,6 +73,7 @@ python -m designmd_pptx master deck.pptx DESIGN.md --potx brand.potx [--empty-po
 python -m designmd_pptx scaffold default -o out/deck --content deck.json --apply --force --screenshot  # v1.4
 python -m designmd_pptx doctor            # v1.4: verify officecli + skill routing
 python -m designmd_pptx compose brief.md -o composed/ --design default   # v1.5: outline → deck-spec
+python -m designmd_pptx compose brief.md -o composed/ --llm --style "Keynote storytelling"  # Phase 3 / #18 opt-in planner
 python -m designmd_pptx render brief.md -o out/draft.pptx --design default  # v1.7: quick draft via official agent-bridge
 python -m designmd_pptx reference infograpify_ppt_templates --catalog -o .ref-analysis  # Phase 2: license-safe structure inventory
 python -m designmd_pptx reference path\to\licensed.pptx -o .ref-analysis               # Phase 2: redacted geometry/theme report
