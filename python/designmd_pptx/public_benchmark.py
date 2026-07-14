@@ -496,6 +496,11 @@ def _methodology_markdown(
         recipes += f", … (+{len(meta.recipes_covered) - 40} more)"
     return f"""# Public benchmark methodology (v{meta.version})
 
+> **Honesty:** Synthetic deck-spec + **recipe-builder smoke** suite (CC0).
+> Does **not** run OfficeCLI apply, screenshots, or live Gate 3 vision.
+> `visual_gate_failure` here means recipe-smoke / offline structural gate,
+> not a contact-sheet vision pass.
+
 ## Rights
 
 - **License:** {meta.license}
@@ -508,16 +513,17 @@ def _methodology_markdown(
 Each fixture is scored **before → after** with
 `python/designmd_pptx/benchmark_thresholds.json`:
 
-| Metric | Max allowed (after) |
-|---|---|
-| corruption | 0 |
-| extraction_loss | 5 |
-| layout_failure | 0 |
-| visual_gate_failure | 0 |
-| a11y_error | 0 |
+| Metric | Max allowed (after) | Meaning in this suite |
+|---|---|---|
+| corruption | 0 | No real pptx path in fixtures (always 0 unless path supplied) |
+| extraction_loss | 5 | Synthetic ledger (empty) |
+| layout_failure | 0 | Deck-spec structure + recipe builder smoke |
+| visual_gate_failure | 0 | Offline recipe-smoke gate (not live vision) |
+| a11y_error | 0 | After a11y auto-correct |
 
 **Before** side intentionally weakens contrast and strips image `alt`.
-**After** side runs `a11y.auto_correct_contrast` + `ensure_notes_and_alt`.
+**After** side runs `a11y.auto_correct_contrast` + `ensure_notes_and_alt`
+plus `RECIPE_BUILDERS` materialisation smoke.
 
 ## Corpus construction
 

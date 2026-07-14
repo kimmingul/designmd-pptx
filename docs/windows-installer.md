@@ -21,7 +21,7 @@ powershell -ExecutionPolicy Bypass -File Install-DesignmdPptx.ps1 -DryRun
 | `-DryRun` | Print actions only |
 | `-SkipOfficeCli` | Skip pinned OfficeCLI download |
 | `-SkipPath` | Do not modify user PATH |
-| `-PackageSource X` | default `designmd-pptx==2.1.1` (pinned); or local path/wheel |
+| `-PackageSource X` | default `designmd-pptx==2.1.2` (pinned); or local path/wheel |
 | `-OfficeCliSha256` | Optional expected SHA-256 of the officecli-dist tarball |
 | `-InstallRoot PATH` | Must stay under `%LOCALAPPDATA%\designmd-pptx` |
 

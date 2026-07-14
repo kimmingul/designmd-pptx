@@ -792,6 +792,10 @@ def cmd_generate(args: argparse.Namespace) -> int:
         tokens = compile_design_md(_resolve_design(args.design))
 
     directive = args.directive or args.style
+    layout_cmd = getattr(args, "layout_cmd", None)
+    if layout_cmd:
+        import os
+        os.environ["DESIGNMD_LAYOUT_CMD"] = str(layout_cmd)
     if args.profile:
         report = gen.generate_deck_layout(
             deck,
@@ -1362,6 +1366,9 @@ def build_parser() -> argparse.ArgumentParser:
                     help="Contact-sheet PNG for vision-driven re-layout")
     gn.add_argument("--vision-plan", type=Path, default=None)
     gn.add_argument("--vision-cmd", default=None)
+    gn.add_argument("--layout-cmd", default=None,
+                    help="External layout generator command (or set DESIGNMD_LAYOUT_CMD); "
+                         "stdin JSON content, stdout {placements|preset}")
     gn.add_argument("--rounds", type=int, default=2,
                     help="Max generate+refine rounds (default 2)")
     gn.set_defaults(func=cmd_generate)

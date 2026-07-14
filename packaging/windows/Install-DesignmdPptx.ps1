@@ -45,7 +45,7 @@ param(
     [switch]$SkipOfficeCli,
     [switch]$SkipPath,
     # Pin package by default (adversarial #35) — override with -PackageSource for editable installs
-    [string]$PackageSource = "designmd-pptx==2.1.1",
+    [string]$PackageSource = "designmd-pptx==2.1.2",
     [string]$InstallRoot = "",
     [string]$OfficeCliPin = "",  # empty → read from embedded default / env
     [string]$OfficeCliSha256 = "",  # optional expected SHA-256 of the tarball
@@ -236,8 +236,10 @@ function Install-OfficeCliPin {
             throw "OfficeCLI tarball SHA-256 mismatch: got $hash expected $expectSha"
         }
         Write-Ok "SHA-256 verified"
+    } elseif ($env:DESIGNMD_REQUIRE_OFFICECLI_SHA -eq "1") {
+        throw "DESIGNMD_REQUIRE_OFFICECLI_SHA=1 but no -OfficeCliSha256 / DESIGNMD_OFFICECLI_SHA256 provided"
     } else {
-        Write-Info "No DESIGNMD_OFFICECLI_SHA256 / -OfficeCliSha256 set — skipping hash verify (pin URL only)"
+        Write-Host "    WARN pin URL only — set DESIGNMD_OFFICECLI_SHA256 for supply-chain verify" -ForegroundColor Yellow
     }
     # tar is available on Windows 10+; extract only under our temp root (path safety)
     $extract = Join-Path $env:TEMP "designmd-officecli-extract-$pin"
@@ -390,26 +392,30 @@ function Remove-UserPathEntry {
 function Invoke-Uninstall {
     Write-Step "Uninstall $ProductName from $InstallRoot"
     Assert-SafeInstallRoot $InstallRoot
-    # Require product marker unless dry-run of empty tree
-    if (-not $DryRun -and (Test-Path $InstallRoot) -and -not (Test-Path $Manifest)) {
-        throw "Refusing uninstall: $Manifest missing (not a designmd-pptx install root)"
-    }
     if ($DryRun) {
         Write-Info "dry-run: remove $InstallRoot and PATH entry"
         return
     }
     $pathModified = $false
-    if (Test-Path $Manifest) {
-        try {
-            $m = Get-Content $Manifest -Raw | ConvertFrom-Json
-            $pathModified = [bool]$m.path_modified
-            if ($m.product -and $m.product -ne $ProductName) {
-                throw "Refusing uninstall: manifest product is $($m.product)"
-            }
-        } catch {
-            if ("$_" -match "Refusing") { throw }
+    if (-not (Test-Path $Manifest)) {
+        throw "Refusing uninstall: $Manifest missing (not a designmd-pptx install root)"
+    }
+    try {
+        $m = Get-Content $Manifest -Raw | ConvertFrom-Json
+    } catch {
+        throw "Refusing uninstall: manifest is not valid JSON: $_"
+    }
+    if (-not $m.product -or $m.product -ne $ProductName) {
+        throw "Refusing uninstall: manifest product is '$($m.product)' (want $ProductName)"
+    }
+    if ($m.paths -and $m.paths.root) {
+        $manifestRoot = [System.IO.Path]::GetFullPath([string]$m.paths.root)
+        $wantRoot = [System.IO.Path]::GetFullPath($InstallRoot)
+        if (-not $manifestRoot.Equals($wantRoot, [System.StringComparison]::OrdinalIgnoreCase)) {
+            throw "Refusing uninstall: manifest root $manifestRoot != InstallRoot $wantRoot"
         }
     }
+    $pathModified = [bool]$m.path_modified
     if ($pathModified -or -not $SkipPath) {
         Remove-UserPathEntry
     }

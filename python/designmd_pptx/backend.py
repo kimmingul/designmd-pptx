@@ -318,7 +318,7 @@ class AgentBridgeBackend(OfficeCliBackend):
                 daemon=True,
             ).start()
             init = self._call("initialize", {
-                "clientInfo": {"name": "designmd-pptx", "version": "2.1.1"},
+                "clientInfo": {"name": "designmd-pptx", "version": "2.1.2"},
             })
             self._caps = None
             self._server = init

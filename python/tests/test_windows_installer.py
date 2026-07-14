@@ -100,7 +100,7 @@ class OneFileInstaller35(unittest.TestCase):
             "Invoke-Uninstall",
             "Get-OfficeCliUrl",
             "0.2.117",
-            "designmd-pptx==2.1.1",  # pinned package
+            "designmd-pptx==2.1.2",  # pinned package
             "Assert-SafeInstallRoot",
             "SHA256",
             "officecli.exe",  # exact binary name (no ambiguous officecli*)
