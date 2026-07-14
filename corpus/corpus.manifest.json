@@ -1,0 +1,5 @@
+{
+  "schema": 1,
+  "description": "Validation corpus of anonymized real decks (issue #36). Admit a deck with `designmd-pptx anonymize <deck>.pptx -o corpus/<id>.pptx`, then add an entry below. Deck files are gitignored by default — commit only what you have the right to redistribute. See docs/corpus.md.",
+  "entries": []
+}

@@ -146,8 +146,12 @@ python -m designmd_pptx master deck.pptx DESIGN.md --potx brand.potx [--empty-po
 python -m designmd_pptx scaffold default -o out/deck --content deck.json --apply --force --screenshot [--gate3]
 python -m designmd_pptx compose brief.md -o composed/ --design default
 python -m designmd_pptx render brief.md -o out/draft.pptx --design default [--images]
+python -m designmd_pptx anonymize deck.pptx -o corpus/deck.pptx [--redact-text]
+python -m designmd_pptx corpus corpus/corpus.manifest.json
 python -m designmd_pptx doctor [--strict]
 ```
+
+`anonymize` strips author/organization/custom metadata + comment authorship (optionally text) so a real deck can join the [validation corpus](docs/corpus.md); `corpus` validates the manifest and reports the stable train / held-out split.
 
 ## Architecture: OfficeCLI backends
 

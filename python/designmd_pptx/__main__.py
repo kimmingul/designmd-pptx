@@ -414,6 +414,46 @@ def cmd_doctor(args: argparse.Namespace) -> int:
     return run_doctor(strict=bool(args.strict))
 
 
+def cmd_anonymize(args: argparse.Namespace) -> int:
+    """Strip PII/metadata from a .pptx for corpus admission (#36)."""
+    import os
+
+    from .anonymize import anonymize_pptx
+
+    force = bool(args.force) or os.environ.get("DESIGNMD_FORCE") == "1"
+    report = anonymize_pptx(
+        args.pptx, out=args.out, force=force, redact_text=bool(args.redact_text))
+    print(f"Anonymized → {report['dest']}")
+    if report["core_fields"]:
+        print(f"  core.xml fields scrubbed: {sorted(set(report['core_fields']))}")
+    if report["app_fields"]:
+        print(f"  app.xml fields scrubbed: {sorted(set(report['app_fields']))}")
+    if report["custom_props_dropped"]:
+        print(f"  custom properties dropped: {report['custom_props_dropped']}")
+    if report["comment_authors"]:
+        print(f"  comment authors anonymized: {report['comment_authors']}")
+    if report["redact_text"]:
+        print(f"  text runs redacted: {report['text_runs_redacted']}")
+    if report["unparsed"]:
+        print(f"  warning: {len(report['unparsed'])} unparseable part(s) left as-is")
+    return 0
+
+
+def cmd_corpus(args: argparse.Namespace) -> int:
+    """Validate a corpus manifest and report the train/held-out split (#36)."""
+    from . import corpus
+
+    entries = corpus.load_corpus(args.manifest)
+    errors = corpus.validate_entries(entries)
+    for e in errors:
+        print(f"error: {e}")
+    s = corpus.stats(entries)
+    print(f"corpus: {s['total']} decks — {s['train']} train / {s['held_out']} held-out")
+    print(f"  licenses: {', '.join(s['licenses']) or '(none)'}")
+    print(f"  sources:  {', '.join(s['sources']) or '(none)'}")
+    return 1 if errors else 0
+
+
 def _safe_name(s: str) -> str:
     out = []
     for ch in s:
@@ -591,6 +631,27 @@ def build_parser() -> argparse.ArgumentParser:
     d.add_argument("--strict", action="store_true",
                    help="Exit non-zero when officecli is missing")
     d.set_defaults(func=cmd_doctor)
+
+    z = sub.add_parser(
+        "anonymize",
+        help="Strip author/org/custom metadata + comment authorship from a .pptx "
+        "for validation-corpus admission (staging-safe; --force to overwrite)",
+    )
+    z.add_argument("pptx", type=Path, help="Source .pptx to anonymize")
+    z.add_argument("-o", "--out", type=Path, default=None,
+                   help="Output .pptx (omit to anonymize in place, requires --force)")
+    z.add_argument("--redact-text", action="store_true",
+                   help="Also length-preserve-blank visible slide text (for highly "
+                   "sensitive decks; layout/structure preserved)")
+    z.add_argument("--force", action="store_true", help="Overwrite destination")
+    z.set_defaults(func=cmd_anonymize)
+
+    cp = sub.add_parser(
+        "corpus",
+        help="Validate a corpus manifest and report the train / held-out split",
+    )
+    cp.add_argument("manifest", type=Path, help="corpus.manifest.json")
+    cp.set_defaults(func=cmd_corpus)
 
     return p
 
