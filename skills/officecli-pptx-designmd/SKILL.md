@@ -132,7 +132,7 @@ modified. Run after `apply` to deliver a deck whose file doubles as a template.
 
 ## Patterns
 
-cover · section_divider · kpi_row · **big_number** · feature_cards · **pricing** · bullets · quote · comparison_2col · **matrix_2x2** · timeline · process · table · **appendix_table** · chart_insight (any officecli chartType: column/bar/line/pie/area/waterfall/funnel/…) · **team** · **logo_strip** · image_full · image_text_2col · close
+cover · section_divider · **section_opener_numbered** · **agenda_toc** · kpi_row · **kpi_dashboard_grid** · **big_number** · feature_cards · **pricing** · bullets · quote · comparison_2col · **matrix_2x2** · timeline · process · table · **appendix_table** · chart_insight (any officecli chartType: column/bar/line/pie/area/waterfall/funnel/…) · **team** · **logo_strip** · image_full · image_text_2col · close
 
 ## Colors
 

@@ -30,7 +30,11 @@ HEAVY = {
     "cards": [{"title": "Card", "body": "Card body text " * 8}] * 8,
     "steps": [{"title": "Step", "body": "Step detail " * 6}] * 10,
     "kpis": [{"value": "42.1", "label": "Label " * 4, "chip": "+9%"}] * 8,
-    "items": [{"title": "Item", "body": "Item body " * 6}] * 8,
+    # agenda_toc + any list that reads content["items"]
+    "items": [
+        {"number": f"{i:02d}", "label": "Agenda topic " * 4, "time": "10m"}
+        for i in range(1, 14)
+    ],
     "headers": ["Metric", "Q1", "Q2", "Q3"],
     "rows": [["Row label " * 2, "1", "2", "3"]] * 30,
     "columns": [{"title": "Column", "points": ["point " * 6] * 6}] * 2,
@@ -69,7 +73,11 @@ class GeometryContract(unittest.TestCase):
         return _call_builder(RECIPE_BUILDERS[name], self.tokens, content, idx)
 
     def test_every_pattern_registered(self) -> None:
-        self.assertEqual(len(RECIPE_BUILDERS), 20)
+        # Phase 2 (#58) grows the catalog beyond the original 20.
+        self.assertGreaterEqual(len(RECIPE_BUILDERS), 20)
+        self.assertIn("kpi_dashboard_grid", RECIPE_BUILDERS)
+        self.assertIn("agenda_toc", RECIPE_BUILDERS)
+        self.assertIn("section_opener_numbered", RECIPE_BUILDERS)
 
     def test_pattern_layout_covers_registry(self) -> None:
         # every pattern is categorized exactly once (engine/structured/fixed),
@@ -79,7 +87,7 @@ class GeometryContract(unittest.TestCase):
         self.assertEqual(len(flat), len(set(flat)), "a pattern is in two buckets")
         self.assertEqual(set(flat), set(RECIPE_BUILDERS),
                          "PATTERN_LAYOUT and RECIPE_BUILDERS disagree")
-        self.assertEqual(len(PATTERN_LAYOUT["engine"]), 9)
+        self.assertGreaterEqual(len(PATTERN_LAYOUT["engine"]), 9)
 
     def test_default_content_is_on_canvas_and_readable(self) -> None:
         for name in RECIPE_BUILDERS:

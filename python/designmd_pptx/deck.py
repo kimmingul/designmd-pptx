@@ -103,9 +103,26 @@ def validate_deck_content_caps(deck: dict[str, Any]) -> list[str]:
         if recipe in ("kpi_row", "kpi_3"):
             kpis = content.get("kpis") or []
             if isinstance(kpis, list) and len(kpis) > 4:
-                errors.append(f"{prefix}: kpis max 4 (got {len(kpis)}); split into another kpi_row slide")
+                errors.append(
+                    f"{prefix}: kpis max 4 (got {len(kpis)}); use kpi_dashboard_grid "
+                    "for 4–8 metrics or split into another kpi_row slide"
+                )
             if isinstance(kpis, list) and len(kpis) == 1:
                 errors.append(f"{prefix}: kpis need 2–4 items (got 1)")
+        if recipe == "kpi_dashboard_grid":
+            kpis = content.get("kpis") or []
+            if isinstance(kpis, list) and len(kpis) > 8:
+                errors.append(
+                    f"{prefix}: kpis max 8 (got {len(kpis)}); split across dashboard slides"
+                )
+            if isinstance(kpis, list) and 0 < len(kpis) < 4:
+                errors.append(f"{prefix}: kpi_dashboard_grid needs 4–8 kpis (got {len(kpis)})")
+        if recipe == "agenda_toc":
+            items = content.get("items") or content.get("entries") or []
+            if isinstance(items, list) and len(items) > 12:
+                errors.append(f"{prefix}: agenda items max 12 (got {len(items)}); split slides")
+            if isinstance(items, list) and 0 < len(items) < 5:
+                errors.append(f"{prefix}: agenda_toc needs 5–12 items (got {len(items)})")
         if recipe in ("feature_cards", "feature_cards_3"):
             cards = content.get("cards") or []
             if isinstance(cards, list) and len(cards) > 4:

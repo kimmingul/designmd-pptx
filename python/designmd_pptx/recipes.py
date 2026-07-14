@@ -325,6 +325,429 @@ def recipe_kpi_row(tokens: dict, content: dict | None = None) -> list[dict]:
     return ops
 
 
+def recipe_kpi_dashboard_grid(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Premium multi-row KPI dashboard (Phase 2 / #58) — 4–8 metric tiles.
+
+    Engine-solved 1–2 row grid inspired by consulting dashboard structure
+    (card bands + large values), original geometry — not a vendor clone.
+    """
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Performance dashboard")
+    subtitle = content.get("subtitle", "")
+    defaults = [
+        {"value": "—", "label": f"Metric {i + 1}", "chip": ""}
+        for i in range(6)
+    ]
+    kpis = content.get("kpis", defaults)
+    if not isinstance(kpis, list) or not kpis:
+        kpis = defaults
+    n = max(4, min(8, len(kpis)))
+    kpis = list(kpis[:n])
+    # Pad short lists up to 4 so the grid never collapses to a single cell.
+    while len(kpis) < 4:
+        kpis.append({"value": "—", "label": "—", "chip": ""})
+    n = len(kpis)
+    bg = c["content_background"]
+    mpt = _micro_pt(t)
+    # Slightly smaller KPI type than kpi_row so 2×N grids stay readable.
+    value_pt = max(28, int(t.get("kpi_pt", 60) * 0.55))
+
+    def _tile(i: int, d: L.Density) -> L.Box:
+        kpi = kpis[i] if isinstance(kpis[i], dict) else {}
+        watch = bool(kpi.get("watch"))
+        fill = c["risk"] if watch else c["surface"]
+        tc = c["on_accent"] if watch else c["text_on_surface"]
+        mc = "FFFFFF" if watch else c["muted"]
+        chip_c = mc if watch else c["accent"]
+        return L.VStack(
+            weight=1,
+            name=f"DashKpi{i + 1}Bg",
+            pad=(0.55 * d.gap, 0.25, 0.45 * d.gap, 0.25),
+            gap=0.2 * d.gap,
+            props={"preset": b["preset"], "fill": fill, "line": c.get("hairline", "none")},
+            children=[
+                L.Spacer(weight=0.6),
+                L.Text(
+                    str(kpi.get("value", "—")),
+                    pt=value_pt,
+                    name=f"DashKpi{i + 1}Value",
+                    min_cm=1.4,
+                    max_cm=3.6,
+                    props={
+                        "font": t["heading_font"],
+                        "size": str(value_pt),
+                        "bold": "true",
+                        "color": tc,
+                        "align": "center",
+                        "fill": "none",
+                    },
+                ),
+                L.Text(
+                    str(kpi.get("label", "")),
+                    pt=mpt,
+                    name=f"DashKpi{i + 1}Label",
+                    min_cm=0.6,
+                    props={
+                        "font": t["body_font"],
+                        "size": str(mpt),
+                        "color": mc,
+                        "align": "center",
+                        "fill": "none",
+                    },
+                ),
+                L.Text(
+                    str(kpi.get("chip", "")),
+                    pt=mpt,
+                    name=f"DashKpi{i + 1}Chip",
+                    min_cm=0.5,
+                    props={
+                        "font": t["body_font"],
+                        "size": str(mpt),
+                        "bold": "true",
+                        "color": chip_c,
+                        "align": "center",
+                        "fill": "none",
+                    },
+                ),
+                L.Spacer(weight=0.4),
+            ],
+        )
+
+    def _row_slices(count: int) -> list[list[int]]:
+        if count <= 4:
+            return [list(range(count))]
+        cols = 3 if count <= 6 else 4
+        return [
+            list(range(i, min(i + cols, count)))
+            for i in range(0, count, cols)
+        ]
+
+    def build(d: L.Density) -> L.Box:
+        header: list[L.Box] = [
+            L.Text(
+                title,
+                pt=t["title_pt"],
+                name="DashTitle",
+                min_cm=1.4,
+                max_cm=2.4,
+                props={
+                    "font": t["heading_font"],
+                    "size": str(t["title_pt"]),
+                    "bold": "true",
+                    "color": c["text_on_content"],
+                    "fill": "none",
+                },
+            ),
+        ]
+        if subtitle:
+            header.append(
+                L.Text(
+                    str(subtitle),
+                    pt=L.floored_pt(t["body_pt"], d),
+                    name="DashSubtitle",
+                    min_cm=0.7,
+                    max_cm=1.6,
+                    props={
+                        "font": t["body_font"],
+                        "size": str(L.floored_pt(t["body_pt"], d)),
+                        "color": c["muted"],
+                        "fill": "none",
+                    },
+                )
+            )
+        rows = []
+        for ri, idxs in enumerate(_row_slices(n)):
+            rows.append(
+                L.HStack(
+                    [_tile(i, d) for i in idxs],
+                    gap=b["gap"] * d.gap,
+                    weight=1,
+                    name=f"DashRow{ri + 1}",
+                )
+            )
+        return L.VStack(
+            pad=(1.1, b["margin"], 0.9, b["margin"]),
+            gap=0.55 * d.gap,
+            name="kpi_dashboard_grid",
+            children=header + rows,
+        )
+
+    placed, _d = L.solve_adaptive(build, 0, 0, L.CANVAS_W, L.CANVAS_H)
+    ops: list[dict] = [
+        {
+            "command": "add",
+            "parent": "/",
+            "type": "slide",
+            "props": {"layout": "blank", "background": bg},
+        },
+    ]
+    ops.extend(_emit_shapes(placed))
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Read the dashboard left→right, top→bottom; call out watches.")},
+    })
+    return ops
+
+
+def recipe_agenda_toc(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Numbered agenda / table-of-contents (Phase 2 / #58) — 5–12 items."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Agenda")
+    raw = content.get("items") or content.get("entries")
+    if not isinstance(raw, list) or not raw:
+        raw = [
+            {"label": "Context & goals"},
+            {"label": "What changed"},
+            {"label": "Options"},
+            {"label": "Recommendation"},
+            {"label": "Next steps"},
+        ]
+    items: list[dict] = []
+    for i, it in enumerate(raw[:12]):
+        if isinstance(it, str):
+            items.append({"number": f"{i + 1:02d}", "label": it, "time": ""})
+        elif isinstance(it, dict):
+            items.append({
+                "number": str(it.get("number") or f"{i + 1:02d}"),
+                "label": str(it.get("label") or it.get("title") or f"Item {i + 1}"),
+                "time": str(it.get("time") or it.get("duration") or ""),
+            })
+    if len(items) < 5:
+        # Pad to the design floor so geometry stays stable in catalog mode.
+        while len(items) < 5:
+            items.append({"number": f"{len(items) + 1:02d}", "label": "—", "time": ""})
+    bg = c["content_background"]
+    body_base = t["body_pt"]
+
+    def build(d: L.Density) -> L.Box:
+        body_pt = L.floored_pt(body_base, d)
+        num_pt = max(body_pt, min(28, t.get("section_pt", 28)))
+        micro = max(12, _micro_pt(t))
+        rows: list[L.Box] = []
+        for i, it in enumerate(items):
+            weighted: list[L.Box] = [
+                L.VStack(
+                    weight=0.18,
+                    name=f"AgendaNumWrap{i + 1}",
+                    children=[
+                        L.Text(
+                            str(it["number"]),
+                            pt=num_pt,
+                            name=f"AgendaNum{i + 1}",
+                            min_cm=0.9,
+                            max_cm=1.4,
+                            props={
+                                "font": t["heading_font"],
+                                "size": str(num_pt),
+                                "bold": "true",
+                                "color": c["accent"],
+                                "fill": "none",
+                            },
+                        ),
+                    ],
+                ),
+                L.VStack(
+                    weight=1,
+                    name=f"AgendaLabelWrap{i + 1}",
+                    children=[
+                        L.Text(
+                            str(it["label"]),
+                            pt=body_pt,
+                            name=f"AgendaLabel{i + 1}",
+                            weight=1,
+                            min_cm=0.9,
+                            props={
+                                "font": t["body_font"],
+                                "size": str(body_pt),
+                                "color": c["text_on_content"],
+                                "fill": "none",
+                            },
+                        ),
+                    ],
+                ),
+            ]
+            if it.get("time"):
+                weighted.append(
+                    L.VStack(
+                        weight=0.28,
+                        name=f"AgendaTimeWrap{i + 1}",
+                        children=[
+                            L.Text(
+                                str(it["time"]),
+                                pt=micro,
+                                name=f"AgendaTime{i + 1}",
+                                min_cm=0.8,
+                                max_cm=1.2,
+                                props={
+                                    "font": t["body_font"],
+                                    "size": str(micro),
+                                    "color": c["muted"],
+                                    "align": "right",
+                                    "fill": "none",
+                                },
+                            ),
+                        ],
+                    )
+                )
+            rows.append(
+                L.HStack(
+                    weighted,
+                    gap=0.4 * d.gap,
+                    weight=1,
+                    name=f"AgendaRow{i + 1}",
+                )
+            )
+            if i < len(items) - 1:
+                rows.append(
+                    L.Fixed(
+                        0.04,
+                        name=f"AgendaRule{i + 1}",
+                        props={
+                            "preset": "rect",
+                            "fill": c.get("hairline", c["muted"]),
+                            "line": "none",
+                        },
+                    )
+                )
+        return L.VStack(
+            pad=(1.1, b["margin"], 1.0, b["margin"]),
+            gap=0.35 * d.gap,
+            name="agenda_toc",
+            children=[
+                L.Text(
+                    title,
+                    pt=t["title_pt"],
+                    name="AgendaTitle",
+                    min_cm=1.5,
+                    max_cm=2.5,
+                    props={
+                        "font": t["heading_font"],
+                        "size": str(t["title_pt"]),
+                        "bold": "true",
+                        "color": c["text_on_content"],
+                        "fill": "none",
+                    },
+                ),
+                L.VStack(rows, gap=0.28 * d.gap, weight=1, name="AgendaList"),
+            ],
+        )
+
+    placed, _d = L.solve_adaptive(build, 0, 0, L.CANVAS_W, L.CANVAS_H)
+    ops: list[dict] = [
+        {
+            "command": "add",
+            "parent": "/",
+            "type": "slide",
+            "props": {"layout": "blank", "background": bg},
+        },
+    ]
+    ops.extend(_emit_shapes(placed))
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get("notes", "Walk the agenda; mark time boxes.")},
+    })
+    return ops
+
+
+def recipe_section_opener_numbered(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Premium section opener — solid large index + title (Phase 2 / #58).
+
+    Fixed geometry (overlap / opacity centering is intentional chrome, not flex).
+    Distinct from ``section_divider`` which uses a washed-out watermark number.
+    """
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    number = str(content.get("number", "01"))
+    title = content.get("title", "Section")
+    blurb = content.get("blurb", "")
+    bg = c["background"]
+
+    ops: list[dict] = [
+        {
+            "command": "add",
+            "parent": "/",
+            "type": "slide",
+            "props": {"layout": "blank", "background": bg},
+        },
+        {
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "shape",
+            "props": {
+                "name": "OpenerAccentBar",
+                "preset": "rect",
+                "fill": c["accent"],
+                "line": "none",
+                "x": _cm(b["margin"]),
+                "y": "6.4cm",
+                "width": "1.1cm",
+                "height": "6.2cm",
+            },
+        },
+        {
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "shape",
+            "props": {
+                "name": "OpenerNumber",
+                "text": number,
+                "x": _cm(b["margin"] + 1.6),
+                "y": "5.8cm",
+                "width": "8cm",
+                "height": "2.4cm",
+                "font": t["heading_font"],
+                "size": "54",
+                "bold": "true",
+                "color": c["accent"],
+                "fill": "none",
+            },
+        },
+        {
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "shape",
+            "props": {
+                "name": "OpenerTitle",
+                "text": title,
+                "x": _cm(b["margin"] + 1.6),
+                "y": "8.4cm",
+                "width": _cm(33.87 - 2 * b["margin"] - 1.6),
+                "height": "2.6cm",
+                "font": t["heading_font"],
+                "size": str(t["title_pt"]),
+                "bold": "true",
+                "color": c["text"],
+                "fill": "none",
+            },
+        },
+    ]
+    if blurb:
+        ops.append({
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "shape",
+            "props": {
+                "name": "OpenerBlurb",
+                "text": blurb,
+                "x": _cm(b["margin"] + 1.6),
+                "y": "11.3cm",
+                "width": "22cm",
+                "height": "2.2cm",
+                "font": t["body_font"],
+                "size": str(t["body_pt"]),
+                "color": c["muted"],
+                "fill": "none",
+            },
+        })
+    return ops
+
+
 def recipe_feature_cards(tokens: dict, content: dict | None = None) -> list[dict]:
     """Adaptive 2–4 feature cards."""
     b = _base_props(tokens)
@@ -1915,7 +2338,9 @@ def _call_builder(builder, tokens, content, slide_index: int | None = None):
 RECIPE_BUILDERS = {
     "cover": recipe_cover,
     "section_divider": recipe_section_divider,
+    "section_opener_numbered": recipe_section_opener_numbered,
     "kpi_row": recipe_kpi_row,
+    "kpi_dashboard_grid": recipe_kpi_dashboard_grid,
     "feature_cards": recipe_feature_cards,
     "bullets": recipe_bullets,
     "quote": recipe_quote,
@@ -1933,6 +2358,7 @@ RECIPE_BUILDERS = {
     "logo_strip": recipe_logo_strip,
     "pricing": recipe_pricing,
     "appendix_table": recipe_appendix_table,
+    "agenda_toc": recipe_agenda_toc,
 }
 
 # Layout strategy per pattern (#9). Every pattern is one of:
@@ -1947,18 +2373,21 @@ RECIPE_BUILDERS = {
 #   "fixed"      — intentional hero/divider compositions whose design depends on
 #                  overlap / opacity / precise centering that a top-down flex
 #                  engine cannot express (e.g. the 0.25-opacity section number).
-# All 20 are covered by the geometry-contract harness (test_layout_contract.py).
-# test_pattern_layout_covers_registry keeps this in sync with RECIPE_BUILDERS.
+# All registered patterns are covered by the geometry-contract harness
+# (test_layout_contract.py). test_pattern_layout_covers_registry keeps this in
+# sync with RECIPE_BUILDERS.
 PATTERN_LAYOUT: dict[str, tuple[str, ...]] = {
     "engine": (
         "bullets", "feature_cards", "comparison_2col", "image_text_2col",
-        "matrix_2x2", "kpi_row", "pricing", "team", "timeline",
+        "matrix_2x2", "kpi_row", "kpi_dashboard_grid", "pricing", "team",
+        "timeline", "agenda_toc",
     ),
     "structured": (
         "process", "chart_insight", "table", "appendix_table", "logo_strip",
     ),
     "fixed": (
-        "cover", "section_divider", "big_number", "quote", "close", "image_full",
+        "cover", "section_divider", "section_opener_numbered",
+        "big_number", "quote", "close", "image_full",
     ),
 }
 
@@ -1970,8 +2399,11 @@ RECIPE_ALIASES = {
 
 DEFAULT_SEQUENCE = [
     "cover",
+    "agenda_toc",
     "section_divider",
+    "section_opener_numbered",
     "kpi_row",
+    "kpi_dashboard_grid",
     "big_number",
     "feature_cards",
     "pricing",

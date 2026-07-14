@@ -43,6 +43,64 @@
       }
     },
     "kpi_3": { "$ref": "#/properties/kpi_row" },
+    "kpi_dashboard_grid": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "notes": { "type": "string" },
+        "kpis": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "properties": {
+              "value": { "type": ["string", "number"] },
+              "label": { "type": "string" },
+              "chip": { "type": "string" },
+              "watch": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    },
+    "agenda_toc": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "notes": { "type": "string" },
+        "items": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 12,
+          "items": {
+            "oneOf": [
+              { "type": "string" },
+              {
+                "type": "object",
+                "properties": {
+                  "number": { "type": ["string", "number"] },
+                  "label": { "type": "string" },
+                  "title": { "type": "string" },
+                  "time": { "type": "string" },
+                  "duration": { "type": "string" }
+                }
+              }
+            ]
+          }
+        },
+        "entries": { "$ref": "#/properties/agenda_toc/properties/items" }
+      }
+    },
+    "section_opener_numbered": {
+      "type": "object",
+      "properties": {
+        "number": { "type": ["string", "number"] },
+        "title": { "type": "string" },
+        "blurb": { "type": "string" }
+      }
+    },
     "feature_cards": {
       "type": "object",
       "properties": {

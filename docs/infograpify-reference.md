@@ -213,8 +213,23 @@ visual quality.
 - [x] `.gitignore`: `infograpify_ppt_templates/`, `.ref-analysis/`
 - [x] This document (principles, token mapping, shortlist, contributor rules)
 - [x] Original premium DESIGN.md fixture for master / scaffold
-- [ ] First wave recipes (#58) with CJK + Gate 3 on **generated** decks
-- [ ] Contributor note mirrored in `CONTRIBUTING.md` / skill hard rules
+- [x] Contributor note mirrored in `CONTRIBUTING.md` / skill hard rules
+- [ ] First wave recipes (#58) — **in progress** (see below)
+
+## #58 implementation status
+
+| Pattern | Status | Layout |
+|---|---|---|
+| `kpi_dashboard_grid` | ✅ shipped | engine |
+| `agenda_toc` | ✅ shipped | engine |
+| `section_opener_numbered` | ✅ shipped | fixed |
+| `story_timeline` | pending | engine |
+| `funnel_stages` | pending | structured |
+| `roadmap_swimlane` | pending | structured |
+| `quadrant_matrix_rich` | pending | engine |
+| `pyramid_levels` | pending | structured |
+| `vs_scorecard` | pending | engine |
+| `chart_callout_panel` | pending | structured |
 
 ---
 

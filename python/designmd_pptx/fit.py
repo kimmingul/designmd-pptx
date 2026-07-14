@@ -52,6 +52,21 @@ _BUDGETS: dict[str, dict[str, tuple[Any, Any, int]]] = {
         "kpis.label": ("per_item", "micro_pt", 2),
         "kpis.chip": ("per_item", "micro_pt", 1),
     },
+    "kpi_dashboard_grid": {
+        "title": ("full", "title_pt", 1),
+        "subtitle": ("full", "body_pt", 1),
+        "kpis.value": ("per_item", "kpi_pt", 1),
+        "kpis.label": ("per_item", "micro_pt", 2),
+        "kpis.chip": ("per_item", "micro_pt", 1),
+    },
+    "agenda_toc": {
+        "title": ("full", "title_pt", 1),
+        "items.label": ("full", "body_pt", 1),
+    },
+    "section_opener_numbered": {
+        "title": ("full", "title_pt", 2),
+        "blurb": (22.0, "body_pt", 2),
+    },
     "feature_cards": {
         "title": ("full", "title_pt", 1),
         "cards.title": ("per_item", "section_pt", 2),
