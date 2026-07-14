@@ -47,6 +47,16 @@ unverified). `python -m designmd_pptx.compat` self-checks the manifest.
 
 ## Install
 
+### pip (CLI, any platform)
+
+```bash
+pip install designmd-pptx      # from PyPI (once published)
+# or from a checkout:
+pip install .                  # add [schema] for full jsonschema validation
+```
+
+Installs the `designmd-pptx` console command; the package is self-contained (bundled schemas, compatibility manifest, and default house style) and needs no `PYTHONPATH`. Then `designmd-pptx doctor`. Materializing real `.pptx` files still needs an OfficeCLI backend (see [Requirements](#requirements)).
+
 ### Claude Code
 
 ```text
