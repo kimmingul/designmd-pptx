@@ -1,8 +1,9 @@
-# Windows standalone installer (#35)
+# Windows one-file bootstrap installer (#35)
 
-Non-developer friendly install of **designmd-pptx** + a **pinned official
-OfficeCLI** on Windows 10/11 — without requiring a pre-configured Python
-dev environment.
+Non-developer friendly **network bootstrap** of **designmd-pptx** + a **pinned
+official OfficeCLI** on Windows 10/11. This is **not** an offline MSI that
+bundles Python/OfficeCLI; it needs network access (winget/PyPI/GitHub) on first
+install.
 
 ## One-file installer (primary)
 
@@ -20,8 +21,9 @@ powershell -ExecutionPolicy Bypass -File Install-DesignmdPptx.ps1 -DryRun
 | `-DryRun` | Print actions only |
 | `-SkipOfficeCli` | Skip pinned OfficeCLI download |
 | `-SkipPath` | Do not modify user PATH |
-| `-PackageSource X` | `designmd-pptx` (default) or local path/wheel |
-| `-InstallRoot PATH` | Override `%LOCALAPPDATA%\designmd-pptx` |
+| `-PackageSource X` | default `designmd-pptx==2.1.1` (pinned); or local path/wheel |
+| `-OfficeCliSha256` | Optional expected SHA-256 of the officecli-dist tarball |
+| `-InstallRoot PATH` | Must stay under `%LOCALAPPDATA%\designmd-pptx` |
 
 ### Layout
 

@@ -2,6 +2,36 @@
 
 All notable changes to designmd-pptx are documented here.
 
+## [2.1.1] — 2026-07-15
+
+Adversarial review follow-up (Codex gpt-5.6-sol@high **BLOCK** findings).
+
+### Security
+- **VS Code extension (#45):** run CLI via `child_process.spawn` + `shell:false`
+  argv array; never `terminal.sendText` of shell-joined user feedback.
+
+### Fixed
+- **Animation (#40):** CT_Slide child order (`transition`/`timing` before
+  `extLst`); numeric slide sort; in-place/`-o` overwrite requires `--force`;
+  appear uses `animEffect` (no broken `p:set`); `pulse` emphasis removed as
+  unimplemented.
+- **Refine (#19):** deferred continuation inserts so multi-slide density
+  patches no longer shift indices mid-pass.
+- **Generative (#21):** overflow lists/prose preserved under `content.overflow`;
+  external placements validated on-canvas; `DESIGNMD_LAYOUT_CMD` wired into
+  freeform path.
+- **Extract (#22):** `c:barChart` + `barDir=col` → `column` (not bar).
+- **Windows installer (#35):** pin `designmd-pptx==2.1.1`; InstallRoot must
+  stay under LocalAppData product dir; uninstall requires product manifest;
+  OfficeCLI extract limited to `officecli.exe` + optional SHA-256.
+- **Public benchmark (#42):** recipe-builder smoke per fixture; honest docs
+  (synthetic deck-spec suite, not rendered PPTX corpus); gate not hard-coded
+  pass without smoke.
+
+### Changed
+- Version **2.1.1**; `npm run check` requires exact version equality across
+  plugin / package / `__version__`.
+
 ## [2.1.0] — 2026-07-15
 
 Phase 5 / **intelligence** release. Production core from v2.0.0 plus generative

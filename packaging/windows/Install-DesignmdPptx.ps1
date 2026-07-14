@@ -44,9 +44,11 @@ param(
     [switch]$DryRun,
     [switch]$SkipOfficeCli,
     [switch]$SkipPath,
-    [string]$PackageSource = "designmd-pptx",
+    # Pin package by default (adversarial #35) — override with -PackageSource for editable installs
+    [string]$PackageSource = "designmd-pptx==2.1.1",
     [string]$InstallRoot = "",
     [string]$OfficeCliPin = "",  # empty → read from embedded default / env
+    [string]$OfficeCliSha256 = "",  # optional expected SHA-256 of the tarball
     [string]$PythonMin = "3.10"
 )
 
@@ -54,10 +56,23 @@ $ErrorActionPreference = "Stop"
 $ProductName = "designmd-pptx"
 # Keep in sync with python/designmd_pptx/compatibility.json official.recommended
 $DefaultOfficeCliPin = "0.2.117"
+$DefaultLocalRoot = Join-Path $env:LOCALAPPDATA $ProductName
 
 if (-not $InstallRoot) {
-    $InstallRoot = Join-Path $env:LOCALAPPDATA $ProductName
+    $InstallRoot = $DefaultLocalRoot
 }
+# Guard: install/uninstall root must live under LocalAppData\designmd-pptx
+# (or explicit subpath). Blocks recursive delete of arbitrary trees.
+function Assert-SafeInstallRoot([string]$root) {
+    $full = [System.IO.Path]::GetFullPath($root)
+    $allowed = [System.IO.Path]::GetFullPath($DefaultLocalRoot)
+    if (-not ($full.Equals($allowed, [System.StringComparison]::OrdinalIgnoreCase) -or
+              $full.StartsWith($allowed + [IO.Path]::DirectorySeparatorChar,
+                               [System.StringComparison]::OrdinalIgnoreCase))) {
+        throw "InstallRoot must be under $allowed (got $full). Refusing unsafe path."
+    }
+}
+Assert-SafeInstallRoot $InstallRoot
 $BinDir     = Join-Path $InstallRoot "bin"
 $VenvDir    = Join-Path $InstallRoot "venv"
 $Manifest   = Join-Path $InstallRoot "install.manifest.json"
@@ -214,19 +229,36 @@ function Install-OfficeCliPin {
     if (-not (Test-Path $tmp) -or ((Get-Item $tmp).Length -lt 64)) {
         throw "Download too small or missing: $tmp"
     }
-    # tar is available on Windows 10+ 
+    $expectSha = if ($OfficeCliSha256) { $OfficeCliSha256 } else { $env:DESIGNMD_OFFICECLI_SHA256 }
+    if ($expectSha) {
+        $hash = (Get-FileHash -Algorithm SHA256 -Path $tmp).Hash.ToLowerInvariant()
+        if ($hash -ne $expectSha.ToLowerInvariant()) {
+            throw "OfficeCLI tarball SHA-256 mismatch: got $hash expected $expectSha"
+        }
+        Write-Ok "SHA-256 verified"
+    } else {
+        Write-Info "No DESIGNMD_OFFICECLI_SHA256 / -OfficeCliSha256 set — skipping hash verify (pin URL only)"
+    }
+    # tar is available on Windows 10+; extract only under our temp root (path safety)
     $extract = Join-Path $env:TEMP "designmd-officecli-extract-$pin"
     if (Test-Path $extract) { Remove-Item -Recurse -Force $extract }
     New-Item -ItemType Directory -Force $extract | Out-Null
     tar -xzf $tmp -C $extract
+    $extractFull = [System.IO.Path]::GetFullPath($extract)
     $exe = Get-ChildItem -Path $extract -Recurse -Filter "officecli.exe" -ErrorAction SilentlyContinue |
+        Where-Object {
+            $p = [System.IO.Path]::GetFullPath($_.FullName)
+            $p.StartsWith($extractFull, [System.StringComparison]::OrdinalIgnoreCase)
+        } |
         Select-Object -First 1
     if (-not $exe) {
-        $exe = Get-ChildItem -Path $extract -Recurse -Filter "officecli*" -File -ErrorAction SilentlyContinue |
-            Where-Object { $_.Name -notmatch '\.tar|\.gz|\.txt|\.md' } |
-            Select-Object -First 1
+        throw "Archive has no officecli.exe under extract root (refusing ambiguous officecli* matches)"
     }
-    if (-not $exe) { throw "Archive has no officecli binary" }
+    # Reject zip-slip / path traversal outside extract root
+    $exeFull = [System.IO.Path]::GetFullPath($exe.FullName)
+    if (-not $exeFull.StartsWith($extractFull, [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw "Refusing officecli path outside extract root: $exeFull"
+    }
     $destOfficial = Join-Path $OfficialDir "officecli.exe"
     $destBin = Join-Path $BinDir "officecli.exe"
     Copy-Item -Force $exe.FullName $destOfficial
@@ -357,6 +389,11 @@ function Remove-UserPathEntry {
 
 function Invoke-Uninstall {
     Write-Step "Uninstall $ProductName from $InstallRoot"
+    Assert-SafeInstallRoot $InstallRoot
+    # Require product marker unless dry-run of empty tree
+    if (-not $DryRun -and (Test-Path $InstallRoot) -and -not (Test-Path $Manifest)) {
+        throw "Refusing uninstall: $Manifest missing (not a designmd-pptx install root)"
+    }
     if ($DryRun) {
         Write-Info "dry-run: remove $InstallRoot and PATH entry"
         return
@@ -366,7 +403,12 @@ function Invoke-Uninstall {
         try {
             $m = Get-Content $Manifest -Raw | ConvertFrom-Json
             $pathModified = [bool]$m.path_modified
-        } catch {}
+            if ($m.product -and $m.product -ne $ProductName) {
+                throw "Refusing uninstall: manifest product is $($m.product)"
+            }
+        } catch {
+            if ("$_" -match "Refusing") { throw }
+        }
     }
     if ($pathModified -or -not $SkipPath) {
         Remove-UserPathEntry

@@ -148,15 +148,22 @@ def apply_patches(
     max_list_items: int = 4,
     max_body_chars: int = 220,
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
-    """Return (new_deck, patch_log) after applying finding-driven mutations."""
+    """Return (new_deck, patch_log) after applying finding-driven mutations.
+
+    Continuations are collected and inserted *after* all index-based patches
+    so inserting a slide never shifts later targets mid-pass (adversarial #19).
+    """
     out = copy.deepcopy(deck)
     slides = out.get("slides") or []
     if not isinstance(slides, list):
         return out, []
     log: list[dict[str, Any]] = []
     n = len(slides)
+    # (after_index, cont_slide) — applied high→low after the main pass
+    pending_inserts: list[tuple[int, dict[str, Any]]] = []
+    # Track which (slide_index, code_family) already handled to avoid double-patch
+    handled: set[tuple[int, str]] = set()
 
-    # Process high-severity first
     ordered = sorted(
         findings,
         key=lambda f: 0 if str(f.get("severity")) == "error" else 1,
@@ -164,9 +171,17 @@ def apply_patches(
 
     for finding in ordered:
         code = str(finding.get("code") or "").lower()
+        family = (
+            "density" if code in _DENSITY_CODES or code in ("overflow",)
+            else "contrast" if code in _CONTRAST_CODES
+            else "align" if code in _ALIGNMENT_CODES
+            else code
+        )
         idxs = _slide_index(finding, n)
         for i in idxs:
             if i >= len(slides):
+                continue
+            if (i, family) in handled:
                 continue
             slide = slides[i]
             if not isinstance(slide, dict):
@@ -188,7 +203,6 @@ def apply_patches(
                             (content.get("notes") or "")
                             + f" [refine: held {len(tail)} overflow items for next slide]"
                         ).strip()
-                        # Insert continuation slide after current
                         cont = copy.deepcopy(slide)
                         cont["id"] = f"{slide.get('id', f's{i}')}-cont"
                         cont_content = dict(cont.get("content") or {})
@@ -197,8 +211,8 @@ def apply_patches(
                         if "(cont." not in title:
                             cont_content["title"] = f"{title} (cont.)"
                         cont["content"] = cont_content
-                        slides.insert(i + 1, cont)
-                        n = len(slides)
+                        pending_inserts.append((i + 1, cont))
+                        handled.add((i, family))
                         log.append({
                             "action": "split_list",
                             "slide": i + 1,
@@ -209,7 +223,6 @@ def apply_patches(
                             "code": code,
                         })
                         continue
-                # Shorten long prose fields
                 shortened = False
                 for bk in _TEXT_BODY_KEYS:
                     if bk in content and isinstance(content[bk], str):
@@ -219,6 +232,7 @@ def apply_patches(
                             content[bk] = new
                             shortened = True
                 if shortened:
+                    handled.add((i, family))
                     log.append({
                         "action": "shorten_text",
                         "slide": i + 1,
@@ -226,7 +240,6 @@ def apply_patches(
                         "code": code,
                     })
                     continue
-                # Fallback: prefer denser multi-column recipe for pure bullets
                 if recipe == "bullets" and key == "bullets" and len(content.get("bullets") or []) >= 3:
                     cards = [
                         {"title": str(b)[:40], "body": ""}
@@ -235,6 +248,7 @@ def apply_patches(
                     slide["recipe"] = "feature_cards"
                     content["cards"] = cards
                     content.pop("bullets", None)
+                    handled.add((i, family))
                     log.append({
                         "action": "recipe_swap",
                         "slide": i + 1,
@@ -245,11 +259,11 @@ def apply_patches(
                     continue
 
             if code in _CONTRAST_CODES:
-                # Cannot fix brand tokens here — annotate notes for human/a11y pass
                 note = content.get("notes") or ""
                 hint = " [refine: run a11y --fix-contrast on tokens]"
                 if hint.strip() not in note:
                     content["notes"] = (note + hint).strip()
+                    handled.add((i, family))
                     log.append({
                         "action": "annotate_contrast",
                         "slide": i + 1,
@@ -261,11 +275,16 @@ def apply_patches(
                 hint = " [refine: prefer engine-solved recipe / reduce chrome]"
                 if hint.strip() not in note:
                     content["notes"] = (note + hint).strip()
+                    handled.add((i, family))
                     log.append({
                         "action": "annotate_alignment",
                         "slide": i + 1,
                         "code": code,
                     })
+
+    # Apply inserts from back to front so indices stay valid
+    for after_idx, cont in sorted(pending_inserts, key=lambda t: t[0], reverse=True):
+        slides.insert(after_idx, cont)
 
     out["slides"] = slides
     return out, log

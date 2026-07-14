@@ -168,14 +168,14 @@ def build_install_plan(
                 f"{paths.venv_dir}/Scripts/pip install -U pip; "
                 + (
                     f"pip install designmd-pptx=={PKG_VERSION}"
-                    if package_source == "pip"
+                    if package_source in ("pip", f"designmd-pptx=={PKG_VERSION}")
                     else f"pip install {package_source}"
                 )
             ),
             downloads=(
-                f"designmd-pptx from PyPI (target {PKG_VERSION})"
-                if package_source == "pip"
-                else f"local path {package_source}"
+                f"designmd-pptx=={PKG_VERSION} from PyPI (pinned)"
+                if package_source in ("pip", f"designmd-pptx=={PKG_VERSION}")
+                else f"package source {package_source}"
             ),
         ),
     ]

@@ -44,9 +44,10 @@ ENTRANCE_PRESETS: dict[str, dict[str, Any]] = {
     "fly_in": {"preset_id": 2, "preset_class": "entr", "dur_ms": 500, "filter": None},
 }
 
+# Emphasis is reserved; only "none" is implemented in the OOXML emitter.
+# Unknown values fall back to none with a warning at extract_animation time.
 EMPHASIS_PRESETS: dict[str, dict[str, Any]] = {
     "none": {"preset_id": 0, "preset_class": None},
-    "pulse": {"preset_id": 24, "preset_class": "emph", "dur_ms": 500},  # flashbulb-ish
 }
 
 # Slide transitions (child element local name under p:transition)
@@ -145,7 +146,10 @@ def extract_animation(fm: dict[str, Any] | None) -> tuple[dict[str, Any], list[s
 
     emph = str(raw.get("emphasis") or cfg["emphasis"]).lower()
     if emph not in EMPHASIS_PRESETS:
-        warnings.append(f"animation.emphasis: unknown {emph!r} — using none")
+        warnings.append(
+            f"animation.emphasis: {emph!r} not implemented — using none "
+            "(only 'none' is emitted in v2.1.x)"
+        )
         emph = "none"
     cfg["emphasis"] = emph
 
@@ -350,20 +354,11 @@ def _build_timing(
         effect_kids = el("p:childTnLst")
         effect_ctn.append(effect_kids)
 
-        if ent.get("filter"):
-            anim = el("p:animEffect", transition="in", filter=str(ent["filter"]))
-        else:
-            # appear / fly_in without filter: use set visibility
-            anim = el("p:set")
-            to_el = el("p:to")
-            str_val = etree.Element(opc.qn("p:strVal"))
-            # use a: namespace for strVal in some producers; p:strVal is accepted
-            str_val = etree.Element("{http://schemas.openxmlformats.org/drawingml/2006/main}strVal")
-            str_val.set("val", "visible")
-            # Prefer p:strVal if present in schema; DrawingML strVal works in PPT
-            to_el.append(str_val)
-            anim.append(to_el)
-
+        # Prefer filter-based entrances (fade/wipe). Appear uses animEffect
+        # with an empty filter rather than a fragile p:set tree — PowerPoint
+        # accepts animEffect for presetID=1 as well.
+        filt = ent.get("filter") or "fade"
+        anim = el("p:animEffect", transition="in", filter=str(filt))
         effect_kids.append(anim)
         cbhvr = el("p:cBhvr")
         anim.append(cbhvr)
@@ -372,14 +367,6 @@ def _build_timing(
         tgt = el("p:tgtEl")
         cbhvr.append(tgt)
         tgt.append(el("p:spTgt", spid=str(spid)))
-
-        if not ent.get("filter"):
-            # For set-based appear, need attrNameLst
-            attr = el("p:attrNameLst")
-            an = el("p:attrName")
-            an.text = "style.visibility"
-            attr.append(an)
-            cbhvr.append(attr)
 
     # prev/next conditions for sequence
     prev = el("p:prevCondLst")
@@ -443,27 +430,43 @@ def inject_slide_animation(
             if parent is not None:
                 parent.remove(old)
 
+    # CT_Slide child order (ECMA-376): cSld, clrMapOvr?, transition?, timing?, extLst?
+    tr_el = _build_transition(transition, transition_speed)
     timing = _build_timing(
         targets,
         entrance=entrance,
         stagger_ms=stagger_ms,
         on=on,
     )
+    to_place: list[etree._Element] = []
+    if tr_el is not None:
+        to_place.append(tr_el)
+        transitions = 1
     if timing is not None:
-        root.append(timing)
+        to_place.append(timing)
         effects = len(targets)
 
-    tr_el = _build_transition(transition, transition_speed)
-    if tr_el is not None:
-        # transition should appear before timing in many writers; append is OK for PPT
-        # Insert after cSld if possible
-        csld = root.find(opc.qn("p:cSld"))
-        if csld is not None:
-            idx = list(root).index(csld) + 1
-            root.insert(idx, tr_el)
+    if to_place:
+        children = list(root)
+        # Anchor: before extLst, else after clrMapOvr, else after cSld, else end
+        insert_at = next(
+            (i for i, c in enumerate(children) if c.tag == opc.qn("p:extLst")),
+            None,
+        )
+        if insert_at is None:
+            for tag in (opc.qn("p:clrMapOvr"), opc.qn("p:cSld")):
+                for i, c in enumerate(children):
+                    if c.tag == tag:
+                        insert_at = i + 1
+                        break
+                if insert_at is not None:
+                    break
+        if insert_at is None:
+            for el in to_place:
+                root.append(el)
         else:
-            root.insert(0, tr_el)
-        transitions = 1
+            for offset, el in enumerate(to_place):
+                root.insert(insert_at + offset, el)
 
     return opc.serialize(root, declaration=decl), effects, transitions
 
@@ -496,8 +499,18 @@ def animate_pptx(
         return AnimationReport(ok=True, notes=["animation disabled in config"])
 
     dest = Path(out) if out else src
-    if dest.exists() and dest.resolve() != src.resolve() and not force:
-        return AnimationReport(ok=False, notes=[f"refusing to overwrite {dest} without --force"])
+    same = dest.resolve() == src.resolve()
+    if dest.exists() and not force:
+        # Staging-safe contract: overwrite of any existing path (incl. in-place) needs --force
+        return AnimationReport(
+            ok=False,
+            notes=[f"refusing to overwrite {dest} without --force"],
+        )
+    if same and not force:
+        return AnimationReport(
+            ok=False,
+            notes=["in-place animate requires --force"],
+        )
 
     notes: list[str] = []
     slides_touched = 0
@@ -511,9 +524,13 @@ def animate_pptx(
     except (OSError, zipfile.BadZipFile) as e:
         return AnimationReport(ok=False, notes=[f"corrupt pptx: {e}"])
 
+    def _slide_key(n: str) -> tuple[int, str]:
+        m = re.search(r"slide(\d+)\.xml$", n)
+        return (int(m.group(1)), n) if m else (10**9, n)
+
     slide_names = sorted(
-        n for n in parts
-        if re.fullmatch(r"ppt/slides/slide\d+\.xml", n)
+        (n for n in parts if re.fullmatch(r"ppt/slides/slide\d+\.xml", n)),
+        key=_slide_key,
     )
     if not slide_names:
         return AnimationReport(ok=False, notes=["no ppt/slides/slideN.xml parts"])
