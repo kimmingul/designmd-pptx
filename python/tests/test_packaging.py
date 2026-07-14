@@ -17,7 +17,8 @@ PKG = pathlib.Path(designmd_pptx.__file__).resolve().parent
 
 class PackagingV33(unittest.TestCase):
     def test_data_files_ship_inside_package(self) -> None:
-        for rel in ("compatibility.json", "default.DESIGN.md",
+        for rel in ("compatibility.json", "benchmark_thresholds.json",
+                    "default.DESIGN.md",
                     "schema/tokens.slide.schema.json",
                     "schema/content.overlay.schema.json"):
             self.assertTrue((PKG / rel).is_file(), f"{rel} missing from package")

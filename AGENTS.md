@@ -44,6 +44,8 @@ python -m designmd_pptx extract old.pptx -o extracted    # existing deck → dec
 python -m designmd_pptx restyle old.pptx DESIGN.md -o new.pptx   # rebrand in place
 python -m designmd_pptx master deck.pptx DESIGN.md --potx brand.potx  # brand master + template
 python -m designmd_pptx doctor   # verify officecli + skill routing (Claude/Codex/Grok)
+python -m designmd_pptx a11y --design default --content python/examples/content.deck.json
+python -m designmd_pptx benchmark -o benchmark-out
 python -m designmd_pptx compose brief.md -o composed --design default   # outline → deck-spec
 ```
 
