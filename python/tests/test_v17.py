@@ -55,6 +55,7 @@ while True:
                      "preferred_tool": "office.render",
                      "image_support": {"invoke_field": "enable_images"}}}}})
     elif method == "task/invoke":
+        MODE = os.environ.get("FAKE_BRIDGE_MODE", "sync")
         args = params.get("args") or {}
         if params.get("tool") != "office.render" or "payload" not in args:
             send({"jsonrpc": "2.0", "id": mid,
@@ -67,26 +68,58 @@ while True:
             f.write(b"FAKEPPTX")
         send({"jsonrpc": "2.0", "method": "event",
               "params": {"type": "task.progress", "payload": {"content": "assembling"}}})
-        send({"jsonrpc": "2.0", "id": mid, "result": {
-            "task_id": "t-1", "status": "completed",
-            "result": {"status": "success", "file_path": produced}}})
+        if MODE == "weird":
+            send({"jsonrpc": "2.0", "id": mid, "result": {
+                "task_id": "t-1", "status": "sideways", "result": {}}})
+        elif MODE == "async":
+            PENDING["produced"] = produced
+            send({"jsonrpc": "2.0", "id": mid, "result": {
+                "task_id": "t-1", "status": "running"}})
+        else:
+            send({"jsonrpc": "2.0", "id": mid, "result": {
+                "task_id": "t-1", "status": "completed",
+                "result": {"status": "success", "file_path": produced}}})
+    elif method == "task/status":
+        PENDING["polls"] = PENDING.get("polls", 0) + 1
+        if PENDING["polls"] < 2:
+            send({"jsonrpc": "2.0", "id": mid, "result": {
+                "task_id": "t-1", "status": "running"}})
+        else:
+            send({"jsonrpc": "2.0", "id": mid, "result": {
+                "task_id": "t-1", "status": "completed",
+                "result": {"status": "success", "file_path": PENDING["produced"]}}})
     else:
         send({"jsonrpc": "2.0", "id": mid, "result": {}})
 '''
 
+FAKE_BRIDGE = "PENDING = {}\n" + FAKE_BRIDGE
 
-def _make_fake_bridge(tmp: Path) -> str:
+# silent-mode: accepts requests, never answers — must trip the call timeout
+FAKE_SILENT = r'''
+import sys, time
+while True:
+    if not sys.stdin.buffer.read(1):
+        raise SystemExit(0)
+'''
+
+
+def _make_fake_bridge(tmp: Path, *, mode: str = "sync",
+                      body: str | None = None) -> str:
     """A launcher the backend can spawn as `<exe> agent-bridge`."""
-    script = tmp / "fake_bridge.py"
-    script.write_text(FAKE_BRIDGE, encoding="utf-8")
+    script = tmp / f"fake_bridge_{mode}.py"
+    script.write_text(body or FAKE_BRIDGE, encoding="utf-8")
     if os.name == "nt":
-        cmd = tmp / "fake-officecli.cmd"
-        cmd.write_text(f'@echo off\r\n"{sys.executable}" "{script}" %*\r\n',
-                       encoding="utf-8")
+        cmd = tmp / f"fake-officecli-{mode}.cmd"
+        cmd.write_text(
+            f'@echo off\r\nset FAKE_BRIDGE_MODE={mode}\r\n'
+            f'"{sys.executable}" "{script}" %*\r\n',
+            encoding="utf-8")
         return str(cmd)
-    sh = tmp / "fake-officecli"
-    sh.write_text(f'#!/bin/sh\nexec "{sys.executable}" "{script}" "$@"\n',
-                  encoding="utf-8")
+    sh = tmp / f"fake-officecli-{mode}"
+    sh.write_text(
+        f'#!/bin/sh\nexport FAKE_BRIDGE_MODE={mode}\n'
+        f'exec "{sys.executable}" "{script}" "$@"\n',
+        encoding="utf-8")
     sh.chmod(0o755)
     return str(sh)
 
@@ -153,6 +186,53 @@ class AgentBridgeV17(unittest.TestCase):
                 self.assertTrue(any(
                     e.get("method") == "event" for e in bridge.events
                 ))  # interleaved notifications were drained, not lost
+            finally:
+                bridge.close()
+
+    def test_async_polling_via_task_status(self) -> None:
+        """task/invoke → running; completion must come from task/status."""
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            bridge = AgentBridgeBackend(_make_fake_bridge(tmp, mode="async"))
+            try:
+                out = tmp / "async.pptx"
+                payload = {"title": "Async", "stylePreset": "b",
+                           "theme": None, "slides": []}
+                status = bridge.render_pptx(payload, out, timeout_s=30)
+                self.assertEqual(status["status"], "completed")
+                self.assertTrue(out.exists())
+            finally:
+                bridge.close()
+
+    def test_unknown_terminal_status_is_a_failure(self) -> None:
+        """'completed-shaped' but unknown states must not pass as success."""
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            bridge = AgentBridgeBackend(_make_fake_bridge(tmp, mode="weird"))
+            try:
+                payload = {"title": "Weird", "stylePreset": "b",
+                           "theme": None, "slides": []}
+                with self.assertRaisesRegex(BackendUnavailable,
+                                            "did not report success"):
+                    bridge.render_pptx(payload, tmp / "w.pptx", timeout_s=30)
+            finally:
+                bridge.close()
+
+    def test_silent_bridge_times_out_instead_of_hanging(self) -> None:
+        """A live-but-mute bridge must raise within the call timeout."""
+        import time as _time
+
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            bridge = AgentBridgeBackend(
+                _make_fake_bridge(tmp, mode="silent", body=FAKE_SILENT),
+                call_timeout=3.0,
+            )
+            start = _time.monotonic()
+            try:
+                with self.assertRaisesRegex(BackendUnavailable, "no response"):
+                    bridge.capabilities()
+                self.assertLess(_time.monotonic() - start, 15.0)
             finally:
                 bridge.close()
 

@@ -30,7 +30,9 @@ function Test-OfficialBinary([string]$exe) {
 $officialExe = $null
 # NOTE: "officecli-official", never "officecli" — Windows paths are
 # case-insensitive and "officecli\" would clobber the legacy "OfficeCLI\" dir.
-foreach ($cand in @((Get-Command officecli -ErrorAction SilentlyContinue)?.Source,
+$pathCmd = Get-Command officecli -ErrorAction SilentlyContinue
+$pathCand = if ($pathCmd) { $pathCmd.Source } else { $null }
+foreach ($cand in @($pathCand,
                     (Join-Path $env:LOCALAPPDATA "officecli-official\officecli.exe"))) {
     if ($cand -and (Test-Path $cand) -and (Test-OfficialBinary $cand)) { $officialExe = $cand; break }
 }
@@ -38,8 +40,11 @@ if (-not $officialExe) {
     Write-Host "official officecli not found — trying npm install -g officecli"
     try {
         npm install -g officecli 2>$null | Out-Null
+        # native exit codes do NOT throw in PS5.1 — verify explicitly
         $npmShim = Join-Path $env:APPDATA "npm\officecli.cmd"
-        if ((Test-Path $npmShim) -and (Test-OfficialBinary $npmShim)) { $officialExe = $npmShim }
+        if ($LASTEXITCODE -eq 0 -and (Test-Path $npmShim) -and
+            (Test-OfficialBinary $npmShim)) { $officialExe = $npmShim }
+        elseif ($LASTEXITCODE -ne 0) { Write-Warning "npm install failed (exit $LASTEXITCODE)" }
     } catch {}
 }
 if (-not $officialExe) {
@@ -49,9 +54,11 @@ if (-not $officialExe) {
     try {
         gh release download -R officecli/officecli-dist --pattern "*windows_amd64.tar.gz" `
             --dir $dst --clobber 2>$null
+        if ($LASTEXITCODE -ne 0) { throw "gh release download failed (exit $LASTEXITCODE)" }
         $tarball = Get-ChildItem $dst -Filter "officecli_*_windows_amd64.tar.gz" |
             Sort-Object LastWriteTime -Descending | Select-Object -First 1
         tar -xzf $tarball.FullName -C $dst
+        if ($LASTEXITCODE -ne 0) { throw "tar extraction failed (exit $LASTEXITCODE)" }
         if (Test-OfficialBinary (Join-Path $dst "officecli.exe")) {
             $officialExe = Join-Path $dst "officecli.exe"
         }
@@ -69,7 +76,8 @@ if ($officialExe) {
 # --- 2. official base skill ---------------------------------------------------
 if (-not $SkipBaseSkills) {
     $claudeBase = Join-Path $env:USERPROFILE ".claude\skills\officecli"
-    $bash = (Get-Command bash -ErrorAction SilentlyContinue)?.Source
+    $bashCmd = Get-Command bash -ErrorAction SilentlyContinue
+    $bash = if ($bashCmd) { $bashCmd.Source } else { $null }
     if ($bash -and -not (Test-Path (Join-Path $claudeBase "SKILL.md"))) {
         Write-Host "running official install-skill.sh (officecli base skill)"
         try {
@@ -112,6 +120,9 @@ New-Item -ItemType Directory -Force $promptDir | Out-Null
 Copy-Item (Join-Path $repo "commands\designmd-pptx.md") (Join-Path $promptDir "designmd-pptx.md") -Force
 
 pip install -r (Join-Path $skillDst "python\requirements.txt")
+if ($LASTEXITCODE -ne 0) {
+    throw "pip install failed (exit $LASTEXITCODE) — install PyYAML manually: pip install PyYAML"
+}
 
 Write-Host "Installed skill: $skillDst"
 Write-Host 'Verify everything: python -m designmd_pptx doctor'

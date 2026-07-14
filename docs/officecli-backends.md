@@ -40,9 +40,11 @@ OfficeCliBackend (ABC)
 │     wraps the legacy binary: create/open/batch/save/validate/issues/
 │     screenshot/close; all subprocess + stdout parsing lives HERE only
 └── AgentBridgeBackend    — outline path (render command)
-      speaks JSON-RPC 2.0 (initialize, capabilities/get, session/open,
-      task/invoke, task/respond, task/status, session/close) and maps a
-      designmd deck-spec / compose brief onto the office.render payload
+      speaks JSON-RPC 2.0 over stdio (Content-Length framing) and maps a
+      designmd deck-spec / compose brief onto the office.render payload.
+      Client implements: initialize, capabilities/get, task/invoke,
+      task/status. (task/respond, task/cancel and session/* exist in the
+      bridge protocol but are not needed by our render flow.)
 ```
 
 Selection is **capability-first** (issue #26): each backend probes before it
@@ -53,13 +55,16 @@ a verb exists.
 
 ### When is which backend used?
 
-- `scaffold` / `apply` / `restyle` / `master` / `extract`: **LegacyBatchBackend**
-  (shape-level fidelity is the product). Fails with a clear install remedy
-  when the legacy binary is missing.
+- `apply` and `scaffold --apply` (materialization, validate/issues gate,
+  Gate 3 screenshots): **LegacyBatchBackend** — shape-level fidelity is the
+  product. Fails with a clear install remedy when the legacy binary is
+  missing.
 - `render` (v1.7): **AgentBridgeBackend** — quick outline→deck generation
   through the official `office.render`, honoring the official skill's
   guidance (structured JSON-RPC, no stdout parsing, capability fields
   cached from `capabilities/get`).
+- `extract` / `restyle` / `master` / `compose` and scaffold's recipe
+  generation are **pure Python** (stdlib zip/XML) — no OfficeCLI needed.
 
 ## Windows install notes (issue #29)
 
@@ -75,5 +80,7 @@ a verb exists.
   direct-download location.
 - Reliable fallback: download the platform asset from
   `github.com/officecli/officecli-dist` releases directly.
-- Minimum supported official version: **0.2.117** (first version verified
-  against this backend contract).
+- Verified against official version **0.2.117** (the wire contract —
+  `{tool, args}` envelope, `out`-as-directory, theme object — was probed on
+  that build; `doctor` reports the installed version, older builds are
+  untested rather than blocked).
