@@ -1,53 +1,28 @@
-"""Apply recipe JSON via officecli batch with staging-safe overwrite (v1.1)."""
+"""Apply recipe JSON with staging-safe overwrite (v1.7: backend-abstracted).
+
+All OfficeCLI subprocess/stdout handling lives in backend.LegacyBatchBackend
+(issue #27); this module owns only the staging-safe orchestration: build into
+a sibling temp file, validate + issues gate + Gate 3 screenshot, then atomic
+replace. The destination is never deleted before success.
+"""
 
 from __future__ import annotations
 
 import json
 import os
 import re
-import shutil
-import subprocess
 import sys
-import tempfile
+import time
 import uuid
 from pathlib import Path
 
+from .backend import BackendUnavailable, LegacyBatchBackend, _issues_are_clean
+from .backend import find_binaries
+
 
 def find_officecli() -> str | None:
-    return shutil.which("officecli")
-
-
-def _run(exe: str, args: list[str], *, input_text: str | None = None) -> subprocess.CompletedProcess:
-    return subprocess.run(
-        [exe, *args],
-        input=input_text,
-        capture_output=True,
-        text=True,
-        check=False,
-        encoding="utf-8",
-        errors="replace",
-    )
-
-
-def _issues_are_clean(stdout: str) -> bool:
-    text = stdout or ""
-    if re.search(r"Found\s+0\s+issue", text, re.I):
-        return True
-    if re.search(r"\[[OCSF]\d+\]", text):
-        return False
-    # JSON path if present
-    if '"Count"' in text or '"count"' in text:
-        m = re.search(r'"Count"\s*:\s*(\d+)', text) or re.search(r'"count"\s*:\s*(\d+)', text)
-        if m:
-            return int(m.group(1)) == 0
-    if "issue" in text.lower() and re.search(r"\b0\b", text):
-        return True
-    # empty / no issues phrasing
-    if not text.strip():
-        return True
-    if "no issue" in text.lower():
-        return True
-    return "Found" not in text
+    """Back-compat helper: path of the legacy (shape-level) binary."""
+    return find_binaries().get("legacy")
 
 
 def apply_sequence(
@@ -59,6 +34,7 @@ def apply_sequence(
     require_clean_issues: bool = True,
     screenshot: bool = False,
     gate3: bool = False,
+    backend: LegacyBatchBackend | None = None,
 ) -> None:
     """
     Materialize deck.sequence.json into pptx.
@@ -73,18 +49,21 @@ def apply_sequence(
     if not isinstance(ops, list):
         raise ValueError("sequence JSON must be a list of batch operations")
 
-    exe = find_officecli()
-    if not exe:
-        raise RuntimeError(
-            "officecli not found on PATH. Install: "
-            "https://github.com/iOfficeAI/OfficeCLI/releases"
-        )
-
     dest_exists = pptx.exists()
     if dest_exists and not force:
         raise FileExistsError(
             f"{pptx} already exists. Pass force=True / --force to overwrite."
         )
+
+    be = backend or LegacyBatchBackend()
+    if not be.available():
+        raise BackendUnavailable(
+            "legacy OfficeCLI not found on PATH. Install: "
+            "https://github.com/iOfficeAI/OfficeCLI/releases "
+            "(the official officecli npm package is outline-only and cannot "
+            "run the shape-level pipeline — see docs/officecli-backends.md)"
+        )
+    be.require("create", "open", "batch", "save", "validate", "view", "close")
 
     # Always build into staging when creating or overwriting
     staging = pptx
@@ -100,19 +79,18 @@ def apply_sequence(
 
     try:
         if create:
-            r = _run(exe, ["create", str(staging)])
+            r = be.create(staging)
             if r.returncode != 0:
                 raise RuntimeError(f"officecli create failed: {r.stderr or r.stdout}")
 
-        r = _run(exe, ["open", str(staging)])
+        r = be.open(staging)
         if r.returncode != 0:
             raise RuntimeError(f"officecli open failed: {r.stderr or r.stdout}")
 
         # Prefer file input over stdin (UTF-8 safe on Windows PowerShell)
-        r = _run(exe, ["batch", str(staging), str(batch_file)])
+        r = be.batch(staging, batch_file)
         if r.returncode != 0:
-            # fallback: stdin
-            r2 = _run(exe, ["batch", str(staging)], input_text=json.dumps(ops))
+            r2 = be.batch_stdin(staging, ops)
             if r2.returncode != 0:
                 sys.stderr.write(r.stdout or "")
                 sys.stderr.write(r.stderr or "")
@@ -128,33 +106,32 @@ def apply_sequence(
             if m and int(m.group(1)) > 0:
                 raise RuntimeError("officecli batch reported failed ops")
 
-        r = _run(exe, ["save", str(staging)])
+        r = be.save(staging)
         if r.returncode != 0:
             raise RuntimeError(f"officecli save failed: {r.stderr or r.stdout}")
 
-        r = _run(exe, ["validate", str(staging)])
+        r = be.validate(staging)
         print(r.stdout or "")
         if r.returncode != 0:
             sys.stderr.write(r.stderr or "")
             raise RuntimeError("officecli validate failed")
 
-        r = _run(exe, ["view", str(staging), "issues"])
-        issues_out = (r.stdout or "") + (r.stderr or "")
+        issues_out = be.issues_output(staging)
         print(issues_out)
-        if require_clean_issues and not _issues_are_clean(issues_out):
+        if require_clean_issues and not be.issues_clean(issues_out):
             raise RuntimeError(
                 "officecli view issues reported problems — fix recipes before delivery"
             )
 
         # close staging if possible (ignore errors)
-        _run(exe, ["close", str(staging)])
+        be.close(staging)
 
         # Gate 3 runs on the STAGING copy, before the destination is replaced —
         # a deck whose contact sheet cannot even render never ships (--gate3).
         shot: Path | None = None
         if screenshot or gate3:
             shot = pptx.with_suffix(".contact.png")
-            r = _run(exe, ["view", str(staging), "screenshot", "--grid", "-o", str(shot)])
+            r = be.screenshot(staging, shot)
             if r.returncode != 0 or not shot.exists():
                 msg = (
                     "Gate 3 screenshot failed: "
@@ -166,7 +143,7 @@ def apply_sequence(
                 shot = None
             # the screenshot view starts its own resident on staging —
             # release it before the atomic replace (Windows locks the file)
-            _run(exe, ["close", str(staging)])
+            be.close(staging)
 
         if staged:
             if dest_exists and not force:
@@ -174,8 +151,6 @@ def apply_sequence(
                 raise FileExistsError(str(pptx))
             # atomic replace onto destination; brief retry for lingering
             # resident file locks on Windows
-            import time
-
             for attempt in range(10):
                 try:
                     os.replace(str(staging), str(pptx))
@@ -200,10 +175,13 @@ def apply_sequence(
             pass
         if staged and staging.exists() and staging != pptx:
             try:
-                _run(exe, ["close", str(staging)])
+                be.close(staging)
             except Exception:
                 pass
             try:
                 staging.unlink()
             except OSError:
                 pass
+
+
+__all__ = ["apply_sequence", "find_officecli", "_issues_are_clean"]

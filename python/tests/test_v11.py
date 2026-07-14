@@ -26,8 +26,8 @@ from designmd_pptx import apply as apply_mod  # noqa: E402
 
 class Version(unittest.TestCase):
     def test_package_and_compiler_1_1(self):
-        self.assertTrue(__version__.startswith("1.6"))
-        self.assertTrue(COMPILER_VERSION.startswith("1.6"))
+        self.assertTrue(__version__.startswith("1.7"))
+        self.assertTrue(COMPILER_VERSION.startswith("1.7"))
 
 
 class ColorV11(unittest.TestCase):
@@ -87,7 +87,7 @@ class CompileVarFixture(unittest.TestCase):
     def test_var_oklch_fixture(self):
         path = ROOT / "fixtures" / "var-oklch.DESIGN.md"
         tokens = compile_design_md(path, brand="VarOKLCH")
-        self.assertTrue(tokens["compiler"]["version"].startswith("1.6"))
+        self.assertTrue(tokens["compiler"]["version"].startswith("1.7"))
         self.assertEqual(tokens["colors"]["accent"], "0B5FFF")
         self.assertTrue(tokens["dark_first"])
         self.assertIn("image_text_2col", tokens["patterns"])
@@ -205,18 +205,24 @@ class ApplyStaging(unittest.TestCase):
             self.assertEqual(pptx.read_bytes(), b"existing")
 
     def test_staging_replace_on_success(self):
+        """v1.7: subprocess handling lives in LegacyBatchBackend (#27) —
+        inject a faked backend instead of patching module internals."""
+        from designmd_pptx.backend import LegacyBatchBackend
+
         calls: list[list[str]] = []
 
-        def fake_run(exe, args, input_text=None):
-            calls.append(list(args))
-            # Simulate success for all
-            class R:
-                returncode = 0
-                stdout = "Found 0 issue(s):\n"
-                stderr = ""
+        class R:
+            returncode = 0
+            stdout = "Found 0 issue(s):\n"
+            stderr = ""
 
-            if args and args[0] == "view":
-                R.stdout = "Found 0 issue(s):\n"
+        be = LegacyBatchBackend(exe="officecli-fake")
+        be._verbs = {"create", "open", "batch", "save", "validate", "view", "close"}
+
+        def fake_run(args, input_text=None):
+            calls.append(list(args))
+            if args and args[0] == "create":
+                Path(args[1]).write_bytes(b"NEW")
             return R()
 
         with tempfile.TemporaryDirectory() as td:
@@ -225,24 +231,14 @@ class ApplyStaging(unittest.TestCase):
             pptx.write_bytes(b"OLD")
             seq = td_path / "deck.sequence.json"
             seq.write_text("[]", encoding="utf-8")
-            with mock.patch.object(apply_mod, "find_officecli", return_value="officecli"):
-                with mock.patch.object(apply_mod, "_run", side_effect=fake_run):
-                    # create=True force=True will stage then replace
-                    # But create writes staging via officecli create — we need
-                    # to create staging file when create is called
-                    real_run = fake_run
-
-                    def run_create_file(exe, args, input_text=None):
-                        if args and args[0] == "create":
-                            Path(args[1]).write_bytes(b"NEW")
-                        return real_run(exe, args, input_text)
-
-                    with mock.patch.object(apply_mod, "_run", side_effect=run_create_file):
-                        apply_mod.apply_sequence(
-                            pptx, seq, create=True, force=True, require_clean_issues=True
-                        )
+            with mock.patch.object(be, "run", side_effect=fake_run):
+                apply_mod.apply_sequence(
+                    pptx, seq, create=True, force=True,
+                    require_clean_issues=True, backend=be,
+                )
             self.assertTrue(pptx.exists())
             self.assertEqual(pptx.read_bytes(), b"NEW")
+            self.assertIn("validate", [c[0] for c in calls])
 
 
 if __name__ == "__main__":

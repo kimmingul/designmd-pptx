@@ -1,9 +1,9 @@
 ---
 name: officecli-pptx-designmd
-description: "designmd-pptx v1.6: compile awesome-design-md / Stitch DESIGN.md into officecli PPTX tokens, ordered decks, staging-safe apply; compose markdown briefs into deck-specs; constraint-based layout engine with density adaptation for text-heavy patterns; extract existing pptx into a deck-spec draft (geometry-aware); restyle existing pptx with brand tokens (font-role aware); brand slide masters/layouts and export pruned .potx templates; 20 slide patterns; CJK-aware text-fit validation; Gate 3 screenshot gating. Trigger on DESIGN.md, getdesign.md, brand design for slides, deck outline, restyle deck, modernize slides, slide master, potx template, /designmd-pptx, /officecli-pptx-designmd."
+description: "designmd-pptx v1.7: compile awesome-design-md / Stitch DESIGN.md into officecli PPTX tokens, ordered decks, staging-safe apply; compose markdown briefs into deck-specs; constraint-based layout engine with density adaptation for text-heavy patterns; extract existing pptx into a deck-spec draft (geometry-aware); restyle existing pptx with brand tokens (font-role aware); brand slide masters/layouts and export pruned .potx templates; 20 slide patterns; CJK-aware text-fit validation; Gate 3 screenshot gating; render quick drafts via the official officecli agent-bridge. Trigger on DESIGN.md, getdesign.md, brand design for slides, deck outline, restyle deck, modernize slides, slide master, potx template, /designmd-pptx, /officecli-pptx-designmd."
 ---
 
-# officecli-pptx-designmd (v1.6)
+# officecli-pptx-designmd (v1.7)
 
 ## Locate the toolkit
 
@@ -69,7 +69,22 @@ python -m designmd_pptx master deck.pptx DESIGN.md --potx brand.potx [--empty-po
 python -m designmd_pptx scaffold default -o out/deck --content deck.json --apply --force --screenshot  # v1.4
 python -m designmd_pptx doctor            # v1.4: verify officecli + skill routing
 python -m designmd_pptx compose brief.md -o composed/ --design default   # v1.5: outline → deck-spec
+python -m designmd_pptx render brief.md -o out/draft.pptx --design default  # v1.7: quick draft via official agent-bridge
 ```
+
+## Backends (v1.7)
+
+Two OfficeCLI generations, one contract (`docs/officecli-backends.md`):
+
+- **Precision path** (scaffold/apply/restyle/master/extract) → legacy
+  shape-level binary. DESIGN.md-exact geometry, glued connectors, Gate 3.
+- **Draft path** (`render`) → official `officecli` agent-bridge
+  (JSON-RPC 2.0, capability-first: `initialize` → `capabilities/get` →
+  `office.render`). Outline-level fidelity; `--design` carries brand colors
+  and fonts into the bridge theme, including the CJK font slot.
+
+Pick by need: precise brand deck → compose → scaffold; quick draft to react
+to → render. `doctor` shows which backends this machine has.
 
 ## Authoring flow (v1.5)
 
@@ -120,4 +135,7 @@ hex, rgb/hsl, oklch (approx), color-mix, var(--token), linear-gradient (2-stop o
 ## Requires
 
 - Python 3.10+ with PyYAML (`pip install -r <python root>/requirements.txt`)
-- Optional: [officecli](https://github.com/iOfficeAI/OfficeCLI) for materializing `.pptx`
+- Optional, for materializing `.pptx`: legacy shape-level binary
+  ([iOfficeAI/OfficeCLI releases](https://github.com/iOfficeAI/OfficeCLI/releases))
+  for scaffold/apply, and/or official [officecli](https://github.com/officecli/officecli)
+  ≥ 0.2.117 for the `render` command (agent-bridge). `doctor` reports both.

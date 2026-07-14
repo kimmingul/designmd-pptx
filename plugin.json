@@ -1,6 +1,6 @@
 {
   "name": "designmd-pptx",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "DESIGN.md → officecli PPTX compiler for agentic AI: compose markdown briefs into decks, extract/restyle existing decks, brand slide masters, Gate 3 screenshot QA. Grok Build manifest of the multi-platform (Claude Code / Codex / Grok) plugin.",
   "author": {
     "name": "Min-Gul Kim",

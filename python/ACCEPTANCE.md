@@ -1,5 +1,18 @@
 # designmd-pptx — Definition of Done
 
+## v1.7 acceptance criteria (issues #25–#30)
+
+| # | Criterion | Evidence |
+|---|---|---|
+| 1 | Package/compiler **1.7.x** | `__version__`, `COMPILER_VERSION` |
+| 2 | (#27) OfficeCliBackend ABC; ALL subprocess/stdout-regex in LegacyBatchBackend; AgentBridgeBackend speaks JSON-RPC 2.0 / Content-Length | `backend.py` + `tests/test_v17.py` |
+| 3 | (#28) agent-bridge adopted where the payload schema allows: `render` command via office.render (envelope `{tool, args}` verified on 0.2.117, async task polling, artifact relocation); why legacy batch remains = docs/officecli-backends.md + upstream issue | AgentBridgeV17 + E2E |
+| 4 | (#26) capability-first: bridge `initialize`→`capabilities/get`, legacy verb probe before use; doctor runs version/config status/bridge probe/check-officecli-env.sh; graceful BackendUnavailable messages | LegacyBackendV17 + doctor |
+| 5 | (#25) refs: primary links → officecli/officecli; skill detection = base `officecli` + designmd extension, `officecli-pptx` legacy fallback; iOfficeAI links only in legacy-fallback contexts | README/AGENTS/SKILL/doctor |
+| 6 | (#29) install-codex.ps1: official npm → officecli-dist download → official install-skill.sh, copy fallback demoted with warning; case-insensitive dir collision documented and avoided | installer + docs |
+| 7 | (#30) README/SKILL.md document the two-backend architecture, min official version 0.2.117, capability-first philosophy | Architecture section |
+| 8 | Brand tokens carry into bridge theme (incl. eaFontFamily CJK slot) | PayloadMappingV17 + E2E Korean draft |
+
 ## v1.6 acceptance criteria
 
 | # | Criterion | Evidence |
