@@ -6,9 +6,9 @@
       "min": "0.2.117",
       "recommended": "0.2.117",
       "max_tested": "0.2.117",
-      "install": "npm install -g officecli@0.2.117",
+      "install": "python -m designmd_pptx doctor --install  # officecli-dist v0.2.117 (npm registry often lags; max npm as of v2.0 is 0.2.106)",
       "capabilities": ["document_generation.pptx", "office.render"],
-      "note": "Official officecli/officecli agent-bridge (JSON-RPC). 'min' is the first version whose agent-bridge payload schema this project targets; 'max_tested' is the exact version CI pins."
+      "note": "Official officecli/officecli agent-bridge (JSON-RPC). Pin ships as GitHub officecli-dist release assets, not always on npm. 'min' is the first version whose agent-bridge payload schema this project targets; 'max_tested' is the exact version CI/doctor pins."
     },
     "legacy": {
       "min": null,

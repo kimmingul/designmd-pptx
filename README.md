@@ -1,12 +1,12 @@
 # designmd-pptx
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.7.1-brightgreen)](plugin.json)
-[![v2.0 roadmap](https://img.shields.io/badge/v2.0-Phase%200%20%26%201%20done-blue)](https://github.com/kimmingul/designmd-pptx/milestones)
+[![Version](https://img.shields.io/badge/version-2.0.0-brightgreen)](plugin.json)
+[![Release](https://img.shields.io/badge/release-v2.0.0-blue)](https://github.com/kimmingul/designmd-pptx/releases/tag/v2.0.0)
 
-**awesome-design-md / Stitch `DESIGN.md` → [OfficeCLI](https://github.com/officecli/officecli) PPTX** — packaged for **Claude Code, OpenAI Codex, and Grok Build** (v1.7).
+**awesome-design-md / Stitch `DESIGN.md` → [OfficeCLI](https://github.com/officecli/officecli) PPTX** — packaged for **Claude Code, OpenAI Codex, and Grok Build** (**v2.0**).
 
-Drop a brand `DESIGN.md` in, scaffold an ordered deck, and materialize slides with staging-safe apply. v1.2 added the reverse path (extract / restyle existing decks); v1.3 slide-master branding + .potx export; v1.4 default house style, doctor, screenshot QA; v1.5 the compose compiler, CJK text-fit, 20 patterns, hard Gate 3; v1.6 the constraint-based layout engine + template polish. **v1.7** adopts the new official OfficeCLI ecosystem: an abstracted **backend layer** (legacy shape-level batch + official **agent-bridge** JSON-RPC), capability-first detection, a **`render`** command for quick outline→deck drafts through `office.render`, and official-installer-first setup.
+Drop a brand `DESIGN.md` in, scaffold an ordered deck, and materialize slides with staging-safe apply. v1.x delivered reverse extract/restyle, masters/.potx, compose, layout engine, dual OfficeCLI backends, and `render`. **v2.0** is the production release: version-locked `doctor --install` (officecli-dist pin), WCAG a11y gate, before/after benchmark harness, maturity docs/gallery, and a green CI fixture suite.
 
 ## What you get
 
@@ -39,7 +39,7 @@ version elsewhere; edit the manifest.
 
 | Backend | Min supported | Pinned / max tested | Install |
 |---|---|---|---|
-| official (agent-bridge) | `0.2.117` | `0.2.117` | `npm install -g officecli@0.2.117` |
+| official (agent-bridge) | `0.2.117` | `0.2.117` | `python -m designmd_pptx doctor --install` (officecli-dist; npm often lags) |
 | legacy (shape-level) | any (verb-gated) | rolling | [iOfficeAI/OfficeCLI releases](https://github.com/iOfficeAI/OfficeCLI/releases) |
 
 `python -m designmd_pptx doctor` reports the exact detected version and whether
@@ -233,16 +233,19 @@ npm test        # python -m unittest discover -s python/tests -v
 - ~~Template polish~~ — v1.6: `--empty-potx` media GC + `master --layouts` slot-mapped layout branding.
 - ~~Dual OfficeCLI backends + `render`~~ — v1.7: legacy shape-level + official agent-bridge, capability-first.
 
-### v2.0 — in progress ([milestones](https://github.com/kimmingul/designmd-pptx/milestones))
+### v2.0 — shipped
 
-Sequenced into six phases (see [issues](https://github.com/kimmingul/designmd-pptx/issues)). Each item is branch → build → verify (unit + real-deck OfficeCLI `validate`/`view issues` + adversarial review) → CI → merge.
+Phases 0–4 complete. See [CHANGELOG](CHANGELOG.md) and [docs/maturity-roadmap.md](docs/maturity-roadmap.md).
 
-- ✅ **Phase 0 — Foundation** — ~~#8~~ OfficeCLI version contract + 3-OS CI, ~~#16~~ lxml/OPC namespace-aware editing (replaces regex-on-XML), ~~#33~~ `pip install designmd-pptx` (self-contained wheel), ~~#36~~ PII-anonymization + validation-corpus pipeline.
-- ✅ **Phase 1 — Deterministic core** — ~~#11~~ DESIGN.md schema v2 (composition/charts/tables/images/master tokens), ~~#17~~ table auto-split to continuation slides, ~~#13~~ semantic-preserving restyle colors, ~~#9~~ layout-engine expansion (9/20 patterns engine-solved + geometry-contract harness + typed overflow policy).
-- ✅ **Phase 2 — Fidelity** — #59 Infograpify reference, #58 premium patterns (10), #12 extract fidelity + loss ledger, #10 domain patterns (shipped in #65).
-- ✅ **Phase 3 — Intelligence adapters** — #18 LLM narrative planner (`compose --llm`); #14 vision Gate 3 (`apply --vision` / `--gate3-vision`, offline + `DESIGNMD_VISION_CMD`; default apply path unchanged).
-- ✅ **Phase 4 — v2.0 release** — packaging/install (#34), a11y (#39), benchmark harness + thresholds (#37), maturity/checklist/templates (#38), docs/gallery/migration (#41), CONTRIBUTING/governance (#43). Fixture benchmark runs in CI; full 50-deck held-out corpus is methodology-ready (assets optional — see [docs/maturity-roadmap.md](docs/maturity-roadmap.md)).
-- 🔮 **Phase 5 — v2.1** — iterative visual refinement (#19), chart/table reconstruction (#22), generative layout (#21), animation (#40), editor integration (#44/#45), Windows installer (#35).
+- ✅ **Phase 0 — Foundation** — OfficeCLI version contract + 3-OS CI, lxml/OPC, pip package, corpus/anonymize.
+- ✅ **Phase 1 — Deterministic core** — DESIGN.md schema v2, table auto-split, semantic restyle, layout-engine expansion.
+- ✅ **Phase 2 — Fidelity** — Infograpify reference, premium + domain patterns, extract loss ledger.
+- ✅ **Phase 3 — Intelligence adapters** — `compose --llm`, vision Gate 3.
+- ✅ **Phase 4 — v2.0 release** — `doctor --install` (officecli-dist pin), a11y, benchmark, docs/gallery/governance.
+
+### Next: v2.1 (Phase 5)
+
+Iterative visual refinement (#19), chart/table reconstruction (#22), generative layout (#21), animation (#40), editor integration (#44/#45), Windows installer (#35), larger public benchmark (#42).
 
 ## License
 

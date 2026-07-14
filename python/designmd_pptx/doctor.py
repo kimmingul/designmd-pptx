@@ -10,9 +10,14 @@ identified by probing, never by name — see docs/officecli-backends.md."""
 from __future__ import annotations
 
 import os
+import platform
 import shutil
 import subprocess
 import sys
+import tarfile
+import tempfile
+import urllib.error
+import urllib.request
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable
@@ -29,12 +34,31 @@ _LEGACY_REMEDY = (
 )
 _OFFICIAL_REMEDY = (
     "run `python -m designmd_pptx doctor --install` (pins the official "
-    "officecli from compatibility.json) — or set OFFICECLI_BRIDGE_BIN; "
-    "fallback download: https://github.com/officecli/officecli-dist/releases"
+    "officecli from compatibility.json via officecli-dist) — or set "
+    "OFFICECLI_BRIDGE_BIN"
 )
 
-# Injected by tests; production uses subprocess.run.
+# Injected by tests; production uses subprocess.run / urllib.
 _RUN_INSTALL: Callable[..., subprocess.CompletedProcess] | None = None
+_URLOPEN: Callable[..., object] | None = None
+
+# Cross-platform default install dir (mirrors Windows officecli-official/).
+# Must NOT be named plain "officecli" on case-insensitive FS (legacy collision).
+def official_install_dir() -> Path:
+    if os.name == "nt":
+        return Path.home() / "AppData" / "Local" / "officecli-official"
+    xdg = os.environ.get("XDG_DATA_HOME")
+    if xdg:
+        return Path(xdg) / "designmd-pptx" / "officecli-official"
+    return Path.home() / ".local" / "share" / "designmd-pptx" / "officecli-official"
+
+
+def official_bin_name() -> str:
+    return "officecli.exe" if os.name == "nt" else "officecli"
+
+
+def official_install_bin() -> Path:
+    return official_install_dir() / official_bin_name()
 
 
 def _run(exe: str, *args: str, timeout: int = 30) -> tuple[int, str]:
@@ -162,21 +186,41 @@ class InstallStep:
     downloads: str  # what package / URL this pulls
 
 
-def _official_install_argv(spec: dict) -> tuple[str, ...]:
-    """Prefer parsing the manifest install string; fall back to recommended pin."""
-    install = (spec.get("install") or "").strip()
-    if install:
-        # e.g. "npm install -g officecli@0.2.117"
-        parts = install.split()
-        if parts:
-            return tuple(parts)
-    pinned = spec.get("recommended") or spec.get("min") or "0.2.117"
-    return ("npm", "install", "-g", f"officecli@{pinned}")
+def _platform_triple() -> str:
+    """Map host to officecli-dist asset triple (e.g. darwin_arm64)."""
+    sys_name = platform.system().lower()
+    mach = platform.machine().lower()
+    if sys_name == "darwin":
+        os_id = "darwin"
+    elif sys_name == "linux":
+        os_id = "linux"
+    elif sys_name == "windows" or os.name == "nt":
+        os_id = "windows"
+    else:
+        os_id = sys_name
+    if mach in ("x86_64", "amd64"):
+        arch = "amd64"
+    elif mach in ("arm64", "aarch64"):
+        arch = "arm64"
+    else:
+        arch = mach
+    return f"{os_id}_{arch}"
+
+
+def dist_asset_url(version: str, triple: str | None = None) -> str:
+    """HTTPS URL for the pinned officecli-dist tarball."""
+    triple = triple or _platform_triple()
+    ver = version.lstrip("v")
+    name = f"officecli_{ver}_{triple}.tar.gz"
+    return (
+        f"https://github.com/officecli/officecli-dist/releases/download/"
+        f"v{ver}/{name}"
+    )
 
 
 def _official_needs_install() -> tuple[bool, str]:
     """(needed, reason) for the official pin from compatibility.json."""
-    exe = find_binaries().get("official")
+    exe = find_binaries(refresh=True).get("official")
     spec = compat.spec_for("official")
     pinned = spec.get("recommended") or spec.get("min") or "?"
     if not exe:
@@ -198,41 +242,114 @@ def _pyyaml_needs_install() -> tuple[bool, str]:
     return True, "PyYAML not importable"
 
 
+def install_official_from_dist(
+    version: str | None = None,
+    *,
+    dest_dir: Path | None = None,
+) -> tuple[bool, str]:
+    """Download + extract the pinned official binary from officecli-dist.
+
+    npm registry often lags behind the dist pin (e.g. npm max 0.2.106 while
+    compatibility.json pins 0.2.117). Dist is the version-locked path.
+    """
+    spec = compat.spec_for("official")
+    ver = (version or spec.get("recommended") or spec.get("min") or "0.2.117").lstrip("v")
+    dest = dest_dir or official_install_dir()
+    dest.mkdir(parents=True, exist_ok=True)
+    url = dist_asset_url(ver)
+    open_fn = _URLOPEN or urllib.request.urlopen
+    try:
+        with open_fn(url, timeout=120) as resp:  # type: ignore[arg-type]
+            data = resp.read()
+    except (urllib.error.URLError, TimeoutError, OSError) as e:
+        return False, f"download failed: {url} ({e})"
+    if len(data) < 64:
+        return False, f"download too small ({len(data)} bytes) from {url}"
+
+    bin_name = official_bin_name()
+    try:
+        with tempfile.TemporaryDirectory() as td:
+            tgz = Path(td) / "officecli.tgz"
+            tgz.write_bytes(data)
+            with tarfile.open(tgz, "r:gz") as tf:
+                # Python 3.12+ filter; tolerate older
+                try:
+                    tf.extractall(td, filter=tarfile.data_filter)  # type: ignore[arg-type]
+                except (AttributeError, TypeError):
+                    tf.extractall(td)
+            found: Path | None = None
+            for p in Path(td).rglob(bin_name):
+                if p.is_file():
+                    found = p
+                    break
+            if found is None:
+                # some archives ship bare 'officecli' without extension even on win
+                for p in Path(td).rglob("officecli*"):
+                    if p.is_file() and not p.name.endswith(".tar.gz"):
+                        found = p
+                        break
+            if found is None:
+                return False, f"archive has no {bin_name} binary"
+            target = dest / bin_name
+            shutil.copy2(found, target)
+            if os.name != "nt":
+                target.chmod(target.stat().st_mode | 0o111)
+    except (tarfile.TarError, OSError) as e:
+        return False, f"extract failed: {e}"
+
+    # Optional convenience symlink into ~/.local/bin when writable
+    link_note = ""
+    local_bin = Path.home() / ".local" / "bin"
+    try:
+        local_bin.mkdir(parents=True, exist_ok=True)
+        link = local_bin / bin_name
+        if link.exists() or link.is_symlink():
+            try:
+                link.unlink()
+            except OSError:
+                pass
+        try:
+            link.symlink_to(target)
+            link_note = f"; linked {link} → {target}"
+        except OSError:
+            # copy as fallback
+            shutil.copy2(target, link)
+            if os.name != "nt":
+                link.chmod(link.stat().st_mode | 0o111)
+            link_note = f"; copied to {link}"
+    except OSError:
+        link_note = f"; add to PATH or set OFFICECLI_BRIDGE_BIN={target}"
+
+    # Refresh discovery cache
+    find_binaries(refresh=True)
+    return True, f"installed {ver} → {target} (from {url}){link_note}"
+
+
 def plan_install() -> list[InstallStep]:
     """Build the explicit install plan from current probes + compatibility.json.
 
-    Never silent: every step is listed even when skipped. Legacy is always
-    manual (rolling/unversioned upstream; no safe npm pin).
+    Never silent: every step is listed even when skipped. Official pin is
+    installed from **officecli-dist** (npm often lacks the pin). Legacy is
+    always manual (rolling/unversioned upstream).
     """
     steps: list[InstallStep] = []
     spec = compat.spec_for("official")
     pinned = spec.get("recommended") or spec.get("min") or "?"
-    argv = _official_install_argv(spec)
+    url = dist_asset_url(str(pinned))
     need, reason = _official_needs_install()
-    npm = shutil.which("npm")
-    if need and not npm:
-        steps.append(InstallStep(
-            id="official",
-            title="official officecli (agent-bridge)",
-            kind="manual",
-            argv=(),
-            display=spec.get("install") or " ".join(argv),
-            reason=(
-                f"{reason}; npm not on PATH — install Node/npm, then re-run, "
-                f"or download from https://github.com/officecli/officecli-dist/releases "
-                f"(or set OFFICECLI_BRIDGE_BIN)"
-            ),
-            downloads=f"officecli@{pinned} (npm registry) or officecli-dist release asset",
-        ))
-    elif need:
+    display = (
+        f"download {url} → extract to {official_install_dir()} "
+        f"(and ~/.local/bin/{official_bin_name()} when writable)"
+    )
+    if need:
         steps.append(InstallStep(
             id="official",
             title="official officecli (agent-bridge)",
             kind="run",
-            argv=argv,
-            display=" ".join(argv),
+            argv=("__dist__", str(pinned)),  # sentinel handled in _execute_step
+            display=display,
             reason=reason,
-            downloads=f"officecli@{pinned} from the npm registry (global)",
+            downloads=url,
         ))
     else:
         steps.append(InstallStep(
@@ -240,7 +357,7 @@ def plan_install() -> list[InstallStep]:
             title="official officecli (agent-bridge)",
             kind="skip",
             argv=(),
-            display=" ".join(argv),
+            display=display,
             reason=reason,
             downloads=f"officecli@{pinned} (not downloaded — already ok)",
         ))
@@ -297,6 +414,10 @@ def _execute_step(step: InstallStep, *, dry_run: bool) -> tuple[bool, str]:
     assert step.kind == "run" and step.argv
     if dry_run:
         return True, f"dry-run — would run: {step.display}"
+    # Official pin: officecli-dist tarball (not npm — pin often unpublished)
+    if step.id == "official" or (step.argv and step.argv[0] == "__dist__"):
+        ver = step.argv[1] if len(step.argv) > 1 else None
+        return install_official_from_dist(ver)
     runner = _RUN_INSTALL or subprocess.run
     try:
         r = runner(
@@ -357,11 +478,14 @@ def run_install(*, dry_run: bool = False) -> int:
 
     if failures:
         print(f"{failures} install step(s) failed — see output above")
-        print("repair: fix network/npm/pip, then re-run doctor --install")
+        print("repair: check network access to github.com/officecli/officecli-dist, "
+              "then re-run doctor --install")
         return 1
     if manuals:
-        print(f"{manuals} step(s) need manual action (legacy binary / missing npm)")
+        print(f"{manuals} step(s) need manual action (legacy binary)")
         print("repair: follow the printed URLs, then re-run doctor")
+        # Official may still have been installed — non-zero only if required
+        # auto steps failed; manuals alone return 1 so agents notice.
         return 1
     if ran:
         print(f"{ran} step(s) applied — re-probing environment…")

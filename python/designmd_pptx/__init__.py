@@ -1,3 +1,3 @@
 """DESIGN.md (awesome-design-md / Stitch) → officecli PPTX slide tokens & recipes."""
 
-__version__ = "1.7.1"
+__version__ = "2.0.0"
