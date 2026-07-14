@@ -148,7 +148,11 @@ cover · section_divider · **section_opener_numbered** · **agenda_toc** · kpi
 
 **Academic / medical (#10):** **consort_flow** · **kaplan_meier** · **forest_plot** · **study_design** · **results_table_insight** · **multi_panel_figure** — example deck-spec: `python/examples/content.medical.deck.json`
 
-**Wave 1 full-family (Infograpify structural roles):** **chevron_process** · **cycle_loop** · **waterfall_insight** · **venn_overlap** · **swot_2x2** · **gantt_bars** · **org_tree** · **persona_card** · **business_canvas** · **fishbone_causes** · **iceberg_levels** · **framework_row** — see `docs/recipe-coverage-roadmap.md`
+**Wave 1 full-family:** **chevron_process** · **cycle_loop** · **waterfall_insight** · **venn_overlap** · **swot_2x2** · **gantt_bars** · **org_tree** · **persona_card** · **business_canvas** · **fishbone_causes** · **iceberg_levels** · **framework_row**
+
+**Wave 2 long-tail:** **icon_stat_row** · **scale_rating** · **hub_spoke** · **before_after_slider** · **calendar_heatmap** · **case_study_band** · **okrs_tree** · **project_status_rag** · **finance_statement** · **pipeline_stages** · **geo_callout** · **device_frame** (user media only for map/device)
+
+**Wave 3 verticals:** `python/examples/content.{business,marketing,health,education,finance}.deck.json` — see `docs/recipe-coverage-roadmap.md`
 
 ## Colors
 

@@ -119,7 +119,8 @@ make 270 recipes. Cluster by **layout role**:
 | 22 | `geo_callout` | structured+image | map *with* callout cards (no basemap ship) | optional |
 | 23 | `device_frame` | structured+image | phone/laptop frame slot (user supplies PNG) | optional |
 
-**Wave 2 target:** ~8–11 recipes that absorb most generic_infographic *roles*.
+**Wave 2 target:** ~8–11 recipes that absorb most generic_infographic *roles*.  
+**Status:** ✅ 12 recipes shipped (`WAVE2_SEQUENCE`).
 
 ### Wave 3 — vertical skins, not new geometry
 
@@ -135,6 +136,19 @@ These are **content/theme packs** on top of Wave 0–2 geometry.
 | Compose classifier hints | map keywords → recipes in `compose.py` |
 
 **No new recipe IDs** unless a vertical needs unique geometry.
+
+**Shipped examples:**
+
+| Vertical | Deck-spec | Notes |
+|---|---|---|
+| business | `python/examples/content.business.deck.json` | icon_stat_row, finance_statement, okrs_tree |
+| marketing | `python/examples/content.marketing.deck.json` | pipeline_stages, persona_card, before_after_slider |
+| health | `python/examples/content.health.deck.json` | icon_stat_row, scale_rating, project_status_rag |
+| education | `python/examples/content.education.deck.json` | framework_row, cycle_loop, okrs_tree |
+| finance | `python/examples/content.finance.deck.json` | finance_statement, waterfall_insight, gantt_bars |
+| finance skin | `python/fixtures/vertical-finance.DESIGN.md` | original dark data palette |
+
+Compose routes `##` titles containing role keywords (OKR, SWOT, pipeline, …) to Wave 1/2 recipes via `compose._ROLE_TITLE_HINTS`.
 
 ### Explicit DEFER (never clone as recipes)
 
@@ -155,8 +169,8 @@ These are **content/theme packs** on top of Wave 0–2 geometry.
 | **1a** (process/chart) | `chevron_process`, `cycle_loop`, `waterfall_insight`, `venn_overlap` | layout contract tests | ✅ shipped |
 | **1b** (matrix/plan) | `swot_2x2`, `gantt_bars` | 1a patterns | ✅ shipped |
 | **1c** (people/strategy) | `org_tree`, `persona_card`, `business_canvas`, `fishbone_causes`, `iceberg_levels`, `framework_row` | 1a | ✅ shipped (`WAVE1_SEQUENCE`, tests) |
-| **2** (long-tail roles) | icon_stat_row … finance_statement | 1 complete | Subcluster “PARTIAL” count drops; catalog suggestions updated |
-| **3** (verticals) | 0 recipes | wave 1–2 | Example decks + DESIGN skins for top 5 verticals |
+| **2** (long-tail roles) | icon_stat_row … device_frame (12 recipes, incl. `pipeline_stages`, `geo_callout`, `device_frame`) | 1 complete | ✅ shipped (`WAVE2_SEQUENCE`, tests) |
+| **3** (verticals) | 0 recipes | wave 1–2 | ✅ shipped: 5 vertical deck-specs + finance DESIGN skin + compose title keywords |
 
 ### Per-recipe checklist (same as premium bar)
 

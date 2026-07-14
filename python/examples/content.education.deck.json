@@ -1,0 +1,64 @@
+{
+  "version": "1.1",
+  "slides": [
+    {
+      "id": "cover",
+      "recipe": "cover",
+      "content": {
+        "title": "Learning program",
+        "subtitle": "Education vertical · Wave 3 example"
+      }
+    },
+    {
+      "id": "framework",
+      "recipe": "framework_row",
+      "content": {
+        "title": "Learner journey",
+        "framework": "Awareness → Practice → Mastery",
+        "steps": [
+          { "label": "Orient", "detail": "Goals & baseline" },
+          { "label": "Learn", "detail": "Core modules" },
+          { "label": "Practice", "detail": "Labs & peer review" },
+          { "label": "Assess", "detail": "Rubric + feedback" },
+          { "label": "Apply", "detail": "Capstone project" }
+        ]
+      }
+    },
+    {
+      "id": "cycle",
+      "recipe": "cycle_loop",
+      "content": {
+        "title": "Improvement loop",
+        "hub": "PDCA",
+        "steps": [
+          { "label": "Plan" },
+          { "label": "Do" },
+          { "label": "Check" },
+          { "label": "Act" }
+        ]
+      }
+    },
+    {
+      "id": "okrs",
+      "recipe": "okrs_tree",
+      "content": {
+        "title": "Semester OKRs",
+        "objective": "Every cohort finishes with a portfolio artifact",
+        "key_results": [
+          { "label": "KR1", "detail": "≥90% capstone submission" },
+          { "label": "KR2", "detail": "Median feedback turnaround <48h" },
+          { "label": "KR3", "detail": "CSAT ≥ 4.5 / 5" }
+        ]
+      }
+    },
+    {
+      "id": "close",
+      "recipe": "close",
+      "content": {
+        "title": "Next step",
+        "body": "Pilot peer-review rubric for the next intake.",
+        "cta": "Ship"
+      }
+    }
+  ]
+}

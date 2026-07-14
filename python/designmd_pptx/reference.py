@@ -498,7 +498,7 @@ def _suggest_recipes(hints: Counter[str], family: str) -> list[str]:
         ],
         "process_flow": [
             "process", "funnel_stages", "chevron_process", "cycle_loop",
-            "fishbone_causes", "framework_row", "feature_cards",
+            "fishbone_causes", "framework_row", "pipeline_stages", "feature_cards",
         ],
         "hierarchy": ["pyramid_levels", "iceberg_levels", "feature_cards"],
         "org_team": ["team", "org_tree", "persona_card", "feature_cards"],
@@ -515,28 +515,30 @@ def _suggest_recipes(hints: Counter[str], family: str) -> list[str]:
             "venn_overlap", "big_number",
         ],
         "strategy_canvas": ["business_canvas", "feature_cards", "table"],
-        "geo_map": ["image_full", "image_text_2col"],
-        "device_mockup": ["image_text_2col", "image_full"],
-        "other": ["feature_cards", "bullets"],
+        "geo_map": ["geo_callout", "image_full", "image_text_2col"],
+        "device_mockup": ["device_frame", "image_text_2col", "image_full"],
+        "other": [
+            "feature_cards", "bullets", "icon_stat_row", "scale_rating",
+            "hub_spoke", "before_after_slider", "calendar_heatmap",
+            "case_study_band", "okrs_tree", "project_status_rag",
+            "finance_statement", "pipeline_stages",
+        ],
     }
     # Full-family coverage roadmap (Wave 1 / Wave 2) — keep names stable.
-    # Wave 1 IDs are shipped — listed under existing via RECIPE_BUILDERS check.
+    # Wave 1–2 IDs are shipped — remaining planned are Wave 3 optional / future.
     planned = {
         "kpi_dashboard": ["metric_sparkline_row"],
-        "timeline_roadmap": [],  # gantt_bars shipped
-        "process_flow": ["pipeline_stages"],  # chevron/cycle/fishbone/framework shipped
-        "hierarchy": [],  # iceberg_levels shipped
-        "org_team": [],  # org_tree / persona_card shipped
-        "comparison_matrix": [],  # swot_2x2 shipped
+        "timeline_roadmap": [],
+        "process_flow": [],
+        "hierarchy": [],
+        "org_team": [],
+        "comparison_matrix": [],
         "narrative_chrome": ["mission_vision_split"],
-        "chart_story": ["cycle_stats"],  # waterfall/venn shipped
-        "strategy_canvas": [],  # business_canvas shipped
-        "geo_map": ["geo_callout"],  # optional; basemap deferred
-        "device_mockup": ["device_frame"],  # user-supplied PNG only
-        "other": [
-            "icon_stat_row", "hub_spoke", "scale_rating", "okrs_tree",
-            "project_status_rag", "finance_statement",
-        ],
+        "chart_story": ["cycle_stats"],
+        "strategy_canvas": [],
+        "geo_map": [],  # geo_callout shipped (user basemap only)
+        "device_mockup": [],  # device_frame shipped (user screenshot only)
+        "other": [],  # Wave 2 long-tail roles shipped
     }
     sug = list(existing.get(family, existing["other"]))
     for p in planned.get(family, []):

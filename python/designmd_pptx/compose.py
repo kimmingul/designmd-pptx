@@ -26,6 +26,44 @@ _BULLET = re.compile(r"^\s*[-*•]\s+(.+)$")
 _ORDERED = re.compile(r"^\s*\d+[.)]\s+(.+)$")
 _MAX_BULLETS = 5
 
+# Wave 1–2 role keywords in section titles → recipe ids (order matters).
+_ROLE_TITLE_HINTS: list[tuple[re.Pattern[str], str]] = [
+    (re.compile(r"\b(okr|okrs|objectives?\s+and\s+key\s+results)\b", re.I), "okrs_tree"),
+    (re.compile(r"\b(rag|status\s+report|project\s+status|traffic\s+light)\b", re.I),
+     "project_status_rag"),
+    (re.compile(r"\b(swot)\b", re.I), "swot_2x2"),
+    (re.compile(r"\b(gantt|schedule|timeline\s+bar)\b", re.I), "gantt_bars"),
+    (re.compile(r"\b(waterfall|bridge\s+chart|variance\s+bridge)\b", re.I),
+     "waterfall_insight"),
+    (re.compile(r"\b(venn|overlap\s+sets?)\b", re.I), "venn_overlap"),
+    (re.compile(r"\b(pipeline|funnel\s+sales|conversion\s+pipeline)\b", re.I),
+     "pipeline_stages"),
+    (re.compile(r"\b(before\s*/?\s*after|before\s+and\s+after)\b", re.I),
+     "before_after_slider"),
+    (re.compile(r"\b(case\s+study|customer\s+story)\b", re.I), "case_study_band"),
+    (re.compile(r"\b(persona|buyer\s+persona)\b", re.I), "persona_card"),
+    (re.compile(r"\b(business\s+model\s+canvas|bmc)\b", re.I), "business_canvas"),
+    (re.compile(r"\b(fishbone|ishikawa|root\s+cause)\b", re.I), "fishbone_causes"),
+    (re.compile(r"\b(iceberg)\b", re.I), "iceberg_levels"),
+    (re.compile(r"\b(adkar|aida|value\s+chain)\b", re.I), "framework_row"),
+    (re.compile(r"\b(likert|rating\s+scale|nps\s+scale|smile\s+scale)\b", re.I),
+     "scale_rating"),
+    (re.compile(r"\b(heatmap|calendar|activity\s+grid)\b", re.I), "calendar_heatmap"),
+    (re.compile(r"\b(org\s+chart|organization|reporting\s+line)\b", re.I), "org_tree"),
+    (re.compile(r"\b(chevron|arrow\s+process)\b", re.I), "chevron_process"),
+    (re.compile(r"\b(cycle|pdca|loop)\b", re.I), "cycle_loop"),
+    (re.compile(r"\b(finance|p&l|budget|forecast)\b", re.I), "finance_statement"),
+    (re.compile(r"\b(at\s+a\s+glance|stat\s+row|icon\s+stats?)\b", re.I), "icon_stat_row"),
+    (re.compile(r"\b(hub\s+and\s+spoke|bullseye|radial)\b", re.I), "hub_spoke"),
+]
+
+
+def _role_from_title(title: str) -> str | None:
+    for pat, recipe in _ROLE_TITLE_HINTS:
+        if pat.search(title or ""):
+            return recipe
+    return None
+
 
 def _split_label_detail(text: str) -> tuple[str, str]:
     for sep in (" — ", " – ", ": ", " - "):
@@ -141,6 +179,69 @@ def _classify_primary(
 ) -> list[tuple[str, dict[str, Any], float, list[str]]]:
     title = sec["title"]
     warnings: list[str] = []
+
+    # Wave 1–2: explicit role keywords in ## titles win over generic heuristics.
+    role = _role_from_title(title)
+    if role:
+        content: dict[str, Any] = {"title": title}
+        if sec["bullets"]:
+            if role in ("icon_stat_row", "pipeline_stages", "framework_row",
+                        "chevron_process", "cycle_loop", "hub_spoke"):
+                stats = []
+                for s in sec["bullets"]:
+                    m = _KPI_LINE.match(s)
+                    if m:
+                        stats.append({
+                            "value": m.group(1).strip(),
+                            "label": m.group(2).strip(),
+                        })
+                    else:
+                        lab, det = _split_label_detail(s)
+                        stats.append({"label": lab, "value": det, "detail": det})
+                content["stats"] = stats
+                content["stages"] = stats
+                content["steps"] = stats
+                content["items"] = sec["bullets"]
+            elif role in ("okrs_tree",):
+                content["objective"] = sec["paras"][0] if sec["paras"] else title
+                content["key_results"] = [
+                    {"label": a, "detail": b} for a, b in
+                    (_split_label_detail(s) for s in sec["bullets"])
+                ]
+            elif role in ("before_after_slider",):
+                if len(sec["subs"]) >= 2:
+                    content["before"] = {
+                        "title": sec["subs"][0]["title"],
+                        "body": " ".join(sec["subs"][0]["paras"]) or "\n".join(
+                            sec["subs"][0].get("bullets") or []),
+                    }
+                    content["after"] = {
+                        "title": sec["subs"][1]["title"],
+                        "body": " ".join(sec["subs"][1]["paras"]) or "\n".join(
+                            sec["subs"][1].get("bullets") or []),
+                    }
+                else:
+                    mid = max(1, len(sec["bullets"]) // 2)
+                    content["before"] = {"title": "Before", "body": "\n".join(sec["bullets"][:mid])}
+                    content["after"] = {"title": "After", "body": "\n".join(sec["bullets"][mid:])}
+            elif role in ("project_status_rag",):
+                content["rows"] = [
+                    {"name": a, "note": b, "status": "amber"}
+                    for a, b in (_split_label_detail(s) for s in sec["bullets"])
+                ]
+            elif role in ("finance_statement",) and sec["table"]:
+                rows = sec["table"]
+                content["headers"], content["rows"] = rows[0], rows[1:12]
+            elif role in ("case_study_band", "persona_card"):
+                content["body"] = " ".join(sec["paras"]) or "\n".join(sec["bullets"])
+                content["attrs"] = sec["bullets"]
+                content["customer"] = title
+            elif sec["bullets"]:
+                content["bullets"] = sec["bullets"]
+                content["steps"] = sec["bullets"]
+            if sec["paras"] and "body" not in content and role != "okrs_tree":
+                content.setdefault("body", " ".join(sec["paras"]))
+            return [(role, content, 0.8, warnings)]
 
     if sec["table"]:
         rows = sec["table"]
