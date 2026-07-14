@@ -1,0 +1,64 @@
+{
+  "version": "1.1",
+  "slides": [
+    {
+      "id": "cover",
+      "recipe": "cover",
+      "content": {
+        "title": "Board update",
+        "subtitle": "Business vertical · Wave 3 example",
+        "meta": "designmd-pptx vertical skin"
+      }
+    },
+    {
+      "id": "pulse",
+      "recipe": "icon_stat_row",
+      "content": {
+        "title": "At a glance",
+        "stats": [
+          { "value": "$42M", "label": "ARR", "icon": "$" },
+          { "value": "118%", "label": "NRR", "icon": "N" },
+          { "value": "1.4y", "label": "Payback", "icon": "P" },
+          { "value": "62", "label": "NPS", "icon": "♥" }
+        ]
+      }
+    },
+    {
+      "id": "finance",
+      "recipe": "finance_statement",
+      "content": {
+        "title": "P&L bridge",
+        "headers": ["Line", "Actual", "Plan", "Δ"],
+        "rows": [
+          ["Revenue", "42.1", "40.0", "+5%"],
+          ["Gross profit", "29.7", "28.0", "+6%"],
+          ["Op. income", "11.5", "10.5", "+10%"]
+        ],
+        "insight_title": "Takeaway",
+        "insight": "Operating leverage improved as revenue outgrew opex."
+      }
+    },
+    {
+      "id": "okrs",
+      "recipe": "okrs_tree",
+      "content": {
+        "title": "OKRs",
+        "objective": "Make enterprise expansion self-serve this half",
+        "key_results": [
+          { "label": "KR1", "detail": "40% of expansion pipeline from in-product" },
+          { "label": "KR2", "detail": "Time-to-quote under 2 days" },
+          { "label": "KR3", "detail": "Win rate +8 pts on mid-market" }
+        ]
+      }
+    },
+    {
+      "id": "close",
+      "recipe": "close",
+      "content": {
+        "title": "Decision",
+        "body": "Approve H2 hiring plan for enterprise product.",
+        "cta": "Approve"
+      }
+    }
+  ]
+}

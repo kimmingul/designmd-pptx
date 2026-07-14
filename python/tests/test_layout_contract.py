@@ -88,6 +88,19 @@ HEAVY = {
     "below": [{"label": "Structure", "detail": "hidden"}] * 4,
     "framework": "ADKAR",
     "blocks": [{"label": f"B{i}", "body": "x"} for i in range(9)],
+    # Wave 2
+    "stats": [{"value": "1", "label": "L", "icon": "A"}] * 8,
+    "points": ["1", "2", "3", "4", "5", "6", "7"],
+    "selected": "4",
+    "spokes": [{"label": "S"}] * 8,
+    "before": {"title": "Before", "body": "x " * 20},
+    "after": {"title": "After", "body": "y " * 20},
+    "cells": [1, 2, 3, 0] * 12,
+    "customer": "Acme",
+    "objective": "Objective " * 6,
+    "key_results": [{"label": "KR", "detail": "d"}] * 6,
+    "projects": [{"name": "P", "status": "red", "note": "n"}] * 12,
+    "device": "phone",
 }
 
 
@@ -118,7 +131,7 @@ class GeometryContract(unittest.TestCase):
 
     def test_every_pattern_registered(self) -> None:
         # Phase 2: premium (#58) + domain (#10) catalogs.
-        self.assertGreaterEqual(len(RECIPE_BUILDERS), 48)
+        self.assertGreaterEqual(len(RECIPE_BUILDERS), 60)
         for name in (
             "kpi_dashboard_grid", "agenda_toc", "section_opener_numbered",
             "story_timeline", "funnel_stages", "roadmap_swimlane",

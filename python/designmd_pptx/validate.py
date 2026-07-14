@@ -120,6 +120,38 @@ CONTENT_KEYS = {
     "framework_row": {
         "title", "framework", "name", "steps", "stages", "items", "notes",
     },
+    # Wave 2 long-tail roles
+    "icon_stat_row": {"title", "stats", "items", "kpis", "notes"},
+    "scale_rating": {
+        "title", "prompt", "question", "points", "scale", "selected",
+        "value", "labels", "notes",
+    },
+    "hub_spoke": {"title", "hub", "center", "spokes", "items", "steps", "notes"},
+    "before_after_slider": {
+        "title", "before", "after", "left", "right", "notes",
+    },
+    "calendar_heatmap": {
+        "title", "subtitle", "month", "cells", "values", "days", "notes",
+    },
+    "case_study_band": {
+        "title", "customer", "client", "body", "story", "kpis", "results", "notes",
+    },
+    "okrs_tree": {
+        "title", "objective", "o", "key_results", "krs", "results", "notes",
+    },
+    "project_status_rag": {
+        "title", "rows", "projects", "items", "notes",
+    },
+    "finance_statement": {
+        "title", "headers", "rows", "insight", "insight_title", "insight_body", "notes",
+    },
+    "pipeline_stages": {"title", "stages", "steps", "items", "notes"},
+    "geo_callout": {
+        "title", "src", "map", "alt", "callouts", "regions", "notes",
+    },
+    "device_frame": {
+        "title", "body", "caption", "src", "alt", "device", "notes",
+    },
 }
 
 

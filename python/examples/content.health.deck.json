@@ -1,0 +1,58 @@
+{
+  "version": "1.1",
+  "slides": [
+    {
+      "id": "cover",
+      "recipe": "cover",
+      "content": {
+        "title": "Care program review",
+        "subtitle": "Health vertical · Wave 3 example"
+      }
+    },
+    {
+      "id": "stats",
+      "recipe": "icon_stat_row",
+      "content": {
+        "title": "Population snapshot",
+        "stats": [
+          { "value": "12.4k", "label": "Enrolled", "icon": "E" },
+          { "value": "86%", "label": "Adherence", "icon": "A" },
+          { "value": "−18%", "label": "Readmit", "icon": "R" },
+          { "value": "4.6", "label": "CSAT", "icon": "C" }
+        ]
+      }
+    },
+    {
+      "id": "rating",
+      "recipe": "scale_rating",
+      "content": {
+        "title": "Experience rating",
+        "prompt": "How easy was it to complete your care plan this week?",
+        "points": ["1", "2", "3", "4", "5"],
+        "selected": "4",
+        "labels": { "1": "Hard", "5": "Easy" }
+      }
+    },
+    {
+      "id": "status",
+      "recipe": "project_status_rag",
+      "content": {
+        "title": "Workstream status",
+        "rows": [
+          { "name": "Onboarding", "status": "green", "note": "SLA met" },
+          { "name": "Remote monitoring", "status": "amber", "note": "Device lag" },
+          { "name": "Claims feed", "status": "red", "note": "Schema freeze" }
+        ]
+      }
+    },
+    {
+      "id": "close",
+      "recipe": "close",
+      "content": {
+        "title": "Ask",
+        "body": "Fund device kit expansion for Q3 cohorts.",
+        "cta": "Approve"
+      }
+    }
+  ]
+}

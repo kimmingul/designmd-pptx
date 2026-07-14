@@ -1,0 +1,67 @@
+{
+  "version": "1.1",
+  "slides": [
+    {
+      "id": "cover",
+      "recipe": "cover",
+      "content": {
+        "title": "Campaign readout",
+        "subtitle": "Marketing vertical · Wave 3 example"
+      }
+    },
+    {
+      "id": "funnel",
+      "recipe": "pipeline_stages",
+      "content": {
+        "title": "Demand pipeline",
+        "stages": [
+          { "label": "Aware", "value": "120k" },
+          { "label": "MQL", "value": "4.2k" },
+          { "label": "SQL", "value": "890" },
+          { "label": "Opp", "value": "210" },
+          { "label": "Won", "value": "48" }
+        ]
+      }
+    },
+    {
+      "id": "persona",
+      "recipe": "persona_card",
+      "content": {
+        "title": "Primary persona",
+        "name": "Jordan Lee",
+        "role": "VP Marketing · mid-market SaaS",
+        "quote": "I need pipeline I can defend in the board pack.",
+        "attrs": [
+          "Goal: predictable SQL volume",
+          "Pain: attribution fog",
+          "Channel: LinkedIn + webinars",
+          "Metric: cost per opportunity"
+        ]
+      }
+    },
+    {
+      "id": "before-after",
+      "recipe": "before_after_slider",
+      "content": {
+        "title": "Before / after messaging",
+        "before": {
+          "title": "Before",
+          "body": "Feature laundry lists. No clear ICP. Blog-led only."
+        },
+        "after": {
+          "title": "After",
+          "body": "Problem-led narrative. ICP filters. ABM + product signals."
+        }
+      }
+    },
+    {
+      "id": "close",
+      "recipe": "close",
+      "content": {
+        "title": "Next",
+        "body": "Shift 20% of content budget to ABM plays.",
+        "cta": "Align"
+      }
+    }
+  ]
+}
