@@ -2,6 +2,19 @@
 
 All notable changes to designmd-pptx are documented here.
 
+## [Unreleased] — Wave 4 Infograpify structural roles
+
+### Added
+- **14 recipes (Wave 4)** from re-analysis of local Infograpify 400-deck library
+  (filename + redacted structural scans only; no vendor bytes):
+  `mindmap_branches`, `journey_stages`, `pestle_grid`, `raci_matrix`,
+  `scorecard_balanced`, `hex_cluster`, `puzzle_pieces`, `pillar_columns`,
+  `stairs_ascent`, `checklist_board`, `empathy_map_quad`, `risk_heat_matrix`,
+  `circle_segments`, `mission_vision_split`.
+- Example deck-spec: `python/examples/content.infograpify-roles.deck.json`
+- Compose title keywords + `reference` family suggestions updated
+- Catalog now **75** recipe builders (`WAVE4_SEQUENCE`)
+
 ## [2.1.2] — 2026-07-15
 
 Residual fixes after Codex **re-verify** of v2.1.1 (still flagged generative body loss,

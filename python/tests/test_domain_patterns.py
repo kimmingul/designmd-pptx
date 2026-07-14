@@ -106,14 +106,15 @@ class DomainPatterns10(unittest.TestCase):
         full, _ = normalize_deck_spec(None, catalog="all")
         full_r = [s["recipe"] for s in full["slides"]]
         self.assertEqual(len(full_r), len(CATALOG_SEQUENCE))
-        from designmd_pptx.recipes import WAVE1_SEQUENCE, WAVE2_SEQUENCE
-        for name in DOMAIN_SEQUENCE + PREMIUM_SEQUENCE + WAVE1_SEQUENCE + WAVE2_SEQUENCE:
+        from designmd_pptx.recipes import WAVE1_SEQUENCE, WAVE2_SEQUENCE, WAVE4_SEQUENCE
+        for name in (DOMAIN_SEQUENCE + PREMIUM_SEQUENCE + WAVE1_SEQUENCE
+                     + WAVE2_SEQUENCE + WAVE4_SEQUENCE):
             self.assertIn(name, full_r)
         # every builder is reachable via catalog partitions
         from designmd_pptx.recipes import GENERATIVE_SEQUENCE
         covered = (set(CORE_SEQUENCE) | set(PREMIUM_SEQUENCE)
                    | set(DOMAIN_SEQUENCE) | set(WAVE1_SEQUENCE) | set(WAVE2_SEQUENCE)
-                   | set(GENERATIVE_SEQUENCE))
+                   | set(WAVE4_SEQUENCE) | set(GENERATIVE_SEQUENCE))
         self.assertEqual(set(RECIPE_BUILDERS), covered)
         self.assertEqual(set(CATALOG_SEQUENCE), covered)
 

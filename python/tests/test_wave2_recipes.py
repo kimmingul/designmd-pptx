@@ -91,8 +91,8 @@ class Wave2Recipes(unittest.TestCase):
         self.assertEqual(len(stages), 3)
 
     def test_total_recipe_count_agent_usable(self) -> None:
-        # Roadmap: roughly ≤55–65, not hundreds (freeform #21 adds +1)
-        self.assertLessEqual(len(RECIPE_BUILDERS), 65)
+        # Structural roles, not hundreds of file clones (Wave 4 + freeform)
+        self.assertLessEqual(len(RECIPE_BUILDERS), 90)
         self.assertGreaterEqual(len(RECIPE_BUILDERS), 60)
 
 

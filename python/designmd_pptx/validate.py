@@ -152,6 +152,43 @@ CONTENT_KEYS = {
     "device_frame": {
         "title", "body", "caption", "src", "alt", "device", "notes",
     },
+    # Wave 4 Infograpify long-tail
+    "mindmap_branches": {
+        "title", "hub", "center", "topic", "branches", "nodes", "items", "steps", "notes",
+    },
+    "journey_stages": {
+        "title", "stages", "steps", "moments", "notes",
+    },
+    "pestle_grid": {
+        "title", "cells", "factors", "political", "economic", "social",
+        "technological", "legal", "environmental", "notes",
+    },
+    "raci_matrix": {
+        "title", "roles", "activities", "rows", "notes",
+    },
+    "scorecard_balanced": {
+        "title", "perspectives", "cards", "quadrants", "notes",
+    },
+    "hex_cluster": {"title", "items", "tiles", "cells", "notes"},
+    "puzzle_pieces": {"title", "pieces", "parts", "items", "notes"},
+    "pillar_columns": {"title", "pillars", "columns", "items", "notes"},
+    "stairs_ascent": {"title", "steps", "levels", "stages", "notes"},
+    "checklist_board": {"title", "items", "checks", "bullets", "notes"},
+    "empathy_map_quad": {
+        "title", "user", "persona", "name", "says", "thinks", "does", "feels",
+        "say", "think", "do", "feel", "quadrants", "notes",
+    },
+    "risk_heat_matrix": {"title", "risks", "items", "notes"},
+    "circle_segments": {
+        "title", "segments", "parts", "items", "center", "hub", "notes",
+    },
+    "mission_vision_split": {
+        "title", "mission", "vision", "left", "right", "notes",
+    },
+    "freeform": {
+        "title", "body", "bullets", "placements", "style_directive", "style",
+        "style_profile", "notes",
+    },
 }
 
 

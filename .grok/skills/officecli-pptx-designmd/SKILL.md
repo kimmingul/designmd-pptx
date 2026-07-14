@@ -172,6 +172,13 @@ editorial). Prefer patterns first; freeform when NL or vision asks for re-layout
 
 **Wave 3 verticals:** `python/examples/content.{business,marketing,health,education,finance}.deck.json` — see `docs/recipe-coverage-roadmap.md`
 
+**Wave 4 Infograpify roles:** **mindmap_branches** · **journey_stages** ·
+**pestle_grid** · **raci_matrix** · **scorecard_balanced** · **hex_cluster** ·
+**puzzle_pieces** · **pillar_columns** · **stairs_ascent** · **checklist_board** ·
+**empathy_map_quad** · **risk_heat_matrix** · **circle_segments** ·
+**mission_vision_split** — example: `python/examples/content.infograpify-roles.deck.json`
+(analyze local packs with `reference` only; never commit vendor `.pptx`).
+
 ### Animation (#40)
 
 Optional DESIGN.md frontmatter `animation: { enabled, entrance, transition, … }`.

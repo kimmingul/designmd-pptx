@@ -62,20 +62,27 @@ licensed .pptx (local)
 Measured on a licensed local library of **400** decks
 (`infograpify_ppt_templates/`, not in git). Filename → family heuristic only:
 
-| Family | Count | designmd today | Premium gap (#58) |
+| Family | Count (2026-07 re-catalog) | designmd recipes | Status |
 |---|---:|---|---|
-| other (long-tail verticals) | 273 | bullets / feature_cards | selective later |
-| chart_story | 23 | chart_insight, big_number | `chart_callout_panel`, waterfall insight |
-| process_flow | 21 | process, timeline | `funnel_stages`, `chevron_process` |
-| timeline_roadmap | 20 | timeline | `story_timeline`, `roadmap_swimlane` |
-| geo_map | 17 | image_* | defer (asset-heavy) |
-| org_team | 11 | team | richer org tree (SmartArt → groups) |
-| kpi_dashboard | 8 | kpi_row, big_number | **`kpi_dashboard_grid`** (priority) |
-| narrative_chrome | 7 | cover, section_divider | `agenda_toc`, numbered openers |
-| comparison_matrix | 7 | comparison_2col, matrix_2x2 | `quadrant_matrix_rich`, scorecard |
-| pricing_table | 6 | pricing, table | multi-tier highlight column |
-| hierarchy | 6 | feature_cards | `pyramid_levels` |
-| device_mockup | 1 | image_text_2col | defer |
+| other (long-tail) | 255 | Wave 2 + **Wave 4** (mindmap, journey, PESTLE, RACI, hex, puzzle, checklist, …) | COVERED / PARTIAL residual |
+| process_flow | 30 | process, funnel, chevron, cycle, pipeline, journey, stairs | COVERED |
+| chart_story | 23 | chart_insight, callout, waterfall, venn, circle_segments | COVERED |
+| timeline_roadmap | 20 | timeline, story_timeline, roadmap, gantt | COVERED |
+| geo_map | 17 | geo_callout + image_* (user basemap only) | DEFER basemap |
+| hierarchy | 12 | pyramid, iceberg, pillar_columns | COVERED |
+| org_team | 11 | team, org_tree, persona | COVERED |
+| kpi_dashboard | 8 | kpi_row, kpi_dashboard_grid, big_number | COVERED |
+| narrative_chrome | 7 | cover, section_*, agenda, **mission_vision_split** | COVERED |
+| comparison_matrix | 7 | comparison, matrix, swot, vs_scorecard, risk_heat, raci | COVERED |
+| pricing_table | 6 | pricing, table, appendix_table | COVERED |
+| strategy_canvas | 3 | business_canvas, pestle_grid, scorecard_balanced | COVERED |
+| device_mockup | 1 | device_frame (user screenshot) | DEFER photo packs |
+
+**Recipe count:** 75 builders (Wave 0–4 + freeform). Re-run catalog:
+
+```bash
+python -m designmd_pptx reference infograpify_ppt_templates --catalog -o .ref-analysis
+```
 
 ## Structural principles (from priority decks)
 
