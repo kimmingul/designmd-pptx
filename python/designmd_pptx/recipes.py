@@ -1935,6 +1935,33 @@ RECIPE_BUILDERS = {
     "appendix_table": recipe_appendix_table,
 }
 
+# Layout strategy per pattern (#9). Every pattern is one of:
+#   "engine"     — content grid/columns solved by the constraint layout engine
+#                  (layout.py) for adaptive card heights + CJK-aware text-fit;
+#                  non-flex markers (avatar discs, timeline dots) are overlaid
+#                  from the solved geometry, chrome (title/axes) stays fixed.
+#   "structured" — geometry is an embedded officecli object (chart, table) or a
+#                  glued-connector / picture-cell composition, not a flex-text
+#                  stack; these keep fixed geometry by design (tables paginate
+#                  via #17). No v2 flex-quality claim.
+#   "fixed"      — intentional hero/divider compositions whose design depends on
+#                  overlap / opacity / precise centering that a top-down flex
+#                  engine cannot express (e.g. the 0.25-opacity section number).
+# All 20 are covered by the geometry-contract harness (test_layout_contract.py).
+# test_pattern_layout_covers_registry keeps this in sync with RECIPE_BUILDERS.
+PATTERN_LAYOUT: dict[str, tuple[str, ...]] = {
+    "engine": (
+        "bullets", "feature_cards", "comparison_2col", "image_text_2col",
+        "matrix_2x2", "kpi_row", "pricing", "team", "timeline",
+    ),
+    "structured": (
+        "process", "chart_insight", "table", "appendix_table", "logo_strip",
+    ),
+    "fixed": (
+        "cover", "section_divider", "big_number", "quote", "close", "image_full",
+    ),
+}
+
 # Back-compat aliases used by older content.sample.json keys
 RECIPE_ALIASES = {
     "kpi_3": "kpi_row",

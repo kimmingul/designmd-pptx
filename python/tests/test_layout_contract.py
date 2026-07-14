@@ -14,7 +14,7 @@ import unittest
 
 from designmd_pptx import layout as L
 from designmd_pptx.compile import compile_design_md
-from designmd_pptx.recipes import RECIPE_BUILDERS, _call_builder
+from designmd_pptx.recipes import PATTERN_LAYOUT, RECIPE_BUILDERS, _call_builder
 from pathlib import Path
 
 FIXTURES = Path(__file__).resolve().parent.parent / "fixtures"
@@ -70,6 +70,16 @@ class GeometryContract(unittest.TestCase):
 
     def test_every_pattern_registered(self) -> None:
         self.assertEqual(len(RECIPE_BUILDERS), 20)
+
+    def test_pattern_layout_covers_registry(self) -> None:
+        # every pattern is categorized exactly once (engine/structured/fixed),
+        # so adding a pattern forces a deliberate layout-strategy choice.
+        buckets = list(PATTERN_LAYOUT.values())
+        flat = [p for bucket in buckets for p in bucket]
+        self.assertEqual(len(flat), len(set(flat)), "a pattern is in two buckets")
+        self.assertEqual(set(flat), set(RECIPE_BUILDERS),
+                         "PATTERN_LAYOUT and RECIPE_BUILDERS disagree")
+        self.assertEqual(len(PATTERN_LAYOUT["engine"]), 9)
 
     def test_default_content_is_on_canvas_and_readable(self) -> None:
         for name in RECIPE_BUILDERS:
