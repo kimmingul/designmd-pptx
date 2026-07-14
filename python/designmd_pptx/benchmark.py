@@ -180,10 +180,15 @@ def score_deck(
     after_extract: dict | None = None,
     before_deck: dict | None = None,
     after_deck: dict | None = None,
+    before_tokens: dict | None = None,
     after_tokens: dict | None = None,
     after_gate: dict | None = None,
 ) -> tuple[DeckMetrics, DeckMetrics]:
-    """Compute before and after metric vectors for one deck."""
+    """Compute before and after metric vectors for one deck.
+
+    Both sides are scored symmetrically for a11y when tokens and/or deck-spec
+    are supplied, so deltas reflect real before→after improvement (or regession).
+    """
     b = DeckMetrics(deck_id=deck_id)
     a = DeckMetrics(deck_id=deck_id)
 
@@ -199,15 +204,18 @@ def score_deck(
     b.extraction_loss = _count_extraction_loss(before_extract)
     a.extraction_loss = _count_extraction_loss(after_extract)
 
-    b.layout_failure = _layout_failures(None, before_deck)
+    b.layout_failure = _layout_failures(before_tokens, before_deck)
     a.layout_failure = _layout_failures(after_tokens, after_deck)
 
     b.visual_gate_failure = 0  # before usually has no gate
     a.visual_gate_failure = _visual_gate_failures(after_gate)
 
+    if before_tokens is not None or before_deck is not None:
+        rep_b = a11y_mod.audit(tokens=before_tokens, deck=before_deck)
+        b.a11y_error = rep_b.errors
     if after_tokens is not None or after_deck is not None:
-        rep = a11y_mod.audit(tokens=after_tokens, deck=after_deck)
-        a.a11y_error = rep.errors
+        rep_a = a11y_mod.audit(tokens=after_tokens, deck=after_deck)
+        a.a11y_error = rep_a.errors
     return b, a
 
 
@@ -263,8 +271,8 @@ def run_fixture_suite(
     """Run benchmark on in-memory fixture cases.
 
     Each fixture dict may include:
-      id, before_deck, after_deck, after_tokens, before_extract, after_extract,
-      after_gate, before_pptx, after_pptx (paths as str)
+      id, before_deck, after_deck, before_tokens, after_tokens,
+      before_extract, after_extract, after_gate, before_pptx, after_pptx
     """
     th = thresholds or load_thresholds()
     results: list[DeckResult] = []
@@ -280,6 +288,7 @@ def run_fixture_suite(
             after_extract=fx.get("after_extract"),
             before_deck=fx.get("before_deck"),
             after_deck=fx.get("after_deck"),
+            before_tokens=fx.get("before_tokens"),
             after_tokens=fx.get("after_tokens"),
             after_gate=fx.get("after_gate"),
         )
@@ -367,11 +376,13 @@ def run_default_fixture_benchmark(
     after_tokens, _ = a11y_mod.auto_correct_contrast(before_tokens)
     after_deck, _ = a11y_mod.ensure_notes_and_alt(before_deck)
 
-    # "before" metrics intentionally fail a11y; after should pass layout/a11y
+    # "before" metrics intentionally fail a11y; after should pass layout/a11y.
+    # before_tokens/before_deck must be scored so a11y_error deltas are real.
     fixtures = [{
         "id": "fixture-default-example",
         "before_deck": before_deck,
         "after_deck": after_deck,
+        "before_tokens": before_tokens,
         "after_tokens": after_tokens,
         "before_extract": {"loss_ledger": []},
         "after_extract": {"loss_ledger": []},
