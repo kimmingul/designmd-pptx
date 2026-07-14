@@ -25,7 +25,11 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any
 
-OFFICIAL_MIN_VERSION = "0.2.117"
+# Sourced from compatibility.json (issue #8) — the single place a version is
+# pinned. Falls back to a literal only if the manifest is absent/corrupt.
+from .compat import official_min_version as _official_min_version
+
+OFFICIAL_MIN_VERSION = _official_min_version()
 _LEGACY_DEFAULT_WIN = Path.home() / "AppData" / "Local" / "OfficeCLI" / "officecli.exe"
 # install-codex.ps1 places the official binary here when npm is unavailable.
 # NOT "officecli/" — Windows paths are case-insensitive, so that would be the

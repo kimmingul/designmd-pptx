@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "description": "Single source of truth for OfficeCLI compatibility (issue #8). Consumed by designmd_pptx.compat (doctor), CI (.github/workflows/ci.yml), packaging, and docs. When CI is bumped to pin a newer OfficeCLI, update 'recommended' and 'max_tested' here in the same change — nothing else hardcodes a version.",
+  "officecli": {
+    "official": {
+      "min": "0.2.117",
+      "recommended": "0.2.117",
+      "max_tested": "0.2.117",
+      "install": "npm install -g officecli@0.2.117",
+      "capabilities": ["document_generation.pptx", "office.render"],
+      "note": "Official officecli/officecli agent-bridge (JSON-RPC). 'min' is the first version whose agent-bridge payload schema this project targets; 'max_tested' is the exact version CI pins."
+    },
+    "legacy": {
+      "min": null,
+      "recommended": null,
+      "max_tested": null,
+      "verbs": ["create", "batch", "validate", "view"],
+      "note": "iOfficeAI shape-level binary (rolling/unversioned upstream releases). Not gated by a version range — identified by --version shape and gated by the required verbs above. Set min/max_tested here if upstream adopts stable semver."
+    }
+  }
+}

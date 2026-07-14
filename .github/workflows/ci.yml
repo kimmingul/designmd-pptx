@@ -1,0 +1,88 @@
+name: CI
+
+# Issue #8 — pinned-OfficeCLI compatibility contract + cross-OS integration tests.
+# The version range lives in python/designmd_pptx/compatibility.json (single
+# source of truth); this workflow reads the pin from there, never hardcodes it.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit:
+    name: unit · ${{ matrix.os }} · py${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: ['3.10', '3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install runtime deps
+        run: python -m pip install -r python/requirements.txt
+      - name: Compatibility manifest self-check
+        working-directory: python
+        run: python -m designmd_pptx.compat
+      - name: Unit tests
+        working-directory: python
+        # cwd=python puts the package on sys.path; the OfficeCLI-dependent E2E
+        # class self-skips when no binary is present (i.e. here).
+        run: python -m unittest discover -s tests -v
+
+  e2e:
+    name: e2e · pinned OfficeCLI version contract
+    runs-on: ubuntu-latest
+    needs: unit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install runtime deps
+        run: python -m pip install -r python/requirements.txt
+      - name: Resolve pinned OfficeCLI version from manifest
+        id: pin
+        working-directory: python
+        run: |
+          VER="$(python -c "from designmd_pptx import compat; print(compat.spec_for('official')['recommended'])")"
+          echo "version=$VER" >> "$GITHUB_OUTPUT"
+          echo "Manifest pins official OfficeCLI == $VER"
+      - name: Install pinned official OfficeCLI (best-effort)
+        continue-on-error: true
+        run: npm install -g "officecli@${{ steps.pin.outputs.version }}"
+      - name: Verify installed binary matches the supported range
+        working-directory: python
+        run: |
+          if ! command -v officecli >/dev/null 2>&1; then
+            echo "::warning::officecli@${{ steps.pin.outputs.version }} not installable in this runner — version-contract probe skipped (unit matrix remains the hard gate)"
+            exit 0
+          fi
+          python - <<'PY'
+          import subprocess, sys
+          from designmd_pptx import compat
+          out = subprocess.run(["officecli", "--version"], capture_output=True,
+                               text=True, encoding="utf-8", errors="replace").stdout
+          level, why = compat.classify_support("official", out)
+          print(f"probed: {out.strip()!r} -> {level} ({why})")
+          if level == compat.TOO_OLD:
+              sys.exit(f"FAIL: installed OfficeCLI is unsupported — {why}")
+          print("OK: installed OfficeCLI is within the supported range")
+          PY
+      - name: E2E generate + validate + contact sheet (runs where a shape-level binary exists)
+        working-directory: python
+        # The full pipeline needs the legacy iOfficeAI shape-level binary; where
+        # it isn't provisioned, EndToEndV20 self-skips and this is a no-op.
+        run: python -m unittest tests.test_v20 -v
