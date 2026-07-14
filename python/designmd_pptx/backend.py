@@ -31,12 +31,29 @@ from .compat import official_min_version as _official_min_version
 
 OFFICIAL_MIN_VERSION = _official_min_version()
 _LEGACY_DEFAULT_WIN = Path.home() / "AppData" / "Local" / "OfficeCLI" / "officecli.exe"
-# install-codex.ps1 places the official binary here when npm is unavailable.
-# NOT "officecli/" — Windows paths are case-insensitive, so that would be the
-# SAME directory as the legacy install ("OfficeCLI/") and clobber it.
+# doctor --install / install-codex.ps1 place the official binary here when
+# npm is unavailable. NOT plain "officecli/" — Windows paths are
+# case-insensitive, so that would be the SAME directory as the legacy install
+# ("OfficeCLI/") and clobber it.
 _OFFICIAL_DEFAULT_WIN = (
     Path.home() / "AppData" / "Local" / "officecli-official" / "officecli.exe"
 )
+
+
+def _official_default_paths() -> list[Path]:
+    """Known install locations for the official agent-bridge binary."""
+    paths: list[Path] = []
+    if os.name == "nt":
+        paths.append(_OFFICIAL_DEFAULT_WIN)
+    else:
+        xdg = os.environ.get("XDG_DATA_HOME")
+        if xdg:
+            paths.append(Path(xdg) / "designmd-pptx" / "officecli-official" / "officecli")
+        paths.append(
+            Path.home() / ".local" / "share" / "designmd-pptx" / "officecli-official" / "officecli"
+        )
+        paths.append(Path.home() / ".local" / "bin" / "officecli")
+    return paths
 
 
 class BackendUnavailable(RuntimeError):
@@ -83,7 +100,7 @@ def _candidates() -> list[str]:
             p = Path(d) / name
             if p.is_file() and str(p) not in seen:
                 seen.append(str(p))
-    for default in (_LEGACY_DEFAULT_WIN, _OFFICIAL_DEFAULT_WIN):
+    for default in (_LEGACY_DEFAULT_WIN, *_official_default_paths()):
         if default.is_file() and str(default) not in seen:
             seen.append(str(default))
     return seen
@@ -301,7 +318,7 @@ class AgentBridgeBackend(OfficeCliBackend):
                 daemon=True,
             ).start()
             init = self._call("initialize", {
-                "clientInfo": {"name": "designmd-pptx", "version": "1.7.1"},
+                "clientInfo": {"name": "designmd-pptx", "version": "2.0.0"},
             })
             self._caps = None
             self._server = init

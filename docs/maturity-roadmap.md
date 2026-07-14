@@ -2,7 +2,7 @@
 
 Where designmd-pptx is going after the dual-backend (v1.7) foundation.
 
-## v2.0 — production core (this release)
+## v2.0 — production core (**shipped** as v2.0.0)
 
 **Goal:** A contributor can install the package, diagnose the machine, generate
 a brand-faithful deck, and gate it on structure + a11y + offline visual QA
