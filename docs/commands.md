@@ -22,6 +22,7 @@ designmd-pptx <command> …
 | `corpus <manifest.json>` | Validate corpus + train/held-out split |
 | `a11y [--tokens] [--deck] [--design] [--content] [--fix-contrast] …` | WCAG + order + alt/notes |
 | `benchmark [-o out/] [--manifest] [--design] [--content]` | Before/after regression harness |
+| `refine <deck.json> [-o refined/] [--feedback] [--findings] [--rounds]` | Iterative visual refinement (#19) |
 | `doctor [--strict] [--install [--dry-run]]` | Env + skill routing; pinned install |
 
 Pass the literal `default` instead of a DESIGN.md path for the bundled neutral
@@ -53,3 +54,22 @@ python -m designmd_pptx benchmark --manifest corpus/corpus.manifest.json -o benc
 ```
 
 Thresholds: `python/designmd_pptx/benchmark_thresholds.json`.
+
+## refine (#19)
+
+```bash
+# Natural-language density feedback (2–3 rounds of deck-spec patches)
+python -m designmd_pptx refine content.deck.json -o refined \
+  --feedback "이 슬라이드는 너무 빽빽해요. 여백을 늘려주세요" --rounds 3
+
+# From Gate 3 vision findings
+python -m designmd_pptx refine content.deck.json -o refined \
+  --findings out/deck.gate3.json --contact out/deck.contact.png
+
+# Then re-scaffold
+python -m designmd_pptx scaffold default -o out/v2 \
+  --content refined/content.deck.json
+```
+
+Patches are deterministic (split lists, shorten bodies, recipe swaps, a11y notes).
+Live vision models remain opt-in via `DESIGNMD_VISION_CMD` / `--vision-cmd`.

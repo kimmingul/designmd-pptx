@@ -592,6 +592,36 @@ def cmd_corpus(args: argparse.Namespace) -> int:
     return 1 if errors else 0
 
 
+def cmd_refine(args: argparse.Namespace) -> int:
+    """Iterative visual refinement loop (#19) — feedback → deck-spec patches."""
+    from . import refine as refine_mod
+
+    result = refine_mod.run_refine_to_dir(
+        args.deck,
+        args.out,
+        feedback=args.feedback,
+        findings_path=args.findings,
+        contact_png=args.contact,
+        vision_plan=args.vision_plan,
+        vision_cmd=args.vision_cmd,
+        rounds=int(args.rounds),
+    )
+    paths = result.get("paths") or {}
+    print(f"Wrote {paths.get('deck')}  (+ {paths.get('report')})")
+    print(f"refine: rounds={result['rounds_run']} patches={result['total_patches']} "
+          f"changed={result['changed']}")
+    for h in result.get("history") or []:
+        n = len(h.get("patches") or [])
+        print(f"  round {h.get('round')}: {n} patch(es)"
+              + ("" if h.get("changed") else " (noop)"))
+        for p in (h.get("patches") or [])[:8]:
+            print(f"    - {p.get('action')} slide={p.get('slide')} "
+                  f"{p.get('code', '')}")
+    if not result.get("changed"):
+        print("tip: pass --feedback 'too dense' or a Gate 3 findings JSON")
+    return 0
+
+
 def cmd_a11y(args: argparse.Namespace) -> int:
     """WCAG contrast, reading order, alt/notes audit (#39)."""
     from . import a11y as a11y_mod
@@ -1012,6 +1042,28 @@ def build_parser() -> argparse.ArgumentParser:
     )
     cp.add_argument("manifest", type=Path, help="corpus.manifest.json")
     cp.set_defaults(func=cmd_corpus)
+
+    rf = sub.add_parser(
+        "refine",
+        help="Iterative visual refinement (#19): NL / vision findings → "
+             "deck-spec patches over 1–3 rounds (re-scaffold after)",
+    )
+    rf.add_argument("deck", type=Path, help="content.deck.json / deck-spec to refine")
+    rf.add_argument("-o", "--out", type=Path, default=Path("refined"),
+                    help="Output directory (default: refined/)")
+    rf.add_argument("--feedback", default=None,
+                    help="Natural-language QA, e.g. 'this slide is too dense'")
+    rf.add_argument("--findings", type=Path, default=None,
+                    help="Vision/Gate3 findings JSON (list or {findings:[...]})")
+    rf.add_argument("--contact", type=Path, default=None,
+                    help="Contact-sheet PNG to evaluate (offline + optional vision)")
+    rf.add_argument("--vision-plan", type=Path, default=None,
+                    help="Pre-authored evaluation JSON (tests / replay)")
+    rf.add_argument("--vision-cmd", default=None,
+                    help="Shell vision evaluator (overrides DESIGNMD_VISION_CMD)")
+    rf.add_argument("--rounds", type=int, default=3,
+                    help="Max refinement rounds (1–5, default 3)")
+    rf.set_defaults(func=cmd_refine)
 
     ay = sub.add_parser(
         "a11y",
