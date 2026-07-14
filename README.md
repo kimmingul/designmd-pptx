@@ -130,13 +130,14 @@ Two OfficeCLI generations power different commands (full write-up:
 
 | Backend | Binary | Used by | Fidelity |
 |---|---|---|---|
-| `LegacyBatchBackend` | legacy shape-level binary ([iOfficeAI/OfficeCLI](https://github.com/iOfficeAI/OfficeCLI/releases)) | scaffold · apply · restyle · master · extract | DESIGN.md-exact: engine-solved cm geometry, glued connectors, Gate 3 |
+| `LegacyBatchBackend` | legacy shape-level binary ([iOfficeAI/OfficeCLI](https://github.com/iOfficeAI/OfficeCLI/releases)) | apply · scaffold --apply (materialization + Gate 3 screenshots) | DESIGN.md-exact: engine-solved cm geometry, glued connectors |
 | `AgentBridgeBackend` | official [officecli](https://github.com/officecli/officecli) ≥ 0.2.117 | `render` | outline-level (`office.render` payload); brand colors/fonts carry via the theme object (incl. `eaFontFamily` for CJK) |
 
-Both are **capability-first** (the bridge via `initialize`/`capabilities/get`
-per the official skill's guidance, the legacy binary via schema-reference
-probing) and identified by version probing — never by binary name, since both
-generations install as `officecli`. The official payload schema is outline-only
+`extract` / `restyle` / `master` / `compose` are pure Python and need no
+OfficeCLI at all. Both backends are **capability-first** (the bridge via
+`initialize`/`capabilities/get` per the official skill's guidance, the legacy
+binary via help-verb probing) and identified by version probing — never by
+binary name, since both generations install as `officecli`. The official payload schema is outline-only
 today (no absolute geometry / connectors / per-shape typography), which is why
 the precision pipeline stays on the legacy backend; an upstream feature request
 for shape-level payloads is filed with the officecli team.

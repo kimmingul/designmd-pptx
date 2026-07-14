@@ -39,16 +39,24 @@ class BackendUnavailable(RuntimeError):
     """The requested backend / capability is not available on this machine."""
 
 
+_RUNNING_STATES = frozenset({"running", "pending", "queued", "started"})
+_SUCCESS_STATES = frozenset({"completed", "succeeded", "success", "done"})
+
+
 # ---------------------------------------------------------------- discovery
 
 def classify_binary(exe: str) -> str | None:
-    """'official' | 'legacy' | None, by probing --version output."""
+    """'official' | 'legacy' | None, by probing --version output.
+
+    A broken shim on PATH must degrade to None, never crash or stall
+    discovery — hence the short timeout and the broad probe-failure net."""
     try:
         r = subprocess.run(
-            [exe, "--version"], capture_output=True, text=True, timeout=20,
+            [exe, "--version"], capture_output=True, text=True, timeout=8,
             encoding="utf-8", errors="replace",
         )
-    except OSError:
+    except (OSError, subprocess.TimeoutExpired, subprocess.SubprocessError,
+            ValueError):
         return None
     out = (r.stdout or "").strip()
     if r.returncode != 0:
@@ -77,8 +85,17 @@ def _candidates() -> list[str]:
     return seen
 
 
-def find_binaries() -> dict[str, str]:
-    """{'legacy': exe?, 'official': exe?} — env overrides win, then PATH scan."""
+_BINARIES_CACHE: dict[str, str] | None = None
+
+
+def find_binaries(*, refresh: bool = False) -> dict[str, str]:
+    """{'legacy': exe?, 'official': exe?} — env overrides win, then PATH scan.
+
+    Cached per process: probing runs a subprocess per candidate, and doctor
+    plus both backends would otherwise re-discover independently."""
+    global _BINARIES_CACHE
+    if _BINARIES_CACHE is not None and not refresh:
+        return dict(_BINARIES_CACHE)
     found: dict[str, str] = {}
     legacy_env = os.environ.get("OFFICECLI_LEGACY_BIN")
     bridge_env = os.environ.get("OFFICECLI_BRIDGE_BIN")
@@ -86,13 +103,19 @@ def find_binaries() -> dict[str, str]:
         found["legacy"] = legacy_env
     if bridge_env and classify_binary(bridge_env) == "official":
         found["official"] = bridge_env
+    probed: set[str] = set()
     for exe in _candidates():
         if len(found) == 2:
             break
+        key = os.path.normcase(os.path.normpath(exe))
+        if key in probed:
+            continue
+        probed.add(key)
         kind = classify_binary(exe)
         if kind and kind not in found:
             found[kind] = exe
-    return found
+    _BINARIES_CACHE = dict(found)
+    return dict(found)
 
 
 # ------------------------------------------------------------------ contract
@@ -160,13 +183,18 @@ class LegacyBatchBackend(OfficeCliBackend):
     def verbs(self) -> set[str]:
         if self._verbs is None:
             r = self.run(["--help"])
-            self._verbs = set(
-                re.findall(r"^  (\w[\w-]*)\b", r.stdout or "", re.M)
-            )
+            text = (r.stdout or "") + (r.stderr or "")
+            self._verbs = set(re.findall(r"^\s{2,}(\w[\w-]*)\b", text, re.M))
         return self._verbs
 
     def require(self, *verbs: str) -> None:
-        missing = [v for v in verbs if v not in self.verbs()]
+        """Better-error gate, not a blocker: when help output can't be parsed
+        at all (empty verb set), let the actual command surface the failure
+        instead of false-negatively rejecting a working binary."""
+        known = self.verbs()
+        if not known:
+            return
+        missing = [v for v in verbs if v not in known]
         if missing:
             raise BackendUnavailable(
                 f"legacy OfficeCLI at {self.exe} lacks required command(s) "
@@ -223,17 +251,28 @@ class AgentBridgeBackend(OfficeCliBackend):
 
     name = "agent-bridge"
 
-    def __init__(self, exe: str | None = None):
+    _MAX_HEADER = 8192
+    _MAX_BODY = 64 * 1024 * 1024
+
+    def __init__(self, exe: str | None = None, *, call_timeout: float = 60.0):
         self.exe = exe or find_binaries().get("official")
+        self.call_timeout = call_timeout
         self._proc: subprocess.Popen | None = None
         self._id = 0
         self._caps: dict[str, Any] | None = None
         self.events: list[dict] = []
+        self._lock = __import__("threading").RLock()
+        self._queue: Any = None  # queue.Queue fed by the reader thread
 
     def available(self) -> bool:
         return bool(self.exe)
 
     # -- transport -----------------------------------------------------------
+    # A dedicated reader thread feeds a queue so every wait is TIMED — a
+    # silent or crashed bridge raises BackendUnavailable instead of blocking
+    # forever (adversarial review finding #1); the transaction lock keeps
+    # concurrent callers from consuming each other's responses (#9).
+
     def _ensure_proc(self) -> subprocess.Popen:
         if self._proc is None or self._proc.poll() is not None:
             if not self.exe:
@@ -243,14 +282,22 @@ class AgentBridgeBackend(OfficeCliBackend):
                     "https://github.com/officecli/officecli-dist/releases, "
                     "or set OFFICECLI_BRIDGE_BIN"
                 )
+            import queue
+            import threading
+
             self._proc = subprocess.Popen(
                 [self.exe, "agent-bridge"],
                 stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                 stderr=subprocess.DEVNULL,
             )
             self._id = 0
+            self._queue = queue.Queue()
+            threading.Thread(
+                target=self._reader_loop, args=(self._proc, self._queue),
+                daemon=True,
+            ).start()
             init = self._call("initialize", {
-                "clientInfo": {"name": "designmd-pptx", "version": "1.7.0"},
+                "clientInfo": {"name": "designmd-pptx", "version": "1.7.1"},
             })
             self._caps = None
             self._server = init
@@ -261,10 +308,12 @@ class AgentBridgeBackend(OfficeCliBackend):
         body = json.dumps(payload).encode("utf-8")
         return f"Content-Length: {len(body)}\r\n\r\n".encode() + body
 
-    def _read_message(self) -> dict:
-        stream = self._proc.stdout
+    @classmethod
+    def _read_framed(cls, stream) -> dict:
         header = b""
         while b"\r\n\r\n" not in header:
+            if len(header) > cls._MAX_HEADER:
+                raise BackendUnavailable("agent-bridge: unframed garbage on stdout")
             chunk = stream.read(1)
             if not chunk:
                 raise BackendUnavailable("agent-bridge closed unexpectedly")
@@ -273,6 +322,8 @@ class AgentBridgeBackend(OfficeCliBackend):
         for line in header.split(b"\r\n"):
             if line.lower().startswith(b"content-length:"):
                 length = int(line.split(b":")[1].strip())
+        if not 0 < length <= cls._MAX_BODY:
+            raise BackendUnavailable(f"agent-bridge: bad frame length {length}")
         body = b""
         while len(body) < length:
             chunk = stream.read(length - len(body))
@@ -281,27 +332,60 @@ class AgentBridgeBackend(OfficeCliBackend):
             body += chunk
         return json.loads(body.decode("utf-8"))
 
+    @classmethod
+    def _reader_loop(cls, proc: subprocess.Popen, out_queue) -> None:
+        try:
+            while True:
+                out_queue.put(cls._read_framed(proc.stdout))
+        except Exception as e:  # EOF / kill / garbage — deliver to the waiter
+            out_queue.put({"__reader_error__": str(e)})
+
     def _call(self, method: str, params: dict | None = None,
-              *, max_messages: int = 10_000) -> dict:
-        """Send one request; collect event notifications until our response."""
-        if method != "initialize":
-            self._ensure_proc()
-        self._id += 1
-        rid = self._id
-        self._proc.stdin.write(self._frame(
-            {"jsonrpc": "2.0", "id": rid, "method": method, "params": params or {}}
-        ))
-        self._proc.stdin.flush()
-        for _ in range(max_messages):
-            msg = self._read_message()
-            if msg.get("id") == rid:
-                if "error" in msg:
+              *, timeout: float | None = None) -> dict:
+        """One request/response transaction; events are drained, waits are timed."""
+        import queue
+        import time as _time
+
+        with self._lock:
+            if method != "initialize":
+                self._ensure_proc()
+            self._id += 1
+            rid = self._id
+            try:
+                self._proc.stdin.write(self._frame(
+                    {"jsonrpc": "2.0", "id": rid, "method": method,
+                     "params": params or {}}
+                ))
+                self._proc.stdin.flush()
+            except OSError as e:
+                self.close()
+                raise BackendUnavailable(f"agent-bridge write failed: {e}")
+
+            deadline = _time.monotonic() + (timeout or self.call_timeout)
+            while True:
+                remaining = deadline - _time.monotonic()
+                if remaining <= 0:
+                    self.close()
                     raise BackendUnavailable(
-                        f"agent-bridge {method} failed: {msg['error']}"
+                        f"agent-bridge {method}: no response within "
+                        f"{timeout or self.call_timeout:.0f}s (bridge killed)"
                     )
-                return msg.get("result", {})
-            self.events.append(msg)  # notification / interleaved event
-        raise BackendUnavailable(f"agent-bridge {method}: no response")
+                try:
+                    msg = self._queue.get(timeout=min(remaining, 1.0))
+                except queue.Empty:
+                    continue
+                if "__reader_error__" in msg:
+                    self.close()
+                    raise BackendUnavailable(
+                        f"agent-bridge transport failed: {msg['__reader_error__']}"
+                    )
+                if msg.get("id") == rid:
+                    if "error" in msg:
+                        raise BackendUnavailable(
+                            f"agent-bridge {method} failed: {msg['error']}"
+                        )
+                    return msg.get("result", {})
+                self.events.append(msg)  # notification / interleaved event
 
     # -- capability-first ----------------------------------------------------
     def capabilities(self) -> dict[str, Any]:
@@ -346,40 +430,83 @@ class AgentBridgeBackend(OfficeCliBackend):
         args[img.get("invoke_field", "enable_images")] = enable_images
         started = self._call("task/invoke", {"tool": tool, "args": args})
         task_id = started.get("task_id")
-        if not task_id:
-            return started  # synchronous completion
-
-        deadline = time.time() + timeout_s
         status = started
-        while time.time() < deadline:
+        if task_id:
+            deadline = time.monotonic() + timeout_s
+            while time.monotonic() < deadline:
+                state = str(status.get("status") or status.get("state") or "").lower()
+                if state and state not in _RUNNING_STATES:
+                    break
+                time.sleep(1.5)
+                status = self._call("task/status", {"task_id": task_id})
             state = str(status.get("status") or status.get("state") or "").lower()
-            if state and state not in ("running", "pending", "queued", "started"):
-                break
-            time.sleep(1.5)
-            status = self._call("task/status", {"task_id": task_id})
+            if state in _RUNNING_STATES:
+                self.close()
+                raise BackendUnavailable(
+                    f"agent-bridge render timed out after {timeout_s:.0f}s (task {task_id})"
+                )
+        # single completion validator for BOTH the sync and async paths —
+        # unknown states are failures, and success without an artifact is too
+        return self._finalize_render(status, out_path)
+
+    @staticmethod
+    def _finalize_render(status: dict, out_path: Path) -> dict:
+        result = status.get("result") or {}
         state = str(status.get("status") or status.get("state") or "").lower()
-        if state in ("running", "pending", "queued", "started"):
+        inner = str(result.get("status") or "").lower()
+        if state not in _SUCCESS_STATES and inner not in _SUCCESS_STATES:
             raise BackendUnavailable(
-                f"agent-bridge render timed out after {timeout_s:.0f}s (task {task_id})"
+                f"agent-bridge render did not report success: "
+                f"{json.dumps(status, ensure_ascii=False)[:300]}"
             )
-        if state in ("failed", "error", "cancelled", "canceled"):
+        produced = result.get("file_path")
+        if produced and Path(produced).exists():
+            if Path(produced).resolve() != out_path.resolve():
+                out_path.parent.mkdir(parents=True, exist_ok=True)
+                # shutil.move survives cross-volume relocation; os.replace doesn't
+                shutil.move(str(produced), str(out_path))
+        if not out_path.is_file():
             raise BackendUnavailable(
-                f"agent-bridge render {state}: {json.dumps(status)[:300]}"
+                f"agent-bridge reported success but no artifact exists at {out_path} "
+                f"(bridge result: {json.dumps(result, ensure_ascii=False)[:200]})"
             )
-        produced = (status.get("result") or {}).get("file_path")
-        if produced and Path(produced).exists() and Path(produced) != out_path:
-            out_path.parent.mkdir(parents=True, exist_ok=True)
-            os.replace(produced, str(out_path))
-            status.setdefault("result", {})["file_path"] = str(out_path)
+        if isinstance(status.get("result"), dict):
+            status["result"]["file_path"] = str(out_path)
         return status
 
     def close(self) -> None:
-        if self._proc and self._proc.poll() is None:
+        """Tear the bridge down completely: pipes closed, process TREE ended
+        (npm .cmd shims spawn a child node process), no zombies, no
+        ResourceWarnings (adversarial review finding #3)."""
+        proc, self._proc = self._proc, None
+        if proc is None:
+            return
+        try:
+            if proc.stdin:
+                proc.stdin.close()
+        except OSError:
+            pass
+        if proc.poll() is None:
             try:
-                self._proc.kill()
-            except OSError:
-                pass
-        self._proc = None
+                if os.name == "nt":
+                    subprocess.run(
+                        ["taskkill", "/PID", str(proc.pid), "/T", "/F"],
+                        capture_output=True, timeout=10,
+                    )
+                else:
+                    proc.terminate()
+                proc.wait(timeout=5)
+            except (OSError, subprocess.TimeoutExpired, subprocess.SubprocessError):
+                try:
+                    proc.kill()
+                    proc.wait(timeout=3)
+                except (OSError, subprocess.TimeoutExpired):
+                    pass
+        try:
+            if proc.stdout:
+                proc.stdout.close()
+        except OSError:
+            pass
 
 
 # ----------------------------------------------------- deck-spec → render payload
