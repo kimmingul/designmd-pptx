@@ -1,5 +1,11 @@
 PyYAML>=6.0
 
+# lxml powers namespace-aware OOXML editing (restyle/master — issue #16),
+# replacing fragile regex-on-XML. defusedxml documents the hardening intent for
+# untrusted .pptx input (lxml's own safe-parser flags are the active control).
+lxml>=5.0
+defusedxml>=0.7
+
 # OfficeCLI is a separate native/npm toolchain, not a pip dependency. Its
 # supported version range is pinned in designmd_pptx/compatibility.json
 # (issue #8) — official agent-bridge >= 0.2.117 (pinned 0.2.117);

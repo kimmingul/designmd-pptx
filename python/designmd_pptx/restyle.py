@@ -16,6 +16,10 @@ import zipfile
 from pathlib import Path
 from typing import Any
 
+from lxml.etree import XMLSyntaxError
+
+from . import opc
+
 # Theme scheme slot → tokens.colors key (first existing key wins)
 _SCHEME_MAP: list[tuple[str, list[str]]] = [
     ("dk1", ["text"]),
@@ -45,103 +49,57 @@ def _nearest(color: str, palette: list[str]) -> str:
     return min(palette, key=lambda p: _hex_dist(color, p))
 
 
-def _restyle_theme(xml: str, colors: dict[str, str], typ: dict[str, Any],
-                   report: dict[str, Any]) -> str:
+def _restyle_theme_tree(theme, colors: dict[str, str], typ: dict[str, Any],
+                        report: dict[str, Any]) -> None:
+    """Namespace-aware theme rebrand: point each clrScheme slot at an explicit
+    srgbClr (replacing srgbClr OR sysClr) and set the major/minor latin fonts."""
     for slot, keys in _SCHEME_MAP:
         val = next((colors[k] for k in keys if colors.get(k)), None)
-        if not val:
-            continue
-        pattern = re.compile(rf"(<a:{slot}>).*?(</a:{slot}>)", re.S)
-        new_xml, n = pattern.subn(rf'\g<1><a:srgbClr val="{val.upper()}"/>\g<2>', xml)
-        if n:
+        if val and opc.set_scheme_color(theme, slot, val):
             report["theme_scheme"][slot] = val.upper()
-            xml = new_xml
 
     heading = typ.get("heading_font")
     body = typ.get("body_font")
-    if heading:
-        xml, n = re.subn(
-            r'(<a:majorFont>\s*<a:latin[^>]*typeface=")[^"]*(")',
-            rf"\g<1>{heading}\g<2>", xml, flags=re.S,
-        )
-        if n:
-            report["theme_fonts"]["major"] = heading
-    if body:
-        xml, n = re.subn(
-            r'(<a:minorFont>\s*<a:latin[^>]*typeface=")[^"]*(")',
-            rf"\g<1>{body}\g<2>", xml, flags=re.S,
-        )
-        if n:
-            report["theme_fonts"]["minor"] = body
-    return xml
+    if heading and opc.set_theme_font(theme, "majorFont", heading):
+        report["theme_fonts"]["major"] = heading
+    if body and opc.set_theme_font(theme, "minorFont", body):
+        report["theme_fonts"]["minor"] = body
 
 
-def _restyle_part(xml: str, palette: list[str], typ: dict[str, Any],
-                  explicit_colors: bool, explicit_fonts: bool,
-                  color_map: dict[str, str], report: dict[str, Any]) -> str:
+def _restyle_part_tree(root, palette: list[str], typ: dict[str, Any],
+                       explicit_colors: bool, explicit_fonts: bool,
+                       color_map: dict[str, str], report: dict[str, Any]) -> None:
     if explicit_colors and palette:
-        def _sub_color(m: re.Match) -> str:
-            old = m.group(1).upper()
+        def _color(old: str) -> str:
             new = color_map.get(old) or _nearest(old, palette)
             if new != old:
-                entry = report["colors"].setdefault(old, {"new": new, "count": 0})
-                entry["count"] += 1
-            return f'srgbClr val="{new}"'
+                report["colors"].setdefault(old, {"new": new, "count": 0})["count"] += 1
+            return new
 
-        xml = re.sub(r'srgbClr val="([0-9A-Fa-f]{6})"', _sub_color, xml)
+        opc.remap_srgb_colors(root, _color)
 
     if explicit_fonts and (typ.get("body_font") or typ.get("mono_font")):
         body = typ.get("body_font", "Calibri")
         mono = typ.get("mono_font", "Consolas")
         heading = typ.get("heading_font", body)
         # Runs at/above the section size keep the HEADING font (v1.5) —
-        # flattening titles into the body font was a v1.2 defect.
+        # flattening titles into the body font was a v1.2 defect. Size comes
+        # from the enclosing run-props element; typefaces outside a sized run
+        # (size None) fall to the body font unless they look monospace.
         heading_sz = int(typ.get("section_pt", 28)) * 100
 
-        def _map_font(old: str, sz: int) -> str:
+        def _font(old: str, sz: int | None) -> str:
+            if old.startswith("+"):  # +mj-lt / +mn-lt follow the theme
+                return old
             if any(h in old.lower() for h in _MONO_HINTS):
-                return mono
-            return heading if sz >= heading_sz else body
-
-        def _record(old: str, new: str) -> None:
+                new = mono
+            else:
+                new = heading if (sz or 0) >= heading_sz else body
             if new != old:
-                entry = report["fonts"].setdefault(old, {"new": new, "count": 0})
-                entry["count"] += 1
+                report["fonts"].setdefault(old, {"new": new, "count": 0})["count"] += 1
+            return new
 
-        def _sub_block(m: re.Match) -> str:
-            block = m.group(0)
-            if "typeface" not in block:
-                return block
-            szm = re.search(r'\bsz="(\d+)"', block)
-            sz = int(szm.group(1)) if szm else 0
-
-            def _sub_face(tm: re.Match) -> str:
-                old = tm.group(2)
-                if old.startswith("+"):  # +mj-lt / +mn-lt follow the theme
-                    return tm.group(0)
-                new = _map_font(old, sz)
-                _record(old, new)
-                return f"{tm.group(1)}{new}{tm.group(3)}"
-
-            return re.sub(r'(typeface=")([^"]+)(")', _sub_face, block)
-
-        # Size-aware pass over run/paragraph property blocks…
-        xml = re.sub(
-            r"<a:(rPr|defRPr|endParaRPr)\b[^>]*?>.*?</a:\1>", _sub_block, xml, flags=re.S
-        )
-
-        # …then a catch-all for typefaces outside sized blocks (no size → body).
-        # Brand fonts already placed by the first pass must not be re-mapped.
-        def _sub_font(m: re.Match) -> str:
-            old = m.group(1)
-            if old.startswith("+") or old in (heading, body, mono):
-                return m.group(0)
-            new = _map_font(old, 0)
-            _record(old, new)
-            return f'typeface="{new}"'
-
-        xml = re.sub(r'typeface="([^"]+)"', _sub_font, xml)
-    return xml
+        opc.remap_typefaces(root, _font)
 
 
 def rewrite_package(
@@ -220,14 +178,25 @@ def restyle_pptx(
     }
 
     def transform(name: str, data: bytes) -> bytes:
-        if re.fullmatch(r"ppt/theme/theme\d+\.xml", name):
-            return _restyle_theme(data.decode("utf-8"), colors, typ, report).encode("utf-8")
-        if re.fullmatch(r"ppt/(slides|slideLayouts|slideMasters)/[^/]+\.xml", name):
-            return _restyle_part(
-                data.decode("utf-8"), palette, typ,
-                explicit_colors, explicit_fonts, cmap, report,
-            ).encode("utf-8")
-        return data
+        is_theme = re.fullmatch(r"ppt/theme/theme\d+\.xml", name)
+        is_part = re.fullmatch(
+            r"ppt/(slides|slideLayouts|slideMasters)/[^/]+\.xml", name)
+        if not (is_theme or is_part):
+            return data
+        decl = opc.xml_declaration(data)
+        try:
+            root = opc.parse(data)
+        except XMLSyntaxError:
+            # A malformed part is left byte-for-byte untouched rather than
+            # aborting the whole restyle — never make a bad deck worse.
+            report.setdefault("unparsed", []).append(name)
+            return data
+        if is_theme:
+            _restyle_theme_tree(root, colors, typ, report)
+        else:
+            _restyle_part_tree(
+                root, palette, typ, explicit_colors, explicit_fonts, cmap, report)
+        return opc.serialize(root, declaration=decl)
 
     dest = rewrite_package(pptx, out, transform, force=force)
     report["dest"] = str(dest)
