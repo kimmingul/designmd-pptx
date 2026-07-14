@@ -148,6 +148,8 @@ cover · section_divider · **section_opener_numbered** · **agenda_toc** · kpi
 
 **Academic / medical (#10):** **consort_flow** · **kaplan_meier** · **forest_plot** · **study_design** · **results_table_insight** · **multi_panel_figure** — example deck-spec: `python/examples/content.medical.deck.json`
 
+**Wave 1 full-family (Infograpify structural roles):** **chevron_process** · **cycle_loop** · **waterfall_insight** · **venn_overlap** · **swot_2x2** · **gantt_bars** · **org_tree** · **persona_card** · **business_canvas** · **fishbone_causes** · **iceberg_levels** · **framework_row** — see `docs/recipe-coverage-roadmap.md`
+
 ## Colors
 
 hex, rgb/hsl, oklch (approx), color-mix, var(--token), linear-gradient (2-stop officecli form).

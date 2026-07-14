@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 from pathlib import Path
 from typing import Any
 
@@ -3808,6 +3809,836 @@ def recipe_multi_panel_figure(tokens: dict, content: dict | None = None) -> list
     return ops
 
 
+# ---------------------------------------------------------------------------
+# Wave 1 full-family coverage (docs/recipe-coverage-roadmap.md)
+# ---------------------------------------------------------------------------
+
+def _norm_steps(raw: Any, *, min_n: int = 3, max_n: int = 6,
+                defaults: list | None = None) -> list[dict]:
+    """Normalize steps/stages/items into list[{label, detail?, value?}]."""
+    if raw is None:
+        raw = defaults or [{"label": f"Step {i + 1}"} for i in range(min_n)]
+    if not isinstance(raw, list):
+        raw = [raw]
+    out: list[dict] = []
+    for i, item in enumerate(raw[:max_n]):
+        if isinstance(item, dict):
+            label = str(item.get("label") or item.get("title") or item.get("name")
+                        or f"Item {i + 1}")
+            detail = str(item.get("detail") or item.get("body") or item.get("desc") or "")
+            value = str(item.get("value") or item.get("metric") or "")
+            out.append({"label": label, "detail": detail, "value": value, **{
+                k: item[k] for k in item if k not in ("label", "title", "name",
+                                                       "detail", "body", "desc",
+                                                       "value", "metric")
+            }})
+        else:
+            out.append({"label": str(item), "detail": "", "value": ""})
+    while len(out) < min_n:
+        out.append({"label": "—", "detail": "", "value": ""})
+    return out
+
+
+def recipe_chevron_process(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Horizontal chevron / arrow process (Wave 1) — 3–6 stepped stages."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Process")
+    steps = _norm_steps(content.get("steps") or content.get("stages"), min_n=3, max_n=6,
+                        defaults=[{"label": s} for s in ("Discover", "Design", "Build", "Ship")])
+    n = len(steps)
+    m, gap = b["margin"], 0.2
+    usable = 33.87 - 2 * m
+    # Overlap chevrons slightly so the point reads as a chevron train.
+    step_w = (usable + (n - 1) * 0.55) / n
+    y, h = 7.2, 4.8
+    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "ChevronTitle", title)]
+    for i, st in enumerate(steps):
+        x = m + i * (step_w - 0.55)
+        fill = c["accent"] if i == 0 or i == n - 1 else c["surface"]
+        tc = c["on_accent"] if fill == c["accent"] else c["text_on_surface"]
+        preset = "chevron" if i < n - 1 else b["preset"]
+        # Some officecli builds lack chevron — rightArrow is the portable fallback.
+        text = st["label"]
+        if st.get("value"):
+            text = f"{st['label']}\n{st['value']}"
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"Chevron{i + 1}", "preset": preset,
+                "fill": fill, "line": "none",
+                "text": text,
+                "x": _cm(x), "y": _cm(y), "width": _cm(step_w), "height": _cm(h),
+                "font": t["heading_font"],
+                "size": str(max(14, min(22, t["section_pt"] - 4))),
+                "bold": "true", "color": tc, "align": "center", "valign": "middle",
+            },
+        })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Walk left→right; the last chevron is the outcome.")},
+    })
+    return ops
+
+
+def recipe_cycle_loop(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Circular process (Wave 1) — 3–6 nodes around a hub."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Cycle")
+    hub = str(content.get("hub") or content.get("center") or "Loop")
+    steps = _norm_steps(content.get("steps") or content.get("stages"), min_n=3, max_n=6,
+                        defaults=[{"label": s} for s in ("Plan", "Do", "Check", "Act")])
+    n = len(steps)
+    cx, cy, r = 16.9, 11.0, 5.2
+    node_w, node_h = 5.4, 2.4
+    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "CycleTitle", title)]
+    # Hub
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "CycleHub", "preset": "ellipse",
+            "fill": c["accent"], "line": "none", "text": hub,
+            "x": _cm(cx - 2.2), "y": _cm(cy - 1.5),
+            "width": "4.4cm", "height": "3.0cm",
+            "font": t["heading_font"], "size": str(max(16, t["section_pt"] - 4)),
+            "bold": "true", "color": c["on_accent"], "align": "center", "valign": "middle",
+        },
+    })
+    for i, st in enumerate(steps):
+        ang = -math.pi / 2 + (2 * math.pi * i / n)
+        x = cx + r * math.cos(ang) - node_w / 2
+        y = cy + r * math.sin(ang) * 0.72 - node_h / 2  # squash vertically for 16:9
+        x = max(b["margin"], min(33.87 - b["margin"] - node_w, x))
+        y = max(3.2, min(17.5 - node_h, y))
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"CycleNode{i + 1}", "preset": b["preset"],
+                "fill": c["surface"], "line": "none", "text": st["label"],
+                "x": _cm(x), "y": _cm(y), "width": _cm(node_w), "height": _cm(node_h),
+                "font": t["body_font"], "size": str(max(14, min(18, t["body_pt"]))),
+                "bold": "true", "color": c["text_on_surface"],
+                "align": "center", "valign": "middle",
+            },
+        })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Name the handoff between two adjacent nodes.")},
+    })
+    return ops
+
+
+def recipe_waterfall_insight(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Waterfall chart + insight rail (Wave 1) — chart_type defaults to waterfall."""
+    content = dict(content or {})
+    content.setdefault("chart_type", "waterfall")
+    content.setdefault("title", content.get("title") or "Bridge to result")
+    content.setdefault(
+        "insight_title", content.get("insight_title") or "What moved the number")
+    content.setdefault(
+        "insight_body",
+        content.get("insight_body")
+        or "Call out the two largest positive and negative bridges.",
+    )
+    content.setdefault("categories", content.get("categories") or "Start,Price,Volume,Mix,End")
+    content.setdefault("series1_values", content.get("series1_values") or "100,12,-5,8,115")
+    content.setdefault("series1_name", content.get("series1_name") or "Bridge")
+    content.setdefault(
+        "notes",
+        content.get("notes") or "Read left→right; the end bar is the result, not a delta.",
+    )
+    # Reuse chart_insight geometry with forced waterfall type.
+    return recipe_chart_insight(tokens, content)
+
+
+def recipe_venn_overlap(tokens: dict, content: dict | None = None) -> list[dict]:
+    """2–3 set Venn (Wave 1) — overlapping ellipses + set labels + intersection."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Overlap")
+    sets = content.get("sets") or content.get("circles") or [
+        {"label": "Set A", "detail": ""},
+        {"label": "Set B", "detail": ""},
+        {"label": "Set C", "detail": ""},
+    ]
+    if not isinstance(sets, list):
+        sets = [{"label": str(sets)}]
+    sets = sets[:3]
+    while len(sets) < 2:
+        sets.append({"label": f"Set {len(sets) + 1}"})
+    intersection = str(content.get("intersection") or content.get("overlap") or "Shared")
+    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "VennTitle", title)]
+    # Two-set side-by-side overlap; three-set triangle of ellipses.
+    if len(sets) == 2:
+        positions = [(8.5, 6.5), (15.5, 6.5)]
+        size = 11.0
+    else:
+        positions = [(9.0, 5.5), (15.0, 5.5), (12.0, 10.0)]
+        size = 9.5
+    fills = [c["accent"], c["surface"], c.get("chart_series2") or c["muted"]]
+    for i, (st, (x, y)) in enumerate(zip(sets, positions)):
+        label = st.get("label") if isinstance(st, dict) else str(st)
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"Venn{i + 1}", "preset": "ellipse",
+                "fill": fills[i % len(fills)], "line": "none",
+                # Soft overlap: no transparency API — use distinct fills + labels outside
+                "x": _cm(x), "y": _cm(y), "width": _cm(size), "height": _cm(size * 0.85),
+            },
+        })
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"VennLabel{i + 1}", "text": str(label),
+                "x": _cm(x + 0.8), "y": _cm(y + 0.6),
+                "width": _cm(size - 1.6), "height": "1.2cm",
+                "font": t["heading_font"], "size": str(max(16, t["section_pt"] - 6)),
+                "bold": "true",
+                "color": c["on_accent"] if i == 0 else c["text_on_surface"],
+                "fill": "none", "align": "center",
+            },
+        })
+    # Intersection callout at center
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "VennIntersection", "text": intersection,
+            "x": "12.5cm", "y": "9.5cm", "width": "9cm", "height": "2.2cm",
+            "font": t["heading_font"], "size": str(max(16, t["body_pt"] + 2)),
+            "bold": "true", "color": c["text_on_content"],
+            "fill": "none", "align": "center", "valign": "middle",
+        },
+    })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Define the intersection first; sets are context.")},
+    })
+    return ops
+
+
+def recipe_swot_2x2(tokens: dict, content: dict | None = None) -> list[dict]:
+    """SWOT 2×2 (Wave 1) — fixed S/W/O/T labels on a quadrant matrix."""
+    content = dict(content or {})
+    quads = content.get("quadrants")
+    if not quads:
+        s = content.get("strengths") or content.get("s") or ["Core strength"]
+        w = content.get("weaknesses") or content.get("w") or ["Gap to close"]
+        o = content.get("opportunities") or content.get("o") or ["Open door"]
+        t_ = content.get("threats") or content.get("t") or ["External risk"]
+
+        def _body(items: Any) -> str:
+            if isinstance(items, list):
+                return "\n".join(f"• {x}" for x in items[:6])
+            return str(items)
+
+        quads = [
+            {"title": "Strengths", "body": _body(s)},
+            {"title": "Weaknesses", "body": _body(w)},
+            {"title": "Opportunities", "body": _body(o)},
+            {"title": "Threats", "body": _body(t_)},
+        ]
+    content["quadrants"] = quads
+    content.setdefault("title", content.get("title") or "SWOT")
+    content.setdefault("axes", content.get("axes") or {
+        "x": "Internal → External", "y": "Helpful → Harmful",
+    })
+    content.setdefault(
+        "notes",
+        content.get("notes") or "Pair each weakness with a strength that offsets it.",
+    )
+    return recipe_matrix_2x2(tokens, content)
+
+
+def recipe_gantt_bars(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Simple Gantt (Wave 1) — rows with start/end bars across phases."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Schedule")
+    phases = content.get("phases") or content.get("columns") or ["Q1", "Q2", "Q3", "Q4"]
+    if not isinstance(phases, list):
+        phases = [str(phases)]
+    phases = [str(p) for p in phases[:8]]
+    if len(phases) < 2:
+        phases = ["Q1", "Q2", "Q3", "Q4"]
+    tasks = content.get("tasks") or content.get("rows") or content.get("items") or [
+        {"name": "Discovery", "start": 0, "end": 1},
+        {"name": "Build", "start": 1, "end": 3},
+        {"name": "Launch", "start": 3, "end": 4},
+    ]
+    if not isinstance(tasks, list):
+        tasks = []
+    tasks = tasks[:8]
+    if not tasks:
+        tasks = [{"name": "Task", "start": 0, "end": 1}]
+    m = b["margin"]
+    label_w = 6.5
+    track_x = m + label_w + 0.3
+    track_w = 33.87 - track_x - m
+    nph = len(phases)
+    col_w = track_w / nph
+    top, header_h = 3.3, 1.0
+    row_h = min(1.8, (17.8 - top - header_h) / max(1, len(tasks)))
+    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "GanttTitle", title)]
+    for j, ph in enumerate(phases):
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"GanttPhase{j + 1}", "text": ph,
+                "x": _cm(track_x + j * col_w), "y": _cm(top),
+                "width": _cm(col_w), "height": _cm(header_h),
+                "font": t["body_font"], "size": str(_micro_pt(t) + 2),
+                "bold": "true", "color": c["muted"], "align": "center", "fill": "none",
+            },
+        })
+    for i, task in enumerate(tasks):
+        if isinstance(task, dict):
+            name = str(task.get("name") or task.get("label") or f"Task {i + 1}")
+            start = int(task.get("start", 0))
+            end = int(task.get("end", start + 1))
+        else:
+            name, start, end = str(task), 0, 1
+        start = max(0, min(nph - 1, start))
+        end = max(start + 1, min(nph, end))
+        y = top + header_h + 0.15 + i * row_h
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"GanttLabel{i + 1}", "text": name,
+                "x": _cm(m), "y": _cm(y), "width": _cm(label_w), "height": _cm(row_h - 0.15),
+                "font": t["body_font"], "size": str(max(12, min(16, t["body_pt"] - 2))),
+                "color": c["text_on_content"], "valign": "middle", "fill": "none",
+            },
+        })
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"GanttBar{i + 1}", "preset": b["preset"],
+                "fill": c["accent"] if i % 2 == 0 else c["surface"], "line": "none",
+                "x": _cm(track_x + start * col_w + 0.1),
+                "y": _cm(y + 0.25),
+                "width": _cm(max(0.4, (end - start) * col_w - 0.2)),
+                "height": _cm(max(0.5, row_h - 0.55)),
+            },
+        })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Call out the critical path — the bar that cannot slip.")},
+    })
+    return ops
+
+
+def recipe_org_tree(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Org tree (Wave 1) — root + up to 2 levels of reports."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Organization")
+    root = content.get("root") or content.get("lead") or {
+        "name": "Leader", "role": "Role",
+    }
+    if not isinstance(root, dict):
+        root = {"name": str(root), "role": ""}
+    reports = content.get("reports") or content.get("children") or content.get("members") or [
+        {"name": "A", "role": "Role A"},
+        {"name": "B", "role": "Role B"},
+        {"name": "C", "role": "Role C"},
+    ]
+    if not isinstance(reports, list):
+        reports = []
+    reports = reports[:5]
+    m = b["margin"]
+    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "OrgTitle", title)]
+    # Root card
+    rw, rh = 10.0, 2.8
+    rx = (33.87 - rw) / 2
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "OrgRoot", "preset": b["preset"],
+            "fill": c["accent"], "line": "none",
+            "text": f"{root.get('name', 'Leader')}\n{root.get('role', '')}".strip(),
+            "x": _cm(rx), "y": "3.6cm", "width": _cm(rw), "height": _cm(rh),
+            "font": t["heading_font"], "size": str(max(16, t["section_pt"] - 4)),
+            "bold": "true", "color": c["on_accent"],
+            "align": "center", "valign": "middle",
+        },
+    })
+    # Vertical spine
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "OrgSpine", "preset": "rect",
+            "fill": c["muted"], "line": "none",
+            "x": "16.75cm", "y": "6.5cm", "width": "0.12cm", "height": "1.2cm",
+        },
+    })
+    n = max(1, len(reports))
+    col_w, xs = _grid_n(n, m, b["gap"], max_n=5)
+    y = 8.0
+    for i, rep in enumerate(reports):
+        if isinstance(rep, dict):
+            text = f"{rep.get('name', '—')}\n{rep.get('role', '')}".strip()
+        else:
+            text = str(rep)
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"OrgChild{i + 1}", "preset": b["preset"],
+                "fill": c["surface"], "line": "none", "text": text,
+                "x": _cm(xs[i]), "y": _cm(y), "width": _cm(col_w), "height": "3.6cm",
+                "font": t["body_font"], "size": str(max(14, min(18, t["body_pt"]))),
+                "bold": "true", "color": c["text_on_surface"],
+                "align": "center", "valign": "middle",
+            },
+        })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "State the decision right of the root node.")},
+    })
+    return ops
+
+
+def recipe_persona_card(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Buyer / user persona (Wave 1) — hero profile + attribute list."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Persona")
+    name = str(content.get("name") or content.get("persona") or "Alex Rivera")
+    role = str(content.get("role") or content.get("title_line") or "Role / segment")
+    quote = str(content.get("quote") or content.get("goal")
+                or "What success looks like in their words.")
+    attrs = content.get("attrs") or content.get("traits") or content.get("bullets") or [
+        "Goal: …", "Pain: …", "Channel: …", "Metric: …",
+    ]
+    if not isinstance(attrs, list):
+        attrs = [str(attrs)]
+    attrs = [str(a) for a in attrs[:8]]
+    m = b["margin"]
+    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "PersonaTitle", title)]
+    # Left profile panel
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "PersonaPanel", "preset": b["preset"],
+            "fill": c["surface"], "line": "none",
+            "x": _cm(m), "y": "3.4cm", "width": "14cm", "height": "14.2cm",
+        },
+    })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "PersonaAvatar", "preset": "ellipse",
+            "fill": c["accent"], "line": "none", "text": _initials(name),
+            "x": _cm(m + 4.2), "y": "4.2cm", "width": "5.5cm", "height": "5.5cm",
+            "font": t["heading_font"], "size": "28",
+            "bold": "true", "color": c["on_accent"],
+            "align": "center", "valign": "middle",
+        },
+    })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "PersonaName", "text": name,
+            "x": _cm(m + 0.6), "y": "10.2cm", "width": "12.8cm", "height": "1.4cm",
+            "font": t["heading_font"], "size": str(t["title_pt"] - 8),
+            "bold": "true", "color": c["text_on_surface"],
+            "align": "center", "fill": "none",
+        },
+    })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "PersonaRole", "text": role,
+            "x": _cm(m + 0.6), "y": "11.6cm", "width": "12.8cm", "height": "1.0cm",
+            "font": t["body_font"], "size": str(t["body_pt"]),
+            "color": c["muted"], "align": "center", "fill": "none",
+        },
+    })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "PersonaQuote", "text": f"“{quote}”",
+            "x": _cm(m + 0.8), "y": "13.2cm", "width": "12.4cm", "height": "3.6cm",
+            "font": t["body_font"], "size": str(max(14, t["body_pt"] - 2)),
+            "color": c["text_on_surface"], "fill": "none",
+        },
+    })
+    # Right attributes
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "PersonaAttrsBg", "preset": b["preset"],
+            "fill": c["content_background"], "line": "none",
+            "x": "16.5cm", "y": "3.4cm", "width": _cm(33.87 - m - 16.5), "height": "14.2cm",
+        },
+    })
+    body = "\n".join(f"• {a}" for a in attrs)
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "PersonaAttrs", "text": body,
+            "x": "17.2cm", "y": "4.2cm",
+            "width": _cm(33.87 - m - 17.8), "height": "12.5cm",
+            "font": t["body_font"], "size": str(t["body_pt"]),
+            "color": c["text_on_content"], "fill": "none",
+        },
+    })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "One decision this persona forces on the product.")},
+    })
+    return ops
+
+
+def recipe_business_canvas(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Business Model Canvas-style 9-block grid (Wave 1) — original layout."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Business model")
+    # Standard BMC keys or free blocks list
+    defaults = {
+        "key_partners": "Key partners",
+        "key_activities": "Key activities",
+        "key_resources": "Key resources",
+        "value_propositions": "Value propositions",
+        "customer_relationships": "Customer relationships",
+        "channels": "Channels",
+        "customer_segments": "Customer segments",
+        "cost_structure": "Cost structure",
+        "revenue_streams": "Revenue streams",
+    }
+    blocks = content.get("blocks")
+    if isinstance(blocks, list) and len(blocks) >= 9:
+        labels = [str(x.get("label") if isinstance(x, dict) else x) for x in blocks[:9]]
+        bodies = [
+            str(x.get("body") if isinstance(x, dict) else "") for x in blocks[:9]
+        ]
+    else:
+        labels, bodies = [], []
+        for key, fallback in defaults.items():
+            val = content.get(key)
+            if isinstance(val, dict):
+                labels.append(str(val.get("label") or fallback))
+                bodies.append(str(val.get("body") or val.get("text") or ""))
+            elif val:
+                labels.append(fallback)
+                bodies.append(str(val) if not isinstance(val, list)
+                              else "\n".join(f"• {x}" for x in val[:5]))
+            else:
+                labels.append(fallback)
+                bodies.append("")
+    m = b["margin"]
+    # Layout (approximate BMC):
+    # Row1: KP | KA | VP | CR | CS
+    #            KR |    | CH |
+    # Row2: Cost structure     | Revenue streams
+    usable = 33.87 - 2 * m
+    col = usable / 5
+    top, mid_h, bot_h = 3.2, 9.0, 4.5
+    half = mid_h / 2
+    # geometry: (i, x_cols, y, h) for each of 9 blocks in defaults order
+    geos = [
+        (0, 0, 1, top, mid_h),           # KP full height left
+        (1, 1, 1, top, half),            # KA
+        (2, 1, 1, top + half, half),     # KR
+        (3, 2, 1, top, mid_h),           # VP full
+        (4, 3, 1, top, half),            # CR
+        (5, 3, 1, top + half, half),     # CH
+        (6, 4, 1, top, mid_h),           # CS full
+        (7, 0, 2, top + mid_h + 0.2, bot_h),  # Cost
+        (8, 2, 3, top + mid_h + 0.2, bot_h),  # Revenue (cols 2-4)
+    ]
+    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "BmcTitle", title)]
+    micro = str(_micro_pt(t))
+    for idx, x0, span, y, h in geos:
+        x = m + x0 * col
+        w = col * span - 0.15
+        if idx == 8:
+            w = col * 3 - 0.15
+        fill = c["accent"] if idx == 3 else c["surface"]
+        tc = c["on_accent"] if idx == 3 else c["text_on_surface"]
+        mc = c["on_accent"] if idx == 3 else c["muted"]
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"BmcBlock{idx + 1}", "preset": b["preset"],
+                "fill": fill, "line": "none",
+                "x": _cm(x), "y": _cm(y), "width": _cm(w), "height": _cm(h - 0.12),
+            },
+        })
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"BmcLabel{idx + 1}", "text": labels[idx],
+                "x": _cm(x + 0.2), "y": _cm(y + 0.15),
+                "width": _cm(w - 0.4), "height": "0.7cm",
+                "font": t["heading_font"], "size": micro,
+                "bold": "true", "color": mc, "fill": "none",
+            },
+        })
+        if bodies[idx]:
+            ops.append({
+                "command": "add", "parent": "/slide[last()]", "type": "shape",
+                "props": {
+                    "name": f"BmcBody{idx + 1}", "text": bodies[idx][:280],
+                    "x": _cm(x + 0.2), "y": _cm(y + 0.9),
+                    "width": _cm(w - 0.4), "height": _cm(max(0.8, h - 1.2)),
+                    "font": t["body_font"], "size": str(max(11, t["body_pt"] - 6)),
+                    "color": tc, "fill": "none",
+                },
+            })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Start at value proposition; test cost vs revenue last.")},
+    })
+    return ops
+
+
+def recipe_fishbone_causes(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Ishikawa / fishbone (Wave 1) — spine + cause branches."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Root causes")
+    effect = str(content.get("effect") or content.get("head") or "Effect")
+    causes = content.get("causes") or content.get("bones") or content.get("branches") or [
+        {"label": "People", "items": ["Skill gap"]},
+        {"label": "Process", "items": ["Handoff delay"]},
+        {"label": "Tools", "items": ["Legacy stack"]},
+        {"label": "Data", "items": ["No single source"]},
+    ]
+    if not isinstance(causes, list):
+        causes = [{"label": str(causes), "items": []}]
+    causes = causes[:6]
+    m = b["margin"]
+    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "FishTitle", title)]
+    # Spine
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "FishSpine", "preset": "rect",
+            "fill": c["muted"], "line": "none",
+            "x": _cm(m + 1), "y": "10.5cm",
+            "width": _cm(33.87 - 2 * m - 8), "height": "0.18cm",
+        },
+    })
+    # Head (effect)
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "FishHead", "preset": b["preset"],
+            "fill": c["accent"], "line": "none", "text": effect,
+            "x": _cm(33.87 - m - 6.5), "y": "8.8cm",
+            "width": "6.2cm", "height": "3.6cm",
+            "font": t["heading_font"], "size": str(max(16, t["section_pt"] - 4)),
+            "bold": "true", "color": c["on_accent"],
+            "align": "center", "valign": "middle",
+        },
+    })
+    # Alternate bones above / below spine
+    n = len(causes)
+    span = 33.87 - 2 * m - 9
+    for i, bone in enumerate(causes):
+        if isinstance(bone, dict):
+            label = str(bone.get("label") or bone.get("name") or f"Cause {i + 1}")
+            items = bone.get("items") or bone.get("bullets") or []
+            if not isinstance(items, list):
+                items = [str(items)]
+            detail = "\n".join(f"• {x}" for x in items[:4])
+        else:
+            label, detail = str(bone), ""
+        x = m + 1.2 + (i + 0.5) * (span / max(1, n)) - 2.8
+        above = i % 2 == 0
+        y = 4.0 if above else 12.0
+        h = 5.8 if above else 5.5
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"FishBone{i + 1}", "preset": b["preset"],
+                "fill": c["surface"], "line": "none",
+                "text": f"{label}\n{detail}".strip(),
+                "x": _cm(max(m, x)), "y": _cm(y),
+                "width": "5.6cm", "height": _cm(h),
+                "font": t["body_font"], "size": str(max(12, t["body_pt"] - 4)),
+                "bold": "true", "color": c["text_on_surface"],
+            },
+        })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Pick the one bone you will act on this quarter.")},
+    })
+    return ops
+
+
+def recipe_iceberg_levels(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Iceberg model (Wave 1) — waterline + levels above/below."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Iceberg")
+    above = content.get("above") or content.get("events") or [
+        {"label": "Events", "detail": "What we see"},
+    ]
+    below = content.get("below") or content.get("levels") or [
+        {"label": "Patterns", "detail": "Recurring trends"},
+        {"label": "Structure", "detail": "System design"},
+        {"label": "Mental models", "detail": "Beliefs"},
+    ]
+    if not isinstance(above, list):
+        above = [above]
+    if not isinstance(below, list):
+        below = [below]
+    above = _norm_steps(above, min_n=1, max_n=2)
+    below = _norm_steps(below, min_n=2, max_n=4)
+    m = b["margin"]
+    usable = 33.87 - 2 * m
+    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "IceTitle", title)]
+    # Waterline
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "Waterline", "preset": "rect",
+            "fill": c.get("chart_series2") or c["muted"], "line": "none",
+            "x": _cm(m), "y": "8.3cm", "width": _cm(usable), "height": "0.12cm",
+        },
+    })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "WaterlineLabel", "text": "waterline — visible above / hidden below",
+            "x": _cm(m), "y": "7.5cm", "width": _cm(usable), "height": "0.7cm",
+            "font": t["body_font"], "size": str(_micro_pt(t)),
+            "color": c["muted"], "align": "center", "fill": "none",
+        },
+    })
+    # Above bands (narrower tip)
+    for i, lv in enumerate(above):
+        frac = 0.45 + i * 0.1
+        w = usable * frac
+        x = m + (usable - w) / 2
+        y = 3.5 + i * 1.8
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"IceAbove{i + 1}", "preset": b["preset"],
+                "fill": c["accent"], "line": "none",
+                "text": f"{lv['label']}" + (f" — {lv['detail']}" if lv.get("detail") else ""),
+                "x": _cm(x), "y": _cm(y), "width": _cm(w), "height": "1.6cm",
+                "font": t["heading_font"], "size": str(max(14, t["section_pt"] - 8)),
+                "bold": "true", "color": c["on_accent"],
+                "align": "center", "valign": "middle",
+            },
+        })
+    # Below bands (widening)
+    for i, lv in enumerate(below):
+        frac = 0.55 + (i / max(1, len(below) - 1)) * 0.4 if len(below) > 1 else 0.75
+        w = usable * frac
+        x = m + (usable - w) / 2
+        y = 8.7 + i * 2.2
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"IceBelow{i + 1}", "preset": b["preset"],
+                "fill": c["surface"], "line": "none",
+                "text": f"{lv['label']}" + (f" — {lv['detail']}" if lv.get("detail") else ""),
+                "x": _cm(x), "y": _cm(y), "width": _cm(w), "height": "2.0cm",
+                "font": t["heading_font"], "size": str(max(14, t["section_pt"] - 8)),
+                "bold": "true", "color": c["text_on_surface"],
+                "align": "center", "valign": "middle",
+            },
+        })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Interventions below the waterline change what appears above.")},
+    })
+    return ops
+
+
+def recipe_framework_row(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Named framework stages (Wave 1) — ADKAR / AIDA / value-chain style row."""
+    b = _base_props(tokens)
+    c, t = b["c"], b["t"]
+    content = content or {}
+    title = content.get("title", "Framework")
+    framework = str(content.get("framework") or content.get("name") or "")
+    steps = _norm_steps(
+        content.get("steps") or content.get("stages") or content.get("items"),
+        min_n=3, max_n=7,
+        defaults=[{"label": s} for s in ("A", "D", "K", "A", "R")],
+    )
+    n = len(steps)
+    m = b["margin"]
+    col_w, xs = _grid_n(n, m, b["gap"] * 0.6, max_n=7)
+    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "FwTitle", title)]
+    if framework:
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": "FwName", "text": framework,
+                "x": _cm(m), "y": "2.7cm",
+                "width": _cm(33.87 - 2 * m), "height": "0.8cm",
+                "font": t["body_font"], "size": str(_micro_pt(t) + 2),
+                "color": c["muted"], "fill": "none",
+            },
+        })
+    y, h = 4.2, 12.5
+    for i, st in enumerate(steps):
+        fill = c["accent"] if i == 0 else c["surface"]
+        tc = c["on_accent"] if i == 0 else c["text_on_surface"]
+        letter = st["label"][:1].upper() if len(st["label"]) <= 3 else f"{i + 1}"
+        # Index disc
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"FwDisc{i + 1}", "preset": "ellipse",
+                "fill": fill, "line": "none", "text": letter,
+                "x": _cm(xs[i] + col_w / 2 - 0.9), "y": _cm(y),
+                "width": "1.8cm", "height": "1.8cm",
+                "font": t["heading_font"], "size": "18",
+                "bold": "true", "color": tc if i == 0 else c["text_on_surface"],
+                "align": "center", "valign": "middle",
+            },
+        })
+        body = st["label"]
+        if st.get("detail"):
+            body = f"{st['label']}\n{st['detail']}"
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"FwCard{i + 1}", "preset": b["preset"],
+                "fill": c["surface"], "line": "none", "text": body,
+                "x": _cm(xs[i]), "y": _cm(y + 2.3),
+                "width": _cm(col_w), "height": _cm(h - 2.3),
+                "font": t["body_font"], "size": str(max(13, min(18, t["body_pt"] - 2))),
+                "bold": "true", "color": c["text_on_surface"],
+                "align": "center",
+            },
+        })
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "notes",
+        "props": {"text": content.get(
+            "notes", "Name the stage that is currently underinvested.")},
+    })
+    return ops
+
+
 def _call_builder(builder, tokens, content, slide_index: int | None = None):
     """Call recipe builder with optional slide_index if supported."""
     try:
@@ -3855,6 +4686,19 @@ RECIPE_BUILDERS = {
     "study_design": recipe_study_design,
     "results_table_insight": recipe_results_table_insight,
     "multi_panel_figure": recipe_multi_panel_figure,
+    # Wave 1 full-family coverage
+    "chevron_process": recipe_chevron_process,
+    "cycle_loop": recipe_cycle_loop,
+    "waterfall_insight": recipe_waterfall_insight,
+    "venn_overlap": recipe_venn_overlap,
+    "swot_2x2": recipe_swot_2x2,
+    "gantt_bars": recipe_gantt_bars,
+    "org_tree": recipe_org_tree,
+    "persona_card": recipe_persona_card,
+    "business_canvas": recipe_business_canvas,
+    "fishbone_causes": recipe_fishbone_causes,
+    "iceberg_levels": recipe_iceberg_levels,
+    "framework_row": recipe_framework_row,
 }
 
 # Layout strategy per pattern (#9). Every pattern is one of:
@@ -3888,13 +4732,17 @@ PATTERN_LAYOUT: dict[str, tuple[str, ...]] = {
     ),
     "hybrid": (
         "timeline", "story_timeline", "matrix_2x2", "quadrant_matrix_rich",
-        "consort_flow", "forest_plot",
+        "consort_flow", "forest_plot", "swot_2x2",
     ),
     "structured": (
         "process", "funnel_stages", "roadmap_swimlane", "pyramid_levels",
         "chart_insight", "chart_callout_panel", "table", "appendix_table",
         "logo_strip", "kaplan_meier", "results_table_insight",
         "multi_panel_figure",
+        # Wave 1 full-family coverage
+        "chevron_process", "cycle_loop", "waterfall_insight", "venn_overlap",
+        "gantt_bars", "org_tree", "persona_card", "business_canvas",
+        "fishbone_causes", "iceberg_levels", "framework_row",
     ),
     "fixed": (
         "cover", "section_divider", "section_opener_numbered",
@@ -3954,17 +4802,34 @@ DOMAIN_SEQUENCE = [
     "multi_panel_figure",
 ]
 
+# Wave 1 full-family coverage (docs/recipe-coverage-roadmap.md)
+WAVE1_SEQUENCE = [
+    "chevron_process",
+    "cycle_loop",
+    "waterfall_insight",
+    "venn_overlap",
+    "swot_2x2",
+    "gantt_bars",
+    "org_tree",
+    "persona_card",
+    "business_canvas",
+    "fishbone_causes",
+    "iceberg_levels",
+    "framework_row",
+]
+
 # Empty-deck / flat-overlay default: consulting core only (no medical tax).
 DEFAULT_SEQUENCE = list(CORE_SEQUENCE)
 
 # Full catalog for inspection / generate_all_recipes ordering helpers.
 CATALOG_SEQUENCE = list(CORE_SEQUENCE) + [
-    n for n in PREMIUM_SEQUENCE + DOMAIN_SEQUENCE if n not in CORE_SEQUENCE
+    n for n in PREMIUM_SEQUENCE + DOMAIN_SEQUENCE + WAVE1_SEQUENCE
+    if n not in CORE_SEQUENCE
 ]
 
 
 def sequence_for(catalog: str = "core") -> list[str]:
-    """Return an ordered recipe list: core | premium | domain | all."""
+    """Return an ordered recipe list: core | premium | domain | wave1 | all."""
     key = (catalog or "core").strip().lower()
     if key in ("core", "default", ""):
         return list(CORE_SEQUENCE)
@@ -3972,6 +4837,8 @@ def sequence_for(catalog: str = "core") -> list[str]:
         return list(CORE_SEQUENCE) + [n for n in PREMIUM_SEQUENCE if n not in CORE_SEQUENCE]
     if key in ("domain", "medical", "academic"):
         return list(CORE_SEQUENCE) + [n for n in DOMAIN_SEQUENCE if n not in CORE_SEQUENCE]
+    if key in ("wave1", "family", "full-family"):
+        return list(CORE_SEQUENCE) + [n for n in WAVE1_SEQUENCE if n not in CORE_SEQUENCE]
     if key in ("all", "catalog", "full"):
         return list(CATALOG_SEQUENCE)
     raise ValueError(f"unknown catalog sequence: {catalog!r}")

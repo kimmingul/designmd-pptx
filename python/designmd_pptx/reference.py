@@ -493,37 +493,44 @@ def _suggest_recipes(hints: Counter[str], family: str) -> list[str]:
     """
     existing = {
         "kpi_dashboard": ["kpi_dashboard_grid", "kpi_row", "big_number", "chart_insight"],
-        "timeline_roadmap": ["timeline", "story_timeline", "roadmap_swimlane"],
-        "process_flow": ["process", "funnel_stages", "feature_cards"],
-        "hierarchy": ["pyramid_levels", "feature_cards"],
-        "org_team": ["team", "feature_cards"],
+        "timeline_roadmap": [
+            "timeline", "story_timeline", "roadmap_swimlane", "gantt_bars",
+        ],
+        "process_flow": [
+            "process", "funnel_stages", "chevron_process", "cycle_loop",
+            "fishbone_causes", "framework_row", "feature_cards",
+        ],
+        "hierarchy": ["pyramid_levels", "iceberg_levels", "feature_cards"],
+        "org_team": ["team", "org_tree", "persona_card", "feature_cards"],
         "pricing_table": ["pricing", "table", "comparison_2col"],
         "comparison_matrix": [
-            "comparison_2col", "matrix_2x2", "quadrant_matrix_rich", "vs_scorecard",
+            "comparison_2col", "matrix_2x2", "quadrant_matrix_rich",
+            "vs_scorecard", "swot_2x2",
         ],
         "narrative_chrome": [
             "cover", "section_divider", "agenda_toc", "section_opener_numbered",
         ],
-        "chart_story": ["chart_insight", "chart_callout_panel", "big_number"],
-        "strategy_canvas": ["feature_cards", "table"],
+        "chart_story": [
+            "chart_insight", "chart_callout_panel", "waterfall_insight",
+            "venn_overlap", "big_number",
+        ],
+        "strategy_canvas": ["business_canvas", "feature_cards", "table"],
         "geo_map": ["image_full", "image_text_2col"],
         "device_mockup": ["image_text_2col", "image_full"],
         "other": ["feature_cards", "bullets"],
     }
     # Full-family coverage roadmap (Wave 1 / Wave 2) — keep names stable.
+    # Wave 1 IDs are shipped — listed under existing via RECIPE_BUILDERS check.
     planned = {
         "kpi_dashboard": ["metric_sparkline_row"],
-        "timeline_roadmap": ["gantt_bars"],
-        "process_flow": [
-            "chevron_process", "cycle_loop", "pipeline_stages",
-            "fishbone_causes", "framework_row",
-        ],
-        "hierarchy": ["iceberg_levels"],
-        "org_team": ["org_tree", "persona_card"],
-        "comparison_matrix": ["swot_2x2"],
+        "timeline_roadmap": [],  # gantt_bars shipped
+        "process_flow": ["pipeline_stages"],  # chevron/cycle/fishbone/framework shipped
+        "hierarchy": [],  # iceberg_levels shipped
+        "org_team": [],  # org_tree / persona_card shipped
+        "comparison_matrix": [],  # swot_2x2 shipped
         "narrative_chrome": ["mission_vision_split"],
-        "chart_story": ["waterfall_insight", "venn_overlap", "cycle_stats"],
-        "strategy_canvas": ["business_canvas"],
+        "chart_story": ["cycle_stats"],  # waterfall/venn shipped
+        "strategy_canvas": [],  # business_canvas shipped
         "geo_map": ["geo_callout"],  # optional; basemap deferred
         "device_mockup": ["device_frame"],  # user-supplied PNG only
         "other": [
