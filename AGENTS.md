@@ -29,6 +29,9 @@ npm test        # python -m unittest discover -s python/tests -v
   layout-engine solved (`layout.py`) — never reintroduce hand coordinates into
   them; a recipe uses exactly one geometry system (engine tree OR fixed cm).
 - Overwrite of generated .pptx is staging-safe and requires `--force` / `DESIGNMD_FORCE=1`.
+- Licensed Infograpify (or other premium) `.pptx` templates are **local reference only** —
+  keep under `infograpify_ppt_templates/` (gitignored). Never commit originals.
+  Analyze with `python -m designmd_pptx reference` (see `docs/infograpify-reference.md`).
 
 ## Using the toolkit
 
