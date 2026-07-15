@@ -5,14 +5,15 @@ All notable changes to designmd-pptx are documented here.
 ## [Unreleased]
 
 ### Added
-- **UI kit contract** (`ui_kit.py`, `docs/ui-kit.md`): React-like spacing
-  system — `StageMetrics` (margin/gap/pad/title bands), cards with
-  content-height body + Spacer free space, comparison panels / tile rows.
-  Layout engine **strips vertical Text weights** so hollow text frames cannot
-  return. Migrated core + Wave 4 chrome (`feature_cards`, `bullets`,
-  `comparison_2col`, `before_after`, `mission_vision`, `puzzle`, `pillars`,
-  `stairs`, `checklist`, `close`, `big_number`, `process`, `_title_op`,
-  `_base_props`). Demo: `designmd-pptx-best-v2.1.2.pptx` (10 slides).
+- **Visual motifs** (`motif.py`, `motifs/catalog.json`, `docs/motifs.md`):
+  SmartArt-like **original** formats derived from Infograpify *structural*
+  analysis only (no vendor shapes). Motifs: `split_hero`, `card_row`,
+  `step_rail`, `kpi_hero`, `stair_ascent`, `check_stack`, `tile_row`. Recipes
+  thin-wrap `render_motif`. Not React UI libs; not Office SmartArt OOXML.
+- **UI kit contract** (`ui_kit.py`, `docs/ui-kit.md`): spacing system —
+  `StageMetrics` (margin/gap/pad/title bands), content-height body + Spacer.
+  Layout engine **strips vertical Text weights**. Demo:
+  `designmd-pptx-best-v2.1.2.pptx` (10 slides).
 - **OfficeCLI ensure + install prompt:** without OfficeCLI, new-deck
   materialization does not work. `doctor` prints a required banner; `--ensure`
   and TTY `doctor` offer **Y/n** to run `doctor --install`. Hard gate on

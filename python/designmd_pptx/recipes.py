@@ -794,43 +794,21 @@ def recipe_section_opener_numbered(tokens: dict, content: dict | None = None) ->
 
 
 def recipe_feature_cards(tokens: dict, content: dict | None = None) -> list[dict]:
-    """2–4 feature cards via ui_kit (content-height body + Spacer free space)."""
-    st = UI.stage_metrics(tokens)
+    """2–4 feature cards — motif ``card_row`` (Infograpify card-row rhythm)."""
+    from .motif import render_motif
+
     content = content or {}
-    title = content.get("title", "Capabilities")
-    cards = content.get(
-        "cards",
-        [
-            {"title": "One", "body": "First capability."},
-            {"title": "Two", "body": "Second capability."},
-            {"title": "Three", "body": "Third capability."},
-        ],
-    )
-    if not isinstance(cards, list) or not cards:
-        cards = [{"title": "Item", "body": "Detail."}]
-    cards = cards[: max(2, min(4, len(cards)))]
-    bg = st.c["content_background"]
-
-    def build(d: L.Density) -> L.Box:
-        cols = [
-            UI.feature_card(
-                st,
-                index=i + 1,
-                title=str(card.get("title", "")),
-                body=str(card.get("body", "")),
-                density=d,
-            )
-            for i, card in enumerate(cards)
-        ]
-        return UI.titled_stage(
-            st,
-            title,
-            UI.equal_columns(cols, st, density=d),
-            title_name="FeatTitle",
-            density=d,
-        )
-
-    return UI.solve_stage(build, bg=bg)
+    cards = content.get("cards") or [
+        {"title": "One", "body": "First capability."},
+        {"title": "Two", "body": "Second capability."},
+        {"title": "Three", "body": "Third capability."},
+    ]
+    return render_motif("card_row", tokens, {
+        "title": content.get("title", "Capabilities"),
+        "cards": cards,
+        "title_name": "FeatTitle",
+        "notes": content.get("notes"),
+    })
 
 
 def recipe_bullets(tokens: dict, content: dict | None = None) -> list[dict]:
@@ -1215,137 +1193,16 @@ def recipe_process(
     *,
     slide_index: int | None = None,
 ) -> list[dict]:
-    """Process boxes + glued connectors — StageMetrics for margin/gap/pad."""
-    st = UI.stage_metrics(tokens)
-    c, t = st.c, tokens["type"]
+    """Process steps — motif ``step_rail`` (+ glued connectors when slide_index set)."""
+    from .motif import render_motif
+
     content = content or {}
-    title = content.get("title", "Process")
-    steps = content.get("steps") or ["Input", "Transform", "Output"]
-    if not isinstance(steps, list):
-        steps = [str(steps)]
-    n = max(2, min(5, len(steps)))
-    steps = steps[:n]
-    col_w, xs = _grid_n(n, st.margin, st.gap, max_n=5)
-    # Content-sized step cards in the mid band; bottom margin = stage margin.
-    box_h = min(5.0, max(3.8, st.content_h * 0.42))
-    free = max(0.0, UI.CANVAS_H - st.content_top - st.content_bottom - box_h)
-    y = st.content_top + free * 0.35
-    parent = "/slide[last()]"
-    ops: list[dict] = [
-        {
-            "command": "add",
-            "parent": "/",
-            "type": "slide",
-            "props": {"layout": "blank", "background": c["content_background"]},
-        },
-        {
-            "command": "add",
-            "parent": parent,
-            "type": "shape",
-            "props": {
-                "name": "ProcTitle",
-                "text": title,
-                "x": UI.cm(st.margin),
-                "y": UI.cm(max(1.15, st.margin * 0.55)),
-                "width": UI.cm(st.usable_w),
-                "height": UI.cm(st.title_band),
-                "font": st.heading_font,
-                "size": str(st.title_pt),
-                "bold": "true",
-                "color": c["text_on_content"],
-                "fill": "none",
-            },
-        },
-    ]
-    names: list[str] = []
-    for i, step in enumerate(steps):
-        if isinstance(step, dict):
-            label = str(step.get("label", step.get("title", f"Step {i+1}")))
-            detail = str(step.get("detail") or step.get("body") or "").strip()
-            text = f"{i + 1}\n{label}" + (f"\n{detail}" if detail else "")
-        else:
-            label = str(step)
-            text = f"{i + 1}\n{label}"
-        name = f"Proc{i+1}"
-        names.append(name)
-        # First step accent; middle surface; last step accent for closure.
-        fill = c["accent"] if i == 0 or i == n - 1 else c["surface"]
-        tc = c["on_accent"] if fill == c["accent"] else c["text_on_surface"]
-        ops.append(
-            {
-                "command": "add",
-                "parent": parent,
-                "type": "shape",
-                "props": {
-                    "name": name,
-                    "preset": st.preset,
-                    "fill": fill,
-                    "line": "none",
-                    "text": text,
-                    "x": UI.cm(xs[i]),
-                    "y": UI.cm(y),
-                    "width": UI.cm(col_w),
-                    "height": UI.cm(box_h),
-                    "font": st.heading_font,
-                    "size": str(max(16, min(20, st.body_pt))),
-                    "bold": "true",
-                    "color": tc,
-                    "align": "center",
-                    "valign": "middle",
-                },
-            }
-        )
-    # Glued connectors with absolute slide index (required — last() fails in from/to)
-    if slide_index is not None:
-        for i in range(len(names) - 1):
-            a, bname = names[i], names[i + 1]
-            ops.append(
-                {
-                    "command": "add",
-                    "parent": parent,
-                    "type": "connector",
-                    "props": {
-                        "from": f"/slide[{slide_index}]/shape[@name={a}]",
-                        "to": f"/slide[{slide_index}]/shape[@name={bname}]",
-                        "shape": "straight",
-                        "color": c["muted"],
-                        "tailEnd": "triangle",
-                    },
-                }
-            )
-    else:
-        # catalog mode without index: decorative arrows (documented fallback)
-        for i in range(len(names) - 1):
-            gap_x = xs[i] + col_w
-            next_x = xs[i + 1]
-            aw = max(0.4, next_x - gap_x - 0.1)
-            ops.append(
-                {
-                    "command": "add",
-                    "parent": parent,
-                    "type": "shape",
-                    "props": {
-                        "name": f"ProcArrow{i+1}",
-                        "preset": "rightArrow",
-                        "fill": c["muted"],
-                        "line": "none",
-                        "x": _cm(gap_x + 0.05),
-                        "y": _cm(y + box_h / 2 - 0.35),
-                        "width": _cm(aw),
-                        "height": "0.7cm",
-                    },
-                }
-            )
-    if content.get("notes"):
-        ops.append(
-            {
-                "command": "add",
-                "parent": parent,
-                "type": "notes",
-                "props": {"text": content["notes"]},
-            }
-        )
-    return ops
+    return render_motif("step_rail", tokens, {
+        "title": content.get("title", "Process"),
+        "steps": content.get("steps") or ["Input", "Transform", "Output"],
+        "notes": content.get("notes"),
+        "slide_index": slide_index,
+    })
 
 
 def recipe_table(tokens: dict, content: dict | None = None) -> list[dict]:
@@ -1795,96 +1652,17 @@ def _slide_op(tokens: dict) -> dict:
 
 
 def recipe_big_number(tokens: dict, content: dict | None = None) -> list[dict]:
-    """One hero metric — centered stack sized from StageMetrics."""
-    st = UI.stage_metrics(tokens)
-    c = st.c
-    t = tokens["type"]
+    """One hero metric — motif ``kpi_hero``."""
+    from .motif import render_motif
+
     content = content or {}
-    value = str(content.get("value", "—"))
-    label = content.get("label", "Headline metric")
-    context = content.get("context", "")
-    mega = int(t.get("mega_pt", max(72, int(t.get("kpi_pt", 60) * 1.35))))
-    mega = min(96, max(56, mega))
-    color = c["risk"] if content.get("watch") else c["accent"]
-    m, usable = st.margin, st.usable_w
-    value_h, label_h, ctx_h = 6.4, 1.7, 2.2
-    stack = value_h + st.title_to_body + label_h
-    if context:
-        stack += st.gap * 0.6 + ctx_h
-    free = max(0.0, UI.CANVAS_H - 2 * m - stack)
-    y0 = m + free * 0.35
-    ops = [
-        _slide_op(tokens),
-        {
-            "command": "add",
-            "parent": "/slide[last()]",
-            "type": "shape",
-            "props": {
-                "name": "BigValue",
-                "text": value,
-                "x": UI.cm(m),
-                "y": UI.cm(y0),
-                "width": UI.cm(usable),
-                "height": UI.cm(value_h),
-                "font": st.heading_font,
-                "size": str(mega),
-                "bold": "true",
-                "color": color,
-                "align": "center",
-                "valign": "middle",
-                "fill": "none",
-            },
-        },
-        {
-            "command": "add",
-            "parent": "/slide[last()]",
-            "type": "shape",
-            "props": {
-                "name": "BigLabel",
-                "text": str(label),
-                "x": UI.cm(m),
-                "y": UI.cm(y0 + value_h + st.title_to_body),
-                "width": UI.cm(usable),
-                "height": UI.cm(label_h),
-                "font": st.heading_font,
-                "size": str(max(22, st.section_pt)),
-                "bold": "true",
-                "color": c["text_on_content"],
-                "align": "center",
-                "fill": "none",
-            },
-        },
-    ]
-    if context:
-        ops.append(
-            {
-                "command": "add",
-                "parent": "/slide[last()]",
-                "type": "shape",
-                "props": {
-                    "name": "BigContext",
-                    "text": str(context),
-                    "x": UI.cm(m + st.pad),
-                    "y": UI.cm(y0 + value_h + st.title_to_body + label_h + st.gap * 0.5),
-                    "width": UI.cm(usable - 2 * st.pad),
-                    "height": UI.cm(ctx_h),
-                    "font": st.body_font,
-                    "size": str(st.body_pt),
-                    "color": c["muted"],
-                    "align": "center",
-                    "fill": "none",
-                },
-            }
-        )
-    ops.append(
-        {
-            "command": "add",
-            "parent": "/slide[last()]",
-            "type": "notes",
-            "props": {"text": content.get("notes", "Let the number land; one sentence of context.")},
-        }
-    )
-    return ops
+    return render_motif("kpi_hero", tokens, {
+        "value": content.get("value", "—"),
+        "label": content.get("label", "Headline metric"),
+        "context": content.get("context", ""),
+        "watch": content.get("watch"),
+        "notes": content.get("notes"),
+    })
 
 
 def recipe_matrix_2x2(tokens: dict, content: dict | None = None) -> list[dict]:
@@ -4765,52 +4543,26 @@ def recipe_hub_spoke(tokens: dict, content: dict | None = None) -> list[dict]:
 
 
 def recipe_before_after_slider(tokens: dict, content: dict | None = None) -> list[dict]:
-    """Before / after — ui_kit comparison_panels (content-height, stage air)."""
-    st = UI.stage_metrics(tokens)
+    """Before / after — motif ``split_hero``."""
+    from .motif import render_motif
+
     content = content or {}
-    title = content.get("title", "Before → After")
     left = content.get("before") or content.get("left") or {
         "title": "Before", "body": "Current state pain points.",
     }
     right = content.get("after") or content.get("right") or {
         "title": "After", "body": "Target state outcomes.",
     }
-    if not isinstance(left, dict):
-        left = {"title": "Before", "body": str(left)}
-    if not isinstance(right, dict):
-        right = {"title": "After", "body": str(right)}
-
-    def _body(data: dict) -> str:
-        body = data.get("body") or data.get("text") or ""
-        if isinstance(body, list):
-            return UI.bullets_text(body, limit=5)
-        return str(body).strip()
-
-    ops = UI.comparison_panels(
-        st,
-        title=title,
-        left_title=str(left.get("title") or "Before"),
-        left_body=_body(left),
-        right_title=str(right.get("title") or "After"),
-        right_body=_body(right),
-        title_name="BaTitle",
-        left_fill=st.c["surface"],
-        right_fill=st.c["accent"],
-    )
-    # Stable Ba* names for tooling / audits
-    for op in ops:
-        props = op.get("props") or {}
-        name = str(props.get("name") or "")
-        if name.startswith("CmpPanel"):
-            props["name"] = name.replace("CmpPanel", "BaPanel", 1)
-        elif name.startswith("CmpHead"):
-            props["name"] = name.replace("CmpHead", "BaHead", 1)
-        elif name.startswith("CmpBody"):
-            props["name"] = name.replace("CmpBody", "BaBody", 1)
-    ops.append(UI.notes_op(
-        content.get("notes", "Call the single metric that proves the after state.")
-    ))
-    return ops
+    return render_motif("split_hero", tokens, {
+        "title": content.get("title", "Before → After"),
+        "left": left if isinstance(left, dict) else {"title": "Before", "body": str(left)},
+        "right": right if isinstance(right, dict) else {"title": "After", "body": str(right)},
+        "title_name": "BaTitle",
+        "name_prefix": "Ba",
+        "accent_right": True,
+        "notes": content.get(
+            "notes", "Call the single metric that proves the after state."),
+    })
 
 
 def recipe_calendar_heatmap(tokens: dict, content: dict | None = None) -> list[dict]:
@@ -5822,23 +5574,23 @@ def recipe_hex_cluster(tokens: dict, content: dict | None = None) -> list[dict]:
 
 
 def recipe_puzzle_pieces(tokens: dict, content: dict | None = None) -> list[dict]:
-    """Puzzle / interlocking pieces — equal tiles in content band (ui_kit)."""
-    st = UI.stage_metrics(tokens)
+    """Puzzle pieces — motif ``tile_row``."""
+    from .motif import render_motif
+
     content = content or {}
-    title = content.get("title", "Fit")
     pieces = _norm_steps(
         content.get("pieces") or content.get("parts") or content.get("items"),
         min_n=3, max_n=6,
         defaults=[{"label": s} for s in ("Product", "GTM", "Ops", "People")],
     )
-    ops = UI.equal_tile_row_ops(
-        st, title=title, title_name="PuzzleTitle", items=pieces,
-        name_prefix="Puzzle", accent_every=2,
-    )
-    ops.append(UI.notes_op(
-        content.get("notes", "Name what breaks if any single piece is missing.")
-    ))
-    return ops
+    return render_motif("tile_row", tokens, {
+        "title": content.get("title", "Fit"),
+        "items": pieces,
+        "title_name": "PuzzleTitle",
+        "name_prefix": "Puzzle",
+        "accent_every": 2,
+        "notes": content.get("notes", "Name what breaks if any single piece is missing."),
+    })
 
 
 def recipe_pillar_columns(tokens: dict, content: dict | None = None) -> list[dict]:
@@ -5884,104 +5636,27 @@ def recipe_pillar_columns(tokens: dict, content: dict | None = None) -> list[dic
 
 
 def recipe_stairs_ascent(tokens: dict, content: dict | None = None) -> list[dict]:
-    """Ascending stairs — heights stay inside content band (ui_kit)."""
-    st = UI.stage_metrics(tokens)
-    c = st.c
+    """Ascending stairs — motif ``stair_ascent``."""
+    from .motif import render_motif
+
     content = content or {}
-    title = content.get("title", "Ascent")
-    steps = _norm_steps(
-        content.get("steps") or content.get("levels") or content.get("stages"),
-        min_n=3, max_n=6,
-        defaults=[{"label": s} for s in ("Aware", "Repeatable", "Defined", "Managed", "Optimising")],
-    )
-    n = len(steps)
-    m = st.margin
-    usable = st.usable_w
-    step_w = usable / n
-    band_y, band_h = UI.content_band_y_h(st, fraction=0.8, min_h=7.5, max_h=11.5, settle=0.15)
-    base_y = band_y + band_h
-    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "StairsTitle", title)]
-    for i, step in enumerate(steps):
-        h = band_h * (0.45 + 0.55 * (i / max(1, n - 1)))
-        y = base_y - h
-        x = m + i * step_w
-        detail = str(step.get("detail") or step.get("body") or "").strip()
-        label = f"{i + 1}\n{step['label']}" + (f"\n{detail}" if detail else "")
-        ops.append({
-            "command": "add", "parent": "/slide[last()]", "type": "shape",
-            "props": {
-                "name": f"Stair{i + 1}", "preset": st.preset,
-                "fill": c["accent"] if i == n - 1 else c["surface"],
-                "line": "none",
-                "text": label,
-                "x": UI.cm(x + 0.1), "y": UI.cm(y),
-                "width": UI.cm(step_w - 0.2), "height": UI.cm(h),
-                "font": st.heading_font,
-                "size": str(max(14, min(18, st.body_pt))),
-                "bold": "true",
-                "color": c["on_accent"] if i == n - 1 else c["text_on_surface"],
-                "align": "center", "valign": "middle",
-            },
-        })
-    ops.append(UI.notes_op(
-        content.get("notes", "You cannot skip a stair — name the exit criteria per step.")
-    ))
-    return ops
+    return render_motif("stair_ascent", tokens, {
+        "title": content.get("title", "Ascent"),
+        "steps": content.get("steps") or content.get("levels") or content.get("stages"),
+        "notes": content.get("notes"),
+    })
 
 
 def recipe_checklist_board(tokens: dict, content: dict | None = None) -> list[dict]:
-    """Checklist / launch readiness board (Wave 4)."""
-    b = _base_props(tokens)
-    c, t = b["c"], b["t"]
+    """Checklist — motif ``check_stack``."""
+    from .motif import render_motif
+
     content = content or {}
-    title = content.get("title", "Checklist")
-    items = content.get("items") or content.get("checks") or content.get("bullets") or [
-        {"label": "Scope locked", "done": True},
-        {"label": "Legal review", "done": True},
-        {"label": "Support ready", "done": False},
-        {"label": "Comms sent", "done": False},
-        {"label": "Metrics live", "done": False},
-    ]
-    if not isinstance(items, list):
-        items = [{"label": str(items)}]
-    norm: list[dict] = []
-    for it in items[:10]:
-        if isinstance(it, dict):
-            norm.append({
-                "label": str(it.get("label") or it.get("text") or it.get("title") or "Item"),
-                "done": bool(it.get("done") or it.get("checked") or it.get("status") in ("done", "ok", "yes")),
-            })
-        else:
-            s = str(it)
-            done = s.startswith("[x]") or s.startswith("✓")
-            norm.append({"label": s.lstrip("[x]✓ ").strip(), "done": done})
-    st = b.get("st") or UI.stage_metrics(tokens)
-    m, pad = st.margin, st.pad
-    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "CheckTitle", title)]
-    band_y, band_h = UI.content_band_y_h(
-        st, fraction=0.75, min_h=6.0, max_h=11.0, settle=0.2)
-    row_h = min(2.0, band_h / max(1, len(norm)))
-    for i, it in enumerate(norm):
-        y = band_y + i * row_h
-        mark = "✓" if it["done"] else "○"
-        fill = c["surface"] if it["done"] else c["content_background"]
-        ops.append({
-            "command": "add", "parent": "/slide[last()]", "type": "shape",
-            "props": {
-                "name": f"CheckRow{i + 1}", "preset": st.preset,
-                "fill": fill, "line": "none",
-                "text": f"{mark}  {it['label']}",
-                "x": UI.cm(m), "y": UI.cm(y),
-                "width": UI.cm(st.usable_w), "height": UI.cm(max(1.3, row_h - 0.18)),
-                "font": st.body_font, "size": str(st.body_pt),
-                "bold": "true" if not it["done"] else "false",
-                "color": c["text_on_surface"], "valign": "middle",
-            },
-        })
-    ops.append(UI.notes_op(
-        content.get("notes", "Open items need an owner before the meeting ends.")
-    ))
-    return ops
+    return render_motif("check_stack", tokens, {
+        "title": content.get("title", "Checklist"),
+        "items": content.get("items") or content.get("checks") or content.get("bullets"),
+        "notes": content.get("notes"),
+    })
 
 
 def recipe_empathy_map_quad(tokens: dict, content: dict | None = None) -> list[dict]:
@@ -6243,37 +5918,30 @@ def recipe_circle_segments(tokens: dict, content: dict | None = None) -> list[di
 
 
 def recipe_mission_vision_split(tokens: dict, content: dict | None = None) -> list[dict]:
-    """Mission / vision two-panel — ui_kit comparison contract."""
-    st = UI.stage_metrics(tokens)
+    """Mission / vision — motif ``split_hero``."""
+    from .motif import render_motif
+
     content = content or {}
-    title = content.get("title", "Direction")
     mission = str(content.get("mission") or content.get("left")
                   or "Why we exist — the problem we refuse to ignore.")
     vision = str(content.get("vision") or content.get("right")
                  or "Where we are going — the future state in concrete terms.")
-    ops = UI.comparison_panels(
-        st,
-        title=title,
-        left_title="Mission",
-        left_body=mission,
-        right_title="Vision",
-        right_body=vision,
-        title_name="MVTitle",
-        left_fill=st.c["surface"],
-        right_fill=st.c["accent"],
-    )
+    ops = render_motif("split_hero", tokens, {
+        "title": content.get("title", "Direction"),
+        "left": {"title": "Mission", "body": mission},
+        "right": {"title": "Vision", "body": vision},
+        "title_name": "MVTitle",
+        "name_prefix": "MV",
+        "accent_right": True,
+        "notes": content.get(
+            "notes", "Mission is timeless; vision is dated and measurable."),
+    })
+    # Prefer MVLab over MVHead for historical name
     for op in ops:
         props = op.get("props") or {}
         name = str(props.get("name") or "")
-        if name.startswith("CmpPanel"):
-            props["name"] = name.replace("CmpPanel", "MVPanel", 1)
-        elif name.startswith("CmpHead"):
-            props["name"] = name.replace("CmpHead", "MVLab", 1)
-        elif name.startswith("CmpBody"):
-            props["name"] = name.replace("CmpBody", "MVBody", 1)
-    ops.append(UI.notes_op(
-        content.get("notes", "Mission is timeless; vision is dated and measurable.")
-    ))
+        if name.startswith("MVHead"):
+            props["name"] = name.replace("MVHead", "MVLab", 1)
     return ops
 
 

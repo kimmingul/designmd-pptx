@@ -732,6 +732,14 @@
   },
   {
     "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Three cards max on a hero slide; cut copy first."
+    }
+  },
+  {
+    "command": "add",
     "parent": "/",
     "type": "slide",
     "props": {
@@ -1108,7 +1116,7 @@
     "parent": "/slide[last()]",
     "type": "notes",
     "props": {
-      "text": "You cannot skip a stair — name the exit criteria per step."
+      "text": "You cannot skip a stair — name the exit criteria."
     }
   },
   {

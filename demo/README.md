@@ -62,11 +62,12 @@ python -m designmd_pptx animate demo/designmd-pptx-best-v2.1.2.pptx \
 
 Requires **legacy** OfficeCLI for precision geometry.
 
-## UI kit (why this looks better than catalog demos)
+## Motifs + UI kit
 
-- `StageMetrics`: margin / gap / pad from DESIGN.md density
-- Body text = **content height**; free space → Spacer / stage air
-- Layout engine strips vertical `weight` on Text leaves globally
-- Comparison panels (before/after, mission/vision) share one contract
+- **Motifs** (`docs/motifs.md`): SmartArt-like originals (`card_row`, `split_hero`,
+  `step_rail`, `kpi_hero`, …) from Infograpify *structure* analysis — never
+  vendor slides. Recipes call `render_motif`.
+- **UI kit** (`docs/ui-kit.md`): margin/gap/pad contract; content-height body;
+  no hollow text frames.
 
-See `docs/ui-kit.md`.
+React UI libraries are **out of scope** for this product path.

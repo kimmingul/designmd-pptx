@@ -141,7 +141,7 @@
     "parent": "/slide[last()]",
     "type": "notes",
     "props": {
-      "text": "You cannot skip a stair — name the exit criteria per step."
+      "text": "You cannot skip a stair — name the exit criteria."
     }
   }
 ]

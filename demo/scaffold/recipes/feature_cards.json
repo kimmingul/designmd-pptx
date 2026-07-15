@@ -232,5 +232,13 @@
       "width": "6.89cm",
       "height": "2.63cm"
     }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Three cards max on a hero slide; cut copy first."
+    }
   }
 ]

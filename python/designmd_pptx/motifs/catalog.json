@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "title": "designmd-pptx visual motifs (SmartArt-like originals)",
+  "license_note": "Motifs are original geometry. Infograpify packs are local reference only — structural roles and rhythm, never vendor shapes/icons/media.",
+  "analysis_path": "python -m designmd_pptx reference <local pack> -o .ref-analysis",
+  "motifs": [
+    {
+      "id": "split_hero",
+      "role": "comparison_split",
+      "infograpify_families": ["comparison_matrix", "narrative_chrome"],
+      "ref_examples": ["Comparison Charts", "Mission/Vision style splits"],
+      "slots": ["title", "left.title", "left.body", "right.title", "right.body"],
+      "chrome": ["two_equal_panels", "content_band", "accent_right_optional"],
+      "recipes": ["before_after_slider", "mission_vision_split", "comparison_2col"]
+    },
+    {
+      "id": "card_row",
+      "role": "card_row_n",
+      "infograpify_families": ["other", "process_flow", "pricing_table"],
+      "ref_examples": ["3–4 card product rows", "feature bands"],
+      "slots": ["title", "cards[].title", "cards[].body"],
+      "chrome": ["index_disc", "surface_card", "equal_columns", "content_height_body"],
+      "recipes": ["feature_cards", "pricing"]
+    },
+    {
+      "id": "step_rail",
+      "role": "process_steps",
+      "infograpify_families": ["process_flow"],
+      "ref_examples": ["Process 01", "Funnel/Agile step rails"],
+      "slots": ["title", "steps[].label", "steps[].detail"],
+      "chrome": ["numbered_tiles", "glued_connectors", "accent_ends"],
+      "recipes": ["process", "chevron_process", "pipeline_stages"]
+    },
+    {
+      "id": "kpi_hero",
+      "role": "single_metric_hero",
+      "infograpify_families": ["kpi_dashboard", "narrative_chrome"],
+      "ref_examples": ["KPI dashboards", "big number openers"],
+      "slots": ["value", "label", "context"],
+      "chrome": ["mega_type", "centered_stack", "stage_air"],
+      "recipes": ["big_number"]
+    },
+    {
+      "id": "stair_ascent",
+      "role": "maturity_stairs",
+      "infograpify_families": ["hierarchy", "process_flow"],
+      "ref_examples": ["Pyramid/Pillar/maturity progressions"],
+      "slots": ["title", "steps[].label", "steps[].detail"],
+      "chrome": ["rising_heights", "content_band", "accent_last"],
+      "recipes": ["stairs_ascent", "pillar_columns"]
+    },
+    {
+      "id": "check_stack",
+      "role": "checklist",
+      "infograpify_families": ["other", "narrative_chrome"],
+      "ref_examples": ["Checklist decks"],
+      "slots": ["title", "items[].label", "items[].done"],
+      "chrome": ["full_width_rows", "content_band"],
+      "recipes": ["checklist_board"]
+    },
+    {
+      "id": "tile_row",
+      "role": "equal_tiles",
+      "infograpify_families": ["other", "hierarchy"],
+      "ref_examples": ["Puzzle", "hex-like clusters (simplified)"],
+      "slots": ["title", "items[].label", "items[].detail"],
+      "chrome": ["equal_width_tiles", "alternating_accent"],
+      "recipes": ["puzzle_pieces", "hex_cluster"]
+    }
+  ]
+}
