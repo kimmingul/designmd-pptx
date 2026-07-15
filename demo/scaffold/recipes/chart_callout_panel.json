@@ -15,9 +15,9 @@
     "props": {
       "name": "CalloutTitle",
       "text": "What the data says",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "1.0cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.8cm",
       "font": "Arial",
       "size": "36",
@@ -37,7 +37,7 @@
       "series1.values": "10,14,12,18",
       "series1.color": "0B5FFF",
       "categories": "A,B,C,D",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "3.4cm",
       "width": "19.5cm",
       "height": "14cm"
@@ -87,7 +87,7 @@
       "y": "5.1cm",
       "width": "9.0cm",
       "height": "2.4cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "F5F5F7",
       "fill": "none"
@@ -122,7 +122,7 @@
       "y": "9.1cm",
       "width": "9.0cm",
       "height": "2.4cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "F5F5F7",
       "fill": "none"
@@ -157,7 +157,7 @@
       "y": "13.1cm",
       "width": "9.0cm",
       "height": "2.4cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "F5F5F7",
       "fill": "none"

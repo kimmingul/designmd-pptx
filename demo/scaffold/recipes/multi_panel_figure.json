@@ -15,9 +15,9 @@
     "props": {
       "name": "FigTitle",
       "text": "Multi-panel figure",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "1.0cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.8cm",
       "font": "Arial",
       "size": "36",
@@ -35,9 +35,9 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "3A3A3C",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "3.3cm",
-      "width": "15.41cm",
+      "width": "14.48cm",
       "height": "7.25cm"
     }
   },
@@ -48,7 +48,7 @@
     "props": {
       "name": "FigPanel1Label",
       "text": "A",
-      "x": "1.52cm",
+      "x": "2.45cm",
       "y": "3.5cm",
       "width": "1.5cm",
       "height": "0.8cm",
@@ -66,12 +66,12 @@
     "props": {
       "name": "FigPanel1Placeholder",
       "text": "Panel A",
-      "x": "1.67cm",
+      "x": "2.6cm",
       "y": "4.6cm",
-      "width": "14.61cm",
+      "width": "13.68cm",
       "height": "4.65cm",
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "align": "center",
       "fill": "none"
@@ -84,12 +84,12 @@
     "props": {
       "name": "FigPanel1Cap",
       "text": "Primary endpoint",
-      "x": "1.57cm",
+      "x": "2.5cm",
       "y": "9.6cm",
-      "width": "14.81cm",
+      "width": "13.88cm",
       "height": "0.8cm",
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "fill": "none"
     }
@@ -105,7 +105,7 @@
       "line": "3A3A3C",
       "x": "17.18cm",
       "y": "3.3cm",
-      "width": "15.41cm",
+      "width": "14.48cm",
       "height": "7.25cm"
     }
   },
@@ -136,10 +136,10 @@
       "text": "Panel B",
       "x": "17.58cm",
       "y": "4.6cm",
-      "width": "14.61cm",
+      "width": "13.68cm",
       "height": "4.65cm",
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "align": "center",
       "fill": "none"
@@ -154,10 +154,10 @@
       "text": "Subgroup",
       "x": "17.48cm",
       "y": "9.6cm",
-      "width": "14.81cm",
+      "width": "13.88cm",
       "height": "0.8cm",
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "fill": "none"
     }
@@ -171,9 +171,9 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "3A3A3C",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "11.05cm",
-      "width": "15.41cm",
+      "width": "14.48cm",
       "height": "7.25cm"
     }
   },
@@ -184,7 +184,7 @@
     "props": {
       "name": "FigPanel3Label",
       "text": "C",
-      "x": "1.52cm",
+      "x": "2.45cm",
       "y": "11.25cm",
       "width": "1.5cm",
       "height": "0.8cm",
@@ -202,12 +202,12 @@
     "props": {
       "name": "FigPanel3Placeholder",
       "text": "Panel C",
-      "x": "1.67cm",
+      "x": "2.6cm",
       "y": "12.35cm",
-      "width": "14.61cm",
+      "width": "13.68cm",
       "height": "4.65cm",
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "align": "center",
       "fill": "none"
@@ -220,12 +220,12 @@
     "props": {
       "name": "FigPanel3Cap",
       "text": "Safety",
-      "x": "1.57cm",
+      "x": "2.5cm",
       "y": "17.35cm",
-      "width": "14.81cm",
+      "width": "13.88cm",
       "height": "0.8cm",
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "fill": "none"
     }
@@ -241,7 +241,7 @@
       "line": "3A3A3C",
       "x": "17.18cm",
       "y": "11.05cm",
-      "width": "15.41cm",
+      "width": "14.48cm",
       "height": "7.25cm"
     }
   },
@@ -272,10 +272,10 @@
       "text": "Panel D",
       "x": "17.58cm",
       "y": "12.35cm",
-      "width": "14.61cm",
+      "width": "13.68cm",
       "height": "4.65cm",
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "align": "center",
       "fill": "none"
@@ -290,10 +290,10 @@
       "text": "Exploratory",
       "x": "17.48cm",
       "y": "17.35cm",
-      "width": "14.81cm",
+      "width": "13.88cm",
       "height": "0.8cm",
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "fill": "none"
     }

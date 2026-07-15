@@ -15,9 +15,9 @@
     "props": {
       "name": "PyramidTitle",
       "text": "Capability stack",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "1.0cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.8cm",
       "font": "Arial",
       "size": "36",
@@ -35,9 +35,9 @@
       "preset": "roundRect",
       "fill": "0B5FFF",
       "line": "none",
-      "x": "10.36cm",
+      "x": "10.75cm",
       "y": "3.5cm",
-      "width": "13.16cm",
+      "width": "12.38cm",
       "height": "3.4cm"
     }
   },
@@ -48,9 +48,9 @@
     "props": {
       "name": "PyramidLabel1",
       "text": "Vision",
-      "x": "10.71cm",
+      "x": "11.1cm",
       "y": "4.45cm",
-      "width": "12.46cm",
+      "width": "11.68cm",
       "height": "1.7cm",
       "font": "Arial",
       "size": "22",
@@ -69,9 +69,9 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "x": "7.33cm",
+      "x": "7.9cm",
       "y": "7.2cm",
-      "width": "19.22cm",
+      "width": "18.07cm",
       "height": "3.4cm"
     }
   },
@@ -82,9 +82,9 @@
     "props": {
       "name": "PyramidLabel2",
       "text": "Strategy",
-      "x": "7.68cm",
+      "x": "8.25cm",
       "y": "8.15cm",
-      "width": "18.52cm",
+      "width": "17.37cm",
       "height": "1.7cm",
       "font": "Arial",
       "size": "22",
@@ -103,9 +103,9 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "x": "4.3cm",
+      "x": "5.05cm",
       "y": "10.9cm",
-      "width": "25.27cm",
+      "width": "23.77cm",
       "height": "3.4cm"
     }
   },
@@ -116,9 +116,9 @@
     "props": {
       "name": "PyramidLabel3",
       "text": "Programs",
-      "x": "4.65cm",
+      "x": "5.4cm",
       "y": "11.85cm",
-      "width": "24.57cm",
+      "width": "23.07cm",
       "height": "1.7cm",
       "font": "Arial",
       "size": "22",
@@ -137,9 +137,9 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "14.6cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "3.4cm"
     }
   },
@@ -150,9 +150,9 @@
     "props": {
       "name": "PyramidLabel4",
       "text": "Execution",
-      "x": "1.62cm",
+      "x": "2.55cm",
       "y": "15.55cm",
-      "width": "30.63cm",
+      "width": "28.77cm",
       "height": "1.7cm",
       "font": "Arial",
       "size": "22",

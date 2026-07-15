@@ -2,7 +2,7 @@
 # Thin wrapper: staging-safe apply via designmd_pptx.apply_sequence
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")" && pwd)"
-FILE="$ROOT/Apple-Keynote-Intro.pptx"
+FILE="$ROOT/Apple-Keynote-Flagship.pptx"
 SEQ="$ROOT/recipes/deck.sequence.json"
 FORCE=()
 if [[ "${DESIGNMD_FORCE:-}" == "1" ]]; then FORCE=(--force); fi

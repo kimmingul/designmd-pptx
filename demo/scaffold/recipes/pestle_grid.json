@@ -15,9 +15,9 @@
     "props": {
       "name": "PestleTitle",
       "text": "PESTLE scan",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "1.0cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.8cm",
       "font": "Arial",
       "size": "36",
@@ -35,9 +35,9 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "3.5cm",
-      "width": "10.21cm",
+      "width": "9.59cm",
       "height": "7.08cm"
     }
   },
@@ -48,9 +48,9 @@
     "props": {
       "name": "PestleLab1",
       "text": "Political",
-      "x": "1.62cm",
+      "x": "2.55cm",
       "y": "3.8cm",
-      "width": "9.51cm",
+      "width": "8.89cm",
       "height": "1.1cm",
       "font": "Arial",
       "size": "18",
@@ -66,11 +66,11 @@
     "props": {
       "name": "PestleBody1",
       "text": "• …",
-      "x": "1.62cm",
+      "x": "2.55cm",
       "y": "5cm",
-      "width": "9.51cm",
+      "width": "8.89cm",
       "height": "5.08cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "16",
       "color": "F5F5F7",
       "fill": "none"
@@ -85,9 +85,9 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "x": "11.83cm",
+      "x": "12.14cm",
       "y": "3.5cm",
-      "width": "10.21cm",
+      "width": "9.59cm",
       "height": "7.08cm"
     }
   },
@@ -98,9 +98,9 @@
     "props": {
       "name": "PestleLab2",
       "text": "Economic",
-      "x": "12.18cm",
+      "x": "12.49cm",
       "y": "3.8cm",
-      "width": "9.51cm",
+      "width": "8.89cm",
       "height": "1.1cm",
       "font": "Arial",
       "size": "18",
@@ -116,11 +116,11 @@
     "props": {
       "name": "PestleBody2",
       "text": "• …",
-      "x": "12.18cm",
+      "x": "12.49cm",
       "y": "5cm",
-      "width": "9.51cm",
+      "width": "8.89cm",
       "height": "5.08cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "16",
       "color": "F5F5F7",
       "fill": "none"
@@ -135,9 +135,9 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "x": "22.39cm",
+      "x": "22.08cm",
       "y": "3.5cm",
-      "width": "10.21cm",
+      "width": "9.59cm",
       "height": "7.08cm"
     }
   },
@@ -148,9 +148,9 @@
     "props": {
       "name": "PestleLab3",
       "text": "Social",
-      "x": "22.74cm",
+      "x": "22.43cm",
       "y": "3.8cm",
-      "width": "9.51cm",
+      "width": "8.89cm",
       "height": "1.1cm",
       "font": "Arial",
       "size": "18",
@@ -166,11 +166,11 @@
     "props": {
       "name": "PestleBody3",
       "text": "• …",
-      "x": "22.74cm",
+      "x": "22.43cm",
       "y": "5cm",
-      "width": "9.51cm",
+      "width": "8.89cm",
       "height": "5.08cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "16",
       "color": "F5F5F7",
       "fill": "none"
@@ -185,9 +185,9 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "10.93cm",
-      "width": "10.21cm",
+      "width": "9.59cm",
       "height": "7.08cm"
     }
   },
@@ -198,9 +198,9 @@
     "props": {
       "name": "PestleLab4",
       "text": "Technological",
-      "x": "1.62cm",
+      "x": "2.55cm",
       "y": "11.23cm",
-      "width": "9.51cm",
+      "width": "8.89cm",
       "height": "1.1cm",
       "font": "Arial",
       "size": "18",
@@ -216,11 +216,11 @@
     "props": {
       "name": "PestleBody4",
       "text": "• …",
-      "x": "1.62cm",
+      "x": "2.55cm",
       "y": "12.43cm",
-      "width": "9.51cm",
+      "width": "8.89cm",
       "height": "5.08cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "16",
       "color": "F5F5F7",
       "fill": "none"
@@ -235,9 +235,9 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "x": "11.83cm",
+      "x": "12.14cm",
       "y": "10.93cm",
-      "width": "10.21cm",
+      "width": "9.59cm",
       "height": "7.08cm"
     }
   },
@@ -248,9 +248,9 @@
     "props": {
       "name": "PestleLab5",
       "text": "Legal",
-      "x": "12.18cm",
+      "x": "12.49cm",
       "y": "11.23cm",
-      "width": "9.51cm",
+      "width": "8.89cm",
       "height": "1.1cm",
       "font": "Arial",
       "size": "18",
@@ -266,11 +266,11 @@
     "props": {
       "name": "PestleBody5",
       "text": "• …",
-      "x": "12.18cm",
+      "x": "12.49cm",
       "y": "12.43cm",
-      "width": "9.51cm",
+      "width": "8.89cm",
       "height": "5.08cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "16",
       "color": "F5F5F7",
       "fill": "none"
@@ -285,9 +285,9 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "x": "22.39cm",
+      "x": "22.08cm",
       "y": "10.93cm",
-      "width": "10.21cm",
+      "width": "9.59cm",
       "height": "7.08cm"
     }
   },
@@ -298,9 +298,9 @@
     "props": {
       "name": "PestleLab6",
       "text": "Environmental",
-      "x": "22.74cm",
+      "x": "22.43cm",
       "y": "11.23cm",
-      "width": "9.51cm",
+      "width": "8.89cm",
       "height": "1.1cm",
       "font": "Arial",
       "size": "18",
@@ -316,11 +316,11 @@
     "props": {
       "name": "PestleBody6",
       "text": "• …",
-      "x": "22.74cm",
+      "x": "22.43cm",
       "y": "12.43cm",
-      "width": "9.51cm",
+      "width": "8.89cm",
       "height": "5.08cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "16",
       "color": "F5F5F7",
       "fill": "none"

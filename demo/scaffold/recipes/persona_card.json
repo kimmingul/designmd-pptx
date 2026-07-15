@@ -15,9 +15,9 @@
     "props": {
       "name": "PersonaTitle",
       "text": "Persona",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "1.0cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.8cm",
       "font": "Arial",
       "size": "36",
@@ -35,7 +35,7 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "3.4cm",
       "width": "14cm",
       "height": "14.2cm"
@@ -51,7 +51,7 @@
       "fill": "0B5FFF",
       "line": "none",
       "text": "AR",
-      "x": "5.47cm",
+      "x": "6.4cm",
       "y": "4.2cm",
       "width": "5.5cm",
       "height": "5.5cm",
@@ -70,7 +70,7 @@
     "props": {
       "name": "PersonaName",
       "text": "Alex Rivera",
-      "x": "1.87cm",
+      "x": "2.8cm",
       "y": "10.2cm",
       "width": "12.8cm",
       "height": "1.4cm",
@@ -89,11 +89,11 @@
     "props": {
       "name": "PersonaRole",
       "text": "Role / segment",
-      "x": "1.87cm",
+      "x": "2.8cm",
       "y": "11.6cm",
       "width": "12.8cm",
       "height": "1.0cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "A0A6B0",
       "align": "center",
@@ -107,11 +107,11 @@
     "props": {
       "name": "PersonaQuote",
       "text": "“What success looks like in their words.”",
-      "x": "2.07cm",
+      "x": "3cm",
       "y": "13.2cm",
       "width": "12.4cm",
       "height": "3.6cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "16",
       "color": "F5F5F7",
       "fill": "none"
@@ -128,7 +128,7 @@
       "line": "none",
       "x": "16.5cm",
       "y": "3.4cm",
-      "width": "16.1cm",
+      "width": "15.17cm",
       "height": "14.2cm"
     }
   },
@@ -141,9 +141,9 @@
       "text": "• Goal: …\n• Pain: …\n• Channel: …\n• Metric: …",
       "x": "17.2cm",
       "y": "4.2cm",
-      "width": "14.8cm",
+      "width": "13.87cm",
       "height": "12.5cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "F5F5F7",
       "fill": "none"

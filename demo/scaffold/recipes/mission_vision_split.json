@@ -14,10 +14,10 @@
     "type": "shape",
     "props": {
       "name": "MVTitle",
-      "text": "North star",
-      "x": "1.27cm",
+      "text": "Direction",
+      "x": "2.2cm",
       "y": "1.0cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.8cm",
       "font": "Arial",
       "size": "36",
@@ -35,9 +35,9 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "3.8cm",
-      "width": "15.41cm",
+      "width": "14.48cm",
       "height": "13.5cm"
     }
   },
@@ -48,9 +48,9 @@
     "props": {
       "name": "MVLab1",
       "text": "Mission",
-      "x": "2.07cm",
+      "x": "3cm",
       "y": "4.6cm",
-      "width": "13.81cm",
+      "width": "12.88cm",
       "height": "1.2cm",
       "font": "Arial",
       "size": "28",
@@ -65,12 +65,12 @@
     "type": "shape",
     "props": {
       "name": "MVBody1",
-      "text": "Make every brand deck as sharp as the product it sells — from DESIGN.md to OfficeCLI tokens, recipes, and staging-safe apply.",
-      "x": "2.07cm",
+      "text": "Why we exist — the problem we refuse to ignore.",
+      "x": "3cm",
       "y": "6.4cm",
-      "width": "13.81cm",
+      "width": "12.88cm",
       "height": "10.0cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "20",
       "color": "F5F5F7",
       "fill": "none"
@@ -87,7 +87,7 @@
       "line": "none",
       "x": "17.18cm",
       "y": "3.8cm",
-      "width": "15.41cm",
+      "width": "14.48cm",
       "height": "13.5cm"
     }
   },
@@ -100,7 +100,7 @@
       "text": "Vision",
       "x": "17.98cm",
       "y": "4.6cm",
-      "width": "13.81cm",
+      "width": "12.88cm",
       "height": "1.2cm",
       "font": "Arial",
       "size": "28",
@@ -115,12 +115,12 @@
     "type": "shape",
     "props": {
       "name": "MVBody2",
-      "text": "Every team ships DESIGN.md-native slides with agent skill routing, without designers trapped in pixel push.",
+      "text": "Where we are going — the future state in concrete terms.",
       "x": "17.98cm",
       "y": "6.4cm",
-      "width": "13.81cm",
+      "width": "12.88cm",
       "height": "10.0cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "20",
       "color": "FFFFFF",
       "fill": "none"

@@ -17,15 +17,15 @@
       "fill": "1C1C1E",
       "line": "3A3A3C",
       "text": "Image — set content.src",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "A0A6B0",
       "align": "center",
       "valign": "middle",
       "name": "It2Placeholder",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "2.5cm",
-      "width": "15.28cm",
+      "width": "14.18cm",
       "height": "14.55cm"
     }
   },
@@ -41,9 +41,9 @@
       "fill": "none",
       "name": "It2Title",
       "text": "Feature",
-      "x": "17.31cm",
+      "x": "17.48cm",
       "y": "2.5cm",
-      "width": "15.28cm",
+      "width": "14.18cm",
       "height": "1.84cm"
     }
   },
@@ -52,15 +52,15 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "A0A6B0",
       "fill": "none",
       "name": "It2Body",
       "text": "Supporting explanation beside the visual.",
-      "x": "17.31cm",
+      "x": "17.48cm",
       "y": "5.04cm",
-      "width": "15.28cm",
+      "width": "14.18cm",
       "height": "12.01cm"
     }
   }

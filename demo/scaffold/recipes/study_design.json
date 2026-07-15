@@ -20,9 +20,9 @@
       "fill": "none",
       "name": "StudyTitle",
       "text": "Study design",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "1.1cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.84cm"
     }
   },
@@ -35,9 +35,9 @@
       "fill": "1C1C1E",
       "line": "3A3A3C",
       "name": "StudyPhase1",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "3.49cm",
-      "width": "7.26cm",
+      "width": "6.54cm",
       "height": "8.06cm"
     }
   },
@@ -46,17 +46,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "bold": "true",
       "color": "0B5FFF",
       "fill": "none",
       "name": "StudyPhaseNum1",
       "text": "01",
-      "x": "1.67cm",
+      "x": "2.6cm",
       "y": "3.94cm",
-      "width": "6.46cm",
-      "height": "0.78cm"
+      "width": "5.74cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -71,10 +71,10 @@
       "fill": "none",
       "name": "StudyPhaseLabel1",
       "text": "Screen",
-      "x": "1.67cm",
-      "y": "4.92cm",
-      "width": "6.46cm",
-      "height": "5.2cm"
+      "x": "2.6cm",
+      "y": "5.01cm",
+      "width": "5.74cm",
+      "height": "5.03cm"
     }
   },
   {
@@ -82,16 +82,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "fill": "none",
       "name": "StudyPhaseDetail1",
       "text": "D-28 to D0",
-      "x": "1.67cm",
-      "y": "10.32cm",
-      "width": "6.46cm",
-      "height": "0.78cm"
+      "x": "2.6cm",
+      "y": "10.23cm",
+      "width": "5.74cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -103,9 +103,9 @@
       "fill": "1C1C1E",
       "line": "3A3A3C",
       "name": "StudyPhase2",
-      "x": "9.29cm",
+      "x": "9.84cm",
       "y": "3.49cm",
-      "width": "7.26cm",
+      "width": "6.54cm",
       "height": "8.06cm"
     }
   },
@@ -114,17 +114,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "bold": "true",
       "color": "0B5FFF",
       "fill": "none",
       "name": "StudyPhaseNum2",
       "text": "02",
-      "x": "9.69cm",
+      "x": "10.24cm",
       "y": "3.94cm",
-      "width": "6.46cm",
-      "height": "0.78cm"
+      "width": "5.74cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -139,10 +139,10 @@
       "fill": "none",
       "name": "StudyPhaseLabel2",
       "text": "Randomize",
-      "x": "9.69cm",
-      "y": "4.92cm",
-      "width": "6.46cm",
-      "height": "5.2cm"
+      "x": "10.24cm",
+      "y": "5.01cm",
+      "width": "5.74cm",
+      "height": "5.03cm"
     }
   },
   {
@@ -150,16 +150,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "fill": "none",
       "name": "StudyPhaseDetail2",
       "text": "1:1",
-      "x": "9.69cm",
-      "y": "10.32cm",
-      "width": "6.46cm",
-      "height": "0.78cm"
+      "x": "10.24cm",
+      "y": "10.23cm",
+      "width": "5.74cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -171,9 +171,9 @@
       "fill": "1C1C1E",
       "line": "3A3A3C",
       "name": "StudyPhase3",
-      "x": "17.31cm",
+      "x": "17.48cm",
       "y": "3.49cm",
-      "width": "7.26cm",
+      "width": "6.54cm",
       "height": "8.06cm"
     }
   },
@@ -182,17 +182,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "bold": "true",
       "color": "0B5FFF",
       "fill": "none",
       "name": "StudyPhaseNum3",
       "text": "03",
-      "x": "17.71cm",
+      "x": "17.88cm",
       "y": "3.94cm",
-      "width": "6.46cm",
-      "height": "0.78cm"
+      "width": "5.74cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -207,10 +207,10 @@
       "fill": "none",
       "name": "StudyPhaseLabel3",
       "text": "Treat",
-      "x": "17.71cm",
-      "y": "4.92cm",
-      "width": "6.46cm",
-      "height": "5.2cm"
+      "x": "17.88cm",
+      "y": "5.01cm",
+      "width": "5.74cm",
+      "height": "5.03cm"
     }
   },
   {
@@ -218,16 +218,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "fill": "none",
       "name": "StudyPhaseDetail3",
       "text": "12 weeks",
-      "x": "17.71cm",
-      "y": "10.32cm",
-      "width": "6.46cm",
-      "height": "0.78cm"
+      "x": "17.88cm",
+      "y": "10.23cm",
+      "width": "5.74cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -239,9 +239,9 @@
       "fill": "1C1C1E",
       "line": "3A3A3C",
       "name": "StudyPhase4",
-      "x": "25.34cm",
+      "x": "25.13cm",
       "y": "3.49cm",
-      "width": "7.26cm",
+      "width": "6.54cm",
       "height": "8.06cm"
     }
   },
@@ -250,17 +250,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "bold": "true",
       "color": "0B5FFF",
       "fill": "none",
       "name": "StudyPhaseNum4",
       "text": "04",
-      "x": "25.74cm",
+      "x": "25.53cm",
       "y": "3.94cm",
-      "width": "6.46cm",
-      "height": "0.78cm"
+      "width": "5.74cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -275,10 +275,10 @@
       "fill": "none",
       "name": "StudyPhaseLabel4",
       "text": "Follow-up",
-      "x": "25.74cm",
-      "y": "4.92cm",
-      "width": "6.46cm",
-      "height": "5.2cm"
+      "x": "25.53cm",
+      "y": "5.01cm",
+      "width": "5.74cm",
+      "height": "5.03cm"
     }
   },
   {
@@ -286,16 +286,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "fill": "none",
       "name": "StudyPhaseDetail4",
       "text": "Week 24",
-      "x": "25.74cm",
-      "y": "10.32cm",
-      "width": "6.46cm",
-      "height": "0.78cm"
+      "x": "25.53cm",
+      "y": "10.23cm",
+      "width": "5.74cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -307,9 +307,9 @@
       "fill": "0B5FFF",
       "line": "none",
       "name": "StudyArm1",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "12.1cm",
-      "width": "15.28cm",
+      "width": "14.18cm",
       "height": "6.05cm"
     }
   },
@@ -325,10 +325,10 @@
       "fill": "none",
       "name": "StudyArmLabel1",
       "text": "Intervention",
-      "x": "1.72cm",
+      "x": "2.65cm",
       "y": "12.5cm",
-      "width": "14.38cm",
-      "height": "4.32cm"
+      "width": "13.29cm",
+      "height": "4.23cm"
     }
   },
   {
@@ -336,16 +336,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "FFFFFF",
       "fill": "none",
       "name": "StudyArmDetail1",
       "text": "Drug X + SOC",
-      "x": "1.72cm",
-      "y": "16.97cm",
-      "width": "14.38cm",
-      "height": "0.78cm"
+      "x": "2.65cm",
+      "y": "16.88cm",
+      "width": "13.29cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -357,9 +357,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "name": "StudyArm2",
-      "x": "17.31cm",
+      "x": "17.48cm",
       "y": "12.1cm",
-      "width": "15.28cm",
+      "width": "14.18cm",
       "height": "6.05cm"
     }
   },
@@ -375,10 +375,10 @@
       "fill": "none",
       "name": "StudyArmLabel2",
       "text": "Control",
-      "x": "17.76cm",
+      "x": "17.93cm",
       "y": "12.5cm",
-      "width": "14.38cm",
-      "height": "4.32cm"
+      "width": "13.29cm",
+      "height": "4.23cm"
     }
   },
   {
@@ -386,16 +386,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "fill": "none",
       "name": "StudyArmDetail2",
       "text": "Placebo + SOC",
-      "x": "17.76cm",
-      "y": "16.97cm",
-      "width": "14.38cm",
-      "height": "0.78cm"
+      "x": "17.93cm",
+      "y": "16.88cm",
+      "width": "13.29cm",
+      "height": "0.87cm"
     }
   },
   {

@@ -15,9 +15,9 @@
     "props": {
       "name": "TeamTitle",
       "text": "Team",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "1.2cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.8cm",
       "font": "Arial",
       "size": "36",
@@ -35,9 +35,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "name": "Member1Bg",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "3.4cm",
-      "width": "15.28cm",
+      "width": "14.18cm",
       "height": "14.4cm"
     }
   },
@@ -54,9 +54,9 @@
       "fill": "none",
       "name": "Member1Name",
       "text": "Member One",
-      "x": "1.67cm",
+      "x": "2.6cm",
       "y": "7.8cm",
-      "width": "14.48cm",
+      "width": "13.38cm",
       "height": "1.75cm"
     }
   },
@@ -65,18 +65,18 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "bold": "true",
       "color": "0B5FFF",
       "align": "center",
       "fill": "none",
       "name": "Member1Role",
       "text": "Role",
-      "x": "1.67cm",
+      "x": "2.6cm",
       "y": "9.85cm",
-      "width": "14.48cm",
-      "height": "0.78cm"
+      "width": "13.38cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -84,17 +84,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
+      "font": "Arial",
       "size": "14",
       "color": "A0A6B0",
       "align": "center",
       "fill": "none",
       "name": "Member1Blurb",
       "text": "",
-      "x": "1.67cm",
-      "y": "10.93cm",
-      "width": "14.48cm",
-      "height": "6.27cm"
+      "x": "2.6cm",
+      "y": "11.02cm",
+      "width": "13.38cm",
+      "height": "6.18cm"
     }
   },
   {
@@ -106,9 +106,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "name": "Member2Bg",
-      "x": "17.31cm",
+      "x": "17.48cm",
       "y": "3.4cm",
-      "width": "15.28cm",
+      "width": "14.18cm",
       "height": "14.4cm"
     }
   },
@@ -125,9 +125,9 @@
       "fill": "none",
       "name": "Member2Name",
       "text": "Member Two",
-      "x": "17.71cm",
+      "x": "17.88cm",
       "y": "7.8cm",
-      "width": "14.48cm",
+      "width": "13.38cm",
       "height": "1.75cm"
     }
   },
@@ -136,18 +136,18 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "bold": "true",
       "color": "0B5FFF",
       "align": "center",
       "fill": "none",
       "name": "Member2Role",
       "text": "Role",
-      "x": "17.71cm",
+      "x": "17.88cm",
       "y": "9.85cm",
-      "width": "14.48cm",
-      "height": "0.78cm"
+      "width": "13.38cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -155,17 +155,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
+      "font": "Arial",
       "size": "14",
       "color": "A0A6B0",
       "align": "center",
       "fill": "none",
       "name": "Member2Blurb",
       "text": "",
-      "x": "17.71cm",
-      "y": "10.93cm",
-      "width": "14.48cm",
-      "height": "6.27cm"
+      "x": "17.88cm",
+      "y": "11.02cm",
+      "width": "13.38cm",
+      "height": "6.18cm"
     }
   },
   {
@@ -178,7 +178,7 @@
       "fill": "0B5FFF",
       "line": "none",
       "text": "MO",
-      "x": "7.21cm",
+      "x": "7.59cm",
       "y": "4cm",
       "width": "3.4cm",
       "height": "3.4cm",
@@ -200,7 +200,7 @@
       "fill": "0B5FFF",
       "line": "none",
       "text": "MT",
-      "x": "23.26cm",
+      "x": "22.88cm",
       "y": "4cm",
       "width": "3.4cm",
       "height": "3.4cm",

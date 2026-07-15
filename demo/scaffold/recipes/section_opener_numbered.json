@@ -17,7 +17,7 @@
       "preset": "rect",
       "fill": "0B5FFF",
       "line": "none",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "6.4cm",
       "width": "1.1cm",
       "height": "6.2cm"
@@ -29,8 +29,8 @@
     "type": "shape",
     "props": {
       "name": "OpenerNumber",
-      "text": "02",
-      "x": "2.87cm",
+      "text": "01",
+      "x": "3.8cm",
       "y": "5.8cm",
       "width": "8cm",
       "height": "2.4cm",
@@ -47,32 +47,15 @@
     "type": "shape",
     "props": {
       "name": "OpenerTitle",
-      "text": "How it works",
-      "x": "2.87cm",
+      "text": "Section",
+      "x": "3.8cm",
       "y": "8.4cm",
-      "width": "29.73cm",
+      "width": "27.87cm",
       "height": "2.6cm",
       "font": "Arial",
       "size": "36",
       "bold": "true",
       "color": "F5F5F7",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "OpenerBlurb",
-      "text": "Two backends. One contract. Precision or draft — pick by need.",
-      "x": "2.87cm",
-      "y": "11.3cm",
-      "width": "22cm",
-      "height": "2.2cm",
-      "font": "Calibri",
-      "size": "18",
-      "color": "A0A6B0",
       "fill": "none"
     }
   }

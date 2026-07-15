@@ -15,9 +15,9 @@
     "props": {
       "name": "KmTitle",
       "text": "Kaplan–Meier survival",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "1.0cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.8cm",
       "font": "Arial",
       "size": "36",
@@ -40,7 +40,7 @@
       "series2.values": "100,88,79,70,61",
       "series2.color": "91B7FF",
       "categories": "0,6,12,18,24",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "3.2cm",
       "width": "22.5cm",
       "height": "10.5cm"
@@ -53,12 +53,12 @@
     "props": {
       "name": "KmRiskH1",
       "text": "Month",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "14cm",
       "width": "7.3cm",
       "height": "0.7cm",
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "bold": "true",
       "color": "A0A6B0",
       "fill": "none"
@@ -71,12 +71,12 @@
     "props": {
       "name": "KmRiskH2",
       "text": "Intervention",
-      "x": "8.87cm",
+      "x": "9.8cm",
       "y": "14cm",
       "width": "7.3cm",
       "height": "0.7cm",
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "bold": "true",
       "color": "A0A6B0",
       "fill": "none"
@@ -89,12 +89,12 @@
     "props": {
       "name": "KmRiskH3",
       "text": "Control",
-      "x": "16.47cm",
+      "x": "17.4cm",
       "y": "14cm",
       "width": "7.3cm",
       "height": "0.7cm",
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "bold": "true",
       "color": "A0A6B0",
       "fill": "none"
@@ -107,12 +107,12 @@
     "props": {
       "name": "KmRisk1_1",
       "text": "0",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "14.75cm",
       "width": "7.3cm",
       "height": "0.6cm",
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "F5F5F7",
       "fill": "none"
     }
@@ -124,12 +124,12 @@
     "props": {
       "name": "KmRisk1_2",
       "text": "150",
-      "x": "8.87cm",
+      "x": "9.8cm",
       "y": "14.75cm",
       "width": "7.3cm",
       "height": "0.6cm",
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "F5F5F7",
       "fill": "none"
     }
@@ -141,12 +141,12 @@
     "props": {
       "name": "KmRisk1_3",
       "text": "150",
-      "x": "16.47cm",
+      "x": "17.4cm",
       "y": "14.75cm",
       "width": "7.3cm",
       "height": "0.6cm",
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "F5F5F7",
       "fill": "none"
     }
@@ -158,12 +158,12 @@
     "props": {
       "name": "KmRisk2_1",
       "text": "12",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "15.4cm",
       "width": "7.3cm",
       "height": "0.6cm",
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "F5F5F7",
       "fill": "none"
     }
@@ -175,12 +175,12 @@
     "props": {
       "name": "KmRisk2_2",
       "text": "128",
-      "x": "8.87cm",
+      "x": "9.8cm",
       "y": "15.4cm",
       "width": "7.3cm",
       "height": "0.6cm",
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "F5F5F7",
       "fill": "none"
     }
@@ -192,12 +192,12 @@
     "props": {
       "name": "KmRisk2_3",
       "text": "119",
-      "x": "16.47cm",
+      "x": "17.4cm",
       "y": "15.4cm",
       "width": "7.3cm",
       "height": "0.6cm",
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "F5F5F7",
       "fill": "none"
     }
@@ -209,12 +209,12 @@
     "props": {
       "name": "KmRisk3_1",
       "text": "24",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "16.05cm",
       "width": "7.3cm",
       "height": "0.6cm",
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "F5F5F7",
       "fill": "none"
     }
@@ -226,12 +226,12 @@
     "props": {
       "name": "KmRisk3_2",
       "text": "96",
-      "x": "8.87cm",
+      "x": "9.8cm",
       "y": "16.05cm",
       "width": "7.3cm",
       "height": "0.6cm",
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "F5F5F7",
       "fill": "none"
     }
@@ -243,12 +243,12 @@
     "props": {
       "name": "KmRisk3_3",
       "text": "84",
-      "x": "16.47cm",
+      "x": "17.4cm",
       "y": "16.05cm",
       "width": "7.3cm",
       "height": "0.6cm",
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "F5F5F7",
       "fill": "none"
     }
@@ -297,7 +297,7 @@
       "y": "5.1cm",
       "width": "6.8cm",
       "height": "11.5cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "A0A6B0",
       "fill": "none"

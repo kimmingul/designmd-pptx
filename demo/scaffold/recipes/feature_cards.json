@@ -19,10 +19,10 @@
       "color": "F5F5F7",
       "fill": "none",
       "name": "FeatTitle",
-      "text": "Infograpify structural roles",
-      "x": "1.27cm",
+      "text": "What you get",
+      "x": "2.2cm",
       "y": "1.2cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.84cm"
     }
   },
@@ -35,9 +35,9 @@
       "fill": "1C1C1E",
       "line": "3A3A3C",
       "name": "Card1Bg",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "3.94cm",
-      "width": "9.94cm",
+      "width": "9.09cm",
       "height": "14.11cm"
     }
   },
@@ -50,9 +50,9 @@
       "fill": "0B5FFF",
       "line": "none",
       "name": "Card1Accent",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "3.94cm",
-      "width": "9.94cm",
+      "width": "9.09cm",
       "height": "0.18cm"
     }
   },
@@ -67,11 +67,11 @@
       "color": "F5F5F7",
       "fill": "none",
       "name": "Card1Title",
-      "text": "Strategy",
-      "x": "1.87cm",
+      "text": "Precise geometry",
+      "x": "2.8cm",
       "y": "5.12cm",
-      "width": "8.74cm",
-      "height": "1.49cm"
+      "width": "7.89cm",
+      "height": "2.72cm"
     }
   },
   {
@@ -79,16 +79,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "A0A6B0",
       "fill": "none",
       "name": "Card1Body",
-      "text": "PESTLE · scorecard · mission/vision · mindmap",
-      "x": "1.87cm",
-      "y": "7.1cm",
-      "width": "8.74cm",
-      "height": "10.35cm"
+      "text": "Shape-level apply from recipes — cm layout, connectors, brand fonts and floors.",
+      "x": "2.8cm",
+      "y": "8.34cm",
+      "width": "7.89cm",
+      "height": "9.11cm"
     }
   },
   {
@@ -100,9 +100,9 @@
       "fill": "1C1C1E",
       "line": "3A3A3C",
       "name": "Card2Bg",
-      "x": "11.97cm",
+      "x": "12.39cm",
       "y": "3.94cm",
-      "width": "9.94cm",
+      "width": "9.09cm",
       "height": "14.11cm"
     }
   },
@@ -115,9 +115,9 @@
       "fill": "0B5FFF",
       "line": "none",
       "name": "Card2Accent",
-      "x": "11.97cm",
+      "x": "12.39cm",
       "y": "3.94cm",
-      "width": "9.94cm",
+      "width": "9.09cm",
       "height": "0.18cm"
     }
   },
@@ -132,10 +132,10 @@
       "color": "F5F5F7",
       "fill": "none",
       "name": "Card2Title",
-      "text": "Delivery",
-      "x": "12.57cm",
+      "text": "Quality gates",
+      "x": "12.99cm",
       "y": "5.12cm",
-      "width": "8.74cm",
+      "width": "7.89cm",
       "height": "1.49cm"
     }
   },
@@ -144,15 +144,15 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "A0A6B0",
       "fill": "none",
       "name": "Card2Body",
-      "text": "RACI · journey · stairs · checklist · pillars",
-      "x": "12.57cm",
+      "text": "Text budgets, contrast, staging issues, and Gate 3 screenshots before delivery.",
+      "x": "12.99cm",
       "y": "7.1cm",
-      "width": "8.74cm",
+      "width": "7.89cm",
       "height": "10.35cm"
     }
   },
@@ -165,9 +165,9 @@
       "fill": "1C1C1E",
       "line": "3A3A3C",
       "name": "Card3Bg",
-      "x": "22.66cm",
+      "x": "22.58cm",
       "y": "3.94cm",
-      "width": "9.94cm",
+      "width": "9.09cm",
       "height": "14.11cm"
     }
   },
@@ -180,9 +180,9 @@
       "fill": "0B5FFF",
       "line": "none",
       "name": "Card3Accent",
-      "x": "22.66cm",
+      "x": "22.58cm",
       "y": "3.94cm",
-      "width": "9.94cm",
+      "width": "9.09cm",
       "height": "0.18cm"
     }
   },
@@ -197,10 +197,10 @@
       "color": "F5F5F7",
       "fill": "none",
       "name": "Card3Title",
-      "text": "Visual systems",
-      "x": "23.26cm",
+      "text": "Agent-ready",
+      "x": "23.18cm",
       "y": "5.12cm",
-      "width": "8.74cm",
+      "width": "7.89cm",
       "height": "1.49cm"
     }
   },
@@ -209,15 +209,15 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "A0A6B0",
       "fill": "none",
       "name": "Card3Body",
-      "text": "Hex · puzzle · circle segments · risk heat · empathy",
-      "x": "23.26cm",
+      "text": "Claude, Codex, and Grok skills. Doctor asks before installing OfficeCLI.",
+      "x": "23.18cm",
       "y": "7.1cm",
-      "width": "8.74cm",
+      "width": "7.89cm",
       "height": "10.35cm"
     }
   }

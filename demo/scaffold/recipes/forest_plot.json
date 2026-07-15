@@ -20,9 +20,9 @@
       "fill": "none",
       "name": "ForestTitle",
       "text": "Forest plot",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "1.1cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.84cm"
     }
   },
@@ -38,9 +38,9 @@
       "fill": "none",
       "name": "ForestLabel1",
       "text": "Study A",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "3.29cm",
-      "width": "9.11cm",
+      "width": "8.55cm",
       "height": "3.51cm"
     }
   },
@@ -53,9 +53,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "name": "ForestTrack1",
-      "x": "10.73cm",
+      "x": "11.1cm",
       "y": "3.29cm",
-      "width": "13.25cm",
+      "width": "12.44cm",
       "height": "3.51cm"
     }
   },
@@ -64,16 +64,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "align": "right",
       "fill": "none",
       "name": "ForestText1",
       "text": "0.82 (0.60–1.10)",
-      "x": "24.32cm",
+      "x": "23.89cm",
       "y": "3.29cm",
-      "width": "8.28cm",
+      "width": "7.78cm",
       "height": "3.51cm"
     }
   },
@@ -89,9 +89,9 @@
       "fill": "none",
       "name": "ForestLabel2",
       "text": "Study B",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "7.07cm",
-      "width": "9.11cm",
+      "width": "8.55cm",
       "height": "3.51cm"
     }
   },
@@ -104,9 +104,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "name": "ForestTrack2",
-      "x": "10.73cm",
+      "x": "11.1cm",
       "y": "7.07cm",
-      "width": "13.25cm",
+      "width": "12.44cm",
       "height": "3.51cm"
     }
   },
@@ -115,16 +115,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "align": "right",
       "fill": "none",
       "name": "ForestText2",
       "text": "0.70 (0.55–0.90)",
-      "x": "24.32cm",
+      "x": "23.89cm",
       "y": "7.07cm",
-      "width": "8.28cm",
+      "width": "7.78cm",
       "height": "3.51cm"
     }
   },
@@ -140,9 +140,9 @@
       "fill": "none",
       "name": "ForestLabel3",
       "text": "Study C",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "10.86cm",
-      "width": "9.11cm",
+      "width": "8.55cm",
       "height": "3.51cm"
     }
   },
@@ -155,9 +155,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "name": "ForestTrack3",
-      "x": "10.73cm",
+      "x": "11.1cm",
       "y": "10.86cm",
-      "width": "13.25cm",
+      "width": "12.44cm",
       "height": "3.51cm"
     }
   },
@@ -166,16 +166,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "align": "right",
       "fill": "none",
       "name": "ForestText3",
       "text": "1.05 (0.82–1.35)",
-      "x": "24.32cm",
+      "x": "23.89cm",
       "y": "10.86cm",
-      "width": "8.28cm",
+      "width": "7.78cm",
       "height": "3.51cm"
     }
   },
@@ -191,9 +191,9 @@
       "fill": "none",
       "name": "ForestLabel4",
       "text": "Pooled",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "14.64cm",
-      "width": "9.11cm",
+      "width": "8.55cm",
       "height": "3.51cm"
     }
   },
@@ -206,9 +206,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "name": "ForestTrack4",
-      "x": "10.73cm",
+      "x": "11.1cm",
       "y": "14.64cm",
-      "width": "13.25cm",
+      "width": "12.44cm",
       "height": "3.51cm"
     }
   },
@@ -217,16 +217,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "align": "right",
       "fill": "none",
       "name": "ForestText4",
       "text": "0.80 (0.67–0.95)",
-      "x": "24.32cm",
+      "x": "23.89cm",
       "y": "14.64cm",
-      "width": "8.28cm",
+      "width": "7.78cm",
       "height": "3.51cm"
     }
   },
@@ -239,9 +239,9 @@
       "preset": "rect",
       "fill": "0B5FFF",
       "line": "none",
-      "x": "14.16cm",
+      "x": "14.34cm",
       "y": "4.96cm",
-      "width": "3.82cm",
+      "width": "3.58cm",
       "height": "0.16cm"
     }
   },
@@ -254,7 +254,7 @@
       "preset": "ellipse",
       "fill": "0B5FFF",
       "line": "none",
-      "x": "15.9cm",
+      "x": "15.95cm",
       "y": "4.87cm",
       "width": "0.35cm",
       "height": "0.35cm"
@@ -269,7 +269,7 @@
       "preset": "rect",
       "fill": "3A3A3C",
       "line": "none",
-      "x": "17.32cm",
+      "x": "17.29cm",
       "y": "3.44cm",
       "width": "0.06cm",
       "height": "3.21cm"
@@ -284,9 +284,9 @@
       "preset": "rect",
       "fill": "0B5FFF",
       "line": "none",
-      "x": "13.53cm",
+      "x": "13.74cm",
       "y": "8.75cm",
-      "width": "3.19cm",
+      "width": "2.99cm",
       "height": "0.16cm"
     }
   },
@@ -299,7 +299,7 @@
       "preset": "ellipse",
       "fill": "0B5FFF",
       "line": "none",
-      "x": "14.94cm",
+      "x": "15.06cm",
       "y": "8.65cm",
       "width": "0.35cm",
       "height": "0.35cm"
@@ -314,7 +314,7 @@
       "preset": "rect",
       "fill": "3A3A3C",
       "line": "none",
-      "x": "17.32cm",
+      "x": "17.29cm",
       "y": "7.22cm",
       "width": "0.06cm",
       "height": "3.21cm"
@@ -329,9 +329,9 @@
       "preset": "rect",
       "fill": "0B5FFF",
       "line": "none",
-      "x": "16.07cm",
+      "x": "16.13cm",
       "y": "12.53cm",
-      "width": "3.19cm",
+      "width": "2.99cm",
       "height": "0.16cm"
     }
   },
@@ -344,7 +344,7 @@
       "preset": "ellipse",
       "fill": "0B5FFF",
       "line": "none",
-      "x": "17.49cm",
+      "x": "17.45cm",
       "y": "12.44cm",
       "width": "0.35cm",
       "height": "0.35cm"
@@ -359,7 +359,7 @@
       "preset": "rect",
       "fill": "3A3A3C",
       "line": "none",
-      "x": "17.32cm",
+      "x": "17.29cm",
       "y": "11.01cm",
       "width": "0.06cm",
       "height": "3.21cm"
@@ -374,9 +374,9 @@
       "preset": "rect",
       "fill": "0B5FFF",
       "line": "none",
-      "x": "14.8cm",
+      "x": "14.94cm",
       "y": "16.32cm",
-      "width": "2.23cm",
+      "width": "2.09cm",
       "height": "0.16cm"
     }
   },
@@ -389,7 +389,7 @@
       "preset": "ellipse",
       "fill": "0B5FFF",
       "line": "none",
-      "x": "15.77cm",
+      "x": "15.84cm",
       "y": "16.22cm",
       "width": "0.35cm",
       "height": "0.35cm"
@@ -404,7 +404,7 @@
       "preset": "rect",
       "fill": "3A3A3C",
       "line": "none",
-      "x": "17.32cm",
+      "x": "17.29cm",
       "y": "14.79cm",
       "width": "0.06cm",
       "height": "3.21cm"

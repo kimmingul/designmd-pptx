@@ -1,5 +1,11 @@
 {
   "version": "1.1",
+  "meta": {
+    "title": "designmd-pptx",
+    "version": "2.1.2",
+    "style": "flagship",
+    "note": "9-slide product narrative — not a recipe catalog"
+  },
   "slides": [
     {
       "id": "01-cover",
@@ -53,26 +59,11 @@
         "title": "Authoring pipeline",
         "notes": "Five steps, one owner each. Gate 3 is not optional for ship.",
         "steps": [
-          {
-            "label": "Brief",
-            "detail": "Markdown"
-          },
-          {
-            "label": "Compose",
-            "detail": "Deck-spec"
-          },
-          {
-            "label": "Scaffold",
-            "detail": "Tokens"
-          },
-          {
-            "label": "Apply",
-            "detail": "Legacy"
-          },
-          {
-            "label": "Gate 3",
-            "detail": "QA"
-          }
+          { "label": "Brief", "detail": "Markdown" },
+          { "label": "Compose", "detail": "Deck-spec" },
+          { "label": "Scaffold", "detail": "Tokens" },
+          { "label": "Apply", "detail": "Legacy" },
+          { "label": "Gate 3", "detail": "QA" }
         ]
       }
     },
@@ -124,26 +115,11 @@
       "content": {
         "title": "Quality is a staircase",
         "steps": [
-          {
-            "label": "Tokens",
-            "detail": "Brand floors"
-          },
-          {
-            "label": "Fit",
-            "detail": "CJK budgets"
-          },
-          {
-            "label": "Issues",
-            "detail": "Overlap gate"
-          },
-          {
-            "label": "Gate 3",
-            "detail": "Contact sheet"
-          },
-          {
-            "label": "Ship",
-            "detail": "Human check"
-          }
+          { "label": "Tokens", "detail": "Brand floors" },
+          { "label": "Fit", "detail": "CJK budgets" },
+          { "label": "Issues", "detail": "Overlap gate" },
+          { "label": "Gate 3", "detail": "Contact sheet" },
+          { "label": "Ship", "detail": "Human check" }
         ]
       }
     },
@@ -153,26 +129,11 @@
       "content": {
         "title": "Hard rules we keep",
         "items": [
-          {
-            "label": "Title ≥ 36pt · body ≥ 18pt",
-            "done": true
-          },
-          {
-            "label": "Never shrink fonts to fit — split or cut",
-            "done": true
-          },
-          {
-            "label": "Overwrite only with --force",
-            "done": true
-          },
-          {
-            "label": "Finish apply with --screenshot",
-            "done": true
-          },
-          {
-            "label": "Ask before installing OfficeCLI",
-            "done": true
-          }
+          { "label": "Title ≥ 36pt · body ≥ 18pt", "done": true },
+          { "label": "Never shrink fonts to fit — split or cut", "done": true },
+          { "label": "Overwrite only with --force", "done": true },
+          { "label": "Finish apply with --screenshot", "done": true },
+          { "label": "Ask before installing OfficeCLI", "done": true }
         ]
       }
     },

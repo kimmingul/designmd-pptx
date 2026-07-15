@@ -147,14 +147,25 @@ def compile_design_md(
             break
     use_round_rect = True if card_radius_px is None else card_radius_px >= 6
 
+    # Map composition.whitespace_density → real geometry (was previously
+    # stored only as metadata while margin/gap stayed fixed at floors).
+    # Keep "comfortable" at historical floors so existing fixtures don't shift.
+    _ws = (design_v2.get("composition") or {}).get("whitespace_density") or "comfortable"
+    if _ws == "spacious":
+        margin_cm, gap_cm = 2.2, 1.1
+    elif _ws == "compact":
+        margin_cm, gap_cm = 1.27, 0.55
+    else:
+        margin_cm, gap_cm = T.MARGIN_CM, T.GAP_CM
+
     result: dict[str, Any] = {
         "version": "1.1",
         "source": str(path.as_posix()),
         "brand": str(name),
         "description": description[:500],
         "canvas_cm": [T.CANVAS_W_CM, T.CANVAS_H_CM],
-        "margin_cm": T.MARGIN_CM,
-        "gap_cm": T.GAP_CM,
+        "margin_cm": margin_cm,
+        "gap_cm": gap_cm,
         "colors": palette,
         "color_provenance": provenance,
         "css_vars": {k: v for k, v in list(var_map.items())[:40]},

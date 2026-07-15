@@ -1,10 +1,10 @@
-# SLIDE-DESIGN.md — Apple-Keynote-Intro
+# SLIDE-DESIGN.md — Apple-Keynote-Flagship
 
 > Compiled from `demo/apple.DESIGN.md` by designmd-pptx v2.1.2.
 
 ## Atmosphere
 
-Apple Keynote–inspired house style for the designmd-pptx product intro. Deep near-black canvas, pure white ink, single system-blue accent, large type, generous margins. Original tokens — not an Apple template.
+Flagship demo house style — spacious black stage, one blue accent, left-hero covers. Original tokens (not an Apple template). Tuned for 8–10 slide product narrative, not catalog exhibition.
 
 **Motif:** `hairline-card-on-dark`  
 **Dark-first:** `True`  
@@ -34,14 +34,14 @@ Apple Keynote–inspired house style for the designmd-pptx product intro. Deep n
 ## Type
 
 - Heading font: **Arial**
-- Body font: **Calibri**
-- Cover: 42pt · Title: 36pt · Body: 18pt
-- KPI: 60pt · Micro/chip: 12pt · Caption: 10pt
+- Body font: **Arial**
+- Cover: 48pt · Title: 36pt · Body: 18pt
+- KPI: 60pt · Micro/chip: 14pt · Caption: 12pt
 
 ## Canvas
 
 - 33.87 × 19.05 cm
-- Margin ≥ 1.27 cm · Gap ≥ 0.76 cm
+- Margin ≥ 2.2 cm · Gap ≥ 1.1 cm
 
 ## Patterns
 
@@ -62,10 +62,8 @@ Apple Keynote–inspired house style for the designmd-pptx product intro. Deep n
 
 ## Compiler warnings
 
-- font.heading: 'SF Pro Display' → 'Arial' (PowerPoint-safe substitute)
-- font.body: 'SF Pro Text' → 'Calibri' (PowerPoint-safe substitute)
-- composition.whitespace_density: 'airy' not one of ('comfortable', 'compact', 'spacious') — using 'comfortable'
-- composition.title_placement: 'center-heavy' not one of ('top', 'left', 'center') — using 'top'
+- font.heading: 'Helvetica Neue' → 'Arial' (PowerPoint-safe substitute)
+- font.body: 'Helvetica Neue' → 'Arial' (PowerPoint-safe substitute)
 
 ## Dropped web concerns
 

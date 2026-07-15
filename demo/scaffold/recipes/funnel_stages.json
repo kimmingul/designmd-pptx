@@ -15,9 +15,9 @@
     "props": {
       "name": "FunnelTitle",
       "text": "Conversion funnel",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "1.0cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.8cm",
       "font": "Arial",
       "size": "36",
@@ -35,9 +35,9 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "3.4cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "3.44cm"
     }
   },
@@ -48,9 +48,9 @@
     "props": {
       "name": "FunnelLabel1",
       "text": "Awareness  ·  100%",
-      "x": "1.67cm",
+      "x": "2.6cm",
       "y": "4.36cm",
-      "width": "30.53cm",
+      "width": "28.67cm",
       "height": "1.72cm",
       "font": "Arial",
       "size": "24",
@@ -69,9 +69,9 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "x": "4.14cm",
+      "x": "4.9cm",
       "y": "7.12cm",
-      "width": "25.59cm",
+      "width": "24.07cm",
       "height": "3.44cm"
     }
   },
@@ -82,9 +82,9 @@
     "props": {
       "name": "FunnelLabel2",
       "text": "Interest  ·  48%",
-      "x": "4.54cm",
+      "x": "5.3cm",
       "y": "8.08cm",
-      "width": "24.79cm",
+      "width": "23.27cm",
       "height": "1.72cm",
       "font": "Arial",
       "size": "24",
@@ -103,9 +103,9 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "x": "7.01cm",
+      "x": "7.6cm",
       "y": "10.84cm",
-      "width": "19.84cm",
+      "width": "18.66cm",
       "height": "3.44cm"
     }
   },
@@ -116,9 +116,9 @@
     "props": {
       "name": "FunnelLabel3",
       "text": "Decision  ·  22%",
-      "x": "7.41cm",
+      "x": "8cm",
       "y": "11.8cm",
-      "width": "19.04cm",
+      "width": "17.86cm",
       "height": "1.72cm",
       "font": "Arial",
       "size": "24",
@@ -137,9 +137,9 @@
       "preset": "roundRect",
       "fill": "0B5FFF",
       "line": "none",
-      "x": "9.89cm",
+      "x": "10.3cm",
       "y": "14.56cm",
-      "width": "14.1cm",
+      "width": "13.26cm",
       "height": "3.44cm"
     }
   },
@@ -150,9 +150,9 @@
     "props": {
       "name": "FunnelLabel4",
       "text": "Action  ·  9%",
-      "x": "10.29cm",
+      "x": "10.7cm",
       "y": "15.52cm",
-      "width": "13.3cm",
+      "width": "12.46cm",
       "height": "1.72cm",
       "font": "Arial",
       "size": "24",

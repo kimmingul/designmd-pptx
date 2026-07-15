@@ -20,9 +20,9 @@
       "fill": "none",
       "name": "VsTitle",
       "text": "Option scorecard",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "1.1cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.84cm"
     }
   },
@@ -31,17 +31,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "bold": "true",
       "color": "A0A6B0",
       "fill": "none",
       "name": "VsCritHeadT",
       "text": "Criteria",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "3.34cm",
-      "width": "10.83cm",
-      "height": "0.78cm"
+      "width": "10.17cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -57,9 +57,9 @@
       "fill": "none",
       "name": "VsLeftHeadT",
       "text": "Option A",
-      "x": "12.5cm",
+      "x": "12.77cm",
       "y": "3.34cm",
-      "width": "9.85cm",
+      "width": "9.25cm",
       "height": "1.22cm"
     }
   },
@@ -76,9 +76,9 @@
       "fill": "none",
       "name": "VsRightHeadT",
       "text": "Option B",
-      "x": "22.75cm",
+      "x": "22.42cm",
       "y": "3.34cm",
-      "width": "9.85cm",
+      "width": "9.25cm",
       "height": "1.22cm"
     }
   },
@@ -91,9 +91,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "name": "VsCrit1Bg",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "4.91cm",
-      "width": "10.87cm",
+      "width": "10.21cm",
       "height": "3.05cm"
     }
   },
@@ -109,9 +109,9 @@
       "fill": "none",
       "name": "VsCrit1",
       "text": "Impact",
-      "x": "1.67cm",
+      "x": "2.6cm",
       "y": "5.26cm",
-      "width": "10.07cm",
+      "width": "9.41cm",
       "height": "2.35cm"
     }
   },
@@ -124,9 +124,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "name": "VsLeft1Bg",
-      "x": "12.49cm",
+      "x": "12.76cm",
       "y": "4.91cm",
-      "width": "9.88cm",
+      "width": "9.28cm",
       "height": "3.05cm"
     }
   },
@@ -135,16 +135,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "F5F5F7",
       "align": "center",
       "fill": "none",
       "name": "VsLeft1",
       "text": "High",
-      "x": "12.89cm",
+      "x": "13.16cm",
       "y": "5.26cm",
-      "width": "9.08cm",
+      "width": "8.48cm",
       "height": "2.35cm"
     }
   },
@@ -157,9 +157,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "name": "VsRight1Bg",
-      "x": "22.72cm",
+      "x": "22.39cm",
       "y": "4.91cm",
-      "width": "9.88cm",
+      "width": "9.28cm",
       "height": "3.05cm"
     }
   },
@@ -168,16 +168,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "F5F5F7",
       "align": "center",
       "fill": "none",
       "name": "VsRight1",
       "text": "Med",
-      "x": "23.12cm",
+      "x": "22.79cm",
       "y": "5.26cm",
-      "width": "9.08cm",
+      "width": "8.48cm",
       "height": "2.35cm"
     }
   },
@@ -190,9 +190,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "name": "VsCrit2Bg",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "8.31cm",
-      "width": "10.87cm",
+      "width": "10.21cm",
       "height": "3.05cm"
     }
   },
@@ -208,9 +208,9 @@
       "fill": "none",
       "name": "VsCrit2",
       "text": "Effort",
-      "x": "1.67cm",
+      "x": "2.6cm",
       "y": "8.66cm",
-      "width": "10.07cm",
+      "width": "9.41cm",
       "height": "2.35cm"
     }
   },
@@ -223,9 +223,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "name": "VsLeft2Bg",
-      "x": "12.49cm",
+      "x": "12.76cm",
       "y": "8.31cm",
-      "width": "9.88cm",
+      "width": "9.28cm",
       "height": "3.05cm"
     }
   },
@@ -234,16 +234,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "F5F5F7",
       "align": "center",
       "fill": "none",
       "name": "VsLeft2",
       "text": "Med",
-      "x": "12.89cm",
+      "x": "13.16cm",
       "y": "8.66cm",
-      "width": "9.08cm",
+      "width": "8.48cm",
       "height": "2.35cm"
     }
   },
@@ -256,9 +256,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "name": "VsRight2Bg",
-      "x": "22.72cm",
+      "x": "22.39cm",
       "y": "8.31cm",
-      "width": "9.88cm",
+      "width": "9.28cm",
       "height": "3.05cm"
     }
   },
@@ -267,16 +267,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "F5F5F7",
       "align": "center",
       "fill": "none",
       "name": "VsRight2",
       "text": "Low",
-      "x": "23.12cm",
+      "x": "22.79cm",
       "y": "8.66cm",
-      "width": "9.08cm",
+      "width": "8.48cm",
       "height": "2.35cm"
     }
   },
@@ -289,9 +289,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "name": "VsCrit3Bg",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "11.7cm",
-      "width": "10.87cm",
+      "width": "10.21cm",
       "height": "3.05cm"
     }
   },
@@ -307,9 +307,9 @@
       "fill": "none",
       "name": "VsCrit3",
       "text": "Risk",
-      "x": "1.67cm",
+      "x": "2.6cm",
       "y": "12.05cm",
-      "width": "10.07cm",
+      "width": "9.41cm",
       "height": "2.35cm"
     }
   },
@@ -322,9 +322,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "name": "VsLeft3Bg",
-      "x": "12.49cm",
+      "x": "12.76cm",
       "y": "11.7cm",
-      "width": "9.88cm",
+      "width": "9.28cm",
       "height": "3.05cm"
     }
   },
@@ -333,16 +333,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "F5F5F7",
       "align": "center",
       "fill": "none",
       "name": "VsLeft3",
       "text": "Low",
-      "x": "12.89cm",
+      "x": "13.16cm",
       "y": "12.05cm",
-      "width": "9.08cm",
+      "width": "8.48cm",
       "height": "2.35cm"
     }
   },
@@ -355,9 +355,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "name": "VsRight3Bg",
-      "x": "22.72cm",
+      "x": "22.39cm",
       "y": "11.7cm",
-      "width": "9.88cm",
+      "width": "9.28cm",
       "height": "3.05cm"
     }
   },
@@ -366,16 +366,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "F5F5F7",
       "align": "center",
       "fill": "none",
       "name": "VsRight3",
       "text": "Med",
-      "x": "23.12cm",
+      "x": "22.79cm",
       "y": "12.05cm",
-      "width": "9.08cm",
+      "width": "8.48cm",
       "height": "2.35cm"
     }
   },
@@ -388,9 +388,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "name": "VsCrit4Bg",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "15.1cm",
-      "width": "10.87cm",
+      "width": "10.21cm",
       "height": "3.05cm"
     }
   },
@@ -406,9 +406,9 @@
       "fill": "none",
       "name": "VsCrit4",
       "text": "Fit",
-      "x": "1.67cm",
+      "x": "2.6cm",
       "y": "15.45cm",
-      "width": "10.07cm",
+      "width": "9.41cm",
       "height": "2.35cm"
     }
   },
@@ -421,9 +421,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "name": "VsLeft4Bg",
-      "x": "12.49cm",
+      "x": "12.76cm",
       "y": "15.1cm",
-      "width": "9.88cm",
+      "width": "9.28cm",
       "height": "3.05cm"
     }
   },
@@ -432,16 +432,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "F5F5F7",
       "align": "center",
       "fill": "none",
       "name": "VsLeft4",
       "text": "Strong",
-      "x": "12.89cm",
+      "x": "13.16cm",
       "y": "15.45cm",
-      "width": "9.08cm",
+      "width": "8.48cm",
       "height": "2.35cm"
     }
   },
@@ -454,9 +454,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "name": "VsRight4Bg",
-      "x": "22.72cm",
+      "x": "22.39cm",
       "y": "15.1cm",
-      "width": "9.88cm",
+      "width": "9.28cm",
       "height": "3.05cm"
     }
   },
@@ -465,16 +465,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "F5F5F7",
       "align": "center",
       "fill": "none",
       "name": "VsRight4",
       "text": "Partial",
-      "x": "23.12cm",
+      "x": "22.79cm",
       "y": "15.45cm",
-      "width": "9.08cm",
+      "width": "8.48cm",
       "height": "2.35cm"
     }
   },

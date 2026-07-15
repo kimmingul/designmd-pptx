@@ -1,7 +1,7 @@
 ---
 version: alpha
-name: Apple-Keynote-Intro
-description: "Apple Keynote–inspired house style for the designmd-pptx product intro. Deep near-black canvas, pure white ink, single system-blue accent, large type, generous margins. Original tokens — not an Apple template."
+name: Apple-Keynote-Flagship
+description: "Flagship demo house style — spacious black stage, one blue accent, left-hero covers. Original tokens (not an Apple template). Tuned for 8–10 slide product narrative, not catalog exhibition."
 
 colors:
   canvas: "#000000"
@@ -17,37 +17,38 @@ colors:
   semantic-warning: "#FFD60A"
 
 typography:
+  # Use pt (not px) so sizes map 1:1 into PowerPoint points.
   display-xl:
-    fontFamily: "SF Pro Display, Helvetica Neue, Arial, sans-serif"
-    fontSize: 56px
+    fontFamily: "Helvetica Neue, Arial, sans-serif"
+    fontSize: 48pt
     fontWeight: 700
   headline:
-    fontFamily: "SF Pro Display, Helvetica Neue, Arial, sans-serif"
-    fontSize: 36px
+    fontFamily: "Helvetica Neue, Arial, sans-serif"
+    fontSize: 36pt
     fontWeight: 600
   body:
-    fontFamily: "SF Pro Text, Helvetica Neue, Arial, sans-serif"
-    fontSize: 18px
+    fontFamily: "Helvetica Neue, Arial, sans-serif"
+    fontSize: 18pt
   caption:
-    fontFamily: "SF Pro Text, Helvetica Neue, Arial, sans-serif"
-    fontSize: 14px
+    fontFamily: "Helvetica Neue, Arial, sans-serif"
+    fontSize: 14pt
 
 rounded:
-  md: 12px
-  lg: 18px
+  md: 14px
+  lg: 20px
 
 spacing:
-  md: 20px
-  lg: 32px
+  md: 24px
+  lg: 36px
 
 composition:
-  whitespace_density: airy
-  title_placement: center-heavy
+  whitespace_density: spacious
+  title_placement: left
 
 charts:
   default_style: modern
   series_colors:
-    - "#0A84FF"
+    - "#0B5FFF"
     - "#64D2FF"
     - "#BF5AF2"
     - "#30D158"
@@ -56,6 +57,7 @@ charts:
 
 ## Overview
 
-Sparse, cinematic Keynote energy: black stage, white type, one blue pulse.
-Prefer short titles, few cards, and high contrast. Built for the designmd-pptx
-intro deck — brand-safe system fonts with SF Pro first where available.
+Spacious Keynote-inspired stage for the designmd-pptx **flagship** intro.
+Prefer short titles, few cards, intentional empty space, and distinct
+silhouettes per recipe (cover left-hero, process connectors, stairs ascent).
+No fake hex/pie/RACI showcase — only structures that read as product truth.

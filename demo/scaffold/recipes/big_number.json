@@ -14,16 +14,17 @@
     "type": "shape",
     "props": {
       "name": "BigValue",
-      "text": "—",
-      "x": "1.27cm",
-      "y": "4.6cm",
-      "width": "31.33cm",
-      "height": "6cm",
+      "text": "DESIGN.md",
+      "x": "2.2cm",
+      "y": "3.8cm",
+      "width": "29.47cm",
+      "height": "7.2cm",
       "font": "Arial",
-      "size": "96",
+      "size": "81",
       "bold": "true",
       "color": "0B5FFF",
       "align": "center",
+      "valign": "middle",
       "fill": "none"
     }
   },
@@ -33,11 +34,11 @@
     "type": "shape",
     "props": {
       "name": "BigLabel",
-      "text": "Headline metric",
-      "x": "3.94cm",
-      "y": "11.2cm",
-      "width": "26cm",
-      "height": "1.6cm",
+      "text": "One brand source of truth",
+      "x": "2.2cm",
+      "y": "11.4cm",
+      "width": "29.47cm",
+      "height": "1.8cm",
       "font": "Arial",
       "size": "28",
       "bold": "true",
@@ -49,9 +50,27 @@
   {
     "command": "add",
     "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BigContext",
+      "text": "Tokens, recipes, and staging-safe apply — not a blank slide and a prayer.",
+      "x": "4.2cm",
+      "y": "13.4cm",
+      "width": "25.47cm",
+      "height": "2.4cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
     "type": "notes",
     "props": {
-      "text": "Let the number land; one sentence of context."
+      "text": "The contract is the brand file — not the agent improvising layout."
     }
   }
 ]

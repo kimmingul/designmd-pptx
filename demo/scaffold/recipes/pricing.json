@@ -15,9 +15,9 @@
     "props": {
       "name": "PricingTitle",
       "text": "Pricing",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "1.0cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.8cm",
       "font": "Arial",
       "size": "36",
@@ -35,9 +35,9 @@
       "fill": "1C1C1E",
       "line": "3A3A3C",
       "name": "Tier1Bg",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "3.6cm",
-      "width": "15.28cm",
+      "width": "14.18cm",
       "height": "14.6cm"
     }
   },
@@ -54,9 +54,9 @@
       "fill": "none",
       "name": "Tier1Name",
       "text": "Starter",
-      "x": "1.62cm",
+      "x": "2.55cm",
       "y": "4.4cm",
-      "width": "14.58cm",
+      "width": "13.48cm",
       "height": "1.31cm"
     }
   },
@@ -73,9 +73,9 @@
       "fill": "none",
       "name": "Tier1Price",
       "text": "$0",
-      "x": "1.62cm",
+      "x": "2.55cm",
       "y": "6.06cm",
-      "width": "14.58cm",
+      "width": "13.48cm",
       "height": "2.9cm"
     }
   },
@@ -84,17 +84,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "align": "center",
       "fill": "none",
       "name": "Tier1Period",
       "text": "",
-      "x": "1.62cm",
+      "x": "2.55cm",
       "y": "9.31cm",
-      "width": "14.58cm",
-      "height": "0.78cm"
+      "width": "13.48cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -102,16 +102,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
+      "font": "Arial",
       "size": "16",
       "color": "A0A6B0",
       "fill": "none",
       "name": "Tier1Features",
       "text": "• Feature A",
-      "x": "1.62cm",
-      "y": "10.44cm",
-      "width": "14.58cm",
-      "height": "6.96cm"
+      "x": "2.55cm",
+      "y": "10.52cm",
+      "width": "13.48cm",
+      "height": "6.88cm"
     }
   },
   {
@@ -123,9 +123,9 @@
       "fill": "0B5FFF",
       "line": "none",
       "name": "Tier2Bg",
-      "x": "17.31cm",
+      "x": "17.48cm",
       "y": "3.6cm",
-      "width": "15.28cm",
+      "width": "14.18cm",
       "height": "14.6cm"
     }
   },
@@ -142,9 +142,9 @@
       "fill": "none",
       "name": "Tier2Name",
       "text": "Pro",
-      "x": "17.66cm",
+      "x": "17.84cm",
       "y": "4.4cm",
-      "width": "14.58cm",
+      "width": "13.48cm",
       "height": "1.31cm"
     }
   },
@@ -161,9 +161,9 @@
       "fill": "none",
       "name": "Tier2Price",
       "text": "$29",
-      "x": "17.66cm",
+      "x": "17.84cm",
       "y": "6.06cm",
-      "width": "14.58cm",
+      "width": "13.48cm",
       "height": "2.9cm"
     }
   },
@@ -172,17 +172,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "FFFFFF",
       "align": "center",
       "fill": "none",
       "name": "Tier2Period",
       "text": "",
-      "x": "17.66cm",
+      "x": "17.84cm",
       "y": "9.31cm",
-      "width": "14.58cm",
-      "height": "0.78cm"
+      "width": "13.48cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -190,16 +190,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
+      "font": "Arial",
       "size": "16",
       "color": "FFFFFF",
       "fill": "none",
       "name": "Tier2Features",
       "text": "• Everything in Starter",
-      "x": "17.66cm",
-      "y": "10.44cm",
-      "width": "14.58cm",
-      "height": "6.96cm"
+      "x": "17.84cm",
+      "y": "10.52cm",
+      "width": "13.48cm",
+      "height": "6.88cm"
     }
   },
   {

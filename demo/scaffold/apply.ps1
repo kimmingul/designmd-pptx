@@ -2,7 +2,7 @@
 # Does NOT delete the destination before validate/issues — staging lives in apply.py
 # Requires: officecli + python
 $ErrorActionPreference = 'Stop'
-$File = Join-Path $PSScriptRoot "Apple-Keynote-Intro.pptx"
+$File = Join-Path $PSScriptRoot "Apple-Keynote-Flagship.pptx"
 $Seq  = Join-Path $PSScriptRoot "recipes\deck.sequence.json"
 $Force = @()
 if ($env:DESIGNMD_FORCE -eq '1') { $Force = @('--force') }

@@ -20,9 +20,9 @@
       "fill": "none",
       "name": "DashTitle",
       "text": "Performance dashboard",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "1.1cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.84cm"
     }
   },
@@ -35,9 +35,9 @@
       "fill": "1C1C1E",
       "line": "3A3A3C",
       "name": "DashKpi1Bg",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "3.49cm",
-      "width": "9.94cm",
+      "width": "9.09cm",
       "height": "7.06cm"
     }
   },
@@ -54,9 +54,9 @@
       "fill": "none",
       "name": "DashKpi1Value",
       "text": "—",
-      "x": "1.52cm",
-      "y": "5.43cm",
-      "width": "9.44cm",
+      "x": "2.45cm",
+      "y": "5.33cm",
+      "width": "8.59cm",
       "height": "1.71cm"
     }
   },
@@ -65,17 +65,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "align": "center",
       "fill": "none",
       "name": "DashKpi1Label",
       "text": "Metric 1",
-      "x": "1.52cm",
-      "y": "7.34cm",
-      "width": "9.44cm",
-      "height": "0.78cm"
+      "x": "2.45cm",
+      "y": "7.23cm",
+      "width": "8.59cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -83,18 +83,18 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "bold": "true",
       "color": "0B5FFF",
       "align": "center",
       "fill": "none",
       "name": "DashKpi1Chip",
       "text": "",
-      "x": "1.52cm",
-      "y": "8.32cm",
-      "width": "9.44cm",
-      "height": "0.78cm"
+      "x": "2.45cm",
+      "y": "8.3cm",
+      "width": "8.59cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -106,9 +106,9 @@
       "fill": "1C1C1E",
       "line": "3A3A3C",
       "name": "DashKpi2Bg",
-      "x": "11.97cm",
+      "x": "12.39cm",
       "y": "3.49cm",
-      "width": "9.94cm",
+      "width": "9.09cm",
       "height": "7.06cm"
     }
   },
@@ -125,9 +125,9 @@
       "fill": "none",
       "name": "DashKpi2Value",
       "text": "—",
-      "x": "12.22cm",
-      "y": "5.43cm",
-      "width": "9.44cm",
+      "x": "12.64cm",
+      "y": "5.33cm",
+      "width": "8.59cm",
       "height": "1.71cm"
     }
   },
@@ -136,17 +136,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "align": "center",
       "fill": "none",
       "name": "DashKpi2Label",
       "text": "Metric 2",
-      "x": "12.22cm",
-      "y": "7.34cm",
-      "width": "9.44cm",
-      "height": "0.78cm"
+      "x": "12.64cm",
+      "y": "7.23cm",
+      "width": "8.59cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -154,18 +154,18 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "bold": "true",
       "color": "0B5FFF",
       "align": "center",
       "fill": "none",
       "name": "DashKpi2Chip",
       "text": "",
-      "x": "12.22cm",
-      "y": "8.32cm",
-      "width": "9.44cm",
-      "height": "0.78cm"
+      "x": "12.64cm",
+      "y": "8.3cm",
+      "width": "8.59cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -177,9 +177,9 @@
       "fill": "1C1C1E",
       "line": "3A3A3C",
       "name": "DashKpi3Bg",
-      "x": "22.66cm",
+      "x": "22.58cm",
       "y": "3.49cm",
-      "width": "9.94cm",
+      "width": "9.09cm",
       "height": "7.06cm"
     }
   },
@@ -196,9 +196,9 @@
       "fill": "none",
       "name": "DashKpi3Value",
       "text": "—",
-      "x": "22.91cm",
-      "y": "5.43cm",
-      "width": "9.44cm",
+      "x": "22.83cm",
+      "y": "5.33cm",
+      "width": "8.59cm",
       "height": "1.71cm"
     }
   },
@@ -207,17 +207,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "align": "center",
       "fill": "none",
       "name": "DashKpi3Label",
       "text": "Metric 3",
-      "x": "22.91cm",
-      "y": "7.34cm",
-      "width": "9.44cm",
-      "height": "0.78cm"
+      "x": "22.83cm",
+      "y": "7.23cm",
+      "width": "8.59cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -225,18 +225,18 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "bold": "true",
       "color": "0B5FFF",
       "align": "center",
       "fill": "none",
       "name": "DashKpi3Chip",
       "text": "",
-      "x": "22.91cm",
-      "y": "8.32cm",
-      "width": "9.44cm",
-      "height": "0.78cm"
+      "x": "22.83cm",
+      "y": "8.3cm",
+      "width": "8.59cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -248,9 +248,9 @@
       "fill": "1C1C1E",
       "line": "3A3A3C",
       "name": "DashKpi4Bg",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "11.09cm",
-      "width": "9.94cm",
+      "width": "9.09cm",
       "height": "7.06cm"
     }
   },
@@ -267,9 +267,9 @@
       "fill": "none",
       "name": "DashKpi4Value",
       "text": "—",
-      "x": "1.52cm",
-      "y": "13.04cm",
-      "width": "9.44cm",
+      "x": "2.45cm",
+      "y": "12.93cm",
+      "width": "8.59cm",
       "height": "1.71cm"
     }
   },
@@ -278,17 +278,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "align": "center",
       "fill": "none",
       "name": "DashKpi4Label",
       "text": "Metric 4",
-      "x": "1.52cm",
-      "y": "14.94cm",
-      "width": "9.44cm",
-      "height": "0.78cm"
+      "x": "2.45cm",
+      "y": "14.84cm",
+      "width": "8.59cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -296,18 +296,18 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "bold": "true",
       "color": "0B5FFF",
       "align": "center",
       "fill": "none",
       "name": "DashKpi4Chip",
       "text": "",
-      "x": "1.52cm",
-      "y": "15.92cm",
-      "width": "9.44cm",
-      "height": "0.78cm"
+      "x": "2.45cm",
+      "y": "15.91cm",
+      "width": "8.59cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -319,9 +319,9 @@
       "fill": "1C1C1E",
       "line": "3A3A3C",
       "name": "DashKpi5Bg",
-      "x": "11.97cm",
+      "x": "12.39cm",
       "y": "11.09cm",
-      "width": "9.94cm",
+      "width": "9.09cm",
       "height": "7.06cm"
     }
   },
@@ -338,9 +338,9 @@
       "fill": "none",
       "name": "DashKpi5Value",
       "text": "—",
-      "x": "12.22cm",
-      "y": "13.04cm",
-      "width": "9.44cm",
+      "x": "12.64cm",
+      "y": "12.93cm",
+      "width": "8.59cm",
       "height": "1.71cm"
     }
   },
@@ -349,17 +349,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "align": "center",
       "fill": "none",
       "name": "DashKpi5Label",
       "text": "Metric 5",
-      "x": "12.22cm",
-      "y": "14.94cm",
-      "width": "9.44cm",
-      "height": "0.78cm"
+      "x": "12.64cm",
+      "y": "14.84cm",
+      "width": "8.59cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -367,18 +367,18 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "bold": "true",
       "color": "0B5FFF",
       "align": "center",
       "fill": "none",
       "name": "DashKpi5Chip",
       "text": "",
-      "x": "12.22cm",
-      "y": "15.92cm",
-      "width": "9.44cm",
-      "height": "0.78cm"
+      "x": "12.64cm",
+      "y": "15.91cm",
+      "width": "8.59cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -390,9 +390,9 @@
       "fill": "1C1C1E",
       "line": "3A3A3C",
       "name": "DashKpi6Bg",
-      "x": "22.66cm",
+      "x": "22.58cm",
       "y": "11.09cm",
-      "width": "9.94cm",
+      "width": "9.09cm",
       "height": "7.06cm"
     }
   },
@@ -409,9 +409,9 @@
       "fill": "none",
       "name": "DashKpi6Value",
       "text": "—",
-      "x": "22.91cm",
-      "y": "13.04cm",
-      "width": "9.44cm",
+      "x": "22.83cm",
+      "y": "12.93cm",
+      "width": "8.59cm",
       "height": "1.71cm"
     }
   },
@@ -420,17 +420,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "align": "center",
       "fill": "none",
       "name": "DashKpi6Label",
       "text": "Metric 6",
-      "x": "22.91cm",
-      "y": "14.94cm",
-      "width": "9.44cm",
-      "height": "0.78cm"
+      "x": "22.83cm",
+      "y": "14.84cm",
+      "width": "8.59cm",
+      "height": "0.87cm"
     }
   },
   {
@@ -438,18 +438,18 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "bold": "true",
       "color": "0B5FFF",
       "align": "center",
       "fill": "none",
       "name": "DashKpi6Chip",
       "text": "",
-      "x": "22.91cm",
-      "y": "15.92cm",
-      "width": "9.44cm",
-      "height": "0.78cm"
+      "x": "22.83cm",
+      "y": "15.91cm",
+      "width": "8.59cm",
+      "height": "0.87cm"
     }
   },
   {

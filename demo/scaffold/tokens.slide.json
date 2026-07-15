@@ -1,14 +1,14 @@
 {
   "version": "1.1",
   "source": "demo/apple.DESIGN.md",
-  "brand": "Apple-Keynote-Intro",
-  "description": "Apple Keynote–inspired house style for the designmd-pptx product intro. Deep near-black canvas, pure white ink, single system-blue accent, large type, generous margins. Original tokens — not an Apple template.",
+  "brand": "Apple-Keynote-Flagship",
+  "description": "Flagship demo house style — spacious black stage, one blue accent, left-hero covers. Original tokens (not an Apple template). Tuned for 8–10 slide product narrative, not catalog exhibition.",
   "canvas_cm": [
     33.87,
     19.05
   ],
-  "margin_cm": 1.27,
-  "gap_cm": 0.76,
+  "margin_cm": 2.2,
+  "gap_cm": 1.1,
   "colors": {
     "background": "000000",
     "content_background": "000000",
@@ -71,36 +71,34 @@
     "--color-semantic-warning": "#FFD60A"
   },
   "warnings": [
-    "font.heading: 'SF Pro Display' → 'Arial' (PowerPoint-safe substitute)",
-    "font.body: 'SF Pro Text' → 'Calibri' (PowerPoint-safe substitute)",
-    "composition.whitespace_density: 'airy' not one of ('comfortable', 'compact', 'spacious') — using 'comfortable'",
-    "composition.title_placement: 'center-heavy' not one of ('top', 'left', 'center') — using 'top'"
+    "font.heading: 'Helvetica Neue' → 'Arial' (PowerPoint-safe substitute)",
+    "font.body: 'Helvetica Neue' → 'Arial' (PowerPoint-safe substitute)"
   ],
   "type": {
-    "cover_pt": 42,
+    "cover_pt": 48,
     "title_pt": 36,
     "section_pt": 28,
     "body_pt": 18,
-    "caption_pt": 10,
-    "micro_pt": 12,
+    "caption_pt": 12,
+    "micro_pt": 14,
     "kpi_pt": 60,
     "heading_font": "Arial",
-    "body_font": "Calibri",
+    "body_font": "Arial",
     "mono_font": "Consolas"
   },
   "shape": {
     "card_preset": "roundRect",
-    "card_radius_px_source": 18.0
+    "card_radius_px_source": 20.0
   },
   "motif": "hairline-card-on-dark",
   "composition": {
-    "whitespace_density": "comfortable",
-    "title_placement": "top"
+    "whitespace_density": "spacious",
+    "title_placement": "left"
   },
   "charts": {
     "default_style": "modern",
     "series_colors": [
-      "0A84FF",
+      "0B5FFF",
       "64D2FF",
       "BF5AF2",
       "30D158",

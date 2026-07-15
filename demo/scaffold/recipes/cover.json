@@ -13,53 +13,33 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
+      "name": "CoverEdge",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "0cm",
+      "y": "0cm",
+      "width": "0.35cm",
+      "height": "19.05cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
       "name": "CoverTitle",
       "text": "designmd-pptx",
-      "x": "1.27cm",
-      "y": "7cm",
-      "width": "31.33cm",
-      "height": "3cm",
+      "x": "2.2cm",
+      "y": "5.2cm",
+      "width": "29.47cm",
+      "height": "4.2cm",
       "font": "Arial",
-      "size": "42",
+      "size": "48",
       "bold": "true",
       "color": "F5F5F7",
-      "align": "center",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "CoverSubtitle",
-      "text": "Compile brand design into precise PowerPoint",
-      "x": "1.27cm",
-      "y": "10.4cm",
-      "width": "31.33cm",
-      "height": "1.2cm",
-      "font": "Calibri",
-      "size": "18",
-      "color": "A0A6B0",
-      "align": "center",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "CoverMeta",
-      "text": "v2.1.2  ·  Apple Keynote style  ·  20 slides",
-      "x": "1.27cm",
-      "y": "16.5cm",
-      "width": "31.33cm",
-      "height": "0.9cm",
-      "font": "Calibri",
-      "size": "10",
-      "color": "A0A6B0",
-      "align": "center",
+      "align": "left",
+      "valign": "bottom",
       "fill": "none"
     }
   },
@@ -72,10 +52,46 @@
       "preset": "rect",
       "fill": "0B5FFF",
       "line": "none",
-      "x": "14.44cm",
-      "y": "10.1cm",
-      "width": "5cm",
-      "height": "0.12cm"
+      "x": "2.2cm",
+      "y": "9.5cm",
+      "width": "4.5cm",
+      "height": "0.14cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverSubtitle",
+      "text": "Brand design that becomes a real PowerPoint deck",
+      "x": "2.2cm",
+      "y": "9.9cm",
+      "width": "26cm",
+      "height": "1.6cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "align": "left",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverMeta",
+      "text": "v2.1.2  ·  Flagship intro  ·  English",
+      "x": "2.2cm",
+      "y": "16.8cm",
+      "width": "29.47cm",
+      "height": "0.9cm",
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "left",
+      "fill": "none"
     }
   }
 ]

@@ -15,7 +15,7 @@
     "props": {
       "name": "SectionNumber",
       "text": "01",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "4.2cm",
       "width": "14cm",
       "height": "4.8cm",
@@ -34,9 +34,9 @@
     "props": {
       "name": "SectionTitle",
       "text": "Section",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "9.5cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "2.5cm",
       "font": "Arial",
       "size": "36",

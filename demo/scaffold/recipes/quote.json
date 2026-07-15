@@ -17,7 +17,7 @@
       "preset": "rect",
       "fill": "0B5FFF",
       "line": "none",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "5.5cm",
       "width": "0.25cm",
       "height": "6cm"
@@ -30,9 +30,9 @@
     "props": {
       "name": "QuoteText",
       "text": "A single sentence the room should remember.",
-      "x": "2.47cm",
+      "x": "3.4cm",
       "y": "5.5cm",
-      "width": "30.13cm",
+      "width": "28.27cm",
       "height": "5cm",
       "font": "Arial",
       "size": "28",
@@ -48,11 +48,11 @@
     "props": {
       "name": "QuoteAttr",
       "text": "— Source",
-      "x": "2.47cm",
+      "x": "3.4cm",
       "y": "11.2cm",
       "width": "20cm",
       "height": "1cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "A0A6B0",
       "fill": "none"

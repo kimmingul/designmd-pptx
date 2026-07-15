@@ -13,53 +13,33 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
+      "name": "CoverEdge",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "0cm",
+      "y": "0cm",
+      "width": "0.35cm",
+      "height": "19.05cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
       "name": "CoverTitle",
       "text": "designmd-pptx",
-      "x": "1.27cm",
-      "y": "7cm",
-      "width": "31.33cm",
-      "height": "3cm",
+      "x": "2.2cm",
+      "y": "5.2cm",
+      "width": "29.47cm",
+      "height": "4.2cm",
       "font": "Arial",
-      "size": "42",
+      "size": "48",
       "bold": "true",
       "color": "F5F5F7",
-      "align": "center",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "CoverSubtitle",
-      "text": "Compile brand design into precise PowerPoint",
-      "x": "1.27cm",
-      "y": "10.4cm",
-      "width": "31.33cm",
-      "height": "1.2cm",
-      "font": "Calibri",
-      "size": "18",
-      "color": "A0A6B0",
-      "align": "center",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "CoverMeta",
-      "text": "v2.1.2  ·  Apple Keynote style  ·  20 slides",
-      "x": "1.27cm",
-      "y": "16.5cm",
-      "width": "31.33cm",
-      "height": "0.9cm",
-      "font": "Calibri",
-      "size": "10",
-      "color": "A0A6B0",
-      "align": "center",
+      "align": "left",
+      "valign": "bottom",
       "fill": "none"
     }
   },
@@ -72,10 +52,46 @@
       "preset": "rect",
       "fill": "0B5FFF",
       "line": "none",
-      "x": "14.44cm",
-      "y": "10.1cm",
-      "width": "5cm",
-      "height": "0.12cm"
+      "x": "2.2cm",
+      "y": "9.5cm",
+      "width": "4.5cm",
+      "height": "0.14cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverSubtitle",
+      "text": "Brand design that becomes a real PowerPoint deck",
+      "x": "2.2cm",
+      "y": "9.9cm",
+      "width": "26cm",
+      "height": "1.6cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "align": "left",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverMeta",
+      "text": "v2.1.2  ·  Flagship intro  ·  English",
+      "x": "2.2cm",
+      "y": "16.8cm",
+      "width": "29.47cm",
+      "height": "0.9cm",
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "left",
+      "fill": "none"
     }
   },
   {
@@ -92,437 +108,18 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "MVTitle",
-      "text": "North star",
-      "x": "1.27cm",
-      "y": "1.0cm",
-      "width": "31.33cm",
-      "height": "1.8cm",
-      "font": "Arial",
-      "size": "36",
-      "bold": "true",
-      "color": "F5F5F7",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "MVPanel1",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "x": "1.27cm",
+      "name": "BigValue",
+      "text": "DESIGN.md",
+      "x": "2.2cm",
       "y": "3.8cm",
-      "width": "15.41cm",
-      "height": "13.5cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "MVLab1",
-      "text": "Mission",
-      "x": "2.07cm",
-      "y": "4.6cm",
-      "width": "13.81cm",
-      "height": "1.2cm",
+      "width": "29.47cm",
+      "height": "7.2cm",
       "font": "Arial",
-      "size": "28",
-      "bold": "true",
-      "color": "F5F5F7",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "MVBody1",
-      "text": "Make every brand deck as sharp as the product it sells — from DESIGN.md to OfficeCLI tokens, recipes, and staging-safe apply.",
-      "x": "2.07cm",
-      "y": "6.4cm",
-      "width": "13.81cm",
-      "height": "10.0cm",
-      "font": "Calibri",
-      "size": "20",
-      "color": "F5F5F7",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "MVPanel2",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "x": "17.18cm",
-      "y": "3.8cm",
-      "width": "15.41cm",
-      "height": "13.5cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "MVLab2",
-      "text": "Vision",
-      "x": "17.98cm",
-      "y": "4.6cm",
-      "width": "13.81cm",
-      "height": "1.2cm",
-      "font": "Arial",
-      "size": "28",
-      "bold": "true",
-      "color": "FFFFFF",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "MVBody2",
-      "text": "Every team ships DESIGN.md-native slides with agent skill routing, without designers trapped in pixel push.",
-      "x": "17.98cm",
-      "y": "6.4cm",
-      "width": "13.81cm",
-      "height": "10.0cm",
-      "font": "Calibri",
-      "size": "20",
-      "color": "FFFFFF",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "notes",
-    "props": {
-      "text": "Mission is timeless; vision is dated and measurable."
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/",
-    "type": "slide",
-    "props": {
-      "layout": "blank",
-      "background": "000000"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "IconStatTitle",
-      "text": "At a glance",
-      "x": "1.27cm",
-      "y": "1.0cm",
-      "width": "31.33cm",
-      "height": "1.8cm",
-      "font": "Arial",
-      "size": "36",
-      "bold": "true",
-      "color": "F5F5F7",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "IconStatChip1",
-      "preset": "ellipse",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "R",
-      "x": "3.9cm",
-      "y": "4.2cm",
-      "width": "2.0cm",
-      "height": "2.0cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "IconStatVal1",
-      "text": "75",
-      "x": "1.27cm",
-      "y": "6.8cm",
-      "width": "7.26cm",
-      "height": "2.4cm",
-      "font": "Arial",
-      "size": "44",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "IconStatLabel1",
-      "text": "Recipe builders",
-      "x": "1.27cm",
-      "y": "9.4cm",
-      "width": "7.26cm",
-      "height": "2.2cm",
-      "font": "Calibri",
-      "size": "18",
-      "color": "A0A6B0",
-      "align": "center",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "IconStatChip2",
-      "preset": "ellipse",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "W",
-      "x": "11.92cm",
-      "y": "4.2cm",
-      "width": "2.0cm",
-      "height": "2.0cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "IconStatVal2",
-      "text": "14",
-      "x": "9.29cm",
-      "y": "6.8cm",
-      "width": "7.26cm",
-      "height": "2.4cm",
-      "font": "Arial",
-      "size": "44",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "IconStatLabel2",
-      "text": "Wave 4 roles",
-      "x": "9.29cm",
-      "y": "9.4cm",
-      "width": "7.26cm",
-      "height": "2.2cm",
-      "font": "Calibri",
-      "size": "18",
-      "color": "A0A6B0",
-      "align": "center",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "IconStatChip3",
-      "preset": "ellipse",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "B",
-      "x": "19.95cm",
-      "y": "4.2cm",
-      "width": "2.0cm",
-      "height": "2.0cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "IconStatVal3",
-      "text": "2",
-      "x": "17.31cm",
-      "y": "6.8cm",
-      "width": "7.26cm",
-      "height": "2.4cm",
-      "font": "Arial",
-      "size": "44",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "IconStatLabel3",
-      "text": "OfficeCLI backends",
-      "x": "17.31cm",
-      "y": "9.4cm",
-      "width": "7.26cm",
-      "height": "2.2cm",
-      "font": "Calibri",
-      "size": "18",
-      "color": "A0A6B0",
-      "align": "center",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "IconStatChip4",
-      "preset": "ellipse",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "A",
-      "x": "27.97cm",
-      "y": "4.2cm",
-      "width": "2.0cm",
-      "height": "2.0cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "IconStatVal4",
-      "text": "3",
-      "x": "25.34cm",
-      "y": "6.8cm",
-      "width": "7.26cm",
-      "height": "2.4cm",
-      "font": "Arial",
-      "size": "44",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "IconStatLabel4",
-      "text": "Agent platforms",
-      "x": "25.34cm",
-      "y": "9.4cm",
-      "width": "7.26cm",
-      "height": "2.2cm",
-      "font": "Calibri",
-      "size": "18",
-      "color": "A0A6B0",
-      "align": "center",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "notes",
-    "props": {
-      "text": "Lead with the metric that decides the meeting."
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/",
-    "type": "slide",
-    "props": {
-      "layout": "blank",
-      "background": "000000"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "OpenerAccentBar",
-      "preset": "rect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "x": "1.27cm",
-      "y": "6.4cm",
-      "width": "1.1cm",
-      "height": "6.2cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "OpenerNumber",
-      "text": "01",
-      "x": "2.87cm",
-      "y": "5.8cm",
-      "width": "8cm",
-      "height": "2.4cm",
-      "font": "Arial",
-      "size": "54",
+      "size": "81",
       "bold": "true",
       "color": "0B5FFF",
+      "align": "center",
+      "valign": "middle",
       "fill": "none"
     }
   },
@@ -531,16 +128,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "OpenerTitle",
-      "text": "The problem",
-      "x": "2.87cm",
-      "y": "8.4cm",
-      "width": "29.73cm",
-      "height": "2.6cm",
+      "name": "BigLabel",
+      "text": "One brand source of truth",
+      "x": "2.2cm",
+      "y": "11.4cm",
+      "width": "29.47cm",
+      "height": "1.8cm",
       "font": "Arial",
-      "size": "36",
+      "size": "28",
       "bold": "true",
       "color": "F5F5F7",
+      "align": "center",
       "fill": "none"
     }
   },
@@ -549,16 +147,25 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "OpenerBlurb",
-      "text": "Brand systems live in DESIGN.md. Decks still ship as one-off slides.",
-      "x": "2.87cm",
-      "y": "11.3cm",
-      "width": "22cm",
-      "height": "2.2cm",
-      "font": "Calibri",
+      "name": "BigContext",
+      "text": "Tokens, recipes, and staging-safe apply — not a blank slide and a prayer.",
+      "x": "4.2cm",
+      "y": "13.4cm",
+      "width": "25.47cm",
+      "height": "2.4cm",
+      "font": "Arial",
       "size": "18",
       "color": "A0A6B0",
+      "align": "center",
       "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "The contract is the brand file — not the agent improvising layout."
     }
   },
   {
@@ -576,10 +183,10 @@
     "type": "shape",
     "props": {
       "name": "BaTitle",
-      "text": "From friction to floor",
-      "x": "1.27cm",
+      "text": "What changes",
+      "x": "2.2cm",
       "y": "1.0cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.8cm",
       "font": "Arial",
       "size": "36",
@@ -597,9 +204,9 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "3.5cm",
-      "width": "15.41cm",
+      "width": "14.48cm",
       "height": "13.8cm"
     }
   },
@@ -609,10 +216,10 @@
     "type": "shape",
     "props": {
       "name": "BaHead1",
-      "text": "Before",
-      "x": "1.77cm",
+      "text": "Without",
+      "x": "2.7cm",
       "y": "4.0cm",
-      "width": "14.41cm",
+      "width": "13.48cm",
       "height": "1.4cm",
       "font": "Arial",
       "size": "28",
@@ -627,12 +234,12 @@
     "type": "shape",
     "props": {
       "name": "BaBody1",
-      "text": "Hand-built decks. Drifted brand. No gates. Agents invent layouts.",
-      "x": "1.77cm",
+      "text": "• Hand-built decks drift from brand\n• Agents invent one-off layouts\n• No floors, no screenshot gate\n• Overwrite risk on every save",
+      "x": "2.7cm",
       "y": "5.8cm",
-      "width": "14.41cm",
+      "width": "13.48cm",
       "height": "10.5cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "A0A6B0",
       "fill": "none"
@@ -649,7 +256,7 @@
       "line": "none",
       "x": "17.18cm",
       "y": "3.5cm",
-      "width": "15.41cm",
+      "width": "14.48cm",
       "height": "13.8cm"
     }
   },
@@ -659,10 +266,10 @@
     "type": "shape",
     "props": {
       "name": "BaHead2",
-      "text": "After",
+      "text": "With designmd-pptx",
       "x": "17.68cm",
       "y": "4.0cm",
-      "width": "14.41cm",
+      "width": "13.48cm",
       "height": "1.4cm",
       "font": "Arial",
       "size": "28",
@@ -677,12 +284,12 @@
     "type": "shape",
     "props": {
       "name": "BaBody2",
-      "text": "Compiled tokens. Recipe catalog. CJK-aware budgets. Gate 3 screenshots.",
+      "text": "• Compiled tokens from DESIGN.md\n• Recipe catalog with text budgets\n• Gate 3 contact sheet before ship\n• Staging-safe apply with --force",
       "x": "17.68cm",
       "y": "5.8cm",
-      "width": "14.41cm",
+      "width": "13.48cm",
       "height": "10.5cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "FFFFFF",
       "fill": "none"
@@ -710,11 +317,11 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "EmpTitle",
-      "text": "Who we serve",
-      "x": "1.27cm",
-      "y": "1.0cm",
-      "width": "31.33cm",
+      "name": "ProcTitle",
+      "text": "Authoring pipeline",
+      "x": "2.2cm",
+      "y": "1.4cm",
+      "width": "29.47cm",
       "height": "1.8cm",
       "font": "Arial",
       "size": "36",
@@ -728,274 +335,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "EmpQ1",
+      "name": "Proc1",
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "x": "1.27cm",
-      "y": "3.5cm",
-      "width": "15.49cm",
-      "height": "5.6cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "EmpLab1",
-      "text": "Says",
-      "x": "1.67cm",
-      "y": "3.8cm",
-      "width": "14.69cm",
-      "height": "1.2cm",
-      "font": "Arial",
-      "size": "18",
-      "bold": "true",
-      "color": "0B5FFF",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "EmpBody1",
-      "text": "• Ship by Friday",
-      "x": "1.67cm",
-      "y": "5cm",
-      "width": "14.69cm",
-      "height": "3.6cm",
-      "font": "Calibri",
-      "size": "16",
-      "color": "F5F5F7",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "EmpQ2",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "x": "17.11cm",
-      "y": "3.5cm",
-      "width": "15.49cm",
-      "height": "5.6cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "EmpLab2",
-      "text": "Thinks",
-      "x": "17.51cm",
-      "y": "3.8cm",
-      "width": "14.69cm",
-      "height": "1.2cm",
-      "font": "Arial",
-      "size": "18",
-      "bold": "true",
-      "color": "0B5FFF",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "EmpBody2",
-      "text": "• Will fonts shrink?",
-      "x": "17.51cm",
-      "y": "5cm",
-      "width": "14.69cm",
-      "height": "3.6cm",
-      "font": "Calibri",
-      "size": "16",
-      "color": "F5F5F7",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "EmpQ3",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "x": "1.27cm",
-      "y": "9.45cm",
-      "width": "15.49cm",
-      "height": "5.6cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "EmpLab3",
-      "text": "Does",
-      "x": "1.67cm",
-      "y": "9.75cm",
-      "width": "14.69cm",
-      "height": "1.2cm",
-      "font": "Arial",
-      "size": "18",
-      "bold": "true",
-      "color": "0B5FFF",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "EmpBody3",
-      "text": "• Brief → scaffold",
-      "x": "1.67cm",
-      "y": "10.95cm",
-      "width": "14.69cm",
-      "height": "3.6cm",
-      "font": "Calibri",
-      "size": "16",
-      "color": "F5F5F7",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "EmpQ4",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "x": "17.11cm",
-      "y": "9.45cm",
-      "width": "15.49cm",
-      "height": "5.6cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "EmpLab4",
-      "text": "Feels",
-      "x": "17.51cm",
-      "y": "9.75cm",
-      "width": "14.69cm",
-      "height": "1.2cm",
-      "font": "Arial",
-      "size": "18",
-      "bold": "true",
-      "color": "0B5FFF",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "EmpBody4",
-      "text": "• Time-poor",
-      "x": "17.51cm",
-      "y": "10.95cm",
-      "width": "14.69cm",
-      "height": "3.6cm",
-      "font": "Calibri",
-      "size": "16",
-      "color": "F5F5F7",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "EmpUser",
-      "preset": "ellipse",
       "fill": "0B5FFF",
       "line": "none",
-      "text": "Design lead",
-      "x": "14.4cm",
-      "y": "8.6cm",
-      "width": "5.0cm",
-      "height": "3.0cm",
+      "text": "1\nBrief\nMarkdown",
+      "x": "2.2cm",
+      "y": "7.2cm",
+      "width": "5.01cm",
+      "height": "4.6cm",
       "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "notes",
-    "props": {
-      "text": "Prefer evidence over stereotypes in every quadrant."
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/",
-    "type": "slide",
-    "props": {
-      "layout": "blank",
-      "background": "000000"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "MindTitle",
-      "text": "What the toolkit covers",
-      "x": "1.27cm",
-      "y": "1.0cm",
-      "width": "31.33cm",
-      "height": "1.8cm",
-      "font": "Arial",
-      "size": "36",
-      "bold": "true",
-      "color": "F5F5F7",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "MindHub",
-      "preset": "ellipse",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "designmd",
-      "x": "13.9cm",
-      "y": "9.4cm",
-      "width": "6.0cm",
-      "height": "3.6cm",
-      "font": "Arial",
-      "size": "26",
+      "size": "18",
       "bold": "true",
       "color": "FFFFFF",
       "align": "center",
@@ -1007,166 +357,21 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "MindBranch1",
+      "name": "Proc2",
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "text": "Compile",
-      "x": "14.1cm",
-      "y": "5.75cm",
-      "width": "5.6cm",
-      "height": "2.2cm",
-      "font": "Calibri",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "MindBranch2",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Compose",
-      "x": "19.64cm",
-      "y": "7.92cm",
-      "width": "5.6cm",
-      "height": "2.2cm",
-      "font": "Calibri",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "MindBranch3",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Recipes",
-      "x": "19.64cm",
-      "y": "12.28cm",
-      "width": "5.6cm",
-      "height": "2.2cm",
-      "font": "Calibri",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "MindBranch4",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Apply",
-      "x": "14.1cm",
-      "y": "14.45cm",
-      "width": "5.6cm",
-      "height": "2.2cm",
-      "font": "Calibri",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "MindBranch5",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Restyle",
-      "x": "8.56cm",
-      "y": "12.28cm",
-      "width": "5.6cm",
-      "height": "2.2cm",
-      "font": "Calibri",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "MindBranch6",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Doctor",
-      "x": "8.56cm",
-      "y": "7.92cm",
-      "width": "5.6cm",
-      "height": "2.2cm",
-      "font": "Calibri",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "notes",
-    "props": {
-      "text": "One branch = one discussion thread; prune to ≤8."
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/",
-    "type": "slide",
-    "props": {
-      "layout": "blank",
-      "background": "000000"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "JourneyTitle",
-      "text": "Authoring journey",
-      "x": "1.27cm",
-      "y": "1.0cm",
-      "width": "31.33cm",
-      "height": "1.8cm",
+      "text": "2\nCompose\nDeck-spec",
+      "x": "8.31cm",
+      "y": "7.2cm",
+      "width": "5.01cm",
+      "height": "4.6cm",
       "font": "Arial",
-      "size": "36",
+      "size": "18",
       "bold": "true",
       "color": "F5F5F7",
-      "fill": "none"
+      "align": "center",
+      "valign": "middle"
     }
   },
   {
@@ -1174,355 +379,113 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "JourneyLane0",
-      "text": "Action",
-      "x": "1.27cm",
-      "y": "7.5cm",
-      "width": "2.6cm",
-      "height": "1.2cm",
-      "font": "Calibri",
-      "size": "14",
+      "name": "Proc3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "3\nScaffold\nTokens",
+      "x": "14.43cm",
+      "y": "7.2cm",
+      "width": "5.01cm",
+      "height": "4.6cm",
+      "font": "Arial",
+      "size": "18",
       "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Proc4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "4\nApply\nLegacy",
+      "x": "20.54cm",
+      "y": "7.2cm",
+      "width": "5.01cm",
+      "height": "4.6cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Proc5",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "5\nGate 3\nQA",
+      "x": "26.66cm",
+      "y": "7.2cm",
+      "width": "5.01cm",
+      "height": "4.6cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "connector",
+    "props": {
+      "from": "/slide[4]/shape[@name=Proc1]",
+      "to": "/slide[4]/shape[@name=Proc2]",
+      "shape": "straight",
       "color": "A0A6B0",
-      "fill": "none"
+      "tailEnd": "triangle"
     }
   },
   {
     "command": "add",
     "parent": "/slide[last()]",
-    "type": "shape",
+    "type": "connector",
     "props": {
-      "name": "JourneyLane1",
-      "text": "Emotion",
-      "x": "1.27cm",
-      "y": "13cm",
-      "width": "2.6cm",
-      "height": "1.2cm",
-      "font": "Calibri",
-      "size": "14",
-      "bold": "true",
+      "from": "/slide[4]/shape[@name=Proc2]",
+      "to": "/slide[4]/shape[@name=Proc3]",
+      "shape": "straight",
       "color": "A0A6B0",
-      "fill": "none"
+      "tailEnd": "triangle"
     }
   },
   {
     "command": "add",
     "parent": "/slide[last()]",
-    "type": "shape",
+    "type": "connector",
     "props": {
-      "name": "JourneyHead1",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "Brief",
-      "x": "4.12cm",
-      "y": "3.6cm",
-      "width": "4.89cm",
-      "height": "2.0cm",
-      "font": "Arial",
-      "size": "18",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
+      "from": "/slide[4]/shape[@name=Proc3]",
+      "to": "/slide[4]/shape[@name=Proc4]",
+      "shape": "straight",
+      "color": "A0A6B0",
+      "tailEnd": "triangle"
     }
   },
   {
     "command": "add",
     "parent": "/slide[last()]",
-    "type": "shape",
+    "type": "connector",
     "props": {
-      "name": "JourneyAct1",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Markdown",
-      "x": "4.12cm",
-      "y": "6.0cm",
-      "width": "4.89cm",
-      "height": "5.2cm",
-      "font": "Calibri",
-      "size": "16",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "JourneyEmo1",
-      "preset": "roundRect",
-      "fill": "000000",
-      "line": "none",
-      "text": "curious",
-      "x": "4.12cm",
-      "y": "11.6cm",
-      "width": "4.89cm",
-      "height": "4.5cm",
-      "font": "Calibri",
-      "size": "28",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "JourneyHead2",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Compose",
-      "x": "9.31cm",
-      "y": "3.6cm",
-      "width": "4.89cm",
-      "height": "2.0cm",
-      "font": "Arial",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "JourneyAct2",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Deck-spec",
-      "x": "9.31cm",
-      "y": "6.0cm",
-      "width": "4.89cm",
-      "height": "5.2cm",
-      "font": "Calibri",
-      "size": "16",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "JourneyEmo2",
-      "preset": "roundRect",
-      "fill": "000000",
-      "line": "none",
-      "text": "focused",
-      "x": "9.31cm",
-      "y": "11.6cm",
-      "width": "4.89cm",
-      "height": "4.5cm",
-      "font": "Calibri",
-      "size": "28",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "JourneyHead3",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Scaffold",
-      "x": "14.49cm",
-      "y": "3.6cm",
-      "width": "4.89cm",
-      "height": "2.0cm",
-      "font": "Arial",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "JourneyAct3",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Tokens",
-      "x": "14.49cm",
-      "y": "6.0cm",
-      "width": "4.89cm",
-      "height": "5.2cm",
-      "font": "Calibri",
-      "size": "16",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "JourneyEmo3",
-      "preset": "roundRect",
-      "fill": "000000",
-      "line": "none",
-      "text": "confident",
-      "x": "14.49cm",
-      "y": "11.6cm",
-      "width": "4.89cm",
-      "height": "4.5cm",
-      "font": "Calibri",
-      "size": "28",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "JourneyHead4",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Apply",
-      "x": "19.68cm",
-      "y": "3.6cm",
-      "width": "4.89cm",
-      "height": "2.0cm",
-      "font": "Arial",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "JourneyAct4",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Precision",
-      "x": "19.68cm",
-      "y": "6.0cm",
-      "width": "4.89cm",
-      "height": "5.2cm",
-      "font": "Calibri",
-      "size": "16",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "JourneyEmo4",
-      "preset": "roundRect",
-      "fill": "000000",
-      "line": "none",
-      "text": "careful",
-      "x": "19.68cm",
-      "y": "11.6cm",
-      "width": "4.89cm",
-      "height": "4.5cm",
-      "font": "Calibri",
-      "size": "28",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "JourneyHead5",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Gate 3",
-      "x": "24.86cm",
-      "y": "3.6cm",
-      "width": "4.89cm",
-      "height": "2.0cm",
-      "font": "Arial",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "JourneyAct5",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "QA sheet",
-      "x": "24.86cm",
-      "y": "6.0cm",
-      "width": "4.89cm",
-      "height": "5.2cm",
-      "font": "Calibri",
-      "size": "16",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "JourneyEmo5",
-      "preset": "roundRect",
-      "fill": "000000",
-      "line": "none",
-      "text": "proud",
-      "x": "24.86cm",
-      "y": "11.6cm",
-      "width": "4.89cm",
-      "height": "4.5cm",
-      "font": "Calibri",
-      "size": "28",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
+      "from": "/slide[4]/shape[@name=Proc4]",
+      "to": "/slide[4]/shape[@name=Proc5]",
+      "shape": "straight",
+      "color": "A0A6B0",
+      "tailEnd": "triangle"
     }
   },
   {
@@ -1530,7 +493,7 @@
     "parent": "/slide[last()]",
     "type": "notes",
     "props": {
-      "text": "Call the biggest emotion drop — that is the intervention."
+      "text": "Five steps, one owner each. Gate 3 is not optional for ship."
     }
   },
   {
@@ -1547,14 +510,47 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "OpenerAccentBar",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "FeatTitle",
+      "text": "What you get",
+      "x": "2.2cm",
+      "y": "1.2cm",
+      "width": "29.47cm",
+      "height": "1.84cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "name": "Card1Bg",
+      "x": "2.2cm",
+      "y": "3.94cm",
+      "width": "9.09cm",
+      "height": "14.11cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
       "preset": "rect",
       "fill": "0B5FFF",
       "line": "none",
-      "x": "1.27cm",
-      "y": "6.4cm",
-      "width": "1.1cm",
-      "height": "6.2cm"
+      "name": "Card1Accent",
+      "x": "2.2cm",
+      "y": "3.94cm",
+      "width": "9.09cm",
+      "height": "0.18cm"
     }
   },
   {
@@ -1562,35 +558,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "OpenerNumber",
-      "text": "02",
-      "x": "2.87cm",
-      "y": "5.8cm",
-      "width": "8cm",
-      "height": "2.4cm",
       "font": "Arial",
-      "size": "54",
-      "bold": "true",
-      "color": "0B5FFF",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "OpenerTitle",
-      "text": "How it works",
-      "x": "2.87cm",
-      "y": "8.4cm",
-      "width": "29.73cm",
-      "height": "2.6cm",
-      "font": "Arial",
-      "size": "36",
+      "size": "28",
       "bold": "true",
       "color": "F5F5F7",
-      "fill": "none"
+      "fill": "none",
+      "name": "Card1Title",
+      "text": "Precise geometry",
+      "x": "2.8cm",
+      "y": "5.12cm",
+      "width": "7.89cm",
+      "height": "2.72cm"
     }
   },
   {
@@ -1598,16 +576,146 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "OpenerBlurb",
-      "text": "Two backends. One contract. Precision or draft — pick by need.",
-      "x": "2.87cm",
-      "y": "11.3cm",
-      "width": "22cm",
-      "height": "2.2cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "A0A6B0",
-      "fill": "none"
+      "fill": "none",
+      "name": "Card1Body",
+      "text": "Shape-level apply from recipes — cm layout, connectors, brand fonts and floors.",
+      "x": "2.8cm",
+      "y": "8.34cm",
+      "width": "7.89cm",
+      "height": "9.11cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "name": "Card2Bg",
+      "x": "12.39cm",
+      "y": "3.94cm",
+      "width": "9.09cm",
+      "height": "14.11cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "name": "Card2Accent",
+      "x": "12.39cm",
+      "y": "3.94cm",
+      "width": "9.09cm",
+      "height": "0.18cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Card2Title",
+      "text": "Quality gates",
+      "x": "12.99cm",
+      "y": "5.12cm",
+      "width": "7.89cm",
+      "height": "1.49cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Card2Body",
+      "text": "Text budgets, contrast, staging issues, and Gate 3 screenshots before delivery.",
+      "x": "12.99cm",
+      "y": "7.1cm",
+      "width": "7.89cm",
+      "height": "10.35cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "name": "Card3Bg",
+      "x": "22.58cm",
+      "y": "3.94cm",
+      "width": "9.09cm",
+      "height": "14.11cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "name": "Card3Accent",
+      "x": "22.58cm",
+      "y": "3.94cm",
+      "width": "9.09cm",
+      "height": "0.18cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Card3Title",
+      "text": "Agent-ready",
+      "x": "23.18cm",
+      "y": "5.12cm",
+      "width": "7.89cm",
+      "height": "1.49cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Card3Body",
+      "text": "Claude, Codex, and Grok skills. Doctor asks before installing OfficeCLI.",
+      "x": "23.18cm",
+      "y": "7.1cm",
+      "width": "7.89cm",
+      "height": "10.35cm"
     }
   },
   {
@@ -1625,10 +733,10 @@
     "type": "shape",
     "props": {
       "name": "PillarTitle",
-      "text": "Dual backends",
-      "x": "1.27cm",
+      "text": "Two backends, one contract",
+      "x": "2.2cm",
       "y": "1.0cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.8cm",
       "font": "Arial",
       "size": "36",
@@ -1646,10 +754,10 @@
       "preset": "roundRect",
       "fill": "0B5FFF",
       "line": "none",
-      "text": "Legacy\n\nShape-level batch. DESIGN.md geometry. scaffold --apply · restyle · master · Gate 3.",
-      "x": "1.27cm",
+      "text": "Legacy\n\nShape-level batch for DESIGN.md-exact decks",
+      "x": "2.2cm",
       "y": "5cm",
-      "width": "10.11cm",
+      "width": "9.49cm",
       "height": "11.5cm",
       "font": "Arial",
       "size": "24",
@@ -1668,10 +776,10 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "text": "Official\n\nAgent-bridge JSON-RPC. office.render drafts. Version pin via doctor --install.",
-      "x": "11.88cm",
+      "text": "Official\n\nAgent-bridge drafts via office.render",
+      "x": "12.19cm",
       "y": "5.4cm",
-      "width": "10.11cm",
+      "width": "9.49cm",
       "height": "11.1cm",
       "font": "Arial",
       "size": "24",
@@ -1690,10 +798,10 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "text": "Offline\n\nCompose, a11y, refine, generate, animate OOXML — no binary required.",
-      "x": "22.49cm",
+      "text": "Offline\n\nCompose, a11y, refine, animate without a binary",
+      "x": "22.18cm",
       "y": "5.8cm",
-      "width": "10.11cm",
+      "width": "9.49cm",
       "height": "10.7cm",
       "font": "Arial",
       "size": "24",
@@ -1725,620 +833,11 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "HexTitle",
-      "text": "Recipe families",
-      "x": "1.27cm",
-      "y": "1.0cm",
-      "width": "31.33cm",
-      "height": "1.8cm",
-      "font": "Arial",
-      "size": "36",
-      "bold": "true",
-      "color": "F5F5F7",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "Hex1",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "Core",
-      "x": "13.5cm",
-      "y": "8.62cm",
-      "width": "6.8cm",
-      "height": "5.1cm",
-      "font": "Calibri",
-      "size": "24",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "Hex2",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "KPI",
-      "x": "19.68cm",
-      "y": "11.25cm",
-      "width": "6.8cm",
-      "height": "5.1cm",
-      "font": "Calibri",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "Hex3",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Process",
-      "x": "13.5cm",
-      "y": "13.89cm",
-      "width": "6.8cm",
-      "height": "5.1cm",
-      "font": "Calibri",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "Hex4",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Matrix",
-      "x": "7.32cm",
-      "y": "11.26cm",
-      "width": "6.8cm",
-      "height": "5.1cm",
-      "font": "Calibri",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "Hex5",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Wave 1",
-      "x": "7.32cm",
-      "y": "5.99cm",
-      "width": "6.8cm",
-      "height": "5.1cm",
-      "font": "Calibri",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "Hex6",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Wave 2",
-      "x": "13.5cm",
-      "y": "3.35cm",
-      "width": "6.8cm",
-      "height": "5.1cm",
-      "font": "Calibri",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "Hex7",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Wave 4",
-      "x": "19.68cm",
-      "y": "5.99cm",
-      "width": "6.8cm",
-      "height": "5.1cm",
-      "font": "Calibri",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "notes",
-    "props": {
-      "text": "Center is the organising idea; ring tiles are facets."
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/",
-    "type": "slide",
-    "props": {
-      "layout": "blank",
-      "background": "000000"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "CircTitle",
-      "text": "Catalog depth",
-      "x": "1.27cm",
-      "y": "1.0cm",
-      "width": "31.33cm",
-      "height": "1.8cm",
-      "font": "Arial",
-      "size": "36",
-      "bold": "true",
-      "color": "F5F5F7",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "CircDisc",
-      "preset": "ellipse",
-      "fill": "1C1C1E",
-      "line": "none",
-      "x": "3.5cm",
-      "y": "5.0cm",
-      "width": "12.0cm",
-      "height": "12.0cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "CircHole",
-      "preset": "ellipse",
-      "fill": "000000",
-      "line": "none",
-      "text": "75",
-      "x": "6.5cm",
-      "y": "8.0cm",
-      "width": "6.0cm",
-      "height": "6.0cm",
-      "font": "Arial",
-      "size": "28",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "CircLeg1",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "Core\nCover · KPI · cards",
-      "x": "18.0cm",
-      "y": "4cm",
-      "width": "13.5cm",
-      "height": "1.97cm",
-      "font": "Calibri",
-      "size": "18",
-      "bold": "true",
-      "color": "FFFFFF",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "CircLeg2",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Wave 1\nFull-family patterns",
-      "x": "18.0cm",
-      "y": "6.17cm",
-      "width": "13.5cm",
-      "height": "1.97cm",
-      "font": "Calibri",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "CircLeg3",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Wave 2\nLong-tail roles",
-      "x": "18.0cm",
-      "y": "8.33cm",
-      "width": "13.5cm",
-      "height": "1.97cm",
-      "font": "Calibri",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "CircLeg4",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Wave 3\nVertical skins",
-      "x": "18.0cm",
-      "y": "10.5cm",
-      "width": "13.5cm",
-      "height": "1.97cm",
-      "font": "Calibri",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "CircLeg5",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Wave 4\nInfograpify roles",
-      "x": "18.0cm",
-      "y": "12.67cm",
-      "width": "13.5cm",
-      "height": "1.97cm",
-      "font": "Calibri",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "CircLeg6",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Generate\nFreeform keynote",
-      "x": "18.0cm",
-      "y": "14.83cm",
-      "width": "13.5cm",
-      "height": "1.97cm",
-      "font": "Calibri",
-      "size": "18",
-      "bold": "true",
-      "color": "F5F5F7",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "notes",
-    "props": {
-      "text": "Legend carries the insight; the disc is orientation only."
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/",
-    "type": "slide",
-    "props": {
-      "layout": "blank",
-      "background": "000000"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "font": "Arial",
-      "size": "36",
-      "bold": "true",
-      "color": "F5F5F7",
-      "fill": "none",
-      "name": "FeatTitle",
-      "text": "Infograpify structural roles",
-      "x": "1.27cm",
-      "y": "1.2cm",
-      "width": "31.33cm",
-      "height": "1.84cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
-      "name": "Card1Bg",
-      "x": "1.27cm",
-      "y": "3.94cm",
-      "width": "9.94cm",
-      "height": "14.11cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "preset": "rect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "name": "Card1Accent",
-      "x": "1.27cm",
-      "y": "3.94cm",
-      "width": "9.94cm",
-      "height": "0.18cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "font": "Arial",
-      "size": "28",
-      "bold": "true",
-      "color": "F5F5F7",
-      "fill": "none",
-      "name": "Card1Title",
-      "text": "Strategy",
-      "x": "1.87cm",
-      "y": "5.12cm",
-      "width": "8.74cm",
-      "height": "1.49cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "font": "Calibri",
-      "size": "18",
-      "color": "A0A6B0",
-      "fill": "none",
-      "name": "Card1Body",
-      "text": "PESTLE · scorecard · mission/vision · mindmap",
-      "x": "1.87cm",
-      "y": "7.1cm",
-      "width": "8.74cm",
-      "height": "10.35cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
-      "name": "Card2Bg",
-      "x": "11.97cm",
-      "y": "3.94cm",
-      "width": "9.94cm",
-      "height": "14.11cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "preset": "rect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "name": "Card2Accent",
-      "x": "11.97cm",
-      "y": "3.94cm",
-      "width": "9.94cm",
-      "height": "0.18cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "font": "Arial",
-      "size": "28",
-      "bold": "true",
-      "color": "F5F5F7",
-      "fill": "none",
-      "name": "Card2Title",
-      "text": "Delivery",
-      "x": "12.57cm",
-      "y": "5.12cm",
-      "width": "8.74cm",
-      "height": "1.49cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "font": "Calibri",
-      "size": "18",
-      "color": "A0A6B0",
-      "fill": "none",
-      "name": "Card2Body",
-      "text": "RACI · journey · stairs · checklist · pillars",
-      "x": "12.57cm",
-      "y": "7.1cm",
-      "width": "8.74cm",
-      "height": "10.35cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
-      "name": "Card3Bg",
-      "x": "22.66cm",
-      "y": "3.94cm",
-      "width": "9.94cm",
-      "height": "14.11cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "preset": "rect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "name": "Card3Accent",
-      "x": "22.66cm",
-      "y": "3.94cm",
-      "width": "9.94cm",
-      "height": "0.18cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "font": "Arial",
-      "size": "28",
-      "bold": "true",
-      "color": "F5F5F7",
-      "fill": "none",
-      "name": "Card3Title",
-      "text": "Visual systems",
-      "x": "23.26cm",
-      "y": "5.12cm",
-      "width": "8.74cm",
-      "height": "1.49cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "font": "Calibri",
-      "size": "18",
-      "color": "A0A6B0",
-      "fill": "none",
-      "name": "Card3Body",
-      "text": "Hex · puzzle · circle segments · risk heat · empathy",
-      "x": "23.26cm",
-      "y": "7.1cm",
-      "width": "8.74cm",
-      "height": "10.35cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/",
-    "type": "slide",
-    "props": {
-      "layout": "blank",
-      "background": "000000"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
       "name": "StairsTitle",
-      "text": "Precision pipeline",
-      "x": "1.27cm",
+      "text": "Quality is a staircase",
+      "x": "2.2cm",
       "y": "1.0cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.8cm",
       "font": "Arial",
       "size": "36",
@@ -2356,17 +855,17 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "text": "1. DESIGN.md",
-      "x": "1.37cm",
-      "y": "13.3cm",
-      "width": "6.07cm",
-      "height": "3.5cm",
-      "font": "Calibri",
+      "text": "1\nTokens\nBrand floors",
+      "x": "2.32cm",
+      "y": "13cm",
+      "width": "5.65cm",
+      "height": "3.8cm",
+      "font": "Arial",
       "size": "18",
       "bold": "true",
       "color": "F5F5F7",
       "align": "center",
-      "valign": "top"
+      "valign": "middle"
     }
   },
   {
@@ -2378,17 +877,17 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "text": "2. Tokens",
-      "x": "7.64cm",
-      "y": "10.93cm",
-      "width": "6.07cm",
-      "height": "5.88cm",
-      "font": "Calibri",
+      "text": "2\nFit\nCJK budgets",
+      "x": "8.21cm",
+      "y": "10.7cm",
+      "width": "5.65cm",
+      "height": "6.1cm",
+      "font": "Arial",
       "size": "18",
       "bold": "true",
       "color": "F5F5F7",
       "align": "center",
-      "valign": "top"
+      "valign": "middle"
     }
   },
   {
@@ -2400,17 +899,17 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "text": "3. Recipes",
-      "x": "13.9cm",
-      "y": "8.55cm",
-      "width": "6.07cm",
-      "height": "8.25cm",
-      "font": "Calibri",
+      "text": "3\nIssues\nOverlap gate",
+      "x": "14.11cm",
+      "y": "8.4cm",
+      "width": "5.65cm",
+      "height": "8.4cm",
+      "font": "Arial",
       "size": "18",
       "bold": "true",
       "color": "F5F5F7",
       "align": "center",
-      "valign": "top"
+      "valign": "middle"
     }
   },
   {
@@ -2422,17 +921,17 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "text": "4. Apply",
-      "x": "20.17cm",
-      "y": "6.18cm",
-      "width": "6.07cm",
-      "height": "10.62cm",
-      "font": "Calibri",
+      "text": "4\nGate 3\nContact sheet",
+      "x": "20cm",
+      "y": "6.1cm",
+      "width": "5.65cm",
+      "height": "10.7cm",
+      "font": "Arial",
       "size": "18",
       "bold": "true",
       "color": "F5F5F7",
       "align": "center",
-      "valign": "top"
+      "valign": "middle"
     }
   },
   {
@@ -2444,17 +943,17 @@
       "preset": "roundRect",
       "fill": "0B5FFF",
       "line": "none",
-      "text": "5. Gate 3",
-      "x": "26.43cm",
+      "text": "5\nShip\nHuman check",
+      "x": "25.9cm",
       "y": "3.8cm",
-      "width": "6.07cm",
+      "width": "5.65cm",
       "height": "13cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "bold": "true",
       "color": "FFFFFF",
       "align": "center",
-      "valign": "top"
+      "valign": "middle"
     }
   },
   {
@@ -2480,10 +979,10 @@
     "type": "shape",
     "props": {
       "name": "CheckTitle",
-      "text": "Hard rules",
-      "x": "1.27cm",
+      "text": "Hard rules we keep",
+      "x": "2.2cm",
       "y": "1.0cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.8cm",
       "font": "Arial",
       "size": "36",
@@ -2502,11 +1001,11 @@
       "fill": "1C1C1E",
       "line": "none",
       "text": "✓  Title ≥ 36pt · body ≥ 18pt",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "3.6cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.75cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "bold": "false",
       "color": "F5F5F7",
@@ -2522,12 +1021,12 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "text": "✓  No silent truncation — shorten or split",
-      "x": "1.27cm",
+      "text": "✓  Never shrink fonts to fit — split or cut",
+      "x": "2.2cm",
       "y": "5.5cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.75cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "bold": "false",
       "color": "F5F5F7",
@@ -2543,12 +1042,12 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "text": "✓  Layout engine for dense patterns",
-      "x": "1.27cm",
+      "text": "✓  Overwrite only with --force",
+      "x": "2.2cm",
       "y": "7.4cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.75cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "bold": "false",
       "color": "F5F5F7",
@@ -2564,12 +1063,12 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "text": "✓  Overwrite only with --force",
-      "x": "1.27cm",
+      "text": "✓  Finish apply with --screenshot",
+      "x": "2.2cm",
       "y": "9.3cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.75cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "bold": "false",
       "color": "F5F5F7",
@@ -2585,33 +1084,12 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "text": "✓  Finish apply with --screenshot",
-      "x": "1.27cm",
-      "y": "11.2cm",
-      "width": "31.33cm",
-      "height": "1.75cm",
-      "font": "Calibri",
-      "size": "18",
-      "bold": "false",
-      "color": "F5F5F7",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "CheckRow6",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
       "text": "✓  Ask before installing OfficeCLI",
-      "x": "1.27cm",
-      "y": "13.1cm",
-      "width": "31.33cm",
+      "x": "2.2cm",
+      "y": "11.2cm",
+      "width": "29.47cm",
       "height": "1.75cm",
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "bold": "false",
       "color": "F5F5F7",
@@ -2640,1423 +1118,14 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "BscTitle",
-      "text": "Quality scorecard",
-      "x": "1.27cm",
-      "y": "1.0cm",
-      "width": "31.33cm",
-      "height": "1.8cm",
-      "font": "Arial",
-      "size": "36",
-      "bold": "true",
-      "color": "F5F5F7",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "BscCard1",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "x": "1.27cm",
-      "y": "3.6cm",
-      "width": "15.46cm",
-      "height": "6.4cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "BscLab1",
-      "text": "Brand",
-      "x": "1.77cm",
-      "y": "4cm",
-      "width": "14.46cm",
-      "height": "1.2cm",
-      "font": "Arial",
-      "size": "28",
-      "bold": "true",
-      "color": "0B5FFF",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "BscBody1",
-      "text": "Token floors · contrast · type scale",
-      "x": "1.77cm",
-      "y": "5.4cm",
-      "width": "14.46cm",
-      "height": "4cm",
-      "font": "Calibri",
-      "size": "18",
-      "color": "F5F5F7",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "BscCard2",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "x": "17.14cm",
-      "y": "3.6cm",
-      "width": "15.46cm",
-      "height": "6.4cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "BscLab2",
-      "text": "Layout",
-      "x": "17.64cm",
-      "y": "4cm",
-      "width": "14.46cm",
-      "height": "1.2cm",
-      "font": "Arial",
-      "size": "28",
-      "bold": "true",
-      "color": "0B5FFF",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "BscBody2",
-      "text": "Density adapt · CJK budgets · recipes",
-      "x": "17.64cm",
-      "y": "5.4cm",
-      "width": "14.46cm",
-      "height": "4cm",
-      "font": "Calibri",
-      "size": "18",
-      "color": "F5F5F7",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "BscCard3",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "x": "1.27cm",
-      "y": "10.4cm",
-      "width": "15.46cm",
-      "height": "6.4cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "BscLab3",
-      "text": "Pipeline",
-      "x": "1.77cm",
-      "y": "10.8cm",
-      "width": "14.46cm",
-      "height": "1.2cm",
-      "font": "Arial",
-      "size": "28",
-      "bold": "true",
-      "color": "0B5FFF",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "BscBody3",
-      "text": "Staging · issues gate · Gate 3",
-      "x": "1.77cm",
-      "y": "12.2cm",
-      "width": "14.46cm",
-      "height": "4cm",
-      "font": "Calibri",
-      "size": "18",
-      "color": "F5F5F7",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "BscCard4",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "x": "17.14cm",
-      "y": "10.4cm",
-      "width": "15.46cm",
-      "height": "6.4cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "BscLab4",
-      "text": "Agents",
-      "x": "17.64cm",
-      "y": "10.8cm",
-      "width": "14.46cm",
-      "height": "1.2cm",
-      "font": "Arial",
-      "size": "28",
-      "bold": "true",
-      "color": "0B5FFF",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "BscBody4",
-      "text": "Doctor · skills · no silent install",
-      "x": "17.64cm",
-      "y": "12.2cm",
-      "width": "14.46cm",
-      "height": "4cm",
-      "font": "Calibri",
-      "size": "18",
-      "color": "F5F5F7",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "notes",
-    "props": {
-      "text": "Tie each metric to one owner and one review cadence."
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/",
-    "type": "slide",
-    "props": {
-      "layout": "blank",
-      "background": "000000"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciTitle",
-      "text": "Who owns the deck",
-      "x": "1.27cm",
-      "y": "1.0cm",
-      "width": "31.33cm",
-      "height": "1.8cm",
-      "font": "Arial",
-      "size": "36",
-      "bold": "true",
-      "color": "F5F5F7",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCorner",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "Activity",
-      "x": "1.27cm",
-      "y": "4cm",
-      "width": "6.5cm",
-      "height": "2cm",
-      "font": "Calibri",
-      "size": "14",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciRole1",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "Human",
-      "x": "7.77cm",
-      "y": "4cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Calibri",
-      "size": "14",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciRole2",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "Agent",
-      "x": "13.98cm",
-      "y": "4cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Calibri",
-      "size": "14",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciRole3",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "designmd",
-      "x": "20.18cm",
-      "y": "4cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Calibri",
-      "size": "14",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciRole4",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "OfficeCLI",
-      "x": "26.39cm",
-      "y": "4cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Calibri",
-      "size": "14",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciAct1",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Brief",
-      "x": "1.27cm",
-      "y": "6cm",
-      "width": "6.5cm",
-      "height": "2cm",
-      "font": "Calibri",
-      "size": "14",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCell1_1",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "A",
-      "x": "7.77cm",
-      "y": "6cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCell1_2",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "R",
-      "x": "13.98cm",
-      "y": "6cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCell1_3",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "C",
-      "x": "20.18cm",
-      "y": "6cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCell1_4",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "I",
-      "x": "26.39cm",
-      "y": "6cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciAct2",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Compose",
-      "x": "1.27cm",
-      "y": "8cm",
-      "width": "6.5cm",
-      "height": "2cm",
-      "font": "Calibri",
-      "size": "14",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCell2_1",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "C",
-      "x": "7.77cm",
-      "y": "8cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCell2_2",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "A",
-      "x": "13.98cm",
-      "y": "8cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCell2_3",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "R",
-      "x": "20.18cm",
-      "y": "8cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCell2_4",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "I",
-      "x": "26.39cm",
-      "y": "8cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciAct3",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Scaffold",
-      "x": "1.27cm",
-      "y": "10cm",
-      "width": "6.5cm",
-      "height": "2cm",
-      "font": "Calibri",
-      "size": "14",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCell3_1",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "I",
-      "x": "7.77cm",
-      "y": "10cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCell3_2",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "A",
-      "x": "13.98cm",
-      "y": "10cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCell3_3",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "R",
-      "x": "20.18cm",
-      "y": "10cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCell3_4",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "C",
-      "x": "26.39cm",
-      "y": "10cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciAct4",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Apply",
-      "x": "1.27cm",
-      "y": "12cm",
-      "width": "6.5cm",
-      "height": "2cm",
-      "font": "Calibri",
-      "size": "14",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCell4_1",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "A",
-      "x": "7.77cm",
-      "y": "12cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCell4_2",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "C",
-      "x": "13.98cm",
-      "y": "12cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCell4_3",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "C",
-      "x": "20.18cm",
-      "y": "12cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCell4_4",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "R",
-      "x": "26.39cm",
-      "y": "12cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciAct5",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Gate 3",
-      "x": "1.27cm",
-      "y": "14cm",
-      "width": "6.5cm",
-      "height": "2cm",
-      "font": "Calibri",
-      "size": "14",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCell5_1",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "A",
-      "x": "7.77cm",
-      "y": "14cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCell5_2",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "R",
-      "x": "13.98cm",
-      "y": "14cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCell5_3",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "C",
-      "x": "20.18cm",
-      "y": "14cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RaciCell5_4",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "C",
-      "x": "26.39cm",
-      "y": "14cm",
-      "width": "6.11cm",
-      "height": "2cm",
-      "font": "Arial",
-      "size": "16",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "notes",
-    "props": {
-      "text": "Exactly one A per row; R does the work."
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/",
-    "type": "slide",
-    "props": {
-      "layout": "blank",
-      "background": "000000"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "PuzzleTitle",
-      "text": "Platform fit",
-      "x": "1.27cm",
-      "y": "1.0cm",
-      "width": "31.33cm",
-      "height": "1.8cm",
-      "font": "Arial",
-      "size": "36",
-      "bold": "true",
-      "color": "F5F5F7",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "Puzzle1",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "Claude Code\nPlugin + skill",
-      "x": "1.27cm",
-      "y": "5.0cm",
-      "width": "7.57cm",
-      "height": "10.5cm",
-      "font": "Arial",
-      "size": "24",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "Puzzle2",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Codex\ninstall-codex.ps1",
-      "x": "9.19cm",
-      "y": "5.0cm",
-      "width": "7.57cm",
-      "height": "10.5cm",
-      "font": "Arial",
-      "size": "24",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "Puzzle3",
-      "preset": "roundRect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "Grok\nSynced adapters",
-      "x": "17.11cm",
-      "y": "5.0cm",
-      "width": "7.57cm",
-      "height": "10.5cm",
-      "font": "Arial",
-      "size": "24",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "Puzzle4",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "VS Code\nThin CLI shell",
-      "x": "25.03cm",
-      "y": "5.0cm",
-      "width": "7.57cm",
-      "height": "10.5cm",
-      "font": "Arial",
-      "size": "24",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "notes",
-    "props": {
-      "text": "Name what breaks if any single piece is missing."
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/",
-    "type": "slide",
-    "props": {
-      "layout": "blank",
-      "background": "000000"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RiskTitle",
-      "text": "What we refuse",
-      "x": "1.27cm",
-      "y": "1.0cm",
-      "width": "31.33cm",
-      "height": "1.8cm",
-      "font": "Arial",
-      "size": "36",
-      "bold": "true",
-      "color": "F5F5F7",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RiskX0",
-      "text": "Low",
-      "x": "4.47cm",
-      "y": "16.65cm",
-      "width": "7.33cm",
-      "height": "0.9cm",
-      "font": "Calibri",
-      "size": "14",
-      "color": "A0A6B0",
-      "align": "center",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RiskY0",
-      "text": "Low",
-      "x": "1.27cm",
-      "y": "14.02cm",
-      "width": "3.0cm",
-      "height": "0.9cm",
-      "font": "Calibri",
-      "size": "14",
-      "color": "A0A6B0",
-      "align": "right",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RiskX1",
-      "text": "Med",
-      "x": "11.8cm",
-      "y": "16.65cm",
-      "width": "7.33cm",
-      "height": "0.9cm",
-      "font": "Calibri",
-      "size": "14",
-      "color": "A0A6B0",
-      "align": "center",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RiskY1",
-      "text": "Med",
-      "x": "1.27cm",
-      "y": "9.85cm",
-      "width": "3.0cm",
-      "height": "0.9cm",
-      "font": "Calibri",
-      "size": "14",
-      "color": "A0A6B0",
-      "align": "right",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RiskX2",
-      "text": "High",
-      "x": "19.14cm",
-      "y": "16.65cm",
-      "width": "7.33cm",
-      "height": "0.9cm",
-      "font": "Calibri",
-      "size": "14",
-      "color": "A0A6B0",
-      "align": "center",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RiskY2",
-      "text": "High",
-      "x": "1.27cm",
-      "y": "5.68cm",
-      "width": "3.0cm",
-      "height": "0.9cm",
-      "font": "Calibri",
-      "size": "14",
-      "color": "A0A6B0",
-      "align": "right",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RiskCell00",
-      "preset": "rect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "x": "4.52cm",
-      "y": "12.38cm",
-      "width": "7.23cm",
-      "height": "4.07cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RiskCell01",
-      "preset": "rect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "x": "11.85cm",
-      "y": "12.38cm",
-      "width": "7.23cm",
-      "height": "4.07cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RiskCell02",
-      "preset": "rect",
-      "fill": "91B7FF",
-      "line": "none",
-      "x": "19.19cm",
-      "y": "12.38cm",
-      "width": "7.23cm",
-      "height": "4.07cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RiskCell10",
-      "preset": "rect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "x": "4.52cm",
-      "y": "8.22cm",
-      "width": "7.23cm",
-      "height": "4.07cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RiskCell11",
-      "preset": "rect",
-      "fill": "91B7FF",
-      "line": "none",
-      "x": "11.85cm",
-      "y": "8.22cm",
-      "width": "7.23cm",
-      "height": "4.07cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RiskCell12",
-      "preset": "rect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "x": "19.19cm",
-      "y": "8.22cm",
-      "width": "7.23cm",
-      "height": "4.07cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RiskCell20",
-      "preset": "rect",
-      "fill": "91B7FF",
-      "line": "none",
-      "x": "4.52cm",
-      "y": "4.05cm",
-      "width": "7.23cm",
-      "height": "4.07cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RiskCell21",
-      "preset": "rect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "x": "11.85cm",
-      "y": "4.05cm",
-      "width": "7.23cm",
-      "height": "4.07cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RiskCell22",
-      "preset": "rect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "x": "19.19cm",
-      "y": "4.05cm",
-      "width": "7.23cm",
-      "height": "4.07cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RiskItem13",
-      "text": "Font shrink to fit\nSilent overwrite\nVendor template copy",
-      "x": "4.72cm",
-      "y": "4.3cm",
-      "width": "6.83cm",
-      "height": "3.67cm",
-      "font": "Calibri",
-      "size": "14",
-      "bold": "true",
-      "color": "F5F5F7",
-      "fill": "none",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RiskItem33",
-      "text": "Missing OfficeCLI",
-      "x": "19.39cm",
-      "y": "4.3cm",
-      "width": "6.83cm",
-      "height": "3.67cm",
-      "font": "Calibri",
-      "size": "14",
-      "bold": "true",
-      "color": "F5F5F7",
-      "fill": "none",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RiskItem22",
-      "text": "Agent silent install",
-      "x": "12.05cm",
-      "y": "8.47cm",
-      "width": "6.83cm",
-      "height": "3.67cm",
-      "font": "Calibri",
-      "size": "14",
-      "bold": "true",
-      "color": "F5F5F7",
-      "fill": "none",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "RiskAxisX",
-      "text": "Likelihood →",
-      "x": "4.47cm",
-      "y": "18.0cm",
-      "width": "22cm",
-      "height": "0.7cm",
-      "font": "Calibri",
-      "size": "12",
-      "color": "A0A6B0",
-      "align": "center",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "notes",
-    "props": {
-      "text": "Top-right cells need owners this week."
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/",
-    "type": "slide",
-    "props": {
-      "layout": "blank",
-      "background": "000000"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
       "name": "CloseTitle",
-      "text": "Start here",
-      "x": "1.27cm",
-      "y": "6cm",
-      "width": "31.33cm",
-      "height": "2.5cm",
+      "text": "Start with the brand file",
+      "x": "2.2cm",
+      "y": "5.2cm",
+      "width": "29.47cm",
+      "height": "2.8cm",
       "font": "Arial",
-      "size": "36",
+      "size": "44",
       "bold": "true",
       "color": "F5F5F7",
       "align": "center",
@@ -4069,12 +1138,12 @@
     "type": "shape",
     "props": {
       "name": "CloseBody",
-      "text": "doctor --ensure · compose · scaffold · apply --screenshot --gate3",
-      "x": "1.27cm",
-      "y": "9cm",
-      "width": "31.33cm",
-      "height": "1.5cm",
-      "font": "Calibri",
+      "text": "doctor --ensure · compose a brief · scaffold · apply --screenshot",
+      "x": "4.2cm",
+      "y": "8.4cm",
+      "width": "25.47cm",
+      "height": "2.0cm",
+      "font": "Arial",
       "size": "18",
       "color": "A0A6B0",
       "align": "center",
@@ -4091,11 +1160,11 @@
       "fill": "0B5FFF",
       "line": "none",
       "text": "doctor --ensure",
-      "x": "12.4cm",
-      "y": "12cm",
-      "width": "9cm",
-      "height": "1.6cm",
-      "font": "Calibri",
+      "x": "11.93cm",
+      "y": "11.8cm",
+      "width": "10cm",
+      "height": "1.8cm",
+      "font": "Arial",
       "size": "18",
       "bold": "true",
       "color": "FFFFFF",

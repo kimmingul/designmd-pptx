@@ -15,9 +15,9 @@
     "props": {
       "name": "TlTitle",
       "text": "Timeline",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "1.2cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.8cm",
       "font": "Arial",
       "size": "36",
@@ -35,9 +35,9 @@
       "preset": "rect",
       "fill": "3A3A3C",
       "line": "none",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "9cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "0.12cm"
     }
   },
@@ -54,9 +54,9 @@
       "fill": "none",
       "name": "TlLabel1",
       "text": "Discover",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "10.3cm",
-      "width": "7.26cm",
+      "width": "6.54cm",
       "height": "1.13cm"
     }
   },
@@ -65,16 +65,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "align": "center",
       "fill": "none",
       "name": "TlDetail1",
       "text": "",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "11.78cm",
-      "width": "7.26cm",
+      "width": "6.54cm",
       "height": "6.02cm"
     }
   },
@@ -91,9 +91,9 @@
       "fill": "none",
       "name": "TlLabel2",
       "text": "Build",
-      "x": "9.29cm",
+      "x": "9.84cm",
       "y": "10.3cm",
-      "width": "7.26cm",
+      "width": "6.54cm",
       "height": "1.13cm"
     }
   },
@@ -102,16 +102,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "align": "center",
       "fill": "none",
       "name": "TlDetail2",
       "text": "",
-      "x": "9.29cm",
+      "x": "9.84cm",
       "y": "11.78cm",
-      "width": "7.26cm",
+      "width": "6.54cm",
       "height": "6.02cm"
     }
   },
@@ -128,9 +128,9 @@
       "fill": "none",
       "name": "TlLabel3",
       "text": "Ship",
-      "x": "17.31cm",
+      "x": "17.48cm",
       "y": "10.3cm",
-      "width": "7.26cm",
+      "width": "6.54cm",
       "height": "1.13cm"
     }
   },
@@ -139,16 +139,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "align": "center",
       "fill": "none",
       "name": "TlDetail3",
       "text": "",
-      "x": "17.31cm",
+      "x": "17.48cm",
       "y": "11.78cm",
-      "width": "7.26cm",
+      "width": "6.54cm",
       "height": "6.02cm"
     }
   },
@@ -165,9 +165,9 @@
       "fill": "none",
       "name": "TlLabel4",
       "text": "Learn",
-      "x": "25.34cm",
+      "x": "25.13cm",
       "y": "10.3cm",
-      "width": "7.26cm",
+      "width": "6.54cm",
       "height": "1.13cm"
     }
   },
@@ -176,16 +176,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "align": "center",
       "fill": "none",
       "name": "TlDetail4",
       "text": "",
-      "x": "25.34cm",
+      "x": "25.13cm",
       "y": "11.78cm",
-      "width": "7.26cm",
+      "width": "6.54cm",
       "height": "6.02cm"
     }
   },
@@ -198,7 +198,7 @@
       "preset": "ellipse",
       "fill": "0B5FFF",
       "line": "none",
-      "x": "4.45cm",
+      "x": "5.02cm",
       "y": "8.61cm",
       "width": "0.9cm",
       "height": "0.9cm"
@@ -213,7 +213,7 @@
       "preset": "ellipse",
       "fill": "0B5FFF",
       "line": "none",
-      "x": "12.47cm",
+      "x": "12.66cm",
       "y": "8.61cm",
       "width": "0.9cm",
       "height": "0.9cm"
@@ -228,7 +228,7 @@
       "preset": "ellipse",
       "fill": "0B5FFF",
       "line": "none",
-      "x": "20.5cm",
+      "x": "20.31cm",
       "y": "8.61cm",
       "width": "0.9cm",
       "height": "0.9cm"
@@ -243,7 +243,7 @@
       "preset": "ellipse",
       "fill": "0B5FFF",
       "line": "none",
-      "x": "28.52cm",
+      "x": "27.95cm",
       "y": "8.61cm",
       "width": "0.9cm",
       "height": "0.9cm"

@@ -20,9 +20,9 @@
       "fill": "none",
       "name": "BulletTitle",
       "text": "Agenda",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "1.2cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "1.84cm"
     }
   },
@@ -31,15 +31,15 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
+      "font": "Arial",
       "size": "18",
       "color": "F5F5F7",
       "fill": "none",
       "name": "BulletBody",
       "text": "• First point\n• Second point\n• Third point",
-      "x": "1.27cm",
+      "x": "2.2cm",
       "y": "3.84cm",
-      "width": "31.33cm",
+      "width": "29.47cm",
       "height": "14.21cm"
     }
   },

@@ -20,9 +20,9 @@
       "fill": "none",
       "name": "ConsortTitle",
       "text": "CONSORT flow",
-      "x": "4.27cm",
+      "x": "5.2cm",
       "y": "1cm",
-      "width": "25.33cm",
+      "width": "23.47cm",
       "height": "1.84cm"
     }
   },
@@ -35,9 +35,9 @@
       "fill": "1C1C1E",
       "line": "3A3A3C",
       "name": "ConsortBox1",
-      "x": "4.27cm",
+      "x": "5.2cm",
       "y": "3.09cm",
-      "width": "25.33cm",
+      "width": "23.47cm",
       "height": "3.68cm"
     }
   },
@@ -53,9 +53,9 @@
       "fill": "none",
       "name": "ConsortLabel1",
       "text": "Assessed for eligibility",
-      "x": "4.72cm",
+      "x": "5.65cm",
       "y": "3.29cm",
-      "width": "24.43cm",
+      "width": "22.57cm",
       "height": "1.4cm"
     }
   },
@@ -64,16 +64,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "bold": "true",
       "color": "0B5FFF",
       "fill": "none",
       "name": "ConsortN1",
       "text": "N=420",
-      "x": "4.72cm",
+      "x": "5.65cm",
       "y": "4.77cm",
-      "width": "24.43cm",
+      "width": "22.57cm",
       "height": "0.7cm"
     }
   },
@@ -86,9 +86,9 @@
       "fill": "1C1C1E",
       "line": "3A3A3C",
       "name": "ConsortBox2",
-      "x": "4.27cm",
+      "x": "5.2cm",
       "y": "6.95cm",
-      "width": "25.33cm",
+      "width": "23.47cm",
       "height": "3.68cm"
     }
   },
@@ -104,9 +104,9 @@
       "fill": "none",
       "name": "ConsortLabel2",
       "text": "Randomized",
-      "x": "4.72cm",
+      "x": "5.65cm",
       "y": "7.15cm",
-      "width": "24.43cm",
+      "width": "22.57cm",
       "height": "1.4cm"
     }
   },
@@ -115,16 +115,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "bold": "true",
       "color": "0B5FFF",
       "fill": "none",
       "name": "ConsortN2",
       "text": "N=300",
-      "x": "4.72cm",
+      "x": "5.65cm",
       "y": "8.63cm",
-      "width": "24.43cm",
+      "width": "22.57cm",
       "height": "0.7cm"
     }
   },
@@ -137,9 +137,9 @@
       "fill": "1C1C1E",
       "line": "3A3A3C",
       "name": "ConsortBox3",
-      "x": "4.27cm",
+      "x": "5.2cm",
       "y": "10.81cm",
-      "width": "25.33cm",
+      "width": "23.47cm",
       "height": "3.68cm"
     }
   },
@@ -155,9 +155,9 @@
       "fill": "none",
       "name": "ConsortLabel3",
       "text": "Allocated to intervention",
-      "x": "4.72cm",
+      "x": "5.65cm",
       "y": "11.01cm",
-      "width": "24.43cm",
+      "width": "22.57cm",
       "height": "1.4cm"
     }
   },
@@ -166,16 +166,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "bold": "true",
       "color": "0B5FFF",
       "fill": "none",
       "name": "ConsortN3",
       "text": "N=150",
-      "x": "4.72cm",
+      "x": "5.65cm",
       "y": "12.49cm",
-      "width": "24.43cm",
+      "width": "22.57cm",
       "height": "0.7cm"
     }
   },
@@ -188,9 +188,9 @@
       "fill": "1C1C1E",
       "line": "3A3A3C",
       "name": "ConsortBox4",
-      "x": "4.27cm",
+      "x": "5.2cm",
       "y": "14.67cm",
-      "width": "25.33cm",
+      "width": "23.47cm",
       "height": "3.68cm"
     }
   },
@@ -206,9 +206,9 @@
       "fill": "none",
       "name": "ConsortLabel4",
       "text": "Analyzed",
-      "x": "4.72cm",
+      "x": "5.65cm",
       "y": "14.87cm",
-      "width": "24.43cm",
+      "width": "22.57cm",
       "height": "1.4cm"
     }
   },
@@ -217,16 +217,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "bold": "true",
       "color": "0B5FFF",
       "fill": "none",
       "name": "ConsortN4",
       "text": "N=148",
-      "x": "4.72cm",
+      "x": "5.65cm",
       "y": "16.35cm",
-      "width": "24.43cm",
+      "width": "22.57cm",
       "height": "0.7cm"
     }
   },
@@ -235,15 +235,15 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "font": "Calibri",
-      "size": "12",
+      "font": "Arial",
+      "size": "14",
       "color": "A0A6B0",
       "fill": "none",
       "name": "ConsortNote4",
       "text": "2 lost to follow-up",
-      "x": "4.72cm",
+      "x": "5.65cm",
       "y": "17.13cm",
-      "width": "24.43cm",
+      "width": "22.57cm",
       "height": "0.7cm"
     }
   },

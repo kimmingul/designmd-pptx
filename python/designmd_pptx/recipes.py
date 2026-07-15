@@ -71,6 +71,8 @@ def _base_props(tokens: dict) -> dict[str, Any]:
 
 
 def recipe_cover(tokens: dict, content: dict | None = None) -> list[dict]:
+    """Product cover — left-hero when composition.title_placement is left,
+    otherwise a tighter centered stack (less empty mid-canvas)."""
     b = _base_props(tokens)
     c, t = b["c"], b["t"]
     content = content or {}
@@ -78,8 +80,24 @@ def recipe_cover(tokens: dict, content: dict | None = None) -> list[dict]:
     subtitle = content.get("subtitle", "Subtitle")
     meta = content.get("meta", "Prepared with designmd-pptx")
     bg = tokens.get("background_gradient") or c["background"]
+    placement = str(
+        (tokens.get("composition") or {}).get("title_placement") or "top"
+    )
+    left = placement == "left"
+    m = b["margin"]
+    usable = 33.87 - 2 * m
+    align = "left" if left else "center"
+    # Left hero: title sits upper-left with room for multi-line product names.
+    # Center: stack sits slightly above mid so subtitle/meta don't float alone.
+    title_y = 5.2 if left else 6.2
+    title_h = 4.2 if left else 3.2
+    sub_y = title_y + title_h + 0.35
+    bar_y = sub_y - 0.25
+    bar_w = 4.5 if left else 5.0
+    bar_x = m if left else (33.87 - bar_w) / 2
+    meta_y = 16.8
 
-    return [
+    ops: list[dict] = [
         {
             "command": "add",
             "parent": "/",
@@ -93,51 +111,16 @@ def recipe_cover(tokens: dict, content: dict | None = None) -> list[dict]:
             "props": {
                 "name": "CoverTitle",
                 "text": title,
-                "x": _cm(b["margin"]),
-                "y": "7cm",
-                "width": _cm(33.87 - 2 * b["margin"]),
-                "height": "3cm",
+                "x": _cm(m),
+                "y": _cm(title_y),
+                "width": _cm(usable if left else usable),
+                "height": _cm(title_h),
                 "font": t["heading_font"],
                 "size": str(t["cover_pt"]),
                 "bold": "true",
                 "color": c["text"],
-                "align": "center",
-                "fill": "none",
-            },
-        },
-        {
-            "command": "add",
-            "parent": "/slide[last()]",
-            "type": "shape",
-            "props": {
-                "name": "CoverSubtitle",
-                "text": subtitle,
-                "x": _cm(b["margin"]),
-                "y": "10.4cm",
-                "width": _cm(33.87 - 2 * b["margin"]),
-                "height": "1.2cm",
-                "font": t["body_font"],
-                "size": str(max(18, t["body_pt"])),
-                "color": c["muted"],
-                "align": "center",
-                "fill": "none",
-            },
-        },
-        {
-            "command": "add",
-            "parent": "/slide[last()]",
-            "type": "shape",
-            "props": {
-                "name": "CoverMeta",
-                "text": meta,
-                "x": _cm(b["margin"]),
-                "y": "16.5cm",
-                "width": _cm(33.87 - 2 * b["margin"]),
-                "height": "0.9cm",
-                "font": t["body_font"],
-                "size": str(t["caption_pt"]),
-                "color": c["muted"],
-                "align": "center",
+                "align": align,
+                "valign": "bottom" if left else "middle",
                 "fill": "none",
             },
         },
@@ -150,13 +133,67 @@ def recipe_cover(tokens: dict, content: dict | None = None) -> list[dict]:
                 "preset": "rect",
                 "fill": c["accent"],
                 "line": "none",
-                "x": "14.44cm",
-                "y": "10.1cm",
-                "width": "5cm",
-                "height": "0.12cm",
+                "x": _cm(bar_x),
+                "y": _cm(bar_y),
+                "width": _cm(bar_w),
+                "height": "0.14cm",
+            },
+        },
+        {
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "shape",
+            "props": {
+                "name": "CoverSubtitle",
+                "text": subtitle,
+                "x": _cm(m),
+                "y": _cm(sub_y + 0.15),
+                "width": _cm(min(usable, 26.0) if left else usable),
+                "height": "1.6cm",
+                "font": t["body_font"],
+                "size": str(max(18, t["body_pt"])),
+                "color": c["muted"],
+                "align": align,
+                "fill": "none",
+            },
+        },
+        {
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "shape",
+            "props": {
+                "name": "CoverMeta",
+                "text": meta,
+                "x": _cm(m),
+                "y": _cm(meta_y),
+                "width": _cm(usable),
+                "height": "0.9cm",
+                "font": t["body_font"],
+                "size": str(max(12, t["caption_pt"])),
+                "color": c["muted"],
+                "align": align,
+                "fill": "none",
             },
         },
     ]
+    if left:
+        # Vertical edge accent for a distinct silhouette vs centered covers.
+        ops.insert(1, {
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "shape",
+            "props": {
+                "name": "CoverEdge",
+                "preset": "rect",
+                "fill": c["accent"],
+                "line": "none",
+                "x": "0cm",
+                "y": "0cm",
+                "width": "0.35cm",
+                "height": "19.05cm",
+            },
+        })
+    return ops
 
 
 def recipe_section_divider(tokens: dict, content: dict | None = None) -> list[dict]:
@@ -1279,9 +1316,9 @@ def recipe_process(
         steps = [str(steps)]
     n = max(2, min(5, len(steps)))
     steps = steps[:n]
-    col_w, xs = _grid_n(n, b["margin"], b["gap"], max_n=5)
-    box_h = 3.2
-    y = 8.0
+    col_w, xs = _grid_n(n, b["margin"], max(0.55, b["gap"]), max_n=5)
+    box_h = 4.6
+    y = 7.2
     parent = "/slide[last()]"
     ops: list[dict] = [
         {
@@ -1298,7 +1335,7 @@ def recipe_process(
                 "name": "ProcTitle",
                 "text": title,
                 "x": _cm(b["margin"]),
-                "y": "1.2cm",
+                "y": "1.4cm",
                 "width": _cm(33.87 - 2 * b["margin"]),
                 "height": "1.8cm",
                 "font": t["heading_font"],
@@ -1313,14 +1350,16 @@ def recipe_process(
     for i, step in enumerate(steps):
         if isinstance(step, dict):
             label = str(step.get("label", step.get("title", f"Step {i+1}")))
+            detail = str(step.get("detail") or step.get("body") or "").strip()
+            text = f"{i + 1}\n{label}" + (f"\n{detail}" if detail else "")
         else:
             label = str(step)
+            text = f"{i + 1}\n{label}"
         name = f"Proc{i+1}"
         names.append(name)
+        # First step accent; middle surface; last step accent for closure.
         fill = c["accent"] if i == 0 or i == n - 1 else c["surface"]
         tc = c["on_accent"] if fill == c["accent"] else c["text_on_surface"]
-        if fill == c["surface"]:
-            tc = c["text_on_surface"]
         ops.append(
             {
                 "command": "add",
@@ -1331,12 +1370,12 @@ def recipe_process(
                     "preset": b["preset"],
                     "fill": fill,
                     "line": "none",
-                    "text": label,
+                    "text": text,
                     "x": _cm(xs[i]),
                     "y": _cm(y),
                     "width": _cm(col_w),
                     "height": _cm(box_h),
-                    "font": t["body_font"],
+                    "font": t["heading_font"],
                     "size": str(max(16, min(20, t["body_pt"]))),
                     "bold": "true",
                     "color": tc,
@@ -1732,6 +1771,8 @@ def recipe_close(tokens: dict, content: dict | None = None) -> list[dict]:
     title = content.get("title", "Next step")
     body = content.get("body", "One clear ask. One owner. One date.")
     cta = content.get("cta", "Continue")
+    m = b["margin"]
+    usable = 33.87 - 2 * m
 
     return [
         {
@@ -1747,12 +1788,12 @@ def recipe_close(tokens: dict, content: dict | None = None) -> list[dict]:
             "props": {
                 "name": "CloseTitle",
                 "text": title,
-                "x": _cm(b["margin"]),
-                "y": "6cm",
-                "width": _cm(33.87 - 2 * b["margin"]),
-                "height": "2.5cm",
+                "x": _cm(m),
+                "y": "5.2cm",
+                "width": _cm(usable),
+                "height": "2.8cm",
                 "font": t["heading_font"],
-                "size": str(t["title_pt"]),
+                "size": str(max(t["title_pt"], t.get("cover_pt", t["title_pt"]) - 4)),
                 "bold": "true",
                 "color": c["text"],
                 "align": "center",
@@ -1766,10 +1807,10 @@ def recipe_close(tokens: dict, content: dict | None = None) -> list[dict]:
             "props": {
                 "name": "CloseBody",
                 "text": body,
-                "x": _cm(b["margin"]),
-                "y": "9cm",
-                "width": _cm(33.87 - 2 * b["margin"]),
-                "height": "1.5cm",
+                "x": _cm(m + 2),
+                "y": "8.4cm",
+                "width": _cm(usable - 4),
+                "height": "2.0cm",
                 "font": t["body_font"],
                 "size": str(t["body_pt"]),
                 "color": c["muted"],
@@ -1787,10 +1828,10 @@ def recipe_close(tokens: dict, content: dict | None = None) -> list[dict]:
                 "fill": c["accent"],
                 "line": "none",
                 "text": cta,
-                "x": "12.4cm",
-                "y": "12cm",
-                "width": "9cm",
-                "height": "1.6cm",
+                "x": _cm((33.87 - 10.0) / 2),
+                "y": "11.8cm",
+                "width": "10cm",
+                "height": "1.8cm",
                 "font": t["body_font"],
                 "size": str(max(18, t["body_pt"])),
                 "bold": "true",
@@ -1843,8 +1884,11 @@ def recipe_big_number(tokens: dict, content: dict | None = None) -> list[dict]:
     value = str(content.get("value", "—"))
     label = content.get("label", "Headline metric")
     context = content.get("context", "")
-    mega = int(t.get("mega_pt", int(t.get("kpi_pt", 60) * 1.6)))
+    mega = int(t.get("mega_pt", max(72, int(t.get("kpi_pt", 60) * 1.35))))
+    mega = min(96, max(56, mega))
     color = c["risk"] if content.get("watch") else c["accent"]
+    m = b["margin"]
+    usable = 33.87 - 2 * m
     ops = [
         _slide_op(tokens),
         {
@@ -1854,15 +1898,16 @@ def recipe_big_number(tokens: dict, content: dict | None = None) -> list[dict]:
             "props": {
                 "name": "BigValue",
                 "text": value,
-                "x": _cm(b["margin"]),
-                "y": "4.6cm",
-                "width": _cm(33.87 - 2 * b["margin"]),
-                "height": "6cm",
+                "x": _cm(m),
+                "y": "3.8cm",
+                "width": _cm(usable),
+                "height": "7.2cm",
                 "font": t["heading_font"],
                 "size": str(mega),
                 "bold": "true",
                 "color": color,
                 "align": "center",
+                "valign": "middle",
                 "fill": "none",
             },
         },
@@ -1873,12 +1918,12 @@ def recipe_big_number(tokens: dict, content: dict | None = None) -> list[dict]:
             "props": {
                 "name": "BigLabel",
                 "text": str(label),
-                "x": "3.94cm",
-                "y": "11.2cm",
-                "width": "26cm",
-                "height": "1.6cm",
+                "x": _cm(m),
+                "y": "11.4cm",
+                "width": _cm(usable),
+                "height": "1.8cm",
                 "font": t["heading_font"],
-                "size": str(t["section_pt"]),
+                "size": str(max(22, t["section_pt"])),
                 "bold": "true",
                 "color": c["text_on_content"],
                 "align": "center",
@@ -1895,10 +1940,10 @@ def recipe_big_number(tokens: dict, content: dict | None = None) -> list[dict]:
                 "props": {
                     "name": "BigContext",
                     "text": str(context),
-                    "x": "3.94cm",
-                    "y": "13.2cm",
-                    "width": "26cm",
-                    "height": "2cm",
+                    "x": _cm(m + 2.0),
+                    "y": "13.4cm",
+                    "width": _cm(usable - 4.0),
+                    "height": "2.4cm",
                     "font": t["body_font"],
                     "size": str(t["body_pt"]),
                     "color": c["muted"],
@@ -5969,23 +6014,25 @@ def recipe_stairs_ascent(tokens: dict, content: dict | None = None) -> list[dict
     ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "StairsTitle", title)]
     base_y = 16.8
     for i, st in enumerate(steps):
-        h = 3.5 + i * (9.5 / max(1, n - 1))
+        h = 3.8 + i * (9.2 / max(1, n - 1))
         y = base_y - h
         x = m + i * step_w
+        detail = str(st.get("detail") or st.get("body") or "").strip()
+        label = f"{i + 1}\n{st['label']}" + (f"\n{detail}" if detail else "")
         ops.append({
             "command": "add", "parent": "/slide[last()]", "type": "shape",
             "props": {
                 "name": f"Stair{i + 1}", "preset": b["preset"],
                 "fill": c["accent"] if i == n - 1 else c["surface"],
                 "line": "none",
-                "text": f"{i + 1}. {st['label']}",
-                "x": _cm(x + 0.1), "y": _cm(y),
-                "width": _cm(step_w - 0.2), "height": _cm(h),
-                "font": t["body_font"],
-                "size": str(max(14, min(20, t["body_pt"]))),
+                "text": label,
+                "x": _cm(x + 0.12), "y": _cm(y),
+                "width": _cm(step_w - 0.24), "height": _cm(h),
+                "font": t["heading_font"],
+                "size": str(max(14, min(18, t["body_pt"]))),
                 "bold": "true",
                 "color": c["on_accent"] if i == n - 1 else c["text_on_surface"],
-                "align": "center", "valign": "top",
+                "align": "center", "valign": "middle",
             },
         })
     ops.append({
