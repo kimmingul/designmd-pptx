@@ -111,9 +111,9 @@
       "name": "BigValue",
       "text": "DESIGN.md",
       "x": "2.2cm",
-      "y": "3.8cm",
+      "y": "3.28cm",
       "width": "29.47cm",
-      "height": "7.2cm",
+      "height": "6.4cm",
       "font": "Arial",
       "size": "81",
       "bold": "true",
@@ -131,9 +131,9 @@
       "name": "BigLabel",
       "text": "One brand source of truth",
       "x": "2.2cm",
-      "y": "11.4cm",
+      "y": "10.29cm",
       "width": "29.47cm",
-      "height": "1.8cm",
+      "height": "1.7cm",
       "font": "Arial",
       "size": "28",
       "bold": "true",
@@ -149,10 +149,10 @@
     "props": {
       "name": "BigContext",
       "text": "Tokens, recipes, and staging-safe apply — not a blank slide and a prayer.",
-      "x": "4.2cm",
-      "y": "13.4cm",
-      "width": "25.47cm",
-      "height": "2.4cm",
+      "x": "3.3cm",
+      "y": "12.54cm",
+      "width": "27.27cm",
+      "height": "2.2cm",
       "font": "Arial",
       "size": "18",
       "color": "A0A6B0",
@@ -187,7 +187,7 @@
       "x": "2.2cm",
       "y": "1.21cm",
       "width": "29.47cm",
-      "height": "1.65cm",
+      "height": "1.55cm",
       "font": "Arial",
       "size": "36",
       "bold": "true",
@@ -205,9 +205,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "x": "2.2cm",
-      "y": "5.46cm",
+      "y": "5.49cm",
       "width": "14.18cm",
-      "height": "8.76cm"
+      "height": "8.43cm"
     }
   },
   {
@@ -217,10 +217,10 @@
     "props": {
       "name": "BaHead1",
       "text": "Before",
-      "x": "3.41cm",
-      "y": "6.67cm",
-      "width": "11.76cm",
-      "height": "1.55cm",
+      "x": "3.3cm",
+      "y": "6.59cm",
+      "width": "11.98cm",
+      "height": "1.5cm",
       "font": "Arial",
       "size": "28",
       "bold": "true",
@@ -235,10 +235,10 @@
     "props": {
       "name": "BaBody1",
       "text": "• Decks drift from the brand file\n• Agents invent one-off layouts\n• No floors, no screenshot gate\n• Overwrite risk on every save",
-      "x": "3.41cm",
-      "y": "8.77cm",
-      "width": "11.76cm",
-      "height": "4.24cm",
+      "x": "3.3cm",
+      "y": "8.7cm",
+      "width": "11.98cm",
+      "height": "4.11cm",
       "font": "Arial",
       "size": "18",
       "color": "A0A6B0",
@@ -255,9 +255,9 @@
       "fill": "0B5FFF",
       "line": "none",
       "x": "17.48cm",
-      "y": "5.46cm",
+      "y": "5.49cm",
       "width": "14.18cm",
-      "height": "8.76cm"
+      "height": "8.43cm"
     }
   },
   {
@@ -267,10 +267,10 @@
     "props": {
       "name": "BaHead2",
       "text": "After",
-      "x": "18.7cm",
-      "y": "6.67cm",
-      "width": "11.76cm",
-      "height": "1.55cm",
+      "x": "18.59cm",
+      "y": "6.59cm",
+      "width": "11.98cm",
+      "height": "1.5cm",
       "font": "Arial",
       "size": "28",
       "bold": "true",
@@ -285,10 +285,10 @@
     "props": {
       "name": "BaBody2",
       "text": "• Tokens compiled from DESIGN.md\n• Recipes with real text budgets\n• Gate 3 contact sheet before ship\n• Staging-safe apply with --force",
-      "x": "18.7cm",
-      "y": "8.77cm",
-      "width": "11.76cm",
-      "height": "4.24cm",
+      "x": "18.59cm",
+      "y": "8.7cm",
+      "width": "11.98cm",
+      "height": "4.11cm",
       "font": "Arial",
       "size": "18",
       "color": "FFFFFF",
@@ -320,9 +320,9 @@
       "name": "ProcTitle",
       "text": "Authoring pipeline",
       "x": "2.2cm",
-      "y": "1.4cm",
+      "y": "1.21cm",
       "width": "29.47cm",
-      "height": "1.8cm",
+      "height": "1.55cm",
       "font": "Arial",
       "size": "36",
       "bold": "true",
@@ -341,9 +341,9 @@
       "line": "none",
       "text": "1\nBrief\nMarkdown",
       "x": "2.2cm",
-      "y": "7.2cm",
+      "y": "6.48cm",
       "width": "5.01cm",
-      "height": "4.6cm",
+      "height": "5cm",
       "font": "Arial",
       "size": "18",
       "bold": "true",
@@ -363,9 +363,9 @@
       "line": "none",
       "text": "2\nCompose\nDeck-spec",
       "x": "8.31cm",
-      "y": "7.2cm",
+      "y": "6.48cm",
       "width": "5.01cm",
-      "height": "4.6cm",
+      "height": "5cm",
       "font": "Arial",
       "size": "18",
       "bold": "true",
@@ -385,9 +385,9 @@
       "line": "none",
       "text": "3\nScaffold\nTokens",
       "x": "14.43cm",
-      "y": "7.2cm",
+      "y": "6.48cm",
       "width": "5.01cm",
-      "height": "4.6cm",
+      "height": "5cm",
       "font": "Arial",
       "size": "18",
       "bold": "true",
@@ -407,9 +407,9 @@
       "line": "none",
       "text": "4\nApply\nLegacy",
       "x": "20.54cm",
-      "y": "7.2cm",
+      "y": "6.48cm",
       "width": "5.01cm",
-      "height": "4.6cm",
+      "height": "5cm",
       "font": "Arial",
       "size": "18",
       "bold": "true",
@@ -429,9 +429,9 @@
       "line": "none",
       "text": "5\nGate 3\nQA",
       "x": "26.66cm",
-      "y": "7.2cm",
+      "y": "6.48cm",
       "width": "5.01cm",
-      "height": "4.6cm",
+      "height": "5cm",
       "font": "Arial",
       "size": "18",
       "bold": "true",
@@ -518,7 +518,7 @@
       "name": "FeatTitle",
       "text": "Three promises",
       "x": "2.2cm",
-      "y": "1.35cm",
+      "y": "1.21cm",
       "width": "29.47cm",
       "height": "1.84cm"
     }
@@ -533,9 +533,9 @@
       "line": "none",
       "name": "Card1Bg",
       "x": "2.2cm",
-      "y": "4.14cm",
+      "y": "3.93cm",
       "width": "9.09cm",
-      "height": "13.71cm"
+      "height": "12.92cm"
     }
   },
   {
@@ -550,10 +550,10 @@
       "fill": "none",
       "name": "Card1Num",
       "text": "01",
-      "x": "3.05cm",
-      "y": "5.44cm",
-      "width": "7.39cm",
-      "height": "1.9cm"
+      "x": "3.3cm",
+      "y": "5.03cm",
+      "width": "6.89cm",
+      "height": "1.85cm"
     }
   },
   {
@@ -568,10 +568,10 @@
       "fill": "none",
       "name": "Card1Title",
       "text": "Exact geometry",
-      "x": "3.05cm",
-      "y": "7.79cm",
-      "width": "7.39cm",
-      "height": "2.8cm"
+      "x": "3.3cm",
+      "y": "7.49cm",
+      "width": "6.89cm",
+      "height": "2.15cm"
     }
   },
   {
@@ -581,13 +581,14 @@
     "props": {
       "font": "Arial",
       "size": "18",
+      "bold": "false",
       "color": "A0A6B0",
       "fill": "none",
       "name": "Card1Body",
       "text": "Centimeters. Glued connectors. Type floors that hold.",
-      "x": "3.05cm",
-      "y": "11.04cm",
-      "width": "7.39cm",
+      "x": "3.3cm",
+      "y": "10.26cm",
+      "width": "6.89cm",
       "height": "2.63cm"
     }
   },
@@ -601,9 +602,9 @@
       "line": "none",
       "name": "Card2Bg",
       "x": "12.39cm",
-      "y": "4.14cm",
+      "y": "3.93cm",
       "width": "9.09cm",
-      "height": "13.71cm"
+      "height": "12.92cm"
     }
   },
   {
@@ -618,10 +619,10 @@
       "fill": "none",
       "name": "Card2Num",
       "text": "02",
-      "x": "13.24cm",
-      "y": "5.44cm",
-      "width": "7.39cm",
-      "height": "1.9cm"
+      "x": "13.49cm",
+      "y": "5.03cm",
+      "width": "6.89cm",
+      "height": "1.85cm"
     }
   },
   {
@@ -636,10 +637,10 @@
       "fill": "none",
       "name": "Card2Title",
       "text": "Hard gates",
-      "x": "13.24cm",
-      "y": "7.79cm",
-      "width": "7.39cm",
-      "height": "2.8cm"
+      "x": "13.49cm",
+      "y": "7.49cm",
+      "width": "6.89cm",
+      "height": "2.15cm"
     }
   },
   {
@@ -649,13 +650,14 @@
     "props": {
       "font": "Arial",
       "size": "18",
+      "bold": "false",
       "color": "A0A6B0",
       "fill": "none",
       "name": "Card2Body",
       "text": "Budgets, contrast, issues — then a contact sheet.",
-      "x": "13.24cm",
-      "y": "11.04cm",
-      "width": "7.39cm",
+      "x": "13.49cm",
+      "y": "10.26cm",
+      "width": "6.89cm",
       "height": "2.63cm"
     }
   },
@@ -669,9 +671,9 @@
       "line": "none",
       "name": "Card3Bg",
       "x": "22.58cm",
-      "y": "4.14cm",
+      "y": "3.93cm",
       "width": "9.09cm",
-      "height": "13.71cm"
+      "height": "12.92cm"
     }
   },
   {
@@ -686,10 +688,10 @@
       "fill": "none",
       "name": "Card3Num",
       "text": "03",
-      "x": "23.43cm",
-      "y": "5.44cm",
-      "width": "7.39cm",
-      "height": "1.9cm"
+      "x": "23.68cm",
+      "y": "5.03cm",
+      "width": "6.89cm",
+      "height": "1.85cm"
     }
   },
   {
@@ -704,10 +706,10 @@
       "fill": "none",
       "name": "Card3Title",
       "text": "Agent-safe",
-      "x": "23.43cm",
-      "y": "7.79cm",
-      "width": "7.39cm",
-      "height": "2.8cm"
+      "x": "23.68cm",
+      "y": "7.49cm",
+      "width": "6.89cm",
+      "height": "2.15cm"
     }
   },
   {
@@ -717,13 +719,14 @@
     "props": {
       "font": "Arial",
       "size": "18",
+      "bold": "false",
       "color": "A0A6B0",
       "fill": "none",
       "name": "Card3Body",
       "text": "Claude, Codex, Grok. Install only after you say yes.",
-      "x": "23.43cm",
-      "y": "11.04cm",
-      "width": "7.39cm",
+      "x": "23.68cm",
+      "y": "10.26cm",
+      "width": "6.89cm",
       "height": "2.63cm"
     }
   },
@@ -744,9 +747,9 @@
       "name": "PillarTitle",
       "text": "Two backends, one contract",
       "x": "2.2cm",
-      "y": "1.0cm",
+      "y": "1.21cm",
       "width": "29.47cm",
-      "height": "1.8cm",
+      "height": "1.55cm",
       "font": "Arial",
       "size": "36",
       "bold": "true",
@@ -845,9 +848,9 @@
       "name": "StairsTitle",
       "text": "Quality is a staircase",
       "x": "2.2cm",
-      "y": "1.0cm",
+      "y": "1.21cm",
       "width": "29.47cm",
-      "height": "1.8cm",
+      "height": "1.55cm",
       "font": "Arial",
       "size": "36",
       "bold": "true",
@@ -990,9 +993,9 @@
       "name": "CheckTitle",
       "text": "Hard rules we keep",
       "x": "2.2cm",
-      "y": "1.0cm",
+      "y": "1.21cm",
       "width": "29.47cm",
-      "height": "1.8cm",
+      "height": "1.55cm",
       "font": "Arial",
       "size": "36",
       "bold": "true",
@@ -1130,9 +1133,9 @@
       "name": "CloseTitle",
       "text": "Start with the brand file",
       "x": "2.2cm",
-      "y": "5.2cm",
+      "y": "4.99cm",
       "width": "29.47cm",
-      "height": "2.8cm",
+      "height": "2.6cm",
       "font": "Arial",
       "size": "44",
       "bold": "true",
@@ -1148,10 +1151,10 @@
     "props": {
       "name": "CloseBody",
       "text": "doctor --ensure · compose a brief · scaffold · apply --screenshot",
-      "x": "4.2cm",
-      "y": "8.4cm",
-      "width": "25.47cm",
-      "height": "2.0cm",
+      "x": "3.3cm",
+      "y": "8.2cm",
+      "width": "27.27cm",
+      "height": "2cm",
       "font": "Arial",
       "size": "18",
       "color": "A0A6B0",
@@ -1170,9 +1173,9 @@
       "line": "none",
       "text": "doctor --ensure",
       "x": "11.93cm",
-      "y": "11.8cm",
+      "y": "11.3cm",
       "width": "10cm",
-      "height": "1.8cm",
+      "height": "1.7cm",
       "font": "Arial",
       "size": "18",
       "bold": "true",

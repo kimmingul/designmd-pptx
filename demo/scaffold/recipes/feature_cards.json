@@ -21,7 +21,7 @@
       "name": "FeatTitle",
       "text": "Three promises",
       "x": "2.2cm",
-      "y": "1.35cm",
+      "y": "1.21cm",
       "width": "29.47cm",
       "height": "1.84cm"
     }
@@ -36,9 +36,9 @@
       "line": "none",
       "name": "Card1Bg",
       "x": "2.2cm",
-      "y": "4.14cm",
+      "y": "3.93cm",
       "width": "9.09cm",
-      "height": "13.71cm"
+      "height": "12.92cm"
     }
   },
   {
@@ -53,10 +53,10 @@
       "fill": "none",
       "name": "Card1Num",
       "text": "01",
-      "x": "3.05cm",
-      "y": "5.44cm",
-      "width": "7.39cm",
-      "height": "1.9cm"
+      "x": "3.3cm",
+      "y": "5.03cm",
+      "width": "6.89cm",
+      "height": "1.85cm"
     }
   },
   {
@@ -71,10 +71,10 @@
       "fill": "none",
       "name": "Card1Title",
       "text": "Exact geometry",
-      "x": "3.05cm",
-      "y": "7.79cm",
-      "width": "7.39cm",
-      "height": "2.8cm"
+      "x": "3.3cm",
+      "y": "7.49cm",
+      "width": "6.89cm",
+      "height": "2.15cm"
     }
   },
   {
@@ -84,13 +84,14 @@
     "props": {
       "font": "Arial",
       "size": "18",
+      "bold": "false",
       "color": "A0A6B0",
       "fill": "none",
       "name": "Card1Body",
       "text": "Centimeters. Glued connectors. Type floors that hold.",
-      "x": "3.05cm",
-      "y": "11.04cm",
-      "width": "7.39cm",
+      "x": "3.3cm",
+      "y": "10.26cm",
+      "width": "6.89cm",
       "height": "2.63cm"
     }
   },
@@ -104,9 +105,9 @@
       "line": "none",
       "name": "Card2Bg",
       "x": "12.39cm",
-      "y": "4.14cm",
+      "y": "3.93cm",
       "width": "9.09cm",
-      "height": "13.71cm"
+      "height": "12.92cm"
     }
   },
   {
@@ -121,10 +122,10 @@
       "fill": "none",
       "name": "Card2Num",
       "text": "02",
-      "x": "13.24cm",
-      "y": "5.44cm",
-      "width": "7.39cm",
-      "height": "1.9cm"
+      "x": "13.49cm",
+      "y": "5.03cm",
+      "width": "6.89cm",
+      "height": "1.85cm"
     }
   },
   {
@@ -139,10 +140,10 @@
       "fill": "none",
       "name": "Card2Title",
       "text": "Hard gates",
-      "x": "13.24cm",
-      "y": "7.79cm",
-      "width": "7.39cm",
-      "height": "2.8cm"
+      "x": "13.49cm",
+      "y": "7.49cm",
+      "width": "6.89cm",
+      "height": "2.15cm"
     }
   },
   {
@@ -152,13 +153,14 @@
     "props": {
       "font": "Arial",
       "size": "18",
+      "bold": "false",
       "color": "A0A6B0",
       "fill": "none",
       "name": "Card2Body",
       "text": "Budgets, contrast, issues — then a contact sheet.",
-      "x": "13.24cm",
-      "y": "11.04cm",
-      "width": "7.39cm",
+      "x": "13.49cm",
+      "y": "10.26cm",
+      "width": "6.89cm",
       "height": "2.63cm"
     }
   },
@@ -172,9 +174,9 @@
       "line": "none",
       "name": "Card3Bg",
       "x": "22.58cm",
-      "y": "4.14cm",
+      "y": "3.93cm",
       "width": "9.09cm",
-      "height": "13.71cm"
+      "height": "12.92cm"
     }
   },
   {
@@ -189,10 +191,10 @@
       "fill": "none",
       "name": "Card3Num",
       "text": "03",
-      "x": "23.43cm",
-      "y": "5.44cm",
-      "width": "7.39cm",
-      "height": "1.9cm"
+      "x": "23.68cm",
+      "y": "5.03cm",
+      "width": "6.89cm",
+      "height": "1.85cm"
     }
   },
   {
@@ -207,10 +209,10 @@
       "fill": "none",
       "name": "Card3Title",
       "text": "Agent-safe",
-      "x": "23.43cm",
-      "y": "7.79cm",
-      "width": "7.39cm",
-      "height": "2.8cm"
+      "x": "23.68cm",
+      "y": "7.49cm",
+      "width": "6.89cm",
+      "height": "2.15cm"
     }
   },
   {
@@ -220,13 +222,14 @@
     "props": {
       "font": "Arial",
       "size": "18",
+      "bold": "false",
       "color": "A0A6B0",
       "fill": "none",
       "name": "Card3Body",
       "text": "Claude, Codex, Grok. Install only after you say yes.",
-      "x": "23.43cm",
-      "y": "11.04cm",
-      "width": "7.39cm",
+      "x": "23.68cm",
+      "y": "10.26cm",
+      "width": "6.89cm",
       "height": "2.63cm"
     }
   }

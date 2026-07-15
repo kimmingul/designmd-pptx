@@ -77,6 +77,9 @@ python -m designmd_pptx animate demo/designmd-pptx-intro-v2.1.2.pptx \
 
 ## Related engine changes (this branch)
 
+- **`ui_kit.py`**: shared StageMetrics + Card/Stack/Comparison contract
+  (see `docs/ui-kit.md`) — content-height body, Spacer free space, pad/gap
+  from tokens (React-like spacing system)
 - `compile.py`: `spacious` / `compact` density maps to real `margin_cm` / `gap_cm`
-- `recipes.py`: stronger cover (left hero), process (numbered + connectors),
-  big_number scale, close CTA, stairs detail text
+- Flagship recipes consume the kit: feature_cards, before/after, process,
+  close, big_number, bullets, comparison_2col

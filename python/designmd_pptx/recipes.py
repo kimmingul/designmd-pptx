@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from . import layout as L
+from . import ui_kit as UI
 
 
 def _cm(n: float) -> str:
@@ -791,19 +792,8 @@ def recipe_section_opener_numbered(tokens: dict, content: dict | None = None) ->
 
 
 def recipe_feature_cards(tokens: dict, content: dict | None = None) -> list[dict]:
-    """2–4 feature cards — equal columns, content top-packed.
-
-    Design contract (not just “fit”):
-    - Card bodies are **content-height**, never weight-stretched into empty
-      text boxes (that was the void-slab look on dark stages).
-    - Free vertical space goes to a **Spacer** at the bottom of each card so
-      columns share height without inventing fake paragraphs.
-    - Index numbers (01 / 02 / …) carry hierarchy; the old 0.18 cm hairline
-      accent bar is gone.
-    - Titles share a fixed band so three-up grids align.
-    """
-    b = _base_props(tokens)
-    c, t = b["c"], b["t"]
+    """2–4 feature cards via ui_kit (content-height body + Spacer free space)."""
+    st = UI.stage_metrics(tokens)
     content = content or {}
     title = content.get("title", "Capabilities")
     cards = content.get(
@@ -816,124 +806,34 @@ def recipe_feature_cards(tokens: dict, content: dict | None = None) -> list[dict
     )
     if not isinstance(cards, list) or not cards:
         cards = [{"title": "Item", "body": "Detail."}]
-    n = max(2, min(4, len(cards)))
-    cards = cards[:n]
-    bg = c["content_background"]
-    m = b["margin"]
-    gap = max(0.55, b["gap"])
+    cards = cards[: max(2, min(4, len(cards)))]
+    bg = st.c["content_background"]
 
     def build(d: L.Density) -> L.Box:
-        body_pt = L.floored_pt(t["body_pt"], d)
-        title_pt = max(20, min(26, int(t["section_pt"])))
-        num_pt = max(28, min(36, title_pt + 8))
-        # Fixed title band keeps multi-column baselines aligned.
-        title_band = 1.7 * d.gap + 1.1
-        pad_y = 0.95 * d.gap + 0.35
-        pad_x = 0.85
-        card_boxes = []
-        for i, card in enumerate(cards):
-            num = f"{i + 1:02d}"
-            card_boxes.append(
-                L.VStack(
-                    weight=1,
-                    name=f"Card{i + 1}Bg",
-                    pad=(pad_y, pad_x, pad_y, pad_x),
-                    gap=0.45 * d.gap,
-                    children=[
-                        L.Text(
-                            num,
-                            pt=num_pt,
-                            name=f"Card{i + 1}Num",
-                            min_cm=1.9,
-                            max_cm=2.1,
-                            props={
-                                "font": t["heading_font"],
-                                "size": str(num_pt),
-                                "bold": "true",
-                                "color": c["accent"],
-                                "fill": "none",
-                            },
-                        ),
-                        L.Text(
-                            str(card.get("title", "")),
-                            pt=title_pt,
-                            name=f"Card{i + 1}Title",
-                            min_cm=max(1.6, title_band),
-                            max_cm=max(1.8, title_band + 0.2),
-                            props={
-                                "font": t["heading_font"],
-                                "size": str(title_pt),
-                                "bold": "true",
-                                "color": c["text_on_surface"],
-                                "fill": "none",
-                            },
-                        ),
-                        # weight=0 → height from lines only (no hollow text frame).
-                        # min_cm padded above fit estimate — OfficeCLI line metrics
-                        # are slightly taller than our estimator.
-                        L.Text(
-                            str(card.get("body", "")),
-                            pt=body_pt,
-                            name=f"Card{i + 1}Body",
-                            weight=0,
-                            min_cm=2.2,
-                            max_cm=5.5,
-                            props={
-                                "font": t["body_font"],
-                                "size": str(body_pt),
-                                "color": c["muted"],
-                                "fill": "none",
-                            },
-                        ),
-                        # Absorb remaining card height as empty surface, not text.
-                        L.Spacer(weight=1),
-                    ],
-                    props={
-                        "preset": b["preset"],
-                        "fill": c["surface"],
-                        "line": "none",
-                    },
-                )
+        cols = [
+            UI.feature_card(
+                st,
+                index=i + 1,
+                title=str(card.get("title", "")),
+                body=str(card.get("body", "")),
+                density=d,
             )
-        return L.VStack(
-            pad=(1.35, m, 1.2, m),
-            gap=0.95 * d.gap,
-            name="feature_cards",
-            children=[
-                L.Text(
-                    title,
-                    pt=t["title_pt"],
-                    name="FeatTitle",
-                    min_cm=1.5,
-                    max_cm=2.2,
-                    props={
-                        "font": t["heading_font"],
-                        "size": str(t["title_pt"]),
-                        "bold": "true",
-                        "color": c["text_on_content"],
-                        "fill": "none",
-                    },
-                ),
-                L.HStack(card_boxes, gap=gap * d.gap, weight=1),
-            ],
+            for i, card in enumerate(cards)
+        ]
+        return UI.titled_stage(
+            st,
+            title,
+            UI.equal_columns(cols, st, density=d),
+            title_name="FeatTitle",
+            density=d,
         )
 
-    placed, _d = L.solve_adaptive(build, 0, 0, L.CANVAS_W, L.CANVAS_H)
-    return [
-        {
-            "command": "add",
-            "parent": "/",
-            "type": "slide",
-            "props": {"layout": "blank", "background": bg},
-        },
-        *_emit_shapes(placed),
-    ]
+    return UI.solve_stage(build, bg=bg)
 
 
 def recipe_bullets(tokens: dict, content: dict | None = None) -> list[dict]:
-    """Title + up to 5 body bullets (one idea per slide)."""
-    b = _base_props(tokens)
-    c, t = b["c"], b["t"]
+    """Title + up to 5 body bullets — body is content-height (ui_kit)."""
+    st = UI.stage_metrics(tokens)
     content = content or {}
     title = content.get("title", "Agenda")
     items = content.get("bullets") or content.get("items") or [
@@ -943,47 +843,31 @@ def recipe_bullets(tokens: dict, content: dict | None = None) -> list[dict]:
     ]
     if not isinstance(items, list):
         items = [str(items)]
-    items = [str(x) for x in items[:5]]
-    body = "\n".join(f"• {x}" for x in items)
+    body = UI.bullets_text(items, limit=5)
+    bg = st.c["content_background"]
 
-    # v1.6: engine-solved geometry — title height from its text, body fills
-    # the rest; density backs off spacing/pt before failing loudly.
     def build(d: L.Density) -> L.Box:
-        body_pt = L.floored_pt(t["body_pt"], d)
+        body_pt = L.floored_pt(st.body_pt, d)
         return L.VStack(
-            pad=(1.2, b["margin"], 1.0, b["margin"]),
-            gap=0.8 * d.gap,
-            name="bullets",
-            children=[
-                L.Text(title, pt=t["title_pt"], name="BulletTitle",
-                       min_cm=1.6, max_cm=2.8, props={
-                           "font": t["heading_font"], "size": str(t["title_pt"]),
-                           "bold": "true", "color": c["text_on_content"],
-                           "fill": "none",
-                       }),
-                L.Text(body, pt=body_pt, name="BulletBody", weight=1, props={
-                    "font": t["body_font"], "size": str(body_pt),
-                    "color": c["text_on_content"], "fill": "none",
-                }),
+            [
+                UI.slide_title_node(st, title, name="BulletTitle", density=d),
+                UI.content_text(
+                    st, body, name="BulletBody", pt=body_pt,
+                    color=st.c["text_on_content"],
+                    min_cm=2.0, max_cm=12.0,
+                ),
+                L.Spacer(weight=1),
             ],
+            pad=(max(1.2, st.margin * 0.55), st.margin, st.margin, st.margin),
+            gap=max(0.7, st.margin * 0.35) * d.gap,
+            name="bullets",
         )
 
-    placed, _d = L.solve_adaptive(build, 0, 0, L.CANVAS_W, L.CANVAS_H)
-    return [
-        {
-            "command": "add",
-            "parent": "/",
-            "type": "slide",
-            "props": {"layout": "blank", "background": c["content_background"]},
-        },
-        *_emit_shapes(placed),
-        {
-            "command": "add",
-            "parent": "/slide[last()]",
-            "type": "notes",
-            "props": {"text": content.get("notes", "Expand each bullet; do not read the slide.")},
-        },
-    ]
+    ops = UI.solve_stage(build, bg=bg)
+    ops.append(UI.notes_op(
+        content.get("notes", "Expand each bullet; do not read the slide.")
+    ))
+    return ops
 
 
 def recipe_quote(tokens: dict, content: dict | None = None) -> list[dict]:
@@ -1054,72 +938,46 @@ def recipe_quote(tokens: dict, content: dict | None = None) -> list[dict]:
 
 
 def recipe_comparison_2col(tokens: dict, content: dict | None = None) -> list[dict]:
-    b = _base_props(tokens)
-    c, t = b["c"], b["t"]
+    """Two equal panels via ui_kit card contract (no body weight stretch)."""
+    st = UI.stage_metrics(tokens)
     content = content or {}
     title = content.get("title", "Compare")
     left = content.get("left") or {"title": "Option A", "body": "Strengths of A."}
     right = content.get("right") or {"title": "Option B", "body": "Strengths of B."}
+    bg = st.c["content_background"]
 
-    # v1.6: engine-solved geometry — two equal panels, body heights validated.
     def build(d: L.Density) -> L.Box:
-        body_pt = L.floored_pt(t["body_pt"], d)
+        body_pt = L.floored_pt(st.body_pt, d)
+        title_pt = max(20, min(26, st.section_pt))
         panels = []
         for i, side in enumerate((left, right)):
             panels.append(
-                L.VStack(
-                    weight=1,
+                UI.card(
+                    st,
                     name=f"Cmp{i + 1}Bg",
-                    pad=(0.8 * d.gap, 0.8, 0.8, 0.8),
-                    gap=0.5 * d.gap,
+                    density=d,
                     children=[
-                        L.Text(str(side.get("title", "")),
-                               pt=max(20, t["section_pt"]),
-                               name=f"Cmp{i + 1}Title",
-                               min_cm=1.2, max_cm=3.0, props={
-                                   "font": t["heading_font"],
-                                   "size": str(max(20, t["section_pt"])),
-                                   "bold": "true",
-                                   "color": c["text_on_surface"],
-                                   "fill": "none",
-                               }),
-                        L.Text(str(side.get("body", "")), pt=body_pt,
-                               name=f"Cmp{i + 1}Body", weight=1, props={
-                                   "font": t["body_font"], "size": str(body_pt),
-                                   "color": c["muted"], "fill": "none",
-                               }),
+                        UI.content_text(
+                            st, str(side.get("title", "")),
+                            name=f"Cmp{i + 1}Title",
+                            pt=title_pt, color=st.c["text_on_surface"], bold=True,
+                            min_cm=st.card_title_band, max_cm=st.card_title_band + 0.2,
+                        ),
+                        UI.content_text(
+                            st, str(side.get("body", "")),
+                            name=f"Cmp{i + 1}Body",
+                            pt=body_pt, color=st.c["muted"],
+                            min_cm=2.0, max_cm=8.0,
+                        ),
                     ],
-                    props={
-                        "preset": b["preset"], "fill": c["surface"],
-                        "line": c["hairline"],
-                    },
                 )
             )
-        return L.VStack(
-            pad=(1.2, b["margin"], 1.0, b["margin"]),
-            gap=0.9 * d.gap,
-            name="comparison_2col",
-            children=[
-                L.Text(title, pt=t["title_pt"], name="CmpTitle",
-                       min_cm=1.6, max_cm=2.8, props={
-                           "font": t["heading_font"], "size": str(t["title_pt"]),
-                           "bold": "true", "color": c["text_on_content"],
-                           "fill": "none",
-                       }),
-                L.HStack(panels, gap=b["gap"] * d.gap, weight=1),
-            ],
+        return UI.titled_stage(
+            st, title, UI.equal_columns(panels, st, density=d),
+            title_name="CmpTitle", density=d,
         )
 
-    placed, _d = L.solve_adaptive(build, 0, 0, L.CANVAS_W, L.CANVAS_H)
-    return [
-        {
-            "command": "add",
-            "parent": "/",
-            "type": "slide",
-            "props": {"layout": "blank", "background": c["content_background"]},
-        },
-        *_emit_shapes(placed),
-    ]
+    return UI.solve_stage(build, bg=bg)
 
 
 def recipe_chart_insight(tokens: dict, content: dict | None = None) -> list[dict]:
@@ -1355,9 +1213,9 @@ def recipe_process(
     *,
     slide_index: int | None = None,
 ) -> list[dict]:
-    """Process boxes + glued officecli connectors (2–5 steps). Requires slide_index for connectors."""
-    b = _base_props(tokens)
-    c, t = b["c"], b["t"]
+    """Process boxes + glued connectors — StageMetrics for margin/gap/pad."""
+    st = UI.stage_metrics(tokens)
+    c, t = st.c, tokens["type"]
     content = content or {}
     title = content.get("title", "Process")
     steps = content.get("steps") or ["Input", "Transform", "Output"]
@@ -1365,9 +1223,11 @@ def recipe_process(
         steps = [str(steps)]
     n = max(2, min(5, len(steps)))
     steps = steps[:n]
-    col_w, xs = _grid_n(n, b["margin"], max(0.55, b["gap"]), max_n=5)
-    box_h = 4.6
-    y = 7.2
+    col_w, xs = _grid_n(n, st.margin, st.gap, max_n=5)
+    # Content-sized step cards in the mid band; bottom margin = stage margin.
+    box_h = min(5.0, max(3.8, st.content_h * 0.42))
+    free = max(0.0, UI.CANVAS_H - st.content_top - st.content_bottom - box_h)
+    y = st.content_top + free * 0.35
     parent = "/slide[last()]"
     ops: list[dict] = [
         {
@@ -1383,12 +1243,12 @@ def recipe_process(
             "props": {
                 "name": "ProcTitle",
                 "text": title,
-                "x": _cm(b["margin"]),
-                "y": "1.4cm",
-                "width": _cm(33.87 - 2 * b["margin"]),
-                "height": "1.8cm",
-                "font": t["heading_font"],
-                "size": str(t["title_pt"]),
+                "x": UI.cm(st.margin),
+                "y": UI.cm(max(1.15, st.margin * 0.55)),
+                "width": UI.cm(st.usable_w),
+                "height": UI.cm(st.title_band),
+                "font": st.heading_font,
+                "size": str(st.title_pt),
                 "bold": "true",
                 "color": c["text_on_content"],
                 "fill": "none",
@@ -1416,16 +1276,16 @@ def recipe_process(
                 "type": "shape",
                 "props": {
                     "name": name,
-                    "preset": b["preset"],
+                    "preset": st.preset,
                     "fill": fill,
                     "line": "none",
                     "text": text,
-                    "x": _cm(xs[i]),
-                    "y": _cm(y),
-                    "width": _cm(col_w),
-                    "height": _cm(box_h),
-                    "font": t["heading_font"],
-                    "size": str(max(16, min(20, t["body_pt"]))),
+                    "x": UI.cm(xs[i]),
+                    "y": UI.cm(y),
+                    "width": UI.cm(col_w),
+                    "height": UI.cm(box_h),
+                    "font": st.heading_font,
+                    "size": str(max(16, min(20, st.body_pt))),
                     "bold": "true",
                     "color": tc,
                     "align": "center",
@@ -1814,14 +1674,20 @@ def recipe_image_text_2col(
 
 
 def recipe_close(tokens: dict, content: dict | None = None) -> list[dict]:
-    b = _base_props(tokens)
-    c, t = b["c"], b["t"]
+    """Close / CTA — centered stack using StageMetrics spacing."""
+    st = UI.stage_metrics(tokens)
+    c = st.c
     content = content or {}
     title = content.get("title", "Next step")
     body = content.get("body", "One clear ask. One owner. One date.")
     cta = content.get("cta", "Continue")
-    m = b["margin"]
-    usable = 33.87 - 2 * m
+    m, usable = st.margin, st.usable_w
+    # Vertical band: title / body / cta with equal stage margins.
+    title_h, body_h, cta_h = 2.6, 2.0, 1.7
+    stack_h = title_h + st.title_to_body + body_h + st.gap + cta_h
+    free = max(0.0, UI.CANVAS_H - 2 * m - stack_h)
+    y0 = m + free * 0.42
+    cta_w = min(10.0, usable * 0.4)
 
     return [
         {
@@ -1837,12 +1703,12 @@ def recipe_close(tokens: dict, content: dict | None = None) -> list[dict]:
             "props": {
                 "name": "CloseTitle",
                 "text": title,
-                "x": _cm(m),
-                "y": "5.2cm",
-                "width": _cm(usable),
-                "height": "2.8cm",
-                "font": t["heading_font"],
-                "size": str(max(t["title_pt"], t.get("cover_pt", t["title_pt"]) - 4)),
+                "x": UI.cm(m),
+                "y": UI.cm(y0),
+                "width": UI.cm(usable),
+                "height": UI.cm(title_h),
+                "font": st.heading_font,
+                "size": str(max(st.title_pt, st.cover_pt - 4)),
                 "bold": "true",
                 "color": c["text"],
                 "align": "center",
@@ -1856,12 +1722,12 @@ def recipe_close(tokens: dict, content: dict | None = None) -> list[dict]:
             "props": {
                 "name": "CloseBody",
                 "text": body,
-                "x": _cm(m + 2),
-                "y": "8.4cm",
-                "width": _cm(usable - 4),
-                "height": "2.0cm",
-                "font": t["body_font"],
-                "size": str(t["body_pt"]),
+                "x": UI.cm(m + st.pad),
+                "y": UI.cm(y0 + title_h + st.title_to_body),
+                "width": UI.cm(usable - 2 * st.pad),
+                "height": UI.cm(body_h),
+                "font": st.body_font,
+                "size": str(st.body_pt),
                 "color": c["muted"],
                 "align": "center",
                 "fill": "none",
@@ -1873,16 +1739,16 @@ def recipe_close(tokens: dict, content: dict | None = None) -> list[dict]:
             "type": "shape",
             "props": {
                 "name": "CloseCta",
-                "preset": b["preset"],
+                "preset": st.preset,
                 "fill": c["accent"],
                 "line": "none",
                 "text": cta,
-                "x": _cm((33.87 - 10.0) / 2),
-                "y": "11.8cm",
-                "width": "10cm",
-                "height": "1.8cm",
-                "font": t["body_font"],
-                "size": str(max(18, t["body_pt"])),
+                "x": UI.cm((UI.CANVAS_W - cta_w) / 2),
+                "y": UI.cm(y0 + title_h + st.title_to_body + body_h + st.gap),
+                "width": UI.cm(cta_w),
+                "height": UI.cm(cta_h),
+                "font": st.body_font,
+                "size": str(max(18, st.body_pt)),
                 "bold": "true",
                 "color": c["on_accent"],
                 "align": "center",
@@ -1892,9 +1758,10 @@ def recipe_close(tokens: dict, content: dict | None = None) -> list[dict]:
     ]
 
 
-def _title_op(tokens: dict, name: str, title: str, *, y: str = "1.0cm") -> dict:
-    b = _base_props(tokens)
-    c, t = b["c"], b["t"]
+def _title_op(tokens: dict, name: str, title: str, *, y: str | None = None) -> dict:
+    """Slide title using ui_kit StageMetrics (margin + title band)."""
+    st = UI.stage_metrics(tokens)
+    title_y = y if y is not None else UI.cm(max(1.15, st.margin * 0.55))
     return {
         "command": "add",
         "parent": "/slide[last()]",
@@ -1902,14 +1769,14 @@ def _title_op(tokens: dict, name: str, title: str, *, y: str = "1.0cm") -> dict:
         "props": {
             "name": name,
             "text": title,
-            "x": _cm(b["margin"]),
-            "y": y,
-            "width": _cm(33.87 - 2 * b["margin"]),
-            "height": "1.8cm",
-            "font": t["heading_font"],
-            "size": str(t["title_pt"]),
+            "x": UI.cm(st.margin),
+            "y": title_y if isinstance(title_y, str) else UI.cm(title_y),
+            "width": UI.cm(st.usable_w),
+            "height": UI.cm(st.title_band),
+            "font": st.heading_font,
+            "size": str(st.title_pt),
             "bold": "true",
-            "color": c["text_on_content"],
+            "color": st.c["text_on_content"],
             "fill": "none",
         },
     }
@@ -1926,9 +1793,10 @@ def _slide_op(tokens: dict) -> dict:
 
 
 def recipe_big_number(tokens: dict, content: dict | None = None) -> list[dict]:
-    """One hero metric: huge value, label, context line."""
-    b = _base_props(tokens)
-    c, t = b["c"], b["t"]
+    """One hero metric — centered stack sized from StageMetrics."""
+    st = UI.stage_metrics(tokens)
+    c = st.c
+    t = tokens["type"]
     content = content or {}
     value = str(content.get("value", "—"))
     label = content.get("label", "Headline metric")
@@ -1936,8 +1804,13 @@ def recipe_big_number(tokens: dict, content: dict | None = None) -> list[dict]:
     mega = int(t.get("mega_pt", max(72, int(t.get("kpi_pt", 60) * 1.35))))
     mega = min(96, max(56, mega))
     color = c["risk"] if content.get("watch") else c["accent"]
-    m = b["margin"]
-    usable = 33.87 - 2 * m
+    m, usable = st.margin, st.usable_w
+    value_h, label_h, ctx_h = 6.4, 1.7, 2.2
+    stack = value_h + st.title_to_body + label_h
+    if context:
+        stack += st.gap * 0.6 + ctx_h
+    free = max(0.0, UI.CANVAS_H - 2 * m - stack)
+    y0 = m + free * 0.35
     ops = [
         _slide_op(tokens),
         {
@@ -1947,11 +1820,11 @@ def recipe_big_number(tokens: dict, content: dict | None = None) -> list[dict]:
             "props": {
                 "name": "BigValue",
                 "text": value,
-                "x": _cm(m),
-                "y": "3.8cm",
-                "width": _cm(usable),
-                "height": "7.2cm",
-                "font": t["heading_font"],
+                "x": UI.cm(m),
+                "y": UI.cm(y0),
+                "width": UI.cm(usable),
+                "height": UI.cm(value_h),
+                "font": st.heading_font,
                 "size": str(mega),
                 "bold": "true",
                 "color": color,
@@ -1967,12 +1840,12 @@ def recipe_big_number(tokens: dict, content: dict | None = None) -> list[dict]:
             "props": {
                 "name": "BigLabel",
                 "text": str(label),
-                "x": _cm(m),
-                "y": "11.4cm",
-                "width": _cm(usable),
-                "height": "1.8cm",
-                "font": t["heading_font"],
-                "size": str(max(22, t["section_pt"])),
+                "x": UI.cm(m),
+                "y": UI.cm(y0 + value_h + st.title_to_body),
+                "width": UI.cm(usable),
+                "height": UI.cm(label_h),
+                "font": st.heading_font,
+                "size": str(max(22, st.section_pt)),
                 "bold": "true",
                 "color": c["text_on_content"],
                 "align": "center",
@@ -1989,12 +1862,12 @@ def recipe_big_number(tokens: dict, content: dict | None = None) -> list[dict]:
                 "props": {
                     "name": "BigContext",
                     "text": str(context),
-                    "x": _cm(m + 2.0),
-                    "y": "13.4cm",
-                    "width": _cm(usable - 4.0),
-                    "height": "2.4cm",
-                    "font": t["body_font"],
-                    "size": str(t["body_pt"]),
+                    "x": UI.cm(m + st.pad),
+                    "y": UI.cm(y0 + value_h + st.title_to_body + label_h + st.gap * 0.5),
+                    "width": UI.cm(usable - 2 * st.pad),
+                    "height": UI.cm(ctx_h),
+                    "font": st.body_font,
+                    "size": str(st.body_pt),
                     "color": c["muted"],
                     "align": "center",
                     "fill": "none",
@@ -4890,18 +4763,8 @@ def recipe_hub_spoke(tokens: dict, content: dict | None = None) -> list[dict]:
 
 
 def recipe_before_after_slider(tokens: dict, content: dict | None = None) -> list[dict]:
-    """Before / after comparison — two equal panels with content-sized height.
-
-    Spacing contract (16:9):
-    - Side margin ``m`` and bottom margin ``m`` match (no “fill the canvas”).
-    - Column gap uses design ``gap``, not a hard-coded 0.5 cm hairline.
-    - Inner pad ≈ 0.5×margin so type never kisses the card edge.
-    - Panel height = pad + head + body lines + pad — **not** a fixed 13.8 cm
-      slab with a 10.5 cm hollow body box.
-    - Extra vertical room stays as stage (black), not inflated text frames.
-    """
-    b = _base_props(tokens)
-    c, t = b["c"], b["t"]
+    """Before / after — ui_kit comparison_panels (content-height, stage air)."""
+    st = UI.stage_metrics(tokens)
     content = content or {}
     title = content.get("title", "Before → After")
     left = content.get("before") or content.get("left") or {
@@ -4915,120 +4778,36 @@ def recipe_before_after_slider(tokens: dict, content: dict | None = None) -> lis
     if not isinstance(right, dict):
         right = {"title": "After", "body": str(right)}
 
-    canvas_w, canvas_h = 33.87, 19.05
-    m = b["margin"]
-    gap = max(0.7, float(b["gap"]))
-    usable = canvas_w - 2 * m
-    col = (usable - gap) / 2
-    # Inner pad scales with margin (spacious → roomier type inset).
-    pad = max(1.0, min(1.4, m * 0.55))
-    body_pt = int(t["body_pt"])
-    head_pt = max(22, min(28, int(t["section_pt"])))
-    title_pt = int(t["title_pt"])
-
-    # Title band — top margin tracks stage margin.
-    title_y = max(1.2, m * 0.55)
-    title_h = 1.65
-    # Space between title and panel top (~0.45× margin).
-    title_to_panel = max(0.85, m * 0.45)
-    band_top = title_y + title_h + title_to_panel
-    bottom_m = m  # equal bottom margin = side margin
-
-    def _body_text(data: dict) -> str:
+    def _body(data: dict) -> str:
         body = data.get("body") or data.get("text") or ""
         if isinstance(body, list):
-            items = [str(x).strip() for x in body[:5] if str(x).strip()]
-            return "\n".join(f"• {x}" for x in items)
+            return UI.bullets_text(body, limit=5)
         return str(body).strip()
 
-    left_body = _body_text(left)
-    right_body = _body_text(right)
-    # Line height ~1.45× body — open enough for 18pt bullets without packing.
-    line_h = body_pt * 0.0353 * 1.45
-    def _body_h(text: str) -> float:
-        n = max(1, text.count("\n") + 1)
-        return max(2.6, min(6.8, n * line_h + 0.55))
-
-    body_h = max(_body_h(left_body), _body_h(right_body))
-    head_h = 1.55
-    head_to_body = 0.55
-    panel_h = pad + head_h + head_to_body + body_h + pad
-    max_panel_h = canvas_h - band_top - bottom_m
-    # Cap so panels never eat the bottom margin; keep content snug, not stretched.
-    panel_h = min(panel_h, max_panel_h)
-    # Sit the pair in the remaining band: not glued under the title, not
-    # floating in the top third with a dead lower half.
-    free = max(0.0, max_panel_h - panel_h)
-    panel_y = band_top + free * 0.38
-
-    ops: list[dict] = [
-        _slide_op(tokens),
-        {
-            "command": "add",
-            "parent": "/slide[last()]",
-            "type": "shape",
-            "props": {
-                "name": "BaTitle",
-                "text": title,
-                "x": _cm(m),
-                "y": _cm(title_y),
-                "width": _cm(usable),
-                "height": _cm(title_h),
-                "font": t["heading_font"],
-                "size": str(title_pt),
-                "bold": "true",
-                "color": c["text_on_content"],
-                "fill": "none",
-            },
-        },
-    ]
-    for i, (side, data, body) in enumerate((
-        ("Before", left, left_body),
-        ("After", right, right_body),
-    )):
-        x = m + i * (col + gap)
-        fill = c["surface"] if i == 0 else c["accent"]
-        tc = c["text_on_surface"] if i == 0 else c["on_accent"]
-        # Muted on dark panel; on accent use slightly soft on_accent (full white is harsh for bullets).
-        bc = c["muted"] if i == 0 else c["on_accent"]
-        head = str(data.get("title") or side)
-        ops.append({
-            "command": "add", "parent": "/slide[last()]", "type": "shape",
-            "props": {
-                "name": f"BaPanel{i + 1}", "preset": b["preset"],
-                "fill": fill, "line": "none",
-                "x": _cm(x), "y": _cm(panel_y),
-                "width": _cm(col), "height": _cm(panel_h),
-            },
-        })
-        ops.append({
-            "command": "add", "parent": "/slide[last()]", "type": "shape",
-            "props": {
-                "name": f"BaHead{i + 1}",
-                "text": head,
-                "x": _cm(x + pad), "y": _cm(panel_y + pad),
-                "width": _cm(col - 2 * pad), "height": _cm(head_h),
-                "font": t["heading_font"], "size": str(head_pt),
-                "bold": "true", "color": tc, "fill": "none",
-            },
-        })
-        ops.append({
-            "command": "add", "parent": "/slide[last()]", "type": "shape",
-            "props": {
-                "name": f"BaBody{i + 1}", "text": body,
-                "x": _cm(x + pad),
-                "y": _cm(panel_y + pad + head_h + head_to_body),
-                "width": _cm(col - 2 * pad),
-                "height": _cm(body_h),
-                "font": t["body_font"], "size": str(body_pt),
-                "color": bc, "fill": "none",
-            },
-        })
-    ops.append({
-        "command": "add", "parent": "/slide[last()]", "type": "notes",
-        "props": {"text": content.get(
-            "notes", "Call the single metric that proves the after state.")},
-    })
+    ops = UI.comparison_panels(
+        st,
+        title=title,
+        left_title=str(left.get("title") or "Before"),
+        left_body=_body(left),
+        right_title=str(right.get("title") or "After"),
+        right_body=_body(right),
+        title_name="BaTitle",
+        left_fill=st.c["surface"],
+        right_fill=st.c["accent"],
+    )
+    # Stable Ba* names for tooling / audits
+    for op in ops:
+        props = op.get("props") or {}
+        name = str(props.get("name") or "")
+        if name.startswith("CmpPanel"):
+            props["name"] = name.replace("CmpPanel", "BaPanel", 1)
+        elif name.startswith("CmpHead"):
+            props["name"] = name.replace("CmpHead", "BaHead", 1)
+        elif name.startswith("CmpBody"):
+            props["name"] = name.replace("CmpBody", "BaBody", 1)
+    ops.append(UI.notes_op(
+        content.get("notes", "Call the single metric that proves the after state.")
+    ))
     return ops
 
 

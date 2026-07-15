@@ -18,7 +18,7 @@
       "x": "2.2cm",
       "y": "1.21cm",
       "width": "29.47cm",
-      "height": "1.65cm",
+      "height": "1.55cm",
       "font": "Arial",
       "size": "36",
       "bold": "true",
@@ -36,9 +36,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "x": "2.2cm",
-      "y": "5.46cm",
+      "y": "5.49cm",
       "width": "14.18cm",
-      "height": "8.76cm"
+      "height": "8.43cm"
     }
   },
   {
@@ -48,10 +48,10 @@
     "props": {
       "name": "BaHead1",
       "text": "Before",
-      "x": "3.41cm",
-      "y": "6.67cm",
-      "width": "11.76cm",
-      "height": "1.55cm",
+      "x": "3.3cm",
+      "y": "6.59cm",
+      "width": "11.98cm",
+      "height": "1.5cm",
       "font": "Arial",
       "size": "28",
       "bold": "true",
@@ -66,10 +66,10 @@
     "props": {
       "name": "BaBody1",
       "text": "• Decks drift from the brand file\n• Agents invent one-off layouts\n• No floors, no screenshot gate\n• Overwrite risk on every save",
-      "x": "3.41cm",
-      "y": "8.77cm",
-      "width": "11.76cm",
-      "height": "4.24cm",
+      "x": "3.3cm",
+      "y": "8.7cm",
+      "width": "11.98cm",
+      "height": "4.11cm",
       "font": "Arial",
       "size": "18",
       "color": "A0A6B0",
@@ -86,9 +86,9 @@
       "fill": "0B5FFF",
       "line": "none",
       "x": "17.48cm",
-      "y": "5.46cm",
+      "y": "5.49cm",
       "width": "14.18cm",
-      "height": "8.76cm"
+      "height": "8.43cm"
     }
   },
   {
@@ -98,10 +98,10 @@
     "props": {
       "name": "BaHead2",
       "text": "After",
-      "x": "18.7cm",
-      "y": "6.67cm",
-      "width": "11.76cm",
-      "height": "1.55cm",
+      "x": "18.59cm",
+      "y": "6.59cm",
+      "width": "11.98cm",
+      "height": "1.5cm",
       "font": "Arial",
       "size": "28",
       "bold": "true",
@@ -116,10 +116,10 @@
     "props": {
       "name": "BaBody2",
       "text": "• Tokens compiled from DESIGN.md\n• Recipes with real text budgets\n• Gate 3 contact sheet before ship\n• Staging-safe apply with --force",
-      "x": "18.7cm",
-      "y": "8.77cm",
-      "width": "11.76cm",
-      "height": "4.24cm",
+      "x": "18.59cm",
+      "y": "8.7cm",
+      "width": "11.98cm",
+      "height": "4.11cm",
       "font": "Arial",
       "size": "18",
       "color": "FFFFFF",

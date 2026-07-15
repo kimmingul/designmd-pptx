@@ -5,6 +5,11 @@ All notable changes to designmd-pptx are documented here.
 ## [Unreleased]
 
 ### Added
+- **UI kit contract** (`ui_kit.py`, `docs/ui-kit.md`): React-like spacing
+  system — `StageMetrics` (margin/gap/pad/title bands), cards with
+  content-height body + Spacer free space, comparison panels. Migrated
+  `feature_cards`, `bullets`, `comparison_2col`, `before_after_slider`,
+  `close`, `big_number`, `process`, `_title_op`. Flagship demo rebuilt on kit.
 - **OfficeCLI ensure + install prompt:** without OfficeCLI, new-deck
   materialization does not work. `doctor` prints a required banner; `--ensure`
   and TTY `doctor` offer **Y/n** to run `doctor --install`. Hard gate on

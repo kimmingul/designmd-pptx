@@ -21,7 +21,7 @@
       "name": "CmpTitle",
       "text": "Compare",
       "x": "2.2cm",
-      "y": "1.2cm",
+      "y": "1.21cm",
       "width": "29.47cm",
       "height": "1.84cm"
     }
@@ -33,12 +33,12 @@
     "props": {
       "preset": "roundRect",
       "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "line": "none",
       "name": "Cmp1Bg",
       "x": "2.2cm",
-      "y": "3.94cm",
+      "y": "3.93cm",
       "width": "14.18cm",
-      "height": "14.11cm"
+      "height": "12.92cm"
     }
   },
   {
@@ -47,16 +47,16 @@
     "type": "shape",
     "props": {
       "font": "Arial",
-      "size": "28",
+      "size": "26",
       "bold": "true",
       "color": "F5F5F7",
       "fill": "none",
       "name": "Cmp1Title",
       "text": "Option A",
-      "x": "3cm",
-      "y": "4.74cm",
-      "width": "12.58cm",
-      "height": "1.49cm"
+      "x": "3.3cm",
+      "y": "5.03cm",
+      "width": "11.98cm",
+      "height": "2.15cm"
     }
   },
   {
@@ -66,14 +66,15 @@
     "props": {
       "font": "Arial",
       "size": "18",
+      "bold": "false",
       "color": "A0A6B0",
       "fill": "none",
       "name": "Cmp1Body",
       "text": "Strengths of A.",
-      "x": "3cm",
-      "y": "6.72cm",
-      "width": "12.58cm",
-      "height": "10.53cm"
+      "x": "3.3cm",
+      "y": "7.79cm",
+      "width": "11.98cm",
+      "height": "2cm"
     }
   },
   {
@@ -83,12 +84,12 @@
     "props": {
       "preset": "roundRect",
       "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "line": "none",
       "name": "Cmp2Bg",
       "x": "17.48cm",
-      "y": "3.94cm",
+      "y": "3.93cm",
       "width": "14.18cm",
-      "height": "14.11cm"
+      "height": "12.92cm"
     }
   },
   {
@@ -97,16 +98,16 @@
     "type": "shape",
     "props": {
       "font": "Arial",
-      "size": "28",
+      "size": "26",
       "bold": "true",
       "color": "F5F5F7",
       "fill": "none",
       "name": "Cmp2Title",
       "text": "Option B",
-      "x": "18.29cm",
-      "y": "4.74cm",
-      "width": "12.58cm",
-      "height": "1.49cm"
+      "x": "18.59cm",
+      "y": "5.03cm",
+      "width": "11.98cm",
+      "height": "2.15cm"
     }
   },
   {
@@ -116,14 +117,15 @@
     "props": {
       "font": "Arial",
       "size": "18",
+      "bold": "false",
       "color": "A0A6B0",
       "fill": "none",
       "name": "Cmp2Body",
       "text": "Strengths of B.",
-      "x": "18.29cm",
-      "y": "6.72cm",
-      "width": "12.58cm",
-      "height": "10.53cm"
+      "x": "18.59cm",
+      "y": "7.79cm",
+      "width": "11.98cm",
+      "height": "2cm"
     }
   }
 ]
