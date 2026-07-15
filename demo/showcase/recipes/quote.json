@@ -1,0 +1,61 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "0B0B1A"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "QuoteMark",
+      "preset": "rect",
+      "fill": "7C5CFF",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "5.5cm",
+      "width": "0.25cm",
+      "height": "6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "QuoteText",
+      "text": "A single sentence the room should remember.",
+      "x": "3.4cm",
+      "y": "5.5cm",
+      "width": "28.27cm",
+      "height": "5cm",
+      "font": "Arial",
+      "size": "28",
+      "italic": "true",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "QuoteAttr",
+      "text": "— Source",
+      "x": "3.4cm",
+      "y": "11.2cm",
+      "width": "20cm",
+      "height": "1cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  }
+]

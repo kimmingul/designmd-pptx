@@ -1,0 +1,147 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "LogoTitle",
+      "text": "Logo Band",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Logo1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Alpha",
+      "x": "2.2cm",
+      "y": "5.11cm",
+      "width": "5.1cm",
+      "height": "9.28cm",
+      "font": "Arial",
+      "size": "20",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Logo2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Beta",
+      "x": "8.29cm",
+      "y": "5.11cm",
+      "width": "5.1cm",
+      "height": "9.28cm",
+      "font": "Arial",
+      "size": "20",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Logo3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Gamma",
+      "x": "14.38cm",
+      "y": "5.11cm",
+      "width": "5.1cm",
+      "height": "9.28cm",
+      "font": "Arial",
+      "size": "20",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Logo4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Delta",
+      "x": "20.48cm",
+      "y": "5.11cm",
+      "width": "5.1cm",
+      "height": "9.28cm",
+      "font": "Arial",
+      "size": "20",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Logo5",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Epsilon",
+      "x": "26.57cm",
+      "y": "5.11cm",
+      "width": "5.1cm",
+      "height": "9.28cm",
+      "font": "Arial",
+      "size": "20",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Logos are social proof — keep the row quiet."
+    }
+  }
+]

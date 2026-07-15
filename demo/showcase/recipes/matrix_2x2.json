@@ -1,0 +1,272 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "0B0B1A"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "MatrixTitle",
+      "text": "Where we play",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "name": "Quad1Bg",
+      "x": "2.2cm",
+      "y": "3.9cm",
+      "width": "14.18cm",
+      "height": "6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none",
+      "name": "Quad1Title",
+      "text": "Invest",
+      "x": "3.03cm",
+      "y": "4.67cm",
+      "width": "12.54cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Quad1Body",
+      "text": "Ent. decision rooms",
+      "x": "3.03cm",
+      "y": "6.33cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "name": "Quad2Bg",
+      "x": "17.48cm",
+      "y": "3.9cm",
+      "width": "14.18cm",
+      "height": "6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none",
+      "name": "Quad2Title",
+      "text": "Selective",
+      "x": "18.31cm",
+      "y": "4.67cm",
+      "width": "12.54cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Quad2Body",
+      "text": "High ACV, long sales",
+      "x": "18.31cm",
+      "y": "6.33cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "name": "Quad3Bg",
+      "x": "2.2cm",
+      "y": "11cm",
+      "width": "14.18cm",
+      "height": "6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none",
+      "name": "Quad3Title",
+      "text": "Maintain",
+      "x": "3.03cm",
+      "y": "11.77cm",
+      "width": "12.54cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Quad3Body",
+      "text": "Self-serve core",
+      "x": "3.03cm",
+      "y": "13.43cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "name": "Quad4Bg",
+      "x": "17.48cm",
+      "y": "11cm",
+      "width": "14.18cm",
+      "height": "6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none",
+      "name": "Quad4Title",
+      "text": "Exit",
+      "x": "18.31cm",
+      "y": "11.77cm",
+      "width": "12.54cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Quad4Body",
+      "text": "One-off custom",
+      "x": "18.31cm",
+      "y": "13.43cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "AxisX",
+      "text": "→ Fit →",
+      "x": "2.2cm",
+      "y": "17.5cm",
+      "width": "29.47cm",
+      "height": "0.9cm",
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "AxisY",
+      "text": "↑ Value ↑",
+      "x": "2.2cm",
+      "y": "3.0cm",
+      "width": "12cm",
+      "height": "0.8cm",
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Name the quadrant that needs a decision this quarter."
+    }
+  }
+]

@@ -1,0 +1,393 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "0B0B1A"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "JourneyTitle",
+      "text": "Journey",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "JourneyLane0",
+      "text": "Action",
+      "x": "2.2cm",
+      "y": "7.5cm",
+      "width": "2.6cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "JourneyLane1",
+      "text": "Emotion",
+      "x": "2.2cm",
+      "y": "13cm",
+      "width": "2.6cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "JourneyHead1",
+      "preset": "roundRect",
+      "fill": "7C5CFF",
+      "line": "none",
+      "text": "Aware",
+      "x": "5.05cm",
+      "y": "3.6cm",
+      "width": "4.51cm",
+      "height": "2.0cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "JourneyAct1",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "text": "Discover",
+      "x": "5.05cm",
+      "y": "6.0cm",
+      "width": "4.51cm",
+      "height": "5.2cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "JourneyEmo1",
+      "preset": "roundRect",
+      "fill": "0B0B1A",
+      "line": "none",
+      "text": "🙂",
+      "x": "5.05cm",
+      "y": "11.6cm",
+      "width": "4.51cm",
+      "height": "4.5cm",
+      "font": "Arial",
+      "size": "28",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "JourneyHead2",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "text": "Consider",
+      "x": "9.86cm",
+      "y": "3.6cm",
+      "width": "4.51cm",
+      "height": "2.0cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "JourneyAct2",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "text": "Compare",
+      "x": "9.86cm",
+      "y": "6.0cm",
+      "width": "4.51cm",
+      "height": "5.2cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "JourneyEmo2",
+      "preset": "roundRect",
+      "fill": "0B0B1A",
+      "line": "none",
+      "text": "🙂",
+      "x": "9.86cm",
+      "y": "11.6cm",
+      "width": "4.51cm",
+      "height": "4.5cm",
+      "font": "Arial",
+      "size": "28",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "JourneyHead3",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "text": "Decide",
+      "x": "14.68cm",
+      "y": "3.6cm",
+      "width": "4.51cm",
+      "height": "2.0cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "JourneyAct3",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "text": "Choose",
+      "x": "14.68cm",
+      "y": "6.0cm",
+      "width": "4.51cm",
+      "height": "5.2cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "JourneyEmo3",
+      "preset": "roundRect",
+      "fill": "0B0B1A",
+      "line": "none",
+      "text": "🙂",
+      "x": "14.68cm",
+      "y": "11.6cm",
+      "width": "4.51cm",
+      "height": "4.5cm",
+      "font": "Arial",
+      "size": "28",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "JourneyHead4",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "text": "Use",
+      "x": "19.49cm",
+      "y": "3.6cm",
+      "width": "4.51cm",
+      "height": "2.0cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "JourneyAct4",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "text": "Adopt",
+      "x": "19.49cm",
+      "y": "6.0cm",
+      "width": "4.51cm",
+      "height": "5.2cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "JourneyEmo4",
+      "preset": "roundRect",
+      "fill": "0B0B1A",
+      "line": "none",
+      "text": "🙂",
+      "x": "19.49cm",
+      "y": "11.6cm",
+      "width": "4.51cm",
+      "height": "4.5cm",
+      "font": "Arial",
+      "size": "28",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "JourneyHead5",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "text": "Advocate",
+      "x": "24.31cm",
+      "y": "3.6cm",
+      "width": "4.51cm",
+      "height": "2.0cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "JourneyAct5",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "text": "Share",
+      "x": "24.31cm",
+      "y": "6.0cm",
+      "width": "4.51cm",
+      "height": "5.2cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "JourneyEmo5",
+      "preset": "roundRect",
+      "fill": "0B0B1A",
+      "line": "none",
+      "text": "🤩",
+      "x": "24.31cm",
+      "y": "11.6cm",
+      "width": "4.51cm",
+      "height": "4.5cm",
+      "font": "Arial",
+      "size": "28",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Call the biggest emotion drop — that is the intervention."
+    }
+  }
+]

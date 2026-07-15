@@ -40,14 +40,16 @@ Publisher `kimmingul`, same repo URL. Not required for MVP acceptance.
 - Python 3.10+ with designmd-pptx importable:
   - `pip install -e .` from repo root, **or**
   - extension auto-sets `PYTHONPATH` to workspace `python/`
-- Optional: OfficeCLI via `designmd-pptx: Doctor Install (dry-run)` then terminal install
+- **OfficeCLI is required** for real `.pptx` materialization. On activation the
+  extension probes with `doctor --status-json` and **asks to install** if missing.
+  Palette: **Install OfficeCLI…** (plan dry-run or install now).
 
 ## Commands (palette: `designmd-pptx:`)
 
 | Command | CLI |
 |---|---|
-| Doctor | `doctor` |
-| Doctor Install (dry-run) | `doctor --install --dry-run` |
+| Doctor | `doctor --ensure` (banner + optional install) |
+| Install OfficeCLI… | dry-run plan or `doctor --install` (asks first) |
 | Compose brief → deck-spec | `compose <md> -o out/…` |
 | Scaffold deck | `scaffold default -o out/… --content …` |
 | Accessibility audit | `a11y --design default --content …` |

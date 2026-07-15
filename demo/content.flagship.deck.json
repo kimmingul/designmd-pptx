@@ -1,0 +1,151 @@
+{
+  "version": "1.1",
+  "meta": {
+    "title": "designmd-pptx",
+    "version": "2.1.2",
+    "style": "flagship",
+    "note": "9-slide product narrative — not a recipe catalog"
+  },
+  "slides": [
+    {
+      "id": "01-cover",
+      "recipe": "cover",
+      "content": {
+        "title": "designmd-pptx",
+        "subtitle": "Brand design that becomes a real PowerPoint deck",
+        "meta": "v2.1.2  ·  Flagship intro  ·  English",
+        "notes": "Open on the product name. Pause. Then: brand design that becomes a real deck."
+      }
+    },
+    {
+      "id": "02-promise",
+      "recipe": "big_number",
+      "content": {
+        "value": "DESIGN.md",
+        "label": "One brand source of truth",
+        "context": "Tokens, recipes, and staging-safe apply — not a blank slide and a prayer.",
+        "notes": "The contract is the brand file — not the agent improvising layout."
+      }
+    },
+    {
+      "id": "03-before-after",
+      "recipe": "before_after_slider",
+      "content": {
+        "title": "What changes",
+        "before": {
+          "title": "Before",
+          "body": [
+            "Decks drift from the brand file",
+            "Agents invent one-off layouts",
+            "No floors, no screenshot gate",
+            "Overwrite risk on every save"
+          ]
+        },
+        "after": {
+          "title": "After",
+          "body": [
+            "Tokens compiled from DESIGN.md",
+            "Recipes with real text budgets",
+            "Gate 3 contact sheet before ship",
+            "Staging-safe apply with --force"
+          ]
+        }
+      }
+    },
+    {
+      "id": "04-pipeline",
+      "recipe": "process",
+      "content": {
+        "title": "Authoring pipeline",
+        "notes": "Five steps, one owner each. Gate 3 is not optional for ship.",
+        "steps": [
+          { "label": "Brief", "detail": "Markdown" },
+          { "label": "Compose", "detail": "Deck-spec" },
+          { "label": "Scaffold", "detail": "Tokens" },
+          { "label": "Apply", "detail": "Legacy" },
+          { "label": "Gate 3", "detail": "QA" }
+        ]
+      }
+    },
+    {
+      "id": "05-capabilities",
+      "recipe": "feature_cards",
+      "content": {
+        "title": "Three promises",
+        "cards": [
+          {
+            "title": "Exact geometry",
+            "body": "Centimeters. Glued connectors. Type floors that hold."
+          },
+          {
+            "title": "Hard gates",
+            "body": "Budgets, contrast, issues — then a contact sheet."
+          },
+          {
+            "title": "Agent-safe",
+            "body": "Claude, Codex, Grok. Install only after you say yes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "06-backends",
+      "recipe": "pillar_columns",
+      "content": {
+        "title": "Two backends, one contract",
+        "pillars": [
+          {
+            "label": "Legacy",
+            "detail": "Shape-level batch for DESIGN.md-exact decks"
+          },
+          {
+            "label": "Official",
+            "detail": "Agent-bridge drafts via office.render"
+          },
+          {
+            "label": "Offline",
+            "detail": "Compose, a11y, refine, animate without a binary"
+          }
+        ]
+      }
+    },
+    {
+      "id": "07-quality",
+      "recipe": "stairs_ascent",
+      "content": {
+        "title": "Quality is a staircase",
+        "steps": [
+          { "label": "Tokens", "detail": "Brand floors" },
+          { "label": "Fit", "detail": "CJK budgets" },
+          { "label": "Issues", "detail": "Overlap gate" },
+          { "label": "Gate 3", "detail": "Contact sheet" },
+          { "label": "Ship", "detail": "Human check" }
+        ]
+      }
+    },
+    {
+      "id": "08-rules",
+      "recipe": "checklist_board",
+      "content": {
+        "title": "Hard rules we keep",
+        "items": [
+          { "label": "Title ≥ 36pt · body ≥ 18pt", "done": true },
+          { "label": "Never shrink fonts to fit — split or cut", "done": true },
+          { "label": "Overwrite only with --force", "done": true },
+          { "label": "Finish apply with --screenshot", "done": true },
+          { "label": "Ask before installing OfficeCLI", "done": true }
+        ]
+      }
+    },
+    {
+      "id": "09-close",
+      "recipe": "close",
+      "content": {
+        "title": "Start with the brand file",
+        "body": "doctor --ensure · compose a brief · scaffold · apply --screenshot",
+        "cta": "doctor --ensure",
+        "notes": "Leave them with one command: doctor --ensure."
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "0B0B1A"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ImgPlaceholder",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "3A3570",
+      "x": "2.2cm",
+      "y": "1.2cm",
+      "width": "29.47cm",
+      "height": "15.5cm",
+      "text": "Image placeholder — set content.image_full.src",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  }
+]

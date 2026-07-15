@@ -1,0 +1,1947 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverEdge",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "0cm",
+      "y": "0cm",
+      "width": "0.35cm",
+      "height": "19.05cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverTitle",
+      "text": "designmd-pptx",
+      "x": "2.2cm",
+      "y": "5cm",
+      "width": "29.47cm",
+      "height": "4cm",
+      "font": "Arial",
+      "size": "48",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "left",
+      "valign": "bottom",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverAccent",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "9.1cm",
+      "width": "4.8cm",
+      "height": "0.14cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverSubtitle",
+      "text": "Motifs from structure — original chrome, brand from DESIGN.md",
+      "x": "2.2cm",
+      "y": "9.5cm",
+      "width": "26cm",
+      "height": "1.6cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "align": "left",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverMeta",
+      "text": "v2.1.2  ·  motif library  ·  English",
+      "x": "2.2cm",
+      "y": "15.95cm",
+      "width": "29.47cm",
+      "height": "0.9cm",
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "left",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Hold the name."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerAccentBar",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "6.2cm",
+      "width": "1.1cm",
+      "height": "6.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerNumber",
+      "text": "01",
+      "x": "3.8cm",
+      "y": "5.6cm",
+      "width": "8cm",
+      "height": "2.4cm",
+      "font": "Arial",
+      "size": "54",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerTitle",
+      "text": "The contract",
+      "x": "3.8cm",
+      "y": "8.2cm",
+      "width": "27.87cm",
+      "height": "2.6cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerBlurb",
+      "text": "Brand lives in DESIGN.md. Motifs carry layout chrome.",
+      "x": "3.8cm",
+      "y": "11.0cm",
+      "width": "22cm",
+      "height": "2.2cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Pause on the section number before the title."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "KpiTitle",
+      "text": "At a glance",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.84cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Kpi1Bg",
+      "x": "2.2cm",
+      "y": "3.93cm",
+      "width": "6.54cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi1Value",
+      "text": "66",
+      "x": "2.55cm",
+      "y": "7.86cm",
+      "width": "5.84cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi1Label",
+      "text": "Motifs",
+      "x": "2.55cm",
+      "y": "11.11cm",
+      "width": "5.84cm",
+      "height": "0.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi1Chip",
+      "text": "v2",
+      "x": "2.55cm",
+      "y": "12.31cm",
+      "width": "5.84cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Kpi2Bg",
+      "x": "9.84cm",
+      "y": "3.93cm",
+      "width": "6.54cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi2Value",
+      "text": "75",
+      "x": "10.19cm",
+      "y": "7.86cm",
+      "width": "5.84cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi2Label",
+      "text": "Recipes",
+      "x": "10.19cm",
+      "y": "11.11cm",
+      "width": "5.84cm",
+      "height": "0.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi2Chip",
+      "text": "",
+      "x": "10.19cm",
+      "y": "12.31cm",
+      "width": "5.84cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Kpi3Bg",
+      "x": "17.48cm",
+      "y": "3.93cm",
+      "width": "6.54cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi3Value",
+      "text": "2",
+      "x": "17.84cm",
+      "y": "7.86cm",
+      "width": "5.84cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi3Label",
+      "text": "Backends",
+      "x": "17.84cm",
+      "y": "11.11cm",
+      "width": "5.84cm",
+      "height": "0.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi3Chip",
+      "text": "",
+      "x": "17.84cm",
+      "y": "12.31cm",
+      "width": "5.84cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Kpi4Bg",
+      "x": "25.13cm",
+      "y": "3.93cm",
+      "width": "6.54cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi4Value",
+      "text": "0",
+      "x": "25.48cm",
+      "y": "7.86cm",
+      "width": "5.84cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi4Label",
+      "text": "Vendor bytes",
+      "x": "25.48cm",
+      "y": "11.11cm",
+      "width": "5.84cm",
+      "height": "0.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi4Chip",
+      "text": "safe",
+      "x": "25.48cm",
+      "y": "12.31cm",
+      "width": "5.84cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Walk KPIs left to right; pause on any watch metric."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BigValue",
+      "text": "DESIGN.md",
+      "x": "2.2cm",
+      "y": "3.28cm",
+      "width": "29.47cm",
+      "height": "6.4cm",
+      "font": "Arial",
+      "size": "81",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "valign": "middle",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BigLabel",
+      "text": "One brand source of truth",
+      "x": "2.2cm",
+      "y": "10.29cm",
+      "width": "29.47cm",
+      "height": "1.7cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BigContext",
+      "text": "Tokens and floors compile once — decks inherit the contract.",
+      "x": "3.3cm",
+      "y": "12.54cm",
+      "width": "27.27cm",
+      "height": "2.2cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "The brand file is the contract."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaTitle",
+      "text": "What changes",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaPanel1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "5.5cm",
+      "width": "14.18cm",
+      "height": "8.39cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaHead1",
+      "text": "Before",
+      "x": "3.3cm",
+      "y": "6.6cm",
+      "width": "11.98cm",
+      "height": "1.5cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaBody1",
+      "text": "• Decks drift from brand\n• Agents invent layouts\n• No screenshot gate\n• Overwrite risk",
+      "x": "3.3cm",
+      "y": "8.71cm",
+      "width": "11.98cm",
+      "height": "4.08cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaPanel2",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "17.48cm",
+      "y": "5.5cm",
+      "width": "14.18cm",
+      "height": "8.39cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaHead2",
+      "text": "After",
+      "x": "18.59cm",
+      "y": "6.6cm",
+      "width": "11.98cm",
+      "height": "1.5cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "FFFFFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaBody2",
+      "text": "• Tokens from DESIGN.md\n• Motif chrome + budgets\n• Gate 3 contact sheet\n• Staging-safe --force",
+      "x": "18.59cm",
+      "y": "8.71cm",
+      "width": "11.98cm",
+      "height": "4.08cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "FFFFFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Call the single metric that proves the after state."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ProcTitle",
+      "text": "Authoring pipeline",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Proc1",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "1\nBrief\nMarkdown",
+      "x": "2.2cm",
+      "y": "6.48cm",
+      "width": "5.01cm",
+      "height": "5cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Proc2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "2\nCompose\nDeck-spec",
+      "x": "8.31cm",
+      "y": "6.48cm",
+      "width": "5.01cm",
+      "height": "5cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Proc3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "3\nScaffold\nMotifs",
+      "x": "14.43cm",
+      "y": "6.48cm",
+      "width": "5.01cm",
+      "height": "5cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Proc4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "4\nApply\nLegacy",
+      "x": "20.54cm",
+      "y": "6.48cm",
+      "width": "5.01cm",
+      "height": "5cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Proc5",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "5\nGate 3\nQA",
+      "x": "26.66cm",
+      "y": "6.48cm",
+      "width": "5.01cm",
+      "height": "5cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "connector",
+    "props": {
+      "from": "/slide[6]/shape[@name=Proc1]",
+      "to": "/slide[6]/shape[@name=Proc2]",
+      "shape": "straight",
+      "color": "A0A6B0",
+      "tailEnd": "triangle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "connector",
+    "props": {
+      "from": "/slide[6]/shape[@name=Proc2]",
+      "to": "/slide[6]/shape[@name=Proc3]",
+      "shape": "straight",
+      "color": "A0A6B0",
+      "tailEnd": "triangle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "connector",
+    "props": {
+      "from": "/slide[6]/shape[@name=Proc3]",
+      "to": "/slide[6]/shape[@name=Proc4]",
+      "shape": "straight",
+      "color": "A0A6B0",
+      "tailEnd": "triangle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "connector",
+    "props": {
+      "from": "/slide[6]/shape[@name=Proc4]",
+      "to": "/slide[6]/shape[@name=Proc5]",
+      "shape": "straight",
+      "color": "A0A6B0",
+      "tailEnd": "triangle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Walk left to right; stop on the bottleneck."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "FeatTitle",
+      "text": "Three promises",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.84cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Card1Bg",
+      "x": "2.2cm",
+      "y": "3.93cm",
+      "width": "9.09cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "34",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "Card1Num",
+      "text": "01",
+      "x": "3.3cm",
+      "y": "5.03cm",
+      "width": "6.89cm",
+      "height": "1.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "26",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Card1Title",
+      "text": "Exact geometry",
+      "x": "3.3cm",
+      "y": "7.49cm",
+      "width": "6.89cm",
+      "height": "2.15cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "bold": "false",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Card1Body",
+      "text": "Centimeters. Connectors. Type floors that hold.",
+      "x": "3.3cm",
+      "y": "10.26cm",
+      "width": "6.89cm",
+      "height": "2.63cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Card2Bg",
+      "x": "12.39cm",
+      "y": "3.93cm",
+      "width": "9.09cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "34",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "Card2Num",
+      "text": "02",
+      "x": "13.49cm",
+      "y": "5.03cm",
+      "width": "6.89cm",
+      "height": "1.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "26",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Card2Title",
+      "text": "Hard gates",
+      "x": "13.49cm",
+      "y": "7.49cm",
+      "width": "6.89cm",
+      "height": "2.15cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "bold": "false",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Card2Body",
+      "text": "Budgets, contrast, issues — then a contact sheet.",
+      "x": "13.49cm",
+      "y": "10.26cm",
+      "width": "6.89cm",
+      "height": "2.63cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Card3Bg",
+      "x": "22.58cm",
+      "y": "3.93cm",
+      "width": "9.09cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "34",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "Card3Num",
+      "text": "03",
+      "x": "23.68cm",
+      "y": "5.03cm",
+      "width": "6.89cm",
+      "height": "1.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "26",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Card3Title",
+      "text": "License-safe",
+      "x": "23.68cm",
+      "y": "7.49cm",
+      "width": "6.89cm",
+      "height": "2.15cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "bold": "false",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Card3Body",
+      "text": "Infograpify is reference only. Motifs are original.",
+      "x": "23.68cm",
+      "y": "10.26cm",
+      "width": "6.89cm",
+      "height": "2.63cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Three cards max on a hero slide; cut copy first."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelTitle",
+      "text": "Adoption funnel",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelBand1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "3.88cm",
+      "width": "29.47cm",
+      "height": "2.51cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelLabel1",
+      "text": "Discover  ·  100%",
+      "x": "2.75cm",
+      "y": "4.43cm",
+      "width": "28.37cm",
+      "height": "1.38cm",
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelBand2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "4.9cm",
+      "y": "6.67cm",
+      "width": "24.07cm",
+      "height": "2.51cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelLabel2",
+      "text": "Try doctor  ·  42%",
+      "x": "5.45cm",
+      "y": "7.22cm",
+      "width": "22.97cm",
+      "height": "1.38cm",
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelBand3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "7.6cm",
+      "y": "9.45cm",
+      "width": "18.66cm",
+      "height": "2.51cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelLabel3",
+      "text": "Scaffold  ·  19%",
+      "x": "8.15cm",
+      "y": "10.01cm",
+      "width": "17.56cm",
+      "height": "1.38cm",
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelBand4",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "10.3cm",
+      "y": "12.24cm",
+      "width": "13.26cm",
+      "height": "2.51cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelLabel4",
+      "text": "Ship  ·  8%",
+      "x": "10.85cm",
+      "y": "12.79cm",
+      "width": "12.16cm",
+      "height": "1.38cm",
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Name the drop-off between the two biggest deltas."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "MatrixTitle",
+      "text": "Where motifs play",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Quad1Bg",
+      "x": "2.2cm",
+      "y": "3.9cm",
+      "width": "14.18cm",
+      "height": "6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Quad1Title",
+      "text": "Hero",
+      "x": "3.03cm",
+      "y": "4.67cm",
+      "width": "12.54cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Quad1Body",
+      "text": "sparse_hero · kpi_hero",
+      "x": "3.03cm",
+      "y": "6.33cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Quad2Bg",
+      "x": "17.48cm",
+      "y": "3.9cm",
+      "width": "14.18cm",
+      "height": "6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Quad2Title",
+      "text": "Compare",
+      "x": "18.31cm",
+      "y": "4.67cm",
+      "width": "12.54cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Quad2Body",
+      "text": "split_hero · matrix_quad",
+      "x": "18.31cm",
+      "y": "6.33cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Quad3Bg",
+      "x": "2.2cm",
+      "y": "11cm",
+      "width": "14.18cm",
+      "height": "6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Quad3Title",
+      "text": "Flow",
+      "x": "3.03cm",
+      "y": "11.77cm",
+      "width": "12.54cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Quad3Body",
+      "text": "step_rail · funnel_cascade",
+      "x": "3.03cm",
+      "y": "13.43cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Quad4Bg",
+      "x": "17.48cm",
+      "y": "11cm",
+      "width": "14.18cm",
+      "height": "6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Quad4Title",
+      "text": "Grid",
+      "x": "18.31cm",
+      "y": "11.77cm",
+      "width": "12.54cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Quad4Body",
+      "text": "card_row · kpi_band · tile_row",
+      "x": "18.31cm",
+      "y": "13.43cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "AxisX",
+      "text": "→ Structure →",
+      "x": "2.2cm",
+      "y": "17.5cm",
+      "width": "29.47cm",
+      "height": "0.9cm",
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "AxisY",
+      "text": "↑ Narrative ↑",
+      "x": "2.2cm",
+      "y": "3.0cm",
+      "width": "12cm",
+      "height": "0.8cm",
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Name the quadrant that needs a decision this quarter."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "StairsTitle",
+      "text": "Quality staircase",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Stair1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "1\nTokens\nFloors",
+      "x": "2.3cm",
+      "y": "9.83cm",
+      "width": "5.69cm",
+      "height": "4.77cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Stair2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "2\nMotif\nChrome",
+      "x": "8.19cm",
+      "y": "8.37cm",
+      "width": "5.69cm",
+      "height": "6.23cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Stair3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "3\nIssues\nGate",
+      "x": "14.09cm",
+      "y": "6.91cm",
+      "width": "5.69cm",
+      "height": "7.69cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Stair4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "4\nGate 3\nSheet",
+      "x": "19.98cm",
+      "y": "5.45cm",
+      "width": "5.69cm",
+      "height": "9.15cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Stair5",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "5\nShip\nHuman",
+      "x": "25.88cm",
+      "y": "3.99cm",
+      "width": "5.69cm",
+      "height": "10.6cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "You cannot skip a stair — name the exit criteria."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CheckTitle",
+      "text": "Hard rules",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CheckRow1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "✓  Title ≥ 36pt · body ≥ 18pt",
+      "x": "2.2cm",
+      "y": "4.26cm",
+      "width": "29.47cm",
+      "height": "1.81cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "false",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CheckRow2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "✓  Never shrink fonts to fit",
+      "x": "2.2cm",
+      "y": "6.25cm",
+      "width": "29.47cm",
+      "height": "1.81cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "false",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CheckRow3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "✓  Body height follows content",
+      "x": "2.2cm",
+      "y": "8.23cm",
+      "width": "29.47cm",
+      "height": "1.81cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "false",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CheckRow4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "✓  No vendor shapes or icons",
+      "x": "2.2cm",
+      "y": "10.22cm",
+      "width": "29.47cm",
+      "height": "1.81cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "false",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CheckRow5",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "✓  Finish apply with --screenshot",
+      "x": "2.2cm",
+      "y": "12.21cm",
+      "width": "29.47cm",
+      "height": "1.81cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "false",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Open items need an owner before the meeting ends."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CloseTitle",
+      "text": "Start with the brand file",
+      "x": "2.2cm",
+      "y": "4.99cm",
+      "width": "29.47cm",
+      "height": "2.6cm",
+      "font": "Arial",
+      "size": "44",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CloseBody",
+      "text": "doctor --ensure · compose · scaffold · apply --screenshot",
+      "x": "3.3cm",
+      "y": "8.2cm",
+      "width": "27.27cm",
+      "height": "2cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CloseCta",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "doctor --ensure",
+      "x": "11.93cm",
+      "y": "11.3cm",
+      "width": "10cm",
+      "height": "1.7cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  }
+]

@@ -1,0 +1,173 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelTitle",
+      "text": "Conversion funnel",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelBand1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "3.4cm",
+      "width": "29.47cm",
+      "height": "3.44cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelLabel1",
+      "text": "Awareness  ·  100%",
+      "x": "2.6cm",
+      "y": "4.36cm",
+      "width": "28.67cm",
+      "height": "1.72cm",
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelBand2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "4.9cm",
+      "y": "7.12cm",
+      "width": "24.07cm",
+      "height": "3.44cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelLabel2",
+      "text": "Interest  ·  48%",
+      "x": "5.3cm",
+      "y": "8.08cm",
+      "width": "23.27cm",
+      "height": "1.72cm",
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelBand3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "7.6cm",
+      "y": "10.84cm",
+      "width": "18.66cm",
+      "height": "3.44cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelLabel3",
+      "text": "Decision  ·  22%",
+      "x": "8cm",
+      "y": "11.8cm",
+      "width": "17.86cm",
+      "height": "1.72cm",
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelBand4",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "10.3cm",
+      "y": "14.56cm",
+      "width": "13.26cm",
+      "height": "3.44cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelLabel4",
+      "text": "Action  ·  9%",
+      "x": "10.7cm",
+      "y": "15.52cm",
+      "width": "12.46cm",
+      "height": "1.72cm",
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Name the drop-off between the two biggest deltas."
+    }
+  }
+]

@@ -1,0 +1,87 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "0B0B1A"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerAccentBar",
+      "preset": "rect",
+      "fill": "7C5CFF",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "6.2cm",
+      "width": "1.1cm",
+      "height": "6.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerNumber",
+      "text": "02",
+      "x": "3.8cm",
+      "y": "5.6cm",
+      "width": "8cm",
+      "height": "2.4cm",
+      "font": "Arial",
+      "size": "54",
+      "bold": "true",
+      "color": "7C5CFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerTitle",
+      "text": "The machine",
+      "x": "3.8cm",
+      "y": "8.2cm",
+      "width": "27.87cm",
+      "height": "2.6cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerBlurb",
+      "text": "People, loop, and time horizon that make the bet real.",
+      "x": "3.8cm",
+      "y": "11.0cm",
+      "width": "22cm",
+      "height": "2.2cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Pause on the section number before the title."
+    }
+  }
+]

@@ -147,14 +147,40 @@ def compile_design_md(
             break
     use_round_rect = True if card_radius_px is None else card_radius_px >= 6
 
+    # Map composition.whitespace_density → real geometry (was previously
+    # stored only as metadata while margin/gap stayed fixed at floors).
+    # Keep "comfortable" at historical floors so existing fixtures don't shift.
+    _ws = (design_v2.get("composition") or {}).get("whitespace_density") or "comfortable"
+    if _ws == "spacious":
+        margin_cm, gap_cm = 2.2, 1.1
+    elif _ws == "compact":
+        margin_cm, gap_cm = 1.27, 0.55
+    else:
+        margin_cm, gap_cm = T.MARGIN_CM, T.GAP_CM
+
+    # Promote charts.series_colors into palette series so motif chrome (KPI
+    # figures, step fills, heat, card index) can cycle multi-hue brand colors.
+    # Do not override accent/primary — brand primary stays the design accent.
+    _series = (design_v2.get("charts") or {}).get("series_colors") or []
+    if isinstance(_series, list) and _series:
+        if len(_series) >= 1 and _series[0]:
+            palette["chart_series1"] = str(_series[0]).replace("#", "").upper()
+            provenance["chart_series1"] = "charts.series_colors"
+        if len(_series) >= 2 and _series[1]:
+            palette["chart_series2"] = str(_series[1]).replace("#", "").upper()
+            provenance["chart_series2"] = "charts.series_colors"
+        if len(_series) >= 3 and _series[2]:
+            palette["chart_series3"] = str(_series[2]).replace("#", "").upper()
+            provenance["chart_series3"] = "charts.series_colors"
+
     result: dict[str, Any] = {
         "version": "1.1",
         "source": str(path.as_posix()),
         "brand": str(name),
         "description": description[:500],
         "canvas_cm": [T.CANVAS_W_CM, T.CANVAS_H_CM],
-        "margin_cm": T.MARGIN_CM,
-        "gap_cm": T.GAP_CM,
+        "margin_cm": margin_cm,
+        "gap_cm": gap_cm,
         "colors": palette,
         "color_provenance": provenance,
         "css_vars": {k: v for k, v in list(var_map.items())[:40]},

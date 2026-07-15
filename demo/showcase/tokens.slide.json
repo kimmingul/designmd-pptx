@@ -1,0 +1,206 @@
+{
+  "version": "1.1",
+  "source": "demo/northstar.DESIGN.md",
+  "brand": "Northstar-Board-Flagship",
+  "description": "Series B board showcase — deep indigo stage, multi-hue accent system (violet / cyan / magenta / lime / amber). Original tokens, not a vendor template. Tuned for a colorful 20-slide motif narrative.",
+  "canvas_cm": [
+    33.87,
+    19.05
+  ],
+  "margin_cm": 2.2,
+  "gap_cm": 1.1,
+  "colors": {
+    "background": "0B0B1A",
+    "content_background": "0B0B1A",
+    "surface": "16162E",
+    "surface_elevated": "22224A",
+    "accent": "7C5CFF",
+    "on_accent": "FFFFFF",
+    "text": "F4F2FF",
+    "text_on_surface": "F4F2FF",
+    "text_on_content": "F4F2FF",
+    "muted": "A0A6B0",
+    "hairline": "3A3570",
+    "success": "3DDC97",
+    "risk": "FF4D6D",
+    "chart_series1": "7C5CFF",
+    "chart_series2": "22D3EE",
+    "chart_series3": "F472B6"
+  },
+  "color_provenance": {
+    "background": "sourced",
+    "surface": "sourced",
+    "surface_elevated": "sourced",
+    "accent": "charts.series_colors[0]",
+    "text_source": "sourced",
+    "muted": "sourced",
+    "on_accent": "sourced",
+    "hairline": "sourced",
+    "success": "sourced",
+    "risk": "sourced",
+    "content_background": "sourced",
+    "text": "derived",
+    "text_on_surface": "derived",
+    "text_on_content": "derived",
+    "chart_series1": "charts.series_colors",
+    "chart_series2": "charts.series_colors",
+    "chart_series3": "charts.series_colors",
+    "background_gradient": "sourced"
+  },
+  "css_vars": {
+    "--canvas": "#0B0B1A",
+    "--color-canvas": "#0B0B1A",
+    "--surface-1": "#16162E",
+    "--color-surface-1": "#16162E",
+    "--surface-2": "#22224A",
+    "--color-surface-2": "#22224A",
+    "--primary": "#7C5CFF",
+    "--color-primary": "#7C5CFF",
+    "--on-primary": "#FFFFFF",
+    "--color-on-primary": "#FFFFFF",
+    "--ink": "#F4F2FF",
+    "--color-ink": "#F4F2FF",
+    "--ink-muted": "#A8A3C7",
+    "--color-ink-muted": "#A8A3C7",
+    "--hairline": "#3A3570",
+    "--color-hairline": "#3A3570",
+    "--semantic-success": "#3DDC97",
+    "--color-semantic-success": "#3DDC97",
+    "--semantic-danger": "#FF4D6D",
+    "--color-semantic-danger": "#FF4D6D",
+    "--semantic-warning": "#FFB020",
+    "--color-semantic-warning": "#FFB020",
+    "--gradient": "0B0B1A-2A145A-135",
+    "--color-gradient": "0B0B1A-2A145A-135"
+  },
+  "warnings": [
+    "font.heading: 'Helvetica Neue' → 'Arial' (PowerPoint-safe substitute)",
+    "font.body: 'Helvetica Neue' → 'Arial' (PowerPoint-safe substitute)"
+  ],
+  "type": {
+    "cover_pt": 48,
+    "title_pt": 36,
+    "section_pt": 28,
+    "body_pt": 18,
+    "caption_pt": 12,
+    "micro_pt": 14,
+    "kpi_pt": 60,
+    "heading_font": "Arial",
+    "body_font": "Arial",
+    "mono_font": "Consolas"
+  },
+  "shape": {
+    "card_preset": "roundRect",
+    "card_radius_px_source": 20.0
+  },
+  "motif": "hairline-card-on-dark",
+  "composition": {
+    "whitespace_density": "spacious",
+    "title_placement": "left"
+  },
+  "charts": {
+    "default_style": "modern",
+    "series_colors": [
+      "7C5CFF",
+      "22D3EE",
+      "F472B6",
+      "3DDC97",
+      "FFB020",
+      "60A5FA"
+    ]
+  },
+  "tables": {
+    "header_style": "filled",
+    "cell_padding_cm": 0.15,
+    "stripe": true
+  },
+  "images": {
+    "crop_mode": "fill",
+    "placement": "auto"
+  },
+  "master": {
+    "footer": null,
+    "page_number": false,
+    "navigation": false
+  },
+  "animation": {
+    "enabled": false,
+    "entrance": "fade",
+    "emphasis": "none",
+    "transition": "fade",
+    "transition_speed": "med",
+    "stagger_ms": 150,
+    "on": "click",
+    "recipes": {
+      "cover": {
+        "entrance": "fade",
+        "transition": "fade"
+      },
+      "bullets": {
+        "entrance": "fade"
+      },
+      "feature_cards": {
+        "entrance": "fade"
+      },
+      "kpi_row": {
+        "entrance": "appear"
+      },
+      "process": {
+        "entrance": "wipe"
+      },
+      "freeform": {
+        "entrance": "fade"
+      }
+    }
+  },
+  "dark_first": true,
+  "content_bg_policy": "match_canvas",
+  "background_gradient": "0B0B1A-2A145A-135",
+  "drop": [
+    "hover",
+    "focus",
+    "breakpoints",
+    "responsive",
+    "nav",
+    "inputs",
+    "forms",
+    "touch-targets",
+    "scroll",
+    "z-index-stacking-beyond-shapes",
+    "css-gradients-as-background-unless-officecli-gradient-prop"
+  ],
+  "patterns": [
+    "cover",
+    "section_divider",
+    "kpi_row",
+    "feature_cards",
+    "bullets",
+    "quote",
+    "comparison_2col",
+    "timeline",
+    "process",
+    "table",
+    "image_full",
+    "image_text_2col",
+    "chart_insight",
+    "close"
+  ],
+  "raw_color_keys": [
+    "canvas",
+    "gradient",
+    "hairline",
+    "ink",
+    "ink-muted",
+    "on-primary",
+    "primary",
+    "semantic-danger",
+    "semantic-success",
+    "semantic-warning",
+    "surface-1",
+    "surface-2"
+  ],
+  "compiler": {
+    "name": "designmd-pptx",
+    "version": "2.1.2"
+  }
+}

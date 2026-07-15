@@ -1,0 +1,55 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "QuoteMark",
+      "text": "“",
+      "x": "2.2cm",
+      "y": "3.5cm",
+      "width": "4cm",
+      "height": "3cm",
+      "font": "Arial",
+      "size": "96",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "QuoteText",
+      "text": "Quote Mark",
+      "x": "3.2cm",
+      "y": "7.0cm",
+      "width": "27.47cm",
+      "height": "5.5cm",
+      "font": "Arial",
+      "size": "32",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Let the quote land; no bullet restatement."
+    }
+  }
+]

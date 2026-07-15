@@ -1,0 +1,260 @@
+{
+  "version": "1.1",
+  "slides": [
+    {
+      "id": "01-cover",
+      "recipe": "cover",
+      "content": {
+        "title": "designmd-pptx",
+        "subtitle": "Motifs from structure — original chrome, brand from DESIGN.md",
+        "meta": "v2.1.2  ·  motif library  ·  English",
+        "notes": "Hold the name."
+      }
+    },
+    {
+      "id": "02-section",
+      "recipe": "section_opener_numbered",
+      "content": {
+        "number": "01",
+        "title": "The contract",
+        "blurb": "Brand lives in DESIGN.md. Motifs carry layout chrome."
+      }
+    },
+    {
+      "id": "03-kpi",
+      "recipe": "kpi_row",
+      "content": {
+        "title": "At a glance",
+        "kpis": [
+          {
+            "value": "66",
+            "label": "Motifs",
+            "chip": "v2"
+          },
+          {
+            "value": "75",
+            "label": "Recipes",
+            "chip": ""
+          },
+          {
+            "value": "2",
+            "label": "Backends",
+            "chip": ""
+          },
+          {
+            "value": "0",
+            "label": "Vendor bytes",
+            "chip": "safe"
+          }
+        ]
+      }
+    },
+    {
+      "id": "04-hero",
+      "recipe": "big_number",
+      "content": {
+        "value": "DESIGN.md",
+        "label": "One brand source of truth",
+        "context": "Tokens and floors compile once — decks inherit the contract.",
+        "notes": "The brand file is the contract."
+      }
+    },
+    {
+      "id": "05-delta",
+      "recipe": "before_after_slider",
+      "content": {
+        "title": "What changes",
+        "before": {
+          "title": "Before",
+          "body": [
+            "Decks drift from brand",
+            "Agents invent layouts",
+            "No screenshot gate",
+            "Overwrite risk"
+          ]
+        },
+        "after": {
+          "title": "After",
+          "body": [
+            "Tokens from DESIGN.md",
+            "Motif chrome + budgets",
+            "Gate 3 contact sheet",
+            "Staging-safe --force"
+          ]
+        }
+      }
+    },
+    {
+      "id": "06-flow",
+      "recipe": "process",
+      "content": {
+        "title": "Authoring pipeline",
+        "steps": [
+          {
+            "label": "Brief",
+            "detail": "Markdown"
+          },
+          {
+            "label": "Compose",
+            "detail": "Deck-spec"
+          },
+          {
+            "label": "Scaffold",
+            "detail": "Motifs"
+          },
+          {
+            "label": "Apply",
+            "detail": "Legacy"
+          },
+          {
+            "label": "Gate 3",
+            "detail": "QA"
+          }
+        ]
+      }
+    },
+    {
+      "id": "07-promises",
+      "recipe": "feature_cards",
+      "content": {
+        "title": "Three promises",
+        "cards": [
+          {
+            "title": "Exact geometry",
+            "body": "Centimeters. Connectors. Type floors that hold."
+          },
+          {
+            "title": "Hard gates",
+            "body": "Budgets, contrast, issues — then a contact sheet."
+          },
+          {
+            "title": "License-safe",
+            "body": "Infograpify is reference only. Motifs are original."
+          }
+        ]
+      }
+    },
+    {
+      "id": "08-funnel",
+      "recipe": "funnel_stages",
+      "content": {
+        "title": "Adoption funnel",
+        "stages": [
+          {
+            "label": "Discover",
+            "value": "100%"
+          },
+          {
+            "label": "Try doctor",
+            "value": "42%"
+          },
+          {
+            "label": "Scaffold",
+            "value": "19%"
+          },
+          {
+            "label": "Ship",
+            "value": "8%"
+          }
+        ]
+      }
+    },
+    {
+      "id": "09-matrix",
+      "recipe": "matrix_2x2",
+      "content": {
+        "title": "Where motifs play",
+        "quadrants": [
+          {
+            "title": "Hero",
+            "body": "sparse_hero · kpi_hero"
+          },
+          {
+            "title": "Compare",
+            "body": "split_hero · matrix_quad"
+          },
+          {
+            "title": "Flow",
+            "body": "step_rail · funnel_cascade"
+          },
+          {
+            "title": "Grid",
+            "body": "card_row · kpi_band · tile_row"
+          }
+        ],
+        "axes": {
+          "x": "Structure →",
+          "y": "Narrative ↑"
+        }
+      }
+    },
+    {
+      "id": "10-stairs",
+      "recipe": "stairs_ascent",
+      "content": {
+        "title": "Quality staircase",
+        "steps": [
+          {
+            "label": "Tokens",
+            "detail": "Floors"
+          },
+          {
+            "label": "Motif",
+            "detail": "Chrome"
+          },
+          {
+            "label": "Issues",
+            "detail": "Gate"
+          },
+          {
+            "label": "Gate 3",
+            "detail": "Sheet"
+          },
+          {
+            "label": "Ship",
+            "detail": "Human"
+          }
+        ]
+      }
+    },
+    {
+      "id": "11-rules",
+      "recipe": "checklist_board",
+      "content": {
+        "title": "Hard rules",
+        "items": [
+          {
+            "label": "Title ≥ 36pt · body ≥ 18pt",
+            "done": true
+          },
+          {
+            "label": "Never shrink fonts to fit",
+            "done": true
+          },
+          {
+            "label": "Body height follows content",
+            "done": true
+          },
+          {
+            "label": "No vendor shapes or icons",
+            "done": true
+          },
+          {
+            "label": "Finish apply with --screenshot",
+            "done": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "12-close",
+      "recipe": "close",
+      "content": {
+        "title": "Start with the brand file",
+        "body": "doctor --ensure · compose · scaffold · apply --screenshot",
+        "cta": "doctor --ensure",
+        "notes": "One command."
+      }
+    }
+  ]
+}

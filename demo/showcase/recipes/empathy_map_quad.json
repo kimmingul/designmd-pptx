@@ -1,0 +1,259 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "0B0B1A"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "EmpTitle",
+      "text": "Empathy map",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "EmpQ1",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "3.5cm",
+      "width": "14.56cm",
+      "height": "5.6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "EmpLab1",
+      "text": "Says",
+      "x": "2.6cm",
+      "y": "3.8cm",
+      "width": "13.76cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "7C5CFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "EmpBody1",
+      "text": "• Quotes from interviews",
+      "x": "2.6cm",
+      "y": "5cm",
+      "width": "13.76cm",
+      "height": "3.6cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "EmpQ2",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "x": "17.11cm",
+      "y": "3.5cm",
+      "width": "14.56cm",
+      "height": "5.6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "EmpLab2",
+      "text": "Thinks",
+      "x": "17.51cm",
+      "y": "3.8cm",
+      "width": "13.76cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "7C5CFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "EmpBody2",
+      "text": "• Private worries / hopes",
+      "x": "17.51cm",
+      "y": "5cm",
+      "width": "13.76cm",
+      "height": "3.6cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "EmpQ3",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "9.45cm",
+      "width": "14.56cm",
+      "height": "5.6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "EmpLab3",
+      "text": "Does",
+      "x": "2.6cm",
+      "y": "9.75cm",
+      "width": "13.76cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "7C5CFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "EmpBody3",
+      "text": "• Observable behaviours",
+      "x": "2.6cm",
+      "y": "10.95cm",
+      "width": "13.76cm",
+      "height": "3.6cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "EmpQ4",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "x": "17.11cm",
+      "y": "9.45cm",
+      "width": "14.56cm",
+      "height": "5.6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "EmpLab4",
+      "text": "Feels",
+      "x": "17.51cm",
+      "y": "9.75cm",
+      "width": "13.76cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "7C5CFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "EmpBody4",
+      "text": "• Emotional state",
+      "x": "17.51cm",
+      "y": "10.95cm",
+      "width": "13.76cm",
+      "height": "3.6cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "EmpUser",
+      "preset": "ellipse",
+      "fill": "7C5CFF",
+      "line": "none",
+      "text": "User",
+      "x": "14.4cm",
+      "y": "8.6cm",
+      "width": "5.0cm",
+      "height": "3.0cm",
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Prefer evidence over stereotypes in every quadrant."
+    }
+  }
+]

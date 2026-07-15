@@ -1,0 +1,260 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlTitle",
+      "text": "Milestones",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlAxis",
+      "preset": "rect",
+      "fill": "A0A6B0",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "10.2cm",
+      "width": "29.47cm",
+      "height": "0.12cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlDot1",
+      "preset": "ellipse",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "5.53cm",
+      "y": "9.9cm",
+      "width": "0.7cm",
+      "height": "0.7cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlLabel1",
+      "text": "Q1",
+      "x": "2.35cm",
+      "y": "11.2cm",
+      "width": "7.07cm",
+      "height": "2.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlDetail1",
+      "text": "Discover",
+      "x": "2.35cm",
+      "y": "7cm",
+      "width": "7.07cm",
+      "height": "2.4cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlDot2",
+      "preset": "ellipse",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "12.9cm",
+      "y": "9.9cm",
+      "width": "0.7cm",
+      "height": "0.7cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlLabel2",
+      "text": "Q2",
+      "x": "9.72cm",
+      "y": "11.2cm",
+      "width": "7.07cm",
+      "height": "2.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlDetail2",
+      "text": "Build",
+      "x": "9.72cm",
+      "y": "7cm",
+      "width": "7.07cm",
+      "height": "2.4cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlDot3",
+      "preset": "ellipse",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "20.27cm",
+      "y": "9.9cm",
+      "width": "0.7cm",
+      "height": "0.7cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlLabel3",
+      "text": "Q3",
+      "x": "17.08cm",
+      "y": "11.2cm",
+      "width": "7.07cm",
+      "height": "2.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlDetail3",
+      "text": "Ship",
+      "x": "17.08cm",
+      "y": "7cm",
+      "width": "7.07cm",
+      "height": "2.4cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlDot4",
+      "preset": "ellipse",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "27.64cm",
+      "y": "9.9cm",
+      "width": "0.7cm",
+      "height": "0.7cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlLabel4",
+      "text": "Q4",
+      "x": "24.45cm",
+      "y": "11.2cm",
+      "width": "7.07cm",
+      "height": "2.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlDetail4",
+      "text": "Scale",
+      "x": "24.45cm",
+      "y": "7cm",
+      "width": "7.07cm",
+      "height": "2.4cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Name the milestone that unlocks the rest."
+    }
+  }
+]

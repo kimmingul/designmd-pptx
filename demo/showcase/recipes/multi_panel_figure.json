@@ -1,0 +1,309 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "0B0B1A"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FigTitle",
+      "text": "Multi-panel figure",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FigPanel1Bg",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "3A3570",
+      "x": "2.2cm",
+      "y": "3.3cm",
+      "width": "14.48cm",
+      "height": "7.25cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FigPanel1Label",
+      "text": "A",
+      "x": "2.45cm",
+      "y": "3.5cm",
+      "width": "1.5cm",
+      "height": "0.8cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "7C5CFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FigPanel1Placeholder",
+      "text": "Panel A",
+      "x": "2.6cm",
+      "y": "4.6cm",
+      "width": "13.68cm",
+      "height": "4.65cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FigPanel1Cap",
+      "text": "Primary endpoint",
+      "x": "2.5cm",
+      "y": "9.6cm",
+      "width": "13.88cm",
+      "height": "0.8cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FigPanel2Bg",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "3A3570",
+      "x": "17.18cm",
+      "y": "3.3cm",
+      "width": "14.48cm",
+      "height": "7.25cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FigPanel2Label",
+      "text": "B",
+      "x": "17.43cm",
+      "y": "3.5cm",
+      "width": "1.5cm",
+      "height": "0.8cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "7C5CFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FigPanel2Placeholder",
+      "text": "Panel B",
+      "x": "17.58cm",
+      "y": "4.6cm",
+      "width": "13.68cm",
+      "height": "4.65cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FigPanel2Cap",
+      "text": "Subgroup",
+      "x": "17.48cm",
+      "y": "9.6cm",
+      "width": "13.88cm",
+      "height": "0.8cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FigPanel3Bg",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "3A3570",
+      "x": "2.2cm",
+      "y": "11.05cm",
+      "width": "14.48cm",
+      "height": "7.25cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FigPanel3Label",
+      "text": "C",
+      "x": "2.45cm",
+      "y": "11.25cm",
+      "width": "1.5cm",
+      "height": "0.8cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "7C5CFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FigPanel3Placeholder",
+      "text": "Panel C",
+      "x": "2.6cm",
+      "y": "12.35cm",
+      "width": "13.68cm",
+      "height": "4.65cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FigPanel3Cap",
+      "text": "Safety",
+      "x": "2.5cm",
+      "y": "17.35cm",
+      "width": "13.88cm",
+      "height": "0.8cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FigPanel4Bg",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "3A3570",
+      "x": "17.18cm",
+      "y": "11.05cm",
+      "width": "14.48cm",
+      "height": "7.25cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FigPanel4Label",
+      "text": "D",
+      "x": "17.43cm",
+      "y": "11.25cm",
+      "width": "1.5cm",
+      "height": "0.8cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "7C5CFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FigPanel4Placeholder",
+      "text": "Panel D",
+      "x": "17.58cm",
+      "y": "12.35cm",
+      "width": "13.68cm",
+      "height": "4.65cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FigPanel4Cap",
+      "text": "Exploratory",
+      "x": "17.48cm",
+      "y": "17.35cm",
+      "width": "13.88cm",
+      "height": "0.8cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Walk panels A→D; set src/alt for each figure asset."
+    }
+  }
+]

@@ -1,0 +1,321 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "KpiTitle",
+      "text": "At a glance",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.84cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Kpi1Bg",
+      "x": "2.2cm",
+      "y": "3.93cm",
+      "width": "6.54cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi1Value",
+      "text": "66",
+      "x": "2.55cm",
+      "y": "7.86cm",
+      "width": "5.84cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi1Label",
+      "text": "Motifs",
+      "x": "2.55cm",
+      "y": "11.11cm",
+      "width": "5.84cm",
+      "height": "0.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi1Chip",
+      "text": "v2",
+      "x": "2.55cm",
+      "y": "12.31cm",
+      "width": "5.84cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Kpi2Bg",
+      "x": "9.84cm",
+      "y": "3.93cm",
+      "width": "6.54cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi2Value",
+      "text": "75",
+      "x": "10.19cm",
+      "y": "7.86cm",
+      "width": "5.84cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi2Label",
+      "text": "Recipes",
+      "x": "10.19cm",
+      "y": "11.11cm",
+      "width": "5.84cm",
+      "height": "0.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi2Chip",
+      "text": "",
+      "x": "10.19cm",
+      "y": "12.31cm",
+      "width": "5.84cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Kpi3Bg",
+      "x": "17.48cm",
+      "y": "3.93cm",
+      "width": "6.54cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi3Value",
+      "text": "2",
+      "x": "17.84cm",
+      "y": "7.86cm",
+      "width": "5.84cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi3Label",
+      "text": "Backends",
+      "x": "17.84cm",
+      "y": "11.11cm",
+      "width": "5.84cm",
+      "height": "0.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi3Chip",
+      "text": "",
+      "x": "17.84cm",
+      "y": "12.31cm",
+      "width": "5.84cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Kpi4Bg",
+      "x": "25.13cm",
+      "y": "3.93cm",
+      "width": "6.54cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi4Value",
+      "text": "0",
+      "x": "25.48cm",
+      "y": "7.86cm",
+      "width": "5.84cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi4Label",
+      "text": "Vendor bytes",
+      "x": "25.48cm",
+      "y": "11.11cm",
+      "width": "5.84cm",
+      "height": "0.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi4Chip",
+      "text": "safe",
+      "x": "25.48cm",
+      "y": "12.31cm",
+      "width": "5.84cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Walk KPIs left to right; pause on any watch metric."
+    }
+  }
+]

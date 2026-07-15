@@ -14,6 +14,10 @@ build/
 python/out/
 out/
 *.pptx
+# Shipped product demos
+!demo/designmd-pptx-intro-v*.pptx
+!demo/designmd-pptx-best-v*.pptx
+!demo/designmd-pptx-showcase-*.pptx
 .omc/
 .DS_Store
 Thumbs.db
@@ -35,3 +39,4 @@ infograpify_ppt_templates/
 extracted/
 **/extract-assets/
 editor/vscode/*.vsix
+demo/_slide*.png

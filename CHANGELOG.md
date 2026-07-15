@@ -2,7 +2,42 @@
 
 All notable changes to designmd-pptx are documented here.
 
-## [Unreleased] — Wave 4 Infograpify structural roles
+## [Unreleased]
+
+### Added
+- **Visual motifs** — Infograpify **structural collapse** (not 1:1 clones):
+  local **400** decks → **13 families** → **~66 owned motifs** covering all
+  **75 recipes** (`motifs/coverage.py` `RECIPE_TO_MOTIF`, catalog schema 2).
+  Core builders in `motif.py`; family pack in `motifs/structural.py`; complex
+  chart/table/domain recipes exposed as recipe-backed motif adapters.
+  Not React UI libs; not Office SmartArt OOXML (`dgm:`). Goldens:
+  `demo/motifs/` via `scripts/generate_motif_goldens.py`.
+- **UI kit contract** (`ui_kit.py`, `docs/ui-kit.md`): spacing system —
+  `StageMetrics` (margin/gap/pad/title bands), content-height body + Spacer.
+  Layout engine **strips vertical Text weights**. Demo:
+  `designmd-pptx-best-v2.1.2.pptx` (12 slides, motif showcase).
+- **OfficeCLI ensure + install prompt:** without OfficeCLI, new-deck
+  materialization does not work. `doctor` prints a required banner; `--ensure`
+  and TTY `doctor` offer **Y/n** to run `doctor --install`. Hard gate on
+  `apply` / `scaffold --apply` / `render`; soft warn on scaffold / restyle /
+  master. VS Code asks on activate and via **Install OfficeCLI…**.
+  Flags: `--status-json`; env `DESIGNMD_ASSUME_YES` / `DESIGNMD_NO_PROMPT`.
+
+### Fixed
+- **`_initials` helper** for `team` / `persona_card` avatar discs (scaffold
+  used an undefined name and aborted recipe generation mid-run).
+- **KPI band value height** floor raised so 60pt figures do not wrap in
+  multi-column bands; **risk heat** axis label cleared of canvas edge.
+
+### Demo
+- **Northstar Board showcase** (`demo/designmd-pptx-showcase-northstar.pptx`,
+  20 slides): Series B narrative exercising structural motifs under
+  `northstar.DESIGN.md` + `content.showcase.deck.json` (issues=0, animated).
+- **Colorful brand system:** indigo stage + multi-hue `charts.series_colors`
+  promoted into palette series; KPI / process / funnel / card index / pillars
+  cycle series colors (not single-blue monochrome).
+
+### Added (Wave 4 Infograpify structural roles)
 
 ### Added
 - **14 recipes (Wave 4)** from re-analysis of local Infograpify 400-deck library

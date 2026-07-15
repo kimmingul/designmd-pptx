@@ -62,4 +62,5 @@ designmd_pptx = [
     "benchmark_thresholds.json",
     "default.DESIGN.md",
     "schema/*.json",
+    "motifs/*.json",
 ]

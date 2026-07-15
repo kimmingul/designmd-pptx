@@ -1,0 +1,244 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "FeatTitle",
+      "text": "Three promises",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.84cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Card1Bg",
+      "x": "2.2cm",
+      "y": "3.93cm",
+      "width": "9.09cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "34",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "Card1Num",
+      "text": "01",
+      "x": "3.3cm",
+      "y": "5.03cm",
+      "width": "6.89cm",
+      "height": "1.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "26",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Card1Title",
+      "text": "Exact geometry",
+      "x": "3.3cm",
+      "y": "7.49cm",
+      "width": "6.89cm",
+      "height": "2.15cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "bold": "false",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Card1Body",
+      "text": "Centimeters and floors.",
+      "x": "3.3cm",
+      "y": "10.26cm",
+      "width": "6.89cm",
+      "height": "2.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Card2Bg",
+      "x": "12.39cm",
+      "y": "3.93cm",
+      "width": "9.09cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "34",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "Card2Num",
+      "text": "02",
+      "x": "13.49cm",
+      "y": "5.03cm",
+      "width": "6.89cm",
+      "height": "1.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "26",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Card2Title",
+      "text": "Hard gates",
+      "x": "13.49cm",
+      "y": "7.49cm",
+      "width": "6.89cm",
+      "height": "2.15cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "bold": "false",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Card2Body",
+      "text": "Budgets then contact sheet.",
+      "x": "13.49cm",
+      "y": "10.26cm",
+      "width": "6.89cm",
+      "height": "2.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Card3Bg",
+      "x": "22.58cm",
+      "y": "3.93cm",
+      "width": "9.09cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "34",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "Card3Num",
+      "text": "03",
+      "x": "23.68cm",
+      "y": "5.03cm",
+      "width": "6.89cm",
+      "height": "1.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "26",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Card3Title",
+      "text": "Agent-safe",
+      "x": "23.68cm",
+      "y": "7.49cm",
+      "width": "6.89cm",
+      "height": "2.15cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "bold": "false",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Card3Body",
+      "text": "Install only after yes.",
+      "x": "23.68cm",
+      "y": "10.26cm",
+      "width": "6.89cm",
+      "height": "2.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Three cards max on a hero slide; cut copy first."
+    }
+  }
+]

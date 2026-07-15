@@ -1,0 +1,189 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "AgendaTitle",
+      "text": "Agenda",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "AgendaNum1",
+      "text": "01",
+      "x": "2.2cm",
+      "y": "4.7cm",
+      "width": "2.4cm",
+      "height": "2.43cm",
+      "font": "Arial",
+      "size": "26",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "AgendaItem1",
+      "text": "Contract",
+      "x": "5cm",
+      "y": "4.7cm",
+      "width": "26.67cm",
+      "height": "2.43cm",
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "AgendaNum2",
+      "text": "02",
+      "x": "2.2cm",
+      "y": "7.29cm",
+      "width": "2.4cm",
+      "height": "2.43cm",
+      "font": "Arial",
+      "size": "26",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "AgendaItem2",
+      "text": "Motifs",
+      "x": "5cm",
+      "y": "7.29cm",
+      "width": "26.67cm",
+      "height": "2.43cm",
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "AgendaNum3",
+      "text": "03",
+      "x": "2.2cm",
+      "y": "9.87cm",
+      "width": "2.4cm",
+      "height": "2.43cm",
+      "font": "Arial",
+      "size": "26",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "AgendaItem3",
+      "text": "Gates",
+      "x": "5cm",
+      "y": "9.87cm",
+      "width": "26.67cm",
+      "height": "2.43cm",
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "AgendaNum4",
+      "text": "04",
+      "x": "2.2cm",
+      "y": "12.46cm",
+      "width": "2.4cm",
+      "height": "2.43cm",
+      "font": "Arial",
+      "size": "26",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "AgendaItem4",
+      "text": "Ask",
+      "x": "5cm",
+      "y": "12.46cm",
+      "width": "26.67cm",
+      "height": "2.43cm",
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Skip the menu — point at the one decision."
+    }
+  }
+]

@@ -1,0 +1,170 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "0B0B1A"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PipeTitle",
+      "text": "Pipeline",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PipeStage1",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "text": "120\nLead",
+      "x": "2.2cm",
+      "y": "5.5cm",
+      "width": "7.18cm",
+      "height": "9.5cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PipeArrow1",
+      "preset": "rightArrow",
+      "fill": "A0A6B0",
+      "line": "none",
+      "x": "9.23cm",
+      "y": "9.9cm",
+      "width": "0.55cm",
+      "height": "0.7cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PipeStage2",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "text": "48\nSQL",
+      "x": "9.63cm",
+      "y": "5.5cm",
+      "width": "7.18cm",
+      "height": "9.5cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PipeArrow2",
+      "preset": "rightArrow",
+      "fill": "A0A6B0",
+      "line": "none",
+      "x": "16.66cm",
+      "y": "9.9cm",
+      "width": "0.55cm",
+      "height": "0.7cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PipeStage3",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "text": "22\nOpp",
+      "x": "17.06cm",
+      "y": "5.5cm",
+      "width": "7.18cm",
+      "height": "9.5cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PipeArrow3",
+      "preset": "rightArrow",
+      "fill": "A0A6B0",
+      "line": "none",
+      "x": "24.09cm",
+      "y": "9.9cm",
+      "width": "0.55cm",
+      "height": "0.7cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PipeStage4",
+      "preset": "roundRect",
+      "fill": "7C5CFF",
+      "line": "none",
+      "text": "9\nWon",
+      "x": "24.49cm",
+      "y": "5.5cm",
+      "width": "7.18cm",
+      "height": "9.5cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Name the biggest conversion drop between adjacent stages."
+    }
+  }
+]

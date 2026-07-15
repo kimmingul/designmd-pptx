@@ -1,0 +1,62 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerAccentBar",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "6.4cm",
+      "width": "1.1cm",
+      "height": "6.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerNumber",
+      "text": "01",
+      "x": "3.8cm",
+      "y": "5.8cm",
+      "width": "8cm",
+      "height": "2.4cm",
+      "font": "Arial",
+      "size": "54",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerTitle",
+      "text": "Section",
+      "x": "3.8cm",
+      "y": "8.4cm",
+      "width": "27.87cm",
+      "height": "2.6cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  }
+]

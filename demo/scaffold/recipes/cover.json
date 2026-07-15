@@ -1,0 +1,105 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverEdge",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "0cm",
+      "y": "0cm",
+      "width": "0.35cm",
+      "height": "19.05cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverTitle",
+      "text": "designmd-pptx",
+      "x": "2.2cm",
+      "y": "5cm",
+      "width": "29.47cm",
+      "height": "4cm",
+      "font": "Arial",
+      "size": "48",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "left",
+      "valign": "bottom",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverAccent",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "9.1cm",
+      "width": "4.8cm",
+      "height": "0.14cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverSubtitle",
+      "text": "Motifs from structure — original chrome, brand from DESIGN.md",
+      "x": "2.2cm",
+      "y": "9.5cm",
+      "width": "26cm",
+      "height": "1.6cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "align": "left",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverMeta",
+      "text": "v2.1.2  ·  motif library  ·  English",
+      "x": "2.2cm",
+      "y": "15.95cm",
+      "width": "29.47cm",
+      "height": "0.9cm",
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "left",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Hold the name."
+    }
+  }
+]

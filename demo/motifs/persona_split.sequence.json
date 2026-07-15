@@ -1,0 +1,190 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PersonaTitle",
+      "text": "Persona Split",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PersonaPanel",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "3.6cm",
+      "width": "12.38cm",
+      "height": "13.25cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PersonaAvatar",
+      "preset": "ellipse",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "AR",
+      "x": "5.99cm",
+      "y": "4.8cm",
+      "width": "4.8cm",
+      "height": "4.8cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PersonaName",
+      "text": "Alex Rivera\nRole / segment",
+      "x": "2.7cm",
+      "y": "10.1cm",
+      "width": "11.38cm",
+      "height": "2.8cm",
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PersonaQuote",
+      "text": "“What success looks like.”",
+      "x": "15.68cm",
+      "y": "3.6cm",
+      "width": "15.99cm",
+      "height": "3.5cm",
+      "font": "Arial",
+      "size": "24",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PersonaAttr1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Goal",
+      "x": "15.68cm",
+      "y": "7.4cm",
+      "width": "15.99cm",
+      "height": "1.5cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PersonaAttr2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Pain",
+      "x": "15.68cm",
+      "y": "9.1cm",
+      "width": "15.99cm",
+      "height": "1.5cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PersonaAttr3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Channel",
+      "x": "15.68cm",
+      "y": "10.8cm",
+      "width": "15.99cm",
+      "height": "1.5cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PersonaAttr4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Metric",
+      "x": "15.68cm",
+      "y": "12.5cm",
+      "width": "15.99cm",
+      "height": "1.5cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "One decision this persona forces on the product."
+    }
+  }
+]

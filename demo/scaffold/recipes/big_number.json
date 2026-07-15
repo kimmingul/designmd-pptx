@@ -1,0 +1,76 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BigValue",
+      "text": "DESIGN.md",
+      "x": "2.2cm",
+      "y": "3.28cm",
+      "width": "29.47cm",
+      "height": "6.4cm",
+      "font": "Arial",
+      "size": "81",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "valign": "middle",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BigLabel",
+      "text": "One brand source of truth",
+      "x": "2.2cm",
+      "y": "10.29cm",
+      "width": "29.47cm",
+      "height": "1.7cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BigContext",
+      "text": "Tokens and floors compile once — decks inherit the contract.",
+      "x": "3.3cm",
+      "y": "12.54cm",
+      "width": "27.27cm",
+      "height": "2.2cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "The brand file is the contract."
+    }
+  }
+]

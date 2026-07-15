@@ -1,0 +1,137 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "0B0B1A"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "MVTitle",
+      "text": "Direction",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "MVPanel1",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "6.1cm",
+      "width": "14.18cm",
+      "height": "6.8cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "MVLab1",
+      "text": "Mission",
+      "x": "3.3cm",
+      "y": "7.2cm",
+      "width": "11.98cm",
+      "height": "1.5cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "MVBody1",
+      "text": "Why we exist — the problem we refuse to ignore.",
+      "x": "3.3cm",
+      "y": "9.32cm",
+      "width": "11.98cm",
+      "height": "2.49cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "MVPanel2",
+      "preset": "roundRect",
+      "fill": "7C5CFF",
+      "line": "none",
+      "x": "17.48cm",
+      "y": "6.1cm",
+      "width": "14.18cm",
+      "height": "6.8cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "MVLab2",
+      "text": "Vision",
+      "x": "18.59cm",
+      "y": "7.2cm",
+      "width": "11.98cm",
+      "height": "1.5cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "FFFFFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "MVBody2",
+      "text": "Where we are going — the future state in concrete terms.",
+      "x": "18.59cm",
+      "y": "9.32cm",
+      "width": "11.98cm",
+      "height": "2.49cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "FFFFFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Mission is timeless; vision is dated and measurable."
+    }
+  }
+]

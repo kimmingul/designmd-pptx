@@ -1,0 +1,201 @@
+{
+  "version": "1.1",
+  "source": "demo/apple.DESIGN.md",
+  "brand": "Apple-Keynote-Flagship",
+  "description": "Flagship demo house style — spacious black stage, one blue accent, left-hero covers. Original tokens (not an Apple template). Tuned for 8–10 slide product narrative, not catalog exhibition.",
+  "canvas_cm": [
+    33.87,
+    19.05
+  ],
+  "margin_cm": 2.2,
+  "gap_cm": 1.1,
+  "colors": {
+    "background": "000000",
+    "content_background": "000000",
+    "surface": "1C1C1E",
+    "surface_elevated": "2C2C2E",
+    "accent": "0B5FFF",
+    "on_accent": "FFFFFF",
+    "text": "F5F5F7",
+    "text_on_surface": "F5F5F7",
+    "text_on_content": "F5F5F7",
+    "muted": "A0A6B0",
+    "hairline": "3A3A3C",
+    "success": "30D158",
+    "risk": "FF453A",
+    "chart_series1": "0B5FFF",
+    "chart_series2": "91B7FF",
+    "chart_series3": "30D158"
+  },
+  "color_provenance": {
+    "background": "sourced",
+    "surface": "sourced",
+    "surface_elevated": "sourced",
+    "accent": "sourced",
+    "text_source": "sourced",
+    "muted": "sourced",
+    "on_accent": "sourced",
+    "hairline": "sourced",
+    "success": "sourced",
+    "risk": "sourced",
+    "content_background": "sourced",
+    "text": "derived",
+    "text_on_surface": "derived",
+    "text_on_content": "derived",
+    "chart_series1": "sourced",
+    "chart_series2": "derived",
+    "chart_series3": "sourced"
+  },
+  "css_vars": {
+    "--canvas": "#000000",
+    "--color-canvas": "#000000",
+    "--surface-1": "#1C1C1E",
+    "--color-surface-1": "#1C1C1E",
+    "--surface-2": "#2C2C2E",
+    "--color-surface-2": "#2C2C2E",
+    "--primary": "#0B5FFF",
+    "--color-primary": "#0B5FFF",
+    "--on-primary": "#FFFFFF",
+    "--color-on-primary": "#FFFFFF",
+    "--ink": "#F5F5F7",
+    "--color-ink": "#F5F5F7",
+    "--ink-muted": "#A1A1A6",
+    "--color-ink-muted": "#A1A1A6",
+    "--hairline": "#3A3A3C",
+    "--color-hairline": "#3A3A3C",
+    "--semantic-success": "#30D158",
+    "--color-semantic-success": "#30D158",
+    "--semantic-danger": "#FF453A",
+    "--color-semantic-danger": "#FF453A",
+    "--semantic-warning": "#FFD60A",
+    "--color-semantic-warning": "#FFD60A"
+  },
+  "warnings": [
+    "font.heading: 'Helvetica Neue' → 'Arial' (PowerPoint-safe substitute)",
+    "font.body: 'Helvetica Neue' → 'Arial' (PowerPoint-safe substitute)"
+  ],
+  "type": {
+    "cover_pt": 48,
+    "title_pt": 36,
+    "section_pt": 28,
+    "body_pt": 18,
+    "caption_pt": 12,
+    "micro_pt": 14,
+    "kpi_pt": 60,
+    "heading_font": "Arial",
+    "body_font": "Arial",
+    "mono_font": "Consolas"
+  },
+  "shape": {
+    "card_preset": "roundRect",
+    "card_radius_px_source": 20.0
+  },
+  "motif": "hairline-card-on-dark",
+  "composition": {
+    "whitespace_density": "spacious",
+    "title_placement": "left"
+  },
+  "charts": {
+    "default_style": "modern",
+    "series_colors": [
+      "0B5FFF",
+      "64D2FF",
+      "BF5AF2",
+      "30D158",
+      "FF9F0A"
+    ]
+  },
+  "tables": {
+    "header_style": "filled",
+    "cell_padding_cm": 0.15,
+    "stripe": true
+  },
+  "images": {
+    "crop_mode": "fill",
+    "placement": "auto"
+  },
+  "master": {
+    "footer": null,
+    "page_number": false,
+    "navigation": false
+  },
+  "animation": {
+    "enabled": false,
+    "entrance": "fade",
+    "emphasis": "none",
+    "transition": "fade",
+    "transition_speed": "med",
+    "stagger_ms": 150,
+    "on": "click",
+    "recipes": {
+      "cover": {
+        "entrance": "fade",
+        "transition": "fade"
+      },
+      "bullets": {
+        "entrance": "fade"
+      },
+      "feature_cards": {
+        "entrance": "fade"
+      },
+      "kpi_row": {
+        "entrance": "appear"
+      },
+      "process": {
+        "entrance": "wipe"
+      },
+      "freeform": {
+        "entrance": "fade"
+      }
+    }
+  },
+  "dark_first": true,
+  "content_bg_policy": "match_canvas",
+  "background_gradient": null,
+  "drop": [
+    "hover",
+    "focus",
+    "breakpoints",
+    "responsive",
+    "nav",
+    "inputs",
+    "forms",
+    "touch-targets",
+    "scroll",
+    "z-index-stacking-beyond-shapes",
+    "css-gradients-as-background-unless-officecli-gradient-prop"
+  ],
+  "patterns": [
+    "cover",
+    "section_divider",
+    "kpi_row",
+    "feature_cards",
+    "bullets",
+    "quote",
+    "comparison_2col",
+    "timeline",
+    "process",
+    "table",
+    "image_full",
+    "image_text_2col",
+    "chart_insight",
+    "close"
+  ],
+  "raw_color_keys": [
+    "canvas",
+    "hairline",
+    "ink",
+    "ink-muted",
+    "on-primary",
+    "primary",
+    "semantic-danger",
+    "semantic-success",
+    "semantic-warning",
+    "surface-1",
+    "surface-2"
+  ],
+  "compiler": {
+    "name": "designmd-pptx",
+    "version": "2.1.2"
+  }
+}

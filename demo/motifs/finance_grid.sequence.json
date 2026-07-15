@@ -1,0 +1,595 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinTitle",
+      "text": "Finance Grid",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinHead1",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "Line",
+      "x": "2.2cm",
+      "y": "3.5cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinHead2",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "Actual",
+      "x": "7.38cm",
+      "y": "3.5cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinHead3",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "Plan",
+      "x": "12.55cm",
+      "y": "3.5cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinHead4",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "Δ",
+      "x": "17.72cm",
+      "y": "3.5cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinCell1_1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Revenue",
+      "x": "2.2cm",
+      "y": "4.75cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinCell1_2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "42.1",
+      "x": "7.38cm",
+      "y": "4.75cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinCell1_3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "40.0",
+      "x": "12.55cm",
+      "y": "4.75cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinCell1_4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "+5%",
+      "x": "17.72cm",
+      "y": "4.75cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinCell2_1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "COGS",
+      "x": "2.2cm",
+      "y": "6cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinCell2_2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "12.4",
+      "x": "7.38cm",
+      "y": "6cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinCell2_3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "12.0",
+      "x": "12.55cm",
+      "y": "6cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinCell2_4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "+3%",
+      "x": "17.72cm",
+      "y": "6cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinCell3_1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Gross profit",
+      "x": "2.2cm",
+      "y": "7.25cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinCell3_2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "29.7",
+      "x": "7.38cm",
+      "y": "7.25cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinCell3_3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "28.0",
+      "x": "12.55cm",
+      "y": "7.25cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinCell3_4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "+6%",
+      "x": "17.72cm",
+      "y": "7.25cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinCell4_1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Opex",
+      "x": "2.2cm",
+      "y": "8.5cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinCell4_2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "18.2",
+      "x": "7.38cm",
+      "y": "8.5cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinCell4_3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "17.5",
+      "x": "12.55cm",
+      "y": "8.5cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinCell4_4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "+4%",
+      "x": "17.72cm",
+      "y": "8.5cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinCell5_1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Op. income",
+      "x": "2.2cm",
+      "y": "9.75cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinCell5_2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "11.5",
+      "x": "7.38cm",
+      "y": "9.75cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinCell5_3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "10.5",
+      "x": "12.55cm",
+      "y": "9.75cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinCell5_4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "+10%",
+      "x": "17.72cm",
+      "y": "9.75cm",
+      "width": "4.97cm",
+      "height": "1.25cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinInsightBg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "22.8cm",
+      "y": "3.5cm",
+      "width": "9.5cm",
+      "height": "14.0cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinInsightTitle",
+      "text": "Takeaway",
+      "x": "23.3cm",
+      "y": "4.0cm",
+      "width": "8.5cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FinInsightBody",
+      "text": "Operating leverage improved as revenue outgrew opex.",
+      "x": "23.3cm",
+      "y": "5.5cm",
+      "width": "8.5cm",
+      "height": "11.0cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "One line of narrative beats reading every cell aloud."
+    }
+  }
+]

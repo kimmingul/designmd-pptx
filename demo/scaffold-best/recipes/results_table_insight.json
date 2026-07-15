@@ -1,0 +1,379 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ResTitle",
+      "text": "Primary results",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ResH1",
+      "text": "Endpoint",
+      "x": "2.2cm",
+      "y": "3.5cm",
+      "width": "5.1cm",
+      "height": "0.95cm",
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "FFFFFF",
+      "fill": "0B5FFF",
+      "align": "center"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ResH2",
+      "text": "Intervention",
+      "x": "7.5cm",
+      "y": "3.5cm",
+      "width": "5.1cm",
+      "height": "0.95cm",
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "FFFFFF",
+      "fill": "0B5FFF",
+      "align": "center"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ResH3",
+      "text": "Control",
+      "x": "12.8cm",
+      "y": "3.5cm",
+      "width": "5.1cm",
+      "height": "0.95cm",
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "FFFFFF",
+      "fill": "0B5FFF",
+      "align": "center"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ResH4",
+      "text": "p",
+      "x": "18.1cm",
+      "y": "3.5cm",
+      "width": "5.1cm",
+      "height": "0.95cm",
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "FFFFFF",
+      "fill": "0B5FFF",
+      "align": "center"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ResR1C1",
+      "text": "ORR",
+      "x": "2.2cm",
+      "y": "4.45cm",
+      "width": "5.1cm",
+      "height": "0.95cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "1C1C1E",
+      "align": "center"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ResR1C2",
+      "text": "42%",
+      "x": "7.5cm",
+      "y": "4.45cm",
+      "width": "5.1cm",
+      "height": "0.95cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "1C1C1E",
+      "align": "center"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ResR1C3",
+      "text": "28%",
+      "x": "12.8cm",
+      "y": "4.45cm",
+      "width": "5.1cm",
+      "height": "0.95cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "1C1C1E",
+      "align": "center"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ResR1C4",
+      "text": "0.03",
+      "x": "18.1cm",
+      "y": "4.45cm",
+      "width": "5.1cm",
+      "height": "0.95cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "1C1C1E",
+      "align": "center"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ResR2C1",
+      "text": "PFS median",
+      "x": "2.2cm",
+      "y": "5.4cm",
+      "width": "5.1cm",
+      "height": "0.95cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "000000",
+      "align": "center"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ResR2C2",
+      "text": "11.2 mo",
+      "x": "7.5cm",
+      "y": "5.4cm",
+      "width": "5.1cm",
+      "height": "0.95cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "000000",
+      "align": "center"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ResR2C3",
+      "text": "7.8 mo",
+      "x": "12.8cm",
+      "y": "5.4cm",
+      "width": "5.1cm",
+      "height": "0.95cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "000000",
+      "align": "center"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ResR2C4",
+      "text": "0.01",
+      "x": "18.1cm",
+      "y": "5.4cm",
+      "width": "5.1cm",
+      "height": "0.95cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "000000",
+      "align": "center"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ResR3C1",
+      "text": "Grade ≥3 AE",
+      "x": "2.2cm",
+      "y": "6.35cm",
+      "width": "5.1cm",
+      "height": "0.95cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "1C1C1E",
+      "align": "center"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ResR3C2",
+      "text": "18%",
+      "x": "7.5cm",
+      "y": "6.35cm",
+      "width": "5.1cm",
+      "height": "0.95cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "1C1C1E",
+      "align": "center"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ResR3C3",
+      "text": "14%",
+      "x": "12.8cm",
+      "y": "6.35cm",
+      "width": "5.1cm",
+      "height": "0.95cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "1C1C1E",
+      "align": "center"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ResR3C4",
+      "text": "0.22",
+      "x": "18.1cm",
+      "y": "6.35cm",
+      "width": "5.1cm",
+      "height": "0.95cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "1C1C1E",
+      "align": "center"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ResInsightBg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "24.0cm",
+      "y": "3.5cm",
+      "width": "8.3cm",
+      "height": "13.8cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ResInsightTitle",
+      "text": "Interpretation",
+      "x": "24.5cm",
+      "y": "4.0cm",
+      "width": "7.3cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "20",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ResInsightBody",
+      "text": "State clinical meaning, not just statistical significance.",
+      "x": "24.5cm",
+      "y": "5.5cm",
+      "width": "7.3cm",
+      "height": "11.0cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Lead with the interpretation, then walk the table."
+    }
+  }
+]

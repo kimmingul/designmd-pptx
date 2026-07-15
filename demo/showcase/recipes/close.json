@@ -1,0 +1,70 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "0B0B1A"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CloseTitle",
+      "text": "One ask",
+      "x": "2.2cm",
+      "y": "4.99cm",
+      "width": "29.47cm",
+      "height": "2.6cm",
+      "font": "Arial",
+      "size": "44",
+      "bold": "true",
+      "color": "F4F2FF",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CloseBody",
+      "text": "Green-light the Series B process this quarter.",
+      "x": "3.3cm",
+      "y": "8.2cm",
+      "width": "27.27cm",
+      "height": "2cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CloseCta",
+      "preset": "roundRect",
+      "fill": "7C5CFF",
+      "line": "none",
+      "text": "Approve window",
+      "x": "11.93cm",
+      "y": "11.3cm",
+      "width": "10cm",
+      "height": "1.7cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  }
+]

@@ -1,0 +1,337 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PestleTitle",
+      "text": "PESTLE scan",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Pestle1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "3.5cm",
+      "width": "9.59cm",
+      "height": "7.08cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PestleLab1",
+      "text": "Political",
+      "x": "2.55cm",
+      "y": "3.8cm",
+      "width": "8.89cm",
+      "height": "1.1cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PestleBody1",
+      "text": "• …",
+      "x": "2.55cm",
+      "y": "5cm",
+      "width": "8.89cm",
+      "height": "5.08cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Pestle2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "12.14cm",
+      "y": "3.5cm",
+      "width": "9.59cm",
+      "height": "7.08cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PestleLab2",
+      "text": "Economic",
+      "x": "12.49cm",
+      "y": "3.8cm",
+      "width": "8.89cm",
+      "height": "1.1cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PestleBody2",
+      "text": "• …",
+      "x": "12.49cm",
+      "y": "5cm",
+      "width": "8.89cm",
+      "height": "5.08cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Pestle3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "22.08cm",
+      "y": "3.5cm",
+      "width": "9.59cm",
+      "height": "7.08cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PestleLab3",
+      "text": "Social",
+      "x": "22.43cm",
+      "y": "3.8cm",
+      "width": "8.89cm",
+      "height": "1.1cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PestleBody3",
+      "text": "• …",
+      "x": "22.43cm",
+      "y": "5cm",
+      "width": "8.89cm",
+      "height": "5.08cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Pestle4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "10.93cm",
+      "width": "9.59cm",
+      "height": "7.08cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PestleLab4",
+      "text": "Technological",
+      "x": "2.55cm",
+      "y": "11.23cm",
+      "width": "8.89cm",
+      "height": "1.1cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PestleBody4",
+      "text": "• …",
+      "x": "2.55cm",
+      "y": "12.43cm",
+      "width": "8.89cm",
+      "height": "5.08cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Pestle5",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "12.14cm",
+      "y": "10.93cm",
+      "width": "9.59cm",
+      "height": "7.08cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PestleLab5",
+      "text": "Legal",
+      "x": "12.49cm",
+      "y": "11.23cm",
+      "width": "8.89cm",
+      "height": "1.1cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PestleBody5",
+      "text": "• …",
+      "x": "12.49cm",
+      "y": "12.43cm",
+      "width": "8.89cm",
+      "height": "5.08cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Pestle6",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "22.08cm",
+      "y": "10.93cm",
+      "width": "9.59cm",
+      "height": "7.08cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PestleLab6",
+      "text": "Environmental",
+      "x": "22.43cm",
+      "y": "11.23cm",
+      "width": "8.89cm",
+      "height": "1.1cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PestleBody6",
+      "text": "• …",
+      "x": "22.43cm",
+      "y": "12.43cm",
+      "width": "8.89cm",
+      "height": "5.08cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Mark the two factors that change the plan this quarter."
+    }
+  }
+]

@@ -78,7 +78,12 @@ Measured on a licensed local library of **400** decks
 | strategy_canvas | 3 | business_canvas, pestle_grid, scorecard_balanced | COVERED |
 | device_mockup | 1 | device_frame (user screenshot) | DEFER photo packs |
 
-**Recipe count:** 75 builders (Wave 0–4 + freeform). Re-run catalog:
+**Recipe count:** 75 builders (Wave 0–4 + freeform).  
+**Motif count:** ~66 structural motifs — every recipe maps to one motif
+(`python/designmd_pptx/motifs/coverage.py`). 400 decks are **collapsed** into
+families/motifs; never cloned slide-for-slide. See [motifs.md](motifs.md).
+
+Re-run catalog:
 
 ```bash
 python -m designmd_pptx reference infograpify_ppt_templates --catalog -o .ref-analysis

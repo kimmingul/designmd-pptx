@@ -1,0 +1,226 @@
+{
+  "ok": true,
+  "errors": 0,
+  "warnings": 0,
+  "findings": [],
+  "reading_order": [
+    {
+      "slide_id": "01-cover",
+      "recipe": "cover",
+      "role": "title",
+      "text": "designmd-pptx",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "01-cover",
+      "recipe": "cover",
+      "role": "subtitle",
+      "text": "Brand design that becomes a real deck",
+      "reading_index": 1
+    },
+    {
+      "slide_id": "01-cover",
+      "recipe": "cover",
+      "role": "notes",
+      "text": "Hold the name. Then the promise.",
+      "reading_index": 2
+    },
+    {
+      "slide_id": "02-contract",
+      "recipe": "big_number",
+      "role": "title",
+      "text": "DESIGN.md",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "02-contract",
+      "recipe": "big_number",
+      "role": "notes",
+      "text": "Everything else is a derivative of this file.",
+      "reading_index": 1
+    },
+    {
+      "slide_id": "03-delta",
+      "recipe": "before_after_slider",
+      "role": "title",
+      "text": "What changes",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "04-flow",
+      "recipe": "process",
+      "role": "title",
+      "text": "One pipeline",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "04-flow",
+      "recipe": "process",
+      "role": "steps[0]",
+      "text": "Brief",
+      "reading_index": 1
+    },
+    {
+      "slide_id": "04-flow",
+      "recipe": "process",
+      "role": "steps[1]",
+      "text": "Compose",
+      "reading_index": 2
+    },
+    {
+      "slide_id": "04-flow",
+      "recipe": "process",
+      "role": "steps[2]",
+      "text": "Scaffold",
+      "reading_index": 3
+    },
+    {
+      "slide_id": "04-flow",
+      "recipe": "process",
+      "role": "steps[3]",
+      "text": "Apply",
+      "reading_index": 4
+    },
+    {
+      "slide_id": "04-flow",
+      "recipe": "process",
+      "role": "steps[4]",
+      "text": "Gate 3",
+      "reading_index": 5
+    },
+    {
+      "slide_id": "04-flow",
+      "recipe": "process",
+      "role": "notes",
+      "text": "Five steps. One owner each. Gate 3 is not optional.",
+      "reading_index": 6
+    },
+    {
+      "slide_id": "05-promises",
+      "recipe": "feature_cards",
+      "role": "title",
+      "text": "Three promises",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "06-backends",
+      "recipe": "pillar_columns",
+      "role": "title",
+      "text": "Two backends, one contract",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "07-north",
+      "recipe": "mission_vision_split",
+      "role": "title",
+      "text": "North star",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "08-quality",
+      "recipe": "stairs_ascent",
+      "role": "title",
+      "text": "Quality is a staircase",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "08-quality",
+      "recipe": "stairs_ascent",
+      "role": "steps[0]",
+      "text": "Tokens",
+      "reading_index": 1
+    },
+    {
+      "slide_id": "08-quality",
+      "recipe": "stairs_ascent",
+      "role": "steps[1]",
+      "text": "Fit",
+      "reading_index": 2
+    },
+    {
+      "slide_id": "08-quality",
+      "recipe": "stairs_ascent",
+      "role": "steps[2]",
+      "text": "Issues",
+      "reading_index": 3
+    },
+    {
+      "slide_id": "08-quality",
+      "recipe": "stairs_ascent",
+      "role": "steps[3]",
+      "text": "Gate 3",
+      "reading_index": 4
+    },
+    {
+      "slide_id": "08-quality",
+      "recipe": "stairs_ascent",
+      "role": "steps[4]",
+      "text": "Ship",
+      "reading_index": 5
+    },
+    {
+      "slide_id": "09-rules",
+      "recipe": "checklist_board",
+      "role": "title",
+      "text": "Hard rules",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "09-rules",
+      "recipe": "checklist_board",
+      "role": "items[0]",
+      "text": "Title ≥ 36pt · body ≥ 18pt",
+      "reading_index": 1
+    },
+    {
+      "slide_id": "09-rules",
+      "recipe": "checklist_board",
+      "role": "items[1]",
+      "text": "Never shrink fonts to fit — split or cut",
+      "reading_index": 2
+    },
+    {
+      "slide_id": "09-rules",
+      "recipe": "checklist_board",
+      "role": "items[2]",
+      "text": "Body height follows content, not free space",
+      "reading_index": 3
+    },
+    {
+      "slide_id": "09-rules",
+      "recipe": "checklist_board",
+      "role": "items[3]",
+      "text": "Overwrite only with --force",
+      "reading_index": 4
+    },
+    {
+      "slide_id": "09-rules",
+      "recipe": "checklist_board",
+      "role": "items[4]",
+      "text": "Finish apply with --screenshot",
+      "reading_index": 5
+    },
+    {
+      "slide_id": "10-close",
+      "recipe": "close",
+      "role": "title",
+      "text": "Start with the brand file",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "10-close",
+      "recipe": "close",
+      "role": "body",
+      "text": "doctor --ensure · compose · scaffold · apply --screenshot",
+      "reading_index": 1
+    },
+    {
+      "slide_id": "10-close",
+      "recipe": "close",
+      "role": "notes",
+      "text": "Leave them with one command.",
+      "reading_index": 2
+    }
+  ],
+  "corrected": null
+}

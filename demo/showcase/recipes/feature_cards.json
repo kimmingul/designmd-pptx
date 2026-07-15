@@ -1,0 +1,244 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "0B0B1A"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none",
+      "name": "FeatTitle",
+      "text": "Three promises",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.84cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "name": "Card1Bg",
+      "x": "2.2cm",
+      "y": "3.93cm",
+      "width": "9.09cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "34",
+      "bold": "true",
+      "color": "7C5CFF",
+      "fill": "none",
+      "name": "Card1Num",
+      "text": "01",
+      "x": "3.3cm",
+      "y": "5.03cm",
+      "width": "6.89cm",
+      "height": "1.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "26",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none",
+      "name": "Card1Title",
+      "text": "Clarity",
+      "x": "3.3cm",
+      "y": "7.49cm",
+      "width": "6.89cm",
+      "height": "2.15cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "bold": "false",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Card1Body",
+      "text": "One brief per decision — not a dashboard tour.",
+      "x": "3.3cm",
+      "y": "10.26cm",
+      "width": "6.89cm",
+      "height": "2.63cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "name": "Card2Bg",
+      "x": "12.39cm",
+      "y": "3.93cm",
+      "width": "9.09cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "34",
+      "bold": "true",
+      "color": "22D3EE",
+      "fill": "none",
+      "name": "Card2Num",
+      "text": "02",
+      "x": "13.49cm",
+      "y": "5.03cm",
+      "width": "6.89cm",
+      "height": "1.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "26",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none",
+      "name": "Card2Title",
+      "text": "Cadence",
+      "x": "13.49cm",
+      "y": "7.49cm",
+      "width": "6.89cm",
+      "height": "2.15cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "bold": "false",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Card2Body",
+      "text": "Same chrome every week so the content is the news.",
+      "x": "13.49cm",
+      "y": "10.26cm",
+      "width": "6.89cm",
+      "height": "2.63cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "name": "Card3Bg",
+      "x": "22.58cm",
+      "y": "3.93cm",
+      "width": "9.09cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "34",
+      "bold": "true",
+      "color": "F472B6",
+      "fill": "none",
+      "name": "Card3Num",
+      "text": "03",
+      "x": "23.68cm",
+      "y": "5.03cm",
+      "width": "6.89cm",
+      "height": "1.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "26",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none",
+      "name": "Card3Title",
+      "text": "Control",
+      "x": "23.68cm",
+      "y": "7.49cm",
+      "width": "6.89cm",
+      "height": "2.15cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "bold": "false",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Card3Body",
+      "text": "Gates before the boardroom, not after the screenshot.",
+      "x": "23.68cm",
+      "y": "10.26cm",
+      "width": "6.89cm",
+      "height": "2.63cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Pick the promise that is still fragile."
+    }
+  }
+]

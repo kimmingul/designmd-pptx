@@ -160,15 +160,34 @@ def _intrinsic_main(box: Box, cross_cm: float, vertical: bool) -> float:
     return max(box.min_cm, box.size_cm)
 
 
+def _strip_vertical_text_weights(box: Box) -> None:
+    """UI-kit contract: in a VStack, text leaves never absorb free height.
+
+    ``weight`` on Text inside an HStack is kept (equal column *widths*).
+    Free vertical space belongs to Spacers / empty stage — not hollow text
+    frames (the void-slab failure mode).
+    """
+    if box.kind == "vstack":
+        for c in box.children:
+            if c.kind == "text" and c.weight > 0:
+                c.weight = 0.0
+            _strip_vertical_text_weights(c)
+    elif box.kind == "hstack":
+        for c in box.children:
+            _strip_vertical_text_weights(c)
+
+
 def solve(root: Box, x: float, y: float, w: float, h: float) -> list[Placed]:
     """Solve the tree into absolutely-positioned leaves. Raises LayoutOverflow.
 
     Containers that carry props are emitted too (before their children), so a
     card stack renders its own background rect. After placement, every text
-    leaf — including weighted ones that were sized by free space, not by
-    content — is re-checked against its estimated height, closing the
-    weighted-text overflow hole.
+    leaf is re-checked against its estimated height.
+
+    Vertical free space is never given to Text leaves (see
+    ``_strip_vertical_text_weights`` / docs/ui-kit.md).
     """
+    _strip_vertical_text_weights(root)
     placed: list[Placed] = []
     _solve_into(root, x, y, w, h, placed)
     for p in placed:

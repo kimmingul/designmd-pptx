@@ -1,0 +1,235 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskTitle",
+      "text": "Risk heat",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Low",
+      "x": "2.2cm",
+      "y": "4.86cm",
+      "width": "9.66cm",
+      "height": "3.15cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Watch",
+      "x": "12.11cm",
+      "y": "4.86cm",
+      "width": "9.66cm",
+      "height": "3.15cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell3",
+      "preset": "roundRect",
+      "fill": "91B7FF",
+      "line": "none",
+      "text": "Plan",
+      "x": "22.01cm",
+      "y": "4.86cm",
+      "width": "9.66cm",
+      "height": "3.15cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Watch",
+      "x": "2.2cm",
+      "y": "8.25cm",
+      "width": "9.66cm",
+      "height": "3.15cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell5",
+      "preset": "roundRect",
+      "fill": "91B7FF",
+      "line": "none",
+      "text": "Plan",
+      "x": "12.11cm",
+      "y": "8.25cm",
+      "width": "9.66cm",
+      "height": "3.15cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell6",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "Act",
+      "x": "22.01cm",
+      "y": "8.25cm",
+      "width": "9.66cm",
+      "height": "3.15cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell7",
+      "preset": "roundRect",
+      "fill": "91B7FF",
+      "line": "none",
+      "text": "Plan",
+      "x": "2.2cm",
+      "y": "11.65cm",
+      "width": "9.66cm",
+      "height": "3.15cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell8",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "Act",
+      "x": "12.11cm",
+      "y": "11.65cm",
+      "width": "9.66cm",
+      "height": "3.15cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell9",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "Stop",
+      "x": "22.01cm",
+      "y": "11.65cm",
+      "width": "9.66cm",
+      "height": "3.15cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Move one risk out of the red zone this quarter."
+    }
+  }
+]

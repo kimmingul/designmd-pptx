@@ -1,0 +1,137 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaTitle",
+      "text": "What changes",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaPanel1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "5.57cm",
+      "width": "14.18cm",
+      "height": "8.19cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaHead1",
+      "text": "Before",
+      "x": "3.3cm",
+      "y": "6.67cm",
+      "width": "11.98cm",
+      "height": "1.5cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaBody1",
+      "text": "• Decks drift from the brand file\n• Agents invent one-off layouts\n• No floors, no screenshot gate\n• Overwrite risk on every save",
+      "x": "3.3cm",
+      "y": "8.79cm",
+      "width": "11.98cm",
+      "height": "3.88cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaPanel2",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "17.48cm",
+      "y": "5.57cm",
+      "width": "14.18cm",
+      "height": "8.19cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaHead2",
+      "text": "After",
+      "x": "18.59cm",
+      "y": "6.67cm",
+      "width": "11.98cm",
+      "height": "1.5cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "FFFFFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaBody2",
+      "text": "• Tokens compiled from DESIGN.md\n• Recipes with real text budgets\n• Gate 3 contact sheet before ship\n• Staging-safe apply with --force",
+      "x": "18.59cm",
+      "y": "8.79cm",
+      "width": "11.98cm",
+      "height": "3.88cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "FFFFFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Call the single metric that proves the after state."
+    }
+  }
+]

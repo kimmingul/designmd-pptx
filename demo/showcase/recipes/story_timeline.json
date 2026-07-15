@@ -1,0 +1,396 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "0B0B1A"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "StoryTlTitle",
+      "text": "The story so far",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "StoryAxis",
+      "preset": "rect",
+      "fill": "3A3570",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "8.6cm",
+      "width": "29.47cm",
+      "height": "0.12cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "3A3570",
+      "name": "StoryCol1",
+      "x": "2.2cm",
+      "y": "9.7cm",
+      "width": "6.54cm",
+      "height": "8.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "7C5CFF",
+      "align": "center",
+      "fill": "none",
+      "name": "StoryDate1",
+      "text": "Q1",
+      "x": "2.55cm",
+      "y": "10.15cm",
+      "width": "5.84cm",
+      "height": "0.87cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "F4F2FF",
+      "align": "center",
+      "fill": "none",
+      "name": "StoryTitle1",
+      "text": "Discover",
+      "x": "2.55cm",
+      "y": "11.32cm",
+      "width": "5.84cm",
+      "height": "1.22cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "16",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "StoryDetail1",
+      "text": "Frame the problem.",
+      "x": "2.55cm",
+      "y": "12.84cm",
+      "width": "5.84cm",
+      "height": "0.96cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "3A3570",
+      "name": "StoryCol2",
+      "x": "9.84cm",
+      "y": "9.7cm",
+      "width": "6.54cm",
+      "height": "8.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "7C5CFF",
+      "align": "center",
+      "fill": "none",
+      "name": "StoryDate2",
+      "text": "Q2",
+      "x": "10.19cm",
+      "y": "10.15cm",
+      "width": "5.84cm",
+      "height": "0.87cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "F4F2FF",
+      "align": "center",
+      "fill": "none",
+      "name": "StoryTitle2",
+      "text": "Build",
+      "x": "10.19cm",
+      "y": "11.32cm",
+      "width": "5.84cm",
+      "height": "1.22cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "16",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "StoryDetail2",
+      "text": "Ship the thin slice.",
+      "x": "10.19cm",
+      "y": "12.84cm",
+      "width": "5.84cm",
+      "height": "0.96cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "3A3570",
+      "name": "StoryCol3",
+      "x": "17.48cm",
+      "y": "9.7cm",
+      "width": "6.54cm",
+      "height": "8.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "7C5CFF",
+      "align": "center",
+      "fill": "none",
+      "name": "StoryDate3",
+      "text": "Q3",
+      "x": "17.84cm",
+      "y": "10.15cm",
+      "width": "5.84cm",
+      "height": "0.87cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "F4F2FF",
+      "align": "center",
+      "fill": "none",
+      "name": "StoryTitle3",
+      "text": "Scale",
+      "x": "17.84cm",
+      "y": "11.32cm",
+      "width": "5.84cm",
+      "height": "1.22cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "16",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "StoryDetail3",
+      "text": "Instrument and expand.",
+      "x": "17.84cm",
+      "y": "12.84cm",
+      "width": "5.84cm",
+      "height": "1.66cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "3A3570",
+      "name": "StoryCol4",
+      "x": "25.13cm",
+      "y": "9.7cm",
+      "width": "6.54cm",
+      "height": "8.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "7C5CFF",
+      "align": "center",
+      "fill": "none",
+      "name": "StoryDate4",
+      "text": "Q4",
+      "x": "25.48cm",
+      "y": "10.15cm",
+      "width": "5.84cm",
+      "height": "0.87cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "F4F2FF",
+      "align": "center",
+      "fill": "none",
+      "name": "StoryTitle4",
+      "text": "Prove",
+      "x": "25.48cm",
+      "y": "11.32cm",
+      "width": "5.84cm",
+      "height": "1.22cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "16",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "StoryDetail4",
+      "text": "Measure outcomes.",
+      "x": "25.48cm",
+      "y": "12.84cm",
+      "width": "5.84cm",
+      "height": "0.96cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "StoryDot1",
+      "preset": "ellipse",
+      "fill": "7C5CFF",
+      "line": "none",
+      "x": "5.1cm",
+      "y": "8.29cm",
+      "width": "0.75cm",
+      "height": "0.75cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "StoryDot2",
+      "preset": "ellipse",
+      "fill": "7C5CFF",
+      "line": "none",
+      "x": "12.74cm",
+      "y": "8.29cm",
+      "width": "0.75cm",
+      "height": "0.75cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "StoryDot3",
+      "preset": "ellipse",
+      "fill": "7C5CFF",
+      "line": "none",
+      "x": "20.38cm",
+      "y": "8.29cm",
+      "width": "0.75cm",
+      "height": "0.75cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "StoryDot4",
+      "preset": "ellipse",
+      "fill": "7C5CFF",
+      "line": "none",
+      "x": "28.02cm",
+      "y": "8.29cm",
+      "width": "0.75cm",
+      "height": "0.75cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Tell the arc left→right; pause on the turning point."
+    }
+  }
+]

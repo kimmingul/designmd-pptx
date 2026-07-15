@@ -1,0 +1,100 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BulletTitle",
+      "text": "Bullet Stack",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Bullet1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "  ·  Point one",
+      "x": "2.2cm",
+      "y": "4.86cm",
+      "width": "29.47cm",
+      "height": "3.13cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Bullet2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "  ·  Point two",
+      "x": "2.2cm",
+      "y": "8.17cm",
+      "width": "29.47cm",
+      "height": "3.13cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Bullet3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "  ·  Point three",
+      "x": "2.2cm",
+      "y": "11.48cm",
+      "width": "29.47cm",
+      "height": "3.13cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Three bullets max when the decision is binary."
+    }
+  }
+]

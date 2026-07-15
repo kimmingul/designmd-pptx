@@ -1,0 +1,250 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "0B0B1A"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none",
+      "name": "KpiTitle",
+      "text": "At a glance",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.84cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "name": "Kpi1Bg",
+      "x": "2.2cm",
+      "y": "3.93cm",
+      "width": "9.09cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "7C5CFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi1Value",
+      "text": "$4.2M",
+      "x": "2.55cm",
+      "y": "7.56cm",
+      "width": "8.39cm",
+      "height": "3.5cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi1Label",
+      "text": "ARR",
+      "x": "2.55cm",
+      "y": "11.41cm",
+      "width": "8.39cm",
+      "height": "0.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "7C5CFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi1Chip",
+      "text": "",
+      "x": "2.55cm",
+      "y": "12.61cm",
+      "width": "8.39cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "name": "Kpi2Bg",
+      "x": "12.39cm",
+      "y": "3.93cm",
+      "width": "9.09cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "22D3EE",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi2Value",
+      "text": "128%",
+      "x": "12.74cm",
+      "y": "7.56cm",
+      "width": "8.39cm",
+      "height": "3.5cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi2Label",
+      "text": "NRR",
+      "x": "12.74cm",
+      "y": "11.41cm",
+      "width": "8.39cm",
+      "height": "0.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "22D3EE",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi2Chip",
+      "text": "",
+      "x": "12.74cm",
+      "y": "12.61cm",
+      "width": "8.39cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "name": "Kpi3Bg",
+      "x": "22.58cm",
+      "y": "3.93cm",
+      "width": "9.09cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F472B6",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi3Value",
+      "text": "14 mo",
+      "x": "22.93cm",
+      "y": "7.56cm",
+      "width": "8.39cm",
+      "height": "3.5cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi3Label",
+      "text": "Runway",
+      "x": "22.93cm",
+      "y": "11.41cm",
+      "width": "8.39cm",
+      "height": "0.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "F472B6",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi3Chip",
+      "text": "",
+      "x": "22.93cm",
+      "y": "12.61cm",
+      "width": "8.39cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Lead with ARR; NRR is the quality proof."
+    }
+  }
+]

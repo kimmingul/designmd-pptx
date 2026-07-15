@@ -1,0 +1,103 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PillarTitle",
+      "text": "Two backends, one contract",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Pillar1",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "Legacy\n\nShape-level precision for DESIGN.md decks",
+      "x": "2.2cm",
+      "y": "7.07cm",
+      "width": "9.09cm",
+      "height": "7.44cm",
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Pillar2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Official\n\nAgent-bridge drafts via office.render",
+      "x": "12.39cm",
+      "y": "5.63cm",
+      "width": "9.09cm",
+      "height": "8.89cm",
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Pillar3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Offline\n\nCompose, a11y, refine, animate without a binary",
+      "x": "22.58cm",
+      "y": "4.18cm",
+      "width": "9.09cm",
+      "height": "10.34cm",
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Pillars are non-negotiable investments, not initiatives."
+    }
+  }
+]

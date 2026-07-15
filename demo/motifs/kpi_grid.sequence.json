@@ -1,0 +1,349 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DashTitle",
+      "text": "Dashboard",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DashCard1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "4.6cm",
+      "width": "6.71cm",
+      "height": "4.86cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DashValue1",
+      "text": "12",
+      "x": "2.75cm",
+      "y": "5.48cm",
+      "width": "5.61cm",
+      "height": "2.19cm",
+      "font": "Arial",
+      "size": "32",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DashLabel1",
+      "text": "Motifs",
+      "x": "2.75cm",
+      "y": "7.62cm",
+      "width": "5.61cm",
+      "height": "1.36cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DashCard2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "9.79cm",
+      "y": "4.6cm",
+      "width": "6.71cm",
+      "height": "4.86cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DashValue2",
+      "text": "75",
+      "x": "10.34cm",
+      "y": "5.48cm",
+      "width": "5.61cm",
+      "height": "2.19cm",
+      "font": "Arial",
+      "size": "32",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DashLabel2",
+      "text": "Recipes",
+      "x": "10.34cm",
+      "y": "7.62cm",
+      "width": "5.61cm",
+      "height": "1.36cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DashCard3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "17.38cm",
+      "y": "4.6cm",
+      "width": "6.71cm",
+      "height": "4.86cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DashValue3",
+      "text": "13",
+      "x": "17.93cm",
+      "y": "5.48cm",
+      "width": "5.61cm",
+      "height": "2.19cm",
+      "font": "Arial",
+      "size": "32",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DashLabel3",
+      "text": "Families",
+      "x": "17.93cm",
+      "y": "7.62cm",
+      "width": "5.61cm",
+      "height": "1.36cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DashCard4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "24.96cm",
+      "y": "4.6cm",
+      "width": "6.71cm",
+      "height": "4.86cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DashValue4",
+      "text": "400",
+      "x": "25.51cm",
+      "y": "5.48cm",
+      "width": "5.61cm",
+      "height": "2.19cm",
+      "font": "Arial",
+      "size": "32",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DashLabel4",
+      "text": "Ref decks",
+      "x": "25.51cm",
+      "y": "7.62cm",
+      "width": "5.61cm",
+      "height": "1.36cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DashCard5",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "10.34cm",
+      "width": "6.71cm",
+      "height": "4.86cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DashValue5",
+      "text": "2",
+      "x": "2.75cm",
+      "y": "11.22cm",
+      "width": "5.61cm",
+      "height": "2.19cm",
+      "font": "Arial",
+      "size": "32",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DashLabel5",
+      "text": "Backends",
+      "x": "2.75cm",
+      "y": "13.36cm",
+      "width": "5.61cm",
+      "height": "1.36cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DashCard6",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "9.79cm",
+      "y": "10.34cm",
+      "width": "6.71cm",
+      "height": "4.86cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DashValue6",
+      "text": "0",
+      "x": "10.34cm",
+      "y": "11.22cm",
+      "width": "5.61cm",
+      "height": "2.19cm",
+      "font": "Arial",
+      "size": "32",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DashLabel6",
+      "text": "Vendor bytes",
+      "x": "10.34cm",
+      "y": "13.36cm",
+      "width": "5.61cm",
+      "height": "1.36cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Lead with the metric that forces a decision."
+    }
+  }
+]

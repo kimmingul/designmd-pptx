@@ -1,0 +1,158 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "0B0B1A"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CircTitle",
+      "text": "Segments",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CircDisc",
+      "preset": "ellipse",
+      "fill": "16162E",
+      "line": "none",
+      "x": "3.5cm",
+      "y": "5.0cm",
+      "width": "12.0cm",
+      "height": "12.0cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CircHole",
+      "preset": "ellipse",
+      "fill": "0B0B1A",
+      "line": "none",
+      "text": "100%",
+      "x": "6.5cm",
+      "y": "8.0cm",
+      "width": "6.0cm",
+      "height": "6.0cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CircLeg1",
+      "preset": "roundRect",
+      "fill": "7C5CFF",
+      "line": "none",
+      "text": "32%  Acquire",
+      "x": "18.0cm",
+      "y": "4cm",
+      "width": "13.5cm",
+      "height": "2.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "FFFFFF",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CircLeg2",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "text": "28%  Activate",
+      "x": "18.0cm",
+      "y": "6.4cm",
+      "width": "13.5cm",
+      "height": "2.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F4F2FF",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CircLeg3",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "text": "24%  Retain",
+      "x": "18.0cm",
+      "y": "8.8cm",
+      "width": "13.5cm",
+      "height": "2.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F4F2FF",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CircLeg4",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "text": "16%  Refer",
+      "x": "18.0cm",
+      "y": "11.2cm",
+      "width": "13.5cm",
+      "height": "2.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F4F2FF",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Legend carries the insight; the disc is orientation only."
+    }
+  }
+]

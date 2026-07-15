@@ -29,6 +29,27 @@ The wheel is self-contained: schemas, `compatibility.json`,
 `benchmark_thresholds.json`, and the default house style ship inside
 `designmd_pptx/`.
 
+## OfficeCLI is required for real .pptx
+
+Without OfficeCLI, **apply / scaffold --apply / render will not materialize a
+new PowerPoint deck** (Gate 3 screenshots also need a binary). Compose,
+compile, a11y, refine, restyle, and master still run offline (JSON / tokens /
+existing OOXML).
+
+```bash
+python -m designmd_pptx doctor              # probe + banner if missing
+python -m designmd_pptx doctor --ensure     # ask Y/n, then doctor --install
+python -m designmd_pptx doctor --status-json
+```
+
+| Env | Effect |
+|---|---|
+| `DESIGNMD_ASSUME_YES=1` | Auto-accept install prompts (agents/CI with approval) |
+| `DESIGNMD_NO_PROMPT=1` | Never prompt; fail/warn only |
+
+VS Code / Cursor: on activation, if OfficeCLI is missing you are asked to
+install. Command palette → **designmd-pptx: Install OfficeCLI…**
+
 ## doctor --install (version-locked)
 
 ```bash

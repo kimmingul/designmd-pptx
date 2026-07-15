@@ -1,0 +1,200 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "0B0B1A"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OrgTitle",
+      "text": "Leadership slice",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OrgRoot",
+      "preset": "roundRect",
+      "fill": "7C5CFF",
+      "line": "none",
+      "text": "Maya Chen\nCEO",
+      "x": "10.93cm",
+      "y": "3.88cm",
+      "width": "12cm",
+      "height": "2.61cm",
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OrgSpine",
+      "preset": "rect",
+      "fill": "A0A6B0",
+      "line": "none",
+      "x": "16.88cm",
+      "y": "6.49cm",
+      "width": "0.12cm",
+      "height": "1.21cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OrgBar",
+      "preset": "rect",
+      "fill": "A0A6B0",
+      "line": "none",
+      "x": "6.8cm",
+      "y": "7.73cm",
+      "width": "20.27cm",
+      "height": "0.1cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OrgStem1",
+      "preset": "rect",
+      "fill": "A0A6B0",
+      "line": "none",
+      "x": "6.75cm",
+      "y": "7.73cm",
+      "width": "0.1cm",
+      "height": "0.35cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OrgChild1",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "text": "Jordan Lee\nProduct",
+      "x": "2.2cm",
+      "y": "8.05cm",
+      "width": "9.2cm",
+      "height": "6.5cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OrgStem2",
+      "preset": "rect",
+      "fill": "A0A6B0",
+      "line": "none",
+      "x": "16.89cm",
+      "y": "7.73cm",
+      "width": "0.1cm",
+      "height": "0.35cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OrgChild2",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "text": "Sam Okonkwo\nGTM",
+      "x": "12.34cm",
+      "y": "8.05cm",
+      "width": "9.2cm",
+      "height": "6.5cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OrgStem3",
+      "preset": "rect",
+      "fill": "A0A6B0",
+      "line": "none",
+      "x": "27.02cm",
+      "y": "7.73cm",
+      "width": "0.1cm",
+      "height": "0.35cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OrgChild3",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "text": "Riley Park\nPlatform",
+      "x": "22.47cm",
+      "y": "8.05cm",
+      "width": "9.2cm",
+      "height": "6.5cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F4F2FF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "State the decision right of the root."
+    }
+  }
+]

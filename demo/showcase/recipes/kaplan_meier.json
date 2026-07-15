@@ -1,0 +1,314 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "0B0B1A"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "KmTitle",
+      "text": "Kaplan–Meier survival",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "chart",
+    "props": {
+      "name": "KmChart",
+      "chartType": "line",
+      "series1.name": "Intervention",
+      "series1.values": "100,92,85,78,72",
+      "series1.color": "7C5CFF",
+      "series2.name": "Control",
+      "series2.values": "100,88,79,70,61",
+      "series2.color": "22D3EE",
+      "categories": "0,6,12,18,24",
+      "x": "2.2cm",
+      "y": "3.2cm",
+      "width": "22.5cm",
+      "height": "10.5cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "KmRiskH1",
+      "text": "Month",
+      "x": "2.2cm",
+      "y": "14cm",
+      "width": "7.3cm",
+      "height": "0.7cm",
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "KmRiskH2",
+      "text": "Intervention",
+      "x": "9.8cm",
+      "y": "14cm",
+      "width": "7.3cm",
+      "height": "0.7cm",
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "KmRiskH3",
+      "text": "Control",
+      "x": "17.4cm",
+      "y": "14cm",
+      "width": "7.3cm",
+      "height": "0.7cm",
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "KmRisk1_1",
+      "text": "0",
+      "x": "2.2cm",
+      "y": "14.75cm",
+      "width": "7.3cm",
+      "height": "0.6cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "KmRisk1_2",
+      "text": "150",
+      "x": "9.8cm",
+      "y": "14.75cm",
+      "width": "7.3cm",
+      "height": "0.6cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "KmRisk1_3",
+      "text": "150",
+      "x": "17.4cm",
+      "y": "14.75cm",
+      "width": "7.3cm",
+      "height": "0.6cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "KmRisk2_1",
+      "text": "12",
+      "x": "2.2cm",
+      "y": "15.4cm",
+      "width": "7.3cm",
+      "height": "0.6cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "KmRisk2_2",
+      "text": "128",
+      "x": "9.8cm",
+      "y": "15.4cm",
+      "width": "7.3cm",
+      "height": "0.6cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "KmRisk2_3",
+      "text": "119",
+      "x": "17.4cm",
+      "y": "15.4cm",
+      "width": "7.3cm",
+      "height": "0.6cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "KmRisk3_1",
+      "text": "24",
+      "x": "2.2cm",
+      "y": "16.05cm",
+      "width": "7.3cm",
+      "height": "0.6cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "KmRisk3_2",
+      "text": "96",
+      "x": "9.8cm",
+      "y": "16.05cm",
+      "width": "7.3cm",
+      "height": "0.6cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "KmRisk3_3",
+      "text": "84",
+      "x": "17.4cm",
+      "y": "16.05cm",
+      "width": "7.3cm",
+      "height": "0.6cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "KmInsightBg",
+      "preset": "roundRect",
+      "fill": "16162E",
+      "line": "none",
+      "x": "24.5cm",
+      "y": "3.2cm",
+      "width": "7.8cm",
+      "height": "14.5cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "KmInsightTitle",
+      "text": "Takeaway",
+      "x": "25cm",
+      "y": "3.7cm",
+      "width": "6.8cm",
+      "height": "1.1cm",
+      "font": "Arial",
+      "size": "20",
+      "bold": "true",
+      "color": "F4F2FF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "KmInsightBody",
+      "text": "State HR, median survival, and clinical relevance.",
+      "x": "25cm",
+      "y": "5.1cm",
+      "width": "6.8cm",
+      "height": "11.5cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Point to separation of curves, then the numbers at risk."
+    }
+  }
+]
