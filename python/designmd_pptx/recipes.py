@@ -4890,7 +4890,16 @@ def recipe_hub_spoke(tokens: dict, content: dict | None = None) -> list[dict]:
 
 
 def recipe_before_after_slider(tokens: dict, content: dict | None = None) -> list[dict]:
-    """Before / after comparison (Wave 2) — two equal panels + divider."""
+    """Before / after comparison — two equal panels with content-sized height.
+
+    Spacing contract (16:9):
+    - Side margin ``m`` and bottom margin ``m`` match (no “fill the canvas”).
+    - Column gap uses design ``gap``, not a hard-coded 0.5 cm hairline.
+    - Inner pad ≈ 0.5×margin so type never kisses the card edge.
+    - Panel height = pad + head + body lines + pad — **not** a fixed 13.8 cm
+      slab with a 10.5 cm hollow body box.
+    - Extra vertical room stays as stage (black), not inflated text frames.
+    """
     b = _base_props(tokens)
     c, t = b["c"], b["t"]
     content = content or {}
@@ -4905,45 +4914,114 @@ def recipe_before_after_slider(tokens: dict, content: dict | None = None) -> lis
         left = {"title": "Before", "body": str(left)}
     if not isinstance(right, dict):
         right = {"title": "After", "body": str(right)}
+
+    canvas_w, canvas_h = 33.87, 19.05
     m = b["margin"]
-    usable = 33.87 - 2 * m
-    gap = 0.5
+    gap = max(0.7, float(b["gap"]))
+    usable = canvas_w - 2 * m
     col = (usable - gap) / 2
-    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "BaTitle", title)]
-    for i, (side, data) in enumerate((("Before", left), ("After", right))):
+    # Inner pad scales with margin (spacious → roomier type inset).
+    pad = max(1.0, min(1.4, m * 0.55))
+    body_pt = int(t["body_pt"])
+    head_pt = max(22, min(28, int(t["section_pt"])))
+    title_pt = int(t["title_pt"])
+
+    # Title band — top margin tracks stage margin.
+    title_y = max(1.2, m * 0.55)
+    title_h = 1.65
+    # Space between title and panel top (~0.45× margin).
+    title_to_panel = max(0.85, m * 0.45)
+    band_top = title_y + title_h + title_to_panel
+    bottom_m = m  # equal bottom margin = side margin
+
+    def _body_text(data: dict) -> str:
+        body = data.get("body") or data.get("text") or ""
+        if isinstance(body, list):
+            items = [str(x).strip() for x in body[:5] if str(x).strip()]
+            return "\n".join(f"• {x}" for x in items)
+        return str(body).strip()
+
+    left_body = _body_text(left)
+    right_body = _body_text(right)
+    # Line height ~1.45× body — open enough for 18pt bullets without packing.
+    line_h = body_pt * 0.0353 * 1.45
+    def _body_h(text: str) -> float:
+        n = max(1, text.count("\n") + 1)
+        return max(2.6, min(6.8, n * line_h + 0.55))
+
+    body_h = max(_body_h(left_body), _body_h(right_body))
+    head_h = 1.55
+    head_to_body = 0.55
+    panel_h = pad + head_h + head_to_body + body_h + pad
+    max_panel_h = canvas_h - band_top - bottom_m
+    # Cap so panels never eat the bottom margin; keep content snug, not stretched.
+    panel_h = min(panel_h, max_panel_h)
+    # Sit the pair in the remaining band: not glued under the title, not
+    # floating in the top third with a dead lower half.
+    free = max(0.0, max_panel_h - panel_h)
+    panel_y = band_top + free * 0.38
+
+    ops: list[dict] = [
+        _slide_op(tokens),
+        {
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "shape",
+            "props": {
+                "name": "BaTitle",
+                "text": title,
+                "x": _cm(m),
+                "y": _cm(title_y),
+                "width": _cm(usable),
+                "height": _cm(title_h),
+                "font": t["heading_font"],
+                "size": str(title_pt),
+                "bold": "true",
+                "color": c["text_on_content"],
+                "fill": "none",
+            },
+        },
+    ]
+    for i, (side, data, body) in enumerate((
+        ("Before", left, left_body),
+        ("After", right, right_body),
+    )):
         x = m + i * (col + gap)
         fill = c["surface"] if i == 0 else c["accent"]
         tc = c["text_on_surface"] if i == 0 else c["on_accent"]
-        mc = c["muted"] if i == 0 else c["on_accent"]
+        # Muted on dark panel; on accent use slightly soft on_accent (full white is harsh for bullets).
+        bc = c["muted"] if i == 0 else c["on_accent"]
+        head = str(data.get("title") or side)
         ops.append({
             "command": "add", "parent": "/slide[last()]", "type": "shape",
             "props": {
                 "name": f"BaPanel{i + 1}", "preset": b["preset"],
                 "fill": fill, "line": "none",
-                "x": _cm(x), "y": "3.5cm", "width": _cm(col), "height": "13.8cm",
+                "x": _cm(x), "y": _cm(panel_y),
+                "width": _cm(col), "height": _cm(panel_h),
             },
         })
         ops.append({
             "command": "add", "parent": "/slide[last()]", "type": "shape",
             "props": {
                 "name": f"BaHead{i + 1}",
-                "text": str(data.get("title") or side),
-                "x": _cm(x + 0.5), "y": "4.0cm", "width": _cm(col - 1.0), "height": "1.4cm",
-                "font": t["heading_font"], "size": str(t["section_pt"]),
+                "text": head,
+                "x": _cm(x + pad), "y": _cm(panel_y + pad),
+                "width": _cm(col - 2 * pad), "height": _cm(head_h),
+                "font": t["heading_font"], "size": str(head_pt),
                 "bold": "true", "color": tc, "fill": "none",
             },
         })
-        body = data.get("body") or data.get("text") or ""
-        if isinstance(body, list):
-            body = "\n".join(f"• {x}" for x in body[:8])
         ops.append({
             "command": "add", "parent": "/slide[last()]", "type": "shape",
             "props": {
-                "name": f"BaBody{i + 1}", "text": str(body),
-                "x": _cm(x + 0.5), "y": "5.8cm",
-                "width": _cm(col - 1.0), "height": "10.5cm",
-                "font": t["body_font"], "size": str(t["body_pt"]),
-                "color": mc if i == 1 else c["muted"], "fill": "none",
+                "name": f"BaBody{i + 1}", "text": body,
+                "x": _cm(x + pad),
+                "y": _cm(panel_y + pad + head_h + head_to_body),
+                "width": _cm(col - 2 * pad),
+                "height": _cm(body_h),
+                "font": t["body_font"], "size": str(body_pt),
+                "color": bc, "fill": "none",
             },
         })
     ops.append({

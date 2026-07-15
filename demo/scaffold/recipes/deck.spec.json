@@ -27,19 +27,19 @@
       "content": {
         "title": "What changes",
         "before": {
-          "title": "Without",
+          "title": "Before",
           "body": [
-            "Hand-built decks drift from brand",
+            "Decks drift from the brand file",
             "Agents invent one-off layouts",
             "No floors, no screenshot gate",
             "Overwrite risk on every save"
           ]
         },
         "after": {
-          "title": "With designmd-pptx",
+          "title": "After",
           "body": [
-            "Compiled tokens from DESIGN.md",
-            "Recipe catalog with text budgets",
+            "Tokens compiled from DESIGN.md",
+            "Recipes with real text budgets",
             "Gate 3 contact sheet before ship",
             "Staging-safe apply with --force"
           ]
