@@ -5,7 +5,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -22,7 +22,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -35,10 +35,10 @@
       "chartType": "line",
       "series1.name": "Intervention",
       "series1.values": "100,92,85,78,72",
-      "series1.color": "0B5FFF",
+      "series1.color": "7C5CFF",
       "series2.name": "Control",
       "series2.values": "100,88,79,70,61",
-      "series2.color": "91B7FF",
+      "series2.color": "22D3EE",
       "categories": "0,6,12,18,24",
       "x": "2.2cm",
       "y": "3.2cm",
@@ -113,7 +113,7 @@
       "height": "0.6cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -130,7 +130,7 @@
       "height": "0.6cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -147,7 +147,7 @@
       "height": "0.6cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -164,7 +164,7 @@
       "height": "0.6cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -181,7 +181,7 @@
       "height": "0.6cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -198,7 +198,7 @@
       "height": "0.6cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -215,7 +215,7 @@
       "height": "0.6cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -232,7 +232,7 @@
       "height": "0.6cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -249,7 +249,7 @@
       "height": "0.6cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -260,7 +260,7 @@
     "props": {
       "name": "KmInsightBg",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "x": "24.5cm",
       "y": "3.2cm",
@@ -282,7 +282,7 @@
       "font": "Arial",
       "size": "20",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },

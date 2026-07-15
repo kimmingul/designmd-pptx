@@ -5,7 +5,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -15,7 +15,7 @@
     "props": {
       "name": "QuoteMark",
       "preset": "rect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "2.2cm",
       "y": "5.5cm",
@@ -37,7 +37,7 @@
       "font": "Arial",
       "size": "28",
       "italic": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },

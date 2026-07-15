@@ -5,7 +5,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -22,7 +22,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -33,8 +33,8 @@
     "props": {
       "name": "FigPanel1Bg",
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "x": "2.2cm",
       "y": "3.3cm",
       "width": "14.48cm",
@@ -55,7 +55,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "7C5CFF",
       "fill": "none"
     }
   },
@@ -101,8 +101,8 @@
     "props": {
       "name": "FigPanel2Bg",
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "x": "17.18cm",
       "y": "3.3cm",
       "width": "14.48cm",
@@ -123,7 +123,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "7C5CFF",
       "fill": "none"
     }
   },
@@ -169,8 +169,8 @@
     "props": {
       "name": "FigPanel3Bg",
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "x": "2.2cm",
       "y": "11.05cm",
       "width": "14.48cm",
@@ -191,7 +191,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "7C5CFF",
       "fill": "none"
     }
   },
@@ -237,8 +237,8 @@
     "props": {
       "name": "FigPanel4Bg",
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "x": "17.18cm",
       "y": "11.05cm",
       "width": "14.48cm",
@@ -259,7 +259,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "7C5CFF",
       "fill": "none"
     }
   },

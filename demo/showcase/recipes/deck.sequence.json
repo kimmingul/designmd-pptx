@@ -5,7 +5,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A-2A145A-135"
     }
   },
   {
@@ -15,7 +15,7 @@
     "props": {
       "name": "CoverEdge",
       "preset": "rect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "0cm",
       "y": "0cm",
@@ -37,7 +37,7 @@
       "font": "Arial",
       "size": "48",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "left",
       "valign": "bottom",
       "fill": "none"
@@ -50,7 +50,7 @@
     "props": {
       "name": "CoverAccent",
       "preset": "rect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "2.2cm",
       "y": "9.1cm",
@@ -108,7 +108,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -118,7 +118,7 @@
     "props": {
       "name": "OpenerAccentBar",
       "preset": "rect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "2.2cm",
       "y": "6.2cm",
@@ -140,7 +140,7 @@
       "font": "Arial",
       "size": "54",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "7C5CFF",
       "fill": "none"
     }
   },
@@ -158,7 +158,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -193,7 +193,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -204,7 +204,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "KpiTitle",
       "text": "At a glance",
@@ -220,7 +220,7 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "Kpi1Bg",
       "x": "2.2cm",
@@ -237,7 +237,7 @@
       "font": "Arial",
       "size": "60",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "7C5CFF",
       "align": "center",
       "fill": "none",
       "name": "Kpi1Value",
@@ -274,7 +274,7 @@
       "font": "Arial",
       "size": "12",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "7C5CFF",
       "align": "center",
       "fill": "none",
       "name": "Kpi1Chip",
@@ -291,7 +291,7 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "Kpi2Bg",
       "x": "12.39cm",
@@ -308,7 +308,7 @@
       "font": "Arial",
       "size": "60",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "22D3EE",
       "align": "center",
       "fill": "none",
       "name": "Kpi2Value",
@@ -345,7 +345,7 @@
       "font": "Arial",
       "size": "12",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "22D3EE",
       "align": "center",
       "fill": "none",
       "name": "Kpi2Chip",
@@ -362,7 +362,7 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "Kpi3Bg",
       "x": "22.58cm",
@@ -379,7 +379,7 @@
       "font": "Arial",
       "size": "60",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F472B6",
       "align": "center",
       "fill": "none",
       "name": "Kpi3Value",
@@ -416,7 +416,7 @@
       "font": "Arial",
       "size": "12",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "F472B6",
       "align": "center",
       "fill": "none",
       "name": "Kpi3Chip",
@@ -441,7 +441,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -458,7 +458,7 @@
       "font": "Arial",
       "size": "81",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "7C5CFF",
       "align": "center",
       "valign": "middle",
       "fill": "none"
@@ -478,7 +478,7 @@
       "font": "Arial",
       "size": "28",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "fill": "none"
     }
@@ -515,7 +515,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -532,7 +532,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -543,7 +543,7 @@
     "props": {
       "name": "BaPanel1",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "x": "2.2cm",
       "y": "5.8cm",
@@ -565,7 +565,7 @@
       "font": "Arial",
       "size": "28",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -593,7 +593,7 @@
     "props": {
       "name": "BaPanel2",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "17.48cm",
       "y": "5.8cm",
@@ -650,7 +650,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -667,7 +667,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -678,7 +678,7 @@
     "props": {
       "name": "Proc1",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "1\nSignal\nTelemetry",
       "x": "2.2cm",
@@ -700,7 +700,7 @@
     "props": {
       "name": "Proc2",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "22D3EE",
       "line": "none",
       "text": "2\nFrame\nBrief",
       "x": "9.84cm",
@@ -710,7 +710,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "FFFFFF",
       "align": "center",
       "valign": "middle"
     }
@@ -722,7 +722,7 @@
     "props": {
       "name": "Proc3",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "F472B6",
       "line": "none",
       "text": "3\nDecide\nOwner",
       "x": "17.48cm",
@@ -732,7 +732,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "FFFFFF",
       "align": "center",
       "valign": "middle"
     }
@@ -744,7 +744,7 @@
     "props": {
       "name": "Proc4",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "3DDC97",
       "line": "none",
       "text": "4\nShip\nMeasure",
       "x": "25.13cm",
@@ -809,7 +809,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -826,7 +826,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -837,7 +837,7 @@
     "props": {
       "name": "FunnelBand1",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "2.2cm",
       "y": "3.88cm",
@@ -859,7 +859,7 @@
       "font": "Arial",
       "size": "22",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "FFFFFF",
       "align": "center",
       "fill": "none"
     }
@@ -871,7 +871,7 @@
     "props": {
       "name": "FunnelBand2",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "22D3EE",
       "line": "none",
       "x": "4.9cm",
       "y": "6.67cm",
@@ -893,7 +893,7 @@
       "font": "Arial",
       "size": "22",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "FFFFFF",
       "align": "center",
       "fill": "none"
     }
@@ -905,7 +905,7 @@
     "props": {
       "name": "FunnelBand3",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "F472B6",
       "line": "none",
       "x": "7.6cm",
       "y": "9.45cm",
@@ -927,7 +927,7 @@
       "font": "Arial",
       "size": "22",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "FFFFFF",
       "align": "center",
       "fill": "none"
     }
@@ -939,7 +939,7 @@
     "props": {
       "name": "FunnelBand4",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "3DDC97",
       "line": "none",
       "x": "10.3cm",
       "y": "12.24cm",
@@ -980,7 +980,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -991,7 +991,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "FeatTitle",
       "text": "Three promises",
@@ -1007,7 +1007,7 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "Card1Bg",
       "x": "2.2cm",
@@ -1024,7 +1024,7 @@
       "font": "Arial",
       "size": "34",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "7C5CFF",
       "fill": "none",
       "name": "Card1Num",
       "text": "01",
@@ -1042,7 +1042,7 @@
       "font": "Arial",
       "size": "26",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "Card1Title",
       "text": "Clarity",
@@ -1076,7 +1076,7 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "Card2Bg",
       "x": "12.39cm",
@@ -1093,7 +1093,7 @@
       "font": "Arial",
       "size": "34",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "22D3EE",
       "fill": "none",
       "name": "Card2Num",
       "text": "02",
@@ -1111,7 +1111,7 @@
       "font": "Arial",
       "size": "26",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "Card2Title",
       "text": "Cadence",
@@ -1145,7 +1145,7 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "Card3Bg",
       "x": "22.58cm",
@@ -1162,7 +1162,7 @@
       "font": "Arial",
       "size": "34",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "F472B6",
       "fill": "none",
       "name": "Card3Num",
       "text": "03",
@@ -1180,7 +1180,7 @@
       "font": "Arial",
       "size": "26",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "Card3Title",
       "text": "Control",
@@ -1222,7 +1222,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -1232,7 +1232,7 @@
     "props": {
       "name": "OpenerAccentBar",
       "preset": "rect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "2.2cm",
       "y": "6.2cm",
@@ -1254,7 +1254,7 @@
       "font": "Arial",
       "size": "54",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "7C5CFF",
       "fill": "none"
     }
   },
@@ -1272,7 +1272,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -1307,7 +1307,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -1324,7 +1324,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -1335,7 +1335,7 @@
     "props": {
       "name": "OrgRoot",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "Maya Chen\nCEO",
       "x": "10.93cm",
@@ -1402,7 +1402,7 @@
     "props": {
       "name": "OrgChild1",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "Jordan Lee\nProduct",
       "x": "2.2cm",
@@ -1412,7 +1412,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "valign": "middle"
     }
@@ -1439,7 +1439,7 @@
     "props": {
       "name": "OrgChild2",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "Sam Okonkwo\nGTM",
       "x": "12.34cm",
@@ -1449,7 +1449,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "valign": "middle"
     }
@@ -1476,7 +1476,7 @@
     "props": {
       "name": "OrgChild3",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "Riley Park\nPlatform",
       "x": "22.47cm",
@@ -1486,7 +1486,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "valign": "middle"
     }
@@ -1505,7 +1505,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -1522,7 +1522,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -1533,7 +1533,7 @@
     "props": {
       "name": "CycleHub",
       "preset": "ellipse",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "Weekly",
       "x": "14.7cm",
@@ -1555,7 +1555,7 @@
     "props": {
       "name": "CycleNode1",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "Sense",
       "x": "14.2cm",
@@ -1565,7 +1565,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "valign": "middle"
     }
@@ -1577,7 +1577,7 @@
     "props": {
       "name": "CycleNode2",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "Brief",
       "x": "19.4cm",
@@ -1587,7 +1587,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "valign": "middle"
     }
@@ -1599,7 +1599,7 @@
     "props": {
       "name": "CycleNode3",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "Decide",
       "x": "14.2cm",
@@ -1609,7 +1609,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "valign": "middle"
     }
@@ -1621,7 +1621,7 @@
     "props": {
       "name": "CycleNode4",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "Ship",
       "x": "9cm",
@@ -1631,7 +1631,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "valign": "middle"
     }
@@ -1650,7 +1650,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -1667,7 +1667,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -1678,7 +1678,7 @@
     "props": {
       "name": "TlAxis",
       "preset": "rect",
-      "fill": "3A3A3C",
+      "fill": "3A3570",
       "line": "none",
       "x": "2.2cm",
       "y": "9cm",
@@ -1694,7 +1694,7 @@
       "font": "Arial",
       "size": "20",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "fill": "none",
       "name": "TlLabel1",
@@ -1731,7 +1731,7 @@
       "font": "Arial",
       "size": "20",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "fill": "none",
       "name": "TlLabel2",
@@ -1768,7 +1768,7 @@
       "font": "Arial",
       "size": "20",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "fill": "none",
       "name": "TlLabel3",
@@ -1805,7 +1805,7 @@
       "font": "Arial",
       "size": "20",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "fill": "none",
       "name": "TlLabel4",
@@ -1841,7 +1841,7 @@
     "props": {
       "name": "TlDot1",
       "preset": "ellipse",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "5.02cm",
       "y": "8.61cm",
@@ -1856,7 +1856,7 @@
     "props": {
       "name": "TlDot2",
       "preset": "ellipse",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "12.66cm",
       "y": "8.61cm",
@@ -1871,7 +1871,7 @@
     "props": {
       "name": "TlDot3",
       "preset": "ellipse",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "20.31cm",
       "y": "8.61cm",
@@ -1886,7 +1886,7 @@
     "props": {
       "name": "TlDot4",
       "preset": "ellipse",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "27.95cm",
       "y": "8.61cm",
@@ -1908,7 +1908,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -1925,7 +1925,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -1936,7 +1936,7 @@
     "props": {
       "name": "Pillar1",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "Product\n\nDecision layer",
       "x": "2.2cm",
@@ -1958,7 +1958,7 @@
     "props": {
       "name": "Pillar2",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "22D3EE",
       "line": "none",
       "text": "GTM\n\nEnterprise",
       "x": "12.39cm",
@@ -1968,7 +1968,7 @@
       "font": "Arial",
       "size": "24",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "FFFFFF",
       "align": "center",
       "valign": "middle"
     }
@@ -1980,7 +1980,7 @@
     "props": {
       "name": "Pillar3",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "F472B6",
       "line": "none",
       "text": "Platform\n\nReliability",
       "x": "22.58cm",
@@ -1990,7 +1990,7 @@
       "font": "Arial",
       "size": "24",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "FFFFFF",
       "align": "center",
       "valign": "middle"
     }
@@ -2009,7 +2009,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -2026,7 +2026,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -2036,7 +2036,7 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "Quad1Bg",
       "x": "2.2cm",
@@ -2053,7 +2053,7 @@
       "font": "Arial",
       "size": "24",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "Quad1Title",
       "text": "Invest",
@@ -2086,7 +2086,7 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "Quad2Bg",
       "x": "17.48cm",
@@ -2103,7 +2103,7 @@
       "font": "Arial",
       "size": "24",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "Quad2Title",
       "text": "Selective",
@@ -2136,7 +2136,7 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "Quad3Bg",
       "x": "2.2cm",
@@ -2153,7 +2153,7 @@
       "font": "Arial",
       "size": "24",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "Quad3Title",
       "text": "Maintain",
@@ -2186,7 +2186,7 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "Quad4Bg",
       "x": "17.48cm",
@@ -2203,7 +2203,7 @@
       "font": "Arial",
       "size": "24",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "Quad4Title",
       "text": "Exit",
@@ -2279,7 +2279,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -2296,7 +2296,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -2314,7 +2314,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "7C5CFF",
       "align": "center",
       "fill": "none"
     }
@@ -2333,7 +2333,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "7C5CFF",
       "align": "center",
       "fill": "none"
     }
@@ -2352,7 +2352,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "7C5CFF",
       "align": "center",
       "fill": "none"
     }
@@ -2371,7 +2371,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -2382,8 +2382,8 @@
     "props": {
       "name": "RoadCell1_1Bg",
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "x": "6.8cm",
       "y": "4.85cm",
       "width": "8.12cm",
@@ -2403,7 +2403,7 @@
       "height": "2.7cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -2414,8 +2414,8 @@
     "props": {
       "name": "RoadCell1_2Bg",
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "x": "15.17cm",
       "y": "4.85cm",
       "width": "8.12cm",
@@ -2435,7 +2435,7 @@
       "height": "2.7cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -2446,8 +2446,8 @@
     "props": {
       "name": "RoadCell1_3Bg",
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "x": "23.55cm",
       "y": "4.85cm",
       "width": "8.12cm",
@@ -2467,7 +2467,7 @@
       "height": "2.7cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -2485,7 +2485,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -2496,8 +2496,8 @@
     "props": {
       "name": "RoadCell2_1Bg",
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "x": "6.8cm",
       "y": "8.35cm",
       "width": "8.12cm",
@@ -2517,7 +2517,7 @@
       "height": "2.7cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -2528,8 +2528,8 @@
     "props": {
       "name": "RoadCell2_2Bg",
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "x": "15.17cm",
       "y": "8.35cm",
       "width": "8.12cm",
@@ -2549,7 +2549,7 @@
       "height": "2.7cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -2560,8 +2560,8 @@
     "props": {
       "name": "RoadCell2_3Bg",
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "x": "23.55cm",
       "y": "8.35cm",
       "width": "8.12cm",
@@ -2581,7 +2581,7 @@
       "height": "2.7cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -2599,7 +2599,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -2610,8 +2610,8 @@
     "props": {
       "name": "RoadCell3_1Bg",
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "x": "6.8cm",
       "y": "11.85cm",
       "width": "8.12cm",
@@ -2631,7 +2631,7 @@
       "height": "2.7cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -2642,8 +2642,8 @@
     "props": {
       "name": "RoadCell3_2Bg",
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "x": "15.17cm",
       "y": "11.85cm",
       "width": "8.12cm",
@@ -2663,7 +2663,7 @@
       "height": "2.7cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -2674,8 +2674,8 @@
     "props": {
       "name": "RoadCell3_3Bg",
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "x": "23.55cm",
       "y": "11.85cm",
       "width": "8.12cm",
@@ -2695,7 +2695,7 @@
       "height": "2.7cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -2713,7 +2713,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -2730,7 +2730,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -2740,8 +2740,8 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "name": "Tier1Bg",
       "x": "2.2cm",
       "y": "3.6cm",
@@ -2757,7 +2757,7 @@
       "font": "Arial",
       "size": "24",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "fill": "none",
       "name": "Tier1Name",
@@ -2776,7 +2776,7 @@
       "font": "Arial",
       "size": "60",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "fill": "none",
       "name": "Tier1Price",
@@ -2828,7 +2828,7 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "name": "Tier2Bg",
       "x": "12.39cm",
@@ -2916,8 +2916,8 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "name": "Tier3Bg",
       "x": "22.58cm",
       "y": "3.6cm",
@@ -2933,7 +2933,7 @@
       "font": "Arial",
       "size": "24",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "fill": "none",
       "name": "Tier3Name",
@@ -2952,7 +2952,7 @@
       "font": "Arial",
       "size": "60",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "fill": "none",
       "name": "Tier3Price",
@@ -3012,7 +3012,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -3029,7 +3029,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -3148,7 +3148,7 @@
     "props": {
       "name": "RiskCell00",
       "preset": "rect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "x": "5.45cm",
       "y": "12.38cm",
@@ -3163,7 +3163,7 @@
     "props": {
       "name": "RiskCell01",
       "preset": "rect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "x": "12.78cm",
       "y": "12.38cm",
@@ -3178,7 +3178,7 @@
     "props": {
       "name": "RiskCell02",
       "preset": "rect",
-      "fill": "91B7FF",
+      "fill": "22D3EE",
       "line": "none",
       "x": "20.12cm",
       "y": "12.38cm",
@@ -3193,7 +3193,7 @@
     "props": {
       "name": "RiskCell10",
       "preset": "rect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "x": "5.45cm",
       "y": "8.22cm",
@@ -3208,7 +3208,7 @@
     "props": {
       "name": "RiskCell11",
       "preset": "rect",
-      "fill": "91B7FF",
+      "fill": "22D3EE",
       "line": "none",
       "x": "12.78cm",
       "y": "8.22cm",
@@ -3223,7 +3223,7 @@
     "props": {
       "name": "RiskCell12",
       "preset": "rect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "20.12cm",
       "y": "8.22cm",
@@ -3238,7 +3238,7 @@
     "props": {
       "name": "RiskCell20",
       "preset": "rect",
-      "fill": "91B7FF",
+      "fill": "22D3EE",
       "line": "none",
       "x": "5.45cm",
       "y": "4.05cm",
@@ -3253,7 +3253,7 @@
     "props": {
       "name": "RiskCell21",
       "preset": "rect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "12.78cm",
       "y": "4.05cm",
@@ -3268,7 +3268,7 @@
     "props": {
       "name": "RiskCell22",
       "preset": "rect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "20.12cm",
       "y": "4.05cm",
@@ -3290,7 +3290,7 @@
       "font": "Arial",
       "size": "14",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "align": "center",
       "valign": "middle"
@@ -3310,7 +3310,7 @@
       "font": "Arial",
       "size": "14",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "align": "center",
       "valign": "middle"
@@ -3330,7 +3330,7 @@
       "font": "Arial",
       "size": "14",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "align": "center",
       "valign": "middle"
@@ -3350,7 +3350,7 @@
       "font": "Arial",
       "size": "14",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "align": "center",
       "valign": "middle"
@@ -3388,7 +3388,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -3405,7 +3405,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -3434,7 +3434,7 @@
     "props": {
       "name": "RagRow1",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "x": "2.2cm",
       "y": "4.4cm",
@@ -3456,7 +3456,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "valign": "middle",
       "fill": "none"
     }
@@ -3468,7 +3468,7 @@
     "props": {
       "name": "RagDot1",
       "preset": "ellipse",
-      "fill": "30D158",
+      "fill": "3DDC97",
       "line": "none",
       "x": "14.2cm",
       "y": "4.8cm",
@@ -3501,7 +3501,7 @@
     "props": {
       "name": "RagRow2",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "x": "2.2cm",
       "y": "6.1cm",
@@ -3523,7 +3523,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "valign": "middle",
       "fill": "none"
     }
@@ -3568,7 +3568,7 @@
     "props": {
       "name": "RagRow3",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "x": "2.2cm",
       "y": "7.8cm",
@@ -3590,7 +3590,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "valign": "middle",
       "fill": "none"
     }
@@ -3635,7 +3635,7 @@
     "props": {
       "name": "RagRow4",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "x": "2.2cm",
       "y": "9.5cm",
@@ -3657,7 +3657,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "valign": "middle",
       "fill": "none"
     }
@@ -3669,7 +3669,7 @@
     "props": {
       "name": "RagDot4",
       "preset": "ellipse",
-      "fill": "30D158",
+      "fill": "3DDC97",
       "line": "none",
       "x": "14.2cm",
       "y": "9.9cm",
@@ -3709,7 +3709,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -3726,7 +3726,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -3737,7 +3737,7 @@
     "props": {
       "name": "CheckRow1",
       "preset": "roundRect",
-      "fill": "000000",
+      "fill": "0B0B1A",
       "line": "none",
       "text": "○  Approve Series B window",
       "x": "2.2cm",
@@ -3747,7 +3747,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "valign": "middle"
     }
   },
@@ -3758,7 +3758,7 @@
     "props": {
       "name": "CheckRow2",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "✓  Hold mid-market spend",
       "x": "2.2cm",
@@ -3768,7 +3768,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "false",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "valign": "middle"
     }
   },
@@ -3779,7 +3779,7 @@
     "props": {
       "name": "CheckRow3",
       "preset": "roundRect",
-      "fill": "000000",
+      "fill": "0B0B1A",
       "line": "none",
       "text": "○  Fund platform SLA hire",
       "x": "2.2cm",
@@ -3789,7 +3789,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "valign": "middle"
     }
   },
@@ -3800,7 +3800,7 @@
     "props": {
       "name": "CheckRow4",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "✓  Kill custom one-offs",
       "x": "2.2cm",
@@ -3810,7 +3810,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "false",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "valign": "middle"
     }
   },
@@ -3828,7 +3828,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -3845,7 +3845,7 @@
       "font": "Arial",
       "size": "44",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "fill": "none"
     }
@@ -3875,7 +3875,7 @@
     "props": {
       "name": "CloseCta",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "Approve window",
       "x": "11.93cm",

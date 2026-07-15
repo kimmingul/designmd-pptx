@@ -17,7 +17,7 @@ content-height text, stage margins, no hollow slabs.
 
 | File | Role |
 |------|------|
-| `northstar.DESIGN.md` | Showcase brand (apple token fork · **pt** type) |
+| `northstar.DESIGN.md` | Showcase brand — indigo stage · multi-hue series · **pt** type |
 | `content.showcase.deck.json` | 20-slide Northstar board narrative |
 | `apple.DESIGN.md` | Product intro house style |
 | `content.best.deck.json` | 12-slide product intro |

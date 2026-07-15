@@ -5,7 +5,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -22,7 +22,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -33,7 +33,7 @@
     "props": {
       "name": "FwDisc1",
       "preset": "ellipse",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "A",
       "x": "3.98cm",
@@ -55,7 +55,7 @@
     "props": {
       "name": "FwCard1",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "A",
       "x": "2.2cm",
@@ -65,7 +65,7 @@
       "font": "Arial",
       "size": "16",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center"
     }
   },
@@ -76,7 +76,7 @@
     "props": {
       "name": "FwDisc2",
       "preset": "ellipse",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "D",
       "x": "10.01cm",
@@ -86,7 +86,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "valign": "middle"
     }
@@ -98,7 +98,7 @@
     "props": {
       "name": "FwCard2",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "D",
       "x": "8.23cm",
@@ -108,7 +108,7 @@
       "font": "Arial",
       "size": "16",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center"
     }
   },
@@ -119,7 +119,7 @@
     "props": {
       "name": "FwDisc3",
       "preset": "ellipse",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "K",
       "x": "16.04cm",
@@ -129,7 +129,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "valign": "middle"
     }
@@ -141,7 +141,7 @@
     "props": {
       "name": "FwCard3",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "K",
       "x": "14.25cm",
@@ -151,7 +151,7 @@
       "font": "Arial",
       "size": "16",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center"
     }
   },
@@ -162,7 +162,7 @@
     "props": {
       "name": "FwDisc4",
       "preset": "ellipse",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "A",
       "x": "22.06cm",
@@ -172,7 +172,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "valign": "middle"
     }
@@ -184,7 +184,7 @@
     "props": {
       "name": "FwCard4",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "A",
       "x": "20.28cm",
@@ -194,7 +194,7 @@
       "font": "Arial",
       "size": "16",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center"
     }
   },
@@ -205,7 +205,7 @@
     "props": {
       "name": "FwDisc5",
       "preset": "ellipse",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "R",
       "x": "28.09cm",
@@ -215,7 +215,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "valign": "middle"
     }
@@ -227,7 +227,7 @@
     "props": {
       "name": "FwCard5",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "R",
       "x": "26.3cm",
@@ -237,7 +237,7 @@
       "font": "Arial",
       "size": "16",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center"
     }
   },

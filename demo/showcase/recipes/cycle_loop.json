@@ -5,7 +5,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -22,7 +22,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -33,7 +33,7 @@
     "props": {
       "name": "CycleHub",
       "preset": "ellipse",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "Weekly",
       "x": "14.7cm",
@@ -55,7 +55,7 @@
     "props": {
       "name": "CycleNode1",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "Sense",
       "x": "14.2cm",
@@ -65,7 +65,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "valign": "middle"
     }
@@ -77,7 +77,7 @@
     "props": {
       "name": "CycleNode2",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "Brief",
       "x": "19.4cm",
@@ -87,7 +87,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "valign": "middle"
     }
@@ -99,7 +99,7 @@
     "props": {
       "name": "CycleNode3",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "Decide",
       "x": "14.2cm",
@@ -109,7 +109,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "valign": "middle"
     }
@@ -121,7 +121,7 @@
     "props": {
       "name": "CycleNode4",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "Ship",
       "x": "9cm",
@@ -131,7 +131,7 @@
       "font": "Arial",
       "size": "18",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "valign": "middle"
     }

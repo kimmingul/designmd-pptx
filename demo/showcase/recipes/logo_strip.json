@@ -5,7 +5,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -22,7 +22,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -33,8 +33,8 @@
     "props": {
       "name": "Logo1",
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "text": "Logo 1",
       "x": "2.2cm",
       "y": "7cm",
@@ -55,8 +55,8 @@
     "props": {
       "name": "Logo2",
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "text": "Logo 2",
       "x": "9.84cm",
       "y": "7cm",
@@ -77,8 +77,8 @@
     "props": {
       "name": "Logo3",
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "text": "Logo 3",
       "x": "17.48cm",
       "y": "7cm",
@@ -99,8 +99,8 @@
     "props": {
       "name": "Logo4",
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "text": "Logo 4",
       "x": "25.13cm",
       "y": "7cm",

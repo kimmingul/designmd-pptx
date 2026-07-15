@@ -5,7 +5,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -22,7 +22,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -41,7 +41,7 @@
       "size": "14",
       "bold": "true",
       "color": "FFFFFF",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "align": "center"
     }
   },
@@ -60,7 +60,7 @@
       "size": "14",
       "bold": "true",
       "color": "FFFFFF",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "align": "center"
     }
   },
@@ -79,7 +79,7 @@
       "size": "14",
       "bold": "true",
       "color": "FFFFFF",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "align": "center"
     }
   },
@@ -98,7 +98,7 @@
       "size": "14",
       "bold": "true",
       "color": "FFFFFF",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "align": "center"
     }
   },
@@ -115,8 +115,8 @@
       "height": "0.95cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
-      "fill": "1C1C1E",
+      "color": "F4F2FF",
+      "fill": "16162E",
       "align": "center"
     }
   },
@@ -133,8 +133,8 @@
       "height": "0.95cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
-      "fill": "1C1C1E",
+      "color": "F4F2FF",
+      "fill": "16162E",
       "align": "center"
     }
   },
@@ -151,8 +151,8 @@
       "height": "0.95cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
-      "fill": "1C1C1E",
+      "color": "F4F2FF",
+      "fill": "16162E",
       "align": "center"
     }
   },
@@ -169,8 +169,8 @@
       "height": "0.95cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
-      "fill": "1C1C1E",
+      "color": "F4F2FF",
+      "fill": "16162E",
       "align": "center"
     }
   },
@@ -187,8 +187,8 @@
       "height": "0.95cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
-      "fill": "000000",
+      "color": "F4F2FF",
+      "fill": "0B0B1A",
       "align": "center"
     }
   },
@@ -205,8 +205,8 @@
       "height": "0.95cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
-      "fill": "000000",
+      "color": "F4F2FF",
+      "fill": "0B0B1A",
       "align": "center"
     }
   },
@@ -223,8 +223,8 @@
       "height": "0.95cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
-      "fill": "000000",
+      "color": "F4F2FF",
+      "fill": "0B0B1A",
       "align": "center"
     }
   },
@@ -241,8 +241,8 @@
       "height": "0.95cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
-      "fill": "000000",
+      "color": "F4F2FF",
+      "fill": "0B0B1A",
       "align": "center"
     }
   },
@@ -259,8 +259,8 @@
       "height": "0.95cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
-      "fill": "1C1C1E",
+      "color": "F4F2FF",
+      "fill": "16162E",
       "align": "center"
     }
   },
@@ -277,8 +277,8 @@
       "height": "0.95cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
-      "fill": "1C1C1E",
+      "color": "F4F2FF",
+      "fill": "16162E",
       "align": "center"
     }
   },
@@ -295,8 +295,8 @@
       "height": "0.95cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
-      "fill": "1C1C1E",
+      "color": "F4F2FF",
+      "fill": "16162E",
       "align": "center"
     }
   },
@@ -313,8 +313,8 @@
       "height": "0.95cm",
       "font": "Arial",
       "size": "14",
-      "color": "F5F5F7",
-      "fill": "1C1C1E",
+      "color": "F4F2FF",
+      "fill": "16162E",
       "align": "center"
     }
   },
@@ -325,7 +325,7 @@
     "props": {
       "name": "ResInsightBg",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "x": "24.0cm",
       "y": "3.5cm",
@@ -347,7 +347,7 @@
       "font": "Arial",
       "size": "20",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },

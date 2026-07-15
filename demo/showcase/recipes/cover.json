@@ -5,7 +5,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A-2A145A-135"
     }
   },
   {
@@ -15,7 +15,7 @@
     "props": {
       "name": "CoverEdge",
       "preset": "rect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "0cm",
       "y": "0cm",
@@ -37,7 +37,7 @@
       "font": "Arial",
       "size": "48",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "left",
       "valign": "bottom",
       "fill": "none"
@@ -50,7 +50,7 @@
     "props": {
       "name": "CoverAccent",
       "preset": "rect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "2.2cm",
       "y": "9.1cm",

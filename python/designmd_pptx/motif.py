@@ -127,6 +127,7 @@ def build_card_row(tokens: dict[str, Any], slots: dict[str, Any]) -> list[dict[s
     cards = cards[: max(2, min(4, len(cards)))]
     bg = st.c["content_background"]
     title_name = str(slots.get("title_name") or "FeatTitle")
+    series = UI.series_palette(tokens)
 
     def build(d: L.Density) -> L.Box:
         cols = [
@@ -136,6 +137,7 @@ def build_card_row(tokens: dict[str, Any], slots: dict[str, Any]) -> list[dict[s
                 title=str(c.get("title", "")),
                 body=str(c.get("body", "")),
                 density=d,
+                accent=series[i % len(series)],
             )
             for i, c in enumerate(cards)
         ]
@@ -195,6 +197,7 @@ def build_step_rail(tokens: dict[str, Any], slots: dict[str, Any]) -> list[dict[
             },
         },
     ]
+    series = UI.series_palette(tokens)
     names: list[str] = []
     for i, step in enumerate(steps):
         if isinstance(step, dict):
@@ -205,8 +208,9 @@ def build_step_rail(tokens: dict[str, Any], slots: dict[str, Any]) -> list[dict[
             text = f"{i + 1}\n{step}"
         name = f"Proc{i + 1}"
         names.append(name)
-        fill = c["accent"] if i == 0 or i == n - 1 else c["surface"]
-        tc = c["on_accent"] if fill == c["accent"] else c["text_on_surface"]
+        # Multi-hue process rail — each step a series color (readable on dark)
+        fill = series[i % len(series)]
+        tc = c["on_accent"]
         ops.append({
             "command": "add",
             "parent": "/slide[last()]",
@@ -616,14 +620,17 @@ def build_kpi_band(tokens: dict[str, Any], slots: dict[str, Any]) -> list[dict[s
     kpis = kpis[:n]
     kpi_pt = int(t.get("kpi_pt", 60))
     micro = max(12, st.caption_pt)
+    series = UI.series_palette(tokens)
 
     def _kpi_card(i: int) -> L.Box:
         kpi = kpis[i] if isinstance(kpis[i], dict) else {}
         watch = bool(kpi.get("watch"))
         fill = c["risk"] if watch else c["surface"]
-        tc = c["on_accent"] if watch else c["text_on_surface"]
+        # Multi-hue KPI figures (risk overrides when watch)
+        value_color = c["on_accent"] if watch else series[i % len(series)]
         mc = "FFFFFF" if watch else c["muted"]
         chip = str(kpi.get("chip") or "")
+        chip_color = c["on_accent"] if watch else series[i % len(series)]
         return L.VStack(
             weight=1,
             name=f"Kpi{i + 1}Bg",
@@ -639,7 +646,7 @@ def build_kpi_band(tokens: dict[str, Any], slots: dict[str, Any]) -> list[dict[s
                     min_cm=3.5, max_cm=5.2,
                     props={
                         "font": st.heading_font, "size": str(kpi_pt),
-                        "bold": "true", "color": tc, "align": "center", "fill": "none",
+                        "bold": "true", "color": value_color, "align": "center", "fill": "none",
                     },
                 ),
                 L.Text(
@@ -655,7 +662,7 @@ def build_kpi_band(tokens: dict[str, Any], slots: dict[str, Any]) -> list[dict[s
                     min_cm=0.55, max_cm=1.0,
                     props={
                         "font": st.body_font, "size": str(micro), "bold": "true",
-                        "color": c["accent"] if not watch else mc,
+                        "color": chip_color,
                         "align": "center", "fill": "none",
                     },
                 ),
@@ -717,6 +724,7 @@ def build_funnel_cascade(tokens: dict[str, Any], slots: dict[str, Any]) -> list[
             },
         },
     ]
+    series = UI.series_palette(tokens)
     for i, stage in enumerate(stages):
         if isinstance(stage, str):
             label, value = stage, ""
@@ -727,8 +735,9 @@ def build_funnel_cascade(tokens: dict[str, Any], slots: dict[str, Any]) -> list[
         w = usable * frac
         x = m + (usable - w) / 2
         y = band_y + i * (row_h + gap)
-        fill = c["accent"] if i == n - 1 else c["surface"]
-        tc = c["on_accent"] if i == n - 1 else c["text_on_surface"]
+        # Cascade through brand series (top → bottom multi-hue)
+        fill = series[i % len(series)]
+        tc = c["on_accent"]
         ops.append({
             "command": "add", "parent": "/slide[last()]", "type": "shape",
             "props": {

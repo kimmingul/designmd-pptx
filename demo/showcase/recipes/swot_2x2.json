@@ -5,7 +5,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -22,7 +22,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -32,7 +32,7 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "Quad1Bg",
       "x": "2.2cm",
@@ -49,7 +49,7 @@
       "font": "Arial",
       "size": "24",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "Quad1Title",
       "text": "Strengths",
@@ -82,7 +82,7 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "Quad2Bg",
       "x": "17.48cm",
@@ -99,7 +99,7 @@
       "font": "Arial",
       "size": "24",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "Quad2Title",
       "text": "Weaknesses",
@@ -132,7 +132,7 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "Quad3Bg",
       "x": "2.2cm",
@@ -149,7 +149,7 @@
       "font": "Arial",
       "size": "24",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "Quad3Title",
       "text": "Opportunities",
@@ -182,7 +182,7 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "Quad4Bg",
       "x": "17.48cm",
@@ -199,7 +199,7 @@
       "font": "Arial",
       "size": "24",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "Quad4Title",
       "text": "Threats",

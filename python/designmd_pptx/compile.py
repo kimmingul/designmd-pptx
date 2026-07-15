@@ -158,6 +158,21 @@ def compile_design_md(
     else:
         margin_cm, gap_cm = T.MARGIN_CM, T.GAP_CM
 
+    # Promote charts.series_colors into palette series so motif chrome (KPI
+    # figures, step fills, heat, card index) can cycle multi-hue brand colors.
+    # Do not override accent/primary — brand primary stays the design accent.
+    _series = (design_v2.get("charts") or {}).get("series_colors") or []
+    if isinstance(_series, list) and _series:
+        if len(_series) >= 1 and _series[0]:
+            palette["chart_series1"] = str(_series[0]).replace("#", "").upper()
+            provenance["chart_series1"] = "charts.series_colors"
+        if len(_series) >= 2 and _series[1]:
+            palette["chart_series2"] = str(_series[1]).replace("#", "").upper()
+            provenance["chart_series2"] = "charts.series_colors"
+        if len(_series) >= 3 and _series[2]:
+            palette["chart_series3"] = str(_series[2]).replace("#", "").upper()
+            provenance["chart_series3"] = "charts.series_colors"
+
     result: dict[str, Any] = {
         "version": "1.1",
         "source": str(path.as_posix()),

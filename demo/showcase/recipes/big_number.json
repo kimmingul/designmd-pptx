@@ -5,7 +5,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -22,7 +22,7 @@
       "font": "Arial",
       "size": "81",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "7C5CFF",
       "align": "center",
       "valign": "middle",
       "fill": "none"
@@ -42,7 +42,7 @@
       "font": "Arial",
       "size": "28",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "fill": "none"
     }

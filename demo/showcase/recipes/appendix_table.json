@@ -5,7 +5,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -22,7 +22,7 @@
       "font": "Arial",
       "size": "28",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -33,7 +33,7 @@
     "props": {
       "name": "ATh1_1",
       "preset": "rect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "Item",
       "x": "2.2cm",
@@ -55,7 +55,7 @@
     "props": {
       "name": "ATh1_2",
       "preset": "rect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "Value",
       "x": "16.96cm",
@@ -77,8 +77,8 @@
     "props": {
       "name": "ATd1_1_1",
       "preset": "rect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "text": "",
       "x": "2.2cm",
       "y": "3.94cm",
@@ -86,7 +86,7 @@
       "height": "0.98cm",
       "font": "Arial",
       "size": "12",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "valign": "middle"
     }
@@ -98,8 +98,8 @@
     "props": {
       "name": "ATd1_1_2",
       "preset": "rect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "text": "",
       "x": "16.96cm",
       "y": "3.94cm",
@@ -107,7 +107,7 @@
       "height": "0.98cm",
       "font": "Arial",
       "size": "12",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "valign": "middle"
     }

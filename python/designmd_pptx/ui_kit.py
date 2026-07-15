@@ -216,6 +216,28 @@ def card(
     )
 
 
+def series_palette(tokens_or_colors: dict[str, Any] | StageMetrics) -> list[str]:
+    """Multi-hue fills for motif chrome (accent → series → success cycle)."""
+    if isinstance(tokens_or_colors, StageMetrics):
+        c = tokens_or_colors.c
+        charts: dict[str, Any] = {}
+    else:
+        c = tokens_or_colors.get("colors") or tokens_or_colors
+        charts = tokens_or_colors.get("charts") or {}
+    out: list[str] = []
+    raw = charts.get("series_colors") if isinstance(charts, dict) else None
+    if isinstance(raw, list):
+        for s in raw:
+            h = str(s).replace("#", "").upper()
+            if len(h) == 6:
+                out.append(h)
+    for key in ("accent", "chart_series1", "chart_series2", "chart_series3", "success"):
+        v = str(c.get(key) or "").replace("#", "").upper()
+        if len(v) == 6 and v not in out:
+            out.append(v)
+    return out or ["5B5BD6"]
+
+
 def feature_card(
     st: StageMetrics,
     *,
@@ -223,12 +245,14 @@ def feature_card(
     title: str,
     body: str,
     density: L.Density | None = None,
+    accent: str | None = None,
 ) -> L.Box:
     """Numbered product card (01 / title / body / spacer)."""
     d = density or L.COMFORTABLE
     body_pt = L.floored_pt(st.body_pt, d)
     title_pt = max(20, min(26, st.section_pt))
     num_pt = max(28, min(36, title_pt + 8))
+    num_color = accent or st.c["accent"]
     return card(
         st,
         name=f"Card{index}Bg",
@@ -236,7 +260,7 @@ def feature_card(
         children=[
             content_text(
                 st, f"{index:02d}", name=f"Card{index}Num",
-                pt=num_pt, color=st.c["accent"], bold=True,
+                pt=num_pt, color=num_color, bold=True,
                 min_cm=1.85, max_cm=2.1,
             ),
             content_text(

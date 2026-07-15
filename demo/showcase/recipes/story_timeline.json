@@ -5,7 +5,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -22,7 +22,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -33,7 +33,7 @@
     "props": {
       "name": "StoryAxis",
       "preset": "rect",
-      "fill": "3A3A3C",
+      "fill": "3A3570",
       "line": "none",
       "x": "2.2cm",
       "y": "8.6cm",
@@ -47,8 +47,8 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "name": "StoryCol1",
       "x": "2.2cm",
       "y": "9.7cm",
@@ -64,7 +64,7 @@
       "font": "Arial",
       "size": "14",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "7C5CFF",
       "align": "center",
       "fill": "none",
       "name": "StoryDate1",
@@ -83,7 +83,7 @@
       "font": "Arial",
       "size": "22",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "fill": "none",
       "name": "StoryTitle1",
@@ -118,8 +118,8 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "name": "StoryCol2",
       "x": "9.84cm",
       "y": "9.7cm",
@@ -135,7 +135,7 @@
       "font": "Arial",
       "size": "14",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "7C5CFF",
       "align": "center",
       "fill": "none",
       "name": "StoryDate2",
@@ -154,7 +154,7 @@
       "font": "Arial",
       "size": "22",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "fill": "none",
       "name": "StoryTitle2",
@@ -189,8 +189,8 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "name": "StoryCol3",
       "x": "17.48cm",
       "y": "9.7cm",
@@ -206,7 +206,7 @@
       "font": "Arial",
       "size": "14",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "7C5CFF",
       "align": "center",
       "fill": "none",
       "name": "StoryDate3",
@@ -225,7 +225,7 @@
       "font": "Arial",
       "size": "22",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "fill": "none",
       "name": "StoryTitle3",
@@ -260,8 +260,8 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "name": "StoryCol4",
       "x": "25.13cm",
       "y": "9.7cm",
@@ -277,7 +277,7 @@
       "font": "Arial",
       "size": "14",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "7C5CFF",
       "align": "center",
       "fill": "none",
       "name": "StoryDate4",
@@ -296,7 +296,7 @@
       "font": "Arial",
       "size": "22",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "fill": "none",
       "name": "StoryTitle4",
@@ -332,7 +332,7 @@
     "props": {
       "name": "StoryDot1",
       "preset": "ellipse",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "5.1cm",
       "y": "8.29cm",
@@ -347,7 +347,7 @@
     "props": {
       "name": "StoryDot2",
       "preset": "ellipse",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "12.74cm",
       "y": "8.29cm",
@@ -362,7 +362,7 @@
     "props": {
       "name": "StoryDot3",
       "preset": "ellipse",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "20.38cm",
       "y": "8.29cm",
@@ -377,7 +377,7 @@
     "props": {
       "name": "StoryDot4",
       "preset": "ellipse",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "28.02cm",
       "y": "8.29cm",

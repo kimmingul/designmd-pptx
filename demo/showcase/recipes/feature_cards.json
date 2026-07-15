@@ -5,7 +5,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -16,7 +16,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "FeatTitle",
       "text": "Three promises",
@@ -32,7 +32,7 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "Card1Bg",
       "x": "2.2cm",
@@ -49,7 +49,7 @@
       "font": "Arial",
       "size": "34",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "7C5CFF",
       "fill": "none",
       "name": "Card1Num",
       "text": "01",
@@ -67,7 +67,7 @@
       "font": "Arial",
       "size": "26",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "Card1Title",
       "text": "Clarity",
@@ -101,7 +101,7 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "Card2Bg",
       "x": "12.39cm",
@@ -118,7 +118,7 @@
       "font": "Arial",
       "size": "34",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "22D3EE",
       "fill": "none",
       "name": "Card2Num",
       "text": "02",
@@ -136,7 +136,7 @@
       "font": "Arial",
       "size": "26",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "Card2Title",
       "text": "Cadence",
@@ -170,7 +170,7 @@
     "type": "shape",
     "props": {
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "Card3Bg",
       "x": "22.58cm",
@@ -187,7 +187,7 @@
       "font": "Arial",
       "size": "34",
       "bold": "true",
-      "color": "0B5FFF",
+      "color": "F472B6",
       "fill": "none",
       "name": "Card3Num",
       "text": "03",
@@ -205,7 +205,7 @@
       "font": "Arial",
       "size": "26",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "Card3Title",
       "text": "Control",

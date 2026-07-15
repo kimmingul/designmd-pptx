@@ -5,7 +5,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -22,7 +22,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -33,7 +33,7 @@
     "props": {
       "name": "PipeStage1",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "120\nLead",
       "x": "2.2cm",
@@ -43,7 +43,7 @@
       "font": "Arial",
       "size": "28",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "valign": "middle"
     }
@@ -70,7 +70,7 @@
     "props": {
       "name": "PipeStage2",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "48\nSQL",
       "x": "9.63cm",
@@ -80,7 +80,7 @@
       "font": "Arial",
       "size": "28",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "valign": "middle"
     }
@@ -107,7 +107,7 @@
     "props": {
       "name": "PipeStage3",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "22\nOpp",
       "x": "17.06cm",
@@ -117,7 +117,7 @@
       "font": "Arial",
       "size": "28",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "align": "center",
       "valign": "middle"
     }
@@ -144,7 +144,7 @@
     "props": {
       "name": "PipeStage4",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "9\nWon",
       "x": "24.49cm",

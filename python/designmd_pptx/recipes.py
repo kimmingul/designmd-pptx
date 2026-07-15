@@ -5130,15 +5130,17 @@ def recipe_pillar_columns(tokens: dict, content: dict | None = None) -> list[dic
     band_y, band_h = UI.content_band_y_h(st, fraction=0.78, min_h=7.0, max_h=11.0, settle=0.2)
     base_y = band_y + band_h
     ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "PillarTitle", title)]
+    series = UI.series_palette(tokens)
     for i, p in enumerate(pillars):
-        # Rising pillars — still capped by content band (not full stage).
+        # Rising pillars — multi-hue series fills (readable on dark brand)
         h = band_h * (0.72 + 0.28 * (i / max(1, n - 1)))
         y = base_y - h
+        fill = series[i % len(series)]
         ops.append({
             "command": "add", "parent": "/slide[last()]", "type": "shape",
             "props": {
                 "name": f"Pillar{i + 1}", "preset": st.preset,
-                "fill": c["accent"] if i == 0 else c["surface"],
+                "fill": fill,
                 "line": "none",
                 "text": f"{p['label']}\n\n{p.get('detail') or ''}",
                 "x": UI.cm(xs[i]), "y": UI.cm(y),
@@ -5146,7 +5148,7 @@ def recipe_pillar_columns(tokens: dict, content: dict | None = None) -> list[dic
                 "font": st.heading_font,
                 "size": str(max(16, st.section_pt - 4)),
                 "bold": "true",
-                "color": c["on_accent"] if i == 0 else c["text_on_surface"],
+                "color": c["on_accent"],
                 "align": "center", "valign": "middle",
             },
         })

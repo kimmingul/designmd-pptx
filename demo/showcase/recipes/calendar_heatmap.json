@@ -5,7 +5,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -22,7 +22,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -33,7 +33,7 @@
     "props": {
       "name": "CalCell1",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "1",
       "x": "2.2cm",
@@ -54,7 +54,7 @@
     "props": {
       "name": "CalCell2",
       "preset": "roundRect",
-      "fill": "91B7FF",
+      "fill": "22D3EE",
       "line": "none",
       "text": "",
       "x": "6.43cm",
@@ -75,7 +75,7 @@
     "props": {
       "name": "CalCell3",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "",
       "x": "10.65cm",
@@ -96,7 +96,7 @@
     "props": {
       "name": "CalCell4",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "",
       "x": "14.88cm",
@@ -117,7 +117,7 @@
     "props": {
       "name": "CalCell5",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "5",
       "x": "19.11cm",
@@ -138,7 +138,7 @@
     "props": {
       "name": "CalCell6",
       "preset": "roundRect",
-      "fill": "91B7FF",
+      "fill": "22D3EE",
       "line": "none",
       "text": "",
       "x": "23.34cm",
@@ -159,7 +159,7 @@
     "props": {
       "name": "CalCell7",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "",
       "x": "27.56cm",
@@ -180,7 +180,7 @@
     "props": {
       "name": "CalCell8",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "",
       "x": "2.2cm",
@@ -201,7 +201,7 @@
     "props": {
       "name": "CalCell9",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "9",
       "x": "6.43cm",
@@ -222,7 +222,7 @@
     "props": {
       "name": "CalCell10",
       "preset": "roundRect",
-      "fill": "91B7FF",
+      "fill": "22D3EE",
       "line": "none",
       "text": "",
       "x": "10.65cm",
@@ -243,7 +243,7 @@
     "props": {
       "name": "CalCell11",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "",
       "x": "14.88cm",
@@ -264,7 +264,7 @@
     "props": {
       "name": "CalCell12",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "",
       "x": "19.11cm",
@@ -285,7 +285,7 @@
     "props": {
       "name": "CalCell13",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "13",
       "x": "23.34cm",
@@ -306,7 +306,7 @@
     "props": {
       "name": "CalCell14",
       "preset": "roundRect",
-      "fill": "91B7FF",
+      "fill": "22D3EE",
       "line": "none",
       "text": "",
       "x": "27.56cm",
@@ -327,7 +327,7 @@
     "props": {
       "name": "CalCell15",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "",
       "x": "2.2cm",
@@ -348,7 +348,7 @@
     "props": {
       "name": "CalCell16",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "",
       "x": "6.43cm",
@@ -369,7 +369,7 @@
     "props": {
       "name": "CalCell17",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "17",
       "x": "10.65cm",
@@ -390,7 +390,7 @@
     "props": {
       "name": "CalCell18",
       "preset": "roundRect",
-      "fill": "91B7FF",
+      "fill": "22D3EE",
       "line": "none",
       "text": "",
       "x": "14.88cm",
@@ -411,7 +411,7 @@
     "props": {
       "name": "CalCell19",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "",
       "x": "19.11cm",
@@ -432,7 +432,7 @@
     "props": {
       "name": "CalCell20",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "",
       "x": "23.34cm",
@@ -453,7 +453,7 @@
     "props": {
       "name": "CalCell21",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "21",
       "x": "27.56cm",
@@ -474,7 +474,7 @@
     "props": {
       "name": "CalCell22",
       "preset": "roundRect",
-      "fill": "91B7FF",
+      "fill": "22D3EE",
       "line": "none",
       "text": "",
       "x": "2.2cm",
@@ -495,7 +495,7 @@
     "props": {
       "name": "CalCell23",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "",
       "x": "6.43cm",
@@ -516,7 +516,7 @@
     "props": {
       "name": "CalCell24",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "",
       "x": "10.65cm",
@@ -537,7 +537,7 @@
     "props": {
       "name": "CalCell25",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "25",
       "x": "14.88cm",
@@ -558,7 +558,7 @@
     "props": {
       "name": "CalCell26",
       "preset": "roundRect",
-      "fill": "91B7FF",
+      "fill": "22D3EE",
       "line": "none",
       "text": "",
       "x": "19.11cm",
@@ -579,7 +579,7 @@
     "props": {
       "name": "CalCell27",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "",
       "x": "23.34cm",
@@ -600,7 +600,7 @@
     "props": {
       "name": "CalCell28",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "",
       "x": "27.56cm",
@@ -621,7 +621,7 @@
     "props": {
       "name": "CalCell29",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "29",
       "x": "2.2cm",
@@ -642,7 +642,7 @@
     "props": {
       "name": "CalCell30",
       "preset": "roundRect",
-      "fill": "91B7FF",
+      "fill": "22D3EE",
       "line": "none",
       "text": "",
       "x": "6.43cm",
@@ -663,7 +663,7 @@
     "props": {
       "name": "CalCell31",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "",
       "x": "10.65cm",
@@ -684,7 +684,7 @@
     "props": {
       "name": "CalCell32",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "",
       "x": "14.88cm",
@@ -705,7 +705,7 @@
     "props": {
       "name": "CalCell33",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "text": "33",
       "x": "19.11cm",
@@ -726,7 +726,7 @@
     "props": {
       "name": "CalCell34",
       "preset": "roundRect",
-      "fill": "91B7FF",
+      "fill": "22D3EE",
       "line": "none",
       "text": "",
       "x": "23.34cm",
@@ -747,7 +747,7 @@
     "props": {
       "name": "CalCell35",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "text": "",
       "x": "27.56cm",

@@ -33,6 +33,9 @@ All notable changes to designmd-pptx are documented here.
 - **Northstar Board showcase** (`demo/designmd-pptx-showcase-northstar.pptx`,
   20 slides): Series B narrative exercising structural motifs under
   `northstar.DESIGN.md` + `content.showcase.deck.json` (issues=0, animated).
+- **Colorful brand system:** indigo stage + multi-hue `charts.series_colors`
+  promoted into palette series; KPI / process / funnel / card index / pillars
+  cycle series colors (not single-blue monochrome).
 
 ### Added (Wave 4 Infograpify structural roles)
 

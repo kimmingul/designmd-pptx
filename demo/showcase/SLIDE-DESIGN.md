@@ -4,7 +4,7 @@
 
 ## Atmosphere
 
-Series B board showcase house style — spacious black stage, one blue accent, left-hero covers. Fork of the flagship tokens (original, not an Apple or Infograpify template). Tuned for an 18–20 slide narrative that exercises structural motifs.
+Series B board showcase — deep indigo stage, multi-hue accent system (violet / cyan / magenta / lime / amber). Original tokens, not a vendor template. Tuned for a colorful 20-slide motif narrative.
 
 **Motif:** `hairline-card-on-dark`  
 **Dark-first:** `True`  
@@ -14,22 +14,22 @@ Series B board showcase house style — spacious black stage, one blue accent, l
 
 | Role | Hex | Provenance |
 |---|---|---|
-| `background` | `000000` | sourced |
-| `content_background` | `000000` | sourced |
-| `surface` | `1C1C1E` | sourced |
-| `surface_elevated` | `2C2C2E` | sourced |
-| `accent` | `0B5FFF` | sourced |
+| `background` | `0B0B1A` | sourced |
+| `content_background` | `0B0B1A` | sourced |
+| `surface` | `16162E` | sourced |
+| `surface_elevated` | `22224A` | sourced |
+| `accent` | `7C5CFF` | charts.series_colors[0] |
 | `on_accent` | `FFFFFF` | sourced |
-| `text` | `F5F5F7` | derived |
-| `text_on_surface` | `F5F5F7` | derived |
-| `text_on_content` | `F5F5F7` | derived |
+| `text` | `F4F2FF` | derived |
+| `text_on_surface` | `F4F2FF` | derived |
+| `text_on_content` | `F4F2FF` | derived |
 | `muted` | `A0A6B0` | sourced |
-| `hairline` | `3A3A3C` | sourced |
-| `success` | `30D158` | sourced |
-| `risk` | `FF453A` | sourced |
-| `chart_series1` | `0B5FFF` | sourced |
-| `chart_series2` | `91B7FF` | derived |
-| `chart_series3` | `30D158` | sourced |
+| `hairline` | `3A3570` | sourced |
+| `success` | `3DDC97` | sourced |
+| `risk` | `FF4D6D` | sourced |
+| `chart_series1` | `7C5CFF` | charts.series_colors |
+| `chart_series2` | `22D3EE` | charts.series_colors |
+| `chart_series3` | `F472B6` | charts.series_colors |
 
 ## Type
 

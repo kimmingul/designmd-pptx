@@ -5,7 +5,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -22,7 +22,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },
@@ -33,7 +33,7 @@
     "props": {
       "name": "DeviceChrome",
       "preset": "roundRect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "x": "6.7cm",
       "y": "3.5cm",
@@ -48,7 +48,7 @@
     "props": {
       "name": "DeviceScreenPh",
       "preset": "rect",
-      "fill": "000000",
+      "fill": "0B0B1A",
       "line": "none",
       "text": "Product screenshot\n(set content.src)",
       "x": "7.25cm",
@@ -75,7 +75,7 @@
       "height": "12.5cm",
       "font": "Arial",
       "size": "18",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none"
     }
   },

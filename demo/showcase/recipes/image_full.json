@@ -5,7 +5,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -15,8 +15,8 @@
     "props": {
       "name": "ImgPlaceholder",
       "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "fill": "16162E",
+      "line": "3A3570",
       "x": "2.2cm",
       "y": "1.2cm",
       "width": "29.47cm",

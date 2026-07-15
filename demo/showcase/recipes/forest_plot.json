@@ -5,7 +5,7 @@
     "type": "slide",
     "props": {
       "layout": "blank",
-      "background": "000000"
+      "background": "0B0B1A"
     }
   },
   {
@@ -16,7 +16,7 @@
       "font": "Arial",
       "size": "36",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "ForestTitle",
       "text": "Forest plot",
@@ -34,7 +34,7 @@
       "font": "Arial",
       "size": "16",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "ForestLabel1",
       "text": "Study A",
@@ -50,7 +50,7 @@
     "type": "shape",
     "props": {
       "preset": "rect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "ForestTrack1",
       "x": "11.1cm",
@@ -85,7 +85,7 @@
       "font": "Arial",
       "size": "16",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "ForestLabel2",
       "text": "Study B",
@@ -101,7 +101,7 @@
     "type": "shape",
     "props": {
       "preset": "rect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "ForestTrack2",
       "x": "11.1cm",
@@ -136,7 +136,7 @@
       "font": "Arial",
       "size": "16",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "ForestLabel3",
       "text": "Study C",
@@ -152,7 +152,7 @@
     "type": "shape",
     "props": {
       "preset": "rect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "ForestTrack3",
       "x": "11.1cm",
@@ -187,7 +187,7 @@
       "font": "Arial",
       "size": "16",
       "bold": "true",
-      "color": "F5F5F7",
+      "color": "F4F2FF",
       "fill": "none",
       "name": "ForestLabel4",
       "text": "Pooled",
@@ -203,7 +203,7 @@
     "type": "shape",
     "props": {
       "preset": "rect",
-      "fill": "1C1C1E",
+      "fill": "16162E",
       "line": "none",
       "name": "ForestTrack4",
       "x": "11.1cm",
@@ -237,7 +237,7 @@
     "props": {
       "name": "ForestBar1",
       "preset": "rect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "14.34cm",
       "y": "4.96cm",
@@ -252,7 +252,7 @@
     "props": {
       "name": "ForestDot1",
       "preset": "ellipse",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "15.95cm",
       "y": "4.87cm",
@@ -267,7 +267,7 @@
     "props": {
       "name": "ForestNull1",
       "preset": "rect",
-      "fill": "3A3A3C",
+      "fill": "3A3570",
       "line": "none",
       "x": "17.29cm",
       "y": "3.44cm",
@@ -282,7 +282,7 @@
     "props": {
       "name": "ForestBar2",
       "preset": "rect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "13.74cm",
       "y": "8.75cm",
@@ -297,7 +297,7 @@
     "props": {
       "name": "ForestDot2",
       "preset": "ellipse",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "15.06cm",
       "y": "8.65cm",
@@ -312,7 +312,7 @@
     "props": {
       "name": "ForestNull2",
       "preset": "rect",
-      "fill": "3A3A3C",
+      "fill": "3A3570",
       "line": "none",
       "x": "17.29cm",
       "y": "7.22cm",
@@ -327,7 +327,7 @@
     "props": {
       "name": "ForestBar3",
       "preset": "rect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "16.13cm",
       "y": "12.53cm",
@@ -342,7 +342,7 @@
     "props": {
       "name": "ForestDot3",
       "preset": "ellipse",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "17.45cm",
       "y": "12.44cm",
@@ -357,7 +357,7 @@
     "props": {
       "name": "ForestNull3",
       "preset": "rect",
-      "fill": "3A3A3C",
+      "fill": "3A3570",
       "line": "none",
       "x": "17.29cm",
       "y": "11.01cm",
@@ -372,7 +372,7 @@
     "props": {
       "name": "ForestBar4",
       "preset": "rect",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "14.94cm",
       "y": "16.32cm",
@@ -387,7 +387,7 @@
     "props": {
       "name": "ForestDot4",
       "preset": "ellipse",
-      "fill": "0B5FFF",
+      "fill": "7C5CFF",
       "line": "none",
       "x": "15.84cm",
       "y": "16.22cm",
@@ -402,7 +402,7 @@
     "props": {
       "name": "ForestNull4",
       "preset": "rect",
-      "fill": "3A3A3C",
+      "fill": "3A3570",
       "line": "none",
       "x": "17.29cm",
       "y": "14.79cm",
