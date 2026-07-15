@@ -1,0 +1,3893 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverEdge",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "0cm",
+      "y": "0cm",
+      "width": "0.35cm",
+      "height": "19.05cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverTitle",
+      "text": "Northstar AI",
+      "x": "2.2cm",
+      "y": "5cm",
+      "width": "29.47cm",
+      "height": "4cm",
+      "font": "Arial",
+      "size": "48",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "left",
+      "valign": "bottom",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverAccent",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "9.1cm",
+      "width": "4.8cm",
+      "height": "0.14cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverSubtitle",
+      "text": "Board update · Series B readiness",
+      "x": "2.2cm",
+      "y": "9.5cm",
+      "width": "26cm",
+      "height": "1.6cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "align": "left",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverMeta",
+      "text": "Q2  ·  confidential  ·  20 min",
+      "x": "2.2cm",
+      "y": "15.95cm",
+      "width": "29.47cm",
+      "height": "0.9cm",
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "left",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Hold the name. Then the room."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerAccentBar",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "6.2cm",
+      "width": "1.1cm",
+      "height": "6.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerNumber",
+      "text": "01",
+      "x": "3.8cm",
+      "y": "5.6cm",
+      "width": "8cm",
+      "height": "2.4cm",
+      "font": "Arial",
+      "size": "54",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerTitle",
+      "text": "The bet",
+      "x": "3.8cm",
+      "y": "8.2cm",
+      "width": "27.87cm",
+      "height": "2.6cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerBlurb",
+      "text": "Own the decision layer between data noise and executive action.",
+      "x": "3.8cm",
+      "y": "11.0cm",
+      "width": "22cm",
+      "height": "2.2cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Pause on the section number before the title."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "KpiTitle",
+      "text": "At a glance",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.84cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Kpi1Bg",
+      "x": "2.2cm",
+      "y": "3.93cm",
+      "width": "9.09cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi1Value",
+      "text": "$4.2M",
+      "x": "2.55cm",
+      "y": "7.56cm",
+      "width": "8.39cm",
+      "height": "3.5cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi1Label",
+      "text": "ARR",
+      "x": "2.55cm",
+      "y": "11.41cm",
+      "width": "8.39cm",
+      "height": "0.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi1Chip",
+      "text": "",
+      "x": "2.55cm",
+      "y": "12.61cm",
+      "width": "8.39cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Kpi2Bg",
+      "x": "12.39cm",
+      "y": "3.93cm",
+      "width": "9.09cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi2Value",
+      "text": "128%",
+      "x": "12.74cm",
+      "y": "7.56cm",
+      "width": "8.39cm",
+      "height": "3.5cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi2Label",
+      "text": "NRR",
+      "x": "12.74cm",
+      "y": "11.41cm",
+      "width": "8.39cm",
+      "height": "0.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi2Chip",
+      "text": "",
+      "x": "12.74cm",
+      "y": "12.61cm",
+      "width": "8.39cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Kpi3Bg",
+      "x": "22.58cm",
+      "y": "3.93cm",
+      "width": "9.09cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi3Value",
+      "text": "14 mo",
+      "x": "22.93cm",
+      "y": "7.56cm",
+      "width": "8.39cm",
+      "height": "3.5cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi3Label",
+      "text": "Runway",
+      "x": "22.93cm",
+      "y": "11.41cm",
+      "width": "8.39cm",
+      "height": "0.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi3Chip",
+      "text": "",
+      "x": "22.93cm",
+      "y": "12.61cm",
+      "width": "8.39cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Lead with ARR; NRR is the quality proof."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BigValue",
+      "text": "3.4×",
+      "x": "2.2cm",
+      "y": "3.28cm",
+      "width": "29.47cm",
+      "height": "6.4cm",
+      "font": "Arial",
+      "size": "81",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "valign": "middle",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BigLabel",
+      "text": "Pipeline coverage vs plan",
+      "x": "2.2cm",
+      "y": "10.29cm",
+      "width": "29.47cm",
+      "height": "1.7cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BigContext",
+      "text": "Enterprise motion is ahead; mid-market is the repair job.",
+      "x": "3.3cm",
+      "y": "12.54cm",
+      "width": "27.27cm",
+      "height": "2.2cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Let the multiple land before the story."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaTitle",
+      "text": "What changed",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaPanel1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "5.8cm",
+      "width": "14.18cm",
+      "height": "7.6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaHead1",
+      "text": "Before",
+      "x": "3.3cm",
+      "y": "6.9cm",
+      "width": "11.98cm",
+      "height": "1.5cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaBody1",
+      "text": "• Dashboards without owners\n• Opinions as forecast\n• Weekly slide rebuilds",
+      "x": "3.3cm",
+      "y": "9.02cm",
+      "width": "11.98cm",
+      "height": "3.28cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaPanel2",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "17.48cm",
+      "y": "5.8cm",
+      "width": "14.18cm",
+      "height": "7.6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaHead2",
+      "text": "After",
+      "x": "18.59cm",
+      "y": "6.9cm",
+      "width": "11.98cm",
+      "height": "1.5cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "FFFFFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaBody2",
+      "text": "• One decision brief\n• Motif-locked rhythm\n• Gate before the room",
+      "x": "18.59cm",
+      "y": "9.02cm",
+      "width": "11.98cm",
+      "height": "3.28cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "FFFFFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Call the single metric that proves After."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ProcTitle",
+      "text": "How we decide",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Proc1",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "1\nSignal\nTelemetry",
+      "x": "2.2cm",
+      "y": "6.48cm",
+      "width": "6.54cm",
+      "height": "5cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Proc2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "2\nFrame\nBrief",
+      "x": "9.84cm",
+      "y": "6.48cm",
+      "width": "6.54cm",
+      "height": "5cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Proc3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "3\nDecide\nOwner",
+      "x": "17.48cm",
+      "y": "6.48cm",
+      "width": "6.54cm",
+      "height": "5cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Proc4",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "4\nShip\nMeasure",
+      "x": "25.13cm",
+      "y": "6.48cm",
+      "width": "6.54cm",
+      "height": "5cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "connector",
+    "props": {
+      "from": "/slide[6]/shape[@name=Proc1]",
+      "to": "/slide[6]/shape[@name=Proc2]",
+      "shape": "straight",
+      "color": "A0A6B0",
+      "tailEnd": "triangle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "connector",
+    "props": {
+      "from": "/slide[6]/shape[@name=Proc2]",
+      "to": "/slide[6]/shape[@name=Proc3]",
+      "shape": "straight",
+      "color": "A0A6B0",
+      "tailEnd": "triangle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "connector",
+    "props": {
+      "from": "/slide[6]/shape[@name=Proc3]",
+      "to": "/slide[6]/shape[@name=Proc4]",
+      "shape": "straight",
+      "color": "A0A6B0",
+      "tailEnd": "triangle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Stop on the bottleneck between Frame and Decide."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelTitle",
+      "text": "Enterprise funnel",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelBand1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "3.88cm",
+      "width": "29.47cm",
+      "height": "2.51cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelLabel1",
+      "text": "Aware  ·  100%",
+      "x": "2.75cm",
+      "y": "4.43cm",
+      "width": "28.37cm",
+      "height": "1.38cm",
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelBand2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "4.9cm",
+      "y": "6.67cm",
+      "width": "24.07cm",
+      "height": "2.51cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelLabel2",
+      "text": "Eval  ·  42%",
+      "x": "5.45cm",
+      "y": "7.22cm",
+      "width": "22.97cm",
+      "height": "1.38cm",
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelBand3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "7.6cm",
+      "y": "9.45cm",
+      "width": "18.66cm",
+      "height": "2.51cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelLabel3",
+      "text": "Commit  ·  18%",
+      "x": "8.15cm",
+      "y": "10.01cm",
+      "width": "17.56cm",
+      "height": "1.38cm",
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelBand4",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "10.3cm",
+      "y": "12.24cm",
+      "width": "13.26cm",
+      "height": "2.51cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelLabel4",
+      "text": "Expand  ·  9%",
+      "x": "10.85cm",
+      "y": "12.79cm",
+      "width": "12.16cm",
+      "height": "1.38cm",
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Name the drop-off between Eval and Commit."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "FeatTitle",
+      "text": "Three promises",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.84cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Card1Bg",
+      "x": "2.2cm",
+      "y": "3.93cm",
+      "width": "9.09cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "34",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "Card1Num",
+      "text": "01",
+      "x": "3.3cm",
+      "y": "5.03cm",
+      "width": "6.89cm",
+      "height": "1.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "26",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Card1Title",
+      "text": "Clarity",
+      "x": "3.3cm",
+      "y": "7.49cm",
+      "width": "6.89cm",
+      "height": "2.15cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "bold": "false",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Card1Body",
+      "text": "One brief per decision — not a dashboard tour.",
+      "x": "3.3cm",
+      "y": "10.26cm",
+      "width": "6.89cm",
+      "height": "2.63cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Card2Bg",
+      "x": "12.39cm",
+      "y": "3.93cm",
+      "width": "9.09cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "34",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "Card2Num",
+      "text": "02",
+      "x": "13.49cm",
+      "y": "5.03cm",
+      "width": "6.89cm",
+      "height": "1.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "26",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Card2Title",
+      "text": "Cadence",
+      "x": "13.49cm",
+      "y": "7.49cm",
+      "width": "6.89cm",
+      "height": "2.15cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "bold": "false",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Card2Body",
+      "text": "Same chrome every week so the content is the news.",
+      "x": "13.49cm",
+      "y": "10.26cm",
+      "width": "6.89cm",
+      "height": "2.63cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Card3Bg",
+      "x": "22.58cm",
+      "y": "3.93cm",
+      "width": "9.09cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "34",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "Card3Num",
+      "text": "03",
+      "x": "23.68cm",
+      "y": "5.03cm",
+      "width": "6.89cm",
+      "height": "1.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "26",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Card3Title",
+      "text": "Control",
+      "x": "23.68cm",
+      "y": "7.49cm",
+      "width": "6.89cm",
+      "height": "2.15cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "bold": "false",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Card3Body",
+      "text": "Gates before the boardroom, not after the screenshot.",
+      "x": "23.68cm",
+      "y": "10.26cm",
+      "width": "6.89cm",
+      "height": "2.63cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Pick the promise that is still fragile."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerAccentBar",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "6.2cm",
+      "width": "1.1cm",
+      "height": "6.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerNumber",
+      "text": "02",
+      "x": "3.8cm",
+      "y": "5.6cm",
+      "width": "8cm",
+      "height": "2.4cm",
+      "font": "Arial",
+      "size": "54",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerTitle",
+      "text": "The machine",
+      "x": "3.8cm",
+      "y": "8.2cm",
+      "width": "27.87cm",
+      "height": "2.6cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerBlurb",
+      "text": "People, loop, and time horizon that make the bet real.",
+      "x": "3.8cm",
+      "y": "11.0cm",
+      "width": "22cm",
+      "height": "2.2cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Pause on the section number before the title."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OrgTitle",
+      "text": "Leadership slice",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OrgRoot",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "Maya Chen\nCEO",
+      "x": "10.93cm",
+      "y": "3.88cm",
+      "width": "12cm",
+      "height": "2.61cm",
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OrgSpine",
+      "preset": "rect",
+      "fill": "A0A6B0",
+      "line": "none",
+      "x": "16.88cm",
+      "y": "6.49cm",
+      "width": "0.12cm",
+      "height": "1.21cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OrgBar",
+      "preset": "rect",
+      "fill": "A0A6B0",
+      "line": "none",
+      "x": "6.8cm",
+      "y": "7.73cm",
+      "width": "20.27cm",
+      "height": "0.1cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OrgStem1",
+      "preset": "rect",
+      "fill": "A0A6B0",
+      "line": "none",
+      "x": "6.75cm",
+      "y": "7.73cm",
+      "width": "0.1cm",
+      "height": "0.35cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OrgChild1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Jordan Lee\nProduct",
+      "x": "2.2cm",
+      "y": "8.05cm",
+      "width": "9.2cm",
+      "height": "6.5cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OrgStem2",
+      "preset": "rect",
+      "fill": "A0A6B0",
+      "line": "none",
+      "x": "16.89cm",
+      "y": "7.73cm",
+      "width": "0.1cm",
+      "height": "0.35cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OrgChild2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Sam Okonkwo\nGTM",
+      "x": "12.34cm",
+      "y": "8.05cm",
+      "width": "9.2cm",
+      "height": "6.5cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OrgStem3",
+      "preset": "rect",
+      "fill": "A0A6B0",
+      "line": "none",
+      "x": "27.02cm",
+      "y": "7.73cm",
+      "width": "0.1cm",
+      "height": "0.35cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OrgChild3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Riley Park\nPlatform",
+      "x": "22.47cm",
+      "y": "8.05cm",
+      "width": "9.2cm",
+      "height": "6.5cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "State the decision right of the root."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CycleTitle",
+      "text": "Operating loop",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CycleHub",
+      "preset": "ellipse",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "Weekly",
+      "x": "14.7cm",
+      "y": "9.5cm",
+      "width": "4.4cm",
+      "height": "3.0cm",
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CycleNode1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Sense",
+      "x": "14.2cm",
+      "y": "6.06cm",
+      "width": "5.4cm",
+      "height": "2.4cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CycleNode2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Brief",
+      "x": "19.4cm",
+      "y": "9.8cm",
+      "width": "5.4cm",
+      "height": "2.4cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CycleNode3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Decide",
+      "x": "14.2cm",
+      "y": "13.54cm",
+      "width": "5.4cm",
+      "height": "2.4cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CycleNode4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Ship",
+      "x": "9cm",
+      "y": "9.8cm",
+      "width": "5.4cm",
+      "height": "2.4cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Name the handoff that breaks most often."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlTitle",
+      "text": "Milestones",
+      "x": "2.2cm",
+      "y": "1.2cm",
+      "width": "29.47cm",
+      "height": "1.8cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlAxis",
+      "preset": "rect",
+      "fill": "3A3A3C",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "9cm",
+      "width": "29.47cm",
+      "height": "0.12cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "20",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "TlLabel1",
+      "text": "Q1",
+      "x": "2.2cm",
+      "y": "10.3cm",
+      "width": "6.54cm",
+      "height": "1.13cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "TlDetail1",
+      "text": "ICP lock",
+      "x": "2.2cm",
+      "y": "11.78cm",
+      "width": "6.54cm",
+      "height": "0.87cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "20",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "TlLabel2",
+      "text": "Q2",
+      "x": "9.84cm",
+      "y": "10.3cm",
+      "width": "6.54cm",
+      "height": "1.13cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "TlDetail2",
+      "text": "Ent. motion",
+      "x": "9.84cm",
+      "y": "11.78cm",
+      "width": "6.54cm",
+      "height": "0.87cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "20",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "TlLabel3",
+      "text": "Q3",
+      "x": "17.48cm",
+      "y": "10.3cm",
+      "width": "6.54cm",
+      "height": "1.13cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "TlDetail3",
+      "text": "Series B",
+      "x": "17.48cm",
+      "y": "11.78cm",
+      "width": "6.54cm",
+      "height": "0.87cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "20",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "TlLabel4",
+      "text": "Q4",
+      "x": "25.13cm",
+      "y": "10.3cm",
+      "width": "6.54cm",
+      "height": "1.13cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "TlDetail4",
+      "text": "Platform",
+      "x": "25.13cm",
+      "y": "11.78cm",
+      "width": "6.54cm",
+      "height": "0.87cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlDot1",
+      "preset": "ellipse",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "5.02cm",
+      "y": "8.61cm",
+      "width": "0.9cm",
+      "height": "0.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlDot2",
+      "preset": "ellipse",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "12.66cm",
+      "y": "8.61cm",
+      "width": "0.9cm",
+      "height": "0.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlDot3",
+      "preset": "ellipse",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "20.31cm",
+      "y": "8.61cm",
+      "width": "0.9cm",
+      "height": "0.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlDot4",
+      "preset": "ellipse",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "27.95cm",
+      "y": "8.61cm",
+      "width": "0.9cm",
+      "height": "0.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Q3 is the only irreversible gate."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PillarTitle",
+      "text": "Where we invest",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Pillar1",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "Product\n\nDecision layer",
+      "x": "2.2cm",
+      "y": "7.07cm",
+      "width": "9.09cm",
+      "height": "7.44cm",
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Pillar2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "GTM\n\nEnterprise",
+      "x": "12.39cm",
+      "y": "5.63cm",
+      "width": "9.09cm",
+      "height": "8.89cm",
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Pillar3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Platform\n\nReliability",
+      "x": "22.58cm",
+      "y": "4.18cm",
+      "width": "9.09cm",
+      "height": "10.34cm",
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "The tallest pillar is the strategic bet."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "MatrixTitle",
+      "text": "Where we play",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Quad1Bg",
+      "x": "2.2cm",
+      "y": "3.9cm",
+      "width": "14.18cm",
+      "height": "6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Quad1Title",
+      "text": "Invest",
+      "x": "3.03cm",
+      "y": "4.67cm",
+      "width": "12.54cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Quad1Body",
+      "text": "Ent. decision rooms",
+      "x": "3.03cm",
+      "y": "6.33cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Quad2Bg",
+      "x": "17.48cm",
+      "y": "3.9cm",
+      "width": "14.18cm",
+      "height": "6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Quad2Title",
+      "text": "Selective",
+      "x": "18.31cm",
+      "y": "4.67cm",
+      "width": "12.54cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Quad2Body",
+      "text": "High ACV, long sales",
+      "x": "18.31cm",
+      "y": "6.33cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Quad3Bg",
+      "x": "2.2cm",
+      "y": "11cm",
+      "width": "14.18cm",
+      "height": "6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Quad3Title",
+      "text": "Maintain",
+      "x": "3.03cm",
+      "y": "11.77cm",
+      "width": "12.54cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Quad3Body",
+      "text": "Self-serve core",
+      "x": "3.03cm",
+      "y": "13.43cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Quad4Bg",
+      "x": "17.48cm",
+      "y": "11cm",
+      "width": "14.18cm",
+      "height": "6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Quad4Title",
+      "text": "Exit",
+      "x": "18.31cm",
+      "y": "11.77cm",
+      "width": "12.54cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Quad4Body",
+      "text": "One-off custom",
+      "x": "18.31cm",
+      "y": "13.43cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "AxisX",
+      "text": "→ Fit →",
+      "x": "2.2cm",
+      "y": "17.5cm",
+      "width": "29.47cm",
+      "height": "0.9cm",
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "AxisY",
+      "text": "↑ Value ↑",
+      "x": "2.2cm",
+      "y": "3.0cm",
+      "width": "12cm",
+      "height": "0.8cm",
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Name the quadrant that needs a decision this quarter."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadmapTitle",
+      "text": "H2 roadmap",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadPhase1",
+      "text": "Now",
+      "x": "6.8cm",
+      "y": "3.5cm",
+      "width": "8.12cm",
+      "height": "1.1cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadPhase2",
+      "text": "Next",
+      "x": "15.17cm",
+      "y": "3.5cm",
+      "width": "8.12cm",
+      "height": "1.1cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadPhase3",
+      "text": "Later",
+      "x": "23.55cm",
+      "y": "3.5cm",
+      "width": "8.12cm",
+      "height": "1.1cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadLane1",
+      "text": "Product",
+      "x": "2.2cm",
+      "y": "4.85cm",
+      "width": "4.2cm",
+      "height": "3.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell1_1Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "6.8cm",
+      "y": "4.85cm",
+      "width": "8.12cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell1_1",
+      "text": "Brief v2",
+      "x": "7cm",
+      "y": "5.1cm",
+      "width": "7.72cm",
+      "height": "2.7cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell1_2Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "15.17cm",
+      "y": "4.85cm",
+      "width": "8.12cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell1_2",
+      "text": "Motifs",
+      "x": "15.37cm",
+      "y": "5.1cm",
+      "width": "7.72cm",
+      "height": "2.7cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell1_3Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "23.55cm",
+      "y": "4.85cm",
+      "width": "8.12cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell1_3",
+      "text": "Gates",
+      "x": "23.75cm",
+      "y": "5.1cm",
+      "width": "7.72cm",
+      "height": "2.7cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadLane2",
+      "text": "GTM",
+      "x": "2.2cm",
+      "y": "8.35cm",
+      "width": "4.2cm",
+      "height": "3.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell2_1Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "6.8cm",
+      "y": "8.35cm",
+      "width": "8.12cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell2_1",
+      "text": "Ent. pack",
+      "x": "7cm",
+      "y": "8.6cm",
+      "width": "7.72cm",
+      "height": "2.7cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell2_2Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "15.17cm",
+      "y": "8.35cm",
+      "width": "8.12cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell2_2",
+      "text": "Partner",
+      "x": "15.37cm",
+      "y": "8.6cm",
+      "width": "7.72cm",
+      "height": "2.7cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell2_3Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "23.55cm",
+      "y": "8.35cm",
+      "width": "8.12cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell2_3",
+      "text": "Events",
+      "x": "23.75cm",
+      "y": "8.6cm",
+      "width": "7.72cm",
+      "height": "2.7cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadLane3",
+      "text": "Platform",
+      "x": "2.2cm",
+      "y": "11.85cm",
+      "width": "4.2cm",
+      "height": "3.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell3_1Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "6.8cm",
+      "y": "11.85cm",
+      "width": "8.12cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell3_1",
+      "text": "SLA",
+      "x": "7cm",
+      "y": "12.1cm",
+      "width": "7.72cm",
+      "height": "2.7cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell3_2Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "15.17cm",
+      "y": "11.85cm",
+      "width": "8.12cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell3_2",
+      "text": "SSO",
+      "x": "15.37cm",
+      "y": "12.1cm",
+      "width": "7.72cm",
+      "height": "2.7cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell3_3Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "23.55cm",
+      "y": "11.85cm",
+      "width": "8.12cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell3_3",
+      "text": "Audit",
+      "x": "23.75cm",
+      "y": "12.1cm",
+      "width": "7.72cm",
+      "height": "2.7cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Call the cross-lane dependency."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PricingTitle",
+      "text": "Packaging",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "name": "Tier1Bg",
+      "x": "2.2cm",
+      "y": "3.6cm",
+      "width": "9.09cm",
+      "height": "14.6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Tier1Name",
+      "text": "Team",
+      "x": "2.55cm",
+      "y": "4.4cm",
+      "width": "8.39cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Tier1Price",
+      "text": "$49",
+      "x": "2.55cm",
+      "y": "6.06cm",
+      "width": "8.39cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Tier1Period",
+      "text": "",
+      "x": "2.55cm",
+      "y": "9.31cm",
+      "width": "8.39cm",
+      "height": "0.87cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "16",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Tier1Features",
+      "text": "• Up to 10 seats\n• Core briefs",
+      "x": "2.55cm",
+      "y": "10.52cm",
+      "width": "8.39cm",
+      "height": "1.66cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "name": "Tier2Bg",
+      "x": "12.39cm",
+      "y": "3.6cm",
+      "width": "9.09cm",
+      "height": "14.6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Tier2Name",
+      "text": "Business",
+      "x": "12.74cm",
+      "y": "4.4cm",
+      "width": "8.39cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Tier2Price",
+      "text": "$199",
+      "x": "12.74cm",
+      "y": "6.06cm",
+      "width": "8.39cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "color": "FFFFFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Tier2Period",
+      "text": "",
+      "x": "12.74cm",
+      "y": "9.31cm",
+      "width": "8.39cm",
+      "height": "0.87cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "16",
+      "color": "FFFFFF",
+      "fill": "none",
+      "name": "Tier2Features",
+      "text": "• Orgs & SSO\n• Priority support",
+      "x": "12.74cm",
+      "y": "10.52cm",
+      "width": "8.39cm",
+      "height": "1.66cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "name": "Tier3Bg",
+      "x": "22.58cm",
+      "y": "3.6cm",
+      "width": "9.09cm",
+      "height": "14.6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Tier3Name",
+      "text": "Enterprise",
+      "x": "22.93cm",
+      "y": "4.4cm",
+      "width": "8.39cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Tier3Price",
+      "text": "Talk",
+      "x": "22.93cm",
+      "y": "6.06cm",
+      "width": "8.39cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Tier3Period",
+      "text": "",
+      "x": "22.93cm",
+      "y": "9.31cm",
+      "width": "8.39cm",
+      "height": "0.87cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "16",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Tier3Features",
+      "text": "• Global admin\n• Custom DPA",
+      "x": "22.93cm",
+      "y": "10.52cm",
+      "width": "8.39cm",
+      "height": "1.66cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Recommend Business; do not present a menu."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskTitle",
+      "text": "Risk heat",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskX0",
+      "text": "Low",
+      "x": "5.4cm",
+      "y": "16.65cm",
+      "width": "7.33cm",
+      "height": "0.9cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskY0",
+      "text": "Low",
+      "x": "2.2cm",
+      "y": "14.02cm",
+      "width": "3.0cm",
+      "height": "0.9cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "A0A6B0",
+      "align": "right",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskX1",
+      "text": "Med",
+      "x": "12.73cm",
+      "y": "16.65cm",
+      "width": "7.33cm",
+      "height": "0.9cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskY1",
+      "text": "Med",
+      "x": "2.2cm",
+      "y": "9.85cm",
+      "width": "3.0cm",
+      "height": "0.9cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "A0A6B0",
+      "align": "right",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskX2",
+      "text": "High",
+      "x": "20.07cm",
+      "y": "16.65cm",
+      "width": "7.33cm",
+      "height": "0.9cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskY2",
+      "text": "High",
+      "x": "2.2cm",
+      "y": "5.68cm",
+      "width": "3.0cm",
+      "height": "0.9cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "A0A6B0",
+      "align": "right",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell00",
+      "preset": "rect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "5.45cm",
+      "y": "12.38cm",
+      "width": "7.23cm",
+      "height": "4.07cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell01",
+      "preset": "rect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "12.78cm",
+      "y": "12.38cm",
+      "width": "7.23cm",
+      "height": "4.07cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell02",
+      "preset": "rect",
+      "fill": "91B7FF",
+      "line": "none",
+      "x": "20.12cm",
+      "y": "12.38cm",
+      "width": "7.23cm",
+      "height": "4.07cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell10",
+      "preset": "rect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "5.45cm",
+      "y": "8.22cm",
+      "width": "7.23cm",
+      "height": "4.07cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell11",
+      "preset": "rect",
+      "fill": "91B7FF",
+      "line": "none",
+      "x": "12.78cm",
+      "y": "8.22cm",
+      "width": "7.23cm",
+      "height": "4.07cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell12",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "20.12cm",
+      "y": "8.22cm",
+      "width": "7.23cm",
+      "height": "4.07cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell20",
+      "preset": "rect",
+      "fill": "91B7FF",
+      "line": "none",
+      "x": "5.45cm",
+      "y": "4.05cm",
+      "width": "7.23cm",
+      "height": "4.07cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell21",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "12.78cm",
+      "y": "4.05cm",
+      "width": "7.23cm",
+      "height": "4.07cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell22",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "20.12cm",
+      "y": "4.05cm",
+      "width": "7.23cm",
+      "height": "4.07cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskItem23",
+      "text": "Vendor",
+      "x": "12.98cm",
+      "y": "4.3cm",
+      "width": "6.83cm",
+      "height": "3.67cm",
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskItem32",
+      "text": "Scope",
+      "x": "20.32cm",
+      "y": "8.47cm",
+      "width": "6.83cm",
+      "height": "3.67cm",
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskItem13",
+      "text": "Hire",
+      "x": "5.65cm",
+      "y": "4.3cm",
+      "width": "6.83cm",
+      "height": "3.67cm",
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskItem12",
+      "text": "Reg",
+      "x": "5.65cm",
+      "y": "8.47cm",
+      "width": "6.83cm",
+      "height": "3.67cm",
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskAxisX",
+      "text": "Likelihood →",
+      "x": "5.4cm",
+      "y": "17.55cm",
+      "width": "22cm",
+      "height": "0.9cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Move one risk out of the red zone this quarter."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagTitle",
+      "text": "Program status",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagHead",
+      "text": "Project          Status          Note",
+      "x": "2.2cm",
+      "y": "3.3cm",
+      "width": "29.47cm",
+      "height": "0.9cm",
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagRow1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "4.4cm",
+      "width": "29.47cm",
+      "height": "1.55cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagName1",
+      "text": "Enterprise motion",
+      "x": "2.6cm",
+      "y": "4.65cm",
+      "width": "10cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "valign": "middle",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagDot1",
+      "preset": "ellipse",
+      "fill": "30D158",
+      "line": "none",
+      "x": "14.2cm",
+      "y": "4.8cm",
+      "width": "0.9cm",
+      "height": "0.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagNote1",
+      "text": "On track",
+      "x": "15.7cm",
+      "y": "4.65cm",
+      "width": "15.27cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "A0A6B0",
+      "valign": "middle",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagRow2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "6.1cm",
+      "width": "29.47cm",
+      "height": "1.55cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagName2",
+      "text": "Mid-market repair",
+      "x": "2.6cm",
+      "y": "6.35cm",
+      "width": "10cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "valign": "middle",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagDot2",
+      "preset": "ellipse",
+      "fill": "D97706",
+      "line": "none",
+      "x": "14.2cm",
+      "y": "6.5cm",
+      "width": "0.9cm",
+      "height": "0.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagNote2",
+      "text": "Owner TBD",
+      "x": "15.7cm",
+      "y": "6.35cm",
+      "width": "15.27cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "A0A6B0",
+      "valign": "middle",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagRow3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "7.8cm",
+      "width": "29.47cm",
+      "height": "1.55cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagName3",
+      "text": "Platform SLA",
+      "x": "2.6cm",
+      "y": "8.05cm",
+      "width": "10cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "valign": "middle",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagDot3",
+      "preset": "ellipse",
+      "fill": "D97706",
+      "line": "none",
+      "x": "14.2cm",
+      "y": "8.2cm",
+      "width": "0.9cm",
+      "height": "0.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagNote3",
+      "text": "Hire lag",
+      "x": "15.7cm",
+      "y": "8.05cm",
+      "width": "15.27cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "A0A6B0",
+      "valign": "middle",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagRow4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "9.5cm",
+      "width": "29.47cm",
+      "height": "1.55cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagName4",
+      "text": "Series B data room",
+      "x": "2.6cm",
+      "y": "9.75cm",
+      "width": "10cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "valign": "middle",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagDot4",
+      "preset": "ellipse",
+      "fill": "30D158",
+      "line": "none",
+      "x": "14.2cm",
+      "y": "9.9cm",
+      "width": "0.9cm",
+      "height": "0.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagNote4",
+      "text": "Ready",
+      "x": "15.7cm",
+      "y": "9.75cm",
+      "width": "15.27cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "A0A6B0",
+      "valign": "middle",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Amber needs an owner before we leave."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CheckTitle",
+      "text": "Board asks",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CheckRow1",
+      "preset": "roundRect",
+      "fill": "000000",
+      "line": "none",
+      "text": "○  Approve Series B window",
+      "x": "2.2cm",
+      "y": "4.26cm",
+      "width": "29.47cm",
+      "height": "1.82cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CheckRow2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "✓  Hold mid-market spend",
+      "x": "2.2cm",
+      "y": "6.26cm",
+      "width": "29.47cm",
+      "height": "1.82cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "false",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CheckRow3",
+      "preset": "roundRect",
+      "fill": "000000",
+      "line": "none",
+      "text": "○  Fund platform SLA hire",
+      "x": "2.2cm",
+      "y": "8.26cm",
+      "width": "29.47cm",
+      "height": "1.82cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CheckRow4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "✓  Kill custom one-offs",
+      "x": "2.2cm",
+      "y": "10.26cm",
+      "width": "29.47cm",
+      "height": "1.82cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "false",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Open items need an owner before the meeting ends."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CloseTitle",
+      "text": "One ask",
+      "x": "2.2cm",
+      "y": "4.99cm",
+      "width": "29.47cm",
+      "height": "2.6cm",
+      "font": "Arial",
+      "size": "44",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CloseBody",
+      "text": "Green-light the Series B process this quarter.",
+      "x": "3.3cm",
+      "y": "8.2cm",
+      "width": "27.27cm",
+      "height": "2cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CloseCta",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "Approve window",
+      "x": "11.93cm",
+      "y": "11.3cm",
+      "width": "10cm",
+      "height": "1.7cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  }
+]

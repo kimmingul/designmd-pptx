@@ -1,0 +1,301 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "PricingTitle",
+      "text": "Packaging",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "name": "Tier1Bg",
+      "x": "2.2cm",
+      "y": "3.6cm",
+      "width": "9.09cm",
+      "height": "14.6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Tier1Name",
+      "text": "Team",
+      "x": "2.55cm",
+      "y": "4.4cm",
+      "width": "8.39cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Tier1Price",
+      "text": "$49",
+      "x": "2.55cm",
+      "y": "6.06cm",
+      "width": "8.39cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Tier1Period",
+      "text": "",
+      "x": "2.55cm",
+      "y": "9.31cm",
+      "width": "8.39cm",
+      "height": "0.87cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "16",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Tier1Features",
+      "text": "• Up to 10 seats\n• Core briefs",
+      "x": "2.55cm",
+      "y": "10.52cm",
+      "width": "8.39cm",
+      "height": "1.66cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "name": "Tier2Bg",
+      "x": "12.39cm",
+      "y": "3.6cm",
+      "width": "9.09cm",
+      "height": "14.6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Tier2Name",
+      "text": "Business",
+      "x": "12.74cm",
+      "y": "4.4cm",
+      "width": "8.39cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Tier2Price",
+      "text": "$199",
+      "x": "12.74cm",
+      "y": "6.06cm",
+      "width": "8.39cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "color": "FFFFFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Tier2Period",
+      "text": "",
+      "x": "12.74cm",
+      "y": "9.31cm",
+      "width": "8.39cm",
+      "height": "0.87cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "16",
+      "color": "FFFFFF",
+      "fill": "none",
+      "name": "Tier2Features",
+      "text": "• Orgs & SSO\n• Priority support",
+      "x": "12.74cm",
+      "y": "10.52cm",
+      "width": "8.39cm",
+      "height": "1.66cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "name": "Tier3Bg",
+      "x": "22.58cm",
+      "y": "3.6cm",
+      "width": "9.09cm",
+      "height": "14.6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Tier3Name",
+      "text": "Enterprise",
+      "x": "22.93cm",
+      "y": "4.4cm",
+      "width": "8.39cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Tier3Price",
+      "text": "Talk",
+      "x": "22.93cm",
+      "y": "6.06cm",
+      "width": "8.39cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Tier3Period",
+      "text": "",
+      "x": "22.93cm",
+      "y": "9.31cm",
+      "width": "8.39cm",
+      "height": "0.87cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "16",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Tier3Features",
+      "text": "• Global admin\n• Custom DPA",
+      "x": "22.93cm",
+      "y": "10.52cm",
+      "width": "8.39cm",
+      "height": "1.66cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Recommend Business; do not present a menu."
+    }
+  }
+]

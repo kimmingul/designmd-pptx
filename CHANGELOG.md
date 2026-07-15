@@ -26,6 +26,13 @@ All notable changes to designmd-pptx are documented here.
 ### Fixed
 - **`_initials` helper** for `team` / `persona_card` avatar discs (scaffold
   used an undefined name and aborted recipe generation mid-run).
+- **KPI band value height** floor raised so 60pt figures do not wrap in
+  multi-column bands; **risk heat** axis label cleared of canvas edge.
+
+### Demo
+- **Northstar Board showcase** (`demo/designmd-pptx-showcase-northstar.pptx`,
+  20 slides): Series B narrative exercising structural motifs under
+  `northstar.DESIGN.md` + `content.showcase.deck.json` (issues=0, animated).
 
 ### Added (Wave 4 Infograpify structural roles)
 

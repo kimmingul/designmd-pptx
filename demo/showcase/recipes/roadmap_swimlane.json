@@ -1,0 +1,436 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadmapTitle",
+      "text": "H2 roadmap",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadPhase1",
+      "text": "Now",
+      "x": "6.8cm",
+      "y": "3.5cm",
+      "width": "8.12cm",
+      "height": "1.1cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadPhase2",
+      "text": "Next",
+      "x": "15.17cm",
+      "y": "3.5cm",
+      "width": "8.12cm",
+      "height": "1.1cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadPhase3",
+      "text": "Later",
+      "x": "23.55cm",
+      "y": "3.5cm",
+      "width": "8.12cm",
+      "height": "1.1cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadLane1",
+      "text": "Product",
+      "x": "2.2cm",
+      "y": "4.85cm",
+      "width": "4.2cm",
+      "height": "3.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell1_1Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "6.8cm",
+      "y": "4.85cm",
+      "width": "8.12cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell1_1",
+      "text": "Brief v2",
+      "x": "7cm",
+      "y": "5.1cm",
+      "width": "7.72cm",
+      "height": "2.7cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell1_2Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "15.17cm",
+      "y": "4.85cm",
+      "width": "8.12cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell1_2",
+      "text": "Motifs",
+      "x": "15.37cm",
+      "y": "5.1cm",
+      "width": "7.72cm",
+      "height": "2.7cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell1_3Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "23.55cm",
+      "y": "4.85cm",
+      "width": "8.12cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell1_3",
+      "text": "Gates",
+      "x": "23.75cm",
+      "y": "5.1cm",
+      "width": "7.72cm",
+      "height": "2.7cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadLane2",
+      "text": "GTM",
+      "x": "2.2cm",
+      "y": "8.35cm",
+      "width": "4.2cm",
+      "height": "3.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell2_1Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "6.8cm",
+      "y": "8.35cm",
+      "width": "8.12cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell2_1",
+      "text": "Ent. pack",
+      "x": "7cm",
+      "y": "8.6cm",
+      "width": "7.72cm",
+      "height": "2.7cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell2_2Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "15.17cm",
+      "y": "8.35cm",
+      "width": "8.12cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell2_2",
+      "text": "Partner",
+      "x": "15.37cm",
+      "y": "8.6cm",
+      "width": "7.72cm",
+      "height": "2.7cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell2_3Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "23.55cm",
+      "y": "8.35cm",
+      "width": "8.12cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell2_3",
+      "text": "Events",
+      "x": "23.75cm",
+      "y": "8.6cm",
+      "width": "7.72cm",
+      "height": "2.7cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadLane3",
+      "text": "Platform",
+      "x": "2.2cm",
+      "y": "11.85cm",
+      "width": "4.2cm",
+      "height": "3.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell3_1Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "6.8cm",
+      "y": "11.85cm",
+      "width": "8.12cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell3_1",
+      "text": "SLA",
+      "x": "7cm",
+      "y": "12.1cm",
+      "width": "7.72cm",
+      "height": "2.7cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell3_2Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "15.17cm",
+      "y": "11.85cm",
+      "width": "8.12cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell3_2",
+      "text": "SSO",
+      "x": "15.37cm",
+      "y": "12.1cm",
+      "width": "7.72cm",
+      "height": "2.7cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell3_3Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "23.55cm",
+      "y": "11.85cm",
+      "width": "8.12cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell3_3",
+      "text": "Audit",
+      "x": "23.75cm",
+      "y": "12.1cm",
+      "width": "7.72cm",
+      "height": "2.7cm",
+      "font": "Arial",
+      "size": "14",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Call the cross-lane dependency."
+    }
+  }
+]

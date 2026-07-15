@@ -1,0 +1,137 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaTitle",
+      "text": "What changed",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaPanel1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "5.8cm",
+      "width": "14.18cm",
+      "height": "7.6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaHead1",
+      "text": "Before",
+      "x": "3.3cm",
+      "y": "6.9cm",
+      "width": "11.98cm",
+      "height": "1.5cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaBody1",
+      "text": "• Dashboards without owners\n• Opinions as forecast\n• Weekly slide rebuilds",
+      "x": "3.3cm",
+      "y": "9.02cm",
+      "width": "11.98cm",
+      "height": "3.28cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaPanel2",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "17.48cm",
+      "y": "5.8cm",
+      "width": "14.18cm",
+      "height": "7.6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaHead2",
+      "text": "After",
+      "x": "18.59cm",
+      "y": "6.9cm",
+      "width": "11.98cm",
+      "height": "1.5cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "FFFFFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BaBody2",
+      "text": "• One decision brief\n• Motif-locked rhythm\n• Gate before the room",
+      "x": "18.59cm",
+      "y": "9.02cm",
+      "width": "11.98cm",
+      "height": "3.28cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "FFFFFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Call the single metric that proves After."
+    }
+  }
+]

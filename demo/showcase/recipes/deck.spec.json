@@ -1,0 +1,461 @@
+{
+  "version": "1.1",
+  "slides": [
+    {
+      "id": "01-cover",
+      "recipe": "cover",
+      "content": {
+        "title": "Northstar AI",
+        "subtitle": "Board update · Series B readiness",
+        "meta": "Q2  ·  confidential  ·  20 min",
+        "notes": "Hold the name. Then the room."
+      }
+    },
+    {
+      "id": "02-section-bet",
+      "recipe": "section_opener_numbered",
+      "content": {
+        "number": "01",
+        "title": "The bet",
+        "blurb": "Own the decision layer between data noise and executive action."
+      }
+    },
+    {
+      "id": "03-kpi",
+      "recipe": "kpi_row",
+      "content": {
+        "title": "At a glance",
+        "kpis": [
+          {
+            "value": "$4.2M",
+            "label": "ARR",
+            "chip": ""
+          },
+          {
+            "value": "128%",
+            "label": "NRR",
+            "chip": ""
+          },
+          {
+            "value": "14 mo",
+            "label": "Runway",
+            "chip": ""
+          }
+        ],
+        "notes": "Lead with ARR; NRR is the quality proof."
+      }
+    },
+    {
+      "id": "04-hero",
+      "recipe": "big_number",
+      "content": {
+        "value": "3.4×",
+        "label": "Pipeline coverage vs plan",
+        "context": "Enterprise motion is ahead; mid-market is the repair job.",
+        "notes": "Let the multiple land before the story."
+      }
+    },
+    {
+      "id": "05-delta",
+      "recipe": "before_after_slider",
+      "content": {
+        "title": "What changed",
+        "before": {
+          "title": "Before",
+          "body": [
+            "Dashboards without owners",
+            "Opinions as forecast",
+            "Weekly slide rebuilds"
+          ]
+        },
+        "after": {
+          "title": "After",
+          "body": [
+            "One decision brief",
+            "Motif-locked rhythm",
+            "Gate before the room"
+          ]
+        },
+        "notes": "Call the single metric that proves After."
+      }
+    },
+    {
+      "id": "06-pipeline",
+      "recipe": "process",
+      "content": {
+        "title": "How we decide",
+        "steps": [
+          {
+            "label": "Signal",
+            "detail": "Telemetry"
+          },
+          {
+            "label": "Frame",
+            "detail": "Brief"
+          },
+          {
+            "label": "Decide",
+            "detail": "Owner"
+          },
+          {
+            "label": "Ship",
+            "detail": "Measure"
+          }
+        ],
+        "notes": "Stop on the bottleneck between Frame and Decide."
+      }
+    },
+    {
+      "id": "07-funnel",
+      "recipe": "funnel_stages",
+      "content": {
+        "title": "Enterprise funnel",
+        "stages": [
+          {
+            "label": "Aware",
+            "value": "100%"
+          },
+          {
+            "label": "Eval",
+            "value": "42%"
+          },
+          {
+            "label": "Commit",
+            "value": "18%"
+          },
+          {
+            "label": "Expand",
+            "value": "9%"
+          }
+        ],
+        "notes": "Name the drop-off between Eval and Commit."
+      }
+    },
+    {
+      "id": "08-promises",
+      "recipe": "feature_cards",
+      "content": {
+        "title": "Three promises",
+        "cards": [
+          {
+            "title": "Clarity",
+            "body": "One brief per decision — not a dashboard tour."
+          },
+          {
+            "title": "Cadence",
+            "body": "Same chrome every week so the content is the news."
+          },
+          {
+            "title": "Control",
+            "body": "Gates before the boardroom, not after the screenshot."
+          }
+        ],
+        "notes": "Pick the promise that is still fragile."
+      }
+    },
+    {
+      "id": "09-section-machine",
+      "recipe": "section_opener_numbered",
+      "content": {
+        "number": "02",
+        "title": "The machine",
+        "blurb": "People, loop, and time horizon that make the bet real."
+      }
+    },
+    {
+      "id": "10-org",
+      "recipe": "org_tree",
+      "content": {
+        "title": "Leadership slice",
+        "root": {
+          "name": "Maya Chen",
+          "role": "CEO"
+        },
+        "reports": [
+          {
+            "name": "Jordan Lee",
+            "role": "Product"
+          },
+          {
+            "name": "Sam Okonkwo",
+            "role": "GTM"
+          },
+          {
+            "name": "Riley Park",
+            "role": "Platform"
+          }
+        ],
+        "notes": "State the decision right of the root."
+      }
+    },
+    {
+      "id": "11-loop",
+      "recipe": "cycle_loop",
+      "content": {
+        "title": "Operating loop",
+        "hub": "Weekly",
+        "steps": [
+          {
+            "label": "Sense"
+          },
+          {
+            "label": "Brief"
+          },
+          {
+            "label": "Decide"
+          },
+          {
+            "label": "Ship"
+          }
+        ],
+        "notes": "Name the handoff that breaks most often."
+      }
+    },
+    {
+      "id": "12-timeline",
+      "recipe": "timeline",
+      "content": {
+        "title": "Milestones",
+        "steps": [
+          {
+            "label": "Q1",
+            "detail": "ICP lock"
+          },
+          {
+            "label": "Q2",
+            "detail": "Ent. motion"
+          },
+          {
+            "label": "Q3",
+            "detail": "Series B"
+          },
+          {
+            "label": "Q4",
+            "detail": "Platform"
+          }
+        ],
+        "notes": "Q3 is the only irreversible gate."
+      }
+    },
+    {
+      "id": "13-pillars",
+      "recipe": "pillar_columns",
+      "content": {
+        "title": "Where we invest",
+        "pillars": [
+          {
+            "label": "Product",
+            "detail": "Decision layer"
+          },
+          {
+            "label": "GTM",
+            "detail": "Enterprise"
+          },
+          {
+            "label": "Platform",
+            "detail": "Reliability"
+          }
+        ],
+        "notes": "The tallest pillar is the strategic bet."
+      }
+    },
+    {
+      "id": "14-matrix",
+      "recipe": "matrix_2x2",
+      "content": {
+        "title": "Where we play",
+        "axes": {
+          "x": "Fit →",
+          "y": "Value ↑"
+        },
+        "quadrants": [
+          {
+            "title": "Invest",
+            "body": "Ent. decision rooms"
+          },
+          {
+            "title": "Selective",
+            "body": "High ACV, long sales"
+          },
+          {
+            "title": "Maintain",
+            "body": "Self-serve core"
+          },
+          {
+            "title": "Exit",
+            "body": "One-off custom"
+          }
+        ],
+        "notes": "Name the quadrant that needs a decision this quarter."
+      }
+    },
+    {
+      "id": "15-roadmap",
+      "recipe": "roadmap_swimlane",
+      "content": {
+        "title": "H2 roadmap",
+        "lanes": [
+          {
+            "label": "Product",
+            "items": [
+              "Brief v2",
+              "Motifs",
+              "Gates",
+              "Atlas"
+            ]
+          },
+          {
+            "label": "GTM",
+            "items": [
+              "Ent. pack",
+              "Partner",
+              "Events",
+              "CS play"
+            ]
+          },
+          {
+            "label": "Platform",
+            "items": [
+              "SLA",
+              "SSO",
+              "Audit",
+              "Scale"
+            ]
+          }
+        ],
+        "notes": "Call the cross-lane dependency."
+      }
+    },
+    {
+      "id": "16-pricing",
+      "recipe": "pricing",
+      "content": {
+        "title": "Packaging",
+        "tiers": [
+          {
+            "name": "Team",
+            "price": "$49",
+            "features": [
+              "Up to 10 seats",
+              "Core briefs"
+            ]
+          },
+          {
+            "name": "Business",
+            "price": "$199",
+            "features": [
+              "Orgs & SSO",
+              "Priority support"
+            ],
+            "highlight": true
+          },
+          {
+            "name": "Enterprise",
+            "price": "Talk",
+            "features": [
+              "Global admin",
+              "Custom DPA"
+            ]
+          }
+        ],
+        "notes": "Recommend Business; do not present a menu."
+      }
+    },
+    {
+      "id": "17-risk",
+      "recipe": "risk_heat_matrix",
+      "content": {
+        "title": "Risk heat",
+        "risks": [
+          {
+            "label": "Vendor",
+            "likelihood": 2,
+            "impact": 3
+          },
+          {
+            "label": "Scope",
+            "likelihood": 3,
+            "impact": 2
+          },
+          {
+            "label": "Hire",
+            "likelihood": 1,
+            "impact": 3
+          },
+          {
+            "label": "Reg",
+            "likelihood": 1,
+            "impact": 2
+          }
+        ],
+        "notes": "Move one risk out of the red zone this quarter."
+      }
+    },
+    {
+      "id": "18-status",
+      "recipe": "project_status_rag",
+      "content": {
+        "title": "Program status",
+        "rows": [
+          {
+            "name": "Enterprise motion",
+            "status": "G",
+            "note": "On track"
+          },
+          {
+            "name": "Mid-market repair",
+            "status": "A",
+            "note": "Owner TBD"
+          },
+          {
+            "name": "Platform SLA",
+            "status": "A",
+            "note": "Hire lag"
+          },
+          {
+            "name": "Series B data room",
+            "status": "G",
+            "note": "Ready"
+          }
+        ],
+        "notes": "Amber needs an owner before we leave."
+      }
+    },
+    {
+      "id": "19-rules",
+      "recipe": "checklist_board",
+      "content": {
+        "title": "Board asks",
+        "items": [
+          {
+            "label": "Approve Series B window",
+            "done": false
+          },
+          {
+            "label": "Hold mid-market spend",
+            "done": true
+          },
+          {
+            "label": "Fund platform SLA hire",
+            "done": false
+          },
+          {
+            "label": "Kill custom one-offs",
+            "done": true
+          }
+        ],
+        "notes": "Open items need an owner before the meeting ends."
+      }
+    },
+    {
+      "id": "20-close",
+      "recipe": "close",
+      "content": {
+        "title": "One ask",
+        "body": "Green-light the Series B process this quarter.",
+        "cta": "Approve window",
+        "notes": "One ask. Stop."
+      }
+    }
+  ]
+}

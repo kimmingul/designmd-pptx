@@ -1,0 +1,237 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BscTitle",
+      "text": "Balanced scorecard",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BscCard1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "3.6cm",
+      "width": "14.54cm",
+      "height": "6.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BscLab1",
+      "text": "Financial",
+      "x": "2.7cm",
+      "y": "4cm",
+      "width": "13.54cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BscBody1",
+      "text": "Revenue, margin, cash",
+      "x": "2.7cm",
+      "y": "5.4cm",
+      "width": "13.54cm",
+      "height": "4cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BscCard2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "17.14cm",
+      "y": "3.6cm",
+      "width": "14.54cm",
+      "height": "6.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BscLab2",
+      "text": "Customer",
+      "x": "17.64cm",
+      "y": "4cm",
+      "width": "13.54cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BscBody2",
+      "text": "NPS, retention, win rate",
+      "x": "17.64cm",
+      "y": "5.4cm",
+      "width": "13.54cm",
+      "height": "4cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BscCard3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "10.4cm",
+      "width": "14.54cm",
+      "height": "6.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BscLab3",
+      "text": "Internal",
+      "x": "2.7cm",
+      "y": "10.8cm",
+      "width": "13.54cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BscBody3",
+      "text": "Cycle time, quality",
+      "x": "2.7cm",
+      "y": "12.2cm",
+      "width": "13.54cm",
+      "height": "4cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BscCard4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "17.14cm",
+      "y": "10.4cm",
+      "width": "14.54cm",
+      "height": "6.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BscLab4",
+      "text": "Learning",
+      "x": "17.64cm",
+      "y": "10.8cm",
+      "width": "13.54cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BscBody4",
+      "text": "Skills, experiments",
+      "x": "17.64cm",
+      "y": "12.2cm",
+      "width": "13.54cm",
+      "height": "4cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Tie each metric to one owner and one review cadence."
+    }
+  }
+]

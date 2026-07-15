@@ -5353,7 +5353,8 @@ def recipe_risk_heat_matrix(tokens: dict, content: dict | None = None) -> list[d
         "command": "add", "parent": "/slide[last()]", "type": "shape",
         "props": {
             "name": "RiskAxisX", "text": "Likelihood →",
-            "x": _cm(grid_x), "y": "18.0cm", "width": _cm(grid_w), "height": "0.7cm",
+            # Keep clear of the 19.05cm canvas edge so 14pt micro type fits.
+            "x": _cm(grid_x), "y": "17.55cm", "width": _cm(grid_w), "height": "0.9cm",
             "font": t["body_font"], "size": str(_micro_pt(t)),
             "color": c["muted"], "align": "center", "fill": "none",
         },

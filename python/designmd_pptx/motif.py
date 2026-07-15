@@ -634,7 +634,9 @@ def build_kpi_band(tokens: dict[str, Any], slots: dict[str, Any]) -> list[dict[s
                 L.Spacer(weight=1),
                 L.Text(
                     str(kpi.get("value", "—")), pt=kpi_pt, name=f"Kpi{i + 1}Value",
-                    min_cm=2.0, max_cm=4.5,
+                    # 60pt display figures need ~3.5cm+ after text-frame insets
+                    # (4-up columns at spacious density wrap below this floor).
+                    min_cm=3.5, max_cm=5.2,
                     props={
                         "font": st.heading_font, "size": str(kpi_pt),
                         "bold": "true", "color": tc, "align": "center", "fill": "none",
