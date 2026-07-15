@@ -23,13 +23,33 @@ MotifBuilder = Callable[[dict[str, Any], dict[str, Any]], list[dict[str, Any]]]
 
 
 def catalog() -> dict[str, Any]:
-    if not _CATALOG_PATH.is_file():
-        return {"schema": 1, "motifs": []}
-    return json.loads(_CATALOG_PATH.read_text(encoding="utf-8"))
+    """Load catalog.json; if empty/missing, derive from Infograpify coverage map."""
+    if _CATALOG_PATH.is_file():
+        data = json.loads(_CATALOG_PATH.read_text(encoding="utf-8"))
+        if data.get("motifs"):
+            return data
+    from .motifs.coverage import FAMILY_MOTIFS, motif_catalog_entries
+
+    return {
+        "schema": 2,
+        "title": "designmd-pptx visual motifs (Infograpify structural coverage)",
+        "license_note": (
+            "Motifs are original geometry. Infograpify packs are local reference "
+            "only — structural roles and rhythm, never vendor shapes/icons/media."
+        ),
+        "analysis_path": "python -m designmd_pptx reference <local pack> -o .ref-analysis",
+        "infograpify_decks_collapsed": 400,
+        "families": FAMILY_MOTIFS,
+        "motifs": motif_catalog_entries(),
+    }
 
 
 def list_motifs() -> list[str]:
-    return [str(m.get("id")) for m in catalog().get("motifs") or [] if m.get("id")]
+    ids = [str(m.get("id")) for m in catalog().get("motifs") or [] if m.get("id")]
+    for mid in MOTIF_BUILDERS:
+        if mid not in ids:
+            ids.append(mid)
+    return ids
 
 
 def motif_info(motif_id: str) -> dict[str, Any] | None:
@@ -1160,6 +1180,40 @@ MOTIF_BUILDERS: dict[str, MotifBuilder] = {
     "chevron_flow": build_chevron_flow,
 }
 
+# Structural pack — Infograpify family coverage (original geometry)
+from .motifs.structural import STRUCTURAL_BUILDERS  # noqa: E402
+
+MOTIF_BUILDERS.update(STRUCTURAL_BUILDERS)
+
+
+def _recipe_adapter(recipe_name: str) -> MotifBuilder:
+    """Expose a complex recipe as a motif without cloning vendor content."""
+
+    def builder(tokens: dict[str, Any], slots: dict[str, Any]) -> list[dict[str, Any]]:
+        from .recipes import RECIPE_BUILDERS
+
+        fn = RECIPE_BUILDERS.get(recipe_name)
+        if fn is None:
+            raise KeyError(f"recipe adapter missing recipe {recipe_name!r}")
+        # Prefer content= for standard recipes; some accept slide_index in slots
+        try:
+            return fn(tokens, slots)
+        except TypeError:
+            return fn(tokens, content=slots)
+
+    return builder
+
+
+def _register_recipe_backed() -> None:
+    from .motifs.coverage import RECIPE_BACKED_MOTIFS
+
+    for mid, recipe in RECIPE_BACKED_MOTIFS.items():
+        if mid not in MOTIF_BUILDERS:
+            MOTIF_BUILDERS[mid] = _recipe_adapter(recipe)
+
+
+_register_recipe_backed()
+
 
 def render_motif(
     motif_id: str,
@@ -1169,8 +1223,23 @@ def render_motif(
     """Render a named motif into officecli batch ops."""
     builder = MOTIF_BUILDERS.get(motif_id)
     if not builder:
-        known = ", ".join(sorted(MOTIF_BUILDERS))
-        raise KeyError(f"unknown motif {motif_id!r}; known: {known}")
+        # Allow recipe name as motif alias (full Infograpify recipe coverage)
+        from .motifs.coverage import RECIPE_TO_MOTIF
+
+        mapped = RECIPE_TO_MOTIF.get(motif_id)
+        if mapped and mapped in MOTIF_BUILDERS:
+            builder = MOTIF_BUILDERS[mapped]
+        elif motif_id in RECIPE_TO_MOTIF.values():
+            pass
+        else:
+            # last resort: treat motif_id as recipe name
+            from .recipes import RECIPE_BUILDERS
+
+            if motif_id in RECIPE_BUILDERS:
+                builder = _recipe_adapter(motif_id)
+    if not builder:
+        known = ", ".join(sorted(MOTIF_BUILDERS)[:40]) + ", …"
+        raise KeyError(f"unknown motif {motif_id!r}; known include: {known}")
     return builder(tokens, slots or {})
 
 
@@ -1180,4 +1249,6 @@ __all__ = [
     "motif_info",
     "render_motif",
     "MOTIF_BUILDERS",
+    "build_org_cascade",
+    "build_matrix_quad",
 ]

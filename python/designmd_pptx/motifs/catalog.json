@@ -1,8 +1,9 @@
 {
-  "schema": 1,
-  "title": "designmd-pptx visual motifs (SmartArt-like originals)",
-  "license_note": "Motifs are original geometry. Infograpify packs are local reference only — structural roles and rhythm, never vendor shapes/icons/media.",
+  "schema": 2,
+  "title": "designmd-pptx visual motifs (Infograpify structural coverage)",
+  "license_note": "Motifs are original geometry. Infograpify packs are local reference only — structural roles and rhythm, never vendor shapes/icons/media. 400 licensed decks collapse into this structural catalog; never commit originals.",
   "analysis_path": "python -m designmd_pptx reference <local pack> -o .ref-analysis",
+  "infograpify_decks_collapsed": 400,
   "ref_hint_priority": [
     "kpi_band",
     "card_row",
@@ -12,132 +13,1448 @@
     "process_flow",
     "hierarchy"
   ],
+  "families": {
+    "narrative_chrome": [
+      "sparse_hero",
+      "section_mark",
+      "section_wash",
+      "agenda_list",
+      "close_mark",
+      "quote_mark",
+      "split_hero"
+    ],
+    "kpi_dashboard": [
+      "kpi_band",
+      "kpi_hero",
+      "kpi_grid",
+      "stat_row",
+      "chart_panel"
+    ],
+    "process_flow": [
+      "step_rail",
+      "funnel_cascade",
+      "chevron_flow",
+      "hub_orbit",
+      "pipeline_rail",
+      "journey_path",
+      "stair_ascent",
+      "fishbone_spine",
+      "framework_bar"
+    ],
+    "timeline_roadmap": [
+      "timeline_rail",
+      "swimlane_roadmap",
+      "gantt_track"
+    ],
+    "hierarchy": [
+      "pyramid_stack",
+      "iceberg_depth",
+      "pillar_band",
+      "org_cascade",
+      "okr_tree"
+    ],
+    "org_team": [
+      "org_cascade",
+      "team_cards",
+      "persona_split"
+    ],
+    "comparison_matrix": [
+      "matrix_quad",
+      "rich_matrix",
+      "split_hero",
+      "vs_columns",
+      "risk_heat",
+      "raci_grid"
+    ],
+    "pricing_table": [
+      "pricing_tiers",
+      "data_table",
+      "card_row"
+    ],
+    "strategy_canvas": [
+      "canvas_bmc",
+      "pestle_cells",
+      "scorecard_grid"
+    ],
+    "chart_story": [
+      "chart_panel",
+      "venn_duo",
+      "ring_segments",
+      "waterfall_bars"
+    ],
+    "geo_map": [
+      "geo_pins",
+      "mindmap_radial",
+      "empathy_quad"
+    ],
+    "device_mockup": [
+      "device_chrome"
+    ],
+    "other": [
+      "card_row",
+      "bullet_stack",
+      "tile_row",
+      "check_stack",
+      "hex_honey",
+      "calendar_grid",
+      "case_band",
+      "rag_status",
+      "finance_grid",
+      "scale_meter",
+      "logo_band",
+      "image_stage",
+      "consort_spine",
+      "forest_ci",
+      "km_curve",
+      "study_box",
+      "multi_panel",
+      "freeform_stage"
+    ]
+  },
+  "recipe_to_motif": {
+    "cover": "sparse_hero",
+    "section_divider": "section_wash",
+    "section_opener_numbered": "section_mark",
+    "agenda_toc": "agenda_list",
+    "close": "close_mark",
+    "quote": "quote_mark",
+    "bullets": "bullet_stack",
+    "mission_vision_split": "split_hero",
+    "before_after_slider": "split_hero",
+    "comparison_2col": "split_hero",
+    "kpi_row": "kpi_band",
+    "kpi_dashboard_grid": "kpi_grid",
+    "big_number": "kpi_hero",
+    "icon_stat_row": "stat_row",
+    "scale_rating": "scale_meter",
+    "process": "step_rail",
+    "funnel_stages": "funnel_cascade",
+    "chevron_process": "chevron_flow",
+    "cycle_loop": "hub_orbit",
+    "hub_spoke": "hub_orbit",
+    "pipeline_stages": "pipeline_rail",
+    "journey_stages": "journey_path",
+    "stairs_ascent": "stair_ascent",
+    "fishbone_causes": "fishbone_spine",
+    "framework_row": "framework_bar",
+    "timeline": "timeline_rail",
+    "story_timeline": "timeline_rail",
+    "roadmap_swimlane": "swimlane_roadmap",
+    "gantt_bars": "gantt_track",
+    "pyramid_levels": "pyramid_stack",
+    "iceberg_levels": "iceberg_depth",
+    "pillar_columns": "pillar_band",
+    "org_tree": "org_cascade",
+    "okrs_tree": "okr_tree",
+    "team": "team_cards",
+    "persona_card": "persona_split",
+    "matrix_2x2": "matrix_quad",
+    "swot_2x2": "matrix_quad",
+    "quadrant_matrix_rich": "rich_matrix",
+    "vs_scorecard": "vs_columns",
+    "risk_heat_matrix": "risk_heat",
+    "raci_matrix": "raci_grid",
+    "empathy_map_quad": "empathy_quad",
+    "feature_cards": "card_row",
+    "puzzle_pieces": "tile_row",
+    "checklist_board": "check_stack",
+    "hex_cluster": "hex_honey",
+    "pricing": "pricing_tiers",
+    "business_canvas": "canvas_bmc",
+    "pestle_grid": "pestle_cells",
+    "scorecard_balanced": "scorecard_grid",
+    "chart_insight": "chart_panel",
+    "chart_callout_panel": "chart_panel",
+    "waterfall_insight": "waterfall_bars",
+    "venn_overlap": "venn_duo",
+    "circle_segments": "ring_segments",
+    "table": "data_table",
+    "appendix_table": "data_table",
+    "results_table_insight": "data_table",
+    "finance_statement": "finance_grid",
+    "mindmap_branches": "mindmap_radial",
+    "calendar_heatmap": "calendar_grid",
+    "case_study_band": "case_band",
+    "project_status_rag": "rag_status",
+    "geo_callout": "geo_pins",
+    "device_frame": "device_chrome",
+    "logo_strip": "logo_band",
+    "image_full": "image_stage",
+    "image_text_2col": "image_stage",
+    "consort_flow": "consort_spine",
+    "forest_plot": "forest_ci",
+    "kaplan_meier": "km_curve",
+    "study_design": "study_box",
+    "multi_panel_figure": "multi_panel",
+    "freeform": "freeform_stage"
+  },
   "motifs": [
     {
-      "id": "sparse_hero",
-      "role": "cover_hero",
-      "ref_hints": ["sparse_hero"],
-      "infograpify_families": ["narrative_chrome"],
-      "slots": ["title", "subtitle", "meta", "placement"],
-      "chrome": ["mega_type", "accent_bar", "optional_left_edge"],
-      "recipes": ["cover"]
+      "id": "agenda_list",
+      "role": "agenda_list",
+      "ref_hints": [],
+      "infograpify_families": [
+        "narrative_chrome"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "agenda_toc"
+      ],
+      "builder": "custom"
     },
     {
-      "id": "split_hero",
-      "role": "comparison_split",
-      "ref_hints": ["matrix_like", "card_row"],
-      "infograpify_families": ["comparison_matrix", "narrative_chrome"],
-      "slots": ["title", "left.title", "left.body", "right.title", "right.body"],
-      "chrome": ["two_equal_panels", "content_band", "accent_right_optional"],
-      "recipes": ["before_after_slider", "mission_vision_split", "comparison_2col"]
+      "id": "bullet_stack",
+      "role": "bullet_stack",
+      "ref_hints": [],
+      "infograpify_families": [
+        "other"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "bullets"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "calendar_grid",
+      "role": "calendar_grid",
+      "ref_hints": [],
+      "infograpify_families": [
+        "other"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "calendar_heatmap"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "canvas_bmc",
+      "role": "canvas_bmc",
+      "ref_hints": [],
+      "infograpify_families": [
+        "strategy_canvas"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "business_canvas"
+      ],
+      "builder": "custom"
     },
     {
       "id": "card_row",
       "role": "card_row_n",
-      "ref_hints": ["card_row", "card_row_3", "card_row_4"],
-      "infograpify_families": ["other", "process_flow", "pricing_table"],
-      "slots": ["title", "cards[].title", "cards[].body"],
-      "chrome": ["index_disc", "surface_card", "equal_columns", "content_height_body"],
-      "recipes": ["feature_cards"]
+      "ref_hints": [],
+      "infograpify_families": [
+        "pricing_table",
+        "other"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "feature_cards"
+      ],
+      "builder": "custom"
     },
     {
-      "id": "kpi_band",
-      "role": "metric_band",
-      "ref_hints": ["kpi_band", "kpi_band_3", "kpi_band_4"],
-      "infograpify_families": ["kpi_dashboard"],
-      "slots": ["title", "kpis[].value", "kpis[].label", "kpis[].chip"],
-      "chrome": ["large_value", "equal_kpi_cards", "watch_accent"],
-      "recipes": ["kpi_row"]
+      "id": "case_band",
+      "role": "case_band",
+      "ref_hints": [],
+      "infograpify_families": [
+        "other"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "case_study_band"
+      ],
+      "builder": "custom"
     },
     {
-      "id": "kpi_hero",
-      "role": "single_metric_hero",
-      "ref_hints": ["sparse_hero", "kpi_band"],
-      "infograpify_families": ["kpi_dashboard", "narrative_chrome"],
-      "slots": ["value", "label", "context"],
-      "chrome": ["mega_type", "centered_stack", "stage_air"],
-      "recipes": ["big_number"]
-    },
-    {
-      "id": "step_rail",
-      "role": "process_steps",
-      "ref_hints": ["has_connectors", "card_row"],
-      "infograpify_families": ["process_flow"],
-      "slots": ["title", "steps[].label", "steps[].detail"],
-      "chrome": ["numbered_tiles", "glued_connectors", "accent_ends"],
-      "recipes": ["process"]
-    },
-    {
-      "id": "funnel_cascade",
-      "role": "funnel",
-      "ref_hints": ["process_flow"],
-      "infograpify_families": ["process_flow"],
-      "slots": ["title", "stages[].label", "stages[].value"],
-      "chrome": ["decreasing_width_bands", "content_band"],
-      "recipes": ["funnel_stages"]
-    },
-    {
-      "id": "matrix_quad",
-      "role": "2x2_matrix",
-      "ref_hints": ["matrix_like"],
-      "infograpify_families": ["comparison_matrix"],
-      "slots": ["title", "quadrants[4].title", "quadrants[4].body", "axes.x", "axes.y"],
-      "chrome": ["four_cells", "spacer_free_height", "optional_axis_labels"],
-      "recipes": ["matrix_2x2", "swot_2x2"]
-    },
-    {
-      "id": "stair_ascent",
-      "role": "maturity_stairs",
-      "ref_hints": ["hierarchy"],
-      "infograpify_families": ["hierarchy", "process_flow"],
-      "slots": ["title", "steps[].label", "steps[].detail"],
-      "chrome": ["rising_heights", "content_band", "accent_last"],
-      "recipes": ["stairs_ascent"]
+      "id": "chart_panel",
+      "role": "chart_panel",
+      "ref_hints": [],
+      "infograpify_families": [
+        "kpi_dashboard",
+        "chart_story"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "chart_insight",
+        "chart_callout_panel"
+      ],
+      "builder": "recipe_adapter"
     },
     {
       "id": "check_stack",
-      "role": "checklist",
+      "role": "check_stack",
       "ref_hints": [],
-      "infograpify_families": ["other", "narrative_chrome"],
-      "slots": ["title", "items[].label", "items[].done"],
-      "chrome": ["full_width_rows", "content_band"],
-      "recipes": ["checklist_board"]
-    },
-    {
-      "id": "tile_row",
-      "role": "equal_tiles",
-      "ref_hints": ["card_row"],
-      "infograpify_families": ["other", "hierarchy"],
-      "slots": ["title", "items[].label", "items[].detail"],
-      "chrome": ["equal_width_tiles", "alternating_accent"],
-      "recipes": ["puzzle_pieces"]
-    },
-    {
-      "id": "section_mark",
-      "role": "section_opener",
-      "ref_hints": ["sparse_hero"],
-      "infograpify_families": ["narrative_chrome"],
-      "slots": ["number", "title", "blurb"],
-      "chrome": ["accent_bar", "large_index", "left_stack"],
-      "recipes": ["section_opener_numbered"]
-    },
-    {
-      "id": "org_cascade",
-      "role": "org_hierarchy",
-      "ref_hints": ["hierarchy", "process_flow"],
-      "infograpify_families": ["hierarchy", "org_chart"],
-      "slots": ["title", "root.name", "root.role", "reports[].name", "reports[].role"],
-      "chrome": ["accent_root", "spine_bar", "equal_child_columns", "stem_drops"],
-      "recipes": ["org_tree"]
+      "infograpify_families": [
+        "other"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "checklist_board"
+      ],
+      "builder": "custom"
     },
     {
       "id": "chevron_flow",
       "role": "chevron_process",
-      "ref_hints": ["process_flow", "has_connectors"],
-      "infograpify_families": ["process_flow"],
-      "slots": ["title", "steps[].label", "steps[].value"],
-      "chrome": ["overlapping_chevrons", "accent_ends", "destination_card"],
-      "recipes": ["chevron_process"]
+      "ref_hints": [],
+      "infograpify_families": [
+        "process_flow"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "chevron_process"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "close_mark",
+      "role": "close_mark",
+      "ref_hints": [],
+      "infograpify_families": [
+        "narrative_chrome"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "close"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "consort_spine",
+      "role": "consort_spine",
+      "ref_hints": [],
+      "infograpify_families": [
+        "other"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "consort_flow"
+      ],
+      "builder": "recipe_adapter"
+    },
+    {
+      "id": "data_table",
+      "role": "data_table",
+      "ref_hints": [],
+      "infograpify_families": [
+        "pricing_table"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "table",
+        "appendix_table",
+        "results_table_insight"
+      ],
+      "builder": "recipe_adapter"
+    },
+    {
+      "id": "device_chrome",
+      "role": "device_chrome",
+      "ref_hints": [],
+      "infograpify_families": [
+        "device_mockup"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "device_frame"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "empathy_quad",
+      "role": "empathy_quad",
+      "ref_hints": [],
+      "infograpify_families": [
+        "geo_map"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "empathy_map_quad"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "finance_grid",
+      "role": "finance_grid",
+      "ref_hints": [],
+      "infograpify_families": [
+        "other"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "finance_statement"
+      ],
+      "builder": "recipe_adapter"
+    },
+    {
+      "id": "fishbone_spine",
+      "role": "fishbone_spine",
+      "ref_hints": [],
+      "infograpify_families": [
+        "process_flow"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "fishbone_causes"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "forest_ci",
+      "role": "forest_ci",
+      "ref_hints": [],
+      "infograpify_families": [
+        "other"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "forest_plot"
+      ],
+      "builder": "recipe_adapter"
+    },
+    {
+      "id": "framework_bar",
+      "role": "framework_bar",
+      "ref_hints": [],
+      "infograpify_families": [
+        "process_flow"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "framework_row"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "freeform_stage",
+      "role": "freeform_stage",
+      "ref_hints": [],
+      "infograpify_families": [
+        "other"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "freeform"
+      ],
+      "builder": "recipe_adapter"
+    },
+    {
+      "id": "funnel_cascade",
+      "role": "funnel",
+      "ref_hints": [],
+      "infograpify_families": [
+        "process_flow"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "funnel_stages"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "gantt_track",
+      "role": "gantt_track",
+      "ref_hints": [],
+      "infograpify_families": [
+        "timeline_roadmap"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "gantt_bars"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "geo_pins",
+      "role": "geo_pins",
+      "ref_hints": [],
+      "infograpify_families": [
+        "geo_map"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "geo_callout"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "hex_honey",
+      "role": "hex_honey",
+      "ref_hints": [],
+      "infograpify_families": [
+        "other"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "hex_cluster"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "hub_orbit",
+      "role": "cycle_hub",
+      "ref_hints": [],
+      "infograpify_families": [
+        "process_flow"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "cycle_loop",
+        "hub_spoke"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "iceberg_depth",
+      "role": "iceberg_depth",
+      "ref_hints": [],
+      "infograpify_families": [
+        "hierarchy"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "iceberg_levels"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "image_stage",
+      "role": "image_stage",
+      "ref_hints": [],
+      "infograpify_families": [
+        "other"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "image_full",
+        "image_text_2col"
+      ],
+      "builder": "recipe_adapter"
+    },
+    {
+      "id": "journey_path",
+      "role": "journey_path",
+      "ref_hints": [],
+      "infograpify_families": [
+        "process_flow"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "journey_stages"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "km_curve",
+      "role": "km_curve",
+      "ref_hints": [],
+      "infograpify_families": [
+        "other"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "kaplan_meier"
+      ],
+      "builder": "recipe_adapter"
+    },
+    {
+      "id": "kpi_band",
+      "role": "metric_band",
+      "ref_hints": [],
+      "infograpify_families": [
+        "kpi_dashboard"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "kpi_row"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "kpi_grid",
+      "role": "metric_dashboard",
+      "ref_hints": [],
+      "infograpify_families": [
+        "kpi_dashboard"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "kpi_dashboard_grid"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "kpi_hero",
+      "role": "single_metric_hero",
+      "ref_hints": [],
+      "infograpify_families": [
+        "kpi_dashboard"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "big_number"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "logo_band",
+      "role": "logo_band",
+      "ref_hints": [],
+      "infograpify_families": [
+        "other"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "logo_strip"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "matrix_quad",
+      "role": "2x2_matrix",
+      "ref_hints": [],
+      "infograpify_families": [
+        "comparison_matrix"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "matrix_2x2",
+        "swot_2x2"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "mindmap_radial",
+      "role": "mindmap_radial",
+      "ref_hints": [],
+      "infograpify_families": [
+        "geo_map"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "mindmap_branches"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "multi_panel",
+      "role": "multi_panel",
+      "ref_hints": [],
+      "infograpify_families": [
+        "other"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "multi_panel_figure"
+      ],
+      "builder": "recipe_adapter"
+    },
+    {
+      "id": "okr_tree",
+      "role": "okr_tree",
+      "ref_hints": [],
+      "infograpify_families": [
+        "hierarchy"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "okrs_tree"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "org_cascade",
+      "role": "org_hierarchy",
+      "ref_hints": [],
+      "infograpify_families": [
+        "hierarchy",
+        "org_team"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "org_tree"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "persona_split",
+      "role": "persona_split",
+      "ref_hints": [],
+      "infograpify_families": [
+        "org_team"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "persona_card"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "pestle_cells",
+      "role": "pestle_cells",
+      "ref_hints": [],
+      "infograpify_families": [
+        "strategy_canvas"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "pestle_grid"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "pillar_band",
+      "role": "pillar_band",
+      "ref_hints": [],
+      "infograpify_families": [
+        "hierarchy"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "pillar_columns"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "pipeline_rail",
+      "role": "pipeline_rail",
+      "ref_hints": [],
+      "infograpify_families": [
+        "process_flow"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "pipeline_stages"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "pricing_tiers",
+      "role": "pricing_tiers",
+      "ref_hints": [],
+      "infograpify_families": [
+        "pricing_table"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "pricing"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "pyramid_stack",
+      "role": "pyramid",
+      "ref_hints": [],
+      "infograpify_families": [
+        "hierarchy"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "pyramid_levels"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "quote_mark",
+      "role": "quote_mark",
+      "ref_hints": [],
+      "infograpify_families": [
+        "narrative_chrome"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "quote"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "raci_grid",
+      "role": "raci_grid",
+      "ref_hints": [],
+      "infograpify_families": [
+        "comparison_matrix"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "raci_matrix"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "rag_status",
+      "role": "rag_status",
+      "ref_hints": [],
+      "infograpify_families": [
+        "other"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "project_status_rag"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "rich_matrix",
+      "role": "rich_matrix",
+      "ref_hints": [],
+      "infograpify_families": [
+        "comparison_matrix"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "quadrant_matrix_rich"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "ring_segments",
+      "role": "ring_segments",
+      "ref_hints": [],
+      "infograpify_families": [
+        "chart_story"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "circle_segments"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "risk_heat",
+      "role": "risk_heat",
+      "ref_hints": [],
+      "infograpify_families": [
+        "comparison_matrix"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "risk_heat_matrix"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "scale_meter",
+      "role": "scale_meter",
+      "ref_hints": [],
+      "infograpify_families": [
+        "other"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "scale_rating"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "scorecard_grid",
+      "role": "scorecard_grid",
+      "ref_hints": [],
+      "infograpify_families": [
+        "strategy_canvas"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "scorecard_balanced"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "section_mark",
+      "role": "section_opener",
+      "ref_hints": [],
+      "infograpify_families": [
+        "narrative_chrome"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "section_opener_numbered"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "section_wash",
+      "role": "section_divider",
+      "ref_hints": [],
+      "infograpify_families": [
+        "narrative_chrome"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "section_divider"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "sparse_hero",
+      "role": "cover_hero",
+      "ref_hints": [],
+      "infograpify_families": [
+        "narrative_chrome"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "cover"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "split_hero",
+      "role": "split_hero",
+      "ref_hints": [],
+      "infograpify_families": [
+        "narrative_chrome",
+        "comparison_matrix"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "mission_vision_split",
+        "before_after_slider",
+        "comparison_2col"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "stair_ascent",
+      "role": "stair_ascent",
+      "ref_hints": [],
+      "infograpify_families": [
+        "process_flow"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "stairs_ascent"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "stat_row",
+      "role": "stat_row",
+      "ref_hints": [],
+      "infograpify_families": [
+        "kpi_dashboard"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "icon_stat_row"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "step_rail",
+      "role": "process_steps",
+      "ref_hints": [],
+      "infograpify_families": [
+        "process_flow"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "process"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "study_box",
+      "role": "study_box",
+      "ref_hints": [],
+      "infograpify_families": [
+        "other"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "study_design"
+      ],
+      "builder": "recipe_adapter"
+    },
+    {
+      "id": "swimlane_roadmap",
+      "role": "swimlane_roadmap",
+      "ref_hints": [],
+      "infograpify_families": [
+        "timeline_roadmap"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "roadmap_swimlane"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "team_cards",
+      "role": "team_cards",
+      "ref_hints": [],
+      "infograpify_families": [
+        "org_team"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "team"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "tile_row",
+      "role": "tile_row",
+      "ref_hints": [],
+      "infograpify_families": [
+        "other"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "puzzle_pieces"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "timeline_rail",
+      "role": "timeline",
+      "ref_hints": [],
+      "infograpify_families": [
+        "timeline_roadmap"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "timeline",
+        "story_timeline"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "venn_duo",
+      "role": "venn_duo",
+      "ref_hints": [],
+      "infograpify_families": [
+        "chart_story"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "venn_overlap"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "vs_columns",
+      "role": "vs_columns",
+      "ref_hints": [],
+      "infograpify_families": [
+        "comparison_matrix"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "vs_scorecard"
+      ],
+      "builder": "custom"
+    },
+    {
+      "id": "waterfall_bars",
+      "role": "waterfall_bars",
+      "ref_hints": [],
+      "infograpify_families": [
+        "chart_story"
+      ],
+      "slots": [
+        "title",
+        "…"
+      ],
+      "chrome": [
+        "stage_metrics"
+      ],
+      "recipes": [
+        "waterfall_insight"
+      ],
+      "builder": "recipe_adapter"
     }
   ]
 }

@@ -1,0 +1,235 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BmcTitle",
+      "text": "Business model",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Bmc1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Partners",
+      "x": "2.2cm",
+      "y": "3.79cm",
+      "width": "9.66cm",
+      "height": "3.46cm",
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Bmc2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Activities",
+      "x": "12.11cm",
+      "y": "3.79cm",
+      "width": "9.66cm",
+      "height": "3.46cm",
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Bmc3",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "Value",
+      "x": "22.01cm",
+      "y": "3.79cm",
+      "width": "9.66cm",
+      "height": "3.46cm",
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Bmc4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Relationships",
+      "x": "2.2cm",
+      "y": "7.49cm",
+      "width": "9.66cm",
+      "height": "3.46cm",
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Bmc5",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Segments",
+      "x": "12.11cm",
+      "y": "7.49cm",
+      "width": "9.66cm",
+      "height": "3.46cm",
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Bmc6",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Resources",
+      "x": "22.01cm",
+      "y": "7.49cm",
+      "width": "9.66cm",
+      "height": "3.46cm",
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Bmc7",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Channels",
+      "x": "2.2cm",
+      "y": "11.2cm",
+      "width": "9.66cm",
+      "height": "3.46cm",
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Bmc8",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Costs",
+      "x": "12.11cm",
+      "y": "11.2cm",
+      "width": "9.66cm",
+      "height": "3.46cm",
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Bmc9",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Revenue",
+      "x": "22.01cm",
+      "y": "11.2cm",
+      "width": "9.66cm",
+      "height": "3.46cm",
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Value proposition is the only required block today."
+    }
+  }
+]

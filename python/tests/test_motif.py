@@ -1,4 +1,4 @@
-"""Visual motif catalog + builders (SmartArt-like originals)."""
+"""Visual motif catalog + builders (Infograpify structural coverage)."""
 
 from __future__ import annotations
 
@@ -6,8 +6,10 @@ import unittest
 from pathlib import Path
 
 from designmd_pptx.compile import compile_design_md
-from designmd_pptx.motif import catalog, list_motifs, motif_info, render_motif
+from designmd_pptx.motif import MOTIF_BUILDERS, catalog, list_motifs, motif_info, render_motif
+from designmd_pptx.motifs.coverage import RECIPE_TO_MOTIF, all_motif_ids
 from designmd_pptx.recipes import (
+    RECIPE_BUILDERS,
     recipe_before_after_slider,
     recipe_chevron_process,
     recipe_feature_cards,
@@ -19,27 +21,32 @@ FIXTURES = Path(__file__).resolve().parent.parent / "fixtures"
 
 
 class MotifCatalog(unittest.TestCase):
-    def test_catalog_lists_core_motifs(self) -> None:
+    def test_catalog_covers_infograpify_collapse(self) -> None:
         ids = list_motifs()
+        self.assertGreaterEqual(len(ids), 60)
         for required in (
             "split_hero", "card_row", "step_rail", "kpi_hero", "kpi_band",
             "stair_ascent", "check_stack", "tile_row", "sparse_hero",
             "funnel_cascade", "matrix_quad", "section_mark",
-            "org_cascade", "chevron_flow",
+            "org_cascade", "chevron_flow", "hub_orbit", "pyramid_stack",
+            "timeline_rail", "pricing_tiers", "canvas_bmc",
         ):
             self.assertIn(required, ids, required)
-        self.assertEqual(len(ids), 14)
         cat = catalog()
-        self.assertEqual(cat.get("schema"), 1)
+        self.assertIn(cat.get("schema"), (1, 2))
         self.assertIn("license_note", cat)
+        self.assertEqual(cat.get("infograpify_decks_collapsed"), 400)
         info = motif_info("card_row")
         self.assertIsNotNone(info)
         self.assertIn("feature_cards", info.get("recipes") or [])
-        self.assertIn("org_tree", (motif_info("org_cascade") or {}).get("recipes") or [])
-        self.assertIn(
-            "chevron_process",
-            (motif_info("chevron_flow") or {}).get("recipes") or [],
-        )
+
+    def test_every_recipe_maps_to_buildable_motif(self) -> None:
+        for recipe, mid in RECIPE_TO_MOTIF.items():
+            self.assertIn(recipe, RECIPE_BUILDERS, recipe)
+            self.assertIn(mid, MOTIF_BUILDERS, f"{recipe} → {mid}")
+        # coverage set equals builders for custom + recipe-backed
+        for mid in all_motif_ids():
+            self.assertIn(mid, MOTIF_BUILDERS, mid)
 
 
 class MotifRender(unittest.TestCase):
@@ -95,53 +102,16 @@ class MotifRender(unittest.TestCase):
 
     def test_unknown_motif_raises(self) -> None:
         with self.assertRaises(KeyError):
-            render_motif("not_a_real_motif", self.tokens, {})
+            render_motif("not_a_real_motif_xyz", self.tokens, {})
 
-    def test_new_motifs_emit_slides(self) -> None:
-        for mid, slots in (
-            ("sparse_hero", {"title": "T", "subtitle": "S", "meta": "M", "placement": "left"}),
-            ("kpi_band", {"title": "K", "kpis": [
-                {"value": "1", "label": "A"}, {"value": "2", "label": "B"},
-            ]}),
-            ("funnel_cascade", {"title": "F", "stages": [
-                {"label": "A", "value": "100%"},
-                {"label": "B", "value": "50%"},
-                {"label": "C", "value": "10%"},
-            ]}),
-            ("matrix_quad", {"title": "M", "quadrants": [
-                {"title": "Q1", "body": "a"}, {"title": "Q2", "body": "b"},
-                {"title": "Q3", "body": "c"}, {"title": "Q4", "body": "d"},
-            ]}),
-            ("section_mark", {"number": "01", "title": "Sec", "blurb": "Hi"}),
-            ("org_cascade", {
-                "title": "Org",
-                "root": {"name": "Lead", "role": "CEO"},
-                "reports": [
-                    {"name": "A", "role": "Eng"},
-                    {"name": "B", "role": "Design"},
-                ],
-            }),
-            ("chevron_flow", {
-                "title": "Flow",
-                "steps": [
-                    {"label": "One"}, {"label": "Two"},
-                    {"label": "Three"}, {"label": "Four"},
-                ],
-            }),
-            ("kpi_hero", {"value": "42", "label": "N", "context": "ctx"}),
-            ("stair_ascent", {"title": "Up", "steps": [
-                {"label": "A"}, {"label": "B"}, {"label": "C"},
-            ]}),
-            ("check_stack", {"title": "Rules", "items": [
-                {"label": "One", "done": True},
-                {"label": "Two", "done": False},
-            ]}),
-            ("tile_row", {"title": "Tiles", "items": [
-                {"label": "A"}, {"label": "B"}, {"label": "C"},
-            ]}),
-        ):
-            ops = render_motif(mid, self.tokens, slots)
-            self.assertTrue(any(o.get("type") == "slide" for o in ops), mid)
+    def test_all_builders_emit_slides(self) -> None:
+        """Every registered motif must produce a slide op (Gate 0)."""
+        for mid in sorted(MOTIF_BUILDERS):
+            with self.subTest(mid=mid):
+                ops = render_motif(mid, self.tokens, {"title": mid})
+                self.assertTrue(
+                    any(o.get("type") == "slide" for o in ops), mid,
+                )
 
     def test_org_and_chevron_recipes_delegate(self) -> None:
         org = recipe_org_tree(self.tokens, {
@@ -158,6 +128,22 @@ class MotifRender(unittest.TestCase):
         })
         names2 = [o.get("props", {}).get("name") for o in ch if o.get("type") == "shape"]
         self.assertTrue(any(n and n.startswith("Chevron") for n in names2))
+
+    def test_structural_family_samples(self) -> None:
+        samples = {
+            "hub_orbit": {"title": "C", "hub": "Core", "steps": [{"label": "A"}] * 4},
+            "pyramid_stack": {"title": "P", "levels": [{"label": "L1"}, {"label": "L2"}, {"label": "L3"}]},
+            "timeline_rail": {"title": "T", "steps": [{"label": "Q1"}, {"label": "Q2"}, {"label": "Q3"}]},
+            "pricing_tiers": {"title": "$$", "tiers": [{"name": "A", "price": "$1"}]},
+            "kpi_grid": {"title": "K", "kpis": [{"value": "1", "label": "a"}] * 4},
+            "canvas_bmc": {"title": "BMC"},
+            "risk_heat": {"title": "Risk"},
+            "venn_duo": {"title": "V", "left": "A", "right": "B", "overlap": "C"},
+        }
+        for mid, slots in samples.items():
+            with self.subTest(mid=mid):
+                ops = render_motif(mid, self.tokens, slots)
+                self.assertTrue(any(o.get("type") == "slide" for o in ops), mid)
 
 
 if __name__ == "__main__":

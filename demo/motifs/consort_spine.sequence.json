@@ -1,0 +1,303 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "ConsortTitle",
+      "text": "Consort Spine",
+      "x": "5.2cm",
+      "y": "1cm",
+      "width": "23.47cm",
+      "height": "1.84cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "name": "ConsortBox1",
+      "x": "5.2cm",
+      "y": "3.09cm",
+      "width": "23.47cm",
+      "height": "3.68cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "ConsortLabel1",
+      "text": "Assessed for eligibility",
+      "x": "5.65cm",
+      "y": "3.29cm",
+      "width": "22.57cm",
+      "height": "1.04cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "ConsortN1",
+      "text": "N=420",
+      "x": "5.65cm",
+      "y": "4.41cm",
+      "width": "22.57cm",
+      "height": "0.7cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "name": "ConsortBox2",
+      "x": "5.2cm",
+      "y": "6.95cm",
+      "width": "23.47cm",
+      "height": "3.68cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "ConsortLabel2",
+      "text": "Randomized",
+      "x": "5.65cm",
+      "y": "7.15cm",
+      "width": "22.57cm",
+      "height": "1.04cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "ConsortN2",
+      "text": "N=300",
+      "x": "5.65cm",
+      "y": "8.27cm",
+      "width": "22.57cm",
+      "height": "0.7cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "name": "ConsortBox3",
+      "x": "5.2cm",
+      "y": "10.81cm",
+      "width": "23.47cm",
+      "height": "3.68cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "ConsortLabel3",
+      "text": "Allocated to intervention",
+      "x": "5.65cm",
+      "y": "11.01cm",
+      "width": "22.57cm",
+      "height": "1.04cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "ConsortN3",
+      "text": "N=150",
+      "x": "5.65cm",
+      "y": "12.13cm",
+      "width": "22.57cm",
+      "height": "0.7cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "name": "ConsortBox4",
+      "x": "5.2cm",
+      "y": "14.67cm",
+      "width": "23.47cm",
+      "height": "3.68cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "ConsortLabel4",
+      "text": "Analyzed",
+      "x": "5.65cm",
+      "y": "14.87cm",
+      "width": "22.57cm",
+      "height": "1.04cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "ConsortN4",
+      "text": "N=148",
+      "x": "5.65cm",
+      "y": "15.99cm",
+      "width": "22.57cm",
+      "height": "0.7cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "ConsortNote4",
+      "text": "2 lost to follow-up",
+      "x": "5.65cm",
+      "y": "16.77cm",
+      "width": "22.57cm",
+      "height": "0.7cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ConsortLink1",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "16.88cm",
+      "y": "6.77cm",
+      "width": "0.12cm",
+      "height": "0.18cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ConsortLink2",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "16.88cm",
+      "y": "10.63cm",
+      "width": "0.12cm",
+      "height": "0.18cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ConsortLink3",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "16.88cm",
+      "y": "14.49cm",
+      "width": "0.12cm",
+      "height": "0.18cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Walk top→bottom; call out each attrition reason."
+    }
+  }
+]

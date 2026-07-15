@@ -141,6 +141,73 @@ def _sample_slots(motif_id: str) -> dict:
                 {"label": "Gate 3", "value": "Ship"},
             ],
         },
+        "hub_orbit": {
+            "title": "Loop",
+            "hub": "Core",
+            "steps": [{"label": s} for s in ("Plan", "Do", "Check", "Act")],
+        },
+        "pyramid_stack": {
+            "title": "Hierarchy",
+            "levels": [
+                {"label": "Strategy"},
+                {"label": "Systems"},
+                {"label": "Execution"},
+            ],
+        },
+        "timeline_rail": {
+            "title": "Milestones",
+            "steps": [
+                {"label": "Q1", "detail": "Discover"},
+                {"label": "Q2", "detail": "Build"},
+                {"label": "Q3", "detail": "Ship"},
+                {"label": "Q4", "detail": "Scale"},
+            ],
+        },
+        "pricing_tiers": {
+            "title": "Plans",
+            "tiers": [
+                {"name": "Starter", "price": "$9", "blurb": "Solo"},
+                {"name": "Team", "price": "$29", "blurb": "Squad", "featured": True},
+                {"name": "Enterprise", "price": "Talk", "blurb": "Scale"},
+            ],
+        },
+        "kpi_grid": {
+            "title": "Dashboard",
+            "kpis": [
+                {"value": "12", "label": "Motifs"},
+                {"value": "75", "label": "Recipes"},
+                {"value": "13", "label": "Families"},
+                {"value": "400", "label": "Ref decks"},
+                {"value": "2", "label": "Backends"},
+                {"value": "0", "label": "Vendor bytes"},
+            ],
+        },
+        "canvas_bmc": {"title": "Business model"},
+        "risk_heat": {"title": "Risk heat"},
+        "team_cards": {
+            "title": "Team",
+            "members": [
+                {"name": "Alex", "role": "Eng"},
+                {"name": "Sam", "role": "Design"},
+                {"name": "Riley", "role": "GTM"},
+            ],
+        },
+        "pillar_band": {
+            "title": "Pillars",
+            "pillars": [
+                {"label": "Legacy"},
+                {"label": "Official"},
+                {"label": "Offline"},
+            ],
+        },
+        "agenda_list": {
+            "title": "Agenda",
+            "items": ["Contract", "Motifs", "Gates", "Ask"],
+        },
+        "close_mark": {
+            "title": "Next step",
+            "body": "python -m designmd_pptx doctor --ensure",
+        },
     }
     base = samples.get(motif_id)
     if base is not None:

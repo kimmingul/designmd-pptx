@@ -1,0 +1,421 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "ForestTitle",
+      "text": "Forest Ci",
+      "x": "2.2cm",
+      "y": "1.1cm",
+      "width": "29.47cm",
+      "height": "1.84cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "ForestLabel1",
+      "text": "Study A",
+      "x": "2.2cm",
+      "y": "3.29cm",
+      "width": "8.55cm",
+      "height": "0.96cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "rect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "ForestTrack1",
+      "x": "11.1cm",
+      "y": "3.29cm",
+      "width": "12.44cm",
+      "height": "3.51cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "right",
+      "fill": "none",
+      "name": "ForestText1",
+      "text": "0.82 (0.60–1.10)",
+      "x": "23.89cm",
+      "y": "3.29cm",
+      "width": "7.78cm",
+      "height": "0.87cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "ForestLabel2",
+      "text": "Study B",
+      "x": "2.2cm",
+      "y": "7.07cm",
+      "width": "8.55cm",
+      "height": "0.96cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "rect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "ForestTrack2",
+      "x": "11.1cm",
+      "y": "7.07cm",
+      "width": "12.44cm",
+      "height": "3.51cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "right",
+      "fill": "none",
+      "name": "ForestText2",
+      "text": "0.70 (0.55–0.90)",
+      "x": "23.89cm",
+      "y": "7.07cm",
+      "width": "7.78cm",
+      "height": "0.87cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "ForestLabel3",
+      "text": "Study C",
+      "x": "2.2cm",
+      "y": "10.86cm",
+      "width": "8.55cm",
+      "height": "0.96cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "rect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "ForestTrack3",
+      "x": "11.1cm",
+      "y": "10.86cm",
+      "width": "12.44cm",
+      "height": "3.51cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "right",
+      "fill": "none",
+      "name": "ForestText3",
+      "text": "1.05 (0.82–1.35)",
+      "x": "23.89cm",
+      "y": "10.86cm",
+      "width": "7.78cm",
+      "height": "0.87cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "ForestLabel4",
+      "text": "Pooled",
+      "x": "2.2cm",
+      "y": "14.64cm",
+      "width": "8.55cm",
+      "height": "0.96cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "rect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "ForestTrack4",
+      "x": "11.1cm",
+      "y": "14.64cm",
+      "width": "12.44cm",
+      "height": "3.51cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "right",
+      "fill": "none",
+      "name": "ForestText4",
+      "text": "0.80 (0.67–0.95)",
+      "x": "23.89cm",
+      "y": "14.64cm",
+      "width": "7.78cm",
+      "height": "0.87cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ForestBar1",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "14.34cm",
+      "y": "4.96cm",
+      "width": "3.58cm",
+      "height": "0.16cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ForestDot1",
+      "preset": "ellipse",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "15.95cm",
+      "y": "4.87cm",
+      "width": "0.35cm",
+      "height": "0.35cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ForestNull1",
+      "preset": "rect",
+      "fill": "3A3A3C",
+      "line": "none",
+      "x": "17.29cm",
+      "y": "3.44cm",
+      "width": "0.06cm",
+      "height": "3.21cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ForestBar2",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "13.74cm",
+      "y": "8.75cm",
+      "width": "2.99cm",
+      "height": "0.16cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ForestDot2",
+      "preset": "ellipse",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "15.06cm",
+      "y": "8.65cm",
+      "width": "0.35cm",
+      "height": "0.35cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ForestNull2",
+      "preset": "rect",
+      "fill": "3A3A3C",
+      "line": "none",
+      "x": "17.29cm",
+      "y": "7.22cm",
+      "width": "0.06cm",
+      "height": "3.21cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ForestBar3",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "16.13cm",
+      "y": "12.53cm",
+      "width": "2.99cm",
+      "height": "0.16cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ForestDot3",
+      "preset": "ellipse",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "17.45cm",
+      "y": "12.44cm",
+      "width": "0.35cm",
+      "height": "0.35cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ForestNull3",
+      "preset": "rect",
+      "fill": "3A3A3C",
+      "line": "none",
+      "x": "17.29cm",
+      "y": "11.01cm",
+      "width": "0.06cm",
+      "height": "3.21cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ForestBar4",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "14.94cm",
+      "y": "16.32cm",
+      "width": "2.09cm",
+      "height": "0.16cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ForestDot4",
+      "preset": "ellipse",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "15.84cm",
+      "y": "16.22cm",
+      "width": "0.35cm",
+      "height": "0.35cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ForestNull4",
+      "preset": "rect",
+      "fill": "3A3A3C",
+      "line": "none",
+      "x": "17.29cm",
+      "y": "14.79cm",
+      "width": "0.06cm",
+      "height": "3.21cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Read left labels, then CI bars vs the null line."
+    }
+  }
+]

@@ -27,9 +27,9 @@
         "title": "At a glance",
         "kpis": [
           {
-            "value": "14",
+            "value": "66",
             "label": "Motifs",
-            "chip": "v1.2"
+            "chip": "v2"
           },
           {
             "value": "75",

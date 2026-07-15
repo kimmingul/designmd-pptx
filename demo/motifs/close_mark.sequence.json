@@ -1,0 +1,54 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CloseTitle",
+      "text": "Next step",
+      "x": "2.2cm",
+      "y": "6.5cm",
+      "width": "29.47cm",
+      "height": "3.2cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CloseBody",
+      "text": "python -m designmd_pptx doctor --ensure",
+      "x": "2.2cm",
+      "y": "10.2cm",
+      "width": "29.47cm",
+      "height": "2.2cm",
+      "font": "Arial",
+      "size": "20",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "One ask. Stop."
+    }
+  }
+]

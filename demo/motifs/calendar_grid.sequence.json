@@ -1,0 +1,457 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalTitle",
+      "text": "Calendar Grid",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "4.86cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal2",
+      "preset": "roundRect",
+      "fill": "91B7FF",
+      "line": "none",
+      "x": "6.43cm",
+      "y": "4.86cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal3",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "10.65cm",
+      "y": "4.86cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal4",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "14.88cm",
+      "y": "4.86cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal5",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "19.11cm",
+      "y": "4.86cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal6",
+      "preset": "roundRect",
+      "fill": "91B7FF",
+      "line": "none",
+      "x": "23.34cm",
+      "y": "4.86cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal7",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "27.56cm",
+      "y": "4.86cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal8",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "7.37cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal9",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "6.43cm",
+      "y": "7.37cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal10",
+      "preset": "roundRect",
+      "fill": "91B7FF",
+      "line": "none",
+      "x": "10.65cm",
+      "y": "7.37cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal11",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "14.88cm",
+      "y": "7.37cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal12",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "19.11cm",
+      "y": "7.37cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal13",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "23.34cm",
+      "y": "7.37cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal14",
+      "preset": "roundRect",
+      "fill": "91B7FF",
+      "line": "none",
+      "x": "27.56cm",
+      "y": "7.37cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal15",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "9.89cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal16",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "6.43cm",
+      "y": "9.89cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal17",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "10.65cm",
+      "y": "9.89cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal18",
+      "preset": "roundRect",
+      "fill": "91B7FF",
+      "line": "none",
+      "x": "14.88cm",
+      "y": "9.89cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal19",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "19.11cm",
+      "y": "9.89cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal20",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "23.34cm",
+      "y": "9.89cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal21",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "27.56cm",
+      "y": "9.89cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal22",
+      "preset": "roundRect",
+      "fill": "91B7FF",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "12.4cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal23",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "6.43cm",
+      "y": "12.4cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal24",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "10.65cm",
+      "y": "12.4cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal25",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "14.88cm",
+      "y": "12.4cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal26",
+      "preset": "roundRect",
+      "fill": "91B7FF",
+      "line": "none",
+      "x": "19.11cm",
+      "y": "12.4cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal27",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "23.34cm",
+      "y": "12.4cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Cal28",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "27.56cm",
+      "y": "12.4cm",
+      "width": "4.11cm",
+      "height": "2.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Point at the densest week."
+    }
+  }
+]

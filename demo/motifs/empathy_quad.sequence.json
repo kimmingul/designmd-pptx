@@ -1,0 +1,237 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "MatrixTitle",
+      "text": "Empathy Quad",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Quad1Bg",
+      "x": "2.2cm",
+      "y": "3.6cm",
+      "width": "14.18cm",
+      "height": "6.08cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Quad1Title",
+      "text": "Says",
+      "x": "3.03cm",
+      "y": "4.37cm",
+      "width": "12.54cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Quad1Body",
+      "text": "",
+      "x": "3.03cm",
+      "y": "6.02cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Quad2Bg",
+      "x": "17.48cm",
+      "y": "3.6cm",
+      "width": "14.18cm",
+      "height": "6.08cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Quad2Title",
+      "text": "Thinks",
+      "x": "18.31cm",
+      "y": "4.37cm",
+      "width": "12.54cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Quad2Body",
+      "text": "",
+      "x": "18.31cm",
+      "y": "6.02cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Quad3Bg",
+      "x": "2.2cm",
+      "y": "10.77cm",
+      "width": "14.18cm",
+      "height": "6.08cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Quad3Title",
+      "text": "Does",
+      "x": "3.03cm",
+      "y": "11.54cm",
+      "width": "12.54cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Quad3Body",
+      "text": "",
+      "x": "3.03cm",
+      "y": "13.2cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Quad4Bg",
+      "x": "17.48cm",
+      "y": "10.77cm",
+      "width": "14.18cm",
+      "height": "6.08cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Quad4Title",
+      "text": "Feels",
+      "x": "18.31cm",
+      "y": "11.54cm",
+      "width": "12.54cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Quad4Body",
+      "text": "",
+      "x": "18.31cm",
+      "y": "13.2cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "One insight that changes the design."
+    }
+  }
+]
