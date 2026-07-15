@@ -89,6 +89,7 @@ def _sample_slots(motif_id: str) -> dict:
                 {"title": "Maintain", "body": "Low value, high fit"},
                 {"title": "Exit", "body": "Low value, low fit"},
             ],
+            "axes": {"x": "Fit →", "y": "Value ↑"},
         },
         "stair_ascent": {
             "title": "Maturity",
@@ -122,8 +123,30 @@ def _sample_slots(motif_id: str) -> dict:
             "title": "How it works",
             "blurb": "Motifs carry chrome; DESIGN.md carries brand.",
         },
+        "org_cascade": {
+            "title": "Delivery org",
+            "root": {"name": "Product lead", "role": "Owns outcomes"},
+            "reports": [
+                {"name": "Design", "role": "Systems"},
+                {"name": "Eng", "role": "Platform"},
+                {"name": "GTM", "role": "Narrative"},
+            ],
+        },
+        "chevron_flow": {
+            "title": "Ship path",
+            "steps": [
+                {"label": "Brief", "value": "MD"},
+                {"label": "Compose", "value": "Spec"},
+                {"label": "Apply", "value": "PPTX"},
+                {"label": "Gate 3", "value": "Ship"},
+            ],
+        },
     }
-    return samples.get(motif_id, {"title": motif_id})
+    base = samples.get(motif_id)
+    if base is not None:
+        return base
+    # Fallback keeps goldens generating even for new catalog ids
+    return {"title": motif_id.replace("_", " ").title()}
 
 
 def main() -> int:

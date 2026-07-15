@@ -37,10 +37,10 @@ scaffold / apply / Gate 3
 
 Hard rules: [infograpify-reference.md](infograpify-reference.md).
 
-## Catalog (v1 → v1.1)
+## Catalog (v1.2 — 14 motifs)
 
 Driven by local `.ref-analysis` layout_hints (kpi_band, card_row, sparse_hero,
-matrix_like, connectors) — **filenames/structure only**.
+matrix_like, connectors, hierarchy) — **filenames/structure only**.
 
 | Motif id | Role | ref hint | Recipes |
 |----------|------|----------|---------|
@@ -56,15 +56,26 @@ matrix_like, connectors) — **filenames/structure only**.
 | `stair_ascent` | Rising steps | hierarchy | `stairs_ascent` |
 | `check_stack` | Checklist | — | `checklist_board` |
 | `tile_row` | Equal tiles | card_row | `puzzle_pieces` |
+| `org_cascade` | Root + reports | hierarchy | `org_tree` |
+| `chevron_flow` | Chevron train | process_flow | `chevron_process` |
 
 Machine-readable: `python/designmd_pptx/motifs/catalog.json`.
 
-### Golden one-pagers
+### Golden one-pagers (full catalog)
+
+Every catalog motif has a synthetic one-pager under `demo/motifs/`:
+
+| Artifact | Tracked? |
+|----------|----------|
+| `<id>.sequence.json` | yes |
+| `<id>.contact.png` | yes |
+| `<id>.pptx` | local only (`*.pptx` gitignored except best/intro) |
 
 ```bash
 export OFFICECLI_LEGACY_BIN=…   # legacy binary
 PYTHONPATH=python python scripts/generate_motif_goldens.py
-# → demo/motifs/<id>.pptx + contact screenshots
+# → demo/motifs/<id>.pptx + .sequence.json + .contact.png for all 14
+PYTHONPATH=python python scripts/generate_motif_goldens.py --motifs org_cascade,chevron_flow
 ```
 
 ## API

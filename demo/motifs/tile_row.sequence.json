@@ -13,8 +13,8 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "ChevronTitle",
-      "text": "Process",
+      "name": "TileTitle",
+      "text": "Pieces",
       "x": "2.2cm",
       "y": "1.21cm",
       "width": "29.47cm",
@@ -31,85 +31,85 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "Chevron1",
-      "preset": "chevron",
-      "fill": "0B5FFF",
-      "line": "none",
-      "text": "Discover",
-      "x": "2.2cm",
-      "y": "6.21cm",
-      "width": "7.78cm",
-      "height": "5.2cm",
-      "font": "Arial",
-      "size": "22",
-      "bold": "true",
-      "color": "FFFFFF",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "Chevron2",
-      "preset": "chevron",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Design",
-      "x": "9.43cm",
-      "y": "6.21cm",
-      "width": "7.78cm",
-      "height": "5.2cm",
-      "font": "Arial",
-      "size": "22",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "Chevron3",
-      "preset": "chevron",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Build",
-      "x": "16.66cm",
-      "y": "6.21cm",
-      "width": "7.78cm",
-      "height": "5.2cm",
-      "font": "Arial",
-      "size": "22",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "Chevron4",
+      "name": "Tile1",
       "preset": "roundRect",
       "fill": "0B5FFF",
       "line": "none",
-      "text": "Ship",
-      "x": "23.89cm",
-      "y": "6.21cm",
-      "width": "7.78cm",
-      "height": "5.2cm",
+      "text": "Compile",
+      "x": "2.2cm",
+      "y": "5.21cm",
+      "width": "6.54cm",
+      "height": "9.01cm",
       "font": "Arial",
       "size": "22",
       "bold": "true",
       "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Tile2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Compose",
+      "x": "9.84cm",
+      "y": "5.21cm",
+      "width": "6.54cm",
+      "height": "9.01cm",
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Tile3",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "Apply",
+      "x": "17.48cm",
+      "y": "5.21cm",
+      "width": "6.54cm",
+      "height": "9.01cm",
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "Tile4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "QA",
+      "x": "25.13cm",
+      "y": "5.21cm",
+      "width": "6.54cm",
+      "height": "9.01cm",
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "F5F5F7",
       "align": "center",
       "valign": "middle"
     }
@@ -119,7 +119,7 @@
     "parent": "/slide[last()]",
     "type": "notes",
     "props": {
-      "text": "Walk left→right; the last chevron is the outcome."
+      "text": "Name the piece that is under-invested."
     }
   }
 ]

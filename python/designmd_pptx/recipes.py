@@ -3186,47 +3186,21 @@ def _norm_steps(raw: Any, *, min_n: int = 3, max_n: int = 6,
 
 
 def recipe_chevron_process(tokens: dict, content: dict | None = None) -> list[dict]:
-    """Horizontal chevron / arrow process (Wave 1) — 3–6 stepped stages."""
-    b = _base_props(tokens)
-    c, t = b["c"], b["t"]
+    """Horizontal chevron process — motif ``chevron_flow``."""
+    from .motif import render_motif
+
     content = content or {}
-    title = content.get("title", "Process")
-    steps = _norm_steps(content.get("steps") or content.get("stages"), min_n=3, max_n=6,
-                        defaults=[{"label": s} for s in ("Discover", "Design", "Build", "Ship")])
-    n = len(steps)
-    m, gap = b["margin"], 0.2
-    usable = 33.87 - 2 * m
-    # Overlap chevrons slightly so the point reads as a chevron train.
-    step_w = (usable + (n - 1) * 0.55) / n
-    y, h = 7.2, 4.8
-    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "ChevronTitle", title)]
-    for i, st in enumerate(steps):
-        x = m + i * (step_w - 0.55)
-        fill = c["accent"] if i == 0 or i == n - 1 else c["surface"]
-        tc = c["on_accent"] if fill == c["accent"] else c["text_on_surface"]
-        preset = "chevron" if i < n - 1 else b["preset"]
-        # Some officecli builds lack chevron — rightArrow is the portable fallback.
-        text = st["label"]
-        if st.get("value"):
-            text = f"{st['label']}\n{st['value']}"
-        ops.append({
-            "command": "add", "parent": "/slide[last()]", "type": "shape",
-            "props": {
-                "name": f"Chevron{i + 1}", "preset": preset,
-                "fill": fill, "line": "none",
-                "text": text,
-                "x": _cm(x), "y": _cm(y), "width": _cm(step_w), "height": _cm(h),
-                "font": t["heading_font"],
-                "size": str(max(14, min(22, t["section_pt"] - 4))),
-                "bold": "true", "color": tc, "align": "center", "valign": "middle",
-            },
-        })
-    ops.append({
-        "command": "add", "parent": "/slide[last()]", "type": "notes",
-        "props": {"text": content.get(
-            "notes", "Walk left→right; the last chevron is the outcome.")},
+    steps = _norm_steps(
+        content.get("steps") or content.get("stages"),
+        min_n=3, max_n=6,
+        defaults=[{"label": s} for s in ("Discover", "Design", "Build", "Ship")],
+    )
+    return render_motif("chevron_flow", tokens, {
+        "title": content.get("title", "Process"),
+        "steps": steps,
+        "notes": content.get(
+            "notes", "Walk left→right; the last chevron is the outcome."),
     })
-    return ops
 
 
 def recipe_cycle_loop(tokens: dict, content: dict | None = None) -> list[dict]:
@@ -3484,75 +3458,23 @@ def recipe_gantt_bars(tokens: dict, content: dict | None = None) -> list[dict]:
 
 
 def recipe_org_tree(tokens: dict, content: dict | None = None) -> list[dict]:
-    """Org tree (Wave 1) — root + up to 2 levels of reports."""
-    b = _base_props(tokens)
-    c, t = b["c"], b["t"]
+    """Org tree — motif ``org_cascade`` (root + report row)."""
+    from .motif import render_motif
+
     content = content or {}
-    title = content.get("title", "Organization")
     root = content.get("root") or content.get("lead") or {
         "name": "Leader", "role": "Role",
     }
     if not isinstance(root, dict):
         root = {"name": str(root), "role": ""}
-    reports = content.get("reports") or content.get("children") or content.get("members") or [
-        {"name": "A", "role": "Role A"},
-        {"name": "B", "role": "Role B"},
-        {"name": "C", "role": "Role C"},
-    ]
-    if not isinstance(reports, list):
-        reports = []
-    reports = reports[:5]
-    m = b["margin"]
-    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "OrgTitle", title)]
-    # Root card
-    rw, rh = 10.0, 2.8
-    rx = (33.87 - rw) / 2
-    ops.append({
-        "command": "add", "parent": "/slide[last()]", "type": "shape",
-        "props": {
-            "name": "OrgRoot", "preset": b["preset"],
-            "fill": c["accent"], "line": "none",
-            "text": f"{root.get('name', 'Leader')}\n{root.get('role', '')}".strip(),
-            "x": _cm(rx), "y": "3.6cm", "width": _cm(rw), "height": _cm(rh),
-            "font": t["heading_font"], "size": str(max(16, t["section_pt"] - 4)),
-            "bold": "true", "color": c["on_accent"],
-            "align": "center", "valign": "middle",
-        },
+    reports = content.get("reports") or content.get("children") or content.get("members")
+    return render_motif("org_cascade", tokens, {
+        "title": content.get("title", "Organization"),
+        "root": root,
+        "reports": reports,
+        "notes": content.get(
+            "notes", "State the decision right of the root node."),
     })
-    # Vertical spine
-    ops.append({
-        "command": "add", "parent": "/slide[last()]", "type": "shape",
-        "props": {
-            "name": "OrgSpine", "preset": "rect",
-            "fill": c["muted"], "line": "none",
-            "x": "16.75cm", "y": "6.5cm", "width": "0.12cm", "height": "1.2cm",
-        },
-    })
-    n = max(1, len(reports))
-    col_w, xs = _grid_n(n, m, b["gap"], max_n=5)
-    y = 8.0
-    for i, rep in enumerate(reports):
-        if isinstance(rep, dict):
-            text = f"{rep.get('name', '—')}\n{rep.get('role', '')}".strip()
-        else:
-            text = str(rep)
-        ops.append({
-            "command": "add", "parent": "/slide[last()]", "type": "shape",
-            "props": {
-                "name": f"OrgChild{i + 1}", "preset": b["preset"],
-                "fill": c["surface"], "line": "none", "text": text,
-                "x": _cm(xs[i]), "y": _cm(y), "width": _cm(col_w), "height": "3.6cm",
-                "font": t["body_font"], "size": str(max(14, min(18, t["body_pt"]))),
-                "bold": "true", "color": c["text_on_surface"],
-                "align": "center", "valign": "middle",
-            },
-        })
-    ops.append({
-        "command": "add", "parent": "/slide[last()]", "type": "notes",
-        "props": {"text": content.get(
-            "notes", "State the decision right of the root node.")},
-    })
-    return ops
 
 
 def recipe_persona_card(tokens: dict, content: dict | None = None) -> list[dict]:

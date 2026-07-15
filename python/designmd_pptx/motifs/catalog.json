@@ -9,7 +9,8 @@
     "sparse_hero",
     "matrix_like",
     "has_connectors",
-    "process_flow"
+    "process_flow",
+    "hierarchy"
   ],
   "motifs": [
     {
@@ -119,6 +120,24 @@
       "slots": ["number", "title", "blurb"],
       "chrome": ["accent_bar", "large_index", "left_stack"],
       "recipes": ["section_opener_numbered"]
+    },
+    {
+      "id": "org_cascade",
+      "role": "org_hierarchy",
+      "ref_hints": ["hierarchy", "process_flow"],
+      "infograpify_families": ["hierarchy", "org_chart"],
+      "slots": ["title", "root.name", "root.role", "reports[].name", "reports[].role"],
+      "chrome": ["accent_root", "spine_bar", "equal_child_columns", "stem_drops"],
+      "recipes": ["org_tree"]
+    },
+    {
+      "id": "chevron_flow",
+      "role": "chevron_process",
+      "ref_hints": ["process_flow", "has_connectors"],
+      "infograpify_families": ["process_flow"],
+      "slots": ["title", "steps[].label", "steps[].value"],
+      "chrome": ["overlapping_chevrons", "accent_ends", "destination_card"],
+      "recipes": ["chevron_process"]
     }
   ]
 }

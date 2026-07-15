@@ -9,7 +9,9 @@ from designmd_pptx.compile import compile_design_md
 from designmd_pptx.motif import catalog, list_motifs, motif_info, render_motif
 from designmd_pptx.recipes import (
     recipe_before_after_slider,
+    recipe_chevron_process,
     recipe_feature_cards,
+    recipe_org_tree,
     recipe_process,
 )
 
@@ -23,14 +25,21 @@ class MotifCatalog(unittest.TestCase):
             "split_hero", "card_row", "step_rail", "kpi_hero", "kpi_band",
             "stair_ascent", "check_stack", "tile_row", "sparse_hero",
             "funnel_cascade", "matrix_quad", "section_mark",
+            "org_cascade", "chevron_flow",
         ):
             self.assertIn(required, ids, required)
+        self.assertEqual(len(ids), 14)
         cat = catalog()
         self.assertEqual(cat.get("schema"), 1)
         self.assertIn("license_note", cat)
         info = motif_info("card_row")
         self.assertIsNotNone(info)
         self.assertIn("feature_cards", info.get("recipes") or [])
+        self.assertIn("org_tree", (motif_info("org_cascade") or {}).get("recipes") or [])
+        self.assertIn(
+            "chevron_process",
+            (motif_info("chevron_flow") or {}).get("recipes") or [],
+        )
 
 
 class MotifRender(unittest.TestCase):
@@ -104,9 +113,51 @@ class MotifRender(unittest.TestCase):
                 {"title": "Q3", "body": "c"}, {"title": "Q4", "body": "d"},
             ]}),
             ("section_mark", {"number": "01", "title": "Sec", "blurb": "Hi"}),
+            ("org_cascade", {
+                "title": "Org",
+                "root": {"name": "Lead", "role": "CEO"},
+                "reports": [
+                    {"name": "A", "role": "Eng"},
+                    {"name": "B", "role": "Design"},
+                ],
+            }),
+            ("chevron_flow", {
+                "title": "Flow",
+                "steps": [
+                    {"label": "One"}, {"label": "Two"},
+                    {"label": "Three"}, {"label": "Four"},
+                ],
+            }),
+            ("kpi_hero", {"value": "42", "label": "N", "context": "ctx"}),
+            ("stair_ascent", {"title": "Up", "steps": [
+                {"label": "A"}, {"label": "B"}, {"label": "C"},
+            ]}),
+            ("check_stack", {"title": "Rules", "items": [
+                {"label": "One", "done": True},
+                {"label": "Two", "done": False},
+            ]}),
+            ("tile_row", {"title": "Tiles", "items": [
+                {"label": "A"}, {"label": "B"}, {"label": "C"},
+            ]}),
         ):
             ops = render_motif(mid, self.tokens, slots)
             self.assertTrue(any(o.get("type") == "slide" for o in ops), mid)
+
+    def test_org_and_chevron_recipes_delegate(self) -> None:
+        org = recipe_org_tree(self.tokens, {
+            "title": "Team",
+            "root": {"name": "Min", "role": "Lead"},
+            "reports": [{"name": "A", "role": "R"}],
+        })
+        names = [o.get("props", {}).get("name") for o in org if o.get("type") == "shape"]
+        self.assertIn("OrgRoot", names)
+        self.assertTrue(any(n and n.startswith("OrgChild") for n in names))
+        ch = recipe_chevron_process(self.tokens, {
+            "title": "Path",
+            "steps": [{"label": "A"}, {"label": "B"}, {"label": "C"}],
+        })
+        names2 = [o.get("props", {}).get("name") for o in ch if o.get("type") == "shape"]
+        self.assertTrue(any(n and n.startswith("Chevron") for n in names2))
 
 
 if __name__ == "__main__":

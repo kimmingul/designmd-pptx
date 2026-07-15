@@ -928,6 +928,221 @@ def build_section_mark(tokens: dict[str, Any], slots: dict[str, Any]) -> list[di
     return ops
 
 
+def build_org_cascade(tokens: dict[str, Any], slots: dict[str, Any]) -> list[dict[str, Any]]:
+    """Org hierarchy — root accent + report row (ref: hierarchy / process_flow).
+
+    Geometry is fixed chrome (not flex): spine and equal child columns so the
+    cascade reads as structure, not a flat card grid.
+    """
+    st = UI.stage_metrics(tokens)
+    c = st.c
+    title = str(slots.get("title") or "Organization")
+    root = slots.get("root") or slots.get("lead") or {"name": "Leader", "role": "Role"}
+    if not isinstance(root, dict):
+        root = {"name": str(root), "role": ""}
+    reports = slots.get("reports") or slots.get("children") or slots.get("members") or []
+    if not isinstance(reports, list):
+        reports = []
+    reports = list(reports)[:5]
+    if not reports:
+        reports = [
+            {"name": "A", "role": "Role A"},
+            {"name": "B", "role": "Role B"},
+            {"name": "C", "role": "Role C"},
+        ]
+    m = st.margin
+    band_y, band_h = UI.content_band_y_h(
+        st, fraction=0.82, min_h=9.0, max_h=12.5, settle=0.12)
+    root_h = min(3.0, max(2.4, band_h * 0.24))
+    root_w = min(12.0, st.usable_w * 0.42)
+    root_x = m + (st.usable_w - root_w) / 2
+    root_y = band_y
+    spine_h = max(0.9, st.gap * 1.1)
+    spine_y = root_y + root_h
+    child_y = spine_y + spine_h + 0.15
+    child_h = max(3.2, band_y + band_h - child_y)
+    n = len(reports)
+    gap = st.gap * 0.85
+    col_w = (st.usable_w - (n - 1) * gap) / n
+    xs = [m + i * (col_w + gap) for i in range(n)]
+    root_name = str(root.get("name") or root.get("label") or "Leader")
+    root_role = str(root.get("role") or root.get("title") or "")
+    root_text = f"{root_name}\n{root_role}".strip() if root_role else root_name
+    pt_root = max(16, min(22, st.section_pt - 2))
+    pt_child = max(14, min(18, st.body_pt))
+
+    ops: list[dict[str, Any]] = [
+        {
+            "command": "add", "parent": "/", "type": "slide",
+            "props": {"layout": "blank", "background": c["content_background"]},
+        },
+        {
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": "OrgTitle", "text": title,
+                "x": UI.cm(m),
+                "y": UI.cm(max(1.15, m * 0.55)),
+                "width": UI.cm(st.usable_w),
+                "height": UI.cm(st.title_band),
+                "font": st.heading_font, "size": str(st.title_pt),
+                "bold": "true", "color": c.get("text_on_content") or c["text"],
+                "fill": "none",
+            },
+        },
+        {
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": "OrgRoot", "preset": st.preset,
+                "fill": c["accent"], "line": "none", "text": root_text,
+                "x": UI.cm(root_x), "y": UI.cm(root_y),
+                "width": UI.cm(root_w), "height": UI.cm(root_h),
+                "font": st.heading_font, "size": str(pt_root),
+                "bold": "true", "color": c["on_accent"],
+                "align": "center", "valign": "middle",
+            },
+        },
+        # Vertical spine under root
+        {
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": "OrgSpine", "preset": "rect",
+                "fill": c["muted"], "line": "none",
+                "x": UI.cm(m + st.usable_w / 2 - 0.06),
+                "y": UI.cm(spine_y),
+                "width": "0.12cm", "height": UI.cm(spine_h),
+            },
+        },
+    ]
+    # Horizontal bar across children when 2+
+    if n >= 2:
+        bar_x = xs[0] + col_w / 2
+        bar_w = (xs[-1] + col_w / 2) - bar_x
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": "OrgBar", "preset": "rect",
+                "fill": c["muted"], "line": "none",
+                "x": UI.cm(bar_x), "y": UI.cm(child_y - 0.12),
+                "width": UI.cm(bar_w), "height": "0.1cm",
+            },
+        })
+    for i, rep in enumerate(reports):
+        if isinstance(rep, dict):
+            name = str(rep.get("name") or rep.get("label") or "—")
+            role = str(rep.get("role") or rep.get("title") or "")
+            text = f"{name}\n{role}".strip() if role else name
+        else:
+            text = str(rep)
+        # Drop stem from bar to each child
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"OrgStem{i + 1}", "preset": "rect",
+                "fill": c["muted"], "line": "none",
+                "x": UI.cm(xs[i] + col_w / 2 - 0.05),
+                "y": UI.cm(child_y - 0.12),
+                "width": "0.1cm", "height": "0.35cm",
+            },
+        })
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"OrgChild{i + 1}", "preset": st.preset,
+                "fill": c["surface"], "line": "none", "text": text,
+                "x": UI.cm(xs[i]), "y": UI.cm(child_y + 0.2),
+                "width": UI.cm(col_w), "height": UI.cm(max(2.8, child_h - 0.4)),
+                "font": st.body_font, "size": str(pt_child),
+                "bold": "true", "color": c["text_on_surface"],
+                "align": "center", "valign": "middle",
+            },
+        })
+    ops.extend(_notes(slots, "State the decision right of the root node."))
+    return ops
+
+
+def build_chevron_flow(tokens: dict[str, Any], slots: dict[str, Any]) -> list[dict[str, Any]]:
+    """Horizontal chevron process train (ref: process_flow / has_connectors).
+
+    Ends use accent fill; middle stages use surface. Last stage uses card preset
+    so the outcome reads as a destination, not another arrow.
+    """
+    st = UI.stage_metrics(tokens)
+    c = st.c
+    title = str(slots.get("title") or "Process")
+    raw = slots.get("steps") or slots.get("stages") or []
+    steps: list[dict[str, str]] = []
+    if isinstance(raw, list):
+        for s in raw:
+            if isinstance(s, dict):
+                label = str(s.get("label") or s.get("title") or s.get("name") or "Step")
+                value = str(s.get("value") or s.get("detail") or s.get("body") or "")
+                steps.append({"label": label, "value": value})
+            else:
+                steps.append({"label": str(s), "value": ""})
+    if len(steps) < 3:
+        steps = [
+            {"label": s, "value": ""}
+            for s in ("Discover", "Design", "Build", "Ship")
+        ]
+    steps = steps[:6]
+    n = len(steps)
+    m = st.margin
+    band_y, band_h = UI.content_band_y_h(
+        st, fraction=0.55, min_h=4.6, max_h=7.2, settle=0.35)
+    # Slight overlap so points read as a chevron train
+    overlap = min(0.55, st.gap * 0.7)
+    usable = st.usable_w
+    step_w = (usable + (n - 1) * overlap) / n
+    y = band_y + max(0.0, (band_h - min(band_h, 5.2)) * 0.25)
+    h = min(5.2, max(4.0, band_h * 0.85))
+    pt = max(14, min(22, st.section_pt - 4))
+
+    ops: list[dict[str, Any]] = [
+        {
+            "command": "add", "parent": "/", "type": "slide",
+            "props": {"layout": "blank", "background": c["content_background"]},
+        },
+        {
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": "ChevronTitle", "text": title,
+                "x": UI.cm(m),
+                "y": UI.cm(max(1.15, m * 0.55)),
+                "width": UI.cm(st.usable_w),
+                "height": UI.cm(st.title_band),
+                "font": st.heading_font, "size": str(st.title_pt),
+                "bold": "true",
+                "color": c.get("text_on_content") or c["text"],
+                "fill": "none",
+            },
+        },
+    ]
+    for i, step in enumerate(steps):
+        x = m + i * (step_w - overlap)
+        is_end = i == 0 or i == n - 1
+        fill = c["accent"] if is_end else c["surface"]
+        tc = c["on_accent"] if fill == c["accent"] else c["text_on_surface"]
+        # chevron for train body; destination uses card preset
+        preset = st.preset if i == n - 1 else "chevron"
+        text = step["label"]
+        if step.get("value"):
+            text = f"{step['label']}\n{step['value']}"
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"Chevron{i + 1}", "preset": preset,
+                "fill": fill, "line": "none", "text": text,
+                "x": UI.cm(x), "y": UI.cm(y),
+                "width": UI.cm(step_w), "height": UI.cm(h),
+                "font": st.heading_font, "size": str(pt),
+                "bold": "true", "color": tc,
+                "align": "center", "valign": "middle",
+            },
+        })
+    ops.extend(_notes(slots, "Walk left→right; the last chevron is the outcome."))
+    return ops
+
+
 MOTIF_BUILDERS: dict[str, MotifBuilder] = {
     "split_hero": build_split_hero,
     "card_row": build_card_row,
@@ -941,6 +1156,8 @@ MOTIF_BUILDERS: dict[str, MotifBuilder] = {
     "funnel_cascade": build_funnel_cascade,
     "matrix_quad": build_matrix_quad,
     "section_mark": build_section_mark,
+    "org_cascade": build_org_cascade,
+    "chevron_flow": build_chevron_flow,
 }
 
 

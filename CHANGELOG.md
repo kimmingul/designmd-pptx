@@ -7,12 +7,11 @@ All notable changes to designmd-pptx are documented here.
 ### Added
 - **Visual motifs** (`motif.py`, `motifs/catalog.json`, `docs/motifs.md`):
   SmartArt-like **original** formats derived from Infograpify *structural*
-  analysis only (no vendor shapes). Catalog includes `sparse_hero`,
-  `section_mark`, `kpi_band`, `funnel_cascade`, `matrix_quad`, plus
-  `split_hero`, `card_row`, `step_rail`, `kpi_hero`, `stair_ascent`,
-  `check_stack`, `tile_row`. Recipes thin-wrap `render_motif`. Not React UI
-  libs; not Office SmartArt OOXML (`dgm:`). Golden one-pagers:
-  `demo/motifs/` via `scripts/generate_motif_goldens.py`.
+  analysis only (no vendor shapes). Catalog **14 motifs**: core set plus
+  org/process **`org_cascade`** (`org_tree`) and **`chevron_flow`**
+  (`chevron_process`). Recipes thin-wrap `render_motif`. Not React UI libs;
+  not Office SmartArt OOXML (`dgm:`). Full golden one-pagers:
+  `demo/motifs/` via `scripts/generate_motif_goldens.py` (all catalog ids).
 - **UI kit contract** (`ui_kit.py`, `docs/ui-kit.md`): spacing system —
   `StageMetrics` (margin/gap/pad/title bands), content-height body + Spacer.
   Layout engine **strips vertical Text weights**. Demo:

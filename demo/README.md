@@ -10,7 +10,7 @@ Premium product intro decks built on the **ui_kit** spacing contract
 | **`designmd-pptx-best-v2.1.2.pptx`** | 12 | Motif showcase narrative (primary) |
 | **`designmd-pptx-intro-v2.1.2.pptx`** | 12 | Same as best (stable name) |
 | `*.contact.png` | — | Gate 3 contact sheets |
-| `motifs/*.pptx` | 1 each | Per-motif golden one-pagers |
+| `motifs/*` | 1 each | 14 motif goldens (sequence + contact; pptx local) |
 
 ## Sources
 
