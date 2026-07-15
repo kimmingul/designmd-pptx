@@ -28,9 +28,8 @@ function activate(context) {
   );
 
   const cmds = {
-    "designmdPptx.doctor": () => runCli(["doctor"], { reveal: true }),
-    "designmdPptx.doctorInstall": () =>
-      runCli(["doctor", "--install", "--dry-run"], { reveal: true }),
+    "designmdPptx.doctor": () => runCli(["doctor", "--ensure"], { reveal: true }),
+    "designmdPptx.doctorInstall": () => doctorInstallInteractive(),
     "designmdPptx.compose": () => composeActive(explorer),
     "designmdPptx.scaffold": () => scaffoldActive(explorer),
     "designmdPptx.a11y": () => a11yActive(explorer, diagnostics),
@@ -66,6 +65,9 @@ function activate(context) {
   vscode.workspace
     .findFiles("**/{a11y.report.json,refine.report.json,compose.report.json,*.gate3.json}", "**/node_modules/**", 40)
     .then((uris) => uris.forEach((u) => loadDiagnosticsFromReport(u, diagnostics)));
+
+  // Soft OfficeCLI check on activate (non-blocking)
+  setTimeout(() => softCheckOfficeCliOnActivate(), 800);
 }
 
 function deactivate() {}
@@ -108,11 +110,13 @@ function resolveCli(args) {
  * Run designmd-pptx with argv (shell:false) — never interpolates user input
  * into a shell string (adversarial #45 P1).
  * @param {string[]} args
- * @param {{ reveal?: boolean, title?: string }} [opts]
- * @returns {Thenable<void>}
+ * @param {{ reveal?: boolean, title?: string, envExtra?: Record<string,string> }} [opts]
+ * @returns {Promise<number>} exit code
  */
 function runCli(args, opts = {}) {
-  const { argv, cwd, env, display } = resolveCli(args);
+  const resolved = resolveCli(args);
+  const { argv, cwd, display } = resolved;
+  const env = { ...resolved.env, ...(opts.envExtra || {}) };
   const name = opts.title || `designmd-pptx ${args[0] || ""}`.trim();
   const out = sharedOutput || vscode.window.createOutputChannel("designmd-pptx");
   if (opts.reveal !== false) {
@@ -129,13 +133,18 @@ function runCli(args, opts = {}) {
       shell: false,
       windowsHide: true,
     });
-    child.stdout?.on("data", (buf) => out.append(buf.toString()));
+    let stdout = "";
+    child.stdout?.on("data", (buf) => {
+      const s = buf.toString();
+      stdout += s;
+      out.append(s);
+    });
     child.stderr?.on("data", (buf) => out.append(buf.toString()));
     child.on("error", (err) => {
       out.appendLine(`error: ${err.message}`);
       status.dispose();
       vscode.window.showErrorMessage(`designmd-pptx failed to start: ${err.message}`);
-      resolve();
+      resolve(1);
     });
     child.on("close", (code) => {
       out.appendLine(`\n[exit ${code}]`);
@@ -143,14 +152,168 @@ function runCli(args, opts = {}) {
       if (code !== 0) {
         vscode.window.showWarningMessage(`${name} exited ${code} — see Output → designmd-pptx`);
       }
-      resolve();
+      resolve(code ?? 1);
+    });
+    // stash last stdout for status-json consumers
+    child.on("close", () => {
+      runCli._lastStdout = stdout;
     });
   });
+}
+
+/**
+ * @returns {Promise<{ legacy_ok?: boolean, official_ok?: boolean, any_officecli?: boolean, materialize_ready?: boolean, required_message?: string } | null>}
+ */
+async function probeOfficeCliStatus() {
+  const code = await runCli(["doctor", "--status-json"], { reveal: false });
+  if (code !== 0 && !runCli._lastStdout) return null;
+  try {
+    const text = (runCli._lastStdout || "").trim();
+    const start = text.indexOf("{");
+    if (start < 0) return null;
+    return JSON.parse(text.slice(start));
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Ask to install OfficeCLI when missing.
+ * @param {{ hard?: boolean }} [opts] hard=true → block command if still missing materialize path
+ * @returns {Promise<boolean>} true if caller may continue
+ */
+async function ensureOfficeCli(opts = {}) {
+  const hard = Boolean(opts.hard);
+  const status = await probeOfficeCliStatus();
+  if (!status) {
+    // probe failed (python missing etc.) — still allow soft commands
+    if (hard) {
+      const pick = await vscode.window.showErrorMessage(
+        "Could not probe OfficeCLI (is Python / designmd-pptx on PATH?). " +
+          "Without OfficeCLI, scaffold --apply / apply / restyle will not produce a .pptx.",
+        "Run Doctor",
+        "Continue anyway",
+        "Cancel",
+      );
+      if (pick === "Run Doctor") {
+        await runCli(["doctor", "--ensure"], { reveal: true });
+        return false;
+      }
+      return pick === "Continue anyway";
+    }
+    return true;
+  }
+  if (status.any_officecli && (!hard || status.materialize_ready || status.official_ok)) {
+    if (hard && !status.materialize_ready) {
+      // official may be present but legacy missing for apply
+      const pick = await vscode.window.showWarningMessage(
+        "Legacy OfficeCLI (shape-level) is missing. " +
+          "apply / scaffold --apply / restyle / master will NOT work properly. " +
+          "Official agent-bridge alone is only enough for render drafts.\n\n" +
+          (status.legacy_detail || ""),
+        "Install official pin",
+        "Continue anyway",
+        "Cancel",
+      );
+      if (pick === "Install official pin") {
+        await runCli(["doctor", "--install"], {
+          reveal: true,
+          envExtra: { DESIGNMD_ASSUME_YES: "1" },
+        });
+        return false;
+      }
+      return pick === "Continue anyway";
+    }
+    return true;
+  }
+
+  const msg =
+    (status.required_message ||
+      "OfficeCLI is not installed. designmd-pptx cannot materialize a real .pptx without it.") +
+    "\n\nInstall the official OfficeCLI pin now? (You can cancel and install later.)";
+  const pick = await vscode.window.showWarningMessage(
+    msg,
+    { modal: true },
+    "Install OfficeCLI",
+    "Continue without OfficeCLI",
+    "Cancel",
+  );
+  if (pick === "Install OfficeCLI") {
+    await runCli(["doctor", "--install"], {
+      reveal: true,
+      envExtra: { DESIGNMD_ASSUME_YES: "1" },
+    });
+    // Re-probe
+    const after = await probeOfficeCliStatus();
+    if (after?.any_officecli) {
+      vscode.window.showInformationMessage("OfficeCLI install finished — re-check with Doctor if needed.");
+      if (hard && !after.materialize_ready) {
+        vscode.window.showWarningMessage(
+          "Official pin may be installed, but legacy binary is still required for apply. See Doctor output.",
+        );
+      }
+      return !hard || Boolean(after.materialize_ready) || pick === "Continue without OfficeCLI";
+    }
+    vscode.window.showWarningMessage("OfficeCLI still missing after install attempt — see Output panel.");
+    return !hard;
+  }
+  if (pick === "Continue without OfficeCLI") {
+    if (hard) {
+      vscode.window.showWarningMessage(
+        "Continuing without OfficeCLI: JSON/tokens may work, but .pptx materialization will fail.",
+      );
+    }
+    return true;
+  }
+  return false; // Cancel
+}
+
+async function softCheckOfficeCliOnActivate() {
+  try {
+    const status = await probeOfficeCliStatus();
+    if (status && !status.any_officecli) {
+      const pick = await vscode.window.showWarningMessage(
+        "designmd-pptx: OfficeCLI is not installed. " +
+          "Without it you cannot apply/scaffold a real PowerPoint deck. Install now?",
+        "Install OfficeCLI",
+        "Later",
+      );
+      if (pick === "Install OfficeCLI") {
+        await runCli(["doctor", "--install"], {
+          reveal: true,
+          envExtra: { DESIGNMD_ASSUME_YES: "1" },
+        });
+      }
+    }
+  } catch {
+    /* ignore activate errors */
+  }
+}
+
+async function doctorInstallInteractive() {
+  const pick = await vscode.window.showInformationMessage(
+    "Install / repair official OfficeCLI (version pin from compatibility.json)?\n" +
+      "This downloads officecli-dist. Legacy shape-level binary remains a manual install.",
+    { modal: true },
+    "Show plan (dry-run)",
+    "Install now",
+    "Cancel",
+  );
+  if (pick === "Show plan (dry-run)") {
+    await runCli(["doctor", "--install", "--dry-run"], { reveal: true });
+  } else if (pick === "Install now") {
+    await runCli(["doctor", "--install"], {
+      reveal: true,
+      envExtra: { DESIGNMD_ASSUME_YES: "1" },
+    });
+  }
 }
 
 // ── Commands ────────────────────────────────────────────────────────────────
 
 async function composeActive(explorer) {
+  // compose is offline-capable — soft warn only
+  await ensureOfficeCli({ hard: false });
   const uri = await pickFile(
     { "Markdown brief": ["md"] },
     "Select a markdown brief to compose",
@@ -161,10 +324,15 @@ async function composeActive(explorer) {
     title: "designmd-pptx compose",
   });
   explorer.refresh();
-  vscode.window.showInformationMessage(`compose → ${out} (see terminal)`);
+  vscode.window.showInformationMessage(`compose → ${out} (see Output panel)`);
 }
 
 async function scaffoldActive(explorer) {
+  // Scaffold writes tokens/recipes without OfficeCLI; warn if missing so
+  // users know apply will fail until installed.
+  const ok = await ensureOfficeCli({ hard: false });
+  if (!ok) return;
+
   let content;
   const active = vscode.window.activeTextEditor?.document.uri;
   if (active && /\.deck\.json$/i.test(active.fsPath)) {

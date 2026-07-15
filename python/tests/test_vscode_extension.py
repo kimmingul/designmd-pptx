@@ -19,6 +19,7 @@ class VscodeExtension45(unittest.TestCase):
         cmds = {c["command"] for c in pkg["contributes"]["commands"]}
         for required in (
             "designmdPptx.doctor",
+            "designmdPptx.doctorInstall",
             "designmdPptx.compose",
             "designmdPptx.scaffold",
             "designmdPptx.a11y",
@@ -27,6 +28,7 @@ class VscodeExtension45(unittest.TestCase):
             "designmdPptx.openGate3Report",
         ):
             self.assertIn(required, cmds, required)
+        self.assertIn("onStartupFinished", pkg.get("activationEvents") or [])
         views = pkg["contributes"]["views"]["designmdPptx"]
         self.assertTrue(any(v["id"] == "designmdPptx.explorer" for v in views))
         self.assertTrue((EXT / "extension.js").is_file())
@@ -83,6 +85,16 @@ console.log('ok', r.argv.join(' '));
         self.assertIn("shell: false", ext)
         # Must not send user feedback through a shell string
         self.assertNotIn("terminal.sendText(shellCmd", ext)
+
+    def test_extension_probes_and_prompts_for_officecli(self) -> None:
+        ext = (EXT / "extension.js").read_text(encoding="utf-8")
+        self.assertIn("doctor\", \"--status-json\"", ext.replace("'", '"'))
+        self.assertIn("softCheckOfficeCliOnActivate", ext)
+        self.assertIn("ensureOfficeCli", ext)
+        self.assertIn("Install OfficeCLI", ext)
+        self.assertIn("doctor\", \"--ensure\"", ext.replace("'", '"'))
+        readme = (EXT / "README.md").read_text(encoding="utf-8")
+        self.assertIn("OfficeCLI is required", readme)
 
     def test_decision_doc_points_at_extension(self) -> None:
         doc = (ROOT / "docs" / "editor-integration-decision.md").read_text(encoding="utf-8")

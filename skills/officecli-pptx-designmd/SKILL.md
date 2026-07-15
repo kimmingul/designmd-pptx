@@ -47,10 +47,16 @@ pip install -r "<resolved python root>\requirements.txt"
    contact sheet; fix and re-apply until clean.
 9. No brand DESIGN.md? Pass the literal `default` as the design argument —
    the bundled neutral house style keeps the design floor.
-10. officecli missing or routing unclear? Run `python -m designmd_pptx doctor`
-   and follow the printed remedies before continuing. For a version-locked
-   official OfficeCLI pin: `doctor --install --dry-run` then `doctor --install`
-   (reads `compatibility.json`; legacy binary remains a manual download).
+10. **OfficeCLI is required to materialize a new .pptx from recipes.** Without
+   it, designmd-pptx cannot **apply / scaffold --apply / render** properly
+   (compose, a11y, refine, restyle, master still run offline). On first use:
+   - Run `python -m designmd_pptx doctor` (prints a required banner if missing).
+   - **Ask the user** before installing: `doctor --ensure` prompts Y/n on a TTY
+     (or VS Code: **Install OfficeCLI…**). Never silent-install.
+   - Official pin: `doctor --install --dry-run` then `doctor --install`.
+   - Legacy (apply precision) is **manual** — doctor prints the release URL.
+   - Agents: confirm with the user first unless they already approved.
+     CI: `DESIGNMD_NO_PROMPT=1`.
 11. Licensed premium templates (Infograpify, etc.) are **local reference only** —
     keep under `infograpify_ppt_templates/` (gitignored). Never commit originals
     or force-add ignored `.pptx`. Analyze with `reference` (text redacted by
@@ -75,9 +81,12 @@ python -m designmd_pptx extract old.pptx -o extracted/          # v1.2: pptx →
 python -m designmd_pptx restyle old.pptx DESIGN.md -o new.pptx  # v1.2: rebrand existing deck
 python -m designmd_pptx master deck.pptx DESIGN.md --potx brand.potx [--empty-potx]  # v1.3
 python -m designmd_pptx scaffold default -o out/deck --content deck.json --apply --force --screenshot  # v1.4
-python -m designmd_pptx doctor            # v1.4: verify officecli + skill routing
-python -m designmd_pptx doctor --install --dry-run  # #34: version-locked install plan
-python -m designmd_pptx doctor --install            # #34: pin official officecli + PyYAML
+python -m designmd_pptx doctor            # verify officecli; banner if missing
+python -m designmd_pptx doctor --ensure   # probe + ask Y/n to install official pin
+python -m designmd_pptx doctor --status-json  # machine-readable backend status
+python -m designmd_pptx doctor --install --dry-run  # version-locked install plan
+python -m designmd_pptx doctor --install            # pin official officecli + PyYAML
+# apply / scaffold --apply / render hard-gate on ensure; scaffold/restyle soft-warn
 python -m designmd_pptx a11y --design default --content content.deck.json --show-order  # #39
 python -m designmd_pptx a11y --tokens tokens.json --deck deck.json --fix-contrast --generate-missing
 python -m designmd_pptx benchmark -o benchmark-out  # #37 fixture thresholds

@@ -29,7 +29,7 @@ from .backend import (AgentBridgeBackend, BackendUnavailable,
 _LEGACY_REMEDY = (
     "install the legacy shape-level binary from "
     "https://github.com/iOfficeAI/OfficeCLI/releases (or set "
-    "OFFICECLI_LEGACY_BIN) — required by scaffold/apply/restyle/master; "
+    "OFFICECLI_LEGACY_BIN) — required by scaffold --apply / apply; "
     "not auto-installable via doctor --install"
 )
 _OFFICIAL_REMEDY = (
@@ -495,8 +495,223 @@ def run_install(*, dry_run: bool = False) -> int:
     return run_doctor(strict=False)
 
 
-def run_doctor(*, strict: bool = False) -> int:
+# ---------------------------------------------------------------------------
+# Status probe + interactive ensure (install prompt)
+# ---------------------------------------------------------------------------
+
+REQUIRED_BANNER = """\
+╔══════════════════════════════════════════════════════════════════════╗
+║  designmd-pptx requires OfficeCLI to materialize real .pptx files    ║
+║                                                                      ║
+║  Without OfficeCLI the following will NOT work properly:             ║
+║    • scaffold --apply / apply  (precision pipeline — legacy binary)  ║
+║    • render  (draft path — official agent-bridge)                    ║
+║    • Gate 3 screenshots                                              ║
+║                                                                      ║
+║  Compile / compose / a11y / refine / restyle / master still run      ║
+║  offline on tokens or existing .pptx, but you will not get a new     ║
+║  deck from recipes without OfficeCLI.                                ║
+╚══════════════════════════════════════════════════════════════════════╝"""
+
+
+@dataclass
+class BackendStatus:
+    """Machine-readable OfficeCLI availability."""
+    legacy_ok: bool
+    official_ok: bool
+    legacy_detail: str
+    official_detail: str
+
+    @property
+    def materialize_ready(self) -> bool:
+        """scaffold --apply / apply need the legacy shape-level binary."""
+        return self.legacy_ok
+
+    @property
+    def render_ready(self) -> bool:
+        return self.official_ok
+
+    @property
+    def any_officecli(self) -> bool:
+        return self.legacy_ok or self.official_ok
+
+    def to_dict(self) -> dict:
+        return {
+            "legacy_ok": self.legacy_ok,
+            "official_ok": self.official_ok,
+            "legacy_detail": self.legacy_detail,
+            "official_detail": self.official_detail,
+            "materialize_ready": self.materialize_ready,
+            "render_ready": self.render_ready,
+            "any_officecli": self.any_officecli,
+            "required_message": (
+                "OfficeCLI is not installed. designmd-pptx cannot materialize "
+                "a new deck from recipes without it (apply / scaffold --apply "
+                "need the legacy binary; render needs official). "
+                "Compose / a11y / restyle / master still run offline."
+            ),
+        }
+
+
+def probe_backends() -> BackendStatus:
+    leg_ok, leg_msg = _legacy()
+    off_ok, off_msg = _official()
+    return BackendStatus(
+        legacy_ok=leg_ok,
+        official_ok=off_ok,
+        legacy_detail=leg_msg,
+        official_detail=off_msg,
+    )
+
+
+def print_required_banner() -> None:
+    print(REQUIRED_BANNER, file=sys.stderr)
+    print(file=sys.stderr)
+
+
+def _interactive_allowed() -> bool:
+    if os.environ.get("DESIGNMD_NO_PROMPT") == "1":
+        return False
+    if os.environ.get("DESIGNMD_ASSUME_YES") == "1":
+        return False  # handled separately as auto-yes
+    try:
+        return bool(sys.stdin.isatty() and sys.stdout.isatty())
+    except Exception:
+        return False
+
+
+def prompt_yes_no(question: str, *, default: bool = True) -> bool:
+    """Ask the user Y/n. Respects DESIGNMD_ASSUME_YES / DESIGNMD_NO_PROMPT."""
+    if os.environ.get("DESIGNMD_ASSUME_YES") == "1":
+        return True
+    if os.environ.get("DESIGNMD_NO_PROMPT") == "1" or not _interactive_allowed():
+        return False
+    hint = "Y/n" if default else "y/N"
+    try:
+        raw = input(f"{question} [{hint}]: ").strip().lower()
+    except EOFError:
+        return default
+    if not raw:
+        return default
+    return raw in ("y", "yes", "ㅛ")  # ㅛ = Korean keyboard y position sometimes
+
+
+def ensure_officecli(
+    *,
+    need_legacy: bool = False,
+    need_official: bool = False,
+    interactive: bool | None = None,
+    stream=None,
+) -> tuple[bool, BackendStatus]:
+    """Probe OfficeCLI; optionally prompt to install official pin.
+
+    Returns ``(ok_to_proceed, status)``.
+
+    * ``need_legacy``: apply / scaffold --apply (shape-level binary)
+    * ``need_official``: render (agent-bridge)
+    * If neither flag is set, ``ok`` means any backend is present (soft check).
+
+    Interactive prompt only when stdin/stdout are TTYs (or
+    ``DESIGNMD_ASSUME_YES=1`` auto-accepts install). Never blocks CI:
+    set ``DESIGNMD_NO_PROMPT=1`` to skip questions (returns False if missing).
+    """
+    out = stream or sys.stderr
+    status = probe_backends()
+
+    if need_legacy and need_official:
+        required_ok = status.legacy_ok and status.official_ok
+    elif need_legacy:
+        required_ok = status.legacy_ok
+    elif need_official:
+        required_ok = status.official_ok
+    else:
+        required_ok = status.any_officecli
+
+    if required_ok:
+        return True, status
+
+    # Missing something essential
+    print_required_banner()
+    print(f"  legacy  (apply/scaffold):  "
+          f"{'ok' if status.legacy_ok else 'MISSING'} — {status.legacy_detail}",
+          file=out)
+    print(f"  official (render/bridge):  "
+          f"{'ok' if status.official_ok else 'MISSING'} — {status.official_detail}",
+          file=out)
+    print(file=out)
+
+    do_prompt = _interactive_allowed() if interactive is None else interactive
+    if os.environ.get("DESIGNMD_ASSUME_YES") == "1":
+        do_prompt = True  # treat as yes without reading stdin
+        auto_yes = True
+    else:
+        auto_yes = False
+
+    # Official can be auto-installed; legacy cannot
+    if not status.official_ok:
+        if auto_yes or (do_prompt and prompt_yes_no(
+            "Install official OfficeCLI now (doctor --install, version-pinned)?",
+            default=True,
+        )):
+            print("\n→ running doctor --install …\n", file=out)
+            code = run_install(dry_run=False)
+            status = probe_backends()
+            if code == 0 and status.official_ok:
+                print("official OfficeCLI is now available.", file=out)
+            else:
+                print("install finished with issues — re-check with: "
+                      "python -m designmd_pptx doctor", file=out)
+        else:
+            print(
+                "skipped install. To install later:\n"
+                "  python -m designmd_pptx doctor --install --dry-run\n"
+                "  python -m designmd_pptx doctor --install\n"
+                "Windows: packaging/windows/Install-DesignmdPptx.ps1",
+                file=out,
+            )
+
+    # Always re-probe after optional install attempt
+    status = probe_backends()
+
+    if need_legacy and not status.legacy_ok:
+        print(
+            "\nNOTE: the precision pipeline (apply / scaffold --apply) still "
+            "requires the *legacy* shape-level OfficeCLI binary.\n"
+            f"  {_LEGACY_REMEDY}\n"
+            "  Official agent-bridge alone is not enough for --apply.",
+            file=out,
+        )
+        return False, status
+
+    if need_official and not status.official_ok:
+        print(
+            "\nOfficial OfficeCLI still missing — render will not work.\n"
+            f"  {_OFFICIAL_REMEDY}",
+            file=out,
+        )
+        return False, status
+
+    if not need_legacy and not need_official:
+        return status.any_officecli, status
+
+    return True, status
+
+
+def run_doctor(
+    *,
+    strict: bool = False,
+    ensure: bool = False,
+    status_json: bool = False,
+) -> int:
     from . import __version__
+
+    if status_json:
+        import json
+        st = probe_backends()
+        print(json.dumps(st.to_dict(), indent=2))
+        if strict and not st.materialize_ready:
+            return 1
+        return 0
 
     home = Path.home()
     rows: list[tuple[str, bool, str]] = []
@@ -540,16 +755,35 @@ def run_doctor(*, strict: bool = False) -> int:
     rows.append(("grok: designmd layer", ok, msg))
 
     failures = 0
+    officecli_missing = False
     for label, ok, msg in rows:
         mark = "ok  " if ok else "MISS"
         if not ok:
             failures += 1
+            if "officecli" in label.lower():
+                officecli_missing = True
         print(f"  {mark}  {label}: {msg}")
+
+    if officecli_missing or not officecli_ok:
+        print()
+        print_required_banner()
 
     if failures:
         print(f"\n{failures} item(s) missing — remedies above")
         print("tip: `python -m designmd_pptx doctor --install --dry-run` "
               "shows the version-locked OfficeCLI install plan")
+        if ensure or _interactive_allowed():
+            # Offer install when official missing
+            st = probe_backends()
+            if not st.official_ok:
+                ok_go, st = ensure_officecli(
+                    need_legacy=False,
+                    need_official=False,
+                    interactive=True if ensure else None,
+                )
+                if st.official_ok:
+                    print("\nre-probe after install:")
+                    return run_doctor(strict=strict, ensure=False)
     else:
         print("\nall checks passed — pptx requests route through officecli on every platform")
     if strict and not officecli_ok:
@@ -561,4 +795,8 @@ if __name__ == "__main__":  # pragma: no cover
     argv = sys.argv[1:]
     if "--install" in argv:
         raise SystemExit(run_install(dry_run="--dry-run" in argv))
-    raise SystemExit(run_doctor(strict="--strict" in sys.argv))
+    raise SystemExit(run_doctor(
+        strict="--strict" in argv,
+        ensure="--ensure" in argv,
+        status_json="--status-json" in argv,
+    ))
