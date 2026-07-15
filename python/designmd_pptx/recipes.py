@@ -59,15 +59,17 @@ def _emit_shapes(placed: list[L.Placed]) -> list[dict]:
 
 
 def _base_props(tokens: dict) -> dict[str, Any]:
-    c = tokens["colors"]
-    t = tokens["type"]
+    """Shared chrome from ui_kit StageMetrics (all recipes)."""
+    st = UI.stage_metrics(tokens)
     return {
-        "c": c,
-        "t": t,
-        "preset": tokens.get("shape", {}).get("card_preset", "roundRect"),
-        "margin": float(tokens.get("margin_cm", 1.27)),
-        "gap": float(tokens.get("gap_cm", 0.76)),
+        "c": st.colors,
+        "t": tokens["type"],
+        "preset": st.preset,
+        "margin": st.margin,
+        "gap": st.gap,
+        "pad": st.pad,
         "dark": bool(tokens.get("dark_first")),
+        "st": st,
     }
 
 
@@ -5820,9 +5822,8 @@ def recipe_hex_cluster(tokens: dict, content: dict | None = None) -> list[dict]:
 
 
 def recipe_puzzle_pieces(tokens: dict, content: dict | None = None) -> list[dict]:
-    """Puzzle / interlocking pieces (Wave 4) — 3–6 complementary parts."""
-    b = _base_props(tokens)
-    c, t = b["c"], b["t"]
+    """Puzzle / interlocking pieces — equal tiles in content band (ui_kit)."""
+    st = UI.stage_metrics(tokens)
     content = content or {}
     title = content.get("title", "Fit")
     pieces = _norm_steps(
@@ -5830,40 +5831,20 @@ def recipe_puzzle_pieces(tokens: dict, content: dict | None = None) -> list[dict
         min_n=3, max_n=6,
         defaults=[{"label": s} for s in ("Product", "GTM", "Ops", "People")],
     )
-    n = len(pieces)
-    col_w, xs = _grid_n(n, b["margin"], 0.35, max_n=6)
-    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "PuzzleTitle", title)]
-    for i, pc in enumerate(pieces):
-        text = pc["label"]
-        if pc.get("detail"):
-            text = f"{text}\n{pc['detail']}"
-        ops.append({
-            "command": "add", "parent": "/slide[last()]", "type": "shape",
-            "props": {
-                "name": f"Puzzle{i + 1}", "preset": b["preset"],
-                "fill": c["accent"] if i % 2 == 0 else c["surface"],
-                "line": "none", "text": text,
-                "x": _cm(xs[i]), "y": "5.0cm",
-                "width": _cm(col_w), "height": "10.5cm",
-                "font": t["heading_font"],
-                "size": str(max(16, min(24, t["section_pt"]))),
-                "bold": "true",
-                "color": c["on_accent"] if i % 2 == 0 else c["text_on_surface"],
-                "align": "center", "valign": "middle",
-            },
-        })
-    ops.append({
-        "command": "add", "parent": "/slide[last()]", "type": "notes",
-        "props": {"text": content.get(
-            "notes", "Name what breaks if any single piece is missing.")},
-    })
+    ops = UI.equal_tile_row_ops(
+        st, title=title, title_name="PuzzleTitle", items=pieces,
+        name_prefix="Puzzle", accent_every=2,
+    )
+    ops.append(UI.notes_op(
+        content.get("notes", "Name what breaks if any single piece is missing.")
+    ))
     return ops
 
 
 def recipe_pillar_columns(tokens: dict, content: dict | None = None) -> list[dict]:
-    """Pillars / foundational columns (Wave 4) — 3–5 vertical pillars."""
-    b = _base_props(tokens)
-    c, t = b["c"], b["t"]
+    """Pillars — ascending heights within content band (ui_kit margins)."""
+    st = UI.stage_metrics(tokens)
+    c = st.c
     content = content or {}
     title = content.get("title", "Pillars")
     pillars = _norm_steps(
@@ -5872,40 +5853,40 @@ def recipe_pillar_columns(tokens: dict, content: dict | None = None) -> list[dic
         defaults=[{"label": s, "detail": "Foundation"} for s in ("Trust", "Speed", "Craft")],
     )
     n = len(pillars)
-    col_w, xs = _grid_n(n, b["margin"], 0.5, max_n=5)
+    col_w, xs = _grid_n(n, st.margin, st.gap, max_n=5)
+    band_y, band_h = UI.content_band_y_h(st, fraction=0.78, min_h=7.0, max_h=11.0, settle=0.2)
+    base_y = band_y + band_h
     ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "PillarTitle", title)]
-    base_y, max_h = 16.5, 11.5
     for i, p in enumerate(pillars):
-        h = max_h - i * 0.4  # slight variation
+        # Rising pillars — still capped by content band (not full stage).
+        h = band_h * (0.72 + 0.28 * (i / max(1, n - 1)))
         y = base_y - h
         ops.append({
             "command": "add", "parent": "/slide[last()]", "type": "shape",
             "props": {
-                "name": f"Pillar{i + 1}", "preset": b["preset"],
+                "name": f"Pillar{i + 1}", "preset": st.preset,
                 "fill": c["accent"] if i == 0 else c["surface"],
                 "line": "none",
                 "text": f"{p['label']}\n\n{p.get('detail') or ''}",
-                "x": _cm(xs[i]), "y": _cm(y),
-                "width": _cm(col_w), "height": _cm(h),
-                "font": t["heading_font"],
-                "size": str(max(16, t["section_pt"] - 4)),
+                "x": UI.cm(xs[i]), "y": UI.cm(y),
+                "width": UI.cm(col_w), "height": UI.cm(h),
+                "font": st.heading_font,
+                "size": str(max(16, st.section_pt - 4)),
                 "bold": "true",
                 "color": c["on_accent"] if i == 0 else c["text_on_surface"],
                 "align": "center", "valign": "middle",
             },
         })
-    ops.append({
-        "command": "add", "parent": "/slide[last()]", "type": "notes",
-        "props": {"text": content.get(
-            "notes", "Pillars are non-negotiable investments, not initiatives.")},
-    })
+    ops.append(UI.notes_op(
+        content.get("notes", "Pillars are non-negotiable investments, not initiatives.")
+    ))
     return ops
 
 
 def recipe_stairs_ascent(tokens: dict, content: dict | None = None) -> list[dict]:
-    """Ascending stairs / maturity steps (Wave 4)."""
-    b = _base_props(tokens)
-    c, t = b["c"], b["t"]
+    """Ascending stairs — heights stay inside content band (ui_kit)."""
+    st = UI.stage_metrics(tokens)
+    c = st.c
     content = content or {}
     title = content.get("title", "Ascent")
     steps = _norm_steps(
@@ -5914,38 +5895,37 @@ def recipe_stairs_ascent(tokens: dict, content: dict | None = None) -> list[dict
         defaults=[{"label": s} for s in ("Aware", "Repeatable", "Defined", "Managed", "Optimising")],
     )
     n = len(steps)
-    m = b["margin"]
-    usable = 33.87 - 2 * m
+    m = st.margin
+    usable = st.usable_w
     step_w = usable / n
+    band_y, band_h = UI.content_band_y_h(st, fraction=0.8, min_h=7.5, max_h=11.5, settle=0.15)
+    base_y = band_y + band_h
     ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "StairsTitle", title)]
-    base_y = 16.8
-    for i, st in enumerate(steps):
-        h = 3.8 + i * (9.2 / max(1, n - 1))
+    for i, step in enumerate(steps):
+        h = band_h * (0.45 + 0.55 * (i / max(1, n - 1)))
         y = base_y - h
         x = m + i * step_w
-        detail = str(st.get("detail") or st.get("body") or "").strip()
-        label = f"{i + 1}\n{st['label']}" + (f"\n{detail}" if detail else "")
+        detail = str(step.get("detail") or step.get("body") or "").strip()
+        label = f"{i + 1}\n{step['label']}" + (f"\n{detail}" if detail else "")
         ops.append({
             "command": "add", "parent": "/slide[last()]", "type": "shape",
             "props": {
-                "name": f"Stair{i + 1}", "preset": b["preset"],
+                "name": f"Stair{i + 1}", "preset": st.preset,
                 "fill": c["accent"] if i == n - 1 else c["surface"],
                 "line": "none",
                 "text": label,
-                "x": _cm(x + 0.12), "y": _cm(y),
-                "width": _cm(step_w - 0.24), "height": _cm(h),
-                "font": t["heading_font"],
-                "size": str(max(14, min(18, t["body_pt"]))),
+                "x": UI.cm(x + 0.1), "y": UI.cm(y),
+                "width": UI.cm(step_w - 0.2), "height": UI.cm(h),
+                "font": st.heading_font,
+                "size": str(max(14, min(18, st.body_pt))),
                 "bold": "true",
                 "color": c["on_accent"] if i == n - 1 else c["text_on_surface"],
                 "align": "center", "valign": "middle",
             },
         })
-    ops.append({
-        "command": "add", "parent": "/slide[last()]", "type": "notes",
-        "props": {"text": content.get(
-            "notes", "You cannot skip a stair — name the exit criteria per step.")},
-    })
+    ops.append(UI.notes_op(
+        content.get("notes", "You cannot skip a stair — name the exit criteria per step.")
+    ))
     return ops
 
 
@@ -5975,31 +5955,32 @@ def recipe_checklist_board(tokens: dict, content: dict | None = None) -> list[di
             s = str(it)
             done = s.startswith("[x]") or s.startswith("✓")
             norm.append({"label": s.lstrip("[x]✓ ").strip(), "done": done})
-    m = b["margin"]
+    st = b.get("st") or UI.stage_metrics(tokens)
+    m, pad = st.margin, st.pad
     ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "CheckTitle", title)]
-    row_h = min(1.9, 14.0 / max(1, len(norm)))
+    band_y, band_h = UI.content_band_y_h(
+        st, fraction=0.75, min_h=6.0, max_h=11.0, settle=0.2)
+    row_h = min(2.0, band_h / max(1, len(norm)))
     for i, it in enumerate(norm):
-        y = 3.6 + i * row_h
+        y = band_y + i * row_h
         mark = "✓" if it["done"] else "○"
         fill = c["surface"] if it["done"] else c["content_background"]
         ops.append({
             "command": "add", "parent": "/slide[last()]", "type": "shape",
             "props": {
-                "name": f"CheckRow{i + 1}", "preset": b["preset"],
+                "name": f"CheckRow{i + 1}", "preset": st.preset,
                 "fill": fill, "line": "none",
                 "text": f"{mark}  {it['label']}",
-                "x": _cm(m), "y": _cm(y),
-                "width": _cm(33.87 - 2 * m), "height": _cm(row_h - 0.15),
-                "font": t["body_font"], "size": str(t["body_pt"]),
+                "x": UI.cm(m), "y": UI.cm(y),
+                "width": UI.cm(st.usable_w), "height": UI.cm(max(1.3, row_h - 0.18)),
+                "font": st.body_font, "size": str(st.body_pt),
                 "bold": "true" if not it["done"] else "false",
                 "color": c["text_on_surface"], "valign": "middle",
             },
         })
-    ops.append({
-        "command": "add", "parent": "/slide[last()]", "type": "notes",
-        "props": {"text": content.get(
-            "notes", "Open items need an owner before the meeting ends.")},
-    })
+    ops.append(UI.notes_op(
+        content.get("notes", "Open items need an owner before the meeting ends.")
+    ))
     return ops
 
 
@@ -6262,58 +6243,37 @@ def recipe_circle_segments(tokens: dict, content: dict | None = None) -> list[di
 
 
 def recipe_mission_vision_split(tokens: dict, content: dict | None = None) -> list[dict]:
-    """Mission / vision two-panel (Wave 4) — narrative chrome."""
-    b = _base_props(tokens)
-    c, t = b["c"], b["t"]
+    """Mission / vision two-panel — ui_kit comparison contract."""
+    st = UI.stage_metrics(tokens)
     content = content or {}
     title = content.get("title", "Direction")
     mission = str(content.get("mission") or content.get("left")
                   or "Why we exist — the problem we refuse to ignore.")
     vision = str(content.get("vision") or content.get("right")
                  or "Where we are going — the future state in concrete terms.")
-    m = b["margin"]
-    gap = 0.5
-    cw = (33.87 - 2 * m - gap) / 2
-    ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "MVTitle", title)]
-    for i, (lab, body, fill) in enumerate((
-        ("Mission", mission, c["surface"]),
-        ("Vision", vision, c["accent"]),
-    )):
-        x = m + i * (cw + gap)
-        tc = c["text_on_surface"] if i == 0 else c["on_accent"]
-        ops.append({
-            "command": "add", "parent": "/slide[last()]", "type": "shape",
-            "props": {
-                "name": f"MVPanel{i + 1}", "preset": b["preset"],
-                "fill": fill, "line": "none",
-                "x": _cm(x), "y": "3.8cm", "width": _cm(cw), "height": "13.5cm",
-            },
-        })
-        ops.append({
-            "command": "add", "parent": "/slide[last()]", "type": "shape",
-            "props": {
-                "name": f"MVLab{i + 1}", "text": lab,
-                "x": _cm(x + 0.8), "y": "4.6cm",
-                "width": _cm(cw - 1.6), "height": "1.2cm",
-                "font": t["heading_font"], "size": str(t["section_pt"]),
-                "bold": "true", "color": tc, "fill": "none",
-            },
-        })
-        ops.append({
-            "command": "add", "parent": "/slide[last()]", "type": "shape",
-            "props": {
-                "name": f"MVBody{i + 1}", "text": body,
-                "x": _cm(x + 0.8), "y": "6.4cm",
-                "width": _cm(cw - 1.6), "height": "10.0cm",
-                "font": t["body_font"], "size": str(t["body_pt"] + 2),
-                "color": tc, "fill": "none",
-            },
-        })
-    ops.append({
-        "command": "add", "parent": "/slide[last()]", "type": "notes",
-        "props": {"text": content.get(
-            "notes", "Mission is timeless; vision is dated and measurable.")},
-    })
+    ops = UI.comparison_panels(
+        st,
+        title=title,
+        left_title="Mission",
+        left_body=mission,
+        right_title="Vision",
+        right_body=vision,
+        title_name="MVTitle",
+        left_fill=st.c["surface"],
+        right_fill=st.c["accent"],
+    )
+    for op in ops:
+        props = op.get("props") or {}
+        name = str(props.get("name") or "")
+        if name.startswith("CmpPanel"):
+            props["name"] = name.replace("CmpPanel", "MVPanel", 1)
+        elif name.startswith("CmpHead"):
+            props["name"] = name.replace("CmpHead", "MVLab", 1)
+        elif name.startswith("CmpBody"):
+            props["name"] = name.replace("CmpBody", "MVBody", 1)
+    ops.append(UI.notes_op(
+        content.get("notes", "Mission is timeless; vision is dated and measurable.")
+    ))
     return ops
 
 

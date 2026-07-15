@@ -1,85 +1,72 @@
-# designmd-pptx flagship demo (v2.1.2)
+# designmd-pptx demos (v2.1.2)
 
-**External-facing product intro** — **9 slides**, English, spacious Keynote-inspired
-stage. Built as a **flagship vertical slice**, not a recipe catalog.
+Premium product intro decks built on the **ui_kit** spacing contract
+(`docs/ui-kit.md`) — content-height text, stage margins, no hollow slabs.
 
-> This replaces the earlier 20-slide Wave 4 inventory demo, which exposed weak
-> geometries (fake hex / segments / RACI grids) and failed as marketing quality.
+## Ship these
 
-## Deliverable
+| File | Slides | Notes |
+|------|--------|--------|
+| **`designmd-pptx-best-v2.1.2.pptx`** | 10 | Best-craft narrative (primary) |
+| **`designmd-pptx-intro-v2.1.2.pptx`** | 10 | Same as best (stable name) |
+| `*.contact.png` | — | Gate 3 contact sheets |
 
-| File | Description |
-|------|-------------|
-| **`designmd-pptx-intro-v2.1.2.pptx`** | Precision pipeline + fade animations |
-| `designmd-pptx-intro-v2.1.2.contact.png` | Gate 3 contact sheet |
-| `apple.DESIGN.md` | Spacious black stage · `title_placement: left` · **pt** type sizes |
-| `content.flagship.deck.json` | 9-slide product narrative |
-| `content.intro.deck.json` | Legacy catalog draft (do not ship) |
-| `scaffold/` | Tokens, recipes, sequence, apply wrappers |
+## Sources
+
+| File | Role |
+|------|------|
+| `apple.DESIGN.md` | Spacious black stage · left cover · **pt** type |
+| `content.best.deck.json` | 10-slide best narrative |
+| `content.flagship.deck.json` | Earlier 9-slide flagship |
+| `content.intro.deck.json` | Deprecated 20-slide catalog (do not ship) |
+| `scaffold/` | Latest tokens / recipes / apply wrappers |
 | `a11y.report.json` | Accessibility audit |
 
-## Narrative (9 slides)
+## Narrative (best / intro)
 
-| # | Recipe | Purpose |
-|---|--------|---------|
+| # | Recipe | Beat |
+|---|--------|------|
 | 1 | `cover` | Left-hero product name |
-| 2 | `big_number` | **DESIGN.md** as the contract |
-| 3 | `before_after_slider` | Without → with |
-| 4 | `process` | Brief → Gate 3 (glued connectors) |
-| 5 | `feature_cards` | Precise geometry · gates · agents |
-| 6 | `pillar_columns` | Legacy / official / offline |
-| 7 | `stairs_ascent` | Quality staircase |
-| 8 | `checklist_board` | Hard rules |
-| 9 | `close` | `doctor --ensure` |
+| 2 | `big_number` | **DESIGN.md** as contract |
+| 3 | `before_after_slider` | Before → After |
+| 4 | `process` | Brief → Gate 3 + connectors |
+| 5 | `feature_cards` | Three promises (01–03) |
+| 6 | `pillar_columns` | Legacy / Official / Offline |
+| 7 | `mission_vision_split` | North star |
+| 8 | `stairs_ascent` | Quality staircase |
+| 9 | `checklist_board` | Hard rules |
+| 10 | `close` | `doctor --ensure` |
 
-**Intentionally omitted:** fake hex, circle segments, mindmap-as-chips, RACI,
-risk heat, and other structural-role showcases that dilute the sales argument.
-
-## What we fixed vs the catalog demo
-
-| Problem | Flagship response |
-|---------|-------------------|
-| Catalog exhibition (20 roles) | 9-slide persuasion arc |
-| Fake diagram geometries | Only recipes that read as product truth |
-| “Airy” ignored | `whitespace_density: spacious` → margin 2.2 / gap 1.1 |
-| SF Pro → silent shrink via px | Type sizes in **pt** (48 / 36 / 18) |
-| Same chrome every slide | Left cover edge, process connectors, stairs, pillars |
-| Engineering gates only | Contact sheet + human narrative review |
+**Not in this deck:** fake hex, circle segments, RACI grids, risk heat,
+or catalog exhibition of all 75 builders.
 
 ## Rebuild
-
-Requires **legacy** shape-level OfficeCLI (`OFFICECLI_LEGACY_BIN` or PATH).
 
 ```bash
 export PYTHONPATH=python
 export OFFICECLI_LEGACY_BIN="$HOME/.local/share/designmd-pptx/officecli-legacy/officecli"
-# macOS: https://github.com/iOfficeAI/OfficeCLI/releases
 
 python -m designmd_pptx scaffold demo/apple.DESIGN.md \
   -o demo/scaffold \
-  --content demo/content.flagship.deck.json \
+  --content demo/content.best.deck.json \
   --apply --force --screenshot
 
-cp demo/scaffold/Apple-Keynote-Flagship.pptx demo/designmd-pptx-intro-v2.1.2.pptx
-cp demo/scaffold/Apple-Keynote-Flagship.contact.png demo/designmd-pptx-intro-v2.1.2.contact.png
-python -m designmd_pptx animate demo/designmd-pptx-intro-v2.1.2.pptx \
-  -o demo/designmd-pptx-intro-v2.1.2.pptx \
-  --entrance fade --transition fade --force
+cp demo/scaffold/Apple-Keynote-Flagship.pptx demo/designmd-pptx-best-v2.1.2.pptx
+cp demo/scaffold/Apple-Keynote-Flagship.contact.png demo/designmd-pptx-best-v2.1.2.contact.png
+cp demo/designmd-pptx-best-v2.1.2.pptx demo/designmd-pptx-intro-v2.1.2.pptx
+cp demo/designmd-pptx-best-v2.1.2.contact.png demo/designmd-pptx-intro-v2.1.2.contact.png
+
+python -m designmd_pptx animate demo/designmd-pptx-best-v2.1.2.pptx \
+  -o demo/designmd-pptx-best-v2.1.2.pptx --entrance fade --transition fade --force
 ```
 
-## Honest limits
+Requires **legacy** OfficeCLI for precision geometry.
 
-- OfficeCLI is **required** for materialization.
-- SF Pro is not embedded; Helvetica Neue / Arial is the portable stack.
-- This deck proves a **small set of strong recipes**, not “75 builders look
-  premium.” Catalog depth is a product claim for docs — not this demo.
-- Original design tokens only; no vendor templates.
+## UI kit (why this looks better than catalog demos)
 
-## Related engine changes (this branch)
+- `StageMetrics`: margin / gap / pad from DESIGN.md density
+- Body text = **content height**; free space → Spacer / stage air
+- Layout engine strips vertical `weight` on Text leaves globally
+- Comparison panels (before/after, mission/vision) share one contract
 
-- **`ui_kit.py`**: shared StageMetrics + Card/Stack/Comparison contract
-  (see `docs/ui-kit.md`) — content-height body, Spacer free space, pad/gap
-  from tokens (React-like spacing system)
-- `compile.py`: `spacious` / `compact` density maps to real `margin_cm` / `gap_cm`
-- Flagship recipes consume the kit: feature_cards, before/after, process,
-  close, big_number, bullets, comparison_2col
+See `docs/ui-kit.md`.

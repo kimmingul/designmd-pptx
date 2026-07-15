@@ -1,0 +1,115 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "AppTitle",
+      "text": "Appendix",
+      "x": "2.2cm",
+      "y": "0.8cm",
+      "width": "29.47cm",
+      "height": "1.4cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ATh1_1",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "Item",
+      "x": "2.2cm",
+      "y": "2.9cm",
+      "width": "14.71cm",
+      "height": "0.98cm",
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ATh1_2",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "Value",
+      "x": "16.96cm",
+      "y": "2.9cm",
+      "width": "14.71cm",
+      "height": "0.98cm",
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ATd1_1_1",
+      "preset": "rect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "text": "",
+      "x": "2.2cm",
+      "y": "3.94cm",
+      "width": "14.71cm",
+      "height": "0.98cm",
+      "font": "Arial",
+      "size": "12",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ATd1_1_2",
+      "preset": "rect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "text": "",
+      "x": "16.96cm",
+      "y": "3.94cm",
+      "width": "14.71cm",
+      "height": "0.98cm",
+      "font": "Arial",
+      "size": "12",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  }
+]

@@ -105,12 +105,25 @@ def cm(n: float) -> str:
     return f"{s}cm"
 
 
-def body_height_cm(text: str, *, body_pt: int, min_cm: float = 1.4,
-                   max_cm: float = 6.5) -> float:
-    """Content-height estimate for body copy (OfficeCLI-friendly padding)."""
-    line_h = body_pt * L.PT_TO_CM * 1.42
+def body_height_cm(
+    text: str,
+    *,
+    body_pt: int,
+    width_cm: float | None = None,
+    min_cm: float = 1.4,
+    max_cm: float = 8.0,
+) -> float:
+    """Content-height estimate for body copy (OfficeCLI-friendly padding).
+
+    When ``width_cm`` is set, wraps with the same estimator as ``layout.py``.
+    """
+    if width_cm is not None and width_cm > 0:
+        h = L.text_height_cm(str(text), width_cm, float(body_pt))
+        # OfficeCLI line metrics run slightly taller than our estimator.
+        return max(min_cm, min(max_cm, h + 0.65))
+    line_h = body_pt * L.PT_TO_CM * 1.55
     n = max(1, str(text).count("\n") + 1)
-    return max(min_cm, min(max_cm, n * line_h + 0.5))
+    return max(min_cm, min(max_cm, n * line_h + 0.7))
 
 
 def bullets_text(items: Sequence[Any], *, limit: int = 6) -> str:
@@ -341,10 +354,13 @@ def comparison_panels(
     head_pt = max(22, min(28, st.section_pt))
     head_h = 1.5
     head_to_body = st.title_to_body
+    inner_w = col - 2 * pad
     body_h = max(
-        body_height_cm(left_body, body_pt=st.body_pt),
-        body_height_cm(right_body, body_pt=st.body_pt),
+        body_height_cm(left_body, body_pt=st.body_pt, width_cm=inner_w),
+        body_height_cm(right_body, body_pt=st.body_pt, width_cm=inner_w),
     )
+    # Shorten long vision/mission lines if they still exceed a sane panel.
+    body_h = min(body_h, 7.5)
     panel_h = pad + head_h + head_to_body + body_h + pad
     max_panel_h = CANVAS_H - band_top - bottom_m
     panel_h = min(panel_h, max_panel_h)
@@ -431,6 +447,102 @@ def notes_op(text: str) -> dict[str, Any]:
         "type": "notes",
         "props": {"text": text},
     }
+
+
+def content_band_y_h(
+    st: StageMetrics,
+    *,
+    fraction: float = 0.72,
+    min_h: float = 5.5,
+    max_h: float = 10.5,
+    settle: float = 0.38,
+) -> tuple[float, float]:
+    """(y, height) for a content band under the title with stage bottom air.
+
+    ``fraction`` of available height is used for the band; the rest is stage
+    air above/below via ``settle`` (0 = top-align, 0.5 = center).
+    """
+    band_top = st.content_top
+    avail = max(min_h, CANVAS_H - band_top - st.content_bottom)
+    h = min(max_h, max(min_h, avail * fraction))
+    free = max(0.0, avail - h)
+    y = band_top + free * settle
+    return y, h
+
+
+def equal_tile_row_ops(
+    st: StageMetrics,
+    *,
+    title: str,
+    title_name: str,
+    items: Sequence[dict[str, str]],
+    name_prefix: str,
+    accent_every: int = 2,
+) -> list[dict[str, Any]]:
+    """Equal-width tiles (puzzle / chips) with content-band height."""
+    n = max(1, len(items))
+    # local grid (avoid circular import of recipes._grid_n)
+    usable = st.usable_w
+    gap = st.gap
+    col = (usable - gap * (n - 1)) / n
+    xs = [st.margin + i * (col + gap) for i in range(n)]
+    y, h = content_band_y_h(st, fraction=0.68, min_h=5.8, max_h=9.5)
+    bg = st.c.get("content_background") or st.c["background"]
+    ops: list[dict[str, Any]] = [
+        {
+            "command": "add",
+            "parent": "/",
+            "type": "slide",
+            "props": {"layout": "blank", "background": bg},
+        },
+        {
+            "command": "add",
+            "parent": "/slide[last()]",
+            "type": "shape",
+            "props": {
+                "name": title_name,
+                "text": title,
+                "x": cm(st.margin),
+                "y": cm(max(1.15, st.margin * 0.55)),
+                "width": cm(st.usable_w),
+                "height": cm(st.title_band),
+                "font": st.heading_font,
+                "size": str(st.title_pt),
+                "bold": "true",
+                "color": st.c["text_on_content"],
+                "fill": "none",
+            },
+        },
+    ]
+    for i, it in enumerate(items):
+        text = str(it.get("label") or it.get("title") or "")
+        detail = str(it.get("detail") or it.get("body") or "").strip()
+        if detail:
+            text = f"{text}\n{detail}" if text else detail
+        accent = (i % accent_every == 0)
+        fill = st.c["accent"] if accent else st.c["surface"]
+        tc = st.c["on_accent"] if accent else st.c["text_on_surface"]
+        ops.append({
+            "command": "add", "parent": "/slide[last()]", "type": "shape",
+            "props": {
+                "name": f"{name_prefix}{i + 1}",
+                "preset": st.preset,
+                "fill": fill,
+                "line": "none",
+                "text": text,
+                "x": cm(xs[i]),
+                "y": cm(y),
+                "width": cm(col),
+                "height": cm(h),
+                "font": st.heading_font,
+                "size": str(max(16, min(22, st.section_pt))),
+                "bold": "true",
+                "color": tc,
+                "align": "center",
+                "valign": "middle",
+            },
+        })
+    return ops
 
 
 __all__ = [

@@ -36,9 +36,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "x": "2.2cm",
-      "y": "5.49cm",
+      "y": "5.5cm",
       "width": "14.18cm",
-      "height": "8.43cm"
+      "height": "8.39cm"
     }
   },
   {
@@ -49,7 +49,7 @@
       "name": "BaHead1",
       "text": "Before",
       "x": "3.3cm",
-      "y": "6.59cm",
+      "y": "6.6cm",
       "width": "11.98cm",
       "height": "1.5cm",
       "font": "Arial",
@@ -67,9 +67,9 @@
       "name": "BaBody1",
       "text": "• Decks drift from the brand file\n• Agents invent one-off layouts\n• No floors, no screenshot gate\n• Overwrite risk on every save",
       "x": "3.3cm",
-      "y": "8.7cm",
+      "y": "8.71cm",
       "width": "11.98cm",
-      "height": "4.11cm",
+      "height": "4.08cm",
       "font": "Arial",
       "size": "18",
       "color": "A0A6B0",
@@ -86,9 +86,9 @@
       "fill": "0B5FFF",
       "line": "none",
       "x": "17.48cm",
-      "y": "5.49cm",
+      "y": "5.5cm",
       "width": "14.18cm",
-      "height": "8.43cm"
+      "height": "8.39cm"
     }
   },
   {
@@ -99,7 +99,7 @@
       "name": "BaHead2",
       "text": "After",
       "x": "18.59cm",
-      "y": "6.59cm",
+      "y": "6.6cm",
       "width": "11.98cm",
       "height": "1.5cm",
       "font": "Arial",
@@ -117,9 +117,9 @@
       "name": "BaBody2",
       "text": "• Tokens compiled from DESIGN.md\n• Recipes with real text budgets\n• Gate 3 contact sheet before ship\n• Staging-safe apply with --force",
       "x": "18.59cm",
-      "y": "8.7cm",
+      "y": "8.71cm",
       "width": "11.98cm",
-      "height": "4.11cm",
+      "height": "4.08cm",
       "font": "Arial",
       "size": "18",
       "color": "FFFFFF",

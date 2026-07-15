@@ -14,7 +14,7 @@
     "type": "shape",
     "props": {
       "name": "MVTitle",
-      "text": "Direction",
+      "text": "North star",
       "x": "2.2cm",
       "y": "1.21cm",
       "width": "29.47cm",
@@ -36,9 +36,9 @@
       "fill": "1C1C1E",
       "line": "none",
       "x": "2.2cm",
-      "y": "3.8cm",
-      "width": "14.48cm",
-      "height": "13.5cm"
+      "y": "6.1cm",
+      "width": "14.18cm",
+      "height": "6.8cm"
     }
   },
   {
@@ -48,10 +48,10 @@
     "props": {
       "name": "MVLab1",
       "text": "Mission",
-      "x": "3cm",
-      "y": "4.6cm",
-      "width": "12.88cm",
-      "height": "1.2cm",
+      "x": "3.3cm",
+      "y": "7.2cm",
+      "width": "11.98cm",
+      "height": "1.5cm",
       "font": "Arial",
       "size": "28",
       "bold": "true",
@@ -65,14 +65,14 @@
     "type": "shape",
     "props": {
       "name": "MVBody1",
-      "text": "Why we exist — the problem we refuse to ignore.",
-      "x": "3cm",
-      "y": "6.4cm",
-      "width": "12.88cm",
-      "height": "10.0cm",
+      "text": "Make every brand deck as sharp as the product it sells.",
+      "x": "3.3cm",
+      "y": "9.32cm",
+      "width": "11.98cm",
+      "height": "2.49cm",
       "font": "Arial",
-      "size": "20",
-      "color": "F5F5F7",
+      "size": "18",
+      "color": "A0A6B0",
       "fill": "none"
     }
   },
@@ -85,10 +85,10 @@
       "preset": "roundRect",
       "fill": "0B5FFF",
       "line": "none",
-      "x": "17.18cm",
-      "y": "3.8cm",
-      "width": "14.48cm",
-      "height": "13.5cm"
+      "x": "17.48cm",
+      "y": "6.1cm",
+      "width": "14.18cm",
+      "height": "6.8cm"
     }
   },
   {
@@ -98,10 +98,10 @@
     "props": {
       "name": "MVLab2",
       "text": "Vision",
-      "x": "17.98cm",
-      "y": "4.6cm",
-      "width": "12.88cm",
-      "height": "1.2cm",
+      "x": "18.59cm",
+      "y": "7.2cm",
+      "width": "11.98cm",
+      "height": "1.5cm",
       "font": "Arial",
       "size": "28",
       "bold": "true",
@@ -115,13 +115,13 @@
     "type": "shape",
     "props": {
       "name": "MVBody2",
-      "text": "Where we are going — the future state in concrete terms.",
-      "x": "17.98cm",
-      "y": "6.4cm",
-      "width": "12.88cm",
-      "height": "10.0cm",
+      "text": "Ship DESIGN.md-native slides without designers in the pixel loop.",
+      "x": "18.59cm",
+      "y": "9.32cm",
+      "width": "11.98cm",
+      "height": "2.49cm",
       "font": "Arial",
-      "size": "20",
+      "size": "18",
       "color": "FFFFFF",
       "fill": "none"
     }

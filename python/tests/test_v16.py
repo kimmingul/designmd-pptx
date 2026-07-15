@@ -31,6 +31,8 @@ FIXTURES = Path(__file__).resolve().parent.parent / "fixtures"
 
 class LayoutEngineV16(unittest.TestCase):
     def test_vstack_title_plus_weighted_body(self) -> None:
+        # weight on Text is stripped (ui-kit): body is content-height, free
+        # stage stays below — not a hollow text frame to the bottom margin.
         tree = VStack(pad=(1.2, 1.27, 1.0, 1.27), gap=0.5, children=[
             Text("Title", pt=36, name="T"),
             Text("Body", pt=18, name="B", weight=1),
@@ -38,7 +40,8 @@ class LayoutEngineV16(unittest.TestCase):
         placed = solve(tree, 0, 0, CANVAS_W, CANVAS_H)
         by = {p.name: p for p in placed}
         self.assertLess(by["T"].h, 3.0)
-        self.assertAlmostEqual(by["B"].y + by["B"].h, CANVAS_H - 1.0, delta=0.05)
+        self.assertLess(by["B"].h, 3.0, "body must not fill the stage")
+        self.assertLess(by["B"].y + by["B"].h, CANVAS_H - 2.0)
         self.assertAlmostEqual(by["T"].w, CANVAS_W - 2 * 1.27, delta=0.01)
 
     def test_hstack_equal_columns(self) -> None:

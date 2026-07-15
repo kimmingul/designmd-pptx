@@ -1,0 +1,212 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "GanttTitle",
+      "text": "Schedule",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.55cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "GanttPhase1",
+      "text": "Q1",
+      "x": "9cm",
+      "y": "3.3cm",
+      "width": "5.67cm",
+      "height": "1cm",
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "GanttPhase2",
+      "text": "Q2",
+      "x": "14.67cm",
+      "y": "3.3cm",
+      "width": "5.67cm",
+      "height": "1cm",
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "GanttPhase3",
+      "text": "Q3",
+      "x": "20.34cm",
+      "y": "3.3cm",
+      "width": "5.67cm",
+      "height": "1cm",
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "GanttPhase4",
+      "text": "Q4",
+      "x": "26cm",
+      "y": "3.3cm",
+      "width": "5.67cm",
+      "height": "1cm",
+      "font": "Arial",
+      "size": "16",
+      "bold": "true",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "GanttLabel1",
+      "text": "Discovery",
+      "x": "2.2cm",
+      "y": "4.45cm",
+      "width": "6.5cm",
+      "height": "1.65cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "F5F5F7",
+      "valign": "middle",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "GanttBar1",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "9.1cm",
+      "y": "4.7cm",
+      "width": "5.47cm",
+      "height": "1.25cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "GanttLabel2",
+      "text": "Build",
+      "x": "2.2cm",
+      "y": "6.25cm",
+      "width": "6.5cm",
+      "height": "1.65cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "F5F5F7",
+      "valign": "middle",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "GanttBar2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "14.77cm",
+      "y": "6.5cm",
+      "width": "11.13cm",
+      "height": "1.25cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "GanttLabel3",
+      "text": "Launch",
+      "x": "2.2cm",
+      "y": "8.05cm",
+      "width": "6.5cm",
+      "height": "1.65cm",
+      "font": "Arial",
+      "size": "16",
+      "color": "F5F5F7",
+      "valign": "middle",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "GanttBar3",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "26.1cm",
+      "y": "8.3cm",
+      "width": "5.47cm",
+      "height": "1.25cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Call out the critical path — the bar that cannot slip."
+    }
+  }
+]

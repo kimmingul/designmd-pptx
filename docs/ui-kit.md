@@ -40,14 +40,24 @@ UI.solve_stage(build, bg=st.c["content_background"])
 UI.comparison_panels(st, title=…, left_title=…, left_body=…, right_title=…, right_body=…)
 ```
 
-## Migrated recipes (contract consumers)
+## Engine enforcement
 
-- `feature_cards`, `bullets`, `comparison_2col`, `before_after_slider`
-- `close`, `big_number`, `process` (metrics for margin/gap/vertical band)
-- `_title_op` (shared title chrome)
+`layout.solve()` strips `weight` from **Text leaves inside VStacks** so free
+height cannot inflate hollow text frames. HStack width weights are unchanged.
 
-Other recipes still use local coordinates; new work should call `stage_metrics`
-or the helpers above.
+`_base_props()` always loads `StageMetrics` (`margin` / `gap` / `pad`).
+
+## Migrated / kit-backed recipes
+
+- **Full kit trees:** `feature_cards`, `bullets`, `comparison_2col`
+- **comparison_panels:** `before_after_slider`, `mission_vision_split`
+- **tile row / content band:** `puzzle_pieces`, `pillar_columns`, `stairs_ascent`,
+  `checklist_board`
+- **metrics chrome:** `close`, `big_number`, `process`, `_title_op`, all recipes
+  via `_base_props`
+
+Remaining fixed-cm recipes still benefit from StageMetrics margin/gap through
+`_base_props`. Prefer `content_band_y_h` / `equal_tile_row_ops` for new work.
 
 ## Why this exists
 
