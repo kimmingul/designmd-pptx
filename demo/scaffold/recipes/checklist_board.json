@@ -1,0 +1,163 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CheckTitle",
+      "text": "Hard rules",
+      "x": "1.27cm",
+      "y": "1.0cm",
+      "width": "31.33cm",
+      "height": "1.8cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CheckRow1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "✓  Title ≥ 36pt · body ≥ 18pt",
+      "x": "1.27cm",
+      "y": "3.6cm",
+      "width": "31.33cm",
+      "height": "1.75cm",
+      "font": "Calibri",
+      "size": "18",
+      "bold": "false",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CheckRow2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "✓  No silent truncation — shorten or split",
+      "x": "1.27cm",
+      "y": "5.5cm",
+      "width": "31.33cm",
+      "height": "1.75cm",
+      "font": "Calibri",
+      "size": "18",
+      "bold": "false",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CheckRow3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "✓  Layout engine for dense patterns",
+      "x": "1.27cm",
+      "y": "7.4cm",
+      "width": "31.33cm",
+      "height": "1.75cm",
+      "font": "Calibri",
+      "size": "18",
+      "bold": "false",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CheckRow4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "✓  Overwrite only with --force",
+      "x": "1.27cm",
+      "y": "9.3cm",
+      "width": "31.33cm",
+      "height": "1.75cm",
+      "font": "Calibri",
+      "size": "18",
+      "bold": "false",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CheckRow5",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "✓  Finish apply with --screenshot",
+      "x": "1.27cm",
+      "y": "11.2cm",
+      "width": "31.33cm",
+      "height": "1.75cm",
+      "font": "Calibri",
+      "size": "18",
+      "bold": "false",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CheckRow6",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "✓  Ask before installing OfficeCLI",
+      "x": "1.27cm",
+      "y": "13.1cm",
+      "width": "31.33cm",
+      "height": "1.75cm",
+      "font": "Calibri",
+      "size": "18",
+      "bold": "false",
+      "color": "F5F5F7",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Open items need an owner before the meeting ends."
+    }
+  }
+]

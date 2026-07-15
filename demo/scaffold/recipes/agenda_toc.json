@@ -1,0 +1,272 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "AgendaTitle",
+      "text": "Agenda",
+      "x": "1.27cm",
+      "y": "1.1cm",
+      "width": "31.33cm",
+      "height": "1.84cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "AgendaNum1",
+      "text": "01",
+      "x": "1.27cm",
+      "y": "3.29cm",
+      "width": "4.72cm",
+      "height": "1.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "18",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "AgendaLabel1",
+      "text": "Context & goals",
+      "x": "6.39cm",
+      "y": "3.29cm",
+      "width": "26.21cm",
+      "height": "2.47cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "rect",
+      "fill": "3A3A3C",
+      "line": "none",
+      "name": "AgendaRule1",
+      "x": "1.27cm",
+      "y": "6.04cm",
+      "width": "31.33cm",
+      "height": "0.04cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "AgendaNum2",
+      "text": "02",
+      "x": "1.27cm",
+      "y": "6.36cm",
+      "width": "4.72cm",
+      "height": "1.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "18",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "AgendaLabel2",
+      "text": "What changed",
+      "x": "6.39cm",
+      "y": "6.36cm",
+      "width": "26.21cm",
+      "height": "2.47cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "rect",
+      "fill": "3A3A3C",
+      "line": "none",
+      "name": "AgendaRule2",
+      "x": "1.27cm",
+      "y": "9.11cm",
+      "width": "31.33cm",
+      "height": "0.04cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "AgendaNum3",
+      "text": "03",
+      "x": "1.27cm",
+      "y": "9.43cm",
+      "width": "4.72cm",
+      "height": "1.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "18",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "AgendaLabel3",
+      "text": "Options",
+      "x": "6.39cm",
+      "y": "9.43cm",
+      "width": "26.21cm",
+      "height": "2.47cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "rect",
+      "fill": "3A3A3C",
+      "line": "none",
+      "name": "AgendaRule3",
+      "x": "1.27cm",
+      "y": "12.19cm",
+      "width": "31.33cm",
+      "height": "0.04cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "AgendaNum4",
+      "text": "04",
+      "x": "1.27cm",
+      "y": "12.51cm",
+      "width": "4.72cm",
+      "height": "1.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "18",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "AgendaLabel4",
+      "text": "Recommendation",
+      "x": "6.39cm",
+      "y": "12.51cm",
+      "width": "26.21cm",
+      "height": "2.47cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "rect",
+      "fill": "3A3A3C",
+      "line": "none",
+      "name": "AgendaRule4",
+      "x": "1.27cm",
+      "y": "15.26cm",
+      "width": "31.33cm",
+      "height": "0.04cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "AgendaNum5",
+      "text": "05",
+      "x": "1.27cm",
+      "y": "15.58cm",
+      "width": "4.72cm",
+      "height": "1.4cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "18",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "AgendaLabel5",
+      "text": "Next steps",
+      "x": "6.39cm",
+      "y": "15.58cm",
+      "width": "26.21cm",
+      "height": "2.47cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Walk the agenda; mark time boxes."
+    }
+  }
+]

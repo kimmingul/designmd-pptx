@@ -1,0 +1,480 @@
+{
+  "version": "1.1",
+  "slides": [
+    {
+      "id": "01-cover",
+      "recipe": "cover",
+      "content": {
+        "title": "designmd-pptx",
+        "subtitle": "Compile brand design into precise PowerPoint",
+        "meta": "v2.1.2  ·  Apple Keynote style  ·  20 slides"
+      }
+    },
+    {
+      "id": "02-mission",
+      "recipe": "mission_vision_split",
+      "content": {
+        "title": "North star",
+        "mission": "Make every brand deck as sharp as the product it sells — from DESIGN.md to OfficeCLI tokens, recipes, and staging-safe apply.",
+        "vision": "Every team ships DESIGN.md-native slides with agent skill routing, without designers trapped in pixel push."
+      }
+    },
+    {
+      "id": "03-pulse",
+      "recipe": "icon_stat_row",
+      "content": {
+        "title": "At a glance",
+        "stats": [
+          {
+            "value": "75",
+            "label": "Recipe builders",
+            "icon": "R"
+          },
+          {
+            "value": "14",
+            "label": "Wave 4 roles",
+            "icon": "W"
+          },
+          {
+            "value": "2",
+            "label": "OfficeCLI backends",
+            "icon": "B"
+          },
+          {
+            "value": "3",
+            "label": "Agent platforms",
+            "icon": "A"
+          }
+        ]
+      }
+    },
+    {
+      "id": "04-section-problem",
+      "recipe": "section_opener_numbered",
+      "content": {
+        "number": "01",
+        "title": "The problem",
+        "blurb": "Brand systems live in DESIGN.md. Decks still ship as one-off slides."
+      }
+    },
+    {
+      "id": "05-before-after",
+      "recipe": "before_after_slider",
+      "content": {
+        "title": "From friction to floor",
+        "before": {
+          "label": "Before",
+          "body": "Hand-built decks. Drifted brand. No gates. Agents invent layouts."
+        },
+        "after": {
+          "label": "After",
+          "body": "Compiled tokens. Recipe catalog. CJK-aware budgets. Gate 3 screenshots."
+        }
+      }
+    },
+    {
+      "id": "06-empathy",
+      "recipe": "empathy_map_quad",
+      "content": {
+        "title": "Who we serve",
+        "user": "Design lead",
+        "says": "• Ship by Friday",
+        "thinks": "• Will fonts shrink?",
+        "does": "• Brief → scaffold",
+        "feels": "• Time-poor"
+      }
+    },
+    {
+      "id": "07-mindmap",
+      "recipe": "mindmap_branches",
+      "content": {
+        "title": "What the toolkit covers",
+        "hub": "designmd",
+        "branches": [
+          {
+            "label": "Compile"
+          },
+          {
+            "label": "Compose"
+          },
+          {
+            "label": "Recipes"
+          },
+          {
+            "label": "Apply"
+          },
+          {
+            "label": "Restyle"
+          },
+          {
+            "label": "Doctor"
+          }
+        ]
+      }
+    },
+    {
+      "id": "08-journey",
+      "recipe": "journey_stages",
+      "content": {
+        "title": "Authoring journey",
+        "stages": [
+          {
+            "label": "Brief",
+            "detail": "Markdown",
+            "emotion": "curious"
+          },
+          {
+            "label": "Compose",
+            "detail": "Deck-spec",
+            "emotion": "focused"
+          },
+          {
+            "label": "Scaffold",
+            "detail": "Tokens",
+            "emotion": "confident"
+          },
+          {
+            "label": "Apply",
+            "detail": "Precision",
+            "emotion": "careful"
+          },
+          {
+            "label": "Gate 3",
+            "detail": "QA sheet",
+            "emotion": "proud"
+          }
+        ]
+      }
+    },
+    {
+      "id": "09-section-how",
+      "recipe": "section_opener_numbered",
+      "content": {
+        "number": "02",
+        "title": "How it works",
+        "blurb": "Two backends. One contract. Precision or draft — pick by need."
+      }
+    },
+    {
+      "id": "10-pillars",
+      "recipe": "pillar_columns",
+      "content": {
+        "title": "Dual backends",
+        "pillars": [
+          {
+            "label": "Legacy",
+            "body": "Shape-level batch. DESIGN.md geometry. scaffold --apply · restyle · master · Gate 3."
+          },
+          {
+            "label": "Official",
+            "body": "Agent-bridge JSON-RPC. office.render drafts. Version pin via doctor --install."
+          },
+          {
+            "label": "Offline",
+            "body": "Compose, a11y, refine, generate, animate OOXML — no binary required."
+          }
+        ]
+      }
+    },
+    {
+      "id": "11-hex",
+      "recipe": "hex_cluster",
+      "content": {
+        "title": "Recipe families",
+        "items": [
+          {
+            "label": "Core"
+          },
+          {
+            "label": "KPI"
+          },
+          {
+            "label": "Process"
+          },
+          {
+            "label": "Matrix"
+          },
+          {
+            "label": "Wave 1"
+          },
+          {
+            "label": "Wave 2"
+          },
+          {
+            "label": "Wave 4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "12-segments",
+      "recipe": "circle_segments",
+      "content": {
+        "title": "Catalog depth",
+        "center": "75",
+        "segments": [
+          {
+            "label": "Core",
+            "detail": "Cover · KPI · cards"
+          },
+          {
+            "label": "Wave 1",
+            "detail": "Full-family patterns"
+          },
+          {
+            "label": "Wave 2",
+            "detail": "Long-tail roles"
+          },
+          {
+            "label": "Wave 3",
+            "detail": "Vertical skins"
+          },
+          {
+            "label": "Wave 4",
+            "detail": "Infograpify roles"
+          },
+          {
+            "label": "Generate",
+            "detail": "Freeform keynote"
+          }
+        ]
+      }
+    },
+    {
+      "id": "13-wave4",
+      "recipe": "feature_cards",
+      "content": {
+        "title": "Infograpify structural roles",
+        "cards": [
+          {
+            "title": "Strategy",
+            "body": "PESTLE · scorecard · mission/vision · mindmap"
+          },
+          {
+            "title": "Delivery",
+            "body": "RACI · journey · stairs · checklist · pillars"
+          },
+          {
+            "title": "Visual systems",
+            "body": "Hex · puzzle · circle segments · risk heat · empathy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "14-stairs",
+      "recipe": "stairs_ascent",
+      "content": {
+        "title": "Precision pipeline",
+        "steps": [
+          {
+            "label": "DESIGN.md",
+            "detail": "Brand source of truth"
+          },
+          {
+            "label": "Tokens",
+            "detail": "Colors · type · floors"
+          },
+          {
+            "label": "Recipes",
+            "detail": "Layout-engine geometry"
+          },
+          {
+            "label": "Apply",
+            "detail": "Staging-safe write"
+          },
+          {
+            "label": "Gate 3",
+            "detail": "Screenshot + vision"
+          }
+        ]
+      }
+    },
+    {
+      "id": "15-checklist",
+      "recipe": "checklist_board",
+      "content": {
+        "title": "Hard rules",
+        "items": [
+          {
+            "label": "Title ≥ 36pt · body ≥ 18pt",
+            "done": true
+          },
+          {
+            "label": "No silent truncation — shorten or split",
+            "done": true
+          },
+          {
+            "label": "Layout engine for dense patterns",
+            "done": true
+          },
+          {
+            "label": "Overwrite only with --force",
+            "done": true
+          },
+          {
+            "label": "Finish apply with --screenshot",
+            "done": true
+          },
+          {
+            "label": "Ask before installing OfficeCLI",
+            "done": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "16-scorecard",
+      "recipe": "scorecard_balanced",
+      "content": {
+        "title": "Quality scorecard",
+        "perspectives": [
+          {
+            "label": "Brand",
+            "body": "Token floors · contrast · type scale"
+          },
+          {
+            "label": "Layout",
+            "body": "Density adapt · CJK budgets · recipes"
+          },
+          {
+            "label": "Pipeline",
+            "body": "Staging · issues gate · Gate 3"
+          },
+          {
+            "label": "Agents",
+            "body": "Doctor · skills · no silent install"
+          }
+        ]
+      }
+    },
+    {
+      "id": "17-raci",
+      "recipe": "raci_matrix",
+      "content": {
+        "title": "Who owns the deck",
+        "roles": [
+          "Human",
+          "Agent",
+          "designmd",
+          "OfficeCLI"
+        ],
+        "activities": [
+          {
+            "name": "Brief",
+            "raci": [
+              "A",
+              "R",
+              "C",
+              "I"
+            ]
+          },
+          {
+            "name": "Compose",
+            "raci": [
+              "C",
+              "A",
+              "R",
+              "I"
+            ]
+          },
+          {
+            "name": "Scaffold",
+            "raci": [
+              "I",
+              "A",
+              "R",
+              "C"
+            ]
+          },
+          {
+            "name": "Apply",
+            "raci": [
+              "A",
+              "C",
+              "C",
+              "R"
+            ]
+          },
+          {
+            "name": "Gate 3",
+            "raci": [
+              "A",
+              "R",
+              "C",
+              "C"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "18-puzzle",
+      "recipe": "puzzle_pieces",
+      "content": {
+        "title": "Platform fit",
+        "pieces": [
+          {
+            "label": "Claude Code",
+            "body": "Plugin + skill"
+          },
+          {
+            "label": "Codex",
+            "body": "install-codex.ps1"
+          },
+          {
+            "label": "Grok",
+            "body": "Synced adapters"
+          },
+          {
+            "label": "VS Code",
+            "body": "Thin CLI shell"
+          }
+        ]
+      }
+    },
+    {
+      "id": "19-risk",
+      "recipe": "risk_heat_matrix",
+      "content": {
+        "title": "What we refuse",
+        "risks": [
+          {
+            "label": "Font shrink to fit",
+            "likelihood": 1,
+            "impact": 3
+          },
+          {
+            "label": "Silent overwrite",
+            "likelihood": 1,
+            "impact": 3
+          },
+          {
+            "label": "Vendor template copy",
+            "likelihood": 1,
+            "impact": 3
+          },
+          {
+            "label": "Missing OfficeCLI",
+            "likelihood": 3,
+            "impact": 3
+          },
+          {
+            "label": "Agent silent install",
+            "likelihood": 2,
+            "impact": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "20-close",
+      "recipe": "close",
+      "content": {
+        "title": "Start here",
+        "body": "doctor --ensure · compose · scaffold · apply --screenshot --gate3",
+        "cta": "doctor --ensure"
+      }
+    }
+  ]
+}

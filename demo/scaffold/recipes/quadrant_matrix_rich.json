@@ -1,0 +1,344 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RichMatrixTitle",
+      "text": "Priority matrix",
+      "x": "1.27cm",
+      "y": "1.0cm",
+      "width": "31.33cm",
+      "height": "1.8cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "name": "RichQuad1Bg",
+      "x": "1.27cm",
+      "y": "3.9cm",
+      "width": "15.28cm",
+      "height": "6.17cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "RichQuad1Tag",
+      "text": "Do",
+      "x": "1.82cm",
+      "y": "4.35cm",
+      "width": "14.18cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "RichQuad1Title",
+      "text": "Bet",
+      "x": "1.82cm",
+      "y": "5.41cm",
+      "width": "14.18cm",
+      "height": "1.22cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "RichQuad1Body",
+      "text": "High impact · invest",
+      "x": "1.82cm",
+      "y": "6.91cm",
+      "width": "14.18cm",
+      "height": "2.66cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "name": "RichQuad2Bg",
+      "x": "17.31cm",
+      "y": "3.9cm",
+      "width": "15.28cm",
+      "height": "6.17cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "RichQuad2Tag",
+      "text": "Design",
+      "x": "17.86cm",
+      "y": "4.35cm",
+      "width": "14.18cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "RichQuad2Title",
+      "text": "Shape",
+      "x": "17.86cm",
+      "y": "5.41cm",
+      "width": "14.18cm",
+      "height": "1.22cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "RichQuad2Body",
+      "text": "Promising · refine",
+      "x": "17.86cm",
+      "y": "6.91cm",
+      "width": "14.18cm",
+      "height": "2.66cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "name": "RichQuad3Bg",
+      "x": "1.27cm",
+      "y": "10.83cm",
+      "width": "15.28cm",
+      "height": "6.17cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "RichQuad3Tag",
+      "text": "Own",
+      "x": "1.82cm",
+      "y": "11.28cm",
+      "width": "14.18cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "RichQuad3Title",
+      "text": "Delegate",
+      "x": "1.82cm",
+      "y": "12.34cm",
+      "width": "14.18cm",
+      "height": "1.22cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "RichQuad3Body",
+      "text": "Low strategy · staff",
+      "x": "1.82cm",
+      "y": "13.84cm",
+      "width": "14.18cm",
+      "height": "2.66cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "name": "RichQuad4Bg",
+      "x": "17.31cm",
+      "y": "10.83cm",
+      "width": "15.28cm",
+      "height": "6.17cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "RichQuad4Tag",
+      "text": "Kill",
+      "x": "17.86cm",
+      "y": "11.28cm",
+      "width": "14.18cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "RichQuad4Title",
+      "text": "Drop",
+      "x": "17.86cm",
+      "y": "12.34cm",
+      "width": "14.18cm",
+      "height": "1.22cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "RichQuad4Body",
+      "text": "Low leverage · cut",
+      "x": "17.86cm",
+      "y": "13.84cm",
+      "width": "14.18cm",
+      "height": "2.66cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RichAxisX",
+      "text": "Effort →",
+      "x": "1.27cm",
+      "y": "17.5cm",
+      "width": "31.33cm",
+      "height": "0.9cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RichAxisY",
+      "text": "Impact →",
+      "x": "1.27cm",
+      "y": "3.0cm",
+      "width": "14cm",
+      "height": "0.8cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Start top-left; contrast invest vs kill with one example each."
+    }
+  }
+]

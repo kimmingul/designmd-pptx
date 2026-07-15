@@ -1,0 +1,772 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalTitle",
+      "text": "Activity calendar",
+      "x": "1.27cm",
+      "y": "1.0cm",
+      "width": "31.33cm",
+      "height": "1.8cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "1",
+      "x": "1.27cm",
+      "y": "3.6cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell2",
+      "preset": "roundRect",
+      "fill": "91B7FF",
+      "line": "none",
+      "text": "",
+      "x": "5.76cm",
+      "y": "3.6cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell3",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "",
+      "x": "10.26cm",
+      "y": "3.6cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell4",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "",
+      "x": "14.75cm",
+      "y": "3.6cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell5",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "5",
+      "x": "19.24cm",
+      "y": "3.6cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell6",
+      "preset": "roundRect",
+      "fill": "91B7FF",
+      "line": "none",
+      "text": "",
+      "x": "23.73cm",
+      "y": "3.6cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell7",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "",
+      "x": "28.23cm",
+      "y": "3.6cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell8",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "",
+      "x": "1.27cm",
+      "y": "5.92cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell9",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "9",
+      "x": "5.76cm",
+      "y": "5.92cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell10",
+      "preset": "roundRect",
+      "fill": "91B7FF",
+      "line": "none",
+      "text": "",
+      "x": "10.26cm",
+      "y": "5.92cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell11",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "",
+      "x": "14.75cm",
+      "y": "5.92cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell12",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "",
+      "x": "19.24cm",
+      "y": "5.92cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell13",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "13",
+      "x": "23.73cm",
+      "y": "5.92cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell14",
+      "preset": "roundRect",
+      "fill": "91B7FF",
+      "line": "none",
+      "text": "",
+      "x": "28.23cm",
+      "y": "5.92cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell15",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "",
+      "x": "1.27cm",
+      "y": "8.24cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell16",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "",
+      "x": "5.76cm",
+      "y": "8.24cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell17",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "17",
+      "x": "10.26cm",
+      "y": "8.24cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell18",
+      "preset": "roundRect",
+      "fill": "91B7FF",
+      "line": "none",
+      "text": "",
+      "x": "14.75cm",
+      "y": "8.24cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell19",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "",
+      "x": "19.24cm",
+      "y": "8.24cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell20",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "",
+      "x": "23.73cm",
+      "y": "8.24cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell21",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "21",
+      "x": "28.23cm",
+      "y": "8.24cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell22",
+      "preset": "roundRect",
+      "fill": "91B7FF",
+      "line": "none",
+      "text": "",
+      "x": "1.27cm",
+      "y": "10.56cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell23",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "",
+      "x": "5.76cm",
+      "y": "10.56cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell24",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "",
+      "x": "10.26cm",
+      "y": "10.56cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell25",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "25",
+      "x": "14.75cm",
+      "y": "10.56cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell26",
+      "preset": "roundRect",
+      "fill": "91B7FF",
+      "line": "none",
+      "text": "",
+      "x": "19.24cm",
+      "y": "10.56cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell27",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "",
+      "x": "23.73cm",
+      "y": "10.56cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell28",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "",
+      "x": "28.23cm",
+      "y": "10.56cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell29",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "29",
+      "x": "1.27cm",
+      "y": "12.88cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell30",
+      "preset": "roundRect",
+      "fill": "91B7FF",
+      "line": "none",
+      "text": "",
+      "x": "5.76cm",
+      "y": "12.88cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell31",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "",
+      "x": "10.26cm",
+      "y": "12.88cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell32",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "",
+      "x": "14.75cm",
+      "y": "12.88cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell33",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "33",
+      "x": "19.24cm",
+      "y": "12.88cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell34",
+      "preset": "roundRect",
+      "fill": "91B7FF",
+      "line": "none",
+      "text": "",
+      "x": "23.73cm",
+      "y": "12.88cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CalCell35",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "",
+      "x": "28.23cm",
+      "y": "12.88cm",
+      "width": "4.37cm",
+      "height": "2.2cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Point at the densest week and what drove it."
+    }
+  }
+]

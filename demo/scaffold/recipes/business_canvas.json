@@ -1,0 +1,334 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BmcTitle",
+      "text": "Business model",
+      "x": "1.27cm",
+      "y": "1.0cm",
+      "width": "31.33cm",
+      "height": "1.8cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BmcBlock1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "1.27cm",
+      "y": "3.2cm",
+      "width": "6.12cm",
+      "height": "8.88cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BmcLabel1",
+      "text": "Key partners",
+      "x": "1.47cm",
+      "y": "3.35cm",
+      "width": "5.72cm",
+      "height": "0.7cm",
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BmcBlock2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "7.54cm",
+      "y": "3.2cm",
+      "width": "6.12cm",
+      "height": "4.38cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BmcLabel2",
+      "text": "Key activities",
+      "x": "7.74cm",
+      "y": "3.35cm",
+      "width": "5.72cm",
+      "height": "0.7cm",
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BmcBlock3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "7.54cm",
+      "y": "7.7cm",
+      "width": "6.12cm",
+      "height": "4.38cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BmcLabel3",
+      "text": "Key resources",
+      "x": "7.74cm",
+      "y": "7.85cm",
+      "width": "5.72cm",
+      "height": "0.7cm",
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BmcBlock4",
+      "preset": "roundRect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "13.8cm",
+      "y": "3.2cm",
+      "width": "6.12cm",
+      "height": "8.88cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BmcLabel4",
+      "text": "Value propositions",
+      "x": "14cm",
+      "y": "3.35cm",
+      "width": "5.72cm",
+      "height": "0.7cm",
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "FFFFFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BmcBlock5",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "20.07cm",
+      "y": "3.2cm",
+      "width": "6.12cm",
+      "height": "4.38cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BmcLabel5",
+      "text": "Customer relationships",
+      "x": "20.27cm",
+      "y": "3.35cm",
+      "width": "5.72cm",
+      "height": "0.7cm",
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BmcBlock6",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "20.07cm",
+      "y": "7.7cm",
+      "width": "6.12cm",
+      "height": "4.38cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BmcLabel6",
+      "text": "Channels",
+      "x": "20.27cm",
+      "y": "7.85cm",
+      "width": "5.72cm",
+      "height": "0.7cm",
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BmcBlock7",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "26.33cm",
+      "y": "3.2cm",
+      "width": "6.12cm",
+      "height": "8.88cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BmcLabel7",
+      "text": "Customer segments",
+      "x": "26.53cm",
+      "y": "3.35cm",
+      "width": "5.72cm",
+      "height": "0.7cm",
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BmcBlock8",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "1.27cm",
+      "y": "12.4cm",
+      "width": "12.38cm",
+      "height": "4.38cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BmcLabel8",
+      "text": "Cost structure",
+      "x": "1.47cm",
+      "y": "12.55cm",
+      "width": "11.98cm",
+      "height": "0.7cm",
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BmcBlock9",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "13.8cm",
+      "y": "12.4cm",
+      "width": "18.65cm",
+      "height": "4.38cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BmcLabel9",
+      "text": "Revenue streams",
+      "x": "14cm",
+      "y": "12.55cm",
+      "width": "18.25cm",
+      "height": "0.7cm",
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Start at value proposition; test cost vs revenue last."
+    }
+  }
+]

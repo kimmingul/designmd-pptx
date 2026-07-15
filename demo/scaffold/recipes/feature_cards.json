@@ -1,0 +1,224 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "FeatTitle",
+      "text": "Infograpify structural roles",
+      "x": "1.27cm",
+      "y": "1.2cm",
+      "width": "31.33cm",
+      "height": "1.84cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "name": "Card1Bg",
+      "x": "1.27cm",
+      "y": "3.94cm",
+      "width": "9.94cm",
+      "height": "14.11cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "name": "Card1Accent",
+      "x": "1.27cm",
+      "y": "3.94cm",
+      "width": "9.94cm",
+      "height": "0.18cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Card1Title",
+      "text": "Strategy",
+      "x": "1.87cm",
+      "y": "5.12cm",
+      "width": "8.74cm",
+      "height": "1.49cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Card1Body",
+      "text": "PESTLE · scorecard · mission/vision · mindmap",
+      "x": "1.87cm",
+      "y": "7.1cm",
+      "width": "8.74cm",
+      "height": "10.35cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "name": "Card2Bg",
+      "x": "11.97cm",
+      "y": "3.94cm",
+      "width": "9.94cm",
+      "height": "14.11cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "name": "Card2Accent",
+      "x": "11.97cm",
+      "y": "3.94cm",
+      "width": "9.94cm",
+      "height": "0.18cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Card2Title",
+      "text": "Delivery",
+      "x": "12.57cm",
+      "y": "5.12cm",
+      "width": "8.74cm",
+      "height": "1.49cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Card2Body",
+      "text": "RACI · journey · stairs · checklist · pillars",
+      "x": "12.57cm",
+      "y": "7.1cm",
+      "width": "8.74cm",
+      "height": "10.35cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "name": "Card3Bg",
+      "x": "22.66cm",
+      "y": "3.94cm",
+      "width": "9.94cm",
+      "height": "14.11cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "name": "Card3Accent",
+      "x": "22.66cm",
+      "y": "3.94cm",
+      "width": "9.94cm",
+      "height": "0.18cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Card3Title",
+      "text": "Visual systems",
+      "x": "23.26cm",
+      "y": "5.12cm",
+      "width": "8.74cm",
+      "height": "1.49cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Card3Body",
+      "text": "Hex · puzzle · circle segments · risk heat · empathy",
+      "x": "23.26cm",
+      "y": "7.1cm",
+      "width": "8.74cm",
+      "height": "10.35cm"
+    }
+  }
+]

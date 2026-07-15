@@ -1,0 +1,129 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "CmpTitle",
+      "text": "Compare",
+      "x": "1.27cm",
+      "y": "1.2cm",
+      "width": "31.33cm",
+      "height": "1.84cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "name": "Cmp1Bg",
+      "x": "1.27cm",
+      "y": "3.94cm",
+      "width": "15.28cm",
+      "height": "14.11cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Cmp1Title",
+      "text": "Option A",
+      "x": "2.07cm",
+      "y": "4.74cm",
+      "width": "13.68cm",
+      "height": "1.49cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Cmp1Body",
+      "text": "Strengths of A.",
+      "x": "2.07cm",
+      "y": "6.72cm",
+      "width": "13.68cm",
+      "height": "10.53cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "name": "Cmp2Bg",
+      "x": "17.31cm",
+      "y": "3.94cm",
+      "width": "15.28cm",
+      "height": "14.11cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Cmp2Title",
+      "text": "Option B",
+      "x": "18.11cm",
+      "y": "4.74cm",
+      "width": "13.68cm",
+      "height": "1.49cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Cmp2Body",
+      "text": "Strengths of B.",
+      "x": "18.11cm",
+      "y": "6.72cm",
+      "width": "13.68cm",
+      "height": "10.53cm"
+    }
+  }
+]

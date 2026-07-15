@@ -1,0 +1,256 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagTitle",
+      "text": "Project status",
+      "x": "1.27cm",
+      "y": "1.0cm",
+      "width": "31.33cm",
+      "height": "1.8cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagHead",
+      "text": "Project          Status          Note",
+      "x": "1.27cm",
+      "y": "3.3cm",
+      "width": "31.33cm",
+      "height": "0.9cm",
+      "font": "Calibri",
+      "size": "14",
+      "bold": "true",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagRow1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "1.27cm",
+      "y": "4.4cm",
+      "width": "31.33cm",
+      "height": "1.55cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagName1",
+      "text": "Platform",
+      "x": "1.67cm",
+      "y": "4.65cm",
+      "width": "10cm",
+      "height": "1.2cm",
+      "font": "Calibri",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "valign": "middle",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagDot1",
+      "preset": "ellipse",
+      "fill": "30D158",
+      "line": "none",
+      "x": "13.27cm",
+      "y": "4.8cm",
+      "width": "0.9cm",
+      "height": "0.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagNote1",
+      "text": "On track",
+      "x": "14.77cm",
+      "y": "4.65cm",
+      "width": "17.13cm",
+      "height": "1.2cm",
+      "font": "Calibri",
+      "size": "16",
+      "color": "A0A6B0",
+      "valign": "middle",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagRow2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "1.27cm",
+      "y": "6.1cm",
+      "width": "31.33cm",
+      "height": "1.55cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagName2",
+      "text": "Mobile",
+      "x": "1.67cm",
+      "y": "6.35cm",
+      "width": "10cm",
+      "height": "1.2cm",
+      "font": "Calibri",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "valign": "middle",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagDot2",
+      "preset": "ellipse",
+      "fill": "D97706",
+      "line": "none",
+      "x": "13.27cm",
+      "y": "6.5cm",
+      "width": "0.9cm",
+      "height": "0.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagNote2",
+      "text": "Hire lag",
+      "x": "14.77cm",
+      "y": "6.35cm",
+      "width": "17.13cm",
+      "height": "1.2cm",
+      "font": "Calibri",
+      "size": "16",
+      "color": "A0A6B0",
+      "valign": "middle",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagRow3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "1.27cm",
+      "y": "7.8cm",
+      "width": "31.33cm",
+      "height": "1.55cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagName3",
+      "text": "Data",
+      "x": "1.67cm",
+      "y": "8.05cm",
+      "width": "10cm",
+      "height": "1.2cm",
+      "font": "Calibri",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "valign": "middle",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagDot3",
+      "preset": "ellipse",
+      "fill": "FF453A",
+      "line": "none",
+      "x": "13.27cm",
+      "y": "8.2cm",
+      "width": "0.9cm",
+      "height": "0.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RagNote3",
+      "text": "Schema freeze",
+      "x": "14.77cm",
+      "y": "8.05cm",
+      "width": "17.13cm",
+      "height": "1.2cm",
+      "font": "Calibri",
+      "size": "16",
+      "color": "A0A6B0",
+      "valign": "middle",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Red items need an owner and a date before the next review."
+    }
+  }
+]

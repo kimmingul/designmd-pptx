@@ -1,0 +1,107 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "ChartTitle",
+      "text": "Bridge to result",
+      "x": "1.27cm",
+      "y": "1cm",
+      "width": "31.33cm",
+      "height": "1.8cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "chart",
+    "props": {
+      "name": "MainChart",
+      "chartType": "waterfall",
+      "series1.name": "Bridge",
+      "series1.values": "100,12,-5,8,115",
+      "series1.color": "0B5FFF",
+      "categories": "Start,Price,Volume,Mix,End",
+      "x": "1.27cm",
+      "y": "3.5cm",
+      "width": "20cm",
+      "height": "14cm",
+      "series2.name": "Series 2",
+      "series2.values": "9,11,12,13",
+      "series2.color": "91B7FF"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "InsightBg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "22.5cm",
+      "y": "3.5cm",
+      "width": "9.8cm",
+      "height": "14cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "InsightTitle",
+      "text": "What moved the number",
+      "x": "23cm",
+      "y": "4cm",
+      "width": "9cm",
+      "height": "1.2cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "InsightBody",
+      "text": "Call out the two largest positive and negative bridges.",
+      "x": "23cm",
+      "y": "5.5cm",
+      "width": "9cm",
+      "height": "11cm",
+      "font": "Calibri",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Read left→right; the end bar is the result, not a delta."
+    }
+  }
+]

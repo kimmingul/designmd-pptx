@@ -1,0 +1,81 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverTitle",
+      "text": "designmd-pptx",
+      "x": "1.27cm",
+      "y": "7cm",
+      "width": "31.33cm",
+      "height": "3cm",
+      "font": "Arial",
+      "size": "42",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverSubtitle",
+      "text": "Compile brand design into precise PowerPoint",
+      "x": "1.27cm",
+      "y": "10.4cm",
+      "width": "31.33cm",
+      "height": "1.2cm",
+      "font": "Calibri",
+      "size": "18",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverMeta",
+      "text": "v2.1.2  ·  Apple Keynote style  ·  20 slides",
+      "x": "1.27cm",
+      "y": "16.5cm",
+      "width": "31.33cm",
+      "height": "0.9cm",
+      "font": "Calibri",
+      "size": "10",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CoverAccent",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "14.44cm",
+      "y": "10.1cm",
+      "width": "5cm",
+      "height": "0.12cm"
+    }
+  }
+]

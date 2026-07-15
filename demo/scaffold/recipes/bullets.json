@@ -1,0 +1,54 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "BulletTitle",
+      "text": "Agenda",
+      "x": "1.27cm",
+      "y": "1.2cm",
+      "width": "31.33cm",
+      "height": "1.84cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "18",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "BulletBody",
+      "text": "• First point\n• Second point\n• Third point",
+      "x": "1.27cm",
+      "y": "3.84cm",
+      "width": "31.33cm",
+      "height": "14.21cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Expand each bullet; do not read the slide."
+    }
+  }
+]

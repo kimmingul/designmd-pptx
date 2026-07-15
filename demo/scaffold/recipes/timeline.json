@@ -1,0 +1,252 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlTitle",
+      "text": "Timeline",
+      "x": "1.27cm",
+      "y": "1.2cm",
+      "width": "31.33cm",
+      "height": "1.8cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlAxis",
+      "preset": "rect",
+      "fill": "3A3A3C",
+      "line": "none",
+      "x": "1.27cm",
+      "y": "9cm",
+      "width": "31.33cm",
+      "height": "0.12cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "20",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "TlLabel1",
+      "text": "Discover",
+      "x": "1.27cm",
+      "y": "10.3cm",
+      "width": "7.26cm",
+      "height": "1.13cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "TlDetail1",
+      "text": "",
+      "x": "1.27cm",
+      "y": "11.78cm",
+      "width": "7.26cm",
+      "height": "6.02cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "20",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "TlLabel2",
+      "text": "Build",
+      "x": "9.29cm",
+      "y": "10.3cm",
+      "width": "7.26cm",
+      "height": "1.13cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "TlDetail2",
+      "text": "",
+      "x": "9.29cm",
+      "y": "11.78cm",
+      "width": "7.26cm",
+      "height": "6.02cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "20",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "TlLabel3",
+      "text": "Ship",
+      "x": "17.31cm",
+      "y": "10.3cm",
+      "width": "7.26cm",
+      "height": "1.13cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "TlDetail3",
+      "text": "",
+      "x": "17.31cm",
+      "y": "11.78cm",
+      "width": "7.26cm",
+      "height": "6.02cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "20",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "TlLabel4",
+      "text": "Learn",
+      "x": "25.34cm",
+      "y": "10.3cm",
+      "width": "7.26cm",
+      "height": "1.13cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "TlDetail4",
+      "text": "",
+      "x": "25.34cm",
+      "y": "11.78cm",
+      "width": "7.26cm",
+      "height": "6.02cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlDot1",
+      "preset": "ellipse",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "4.45cm",
+      "y": "8.61cm",
+      "width": "0.9cm",
+      "height": "0.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlDot2",
+      "preset": "ellipse",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "12.47cm",
+      "y": "8.61cm",
+      "width": "0.9cm",
+      "height": "0.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlDot3",
+      "preset": "ellipse",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "20.5cm",
+      "y": "8.61cm",
+      "width": "0.9cm",
+      "height": "0.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "TlDot4",
+      "preset": "ellipse",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "28.52cm",
+      "y": "8.61cm",
+      "width": "0.9cm",
+      "height": "0.9cm"
+    }
+  }
+]

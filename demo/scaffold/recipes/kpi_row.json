@@ -1,0 +1,250 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "KpiTitle",
+      "text": "Key metrics",
+      "x": "1.27cm",
+      "y": "1.2cm",
+      "width": "31.33cm",
+      "height": "1.8cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Kpi1Bg",
+      "x": "1.27cm",
+      "y": "4.2cm",
+      "width": "9.94cm",
+      "height": "11cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi1Value",
+      "text": "—",
+      "x": "1.47cm",
+      "y": "7.26cm",
+      "width": "9.54cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi1Label",
+      "text": "Metric A",
+      "x": "1.47cm",
+      "y": "10.46cm",
+      "width": "9.54cm",
+      "height": "0.8cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi1Chip",
+      "text": "",
+      "x": "1.47cm",
+      "y": "11.56cm",
+      "width": "9.54cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Kpi2Bg",
+      "x": "11.97cm",
+      "y": "4.2cm",
+      "width": "9.94cm",
+      "height": "11cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi2Value",
+      "text": "—",
+      "x": "12.17cm",
+      "y": "7.26cm",
+      "width": "9.54cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi2Label",
+      "text": "Metric B",
+      "x": "12.17cm",
+      "y": "10.46cm",
+      "width": "9.54cm",
+      "height": "0.8cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi2Chip",
+      "text": "",
+      "x": "12.17cm",
+      "y": "11.56cm",
+      "width": "9.54cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Kpi3Bg",
+      "x": "22.66cm",
+      "y": "4.2cm",
+      "width": "9.94cm",
+      "height": "11cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi3Value",
+      "text": "—",
+      "x": "22.86cm",
+      "y": "7.26cm",
+      "width": "9.54cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi3Label",
+      "text": "Metric C",
+      "x": "22.86cm",
+      "y": "10.46cm",
+      "width": "9.54cm",
+      "height": "0.8cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi3Chip",
+      "text": "",
+      "x": "22.86cm",
+      "y": "11.56cm",
+      "width": "9.54cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Walk KPIs left to right; pause on any watch metric."
+    }
+  }
+]

@@ -1,0 +1,358 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskTitle",
+      "text": "What we refuse",
+      "x": "1.27cm",
+      "y": "1.0cm",
+      "width": "31.33cm",
+      "height": "1.8cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskX0",
+      "text": "Low",
+      "x": "4.47cm",
+      "y": "16.65cm",
+      "width": "7.33cm",
+      "height": "0.9cm",
+      "font": "Calibri",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskY0",
+      "text": "Low",
+      "x": "1.27cm",
+      "y": "14.02cm",
+      "width": "3.0cm",
+      "height": "0.9cm",
+      "font": "Calibri",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "right",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskX1",
+      "text": "Med",
+      "x": "11.8cm",
+      "y": "16.65cm",
+      "width": "7.33cm",
+      "height": "0.9cm",
+      "font": "Calibri",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskY1",
+      "text": "Med",
+      "x": "1.27cm",
+      "y": "9.85cm",
+      "width": "3.0cm",
+      "height": "0.9cm",
+      "font": "Calibri",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "right",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskX2",
+      "text": "High",
+      "x": "19.14cm",
+      "y": "16.65cm",
+      "width": "7.33cm",
+      "height": "0.9cm",
+      "font": "Calibri",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskY2",
+      "text": "High",
+      "x": "1.27cm",
+      "y": "5.68cm",
+      "width": "3.0cm",
+      "height": "0.9cm",
+      "font": "Calibri",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "right",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell00",
+      "preset": "rect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "4.52cm",
+      "y": "12.38cm",
+      "width": "7.23cm",
+      "height": "4.07cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell01",
+      "preset": "rect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "11.85cm",
+      "y": "12.38cm",
+      "width": "7.23cm",
+      "height": "4.07cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell02",
+      "preset": "rect",
+      "fill": "91B7FF",
+      "line": "none",
+      "x": "19.19cm",
+      "y": "12.38cm",
+      "width": "7.23cm",
+      "height": "4.07cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell10",
+      "preset": "rect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "4.52cm",
+      "y": "8.22cm",
+      "width": "7.23cm",
+      "height": "4.07cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell11",
+      "preset": "rect",
+      "fill": "91B7FF",
+      "line": "none",
+      "x": "11.85cm",
+      "y": "8.22cm",
+      "width": "7.23cm",
+      "height": "4.07cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell12",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "19.19cm",
+      "y": "8.22cm",
+      "width": "7.23cm",
+      "height": "4.07cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell20",
+      "preset": "rect",
+      "fill": "91B7FF",
+      "line": "none",
+      "x": "4.52cm",
+      "y": "4.05cm",
+      "width": "7.23cm",
+      "height": "4.07cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell21",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "11.85cm",
+      "y": "4.05cm",
+      "width": "7.23cm",
+      "height": "4.07cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskCell22",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "19.19cm",
+      "y": "4.05cm",
+      "width": "7.23cm",
+      "height": "4.07cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskItem13",
+      "text": "Font shrink to fit\nSilent overwrite\nVendor template copy",
+      "x": "4.72cm",
+      "y": "4.3cm",
+      "width": "6.83cm",
+      "height": "3.67cm",
+      "font": "Calibri",
+      "size": "14",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskItem33",
+      "text": "Missing OfficeCLI",
+      "x": "19.39cm",
+      "y": "4.3cm",
+      "width": "6.83cm",
+      "height": "3.67cm",
+      "font": "Calibri",
+      "size": "14",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskItem22",
+      "text": "Agent silent install",
+      "x": "12.05cm",
+      "y": "8.47cm",
+      "width": "6.83cm",
+      "height": "3.67cm",
+      "font": "Calibri",
+      "size": "14",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RiskAxisX",
+      "text": "Likelihood →",
+      "x": "4.47cm",
+      "y": "18.0cm",
+      "width": "22cm",
+      "height": "0.7cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Top-right cells need owners this week."
+    }
+  }
+]

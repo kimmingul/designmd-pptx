@@ -1,0 +1,147 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CycleTitle",
+      "text": "Cycle",
+      "x": "1.27cm",
+      "y": "1.0cm",
+      "width": "31.33cm",
+      "height": "1.8cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CycleHub",
+      "preset": "ellipse",
+      "fill": "0B5FFF",
+      "line": "none",
+      "text": "Loop",
+      "x": "14.7cm",
+      "y": "9.5cm",
+      "width": "4.4cm",
+      "height": "3.0cm",
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "FFFFFF",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CycleNode1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Plan",
+      "x": "14.2cm",
+      "y": "6.06cm",
+      "width": "5.4cm",
+      "height": "2.4cm",
+      "font": "Calibri",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CycleNode2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Do",
+      "x": "19.4cm",
+      "y": "9.8cm",
+      "width": "5.4cm",
+      "height": "2.4cm",
+      "font": "Calibri",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CycleNode3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Check",
+      "x": "14.2cm",
+      "y": "13.54cm",
+      "width": "5.4cm",
+      "height": "2.4cm",
+      "font": "Calibri",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "CycleNode4",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "text": "Act",
+      "x": "9cm",
+      "y": "9.8cm",
+      "width": "5.4cm",
+      "height": "2.4cm",
+      "font": "Calibri",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Name the handoff between two adjacent nodes."
+    }
+  }
+]

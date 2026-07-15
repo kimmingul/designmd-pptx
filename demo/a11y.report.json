@@ -1,0 +1,371 @@
+{
+  "ok": true,
+  "errors": 0,
+  "warnings": 4,
+  "findings": [
+    {
+      "code": "a11y.notes.missing",
+      "severity": "warning",
+      "message": "cover: speaker notes empty (recommended for narrative slides)",
+      "path": "slides[0].01-cover",
+      "ratio": null,
+      "fix": "set content.notes to a 1–2 sentence speaker cue"
+    },
+    {
+      "code": "a11y.notes.missing",
+      "severity": "warning",
+      "message": "section_opener_numbered: speaker notes empty (recommended for narrative slides)",
+      "path": "slides[3].04-section-problem",
+      "ratio": null,
+      "fix": "set content.notes to a 1–2 sentence speaker cue"
+    },
+    {
+      "code": "a11y.notes.missing",
+      "severity": "warning",
+      "message": "section_opener_numbered: speaker notes empty (recommended for narrative slides)",
+      "path": "slides[8].09-section-how",
+      "ratio": null,
+      "fix": "set content.notes to a 1–2 sentence speaker cue"
+    },
+    {
+      "code": "a11y.notes.missing",
+      "severity": "warning",
+      "message": "close: speaker notes empty (recommended for narrative slides)",
+      "path": "slides[19].20-close",
+      "ratio": null,
+      "fix": "set content.notes to a 1–2 sentence speaker cue"
+    }
+  ],
+  "reading_order": [
+    {
+      "slide_id": "01-cover",
+      "recipe": "cover",
+      "role": "title",
+      "text": "designmd-pptx",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "01-cover",
+      "recipe": "cover",
+      "role": "subtitle",
+      "text": "Compile brand design into precise PowerPoint",
+      "reading_index": 1
+    },
+    {
+      "slide_id": "02-mission",
+      "recipe": "mission_vision_split",
+      "role": "title",
+      "text": "North star",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "03-pulse",
+      "recipe": "icon_stat_row",
+      "role": "title",
+      "text": "At a glance",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "04-section-problem",
+      "recipe": "section_opener_numbered",
+      "role": "title",
+      "text": "The problem",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "04-section-problem",
+      "recipe": "section_opener_numbered",
+      "role": "subtitle",
+      "text": "Brand systems live in DESIGN.md. Decks still ship as one-off slides.",
+      "reading_index": 1
+    },
+    {
+      "slide_id": "05-before-after",
+      "recipe": "before_after_slider",
+      "role": "title",
+      "text": "From friction to floor",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "06-empathy",
+      "recipe": "empathy_map_quad",
+      "role": "title",
+      "text": "Who we serve",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "07-mindmap",
+      "recipe": "mindmap_branches",
+      "role": "title",
+      "text": "What the toolkit covers",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "08-journey",
+      "recipe": "journey_stages",
+      "role": "title",
+      "text": "Authoring journey",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "08-journey",
+      "recipe": "journey_stages",
+      "role": "stages[0]",
+      "text": "Brief",
+      "reading_index": 1
+    },
+    {
+      "slide_id": "08-journey",
+      "recipe": "journey_stages",
+      "role": "stages[1]",
+      "text": "Compose",
+      "reading_index": 2
+    },
+    {
+      "slide_id": "08-journey",
+      "recipe": "journey_stages",
+      "role": "stages[2]",
+      "text": "Scaffold",
+      "reading_index": 3
+    },
+    {
+      "slide_id": "08-journey",
+      "recipe": "journey_stages",
+      "role": "stages[3]",
+      "text": "Apply",
+      "reading_index": 4
+    },
+    {
+      "slide_id": "08-journey",
+      "recipe": "journey_stages",
+      "role": "stages[4]",
+      "text": "Gate 3",
+      "reading_index": 5
+    },
+    {
+      "slide_id": "09-section-how",
+      "recipe": "section_opener_numbered",
+      "role": "title",
+      "text": "How it works",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "09-section-how",
+      "recipe": "section_opener_numbered",
+      "role": "subtitle",
+      "text": "Two backends. One contract. Precision or draft — pick by need.",
+      "reading_index": 1
+    },
+    {
+      "slide_id": "10-pillars",
+      "recipe": "pillar_columns",
+      "role": "title",
+      "text": "Dual backends",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "11-hex",
+      "recipe": "hex_cluster",
+      "role": "title",
+      "text": "Recipe families",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "11-hex",
+      "recipe": "hex_cluster",
+      "role": "items[0]",
+      "text": "Core",
+      "reading_index": 1
+    },
+    {
+      "slide_id": "11-hex",
+      "recipe": "hex_cluster",
+      "role": "items[1]",
+      "text": "KPI",
+      "reading_index": 2
+    },
+    {
+      "slide_id": "11-hex",
+      "recipe": "hex_cluster",
+      "role": "items[2]",
+      "text": "Process",
+      "reading_index": 3
+    },
+    {
+      "slide_id": "11-hex",
+      "recipe": "hex_cluster",
+      "role": "items[3]",
+      "text": "Matrix",
+      "reading_index": 4
+    },
+    {
+      "slide_id": "11-hex",
+      "recipe": "hex_cluster",
+      "role": "items[4]",
+      "text": "Wave 1",
+      "reading_index": 5
+    },
+    {
+      "slide_id": "11-hex",
+      "recipe": "hex_cluster",
+      "role": "items[5]",
+      "text": "Wave 2",
+      "reading_index": 6
+    },
+    {
+      "slide_id": "11-hex",
+      "recipe": "hex_cluster",
+      "role": "items[6]",
+      "text": "Wave 4",
+      "reading_index": 7
+    },
+    {
+      "slide_id": "12-segments",
+      "recipe": "circle_segments",
+      "role": "title",
+      "text": "Catalog depth",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "13-wave4",
+      "recipe": "feature_cards",
+      "role": "title",
+      "text": "Infograpify structural roles",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "14-stairs",
+      "recipe": "stairs_ascent",
+      "role": "title",
+      "text": "Precision pipeline",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "14-stairs",
+      "recipe": "stairs_ascent",
+      "role": "steps[0]",
+      "text": "DESIGN.md",
+      "reading_index": 1
+    },
+    {
+      "slide_id": "14-stairs",
+      "recipe": "stairs_ascent",
+      "role": "steps[1]",
+      "text": "Tokens",
+      "reading_index": 2
+    },
+    {
+      "slide_id": "14-stairs",
+      "recipe": "stairs_ascent",
+      "role": "steps[2]",
+      "text": "Recipes",
+      "reading_index": 3
+    },
+    {
+      "slide_id": "14-stairs",
+      "recipe": "stairs_ascent",
+      "role": "steps[3]",
+      "text": "Apply",
+      "reading_index": 4
+    },
+    {
+      "slide_id": "14-stairs",
+      "recipe": "stairs_ascent",
+      "role": "steps[4]",
+      "text": "Gate 3",
+      "reading_index": 5
+    },
+    {
+      "slide_id": "15-checklist",
+      "recipe": "checklist_board",
+      "role": "title",
+      "text": "Hard rules",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "15-checklist",
+      "recipe": "checklist_board",
+      "role": "items[0]",
+      "text": "Title ≥ 36pt · body ≥ 18pt",
+      "reading_index": 1
+    },
+    {
+      "slide_id": "15-checklist",
+      "recipe": "checklist_board",
+      "role": "items[1]",
+      "text": "No silent truncation — shorten or split",
+      "reading_index": 2
+    },
+    {
+      "slide_id": "15-checklist",
+      "recipe": "checklist_board",
+      "role": "items[2]",
+      "text": "Layout engine for dense patterns",
+      "reading_index": 3
+    },
+    {
+      "slide_id": "15-checklist",
+      "recipe": "checklist_board",
+      "role": "items[3]",
+      "text": "Overwrite only with --force",
+      "reading_index": 4
+    },
+    {
+      "slide_id": "15-checklist",
+      "recipe": "checklist_board",
+      "role": "items[4]",
+      "text": "Finish apply with --screenshot",
+      "reading_index": 5
+    },
+    {
+      "slide_id": "15-checklist",
+      "recipe": "checklist_board",
+      "role": "items[5]",
+      "text": "Ask before installing OfficeCLI",
+      "reading_index": 6
+    },
+    {
+      "slide_id": "16-scorecard",
+      "recipe": "scorecard_balanced",
+      "role": "title",
+      "text": "Quality scorecard",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "17-raci",
+      "recipe": "raci_matrix",
+      "role": "title",
+      "text": "Who owns the deck",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "18-puzzle",
+      "recipe": "puzzle_pieces",
+      "role": "title",
+      "text": "Platform fit",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "19-risk",
+      "recipe": "risk_heat_matrix",
+      "role": "title",
+      "text": "What we refuse",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "20-close",
+      "recipe": "close",
+      "role": "title",
+      "text": "Start here",
+      "reading_index": 0
+    },
+    {
+      "slide_id": "20-close",
+      "recipe": "close",
+      "role": "body",
+      "text": "doctor --ensure · compose · scaffold · apply --screenshot --gate3",
+      "reading_index": 1
+    }
+  ],
+  "corrected": null
+}

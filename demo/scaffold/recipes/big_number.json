@@ -1,0 +1,57 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BigValue",
+      "text": "—",
+      "x": "1.27cm",
+      "y": "4.6cm",
+      "width": "31.33cm",
+      "height": "6cm",
+      "font": "Arial",
+      "size": "96",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "BigLabel",
+      "text": "Headline metric",
+      "x": "3.94cm",
+      "y": "11.2cm",
+      "width": "26cm",
+      "height": "1.6cm",
+      "font": "Arial",
+      "size": "28",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Let the number land; one sentence of context."
+    }
+  }
+]

@@ -5513,7 +5513,10 @@ def recipe_journey_stages(tokens: dict, content: dict | None = None) -> list[dic
         ],
     )
     n = len(stages)
-    col_w, xs = _grid_n(n, b["margin"], 0.3, max_n=6)
+    # Leave a left gutter for Action/Emotion lane labels so they are not
+    # covered by the first stage column (airier DESIGN.md margins).
+    lane_w = 2.6
+    col_w, xs = _grid_n(n, b["margin"] + lane_w + 0.25, 0.3, max_n=6)
     ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "JourneyTitle", title)]
     # Lane labels
     for lane_i, lane in enumerate(("Action", "Emotion")):
@@ -5521,8 +5524,8 @@ def recipe_journey_stages(tokens: dict, content: dict | None = None) -> list[dic
             "command": "add", "parent": "/slide[last()]", "type": "shape",
             "props": {
                 "name": f"JourneyLane{lane_i}", "text": lane,
-                "x": _cm(b["margin"]), "y": _cm(4.0 + lane_i * 6.2),
-                "width": "2.8cm", "height": "1.0cm",
+                "x": _cm(b["margin"]), "y": _cm(7.5 + lane_i * 5.5),
+                "width": _cm(lane_w), "height": "1.2cm",
                 "font": t["body_font"], "size": str(_micro_pt(t) + 2),
                 "bold": "true", "color": c["muted"], "fill": "none",
             },
@@ -6074,20 +6077,12 @@ def recipe_empathy_map_quad(tokens: dict, content: dict | None = None) -> list[d
     m = b["margin"]
     gap = 0.35
     cw = (33.87 - 2 * m - gap) / 2
-    ch = 6.2
+    # Keep quads clear of the center user chip (chip sits in the cross).
+    ch = 5.6
     ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "EmpTitle", title)]
-    # Center user chip
-    ops.append({
-        "command": "add", "parent": "/slide[last()]", "type": "shape",
-        "props": {
-            "name": "EmpUser", "preset": "ellipse",
-            "fill": c["accent"], "line": "none", "text": user,
-            "x": "14.2cm", "y": "9.0cm", "width": "5.5cm", "height": "3.2cm",
-            "font": t["heading_font"], "size": str(max(16, t["body_pt"])),
-            "bold": "true", "color": c["on_accent"],
-            "align": "center", "valign": "middle",
-        },
-    })
+    # Short user label — long names overflow the ellipse and trip issues gate.
+    user_label = user if len(user) <= 18 else (user[:16] + "…")
+    lab_pt = min(20, max(14, int(t.get("body_pt", 18))))
     positions = [
         (m, 3.5), (m + cw + gap, 3.5),
         (m, 3.5 + ch + gap), (m + cw + gap, 3.5 + ch + gap),
@@ -6108,8 +6103,8 @@ def recipe_empathy_map_quad(tokens: dict, content: dict | None = None) -> list[d
             "props": {
                 "name": f"EmpLab{i + 1}", "text": lab,
                 "x": _cm(x + 0.4), "y": _cm(y + 0.3),
-                "width": _cm(cw - 0.8), "height": "1.0cm",
-                "font": t["heading_font"], "size": str(t["section_pt"] - 4),
+                "width": _cm(cw - 0.8), "height": "1.2cm",
+                "font": t["heading_font"], "size": str(lab_pt),
                 "bold": "true", "color": c["accent"], "fill": "none",
             },
         })
@@ -6117,12 +6112,24 @@ def recipe_empathy_map_quad(tokens: dict, content: dict | None = None) -> list[d
             "command": "add", "parent": "/slide[last()]", "type": "shape",
             "props": {
                 "name": f"EmpBody{i + 1}", "text": str(body),
-                "x": _cm(x + 0.4), "y": _cm(y + 1.4),
-                "width": _cm(cw - 0.8), "height": _cm(ch - 1.9),
+                "x": _cm(x + 0.4), "y": _cm(y + 1.5),
+                "width": _cm(cw - 0.8), "height": _cm(ch - 2.0),
                 "font": t["body_font"], "size": str(max(14, t["body_pt"] - 2)),
                 "color": c["text_on_surface"], "fill": "none",
             },
         })
+    # User chip last so it stays on top of the four panels without hiding labels.
+    ops.append({
+        "command": "add", "parent": "/slide[last()]", "type": "shape",
+        "props": {
+            "name": "EmpUser", "preset": "ellipse",
+            "fill": c["accent"], "line": "none", "text": user_label,
+            "x": "14.4cm", "y": "8.6cm", "width": "5.0cm", "height": "3.0cm",
+            "font": t["heading_font"], "size": str(max(14, t["body_pt"] - 2)),
+            "bold": "true", "color": c["on_accent"],
+            "align": "center", "valign": "middle",
+        },
+    })
     ops.append({
         "command": "add", "parent": "/slide[last()]", "type": "notes",
         "props": {"text": content.get(
@@ -6247,17 +6254,15 @@ def recipe_circle_segments(tokens: dict, content: dict | None = None) -> list[di
     )
     n = len(segs)
     ops: list[dict] = [_slide_op(tokens), _title_op(tokens, "CircTitle", title)]
-    # Center disc (placeholder for donut — officecli has no pie slice API in shapes)
+    center = str(content.get("center") or content.get("hub") or "100%")
+    # Center disc (placeholder for donut — officecli has no pie slice API in shapes).
+    # Put the hub label on the inner hole so it is not covered by a second ellipse.
     ops.append({
         "command": "add", "parent": "/slide[last()]", "type": "shape",
         "props": {
             "name": "CircDisc", "preset": "ellipse",
             "fill": c["surface"], "line": "none",
-            "text": str(content.get("center") or content.get("hub") or "100%"),
             "x": "3.5cm", "y": "5.0cm", "width": "12.0cm", "height": "12.0cm",
-            "font": t["heading_font"], "size": str(t["title_pt"] - 8),
-            "bold": "true", "color": c["text_on_surface"],
-            "align": "center", "valign": "middle",
         },
     })
     ops.append({
@@ -6265,7 +6270,11 @@ def recipe_circle_segments(tokens: dict, content: dict | None = None) -> list[di
         "props": {
             "name": "CircHole", "preset": "ellipse",
             "fill": c["content_background"], "line": "none",
+            "text": center,
             "x": "6.5cm", "y": "8.0cm", "width": "6.0cm", "height": "6.0cm",
+            "font": t["heading_font"], "size": str(t["title_pt"] - 8),
+            "bold": "true", "color": c["text_on_content"],
+            "align": "center", "valign": "middle",
         },
     })
     # Legend list on the right

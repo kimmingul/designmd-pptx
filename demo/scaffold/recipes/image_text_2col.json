@@ -1,0 +1,67 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "text": "Image — set content.src",
+      "font": "Calibri",
+      "size": "18",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle",
+      "name": "It2Placeholder",
+      "x": "1.27cm",
+      "y": "2.5cm",
+      "width": "15.28cm",
+      "height": "14.55cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "It2Title",
+      "text": "Feature",
+      "x": "17.31cm",
+      "y": "2.5cm",
+      "width": "15.28cm",
+      "height": "1.84cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Calibri",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "It2Body",
+      "text": "Supporting explanation beside the visual.",
+      "x": "17.31cm",
+      "y": "5.04cm",
+      "width": "15.28cm",
+      "height": "12.01cm"
+    }
+  }
+]

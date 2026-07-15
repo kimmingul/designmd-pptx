@@ -1,0 +1,436 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadmapTitle",
+      "text": "Roadmap",
+      "x": "1.27cm",
+      "y": "1.0cm",
+      "width": "31.33cm",
+      "height": "1.8cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadPhase1",
+      "text": "Now",
+      "x": "5.87cm",
+      "y": "3.5cm",
+      "width": "8.74cm",
+      "height": "1.1cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadPhase2",
+      "text": "Next",
+      "x": "14.86cm",
+      "y": "3.5cm",
+      "width": "8.74cm",
+      "height": "1.1cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadPhase3",
+      "text": "Later",
+      "x": "23.86cm",
+      "y": "3.5cm",
+      "width": "8.74cm",
+      "height": "1.1cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadLane1",
+      "text": "Product",
+      "x": "1.27cm",
+      "y": "4.85cm",
+      "width": "4.2cm",
+      "height": "3.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell1_1Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "5.87cm",
+      "y": "4.85cm",
+      "width": "8.74cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell1_1",
+      "text": "MVP",
+      "x": "6.07cm",
+      "y": "5.1cm",
+      "width": "8.34cm",
+      "height": "2.7cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell1_2Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "14.86cm",
+      "y": "4.85cm",
+      "width": "8.74cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell1_2",
+      "text": "Beta",
+      "x": "15.06cm",
+      "y": "5.1cm",
+      "width": "8.34cm",
+      "height": "2.7cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell1_3Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "23.86cm",
+      "y": "4.85cm",
+      "width": "8.74cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell1_3",
+      "text": "GA",
+      "x": "24.06cm",
+      "y": "5.1cm",
+      "width": "8.34cm",
+      "height": "2.7cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadLane2",
+      "text": "GTM",
+      "x": "1.27cm",
+      "y": "8.35cm",
+      "width": "4.2cm",
+      "height": "3.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell2_1Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "5.87cm",
+      "y": "8.35cm",
+      "width": "8.74cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell2_1",
+      "text": "Design partners",
+      "x": "6.07cm",
+      "y": "8.6cm",
+      "width": "8.34cm",
+      "height": "2.7cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell2_2Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "14.86cm",
+      "y": "8.35cm",
+      "width": "8.74cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell2_2",
+      "text": "Launch",
+      "x": "15.06cm",
+      "y": "8.6cm",
+      "width": "8.34cm",
+      "height": "2.7cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell2_3Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "23.86cm",
+      "y": "8.35cm",
+      "width": "8.74cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell2_3",
+      "text": "Expand",
+      "x": "24.06cm",
+      "y": "8.6cm",
+      "width": "8.34cm",
+      "height": "2.7cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadLane3",
+      "text": "Platform",
+      "x": "1.27cm",
+      "y": "11.85cm",
+      "width": "4.2cm",
+      "height": "3.2cm",
+      "font": "Arial",
+      "size": "18",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell3_1Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "5.87cm",
+      "y": "11.85cm",
+      "width": "8.74cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell3_1",
+      "text": "Core APIs",
+      "x": "6.07cm",
+      "y": "12.1cm",
+      "width": "8.34cm",
+      "height": "2.7cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell3_2Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "14.86cm",
+      "y": "11.85cm",
+      "width": "8.74cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell3_2",
+      "text": "Scale",
+      "x": "15.06cm",
+      "y": "12.1cm",
+      "width": "8.34cm",
+      "height": "2.7cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell3_3Bg",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "3A3A3C",
+      "x": "23.86cm",
+      "y": "11.85cm",
+      "width": "8.74cm",
+      "height": "3.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "RoadCell3_3",
+      "text": "Self-serve",
+      "x": "24.06cm",
+      "y": "12.1cm",
+      "width": "8.34cm",
+      "height": "2.7cm",
+      "font": "Calibri",
+      "size": "12",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Walk one lane at a time; call out dependencies across phases."
+    }
+  }
+]

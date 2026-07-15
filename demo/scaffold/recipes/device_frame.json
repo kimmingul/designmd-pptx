@@ -1,0 +1,90 @@
+[
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DevTitle",
+      "text": "Product surface",
+      "x": "1.27cm",
+      "y": "1.0cm",
+      "width": "31.33cm",
+      "height": "1.8cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DeviceChrome",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "5.77cm",
+      "y": "3.5cm",
+      "width": "10.5cm",
+      "height": "14cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DeviceScreenPh",
+      "preset": "rect",
+      "fill": "000000",
+      "line": "none",
+      "text": "Product screenshot\n(set content.src)",
+      "x": "6.32cm",
+      "y": "4.05cm",
+      "width": "9.4cm",
+      "height": "12.9cm",
+      "font": "Calibri",
+      "size": "14",
+      "color": "A0A6B0",
+      "align": "center",
+      "valign": "middle"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "DeviceBody",
+      "text": "Describe the UI moment. Provide src for the screenshot.",
+      "x": "21.5cm",
+      "y": "4.0cm",
+      "width": "10.8cm",
+      "height": "12.5cm",
+      "font": "Calibri",
+      "size": "18",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Only user-owned screenshots — never vendor mockup photo packs."
+    }
+  }
+]
