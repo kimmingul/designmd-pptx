@@ -16,6 +16,7 @@ out/
 *.pptx
 # Shipped product demo (versioned intro deck only)
 !demo/designmd-pptx-intro-v*.pptx
+!demo/designmd-pptx-best-v*.pptx
 .omc/
 .DS_Store
 Thumbs.db
