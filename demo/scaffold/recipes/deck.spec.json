@@ -80,19 +80,19 @@
       "id": "05-capabilities",
       "recipe": "feature_cards",
       "content": {
-        "title": "What you get",
+        "title": "Three promises",
         "cards": [
           {
-            "title": "Precise geometry",
-            "body": "Shape-level apply from recipes — cm layout, connectors, brand fonts and floors."
+            "title": "Exact geometry",
+            "body": "Centimeters. Glued connectors. Type floors that hold."
           },
           {
-            "title": "Quality gates",
-            "body": "Text budgets, contrast, staging issues, and Gate 3 screenshots before delivery."
+            "title": "Hard gates",
+            "body": "Budgets, contrast, issues — then a contact sheet."
           },
           {
-            "title": "Agent-ready",
-            "body": "Claude, Codex, and Grok skills. Doctor asks before installing OfficeCLI."
+            "title": "Agent-safe",
+            "body": "Claude, Codex, Grok. Install only after you say yes."
           }
         ]
       }

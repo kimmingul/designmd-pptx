@@ -19,9 +19,9 @@
       "color": "F5F5F7",
       "fill": "none",
       "name": "FeatTitle",
-      "text": "What you get",
+      "text": "Three promises",
       "x": "2.2cm",
-      "y": "1.2cm",
+      "y": "1.35cm",
       "width": "29.47cm",
       "height": "1.84cm"
     }
@@ -33,27 +33,12 @@
     "props": {
       "preset": "roundRect",
       "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "line": "none",
       "name": "Card1Bg",
       "x": "2.2cm",
-      "y": "3.94cm",
+      "y": "4.14cm",
       "width": "9.09cm",
-      "height": "14.11cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "preset": "rect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "name": "Card1Accent",
-      "x": "2.2cm",
-      "y": "3.94cm",
-      "width": "9.09cm",
-      "height": "0.18cm"
+      "height": "13.71cm"
     }
   },
   {
@@ -62,16 +47,34 @@
     "type": "shape",
     "props": {
       "font": "Arial",
-      "size": "28",
+      "size": "34",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "Card1Num",
+      "text": "01",
+      "x": "3.05cm",
+      "y": "5.44cm",
+      "width": "7.39cm",
+      "height": "1.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "26",
       "bold": "true",
       "color": "F5F5F7",
       "fill": "none",
       "name": "Card1Title",
-      "text": "Precise geometry",
-      "x": "2.8cm",
-      "y": "5.12cm",
-      "width": "7.89cm",
-      "height": "2.72cm"
+      "text": "Exact geometry",
+      "x": "3.05cm",
+      "y": "7.79cm",
+      "width": "7.39cm",
+      "height": "2.8cm"
     }
   },
   {
@@ -84,11 +87,11 @@
       "color": "A0A6B0",
       "fill": "none",
       "name": "Card1Body",
-      "text": "Shape-level apply from recipes — cm layout, connectors, brand fonts and floors.",
-      "x": "2.8cm",
-      "y": "8.34cm",
-      "width": "7.89cm",
-      "height": "9.11cm"
+      "text": "Centimeters. Glued connectors. Type floors that hold.",
+      "x": "3.05cm",
+      "y": "11.04cm",
+      "width": "7.39cm",
+      "height": "2.63cm"
     }
   },
   {
@@ -98,27 +101,12 @@
     "props": {
       "preset": "roundRect",
       "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "line": "none",
       "name": "Card2Bg",
       "x": "12.39cm",
-      "y": "3.94cm",
+      "y": "4.14cm",
       "width": "9.09cm",
-      "height": "14.11cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "preset": "rect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "name": "Card2Accent",
-      "x": "12.39cm",
-      "y": "3.94cm",
-      "width": "9.09cm",
-      "height": "0.18cm"
+      "height": "13.71cm"
     }
   },
   {
@@ -127,16 +115,34 @@
     "type": "shape",
     "props": {
       "font": "Arial",
-      "size": "28",
+      "size": "34",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "Card2Num",
+      "text": "02",
+      "x": "13.24cm",
+      "y": "5.44cm",
+      "width": "7.39cm",
+      "height": "1.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "26",
       "bold": "true",
       "color": "F5F5F7",
       "fill": "none",
       "name": "Card2Title",
-      "text": "Quality gates",
-      "x": "12.99cm",
-      "y": "5.12cm",
-      "width": "7.89cm",
-      "height": "1.49cm"
+      "text": "Hard gates",
+      "x": "13.24cm",
+      "y": "7.79cm",
+      "width": "7.39cm",
+      "height": "2.8cm"
     }
   },
   {
@@ -149,11 +155,11 @@
       "color": "A0A6B0",
       "fill": "none",
       "name": "Card2Body",
-      "text": "Text budgets, contrast, staging issues, and Gate 3 screenshots before delivery.",
-      "x": "12.99cm",
-      "y": "7.1cm",
-      "width": "7.89cm",
-      "height": "10.35cm"
+      "text": "Budgets, contrast, issues — then a contact sheet.",
+      "x": "13.24cm",
+      "y": "11.04cm",
+      "width": "7.39cm",
+      "height": "2.63cm"
     }
   },
   {
@@ -163,27 +169,12 @@
     "props": {
       "preset": "roundRect",
       "fill": "1C1C1E",
-      "line": "3A3A3C",
+      "line": "none",
       "name": "Card3Bg",
       "x": "22.58cm",
-      "y": "3.94cm",
+      "y": "4.14cm",
       "width": "9.09cm",
-      "height": "14.11cm"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "preset": "rect",
-      "fill": "0B5FFF",
-      "line": "none",
-      "name": "Card3Accent",
-      "x": "22.58cm",
-      "y": "3.94cm",
-      "width": "9.09cm",
-      "height": "0.18cm"
+      "height": "13.71cm"
     }
   },
   {
@@ -192,16 +183,34 @@
     "type": "shape",
     "props": {
       "font": "Arial",
-      "size": "28",
+      "size": "34",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none",
+      "name": "Card3Num",
+      "text": "03",
+      "x": "23.43cm",
+      "y": "5.44cm",
+      "width": "7.39cm",
+      "height": "1.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "26",
       "bold": "true",
       "color": "F5F5F7",
       "fill": "none",
       "name": "Card3Title",
-      "text": "Agent-ready",
-      "x": "23.18cm",
-      "y": "5.12cm",
-      "width": "7.89cm",
-      "height": "1.49cm"
+      "text": "Agent-safe",
+      "x": "23.43cm",
+      "y": "7.79cm",
+      "width": "7.39cm",
+      "height": "2.8cm"
     }
   },
   {
@@ -214,11 +223,11 @@
       "color": "A0A6B0",
       "fill": "none",
       "name": "Card3Body",
-      "text": "Claude, Codex, and Grok skills. Doctor asks before installing OfficeCLI.",
-      "x": "23.18cm",
-      "y": "7.1cm",
-      "width": "7.89cm",
-      "height": "10.35cm"
+      "text": "Claude, Codex, Grok. Install only after you say yes.",
+      "x": "23.43cm",
+      "y": "11.04cm",
+      "width": "7.39cm",
+      "height": "2.63cm"
     }
   }
 ]

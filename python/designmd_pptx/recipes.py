@@ -791,7 +791,17 @@ def recipe_section_opener_numbered(tokens: dict, content: dict | None = None) ->
 
 
 def recipe_feature_cards(tokens: dict, content: dict | None = None) -> list[dict]:
-    """Adaptive 2–4 feature cards."""
+    """2–4 feature cards — equal columns, content top-packed.
+
+    Design contract (not just “fit”):
+    - Card bodies are **content-height**, never weight-stretched into empty
+      text boxes (that was the void-slab look on dark stages).
+    - Free vertical space goes to a **Spacer** at the bottom of each card so
+      columns share height without inventing fake paragraphs.
+    - Index numbers (01 / 02 / …) carry hierarchy; the old 0.18 cm hairline
+      accent bar is gone.
+    - Titles share a fixed band so three-up grids align.
+    """
     b = _base_props(tokens)
     c, t = b["c"], b["t"]
     content = content or {}
@@ -809,63 +819,102 @@ def recipe_feature_cards(tokens: dict, content: dict | None = None) -> list[dict
     n = max(2, min(4, len(cards)))
     cards = cards[:n]
     bg = c["content_background"]
+    m = b["margin"]
+    gap = max(0.55, b["gap"])
 
-    # v1.6: engine-solved geometry — equal-width card columns, card heights
-    # share the space below the title; body text height is validated.
     def build(d: L.Density) -> L.Box:
         body_pt = L.floored_pt(t["body_pt"], d)
+        title_pt = max(20, min(26, int(t["section_pt"])))
+        num_pt = max(28, min(36, title_pt + 8))
+        # Fixed title band keeps multi-column baselines aligned.
+        title_band = 1.7 * d.gap + 1.1
+        pad_y = 0.95 * d.gap + 0.35
+        pad_x = 0.85
         card_boxes = []
         for i, card in enumerate(cards):
+            num = f"{i + 1:02d}"
             card_boxes.append(
                 L.VStack(
                     weight=1,
                     name=f"Card{i + 1}Bg",
+                    pad=(pad_y, pad_x, pad_y, pad_x),
+                    gap=0.45 * d.gap,
                     children=[
-                        L.Fixed(0.18, name=f"Card{i + 1}Accent", props={
-                            "preset": "rect", "fill": c["accent"], "line": "none",
-                        }),
-                        L.VStack(
-                            weight=1,
-                            pad=(1.0 * d.gap, 0.6, 0.6, 0.6),
-                            gap=0.5 * d.gap,
-                            children=[
-                                L.Text(str(card.get("title", "")),
-                                       pt=max(20, t["section_pt"]),
-                                       name=f"Card{i + 1}Title",
-                                       min_cm=1.2, max_cm=3.0, props={
-                                           "font": t["heading_font"],
-                                           "size": str(max(20, t["section_pt"])),
-                                           "bold": "true",
-                                           "color": c["text_on_surface"],
-                                           "fill": "none",
-                                       }),
-                                L.Text(str(card.get("body", "")), pt=body_pt,
-                                       name=f"Card{i + 1}Body", weight=1, props={
-                                           "font": t["body_font"],
-                                           "size": str(body_pt),
-                                           "color": c["muted"], "fill": "none",
-                                       }),
-                            ],
+                        L.Text(
+                            num,
+                            pt=num_pt,
+                            name=f"Card{i + 1}Num",
+                            min_cm=1.9,
+                            max_cm=2.1,
+                            props={
+                                "font": t["heading_font"],
+                                "size": str(num_pt),
+                                "bold": "true",
+                                "color": c["accent"],
+                                "fill": "none",
+                            },
                         ),
+                        L.Text(
+                            str(card.get("title", "")),
+                            pt=title_pt,
+                            name=f"Card{i + 1}Title",
+                            min_cm=max(1.6, title_band),
+                            max_cm=max(1.8, title_band + 0.2),
+                            props={
+                                "font": t["heading_font"],
+                                "size": str(title_pt),
+                                "bold": "true",
+                                "color": c["text_on_surface"],
+                                "fill": "none",
+                            },
+                        ),
+                        # weight=0 → height from lines only (no hollow text frame).
+                        # min_cm padded above fit estimate — OfficeCLI line metrics
+                        # are slightly taller than our estimator.
+                        L.Text(
+                            str(card.get("body", "")),
+                            pt=body_pt,
+                            name=f"Card{i + 1}Body",
+                            weight=0,
+                            min_cm=2.2,
+                            max_cm=5.5,
+                            props={
+                                "font": t["body_font"],
+                                "size": str(body_pt),
+                                "color": c["muted"],
+                                "fill": "none",
+                            },
+                        ),
+                        # Absorb remaining card height as empty surface, not text.
+                        L.Spacer(weight=1),
                     ],
                     props={
-                        "preset": b["preset"], "fill": c["surface"],
-                        "line": c["hairline"],
+                        "preset": b["preset"],
+                        "fill": c["surface"],
+                        "line": "none",
                     },
                 )
             )
         return L.VStack(
-            pad=(1.2, b["margin"], 1.0, b["margin"]),
-            gap=0.9 * d.gap,
+            pad=(1.35, m, 1.2, m),
+            gap=0.95 * d.gap,
             name="feature_cards",
             children=[
-                L.Text(title, pt=t["title_pt"], name="FeatTitle",
-                       min_cm=1.6, max_cm=2.8, props={
-                           "font": t["heading_font"], "size": str(t["title_pt"]),
-                           "bold": "true", "color": c["text_on_content"],
-                           "fill": "none",
-                       }),
-                L.HStack(card_boxes, gap=b["gap"] * d.gap, weight=1),
+                L.Text(
+                    title,
+                    pt=t["title_pt"],
+                    name="FeatTitle",
+                    min_cm=1.5,
+                    max_cm=2.2,
+                    props={
+                        "font": t["heading_font"],
+                        "size": str(t["title_pt"]),
+                        "bold": "true",
+                        "color": c["text_on_content"],
+                        "fill": "none",
+                    },
+                ),
+                L.HStack(card_boxes, gap=gap * d.gap, weight=1),
             ],
         )
 
