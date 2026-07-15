@@ -74,6 +74,9 @@ def cmd_apply(args: argparse.Namespace) -> int:
     """Staging-safe materialization entry point used by apply.ps1 / apply.sh."""
     from .apply import apply_sequence
 
+    if _ensure_for_command(need_legacy=True) != 0:
+        return 1
+
     force = bool(args.force)
     # DESIGNMD_FORCE=1 is an alternate force signal for shell wrappers
     import os
@@ -97,6 +100,13 @@ def cmd_apply(args: argparse.Namespace) -> int:
 
 
 def cmd_scaffold(args: argparse.Namespace) -> int:
+    # Soft warn always; hard require when --apply
+    if getattr(args, "apply", False):
+        if _ensure_for_command(need_legacy=True) != 0:
+            return 1
+    else:
+        _ensure_for_command(soft=True)
+
     out_dir = Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -377,6 +387,11 @@ def cmd_restyle(args: argparse.Namespace) -> int:
 
     from .restyle import restyle_pptx, restyle_preview
 
+    # Pure OOXML restyle — works offline; soft-warn only if OfficeCLI missing
+    # so users still know apply will need the binary later.
+    if not args.preview:
+        _ensure_for_command(soft=True)
+
     design = _resolve_design(args.design)
     if design.suffix.lower() == ".json":
         tokens = json.loads(design.read_text(encoding="utf-8"))
@@ -428,6 +443,9 @@ def cmd_master(args: argparse.Namespace) -> int:
     import tempfile
 
     from .master import brand_master, export_potx
+
+    # Pure OOXML master branding — offline-capable; soft warn only.
+    _ensure_for_command(soft=True)
 
     design = _resolve_design(args.design)
     if design.suffix.lower() == ".json":
@@ -527,6 +545,9 @@ def cmd_render(args: argparse.Namespace) -> int:
                           tokens_to_bridge_theme)
     from .deck import normalize_deck_spec
 
+    if _ensure_for_command(need_official=True) != 0:
+        return 1
+
     src = Path(args.source)
     if src.suffix.lower() == ".json":
         deck_obj = json.loads(src.read_text(encoding="utf-8"))
@@ -570,7 +591,57 @@ def cmd_doctor(args: argparse.Namespace) -> int:
 
     if getattr(args, "install", False):
         return run_install(dry_run=bool(getattr(args, "dry_run", False)))
-    return run_doctor(strict=bool(args.strict))
+    return run_doctor(
+        strict=bool(args.strict),
+        ensure=bool(getattr(args, "ensure", False)),
+        status_json=bool(getattr(args, "status_json", False)),
+    )
+
+
+def _ensure_for_command(
+    *,
+    need_legacy: bool = False,
+    need_official: bool = False,
+    soft: bool = False,
+) -> int:
+    """Return 0 to proceed, 1 to abort. Prints required banner when missing."""
+    from .doctor import ensure_officecli
+
+    if soft:
+        # Soft: optional install prompt + warn — never abort
+        # (compose / scaffold without --apply / restyle / master)
+        _ok, status = ensure_officecli(
+            need_legacy=False,
+            need_official=False,
+            interactive=None,
+        )
+        if not status.any_officecli:
+            # Banner already printed by ensure_officecli when missing
+            print(
+                "warning: OfficeCLI not detected — you can still compile tokens / "
+                "compose deck-specs / restyle existing .pptx, but materializing "
+                "a new deck (apply / scaffold --apply / render) will fail until "
+                "OfficeCLI is installed.\n"
+                "  python -m designmd_pptx doctor --ensure\n"
+                "  python -m designmd_pptx doctor --install",
+                file=sys.stderr,
+            )
+        return 0
+
+    ok, _status = ensure_officecli(
+        need_legacy=need_legacy,
+        need_official=need_official,
+        interactive=None,
+    )
+    if not ok:
+        print(
+            "error: OfficeCLI required for this command is not available — aborting.\n"
+            "  python -m designmd_pptx doctor --ensure\n"
+            "  python -m designmd_pptx doctor --install",
+            file=sys.stderr,
+        )
+        return 1
+    return 0
 
 
 def cmd_anonymize(args: argparse.Namespace) -> int:
@@ -1229,17 +1300,23 @@ def build_parser() -> argparse.ArgumentParser:
 
     d = sub.add_parser(
         "doctor",
-        help="Verify officecli + per-platform agent skill routing (Claude/Codex/Grok); "
-             "optional --install pins official OfficeCLI from compatibility.json",
+        help="Verify officecli + skill routing; warn that .pptx materialization "
+             "requires OfficeCLI; optional --install / --ensure prompts to install",
     )
     d.add_argument("--strict", action="store_true",
-                   help="Exit non-zero when officecli is missing")
+                   help="Exit non-zero when legacy officecli is missing")
     d.add_argument("--install", action="store_true",
                    help="Explicitly install/repair auto-installable deps "
                         "(official officecli@pin from compatibility.json, PyYAML); "
                         "prints every download/command; legacy remains manual")
     d.add_argument("--dry-run", action="store_true",
                    help="With --install: print the version-locked plan without running it")
+    d.add_argument("--ensure", action="store_true",
+                   help="If OfficeCLI is missing, print the required banner and "
+                        "interactively ask to run doctor --install (TTY only; "
+                        "DESIGNMD_ASSUME_YES=1 auto-accepts; DESIGNMD_NO_PROMPT=1 skips)")
+    d.add_argument("--status-json", action="store_true",
+                   help="Print machine-readable backend status JSON and exit")
     d.set_defaults(func=cmd_doctor)
 
     z = sub.add_parser(

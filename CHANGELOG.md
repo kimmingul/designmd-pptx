@@ -2,7 +2,17 @@
 
 All notable changes to designmd-pptx are documented here.
 
-## [Unreleased] — Wave 4 Infograpify structural roles
+## [Unreleased]
+
+### Added
+- **OfficeCLI ensure + install prompt:** without OfficeCLI, new-deck
+  materialization does not work. `doctor` prints a required banner; `--ensure`
+  and TTY `doctor` offer **Y/n** to run `doctor --install`. Hard gate on
+  `apply` / `scaffold --apply` / `render`; soft warn on scaffold / restyle /
+  master. VS Code asks on activate and via **Install OfficeCLI…**.
+  Flags: `--status-json`; env `DESIGNMD_ASSUME_YES` / `DESIGNMD_NO_PROMPT`.
+
+### Added (Wave 4 Infograpify structural roles)
 
 ### Added
 - **14 recipes (Wave 4)** from re-analysis of local Infograpify 400-deck library
