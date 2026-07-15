@@ -37,3 +37,4 @@ infograpify_ppt_templates/
 extracted/
 **/extract-assets/
 editor/vscode/*.vsix
+demo/_slide*.png
