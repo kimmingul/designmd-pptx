@@ -7,19 +7,26 @@ All notable changes to designmd-pptx are documented here.
 ### Added
 - **Visual motifs** (`motif.py`, `motifs/catalog.json`, `docs/motifs.md`):
   SmartArt-like **original** formats derived from Infograpify *structural*
-  analysis only (no vendor shapes). Motifs: `split_hero`, `card_row`,
-  `step_rail`, `kpi_hero`, `stair_ascent`, `check_stack`, `tile_row`. Recipes
-  thin-wrap `render_motif`. Not React UI libs; not Office SmartArt OOXML.
+  analysis only (no vendor shapes). Catalog includes `sparse_hero`,
+  `section_mark`, `kpi_band`, `funnel_cascade`, `matrix_quad`, plus
+  `split_hero`, `card_row`, `step_rail`, `kpi_hero`, `stair_ascent`,
+  `check_stack`, `tile_row`. Recipes thin-wrap `render_motif`. Not React UI
+  libs; not Office SmartArt OOXML (`dgm:`). Golden one-pagers:
+  `demo/motifs/` via `scripts/generate_motif_goldens.py`.
 - **UI kit contract** (`ui_kit.py`, `docs/ui-kit.md`): spacing system —
   `StageMetrics` (margin/gap/pad/title bands), content-height body + Spacer.
   Layout engine **strips vertical Text weights**. Demo:
-  `designmd-pptx-best-v2.1.2.pptx` (10 slides).
+  `designmd-pptx-best-v2.1.2.pptx` (12 slides, motif showcase).
 - **OfficeCLI ensure + install prompt:** without OfficeCLI, new-deck
   materialization does not work. `doctor` prints a required banner; `--ensure`
   and TTY `doctor` offer **Y/n** to run `doctor --install`. Hard gate on
   `apply` / `scaffold --apply` / `render`; soft warn on scaffold / restyle /
   master. VS Code asks on activate and via **Install OfficeCLI…**.
   Flags: `--status-json`; env `DESIGNMD_ASSUME_YES` / `DESIGNMD_NO_PROMPT`.
+
+### Fixed
+- **`_initials` helper** for `team` / `persona_card` avatar discs (scaffold
+  used an undefined name and aborted recipe generation mid-run).
 
 ### Added (Wave 4 Infograpify structural roles)
 

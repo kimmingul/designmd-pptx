@@ -64,7 +64,7 @@
     "type": "shape",
     "props": {
       "name": "CoverSubtitle",
-      "text": "Motifs from structure — original chrome, brand from DESIGN.md",
+      "text": "Motif golden — sparse_hero",
       "x": "2.2cm",
       "y": "9.5cm",
       "width": "26cm",
@@ -82,7 +82,7 @@
     "type": "shape",
     "props": {
       "name": "CoverMeta",
-      "text": "v2.1.2  ·  motif library  ·  English",
+      "text": "v2.1.2",
       "x": "2.2cm",
       "y": "15.95cm",
       "width": "29.47cm",
@@ -99,7 +99,7 @@
     "parent": "/slide[last()]",
     "type": "notes",
     "props": {
-      "text": "Hold the name."
+      "text": "Hold the product name, then the promise."
     }
   }
 ]

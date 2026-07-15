@@ -34,7 +34,7 @@
     "type": "shape",
     "props": {
       "name": "BigLabel",
-      "text": "The brand is the contract",
+      "text": "One brand source of truth",
       "x": "2.2cm",
       "y": "10.29cm",
       "width": "29.47cm",
@@ -53,7 +53,7 @@
     "type": "shape",
     "props": {
       "name": "BigContext",
-      "text": "Tokens, recipes, staging-safe apply — not a blank slide and a prayer.",
+      "text": "Tokens and floors compile once — decks inherit the contract.",
       "x": "3.3cm",
       "y": "12.54cm",
       "width": "27.27cm",
@@ -70,7 +70,7 @@
     "parent": "/slide[last()]",
     "type": "notes",
     "props": {
-      "text": "Everything else is a derivative of this file."
+      "text": "The brand file is the contract."
     }
   }
 ]

@@ -20,8 +20,9 @@ class MotifCatalog(unittest.TestCase):
     def test_catalog_lists_core_motifs(self) -> None:
         ids = list_motifs()
         for required in (
-            "split_hero", "card_row", "step_rail", "kpi_hero",
-            "stair_ascent", "check_stack", "tile_row",
+            "split_hero", "card_row", "step_rail", "kpi_hero", "kpi_band",
+            "stair_ascent", "check_stack", "tile_row", "sparse_hero",
+            "funnel_cascade", "matrix_quad", "section_mark",
         ):
             self.assertIn(required, ids, required)
         cat = catalog()
@@ -86,6 +87,26 @@ class MotifRender(unittest.TestCase):
     def test_unknown_motif_raises(self) -> None:
         with self.assertRaises(KeyError):
             render_motif("not_a_real_motif", self.tokens, {})
+
+    def test_new_motifs_emit_slides(self) -> None:
+        for mid, slots in (
+            ("sparse_hero", {"title": "T", "subtitle": "S", "meta": "M", "placement": "left"}),
+            ("kpi_band", {"title": "K", "kpis": [
+                {"value": "1", "label": "A"}, {"value": "2", "label": "B"},
+            ]}),
+            ("funnel_cascade", {"title": "F", "stages": [
+                {"label": "A", "value": "100%"},
+                {"label": "B", "value": "50%"},
+                {"label": "C", "value": "10%"},
+            ]}),
+            ("matrix_quad", {"title": "M", "quadrants": [
+                {"title": "Q1", "body": "a"}, {"title": "Q2", "body": "b"},
+                {"title": "Q3", "body": "c"}, {"title": "Q4", "body": "d"},
+            ]}),
+            ("section_mark", {"number": "01", "title": "Sec", "blurb": "Hi"}),
+        ):
+            ops = render_motif(mid, self.tokens, slots)
+            self.assertTrue(any(o.get("type") == "slide" for o in ops), mid)
 
 
 if __name__ == "__main__":

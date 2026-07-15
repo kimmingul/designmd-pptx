@@ -7,35 +7,39 @@ Premium product intro decks built on the **ui_kit** spacing contract
 
 | File | Slides | Notes |
 |------|--------|--------|
-| **`designmd-pptx-best-v2.1.2.pptx`** | 10 | Best-craft narrative (primary) |
-| **`designmd-pptx-intro-v2.1.2.pptx`** | 10 | Same as best (stable name) |
+| **`designmd-pptx-best-v2.1.2.pptx`** | 12 | Motif showcase narrative (primary) |
+| **`designmd-pptx-intro-v2.1.2.pptx`** | 12 | Same as best (stable name) |
 | `*.contact.png` | — | Gate 3 contact sheets |
+| `motifs/*.pptx` | 1 each | Per-motif golden one-pagers |
 
 ## Sources
 
 | File | Role |
 |------|------|
 | `apple.DESIGN.md` | Spacious black stage · left cover · **pt** type |
-| `content.best.deck.json` | 10-slide best narrative |
+| `content.best.deck.json` | 12-slide motif narrative |
 | `content.flagship.deck.json` | Earlier 9-slide flagship |
 | `content.intro.deck.json` | Deprecated 20-slide catalog (do not ship) |
 | `scaffold/` | Latest tokens / recipes / apply wrappers |
+| `motifs/` | Golden one-pagers (`scripts/generate_motif_goldens.py`) |
 | `a11y.report.json` | Accessibility audit |
 
 ## Narrative (best / intro)
 
-| # | Recipe | Beat |
-|---|--------|------|
-| 1 | `cover` | Left-hero product name |
-| 2 | `big_number` | **DESIGN.md** as contract |
-| 3 | `before_after_slider` | Before → After |
-| 4 | `process` | Brief → Gate 3 + connectors |
-| 5 | `feature_cards` | Three promises (01–03) |
-| 6 | `pillar_columns` | Legacy / Official / Offline |
-| 7 | `mission_vision_split` | North star |
-| 8 | `stairs_ascent` | Quality staircase |
-| 9 | `checklist_board` | Hard rules |
-| 10 | `close` | `doctor --ensure` |
+| # | Recipe | Motif / beat |
+|---|--------|--------------|
+| 1 | `cover` | `sparse_hero` — product name |
+| 2 | `section_opener_numbered` | `section_mark` — contract |
+| 3 | `kpi_row` | `kpi_band` — at a glance |
+| 4 | `big_number` | **DESIGN.md** as source of truth |
+| 5 | `before_after_slider` | Before → After |
+| 6 | `process` | `step_rail` — authoring pipeline |
+| 7 | `feature_cards` | `card_row` — three promises |
+| 8 | `funnel_stages` | `funnel_cascade` |
+| 9 | `matrix_2x2` | `matrix_quad` |
+| 10 | `stairs_ascent` | Quality staircase |
+| 11 | `checklist_board` | Hard rules |
+| 12 | `close` | `doctor --ensure` |
 
 **Not in this deck:** fake hex, circle segments, RACI grids, risk heat,
 or catalog exhibition of all 75 builders.

@@ -14,7 +14,7 @@
     "type": "shape",
     "props": {
       "name": "ProcTitle",
-      "text": "One pipeline",
+      "text": "Authoring pipeline",
       "x": "2.2cm",
       "y": "1.21cm",
       "width": "29.47cm",
@@ -79,7 +79,7 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "text": "3\nScaffold\nTokens",
+      "text": "3\nScaffold\nMotifs",
       "x": "14.43cm",
       "y": "6.48cm",
       "width": "5.01cm",
@@ -189,7 +189,7 @@
     "parent": "/slide[last()]",
     "type": "notes",
     "props": {
-      "text": "Five steps. One owner each. Gate 3 is not optional."
+      "text": "Walk left to right; stop on the bottleneck."
     }
   }
 ]

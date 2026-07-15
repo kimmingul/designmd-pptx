@@ -6,52 +6,89 @@
       "recipe": "cover",
       "content": {
         "title": "designmd-pptx",
-        "subtitle": "Brand design that becomes a real deck",
-        "meta": "v2.1.2  ·  English  ·  Precision pipeline",
-        "notes": "Hold the name. Then the promise."
+        "subtitle": "Motifs from structure — original chrome, brand from DESIGN.md",
+        "meta": "v2.1.2  ·  motif library  ·  English",
+        "notes": "Hold the name."
       }
     },
     {
-      "id": "02-contract",
+      "id": "02-section",
+      "recipe": "section_opener_numbered",
+      "content": {
+        "number": "01",
+        "title": "The contract",
+        "blurb": "Brand lives in DESIGN.md. Motifs carry layout chrome."
+      }
+    },
+    {
+      "id": "03-kpi",
+      "recipe": "kpi_row",
+      "content": {
+        "title": "At a glance",
+        "kpis": [
+          {
+            "value": "12",
+            "label": "Motifs",
+            "chip": "v1"
+          },
+          {
+            "value": "75",
+            "label": "Recipes",
+            "chip": ""
+          },
+          {
+            "value": "2",
+            "label": "Backends",
+            "chip": ""
+          },
+          {
+            "value": "0",
+            "label": "Vendor bytes",
+            "chip": "safe"
+          }
+        ]
+      }
+    },
+    {
+      "id": "04-hero",
       "recipe": "big_number",
       "content": {
         "value": "DESIGN.md",
-        "label": "The brand is the contract",
-        "context": "Tokens, recipes, staging-safe apply — not a blank slide and a prayer.",
-        "notes": "Everything else is a derivative of this file."
+        "label": "One brand source of truth",
+        "context": "Tokens and floors compile once — decks inherit the contract.",
+        "notes": "The brand file is the contract."
       }
     },
     {
-      "id": "03-delta",
+      "id": "05-delta",
       "recipe": "before_after_slider",
       "content": {
         "title": "What changes",
         "before": {
           "title": "Before",
           "body": [
-            "Decks drift from the brand file",
-            "Agents invent one-off layouts",
-            "No floors, no screenshot gate",
-            "Overwrite risk on every save"
+            "Decks drift from brand",
+            "Agents invent layouts",
+            "No screenshot gate",
+            "Overwrite risk"
           ]
         },
         "after": {
           "title": "After",
           "body": [
-            "Tokens compiled from DESIGN.md",
-            "Recipes with real text budgets",
-            "Gate 3 contact sheet before ship",
-            "Staging-safe apply with --force"
+            "Tokens from DESIGN.md",
+            "Motif chrome + budgets",
+            "Gate 3 contact sheet",
+            "Staging-safe --force"
           ]
         }
       }
     },
     {
-      "id": "04-flow",
+      "id": "06-flow",
       "recipe": "process",
       "content": {
-        "title": "One pipeline",
-        "notes": "Five steps. One owner each. Gate 3 is not optional.",
+        "title": "Authoring pipeline",
         "steps": [
           {
             "label": "Brief",
@@ -63,7 +100,7 @@
           },
           {
             "label": "Scaffold",
-            "detail": "Tokens"
+            "detail": "Motifs"
           },
           {
             "label": "Apply",
@@ -77,87 +114,111 @@
       }
     },
     {
-      "id": "05-promises",
+      "id": "07-promises",
       "recipe": "feature_cards",
       "content": {
         "title": "Three promises",
         "cards": [
           {
             "title": "Exact geometry",
-            "body": "Centimeters. Glued connectors. Type floors that hold."
+            "body": "Centimeters. Connectors. Type floors that hold."
           },
           {
             "title": "Hard gates",
             "body": "Budgets, contrast, issues — then a contact sheet."
           },
           {
-            "title": "Agent-safe",
-            "body": "Claude, Codex, Grok. Install only after you say yes."
+            "title": "License-safe",
+            "body": "Infograpify is reference only. Motifs are original."
           }
         ]
       }
     },
     {
-      "id": "06-backends",
-      "recipe": "pillar_columns",
+      "id": "08-funnel",
+      "recipe": "funnel_stages",
       "content": {
-        "title": "Two backends, one contract",
-        "pillars": [
+        "title": "Adoption funnel",
+        "stages": [
           {
-            "label": "Legacy",
-            "detail": "Shape-level precision for DESIGN.md decks"
+            "label": "Discover",
+            "value": "100%"
           },
           {
-            "label": "Official",
-            "detail": "Agent-bridge drafts via office.render"
+            "label": "Try doctor",
+            "value": "42%"
           },
           {
-            "label": "Offline",
-            "detail": "Compose, a11y, refine, animate without a binary"
-          }
-        ]
-      }
-    },
-    {
-      "id": "07-north",
-      "recipe": "mission_vision_split",
-      "content": {
-        "title": "North star",
-        "mission": "Make every brand deck as sharp as the product it sells.",
-        "vision": "Ship DESIGN.md-native slides without designers in the pixel loop."
-      }
-    },
-    {
-      "id": "08-quality",
-      "recipe": "stairs_ascent",
-      "content": {
-        "title": "Quality is a staircase",
-        "steps": [
-          {
-            "label": "Tokens",
-            "detail": "Brand floors"
-          },
-          {
-            "label": "Fit",
-            "detail": "CJK budgets"
-          },
-          {
-            "label": "Issues",
-            "detail": "Overlap gate"
-          },
-          {
-            "label": "Gate 3",
-            "detail": "Contact sheet"
+            "label": "Scaffold",
+            "value": "19%"
           },
           {
             "label": "Ship",
-            "detail": "Human check"
+            "value": "8%"
           }
         ]
       }
     },
     {
-      "id": "09-rules",
+      "id": "09-matrix",
+      "recipe": "matrix_2x2",
+      "content": {
+        "title": "Where motifs play",
+        "quadrants": [
+          {
+            "title": "Hero",
+            "body": "sparse_hero · kpi_hero"
+          },
+          {
+            "title": "Compare",
+            "body": "split_hero · matrix_quad"
+          },
+          {
+            "title": "Flow",
+            "body": "step_rail · funnel_cascade"
+          },
+          {
+            "title": "Grid",
+            "body": "card_row · kpi_band · tile_row"
+          }
+        ],
+        "axes": {
+          "x": "Structure →",
+          "y": "Narrative ↑"
+        }
+      }
+    },
+    {
+      "id": "10-stairs",
+      "recipe": "stairs_ascent",
+      "content": {
+        "title": "Quality staircase",
+        "steps": [
+          {
+            "label": "Tokens",
+            "detail": "Floors"
+          },
+          {
+            "label": "Motif",
+            "detail": "Chrome"
+          },
+          {
+            "label": "Issues",
+            "detail": "Gate"
+          },
+          {
+            "label": "Gate 3",
+            "detail": "Sheet"
+          },
+          {
+            "label": "Ship",
+            "detail": "Human"
+          }
+        ]
+      }
+    },
+    {
+      "id": "11-rules",
       "recipe": "checklist_board",
       "content": {
         "title": "Hard rules",
@@ -167,15 +228,15 @@
             "done": true
           },
           {
-            "label": "Never shrink fonts to fit — split or cut",
+            "label": "Never shrink fonts to fit",
             "done": true
           },
           {
-            "label": "Body height follows content, not free space",
+            "label": "Body height follows content",
             "done": true
           },
           {
-            "label": "Overwrite only with --force",
+            "label": "No vendor shapes or icons",
             "done": true
           },
           {
@@ -186,13 +247,13 @@
       }
     },
     {
-      "id": "10-close",
+      "id": "12-close",
       "recipe": "close",
       "content": {
         "title": "Start with the brand file",
         "body": "doctor --ensure · compose · scaffold · apply --screenshot",
         "cta": "doctor --ensure",
-        "notes": "Leave them with one command."
+        "notes": "One command."
       }
     }
   ]

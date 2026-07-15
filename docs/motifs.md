@@ -37,19 +37,35 @@ scaffold / apply / Gate 3
 
 Hard rules: [infograpify-reference.md](infograpify-reference.md).
 
-## Catalog (v1)
+## Catalog (v1 → v1.1)
 
-| Motif id | Role | Recipes |
-|----------|------|---------|
-| `split_hero` | Two equal panels | `before_after_slider`, `mission_vision_split` |
-| `card_row` | 2–4 indexed cards | `feature_cards` |
-| `step_rail` | Numbered process + connectors | `process` |
-| `kpi_hero` | Mega metric | `big_number` |
-| `stair_ascent` | Rising maturity steps | `stairs_ascent` |
-| `check_stack` | Checklist rows | `checklist_board` |
-| `tile_row` | Equal tiles | `puzzle_pieces` |
+Driven by local `.ref-analysis` layout_hints (kpi_band, card_row, sparse_hero,
+matrix_like, connectors) — **filenames/structure only**.
+
+| Motif id | Role | ref hint | Recipes |
+|----------|------|----------|---------|
+| `sparse_hero` | Cover / large type | sparse_hero | `cover` |
+| `section_mark` | Numbered section | sparse_hero | `section_opener_numbered` |
+| `kpi_band` | 2–4 metric cards | kpi_band | `kpi_row` |
+| `kpi_hero` | Mega metric | kpi_band | `big_number` |
+| `split_hero` | Two equal panels | comparison | `before_after`, `mission_vision` |
+| `card_row` | Indexed cards | card_row_3/4 | `feature_cards` |
+| `step_rail` | Process + connectors | has_connectors | `process` |
+| `funnel_cascade` | Decreasing bands | process_flow | `funnel_stages` |
+| `matrix_quad` | 2×2 cells | matrix_like | `matrix_2x2` |
+| `stair_ascent` | Rising steps | hierarchy | `stairs_ascent` |
+| `check_stack` | Checklist | — | `checklist_board` |
+| `tile_row` | Equal tiles | card_row | `puzzle_pieces` |
 
 Machine-readable: `python/designmd_pptx/motifs/catalog.json`.
+
+### Golden one-pagers
+
+```bash
+export OFFICECLI_LEGACY_BIN=…   # legacy binary
+PYTHONPATH=python python scripts/generate_motif_goldens.py
+# → demo/motifs/<id>.pptx + contact screenshots
+```
 
 ## API
 

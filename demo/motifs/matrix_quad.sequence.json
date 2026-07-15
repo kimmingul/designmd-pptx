@@ -13,17 +13,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "MatrixTitle",
-      "text": "SWOT",
-      "x": "2.2cm",
-      "y": "1.21cm",
-      "width": "29.47cm",
-      "height": "1.55cm",
       "font": "Arial",
       "size": "36",
       "bold": "true",
       "color": "F5F5F7",
-      "fill": "none"
+      "fill": "none",
+      "name": "MatrixTitle",
+      "text": "Where we play",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.84cm"
     }
   },
   {
@@ -36,9 +36,9 @@
       "line": "none",
       "name": "Quad1Bg",
       "x": "2.2cm",
-      "y": "3.9cm",
+      "y": "3.93cm",
       "width": "14.18cm",
-      "height": "6cm"
+      "height": "5.91cm"
     }
   },
   {
@@ -52,9 +52,9 @@
       "color": "F5F5F7",
       "fill": "none",
       "name": "Quad1Title",
-      "text": "Strengths",
+      "text": "Invest",
       "x": "3.03cm",
-      "y": "4.67cm",
+      "y": "4.7cm",
       "width": "12.54cm",
       "height": "1.31cm"
     }
@@ -69,9 +69,9 @@
       "color": "A0A6B0",
       "fill": "none",
       "name": "Quad1Body",
-      "text": "• Core strength",
+      "text": "High value, high fit",
       "x": "3.03cm",
-      "y": "6.33cm",
+      "y": "6.36cm",
       "width": "12.54cm",
       "height": "1.2cm"
     }
@@ -86,9 +86,9 @@
       "line": "none",
       "name": "Quad2Bg",
       "x": "17.48cm",
-      "y": "3.9cm",
+      "y": "3.93cm",
       "width": "14.18cm",
-      "height": "6cm"
+      "height": "5.91cm"
     }
   },
   {
@@ -102,9 +102,9 @@
       "color": "F5F5F7",
       "fill": "none",
       "name": "Quad2Title",
-      "text": "Weaknesses",
+      "text": "Selective",
       "x": "18.31cm",
-      "y": "4.67cm",
+      "y": "4.7cm",
       "width": "12.54cm",
       "height": "1.31cm"
     }
@@ -119,9 +119,9 @@
       "color": "A0A6B0",
       "fill": "none",
       "name": "Quad2Body",
-      "text": "• Gap to close",
+      "text": "High value, low fit",
       "x": "18.31cm",
-      "y": "6.33cm",
+      "y": "6.36cm",
       "width": "12.54cm",
       "height": "1.2cm"
     }
@@ -136,9 +136,9 @@
       "line": "none",
       "name": "Quad3Bg",
       "x": "2.2cm",
-      "y": "11cm",
+      "y": "10.94cm",
       "width": "14.18cm",
-      "height": "6cm"
+      "height": "5.91cm"
     }
   },
   {
@@ -152,9 +152,9 @@
       "color": "F5F5F7",
       "fill": "none",
       "name": "Quad3Title",
-      "text": "Opportunities",
+      "text": "Maintain",
       "x": "3.03cm",
-      "y": "11.77cm",
+      "y": "11.71cm",
       "width": "12.54cm",
       "height": "1.31cm"
     }
@@ -169,9 +169,9 @@
       "color": "A0A6B0",
       "fill": "none",
       "name": "Quad3Body",
-      "text": "• Open door",
+      "text": "Low value, high fit",
       "x": "3.03cm",
-      "y": "13.43cm",
+      "y": "13.37cm",
       "width": "12.54cm",
       "height": "1.2cm"
     }
@@ -186,9 +186,9 @@
       "line": "none",
       "name": "Quad4Bg",
       "x": "17.48cm",
-      "y": "11cm",
+      "y": "10.94cm",
       "width": "14.18cm",
-      "height": "6cm"
+      "height": "5.91cm"
     }
   },
   {
@@ -202,9 +202,9 @@
       "color": "F5F5F7",
       "fill": "none",
       "name": "Quad4Title",
-      "text": "Threats",
+      "text": "Exit",
       "x": "18.31cm",
-      "y": "11.77cm",
+      "y": "11.71cm",
       "width": "12.54cm",
       "height": "1.31cm"
     }
@@ -219,9 +219,9 @@
       "color": "A0A6B0",
       "fill": "none",
       "name": "Quad4Body",
-      "text": "• External risk",
+      "text": "Low value, low fit",
       "x": "18.31cm",
-      "y": "13.43cm",
+      "y": "13.37cm",
       "width": "12.54cm",
       "height": "1.2cm"
     }
@@ -229,44 +229,9 @@
   {
     "command": "add",
     "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "AxisX",
-      "text": "→ Internal → External",
-      "x": "2.2cm",
-      "y": "17.5cm",
-      "width": "29.47cm",
-      "height": "0.9cm",
-      "font": "Arial",
-      "size": "12",
-      "color": "A0A6B0",
-      "align": "center",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "AxisY",
-      "text": "↑ Helpful → Harmful",
-      "x": "2.2cm",
-      "y": "3.0cm",
-      "width": "12cm",
-      "height": "0.8cm",
-      "font": "Arial",
-      "size": "12",
-      "color": "A0A6B0",
-      "fill": "none"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
     "type": "notes",
     "props": {
-      "text": "Pair each weakness with a strength that offsets it."
+      "text": "Name the quadrant that needs a decision this quarter."
     }
   }
 ]

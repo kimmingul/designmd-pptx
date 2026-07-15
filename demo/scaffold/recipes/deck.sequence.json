@@ -31,9 +31,9 @@
       "name": "CoverTitle",
       "text": "designmd-pptx",
       "x": "2.2cm",
-      "y": "5.2cm",
+      "y": "5cm",
       "width": "29.47cm",
-      "height": "4.2cm",
+      "height": "4cm",
       "font": "Arial",
       "size": "48",
       "bold": "true",
@@ -53,8 +53,8 @@
       "fill": "0B5FFF",
       "line": "none",
       "x": "2.2cm",
-      "y": "9.5cm",
-      "width": "4.5cm",
+      "y": "9.1cm",
+      "width": "4.8cm",
       "height": "0.14cm"
     }
   },
@@ -64,9 +64,9 @@
     "type": "shape",
     "props": {
       "name": "CoverSubtitle",
-      "text": "Brand design that becomes a real deck",
+      "text": "Motifs from structure — original chrome, brand from DESIGN.md",
       "x": "2.2cm",
-      "y": "9.9cm",
+      "y": "9.5cm",
       "width": "26cm",
       "height": "1.6cm",
       "font": "Arial",
@@ -82,9 +82,9 @@
     "type": "shape",
     "props": {
       "name": "CoverMeta",
-      "text": "v2.1.2  ·  English  ·  Precision pipeline",
+      "text": "v2.1.2  ·  motif library  ·  English",
       "x": "2.2cm",
-      "y": "16.8cm",
+      "y": "15.95cm",
       "width": "29.47cm",
       "height": "0.9cm",
       "font": "Arial",
@@ -92,6 +92,418 @@
       "color": "A0A6B0",
       "align": "left",
       "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Hold the name."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerAccentBar",
+      "preset": "rect",
+      "fill": "0B5FFF",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "6.2cm",
+      "width": "1.1cm",
+      "height": "6.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerNumber",
+      "text": "01",
+      "x": "3.8cm",
+      "y": "5.6cm",
+      "width": "8cm",
+      "height": "2.4cm",
+      "font": "Arial",
+      "size": "54",
+      "bold": "true",
+      "color": "0B5FFF",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerTitle",
+      "text": "The contract",
+      "x": "3.8cm",
+      "y": "8.2cm",
+      "width": "27.87cm",
+      "height": "2.6cm",
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "OpenerBlurb",
+      "text": "Brand lives in DESIGN.md. Motifs carry layout chrome.",
+      "x": "3.8cm",
+      "y": "11.0cm",
+      "width": "22cm",
+      "height": "2.2cm",
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Pause on the section number before the title."
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/",
+    "type": "slide",
+    "props": {
+      "layout": "blank",
+      "background": "000000"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "36",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "KpiTitle",
+      "text": "At a glance",
+      "x": "2.2cm",
+      "y": "1.21cm",
+      "width": "29.47cm",
+      "height": "1.84cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Kpi1Bg",
+      "x": "2.2cm",
+      "y": "3.93cm",
+      "width": "6.54cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi1Value",
+      "text": "12",
+      "x": "2.55cm",
+      "y": "7.86cm",
+      "width": "5.84cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi1Label",
+      "text": "Motifs",
+      "x": "2.55cm",
+      "y": "11.11cm",
+      "width": "5.84cm",
+      "height": "0.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi1Chip",
+      "text": "v1",
+      "x": "2.55cm",
+      "y": "12.31cm",
+      "width": "5.84cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Kpi2Bg",
+      "x": "9.84cm",
+      "y": "3.93cm",
+      "width": "6.54cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi2Value",
+      "text": "75",
+      "x": "10.19cm",
+      "y": "7.86cm",
+      "width": "5.84cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi2Label",
+      "text": "Recipes",
+      "x": "10.19cm",
+      "y": "11.11cm",
+      "width": "5.84cm",
+      "height": "0.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi2Chip",
+      "text": "",
+      "x": "10.19cm",
+      "y": "12.31cm",
+      "width": "5.84cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Kpi3Bg",
+      "x": "17.48cm",
+      "y": "3.93cm",
+      "width": "6.54cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi3Value",
+      "text": "2",
+      "x": "17.84cm",
+      "y": "7.86cm",
+      "width": "5.84cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi3Label",
+      "text": "Backends",
+      "x": "17.84cm",
+      "y": "11.11cm",
+      "width": "5.84cm",
+      "height": "0.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi3Chip",
+      "text": "",
+      "x": "17.84cm",
+      "y": "12.31cm",
+      "width": "5.84cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Kpi4Bg",
+      "x": "25.13cm",
+      "y": "3.93cm",
+      "width": "6.54cm",
+      "height": "12.92cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "60",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi4Value",
+      "text": "0",
+      "x": "25.48cm",
+      "y": "7.86cm",
+      "width": "5.84cm",
+      "height": "2.9cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi4Label",
+      "text": "Vendor bytes",
+      "x": "25.48cm",
+      "y": "11.11cm",
+      "width": "5.84cm",
+      "height": "0.85cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "12",
+      "bold": "true",
+      "color": "0B5FFF",
+      "align": "center",
+      "fill": "none",
+      "name": "Kpi4Chip",
+      "text": "safe",
+      "x": "25.48cm",
+      "y": "12.31cm",
+      "width": "5.84cm",
+      "height": "0.78cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "notes",
+    "props": {
+      "text": "Walk KPIs left to right; pause on any watch metric."
     }
   },
   {
@@ -129,7 +541,7 @@
     "type": "shape",
     "props": {
       "name": "BigLabel",
-      "text": "The brand is the contract",
+      "text": "One brand source of truth",
       "x": "2.2cm",
       "y": "10.29cm",
       "width": "29.47cm",
@@ -148,7 +560,7 @@
     "type": "shape",
     "props": {
       "name": "BigContext",
-      "text": "Tokens, recipes, staging-safe apply — not a blank slide and a prayer.",
+      "text": "Tokens and floors compile once — decks inherit the contract.",
       "x": "3.3cm",
       "y": "12.54cm",
       "width": "27.27cm",
@@ -165,7 +577,7 @@
     "parent": "/slide[last()]",
     "type": "notes",
     "props": {
-      "text": "Everything else is a derivative of this file."
+      "text": "The brand file is the contract."
     }
   },
   {
@@ -234,7 +646,7 @@
     "type": "shape",
     "props": {
       "name": "BaBody1",
-      "text": "• Decks drift from the brand file\n• Agents invent one-off layouts\n• No floors, no screenshot gate\n• Overwrite risk on every save",
+      "text": "• Decks drift from brand\n• Agents invent layouts\n• No screenshot gate\n• Overwrite risk",
       "x": "3.3cm",
       "y": "8.71cm",
       "width": "11.98cm",
@@ -284,7 +696,7 @@
     "type": "shape",
     "props": {
       "name": "BaBody2",
-      "text": "• Tokens compiled from DESIGN.md\n• Recipes with real text budgets\n• Gate 3 contact sheet before ship\n• Staging-safe apply with --force",
+      "text": "• Tokens from DESIGN.md\n• Motif chrome + budgets\n• Gate 3 contact sheet\n• Staging-safe --force",
       "x": "18.59cm",
       "y": "8.71cm",
       "width": "11.98cm",
@@ -318,7 +730,7 @@
     "type": "shape",
     "props": {
       "name": "ProcTitle",
-      "text": "One pipeline",
+      "text": "Authoring pipeline",
       "x": "2.2cm",
       "y": "1.21cm",
       "width": "29.47cm",
@@ -383,7 +795,7 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "text": "3\nScaffold\nTokens",
+      "text": "3\nScaffold\nMotifs",
       "x": "14.43cm",
       "y": "6.48cm",
       "width": "5.01cm",
@@ -445,8 +857,8 @@
     "parent": "/slide[last()]",
     "type": "connector",
     "props": {
-      "from": "/slide[4]/shape[@name=Proc1]",
-      "to": "/slide[4]/shape[@name=Proc2]",
+      "from": "/slide[6]/shape[@name=Proc1]",
+      "to": "/slide[6]/shape[@name=Proc2]",
       "shape": "straight",
       "color": "A0A6B0",
       "tailEnd": "triangle"
@@ -457,8 +869,8 @@
     "parent": "/slide[last()]",
     "type": "connector",
     "props": {
-      "from": "/slide[4]/shape[@name=Proc2]",
-      "to": "/slide[4]/shape[@name=Proc3]",
+      "from": "/slide[6]/shape[@name=Proc2]",
+      "to": "/slide[6]/shape[@name=Proc3]",
       "shape": "straight",
       "color": "A0A6B0",
       "tailEnd": "triangle"
@@ -469,8 +881,8 @@
     "parent": "/slide[last()]",
     "type": "connector",
     "props": {
-      "from": "/slide[4]/shape[@name=Proc3]",
-      "to": "/slide[4]/shape[@name=Proc4]",
+      "from": "/slide[6]/shape[@name=Proc3]",
+      "to": "/slide[6]/shape[@name=Proc4]",
       "shape": "straight",
       "color": "A0A6B0",
       "tailEnd": "triangle"
@@ -481,8 +893,8 @@
     "parent": "/slide[last()]",
     "type": "connector",
     "props": {
-      "from": "/slide[4]/shape[@name=Proc4]",
-      "to": "/slide[4]/shape[@name=Proc5]",
+      "from": "/slide[6]/shape[@name=Proc4]",
+      "to": "/slide[6]/shape[@name=Proc5]",
       "shape": "straight",
       "color": "A0A6B0",
       "tailEnd": "triangle"
@@ -493,7 +905,7 @@
     "parent": "/slide[last()]",
     "type": "notes",
     "props": {
-      "text": "Five steps. One owner each. Gate 3 is not optional."
+      "text": "Walk left to right; stop on the bottleneck."
     }
   },
   {
@@ -585,7 +997,7 @@
       "color": "A0A6B0",
       "fill": "none",
       "name": "Card1Body",
-      "text": "Centimeters. Glued connectors. Type floors that hold.",
+      "text": "Centimeters. Connectors. Type floors that hold.",
       "x": "3.3cm",
       "y": "10.26cm",
       "width": "6.89cm",
@@ -705,7 +1117,7 @@
       "color": "F5F5F7",
       "fill": "none",
       "name": "Card3Title",
-      "text": "Agent-safe",
+      "text": "License-safe",
       "x": "23.68cm",
       "y": "7.49cm",
       "width": "6.89cm",
@@ -723,7 +1135,7 @@
       "color": "A0A6B0",
       "fill": "none",
       "name": "Card3Body",
-      "text": "Claude, Codex, Grok. Install only after you say yes.",
+      "text": "Infograpify is reference only. Motifs are original.",
       "x": "23.68cm",
       "y": "10.26cm",
       "width": "6.89cm",
@@ -752,8 +1164,8 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "PillarTitle",
-      "text": "Two backends, one contract",
+      "name": "FunnelTitle",
+      "text": "Adoption funnel",
       "x": "2.2cm",
       "y": "1.21cm",
       "width": "29.47cm",
@@ -770,65 +1182,135 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "Pillar1",
+      "name": "FunnelBand1",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "2.2cm",
+      "y": "3.88cm",
+      "width": "29.47cm",
+      "height": "2.51cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelLabel1",
+      "text": "Discover  ·  100%",
+      "x": "2.75cm",
+      "y": "4.43cm",
+      "width": "28.37cm",
+      "height": "1.38cm",
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelBand2",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "4.9cm",
+      "y": "6.67cm",
+      "width": "24.07cm",
+      "height": "2.51cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelLabel2",
+      "text": "Try doctor  ·  42%",
+      "x": "5.45cm",
+      "y": "7.22cm",
+      "width": "22.97cm",
+      "height": "1.38cm",
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelBand3",
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "x": "7.6cm",
+      "y": "9.45cm",
+      "width": "18.66cm",
+      "height": "2.51cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelLabel3",
+      "text": "Scaffold  ·  19%",
+      "x": "8.15cm",
+      "y": "10.01cm",
+      "width": "17.56cm",
+      "height": "1.38cm",
+      "font": "Arial",
+      "size": "22",
+      "bold": "true",
+      "color": "F5F5F7",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelBand4",
       "preset": "roundRect",
       "fill": "0B5FFF",
       "line": "none",
-      "text": "Legacy\n\nShape-level precision for DESIGN.md decks",
-      "x": "2.2cm",
-      "y": "7.07cm",
-      "width": "9.09cm",
-      "height": "7.44cm",
+      "x": "10.3cm",
+      "y": "12.24cm",
+      "width": "13.26cm",
+      "height": "2.51cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "FunnelLabel4",
+      "text": "Ship  ·  8%",
+      "x": "10.85cm",
+      "y": "12.79cm",
+      "width": "12.16cm",
+      "height": "1.38cm",
       "font": "Arial",
-      "size": "24",
+      "size": "22",
       "bold": "true",
       "color": "FFFFFF",
       "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "Pillar2",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Official\n\nAgent-bridge drafts via office.render",
-      "x": "12.39cm",
-      "y": "5.63cm",
-      "width": "9.09cm",
-      "height": "8.89cm",
-      "font": "Arial",
-      "size": "24",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
-    }
-  },
-  {
-    "command": "add",
-    "parent": "/slide[last()]",
-    "type": "shape",
-    "props": {
-      "name": "Pillar3",
-      "preset": "roundRect",
-      "fill": "1C1C1E",
-      "line": "none",
-      "text": "Offline\n\nCompose, a11y, refine, animate without a binary",
-      "x": "22.58cm",
-      "y": "4.18cm",
-      "width": "9.09cm",
-      "height": "10.34cm",
-      "font": "Arial",
-      "size": "24",
-      "bold": "true",
-      "color": "F5F5F7",
-      "align": "center",
-      "valign": "middle"
+      "fill": "none"
     }
   },
   {
@@ -836,7 +1318,7 @@
     "parent": "/slide[last()]",
     "type": "notes",
     "props": {
-      "text": "Pillars are non-negotiable investments, not initiatives."
+      "text": "Name the drop-off between the two biggest deltas."
     }
   },
   {
@@ -853,8 +1335,8 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "MVTitle",
-      "text": "North star",
+      "name": "MatrixTitle",
+      "text": "Where motifs play",
       "x": "2.2cm",
       "y": "1.21cm",
       "width": "29.47cm",
@@ -871,14 +1353,14 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "MVPanel1",
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
+      "name": "Quad1Bg",
       "x": "2.2cm",
-      "y": "6.1cm",
+      "y": "3.9cm",
       "width": "14.18cm",
-      "height": "6.8cm"
+      "height": "6cm"
     }
   },
   {
@@ -886,17 +1368,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "MVLab1",
-      "text": "Mission",
-      "x": "3.3cm",
-      "y": "7.2cm",
-      "width": "11.98cm",
-      "height": "1.5cm",
       "font": "Arial",
-      "size": "28",
+      "size": "24",
       "bold": "true",
       "color": "F5F5F7",
-      "fill": "none"
+      "fill": "none",
+      "name": "Quad1Title",
+      "text": "Hero",
+      "x": "3.03cm",
+      "y": "4.67cm",
+      "width": "12.54cm",
+      "height": "1.31cm"
     }
   },
   {
@@ -904,16 +1386,16 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "MVBody1",
-      "text": "Make every brand deck as sharp as the product it sells.",
-      "x": "3.3cm",
-      "y": "9.32cm",
-      "width": "11.98cm",
-      "height": "2.49cm",
       "font": "Arial",
       "size": "18",
       "color": "A0A6B0",
-      "fill": "none"
+      "fill": "none",
+      "name": "Quad1Body",
+      "text": "sparse_hero · kpi_hero",
+      "x": "3.03cm",
+      "y": "6.33cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
     }
   },
   {
@@ -921,14 +1403,14 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "MVPanel2",
       "preset": "roundRect",
-      "fill": "0B5FFF",
+      "fill": "1C1C1E",
       "line": "none",
+      "name": "Quad2Bg",
       "x": "17.48cm",
-      "y": "6.1cm",
+      "y": "3.9cm",
       "width": "14.18cm",
-      "height": "6.8cm"
+      "height": "6cm"
     }
   },
   {
@@ -936,17 +1418,17 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "MVLab2",
-      "text": "Vision",
-      "x": "18.59cm",
-      "y": "7.2cm",
-      "width": "11.98cm",
-      "height": "1.5cm",
       "font": "Arial",
-      "size": "28",
+      "size": "24",
       "bold": "true",
-      "color": "FFFFFF",
-      "fill": "none"
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Quad2Title",
+      "text": "Compare",
+      "x": "18.31cm",
+      "y": "4.67cm",
+      "width": "12.54cm",
+      "height": "1.31cm"
     }
   },
   {
@@ -954,15 +1436,150 @@
     "parent": "/slide[last()]",
     "type": "shape",
     "props": {
-      "name": "MVBody2",
-      "text": "Ship DESIGN.md-native slides without designers in the pixel loop.",
-      "x": "18.59cm",
-      "y": "9.32cm",
-      "width": "11.98cm",
-      "height": "2.49cm",
       "font": "Arial",
       "size": "18",
-      "color": "FFFFFF",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Quad2Body",
+      "text": "split_hero · matrix_quad",
+      "x": "18.31cm",
+      "y": "6.33cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Quad3Bg",
+      "x": "2.2cm",
+      "y": "11cm",
+      "width": "14.18cm",
+      "height": "6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Quad3Title",
+      "text": "Flow",
+      "x": "3.03cm",
+      "y": "11.77cm",
+      "width": "12.54cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Quad3Body",
+      "text": "step_rail · funnel_cascade",
+      "x": "3.03cm",
+      "y": "13.43cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "preset": "roundRect",
+      "fill": "1C1C1E",
+      "line": "none",
+      "name": "Quad4Bg",
+      "x": "17.48cm",
+      "y": "11cm",
+      "width": "14.18cm",
+      "height": "6cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "24",
+      "bold": "true",
+      "color": "F5F5F7",
+      "fill": "none",
+      "name": "Quad4Title",
+      "text": "Grid",
+      "x": "18.31cm",
+      "y": "11.77cm",
+      "width": "12.54cm",
+      "height": "1.31cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "font": "Arial",
+      "size": "18",
+      "color": "A0A6B0",
+      "fill": "none",
+      "name": "Quad4Body",
+      "text": "card_row · kpi_band · tile_row",
+      "x": "18.31cm",
+      "y": "13.43cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "AxisX",
+      "text": "→ Structure →",
+      "x": "2.2cm",
+      "y": "17.5cm",
+      "width": "29.47cm",
+      "height": "0.9cm",
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "AxisY",
+      "text": "↑ Narrative ↑",
+      "x": "2.2cm",
+      "y": "3.0cm",
+      "width": "12cm",
+      "height": "0.8cm",
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
       "fill": "none"
     }
   },
@@ -971,7 +1588,7 @@
     "parent": "/slide[last()]",
     "type": "notes",
     "props": {
-      "text": "Mission is timeless; vision is dated and measurable."
+      "text": "Name the quadrant that needs a decision this quarter."
     }
   },
   {
@@ -989,7 +1606,7 @@
     "type": "shape",
     "props": {
       "name": "StairsTitle",
-      "text": "Quality is a staircase",
+      "text": "Quality staircase",
       "x": "2.2cm",
       "y": "1.21cm",
       "width": "29.47cm",
@@ -1010,7 +1627,7 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "text": "1\nTokens\nBrand floors",
+      "text": "1\nTokens\nFloors",
       "x": "2.3cm",
       "y": "9.83cm",
       "width": "5.69cm",
@@ -1032,7 +1649,7 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "text": "2\nFit\nCJK budgets",
+      "text": "2\nMotif\nChrome",
       "x": "8.19cm",
       "y": "8.37cm",
       "width": "5.69cm",
@@ -1054,7 +1671,7 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "text": "3\nIssues\nOverlap gate",
+      "text": "3\nIssues\nGate",
       "x": "14.09cm",
       "y": "6.91cm",
       "width": "5.69cm",
@@ -1076,7 +1693,7 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "text": "4\nGate 3\nContact sheet",
+      "text": "4\nGate 3\nSheet",
       "x": "19.98cm",
       "y": "5.45cm",
       "width": "5.69cm",
@@ -1098,7 +1715,7 @@
       "preset": "roundRect",
       "fill": "0B5FFF",
       "line": "none",
-      "text": "5\nShip\nHuman check",
+      "text": "5\nShip\nHuman",
       "x": "25.88cm",
       "y": "3.99cm",
       "width": "5.69cm",
@@ -1176,7 +1793,7 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "text": "✓  Never shrink fonts to fit — split or cut",
+      "text": "✓  Never shrink fonts to fit",
       "x": "2.2cm",
       "y": "6.25cm",
       "width": "29.47cm",
@@ -1197,7 +1814,7 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "text": "✓  Body height follows content, not free space",
+      "text": "✓  Body height follows content",
       "x": "2.2cm",
       "y": "8.23cm",
       "width": "29.47cm",
@@ -1218,7 +1835,7 @@
       "preset": "roundRect",
       "fill": "1C1C1E",
       "line": "none",
-      "text": "✓  Overwrite only with --force",
+      "text": "✓  No vendor shapes or icons",
       "x": "2.2cm",
       "y": "10.22cm",
       "width": "29.47cm",

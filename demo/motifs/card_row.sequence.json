@@ -88,11 +88,11 @@
       "color": "A0A6B0",
       "fill": "none",
       "name": "Card1Body",
-      "text": "Centimeters. Connectors. Type floors that hold.",
+      "text": "Centimeters and floors.",
       "x": "3.3cm",
       "y": "10.26cm",
       "width": "6.89cm",
-      "height": "2.63cm"
+      "height": "2.2cm"
     }
   },
   {
@@ -157,11 +157,11 @@
       "color": "A0A6B0",
       "fill": "none",
       "name": "Card2Body",
-      "text": "Budgets, contrast, issues — then a contact sheet.",
+      "text": "Budgets then contact sheet.",
       "x": "13.49cm",
       "y": "10.26cm",
       "width": "6.89cm",
-      "height": "2.63cm"
+      "height": "2.2cm"
     }
   },
   {
@@ -208,7 +208,7 @@
       "color": "F5F5F7",
       "fill": "none",
       "name": "Card3Title",
-      "text": "License-safe",
+      "text": "Agent-safe",
       "x": "23.68cm",
       "y": "7.49cm",
       "width": "6.89cm",
@@ -226,11 +226,11 @@
       "color": "A0A6B0",
       "fill": "none",
       "name": "Card3Body",
-      "text": "Infograpify is reference only. Motifs are original.",
+      "text": "Install only after yes.",
       "x": "23.68cm",
       "y": "10.26cm",
       "width": "6.89cm",
-      "height": "2.63cm"
+      "height": "2.2cm"
     }
   },
   {

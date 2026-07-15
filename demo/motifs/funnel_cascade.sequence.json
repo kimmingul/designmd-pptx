@@ -47,7 +47,7 @@
     "type": "shape",
     "props": {
       "name": "FunnelLabel1",
-      "text": "Discover  ·  100%",
+      "text": "Aware  ·  100%",
       "x": "2.75cm",
       "y": "4.43cm",
       "width": "28.37cm",
@@ -81,7 +81,7 @@
     "type": "shape",
     "props": {
       "name": "FunnelLabel2",
-      "text": "Try doctor  ·  42%",
+      "text": "Try  ·  40%",
       "x": "5.45cm",
       "y": "7.22cm",
       "width": "22.97cm",
@@ -115,7 +115,7 @@
     "type": "shape",
     "props": {
       "name": "FunnelLabel3",
-      "text": "Scaffold  ·  19%",
+      "text": "Adopt  ·  18%",
       "x": "8.15cm",
       "y": "10.01cm",
       "width": "17.56cm",
@@ -149,7 +149,7 @@
     "type": "shape",
     "props": {
       "name": "FunnelLabel4",
-      "text": "Ship  ·  8%",
+      "text": "Expand  ·  7%",
       "x": "10.85cm",
       "y": "12.79cm",
       "width": "12.16cm",

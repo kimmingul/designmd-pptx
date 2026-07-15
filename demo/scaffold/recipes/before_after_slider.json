@@ -65,7 +65,7 @@
     "type": "shape",
     "props": {
       "name": "BaBody1",
-      "text": "• Decks drift from the brand file\n• Agents invent one-off layouts\n• No floors, no screenshot gate\n• Overwrite risk on every save",
+      "text": "• Decks drift from brand\n• Agents invent layouts\n• No screenshot gate\n• Overwrite risk",
       "x": "3.3cm",
       "y": "8.71cm",
       "width": "11.98cm",
@@ -115,7 +115,7 @@
     "type": "shape",
     "props": {
       "name": "BaBody2",
-      "text": "• Tokens compiled from DESIGN.md\n• Recipes with real text budgets\n• Gate 3 contact sheet before ship\n• Staging-safe apply with --force",
+      "text": "• Tokens from DESIGN.md\n• Motif chrome + budgets\n• Gate 3 contact sheet\n• Staging-safe --force",
       "x": "18.59cm",
       "y": "8.71cm",
       "width": "11.98cm",

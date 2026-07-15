@@ -3,12 +3,29 @@
   "title": "designmd-pptx visual motifs (SmartArt-like originals)",
   "license_note": "Motifs are original geometry. Infograpify packs are local reference only — structural roles and rhythm, never vendor shapes/icons/media.",
   "analysis_path": "python -m designmd_pptx reference <local pack> -o .ref-analysis",
+  "ref_hint_priority": [
+    "kpi_band",
+    "card_row",
+    "sparse_hero",
+    "matrix_like",
+    "has_connectors",
+    "process_flow"
+  ],
   "motifs": [
+    {
+      "id": "sparse_hero",
+      "role": "cover_hero",
+      "ref_hints": ["sparse_hero"],
+      "infograpify_families": ["narrative_chrome"],
+      "slots": ["title", "subtitle", "meta", "placement"],
+      "chrome": ["mega_type", "accent_bar", "optional_left_edge"],
+      "recipes": ["cover"]
+    },
     {
       "id": "split_hero",
       "role": "comparison_split",
+      "ref_hints": ["matrix_like", "card_row"],
       "infograpify_families": ["comparison_matrix", "narrative_chrome"],
-      "ref_examples": ["Comparison Charts", "Mission/Vision style splits"],
       "slots": ["title", "left.title", "left.body", "right.title", "right.body"],
       "chrome": ["two_equal_panels", "content_band", "accent_right_optional"],
       "recipes": ["before_after_slider", "mission_vision_split", "comparison_2col"]
@@ -16,44 +33,71 @@
     {
       "id": "card_row",
       "role": "card_row_n",
+      "ref_hints": ["card_row", "card_row_3", "card_row_4"],
       "infograpify_families": ["other", "process_flow", "pricing_table"],
-      "ref_examples": ["3–4 card product rows", "feature bands"],
       "slots": ["title", "cards[].title", "cards[].body"],
       "chrome": ["index_disc", "surface_card", "equal_columns", "content_height_body"],
-      "recipes": ["feature_cards", "pricing"]
+      "recipes": ["feature_cards"]
     },
     {
-      "id": "step_rail",
-      "role": "process_steps",
-      "infograpify_families": ["process_flow"],
-      "ref_examples": ["Process 01", "Funnel/Agile step rails"],
-      "slots": ["title", "steps[].label", "steps[].detail"],
-      "chrome": ["numbered_tiles", "glued_connectors", "accent_ends"],
-      "recipes": ["process", "chevron_process", "pipeline_stages"]
+      "id": "kpi_band",
+      "role": "metric_band",
+      "ref_hints": ["kpi_band", "kpi_band_3", "kpi_band_4"],
+      "infograpify_families": ["kpi_dashboard"],
+      "slots": ["title", "kpis[].value", "kpis[].label", "kpis[].chip"],
+      "chrome": ["large_value", "equal_kpi_cards", "watch_accent"],
+      "recipes": ["kpi_row"]
     },
     {
       "id": "kpi_hero",
       "role": "single_metric_hero",
+      "ref_hints": ["sparse_hero", "kpi_band"],
       "infograpify_families": ["kpi_dashboard", "narrative_chrome"],
-      "ref_examples": ["KPI dashboards", "big number openers"],
       "slots": ["value", "label", "context"],
       "chrome": ["mega_type", "centered_stack", "stage_air"],
       "recipes": ["big_number"]
     },
     {
+      "id": "step_rail",
+      "role": "process_steps",
+      "ref_hints": ["has_connectors", "card_row"],
+      "infograpify_families": ["process_flow"],
+      "slots": ["title", "steps[].label", "steps[].detail"],
+      "chrome": ["numbered_tiles", "glued_connectors", "accent_ends"],
+      "recipes": ["process"]
+    },
+    {
+      "id": "funnel_cascade",
+      "role": "funnel",
+      "ref_hints": ["process_flow"],
+      "infograpify_families": ["process_flow"],
+      "slots": ["title", "stages[].label", "stages[].value"],
+      "chrome": ["decreasing_width_bands", "content_band"],
+      "recipes": ["funnel_stages"]
+    },
+    {
+      "id": "matrix_quad",
+      "role": "2x2_matrix",
+      "ref_hints": ["matrix_like"],
+      "infograpify_families": ["comparison_matrix"],
+      "slots": ["title", "quadrants[4].title", "quadrants[4].body", "axes.x", "axes.y"],
+      "chrome": ["four_cells", "spacer_free_height", "optional_axis_labels"],
+      "recipes": ["matrix_2x2", "swot_2x2"]
+    },
+    {
       "id": "stair_ascent",
       "role": "maturity_stairs",
+      "ref_hints": ["hierarchy"],
       "infograpify_families": ["hierarchy", "process_flow"],
-      "ref_examples": ["Pyramid/Pillar/maturity progressions"],
       "slots": ["title", "steps[].label", "steps[].detail"],
       "chrome": ["rising_heights", "content_band", "accent_last"],
-      "recipes": ["stairs_ascent", "pillar_columns"]
+      "recipes": ["stairs_ascent"]
     },
     {
       "id": "check_stack",
       "role": "checklist",
+      "ref_hints": [],
       "infograpify_families": ["other", "narrative_chrome"],
-      "ref_examples": ["Checklist decks"],
       "slots": ["title", "items[].label", "items[].done"],
       "chrome": ["full_width_rows", "content_band"],
       "recipes": ["checklist_board"]
@@ -61,11 +105,20 @@
     {
       "id": "tile_row",
       "role": "equal_tiles",
+      "ref_hints": ["card_row"],
       "infograpify_families": ["other", "hierarchy"],
-      "ref_examples": ["Puzzle", "hex-like clusters (simplified)"],
       "slots": ["title", "items[].label", "items[].detail"],
       "chrome": ["equal_width_tiles", "alternating_accent"],
-      "recipes": ["puzzle_pieces", "hex_cluster"]
+      "recipes": ["puzzle_pieces"]
+    },
+    {
+      "id": "section_mark",
+      "role": "section_opener",
+      "ref_hints": ["sparse_hero"],
+      "infograpify_families": ["narrative_chrome"],
+      "slots": ["number", "title", "blurb"],
+      "chrome": ["accent_bar", "large_index", "left_stack"],
+      "recipes": ["section_opener_numbered"]
     }
   ]
 }

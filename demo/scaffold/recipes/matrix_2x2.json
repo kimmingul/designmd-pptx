@@ -14,7 +14,7 @@
     "type": "shape",
     "props": {
       "name": "MatrixTitle",
-      "text": "Where we play",
+      "text": "Where motifs play",
       "x": "2.2cm",
       "y": "1.21cm",
       "width": "29.47cm",
@@ -36,9 +36,9 @@
       "line": "none",
       "name": "Quad1Bg",
       "x": "2.2cm",
-      "y": "3.4cm",
+      "y": "3.9cm",
       "width": "14.18cm",
-      "height": "6.85cm"
+      "height": "6cm"
     }
   },
   {
@@ -52,10 +52,10 @@
       "color": "F5F5F7",
       "fill": "none",
       "name": "Quad1Title",
-      "text": "Quadrant 1",
-      "x": "2.8cm",
-      "y": "3.9cm",
-      "width": "12.98cm",
+      "text": "Hero",
+      "x": "3.03cm",
+      "y": "4.67cm",
+      "width": "12.54cm",
       "height": "1.31cm"
     }
   },
@@ -69,11 +69,11 @@
       "color": "A0A6B0",
       "fill": "none",
       "name": "Quad1Body",
-      "text": "",
-      "x": "2.8cm",
-      "y": "5.61cm",
-      "width": "12.98cm",
-      "height": "1.04cm"
+      "text": "sparse_hero · kpi_hero",
+      "x": "3.03cm",
+      "y": "6.33cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
     }
   },
   {
@@ -86,9 +86,9 @@
       "line": "none",
       "name": "Quad2Bg",
       "x": "17.48cm",
-      "y": "3.4cm",
+      "y": "3.9cm",
       "width": "14.18cm",
-      "height": "6.85cm"
+      "height": "6cm"
     }
   },
   {
@@ -102,10 +102,10 @@
       "color": "F5F5F7",
       "fill": "none",
       "name": "Quad2Title",
-      "text": "Quadrant 2",
-      "x": "18.09cm",
-      "y": "3.9cm",
-      "width": "12.98cm",
+      "text": "Compare",
+      "x": "18.31cm",
+      "y": "4.67cm",
+      "width": "12.54cm",
       "height": "1.31cm"
     }
   },
@@ -119,11 +119,11 @@
       "color": "A0A6B0",
       "fill": "none",
       "name": "Quad2Body",
-      "text": "",
-      "x": "18.09cm",
-      "y": "5.61cm",
-      "width": "12.98cm",
-      "height": "1.04cm"
+      "text": "split_hero · matrix_quad",
+      "x": "18.31cm",
+      "y": "6.33cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
     }
   },
   {
@@ -136,9 +136,9 @@
       "line": "none",
       "name": "Quad3Bg",
       "x": "2.2cm",
-      "y": "11.35cm",
+      "y": "11cm",
       "width": "14.18cm",
-      "height": "6.85cm"
+      "height": "6cm"
     }
   },
   {
@@ -152,10 +152,10 @@
       "color": "F5F5F7",
       "fill": "none",
       "name": "Quad3Title",
-      "text": "Quadrant 3",
-      "x": "2.8cm",
-      "y": "11.85cm",
-      "width": "12.98cm",
+      "text": "Flow",
+      "x": "3.03cm",
+      "y": "11.77cm",
+      "width": "12.54cm",
       "height": "1.31cm"
     }
   },
@@ -169,11 +169,11 @@
       "color": "A0A6B0",
       "fill": "none",
       "name": "Quad3Body",
-      "text": "",
-      "x": "2.8cm",
-      "y": "13.56cm",
-      "width": "12.98cm",
-      "height": "1.04cm"
+      "text": "step_rail · funnel_cascade",
+      "x": "3.03cm",
+      "y": "13.43cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
     }
   },
   {
@@ -186,9 +186,9 @@
       "line": "none",
       "name": "Quad4Bg",
       "x": "17.48cm",
-      "y": "11.35cm",
+      "y": "11cm",
       "width": "14.18cm",
-      "height": "6.85cm"
+      "height": "6cm"
     }
   },
   {
@@ -202,10 +202,10 @@
       "color": "F5F5F7",
       "fill": "none",
       "name": "Quad4Title",
-      "text": "Quadrant 4",
-      "x": "18.09cm",
-      "y": "11.85cm",
-      "width": "12.98cm",
+      "text": "Grid",
+      "x": "18.31cm",
+      "y": "11.77cm",
+      "width": "12.54cm",
       "height": "1.31cm"
     }
   },
@@ -219,11 +219,46 @@
       "color": "A0A6B0",
       "fill": "none",
       "name": "Quad4Body",
-      "text": "",
-      "x": "18.09cm",
-      "y": "13.56cm",
-      "width": "12.98cm",
-      "height": "1.04cm"
+      "text": "card_row · kpi_band · tile_row",
+      "x": "18.31cm",
+      "y": "13.43cm",
+      "width": "12.54cm",
+      "height": "1.2cm"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "AxisX",
+      "text": "→ Structure →",
+      "x": "2.2cm",
+      "y": "17.5cm",
+      "width": "29.47cm",
+      "height": "0.9cm",
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "align": "center",
+      "fill": "none"
+    }
+  },
+  {
+    "command": "add",
+    "parent": "/slide[last()]",
+    "type": "shape",
+    "props": {
+      "name": "AxisY",
+      "text": "↑ Narrative ↑",
+      "x": "2.2cm",
+      "y": "3.0cm",
+      "width": "12cm",
+      "height": "0.8cm",
+      "font": "Arial",
+      "size": "12",
+      "color": "A0A6B0",
+      "fill": "none"
     }
   },
   {
@@ -231,7 +266,7 @@
     "parent": "/slide[last()]",
     "type": "notes",
     "props": {
-      "text": "Walk quadrants clockwise from top-left."
+      "text": "Name the quadrant that needs a decision this quarter."
     }
   }
 ]

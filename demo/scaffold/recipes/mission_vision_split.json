@@ -14,7 +14,7 @@
     "type": "shape",
     "props": {
       "name": "MVTitle",
-      "text": "North star",
+      "text": "Direction",
       "x": "2.2cm",
       "y": "1.21cm",
       "width": "29.47cm",
@@ -65,7 +65,7 @@
     "type": "shape",
     "props": {
       "name": "MVBody1",
-      "text": "Make every brand deck as sharp as the product it sells.",
+      "text": "Why we exist — the problem we refuse to ignore.",
       "x": "3.3cm",
       "y": "9.32cm",
       "width": "11.98cm",
@@ -115,7 +115,7 @@
     "type": "shape",
     "props": {
       "name": "MVBody2",
-      "text": "Ship DESIGN.md-native slides without designers in the pixel loop.",
+      "text": "Where we are going — the future state in concrete terms.",
       "x": "18.59cm",
       "y": "9.32cm",
       "width": "11.98cm",
